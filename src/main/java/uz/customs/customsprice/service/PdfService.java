@@ -68,7 +68,7 @@ public class PdfService {
         String url_InsUsr = "http://google.com";
         Date date1 = Calendar.getInstance().getTime();
 
-
+        System.out.println("salom");
         Context context = new Context();
         context.setVariable("apps", appsService.findById(appId));
         context.setVariable("cmdt", commodityService.getById(cmdtId));
