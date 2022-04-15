@@ -28,12 +28,12 @@ public class exit extends HttpServlet {
             ip = socket.getLocalAddress().getHostAddress();
         }
         String strDB = "192.168.212.231";
-        String strUser = "rusram";
+        String strUser = "rustam";
         String strPwd = "9061648";
         if ((ip.equals("192.168.224.224") || ip.equals("192.168.224.18") || ip.equals("localhost"))) {
-            strDB = "192.168.212.231";
-            strUser = "rustam";
-            strPwd = "9061648";
+            strDB = "192.168.2.10";
+            strUser = "rustamadm";
+            strPwd = "rustamadm";
         }
         String strUrl = "jdbc:as400:" + strDB + "/ESAD;date format=iso";
         Connection ConST = null;

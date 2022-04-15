@@ -68,9 +68,9 @@ public class logo extends HttpServlet {
         String strUser = "rustam";
         String strPwd = "9061648";
         if ((ip.equals("192.168.224.224") || ip.equals("192.168.224.18") || ip.equals("localhost"))) {
-            strDB = "192.168.212.231";
-            strUser = "rustam";
-            strPwd = "9061648";
+            strDB = "192.168.2.10";
+            strUser = "rustamadm";
+            strPwd = "rustamadm";
         }
         String strUrl = "jdbc:as400:" + strDB + "/ESAD;date format=iso";
         Connection ConST = null;
@@ -207,7 +207,7 @@ public class logo extends HttpServlet {
                             "    esad.userrole usr\n" +
                             "on\n" +
                             "    usr.id=rs.role_id\n" +
-                            "and usr.sysid='S036' /*KADR test*/\n" +
+                            "and usr.sysid='S047' /*KADR test*/\n" +
                             "join\n" +
                             "    esad.userrightsmain urtm\n" +
                             "on\n" +
@@ -272,7 +272,7 @@ public class logo extends HttpServlet {
                     conET = getConCPID(request);
                     conET.setAutoCommit(false);
                     Statement sqlEt = conET.createStatement();
-                    String sqlstr = "insert into cpid.log_esad(ses_id, USER_ID, name, ip, enter, last) " + "values ('" + sessionID + "','" + up.getUUser_Id().substring(2) + "','" + up.getUName() + "','" + IP + "',current_timestamp,current_timestamp)";
+                    String sqlstr = "insert into cpid.log(ses_id, USER_ID, name, ip, enter, last) " + "values ('" + sessionID + "','" + up.getUUser_Id().substring(2) + "','" + up.getUName() + "','" + IP + "',current_timestamp,current_timestamp)";
                     sqlEt.executeUpdate(sqlstr);
 
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
