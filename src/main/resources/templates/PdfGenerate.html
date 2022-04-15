@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+    <style type='text/css'>
+
+        @page {
+            size: A4;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        * {
+            font-family: 'Times New Roman';
+            font-size: 12px;
+        }
+
+        .tg-oi4f {
+            border: 0px solid black;
+            margin-top: 1px;
+        }
+
+        .tg-aboz {
+            border: 0px solid #deeaf6;
+            margin-top: 1px;
+        }
+
+        .tableclass {
+            position: relative;
+            margin-left: 0px;
+            margin-right: 2px;
+
+        }
+
+
+        /*.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {*/
+        /*    background-color: #e2efd9ff;*/
+        /*}*/
+        /*.table-striped2 > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {*/
+        /*    background-color: #deeaf6ff;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-12">
+<!--        <p style="background-image: url('https://bojxona.uz/img/gtk_image2.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover; position: absolute; opacity: 0.9; width: 100%; height: 100%"></p>-->
+<!--        <img alt="" style="background-repeat: no-repeat; background-attachment: fixed; background-size: cover; position: absolute; opacity: 0.1; width: 100%; height: 100%" src=""/>-->
+<!--        <img src="data:https://bojxona.uz/img/gtk_image2.png, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAAABJRU5ErkJggg== ">-->
+        <div class="row">
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 86%; font-size: 15px!important; vertical-align: center!important; text-align: center!important;">
+                        Ўзбекистон Республикасига олиб кириладиган товарлар бўйича
+                        тўланиши лозим бўлган божхона тўловлари миқдорини аниқлаш бўйича
+                        <br style="font-size: 17px!important; vertical-align: center; horiz-align: center">ДАСТЛАБКИ
+                        ҚАРОР</br>
+                    </th>
+                    <th style="width: 14%">
+                        <img alt=""
+                             class="m-20 w-100 text-center text-c-red"
+                             style="width: 80px; height: 80px"
+                             id='barcode'
+                             th:src="@{${'https://api.qrserver.com/v1/create-qr-code/?data=' + url_qrCode +'&amp;size=200x200'}}"
+                             title="${uncodId}"/>
+                    </th>
+                </tr>
+                </thead>
+            </table>
+            <div class="col-md-12" style="min-width:300px; overflow-x: auto">
+                <table style=" width: 100%; margin-left: auto; margin-right: auto;">
+                    <tbody>
+                    <tr>
+                        <td class="tg-oi4f" colspan="2"><b>1. Дастлабки қарорни рўйхатга олиш рақами ва санаси:</b></td>
+                        <td class="tg-aboz" th:text="${inDec.getInDecNum()} + '/' + ${inDec.getInDecDate()}"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-oi4f" colspan="2"><b>2. Дастлабки қарорни қабул қилган божхона органининг номи:</b>
+                        </td>
+                        <td class="tg-aboz" th:text="${inDec.getInDecLocationNm()}"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-oi4f" colspan="2"><b>3. Манфаатдор шахс:</b></td>
+                        <td class="tg-aboz" th:text="${apps.getPersonFio()}"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-oi4f" colspan="2"><b>4. Дастлабки қарорнинг амал қилиш муддати:</b></td>
+                        <td class="tg-aboz" th:text="${{inDec.getInDecDate()}}"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-oi4f" colspan="2"><b>5. Товарнинг ТИФ ТН коди:</b></td>
+                        <td class="tg-aboz" th:text="${inDec.getHsCode()}"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-oi4f" colspan="3"><b>6. Товарлар номи ва тавсифи:</b>
+<!--                            <p th:text="'ТИФ ТН бўйича товар номи:' + ${inDec.getHsName()}" style="margin-top: 0; font-style: italic;"></p>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <table  style="width: 100%;  border-top: 1px solid #e2efd9; border-bottom: 1px solid #e2efd9;">
+                                <tr>
+                                    <td style="background-color: #e2efd9;"><b>Тижорат номи:</b><p th:text="${cmdt.get().getTradeName()}" style="margin-top: 0; margin-bottom: 0"></p></td>
+                                    <td style="background-color: #e2efd9;"><b>Савдо белгиси:</b><p th:text="${cmdt.get().getTradeMark()}" style="margin-top: 0; margin-bottom: 0"></p></td>
+                                    <td style="background-color: #e2efd9;"><b>Маркаси:</b><p th:text="${cmdt.get().getMark()}" style="margin-top: 0; margin-bottom: 0"></p></td>
+                                    <td style="background-color: #e2efd9;"><b>Модели:</b><p th:text="${cmdt.get().getModel()}" style="margin-top: 0; margin-bottom: 0"></p></td>
+                                    <td style="background-color: #e2efd9;"><b>Артикули:</b><p th:text="${cmdt.get().getArticle()}" style="margin-top: 0; margin-bottom: 0"></p></td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #ffff;"><b>Нави:</b><br><p th:text="${cmdt.get().getSort()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                    <td style="background-color: #ffff;"><b>Стандарти:</b><br><p th:text="${cmdt.get().getStandarts()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                    <td style="background-color: #ffff;"><b>Фойдаланиш мақсади:</b><br><p th:text="${cmdt.get().getProductGoal()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                    <td style="background-color: #ffff;"><b>Тижорат хцусусияти:</b><br><p th:text="${cmdt.get().getComProp()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                    <td style="background-color: #ffff;"><b>Техник хусусияти:</b><br><p th:text="${cmdt.get().getTechChar()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #e2efd9;"><b>Ўрам тури:</b><br><p th:text="${cmdt.get().getPackTypeNm()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                    <td style="background-color: #e2efd9;"><b>Урамлар сони:</b><br><p th:text="${cmdt.get().getPackQty()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                    <td style="background-color: #e2efd9;"><b>Юк жойларининг умумий сони:</b><br><p th:text="${cmdt.get().getCargoSpace()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                    <td style="background-color: #e2efd9;"><b>Фактура киймати:</b><br><p th:text="${cmdt.get().getPrice()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                    <td style="background-color: #e2efd9;"><b>Валюта коди:</b><br><p th:text="${cmdt.get().getCurrencyType()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #ffff;"><b>Брутто:</b><br><p th:text="${cmdt.get().getBrutto()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                    <td style="background-color: #ffff;"><b>Нетто:</b><br><p th:text="${cmdt.get().getNetto()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                    <td style="background-color: #ffff;"><b>Қўш. ўл.бир. миқ.</b><br><p th:text="${cmdt.get().getExtraQty()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                    <td style="background-color: #ffff;" colspan="2"><b>Қўш. ўл.бир. коди:</b><br><p th:text="${cmdt.get().getExtraUnits()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #e2efd9;" colspan="5"><b>Қўшимча:</b><br><p th:text="${cmdt.get().getExtraInfo()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #ffff;" colspan="2"><b>Илгари берилган БТ бўйича дастлабки қарор:</b><br><p th:text="${cmdt.get().getHsDecNum()} + '/' + ${cmdt.get().getHsDecDate()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                    <td style="background-color: #ffff;" colspan="3"><b>ТИФ ТН бўйича дастлабки қарор:</b><br><p th:text="${cmdt.get().getInDecNum()} + '/' + ${cmdt.get().getInDecDate()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tg-oi4f"  style="margin-top: 0"><b>7. Товарларнинг божхона қийматини аниқлаш усули ва уни
+                            асослаш:</b></td>
+                        <td class="tg-aboz" colspan="2" style="margin-top: 0"><p th:text="${cmdt.get().getMethod()} + '-усул:' + ${cmdt.get().getMethodNm()}"></p></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-oi4f" style="margin-top: 0"><b>8. Товарларнинг келиб чиқиш мамлакати ва уни асослаш:</b></td>
+                        <td class="tg-aboz" colspan="2" style="margin-top: 0"><p th:text="${cmdt.get().getOriginCountry()} + '-' + ${cmdt.get().getOrignCountrNm()}"></p></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-oi4f" colspan="3"><b>9. Божхона тўловлари ва йиғимлари тўғрисида маълумот:</b></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <table style="width: 100%; border-top: 1px solid #e2efd9; border-bottom: 1px solid #e2efd9;">
+                                <thead>
+                                <tr>
+                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f">Код</th>
+                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f">Ҳисоблаш асоси</th>
+                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f">Ставка</th>
+                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f">Ҳос ставка (асос)</th>
+                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f">Ҳос ставка</th>
+                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f">Ҳисобланган тўлов</th>
+                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f">Тўлов усули</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="pay: ${payment}">
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47ClcType}"         class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${{pay.getG47Base}}"            class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltRate}"         class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltBase}"         class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47Altbasecurrkod}"  class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${{pay.getG47Sum}}"             class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47Sp}"              class="tg-oi4f"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tg-oi4f" colspan="2"><b>10. Дастлабки қарорни қабул қилиш асослари:</b></td>
+                        <td th:text="${inDec.getInDecBasis()}" class="tg-aboz"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-oi4f" colspan="3"><b>11. Манфаатдор шахс томонидан тақдим қилинган маълумотлар ва
+                            хужжатлар рўйхати:</b></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <table style="width: 100%; border-top: 1px solid #e2efd9; border-bottom: 1px solid #e2efd9;">
+                                <thead>
+                                <tr>
+                                    <th class="tg-oi4f" style="background-color: #e2efd9; text-align: center">Тартиб рақами</th>
+                                    <th class="tg-oi4f" style="background-color: #e2efd9; text-align: center">Хужжат тури</th>
+                                    <th class="tg-oi4f" style="background-color: #e2efd9; text-align: center">Хужжат рақами</th>
+                                    <th class="tg-oi4f" style="background-color: #e2efd9; text-align: center">Хужжат санаси</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="doc: ${docs}">
+                                    <td  style="background-color: #e2efd9; text-align: center" th:text="${doc.getDocSrNo()}"   class="tg-oi4f"></td>
+                                    <td  style="background-color: #e2efd9; text-align: center" th:text="${doc.getDocType()}"   class="tg-oi4f"></td>
+                                    <td  style="background-color: #e2efd9; text-align: center" th:text="${doc.getDocNumber()}" class="tg-oi4f"></td>
+                                    <td  style="background-color: #e2efd9; text-align: center" th:text="${#dates.format(doc.getDocDate(), 'dd-MMM yyyyг')}"   class="tg-oi4f"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tg-oi4f" colspan="2"><b>12. Қўшимча маълумотлар:</b></td>
+                        <td class="tg-aboz">--</td>
+                    </tr>
+                    <tr>
+                        <td class="tg-oi4f" style="width: 44%"><b>13. Божхона органининг мансабдор шахси:</b></td>
+                        <td class="tg-aboz" style="width: 12%">
+                            <img alt=""
+                                 class="m-20 w-100 text-center text-c-red"
+                                 style="width: 50px; height: 50px"
+                                 id='barcode2'
+                                 th:src="@{${'https://api.qrserver.com/v1/create-qr-code/?data=' + url_InsUsr +'&amp;size=200x200'}}"
+                                 title="${uncodId}"/>
+                        </td>
+                        <td style="width: 44%">
+                            <br>
+                            <tr>
+                                <td style="width: 40%">
+                                    <span style="font-weight:bold;">Бошқарма бошлиғи:</span>
+                                </td>
+                                <td style="width: 60%">
+                                    <span th:text="${userName}" style="margin-right: auto"></span>
+                                </td>
+                            </tr>
+                            </br>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="text-indent: 1.5em!important;">
+                Ушбу маълумотлар <b th:text="${#dates.format(LocaleDate, 'dd.MM.yyyy')}"></b> йилдаги Марказий банкининг валюталар курси бўйича ҳисоблаб чиқарилди. Валюта
+                курси ўзгариши ҳисобига божхона тўловлари миқдори ўзгариши мумкин
+            </p>
+            <p style="text-indent: 1.5em!important;">
+                Қўлланилган имтиёзлар ва божхона тўловлари ставкалари <b th:text="${#dates.format(LocaleDate, 'dd.MM.yyyy')}"></b> йилдаги Ўзбекистон қонун хужжатларини
+                инобатга олиб ҳисобланади.
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
