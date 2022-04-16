@@ -4,12 +4,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextpdf.text.BadElementException;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import uz.customs.customsprice.entity.InitialDecision.*;
+import uz.customs.customsprice.repository.PaymentRepo;
 import uz.customs.customsprice.service.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +41,11 @@ public class InDecController {
     private final ExchangerateService exchangerateService;
     private final StatusMService statusMService;
     private final StatusHService statusHService;
+    private final PaymentTypeService paymentTypeService;
+    private final PaymTypeService paymTypeService;
+
+    @Autowired
+    PaymentRepo paymentRepo;
 
     private final String INITIALDECISIONCONFIRMCMDT = "/resources/pages/InitialDecision/InitialDecisionConfirm";
     private final String INITIALDECISIONTOHTMl = "/resources/pages/InitialDecision/Qaror";
@@ -45,9 +53,10 @@ public class InDecController {
     private final String INITIALDECISIONCONFIRMXBBFINISH = "/resources/pages/InitialDecision/InitialDecisionConfirXBBFinish";
     private final String INDEC_GENERATE_PDF = "/resources/pages/InitialDecision/InitialDecisionGeneratePdf";
     private final String INITIALDECISIONCONFIRMCMDT_CALC = "/resources/pages/InitialDecision/InitialDecisionCalc";
+    private final String DELETINGCALCUALTE = "/resources/pages/InitialDecision/DeletePayments";
 
 
-    public InDecController(InDecService inDecService, AppsService appsService, AppsService appsservice, CommodityService commodityService, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, LocationService locationService, StatusService statusService, UsersService usersService, PdfService pdfService, PaymentServise paymentServise, ExchangerateService exchangerateService, StatusMService statusMService, StatusHService statusHService) {
+    public InDecController(InDecService inDecService, AppsService appsService, AppsService appsservice, CommodityService commodityService, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, LocationService locationService, StatusService statusService, UsersService usersService, PdfService pdfService, PaymentServise paymentServise, ExchangerateService exchangerateService, StatusMService statusMService, StatusHService statusHService, PaymentTypeService paymentTypeService, PaymTypeService paymTypeService) {
         this.inDecService = inDecService;
         this.appsService = appsService;
         this.appsservice = appsservice;
@@ -64,6 +73,8 @@ public class InDecController {
         this.exchangerateService = exchangerateService;
         this.statusMService = statusMService;
         this.statusHService = statusHService;
+        this.paymentTypeService = paymentTypeService;
+        this.paymTypeService = paymTypeService;
     }
 
     @PostMapping(value = INITIALDECISIONCONFIRMCMDT)
@@ -122,6 +133,51 @@ public class InDecController {
         statusHService.saveStatusH(statusH);
         /**todo ЛОК га ёзиш end todo**/
 
+        return mav;
+    }
+
+    @PostMapping(value = DELETINGCALCUALTE)
+    public ModelAndView deleteValue(HttpServletRequest request, @RequestParam String payId, @RequestParam String cmdtId, @RequestParam String appId) {
+        paymentRepo.deletePaymentById(payId);
+        ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/InitialDecisionSteps/Steps4");
+        ModelAndView mav2 = new ModelAndView("resources/pages/InitialDecision/InitialDecisionSteps/Steps4StatusDefault");
+        List<PaymenttypeEntity> paymenttypeEntityList = paymentTypeService.getListPaymentType();
+        List<PaymtypeEntity> paymtypeEntityList = paymTypeService.getListPaymType();
+        Optional<Commodity> commodityList = commodityService.getById(cmdtId);
+        List<Payment> payments = paymentServise.getByCmdtId(cmdtId);
+        Optional<Commodity> commodityTnved = commodityService.getById(cmdtId);
+        Apps apps = appsService.findById(appId);
+        Exchangerate exchangerate840 = exchangerateService.getTop1ByIdOrderByDateSetDesc("840");
+        BigDecimal rate = BigDecimal.valueOf(exchangerate840.getRate()).multiply(BigDecimal.valueOf(exchangerate840.getAmount()));
+
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userName = (String) request.getSession().getAttribute("userName");
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userRoleName = (String) request.getSession().getAttribute("userRoleName");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userLocationName = (String) request.getSession().getAttribute("userLocationName");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+
+//        mav.addObject("docsList", docsList);
+//        mav.addObject("rollbackInfo", listRollbackSp);
+//        mav.addObject("cmdtId", appId);
+        mav.addObject("commodity", commodityList.get().getHsCode());
+        mav.addObject("cmdtId", cmdtId);
+        mav.addObject("appId", appId);
+        mav.addObject("paymenttype", paymenttypeEntityList);
+        mav.addObject("paymttype", paymtypeEntityList);
+        if (payments.isEmpty() && userRole == 8) {
+            return mav;
+        } else {
+            mav2.addObject("CmdtPayments", payments);
+            mav2.addObject("cmdtTnved", commodityTnved.get().getHsCode());
+            mav2.addObject("cmdtId", commodityTnved.get().getId());
+            mav2.addObject("appStatus", apps.getStatus());
+            mav2.addObject("appStatusName", apps.getStatusNm());
+            mav2.addObject("userRole", userRole);
+            mav2.addObject("rate", rate);
+            mav = mav2;
+        }
         return mav;
     }
 

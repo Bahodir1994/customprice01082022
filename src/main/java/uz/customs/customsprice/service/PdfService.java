@@ -16,6 +16,7 @@ import uz.customs.customsprice.entity.InitialDecision.Commodity;
 import uz.customs.customsprice.entity.InitialDecision.InDec;
 import uz.customs.customsprice.entity.InitialDecision.Users;
 import uz.customs.customsprice.entity.files.DecisionPdf;
+import uz.customs.customsprice.repository.forHtmlRepo;
 
 import java.io.*;
 import java.security.MessageDigest;
@@ -38,8 +39,9 @@ public class PdfService {
     private final PaymentServise paymentServise;
     private final DocsService docsService;
     private final UsersService usersService;
+    private final forHtmlService htmlService;
 
-    public PdfService(AppsService appsService, CommodityService commodityService, InDecService inDecService, DecisionPdfService decisionPdfService, PaymentServise paymentServise, DocsService docsService, UsersService usersService) {
+    public PdfService(AppsService appsService, CommodityService commodityService, InDecService inDecService, DecisionPdfService decisionPdfService, PaymentServise paymentServise, DocsService docsService, UsersService usersService, forHtmlRepo htmlRepo, forHtmlService htmlService) {
         this.appsService = appsService;
         this.commodityService = commodityService;
         this.inDecService = inDecService;
@@ -47,6 +49,7 @@ public class PdfService {
         this.paymentServise = paymentServise;
         this.docsService = docsService;
         this.usersService = usersService;
+        this.htmlService = htmlService;
     }
 
     public void createPdf(String appId, String cmdtId) throws IOException, BadElementException {
@@ -54,6 +57,7 @@ public class PdfService {
         InDec inDec2 = inDecService.getByCmtdId(cmdtId);
         String IdUser = inDec2.getInsUser();
         Optional<Users> userName = usersService.getById(IdUser);
+
 
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setSuffix(".html");
@@ -79,10 +83,12 @@ public class PdfService {
         context.setVariable("LocaleDate", date1);
         context.setVariable("url_qrCode", url_qrCode);
         context.setVariable("url_InsUsr", url_InsUsr);
+        context.setVariable("htmlData",  htmlService.getforHtmlById("1"));
 
         String processHtml = templateEngine.process("templates/PdfGenerate.html", context);
 
-        String urlTTF = "D:\\IN_DEC_FILES\\DECISION_PDF\\";
+//        String urlTTF = "D:\\IN_DEC_FILES\\DECISION_PDF\\";
+        String urlTTF = "D:/FontStyle/TimesNewRoman.ttf";
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = dateFormat.format(date);
@@ -134,6 +140,7 @@ public class PdfService {
         }
 
     }
+
     private static String GetHash2(InputStream fis) throws IOException, NoSuchAlgorithmException {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");

@@ -68,7 +68,7 @@
                             <th>Қўш.ўл.бир</th>
                             <th>Ҳисобланган</th>
                             <th>Тўлов тури</th>
-                            <c:if test="${appStatus == 110}">
+                            <c:if test="${appStatus == 110 &&  userRole == 8}">
                                 <th>Тозалаш</th>
                             </c:if>
                         </tr>
@@ -86,10 +86,10 @@
                                 <td>${val.g47AltBaseEdIzm}</td>
                                 <td>${val.g47Sum}</td>
                                 <td>${val.g47Sp}</td>
-                                <c:if test="${appStatus == 110}">
+
+                                <c:if test="${appStatus == 110 &&  userRole == 8}">
                                     <td>
-                                        <button type="button" class="btn btn-danger btn-block" data-bs-toggle="modal"
-                                                data-bs-target="#exampleExtraLargeModal4">
+                                        <button onclick="javascript:ClearCalculate('${val.id}')"  class="btn btn-danger btn-block">
                                             <i class="bx bx-trash-alt"></i>
                                         </button>
                                     </td>
@@ -109,60 +109,60 @@
 
 <script>
     function sendCalcInDec() {
-    var dataS = {
-        "cmdtId": $("#cmdtId").val(),
-        "appId": $("#appId").val(),
+        var dataS = {
+            "cmdtId": $("#cmdtId").val(),
+            "appId": $("#appId").val(),
 
-    }
-    /*-------------------------------*/
-
-    const swalWithBootstrapButtons = Swal.mixin({
-    customClass: {
-    confirmButton: 'btn btn-success',
-    cancelButton: 'btn btn-danger'
-    },
-    buttonsStyling: false
-    })
-
-    swalWithBootstrapButtons.fire({
-    title: 'Аризани тасдиқлаш учун жўнатишни хоҳлайсизми?',
-    text: "Сиз ушбу ариза бўйича қарор қабул қилмоқдасиз!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Ха, жўнатишни тасдиқлайман!',
-    cancelButtonText: 'Йўқ, қайта кўриб чиқаман!',
-    reverseButtons: true
-    }).then((result) => {
-    if (result.isConfirmed) {
-    swalWithBootstrapButtons.fire(
-    'Ариза тасдиқлаш учун жўнатилди!',
-    'Ушбу ариза худудий бошқарма тўловлар бўлими бошлиғига тасдиқлаш учун юборилди',
-    'success'
-    )
-    $.ajax({
-        type: "POST",
-        data: dataS,
-        dataType: "json",
-        url: "<%=request.getContextPath()%>/saveInDec/resources/pages/InitialDecision/InitialDecisionConfirm",
-        dataType: "html",
-        header: 'Content-type: text/html; charset=utf-8',
-        success: function (res) {
-        $('div#MainContent').html(res);
-    },
-    error: function (res) {
         }
-        });
-    }
-    else if (
-    /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-        )
-    {
-    swalWithBootstrapButtons.fire(
-    'Амал рад этилди!',
-    'Сақлаш амалга оширилмади',
-    'error')}
-    })
+        /*-------------------------------*/
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Аризани тасдиқлаш учун жўнатишни хоҳлайсизми?',
+            text: "Сиз ушбу ариза бўйича қарор қабул қилмоқдасиз!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ха, жўнатишни тасдиқлайман!',
+            cancelButtonText: 'Йўқ, қайта кўриб чиқаман!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                    'Ариза тасдиқлаш учун жўнатилди!',
+                    'Ушбу ариза худудий бошқарма тўловлар бўлими бошлиғига тасдиқлаш учун юборилди',
+                    'success'
+                )
+                $.ajax({
+                    type: "POST",
+                    data: dataS,
+                    dataType: "json",
+                    url: "<%=request.getContextPath()%>/saveInDec/resources/pages/InitialDecision/InitialDecisionConfirm",
+                    dataType: "html",
+                    header: 'Content-type: text/html; charset=utf-8',
+                    success: function (res) {
+                        $('div#MainContent').html(res);
+                    },
+                    error: function (res) {
+                    }
+                });
+            }
+            else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            )
+            {
+                swalWithBootstrapButtons.fire(
+                    'Амал рад этилди!',
+                    'Сақлаш амалга оширилмади',
+                    'error')}
+        })
 
     }
     function InDecConfirmToXBB() {
@@ -273,6 +273,43 @@
                     'Сақлаш амалга оширилмади',
                     'error'
                 )
+            }
+        })
+
+    }
+    function ClearCalculate(payId) {
+        var dataS = {
+            "cmdtId": $('#cmdtId').val(),
+            "appId": $('#appId').val(),
+            "payId": payId,
+        }
+        // alert(payId + ' ASDASD' + $('#cmdtId').val() + ' ASDASD' + $('#appId').val())
+
+        /*-------------------------------*/
+        Swal.fire({
+            title: 'Хисобанган тўловни ўчириш',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Ўчириш',
+            denyButtonText: `Бекор қилиш`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    data: dataS,
+                    url: "<%=request.getContextPath()%>/saveInDec/resources/pages/InitialDecision/DeletePayments",
+                    dataType: "html",
+                    header: 'Content-type: text/html; charset=utf-8',
+                    success: function (res) {
+                        $('div#divcalculate').html(res);
+                    },
+                    error: function (res) {
+                    }
+                });
+                Swal.fire('Ўчирилди!', '', 'success')
+            } else if (result.isDenied) {
+                Swal.fire('Амал рад этилди!', '', 'info')
             }
         })
 
