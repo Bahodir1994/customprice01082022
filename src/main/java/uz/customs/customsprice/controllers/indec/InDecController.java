@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextpdf.text.BadElementException;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import uz.customs.customsprice.entity.InitialDecision.*;
+import uz.customs.customsprice.entity.users.User;
 import uz.customs.customsprice.repository.PaymentRepo;
 import uz.customs.customsprice.service.*;
 
@@ -35,7 +35,6 @@ public class InDecController {
     private final Tnved2Service tnved2Service;
     private final LocationService locationService;
     private final StatusService statusService;
-    private final UsersService usersService;
     private final PdfService pdfService;
     private final PaymentServise paymentServise;
     private final ExchangerateService exchangerateService;
@@ -43,6 +42,7 @@ public class InDecController {
     private final StatusHService statusHService;
     private final PaymentTypeService paymentTypeService;
     private final PaymTypeService paymTypeService;
+    private final UsersService usersService;
 
     @Autowired
     PaymentRepo paymentRepo;
@@ -55,8 +55,7 @@ public class InDecController {
     private final String INITIALDECISIONCONFIRMCMDT_CALC = "/resources/pages/InitialDecision/InitialDecisionCalc";
     private final String DELETINGCALCUALTE = "/resources/pages/InitialDecision/DeletePayments";
 
-
-    public InDecController(InDecService inDecService, AppsService appsService, AppsService appsservice, CommodityService commodityService, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, LocationService locationService, StatusService statusService, UsersService usersService, PdfService pdfService, PaymentServise paymentServise, ExchangerateService exchangerateService, StatusMService statusMService, StatusHService statusHService, PaymentTypeService paymentTypeService, PaymTypeService paymTypeService) {
+    public InDecController(InDecService inDecService, AppsService appsService, AppsService appsservice, CommodityService commodityService, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, LocationService locationService, StatusService statusService, PdfService pdfService, PaymentServise paymentServise, ExchangerateService exchangerateService, StatusMService statusMService, StatusHService statusHService, PaymentTypeService paymentTypeService, PaymTypeService paymTypeService, UsersService usersService) {
         this.inDecService = inDecService;
         this.appsService = appsService;
         this.appsservice = appsservice;
@@ -67,7 +66,6 @@ public class InDecController {
         this.tnved2Service = tnved2Service;
         this.locationService = locationService;
         this.statusService = statusService;
-        this.usersService = usersService;
         this.pdfService = pdfService;
         this.paymentServise = paymentServise;
         this.exchangerateService = exchangerateService;
@@ -75,7 +73,9 @@ public class InDecController {
         this.statusHService = statusHService;
         this.paymentTypeService = paymentTypeService;
         this.paymTypeService = paymTypeService;
+        this.usersService = usersService;
     }
+
 
     @PostMapping(value = INITIALDECISIONCONFIRMCMDT)
     public ModelAndView saveValue(HttpServletRequest request, @RequestParam String appId) {
@@ -107,11 +107,11 @@ public class InDecController {
         sortedList = appsservice.getListSorted();
         mav.addObject("sortedList", sortedList);
 
-        List<Apps> termsList = new ArrayList<>();
-        termsList = appsservice.getListTerms();
+        List<InDec> termsList = new ArrayList<>();
+        termsList = appsservice.getListInDec(request);
         mav.addObject("termsList", termsList);
 
-        List<Users> usersList = new ArrayList<>();
+        List<User> usersList = new ArrayList<>();
         usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
         mav.addObject("userSelectList", usersList);
         /** mav object end **/
@@ -215,11 +215,11 @@ public class InDecController {
         sortedList = appsservice.getListSorted();
         mav.addObject("sortedList", sortedList);
 
-        List<Apps> termsList = new ArrayList<>();
-        termsList = appsservice.getListTerms();
+        List<InDec> termsList = new ArrayList<>();
+        termsList = appsservice.getListInDec(request);
         mav.addObject("termsList", termsList);
 
-        List<Users> usersList = new ArrayList<>();
+        List<User> usersList = new ArrayList<>();
         usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
         mav.addObject("userSelectList", usersList);
         /** mav object end **/
@@ -274,11 +274,11 @@ public class InDecController {
         sortedList = appsservice.getListSorted();
         mav.addObject("sortedList", sortedList);
 
-        List<Apps> termsList = new ArrayList<>();
-        termsList = appsservice.getListTerms();
+        List<InDec> termsList = new ArrayList<>();
+        termsList = appsservice.getListInDec(request);
         mav.addObject("termsList", termsList);
 
-        List<Users> usersList = new ArrayList<>();
+        List<User> usersList = new ArrayList<>();
         usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
         mav.addObject("userSelectList", usersList);
 

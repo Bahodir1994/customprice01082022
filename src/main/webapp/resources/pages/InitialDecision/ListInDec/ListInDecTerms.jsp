@@ -113,10 +113,10 @@
                             </a>
                         </td>
                         <td>${terms[14]}</td>
+                        <td>${terms[48]}</td>
+                        <td>${terms[45]}</td>
                         <td>${terms[9]}-${terms[8]}</td>
-                        <td>${terms[9]}-${terms[8]}</td>
-                        <td>${terms[9]}-${terms[8]}</td>
-                        <td>${terms[9]}-${terms[8]}</td>
+                        <td>${terms[25]}</td>
                         <td>${terms[9]}-${terms[8]}</td>
                         <td>${terms[30]}</td>
                     </tr>

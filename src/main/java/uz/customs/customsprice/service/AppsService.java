@@ -3,6 +3,7 @@ package uz.customs.customsprice.service;
 import org.springframework.stereotype.Service;
 import uz.customs.customsprice.entity.InitialDecision.Apps;
 import uz.customs.customsprice.entity.InitialDecision.Commodity;
+import uz.customs.customsprice.entity.InitialDecision.InDec;
 import uz.customs.customsprice.entity.files.Docs;
 import uz.customs.customsprice.repository.AppsRepo;
 
@@ -155,59 +156,59 @@ public class AppsService {
     }
 
     /* 3) Статуси фақат "Имзоланган"+"Бекор қилинган" бўлган аризалар*/
-    public List<Apps> getListTerms() {
-        String queryForList = "select\n" +
-                "    a.id,\n" + /*0-id*/
-                "    a.instime,\n" + /*1-instime*/
-                "    a.insuser,\n" + /*2-insuser*/
-                "    a.isdeleted,\n" + /*3-isdeleted*/
-                "    a.updtime,\n" + /*4-updtime*/
-                "    a.upduser,\n" + /*5-upduser*/
-                "    a.app_num,\n" + /*6-app_num*/
-                "    a.app_date,\n" + /*7-app_date*/
-                "    a.customer_country_nm,\n" + /*8-customer_country_nm*/
-                "    a.customer_country,\n" + /*9-customer_country*/
-                "    a.location_id,\n" + /*10-location_id*/
-                "    a.location_nm,\n" + /*11-location_nm*/
-                "    a.org_name, \n" + /*12-org_name*/
-                "    a.person_addr,\n" + /*13-person_addr*/
-                "    a.person_fio,\n" + /*14-person_fio*/
-                "    a.person_mail,\n" + /*15-person_mail*/
-                "    a.person_phone,\n" + /*16-person_phone*/
-                "    a.person_pin,\n" + /*17-person_pin*/
-                "    a.person_position,\n" + /*18-person_position*/
-                "    a.person_tin,\n" + /*19-person_tin*/
-                "    a.seller_org,\n" + /*20-seller_org*/
-                "    a.sender_country,\n" + /*21-sender_country*/
-                "    a.sender_country_nm,\n" + /*22-sender_country_nm*/
-                "    a.sender_org,\n" + /*23-sender_org*/
-                "    a.status,\n" + /*24-status*/
-                "    a.terms_nm,\n" + /*25-terms_nm*/
-                "    a.terms_addr,\n" + /*26-terms_addr*/
-                "    a.trans_exp,\n" + /*27-trans_exp*/
-                "    a.status_nm,\n" + /*28-status_nm*/
-                "    ar.inspector_id inspector_id,\n" + /*29-inspector_id*/
-                "    ar.inspector_name inspector_name,\n" + /*30-inspector_name*/
-                "    a.comment,\n"  + /*31-comment*/
-                "    cmdt.id cmdt_id \n"  + /*32-cmdt_id*/
-                "from\n" +
-                "    cpid.apps a\n" +
-                "left join\n" +
-                "    cpid.apps_rasp ar\n" +
-                "on\n" +
-                "    a.id=ar.app_id\n" +
-                "left join\n" +
-                "    cpid.commodity cmdt\n" +
-                "on\n" +
-                "    a.id=cmdt.app_id\n" +
-                "    and cmdt.isdeleted=0\n" +
-                "where\n" +
-                "    a.isdeleted=0\n" +
-                "and a.status in (170,175)\n" +
-                "order by\n" +
-                "    a.instime desc";
-        return (List<Apps>) entityManager.createNativeQuery(queryForList).getResultList();
-    }
+//    public List<Apps> getListTerms() {
+//        String queryForList = "select\n" +
+//                "    a.id,\n" + /*0-id*/
+//                "    a.instime,\n" + /*1-instime*/
+//                "    a.insuser,\n" + /*2-insuser*/
+//                "    a.isdeleted,\n" + /*3-isdeleted*/
+//                "    a.updtime,\n" + /*4-updtime*/
+//                "    a.upduser,\n" + /*5-upduser*/
+//                "    a.app_num,\n" + /*6-app_num*/
+//                "    a.app_date,\n" + /*7-app_date*/
+//                "    a.customer_country_nm,\n" + /*8-customer_country_nm*/
+//                "    a.customer_country,\n" + /*9-customer_country*/
+//                "    a.location_id,\n" + /*10-location_id*/
+//                "    a.location_nm,\n" + /*11-location_nm*/
+//                "    a.org_name, \n" + /*12-org_name*/
+//                "    a.person_addr,\n" + /*13-person_addr*/
+//                "    a.person_fio,\n" + /*14-person_fio*/
+//                "    a.person_mail,\n" + /*15-person_mail*/
+//                "    a.person_phone,\n" + /*16-person_phone*/
+//                "    a.person_pin,\n" + /*17-person_pin*/
+//                "    a.person_position,\n" + /*18-person_position*/
+//                "    a.person_tin,\n" + /*19-person_tin*/
+//                "    a.seller_org,\n" + /*20-seller_org*/
+//                "    a.sender_country,\n" + /*21-sender_country*/
+//                "    a.sender_country_nm,\n" + /*22-sender_country_nm*/
+//                "    a.sender_org,\n" + /*23-sender_org*/
+//                "    a.status,\n" + /*24-status*/
+//                "    a.terms_nm,\n" + /*25-terms_nm*/
+//                "    a.terms_addr,\n" + /*26-terms_addr*/
+//                "    a.trans_exp,\n" + /*27-trans_exp*/
+//                "    a.status_nm,\n" + /*28-status_nm*/
+//                "    ar.inspector_id inspector_id,\n" + /*29-inspector_id*/
+//                "    ar.inspector_name inspector_name,\n" + /*30-inspector_name*/
+//                "    a.comment,\n"  + /*31-comment*/
+//                "    cmdt.id cmdt_id \n"  + /*32-cmdt_id*/
+//                "from\n" +
+//                "    cpid.apps a\n" +
+//                "left join\n" +
+//                "    cpid.apps_rasp ar\n" +
+//                "on\n" +
+//                "    a.id=ar.app_id\n" +
+//                "left join\n" +
+//                "    cpid.commodity cmdt\n" +
+//                "on\n" +
+//                "    a.id=cmdt.app_id\n" +
+//                "    and cmdt.isdeleted=0\n" +
+//                "where\n" +
+//                "    a.isdeleted=0\n" +
+//                "and a.status in (170,175)\n" +
+//                "order by\n" +
+//                "    a.instime desc";
+//        return (List<Apps>) entityManager.createNativeQuery(queryForList).getResultList();
+//    }
 
     /* 4) <<app_num>> га ариза рафамини киритади */
     public Apps saveApps(Apps apps) {
@@ -566,6 +567,189 @@ public class AppsService {
                 "    d.app_id = '" + appId + "'\n" +
                 "and d.isdeleted = 0";
         return (List<Docs>) entityManager.createNativeQuery(queryForList, Docs.class).getResultList();
+    }
+
+    /* 9) Статуси фақат "Имзоланган" бўлган аризалар*/
+    public List<InDec> getListInDec(HttpServletRequest request) {
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+
+        String sql_os = "";
+        if (userRole >= 6) sql_os = " and i.in_dec_location = '" + userLocation + "' ";
+
+        String queryForList = "select\n" +
+                "    a.id,\n" +
+                "    a.instime,\n" +
+                "    a.insuser,\n" +
+                "    a.isdeleted,\n" +
+                "    a.updtime,\n" +
+                "    a.upduser,\n" +
+                "    a.app_num,\n" +
+                "    a.app_date,\n" +
+                "    a.customer_country_nm,\n" +
+                "    a.customer_country,\n" +
+          /*10*/"    a.location_id,\n" +
+                "    a.location_nm,\n" +
+                "    a.org_name,\n" +
+                "    a.person_addr,\n" +
+                "    a.person_fio,\n" +
+                "    a.person_mail,\n" +
+                "    a.person_phone,\n" +
+                "    a.person_pin,\n" +
+                "    a.person_position,\n" +
+                "    a.person_tin,\n" +
+          /*20*/"    a.seller_org,\n" +
+                "    a.sender_country,\n" +
+                "    a.sender_country_nm,\n" +
+                "    a.sender_org,\n" +
+                "    a.status,\n" +
+                "    a.terms_nm,\n" +
+                "    a.terms_addr,\n" +
+                "    a.trans_exp,\n" +
+                "    a.status_nm,\n" +
+                "    ar.inspector_id   inspector_id,\n" +
+                "    ar.inspector_name inspector_name,\n" +
+                "    a.comment,\n" +
+                "    cmdt.id cmdt_id,\n" +
+                "    i.id indec_id,\n" +
+                "    i.instime indec_instime,\n" +
+                "    i.insuser indec_insuser,\n" +
+                "    i.isdeleted indec_isdeleted,\n" +
+                "    i.updtime indec_updtime,\n" +
+                "    i.upduser indec_upduser,\n" +
+                "    i.comment_marks,\n" +
+                "    i.customs_payments,\n" +
+                "    i.customs_preference,\n" +
+                "    i.hs_code,\n" +
+                "    i.hs_name,\n" +
+                "    i.in_dec_basis,\n" +
+                "    i.in_dec_date,\n" +
+                "    i.in_dec_location,\n" +
+                "    i.in_dec_location_nm,\n" +
+                "    i.in_dec_num,\n" +
+                "    i.method,\n" +
+                "    i.method_nm,\n" +
+                "    i.origin_country,\n" +
+                "    i.origin_country_nm,\n" +
+                "    i.person_id,\n" +
+                "    i.status indec_status,\n" +
+                "    i.status_nm indec_status_nm\n" +
+                "from\n" +
+                "    cpid.in_dec i\n" +
+                "left join\n" +
+                "    cpid.commodity cmdt\n" +
+                "on\n" +
+                "    cmdt.id=i.cmdt_id\n" +
+                "and cmdt.isdeleted=0\n" +
+                "left join\n" +
+                "    cpid.apps a\n" +
+                "on\n" +
+                "    a.id=cmdt.app_id\n" +
+                "and a.isdeleted=0\n" +
+                "left join\n" +
+                "    cpid.apps_rasp ar\n" +
+                "on\n" +
+                "    a.id=ar.app_id\n" +
+                "where\n" +
+                "    i.isdeleted=0\n" +
+                "and a.status = 170\n" +
+                "" + sql_os + "\n " +
+                "order by\n" +
+                "    a.instime desc";
+        return (List<InDec>) entityManager.createNativeQuery(queryForList).getResultList();
+    }
+
+    /* 10) Статуси фақат "Бекор қилинган" бўлган аризалар*/
+    public List<InDec> getListInDecRollBack(HttpServletRequest request) {
+
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+
+        String sql_os = "";
+        if (userRole >= 6) sql_os = " and i.in_dec_location = '" + userLocation + "' ";
+
+        String queryForList = "select\n" +
+                "    a.id,\n" +
+                "    a.instime,\n" +
+                "    a.insuser,\n" +
+                "    a.isdeleted,\n" +
+                "    a.updtime,\n" +
+                "    a.upduser,\n" +
+                "    a.app_num,\n" +
+                "    a.app_date,\n" +
+                "    a.customer_country_nm,\n" +
+                "    a.customer_country,\n" +
+          /*10*/"    a.location_id,\n" +
+                "    a.location_nm,\n" +
+                "    a.org_name,\n" +
+                "    a.person_addr,\n" +
+                "    a.person_fio,\n" +
+                "    a.person_mail,\n" +
+                "    a.person_phone,\n" +
+                "    a.person_pin,\n" +
+                "    a.person_position,\n" +
+                "    a.person_tin,\n" +
+          /*20*/"    a.seller_org,\n" +
+                "    a.sender_country,\n" +
+                "    a.sender_country_nm,\n" +
+                "    a.sender_org,\n" +
+                "    a.status,\n" +
+                "    a.terms_nm,\n" +
+                "    a.terms_addr,\n" +
+                "    a.trans_exp,\n" +
+                "    a.status_nm,\n" +
+                "    ar.inspector_id   inspector_id,\n" +
+                "    ar.inspector_name inspector_name,\n" +
+                "    a.comment,\n" +
+          /*32*/"    cmdt.id cmdt_id,\n" +
+                "    i.id indec_id,\n" +
+                "    i.instime indec_instime,\n" +
+                "    i.insuser indec_insuser,\n" +
+                "    i.isdeleted indec_isdeleted,\n" +
+                "    i.updtime indec_updtime,\n" +
+                "    i.upduser indec_upduser,\n" +
+                "    i.comment_marks,\n" +
+          /*40*/"    i.customs_payments,\n" +
+                "    i.customs_preference,\n" +
+                "    i.hs_code,\n" +
+                "    i.hs_name,\n" +
+                "    i.in_dec_basis,\n" +
+                "    i.in_dec_date,\n" +
+                "    i.in_dec_location,\n" +
+                "    i.in_dec_location_nm,\n" +
+                "    i.in_dec_num,\n" +
+                "    i.method,\n" +
+          /*50*/"    i.method_nm,\n" +
+                "    i.origin_country,\n" +
+                "    i.origin_country_nm,\n" +
+                "    i.person_id,\n" +
+                "    i.status indec_status,\n" +
+                "    i.status_nm indec_status_nm\n" +
+                "from\n" +
+                "    cpid.in_dec i\n" +
+                "left join\n" +
+                "    cpid.commodity cmdt\n" +
+                "on\n" +
+                "    cmdt.id=i.cmdt_id\n" +
+                "and cmdt.isdeleted=0\n" +
+                "left join\n" +
+                "    cpid.apps a\n" +
+                "on\n" +
+                "    a.id=cmdt.app_id\n" +
+                "and a.isdeleted=0\n" +
+                "left join\n" +
+                "    cpid.apps_rasp ar\n" +
+                "on\n" +
+                "    a.id=ar.app_id\n" +
+                "where\n" +
+                "    i.isdeleted=0\n" +
+                "and a.status = 175\n" +
+                "" + sql_os + "\n " +
+                "order by\n" +
+                "    a.instime desc";
+        return (List<InDec>) entityManager.createNativeQuery(queryForList).getResultList();
     }
 
 }

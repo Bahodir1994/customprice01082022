@@ -14,9 +14,8 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 import uz.customs.customsprice.entity.InitialDecision.Apps;
 import uz.customs.customsprice.entity.InitialDecision.Commodity;
 import uz.customs.customsprice.entity.InitialDecision.InDec;
-import uz.customs.customsprice.entity.InitialDecision.Users;
 import uz.customs.customsprice.entity.files.DecisionPdf;
-import uz.customs.customsprice.repository.forHtmlRepo;
+import uz.customs.customsprice.entity.users.User;
 
 import java.io.*;
 import java.security.MessageDigest;
@@ -41,7 +40,7 @@ public class PdfService {
     private final UsersService usersService;
     private final forHtmlService htmlService;
 
-    public PdfService(AppsService appsService, CommodityService commodityService, InDecService inDecService, DecisionPdfService decisionPdfService, PaymentServise paymentServise, DocsService docsService, UsersService usersService, forHtmlRepo htmlRepo, forHtmlService htmlService) {
+    public PdfService(AppsService appsService, CommodityService commodityService, InDecService inDecService, DecisionPdfService decisionPdfService, PaymentServise paymentServise, DocsService docsService, UsersService usersService, forHtmlService htmlService) {
         this.appsService = appsService;
         this.commodityService = commodityService;
         this.inDecService = inDecService;
@@ -52,11 +51,12 @@ public class PdfService {
         this.htmlService = htmlService;
     }
 
+
     public void createPdf(String appId, String cmdtId) throws IOException, BadElementException {
         Apps apps = appsService.findById(appId);
         InDec inDec2 = inDecService.getByCmtdId(cmdtId);
         String IdUser = inDec2.getInsUser();
-        Optional<Users> userName = usersService.getById(IdUser);
+        Optional<User> userName = usersService.getById(IdUser);
 
 
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
@@ -79,7 +79,7 @@ public class PdfService {
         context.setVariable("inDec", inDecService.getByCmtdId(cmdtId));
         context.setVariable("payment", paymentServise.getByCmdtId(cmdtId));
         context.setVariable("docs", docsService.getByAppIdForPdf(appId));
-        context.setVariable("userName", userName.get().getUserName());
+        context.setVariable("userName", userName.get().getUsername());
         context.setVariable("LocaleDate", date1);
         context.setVariable("url_qrCode", url_qrCode);
         context.setVariable("url_InsUsr", url_InsUsr);

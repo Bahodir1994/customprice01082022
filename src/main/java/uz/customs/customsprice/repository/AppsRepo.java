@@ -13,4 +13,6 @@ public interface AppsRepo extends JpaRepository<Apps, String> {
 
     Page<Apps> findByPersonId(String personId, Pageable pageable);
 
+    String countByStatusAndLocationId(String status, String locationId);
+
 }

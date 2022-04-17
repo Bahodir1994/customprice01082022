@@ -50,18 +50,29 @@
 <div class="page-content">
     <!--start email wrapper-->
     <div class="row">
+        <%if (userRole == 7 || userRole == 8) {%>
         <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecApp('100')">
             <div class="card radius-10 shadow">
                 <div class="card-body">
                     <div class="text-center">
                         <div class="widgets-icons rounded-circle mx-auto bg-light-primary text-primary mb-3"><i class="bx bx-news"></i>
                         </div>
-                        <h4 class="my-1">30 та</h4>
+                        <h4 class="my-1">
+                            <%if (userRole == 7) {%>
+                            ${notSortedListSize} та
+                            <%
+                                }
+                                if (userRole == 8) {
+                            %>
+                            ${sortedListSize} та
+                            <%}%>
+                        </h4>
                         <p class="mb-0 text-secondary">Янги ариза</p>
                     </div>
                 </div>
             </div>
         </div>
+        <%}%>
         <%if (userRole == 7) {%>
         <%--        <c:if test="userRole == 7">--%>
         <div class="col my-button" style="cursor: pointer;" onclick="javascript:ListInDecRaspTable('110')">
@@ -70,7 +81,7 @@
                     <div class="text-center">
                         <div class="widgets-icons rounded-circle mx-auto bg-light-danger text-danger mb-3"><i class="bx bx-send"></i>
                         </div>
-                        <h4 class="my-1">29 та</h4>
+                        <h4 class="my-1">${sortedListSize} та</h4>
                         <p class="mb-0 text-secondary">Tақсимланган</p>
                     </div>
                 </div>
@@ -108,7 +119,7 @@
                     <div class="text-center">
                         <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
                         </div>
-                        <h4 class="my-1">30 та</h4>
+                        <h4 class="my-1">${termsListSize} та</h4>
                         <p class="mb-0 text-secondary">Дастлабки қарор</p>
                     </div>
                 </div>
@@ -126,13 +137,13 @@
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="javascript:ListInDecTermsRollBack('175')">
             <div class="card radius-10 shadow">
                 <div class="card-body">
                     <div class="text-center">
                         <div class="widgets-icons rounded-circle mx-auto bg-light-info text-info mb-3"><i class="bx bx-reset"></i>
                         </div>
-                        <h4 class="my-1">5 та</h4>
+                        <h4 class="my-1">${termsRollBackListSize} та</h4>
                         <p class="mb-0 text-secondary">Бекор қилинган</p>
                     </div>
                 </div>
@@ -248,14 +259,40 @@
         // var inspectorName = $('#userIdF_' + rowNum + ' option:selected').text();
         var x = '0';
         var dataS = {
-            "id": x,
-            "status": status
+            "id": x/*,
+            "status": status*/
         }
         $.ajax({
             type: "POST",
             data: dataS,
             <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
             url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/ListInDec/ListInDecTermsTable",
+            dataType: "html",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (res) {
+                $('div#ListInDecTable').html(res);
+            },
+            error: function (res) {
+            }
+        });
+    }
+
+    function ListInDecTermsRollBack(status) {
+        if (status == '100') {
+        }
+        if (status == '110') {
+        }
+        // var inspectorName = $('#userIdF_' + rowNum + ' option:selected').text();
+        var x = '0';
+        var dataS = {
+            "id": x/*,
+            "status": status*/
+        }
+        $.ajax({
+            type: "POST",
+            data: dataS,
+            <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
+            url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/ListInDec/ListInDecTermsRollBack",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {
