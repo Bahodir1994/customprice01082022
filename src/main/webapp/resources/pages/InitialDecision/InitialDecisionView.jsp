@@ -379,15 +379,12 @@
                             <tbody>
                             <c:forEach var="var" items="${allCommodityFor}" varStatus="i">
                                 <tr>
-                                        <%--                                    <td>--%>
-                                        <%--                                        <div class="d-flex align-items-center">--%>
-                                        <%--                                            <div><i class='bx bxs-file-doc me-2 font-24 text-success'></i>--%>
-                                        <%--                                            </div>--%>
-                                        <%--                                            <div class="font-weight-bold text-success">Review Checklist Template</div>--%>
-                                        <%--                                        </div>--%>
-                                        <%--                                    </td>--%>
-                                    <td><a type="button" class="btn btn-primary btn-sm radius-30" style="cursor: pointer;" onclick="Calculating('${var.id}')">${var.hsCode}</a>
-                                    </td>
+                                    <c:if test="${var.paymentYN == 'YES'} ">
+                                    <td><a type="button" class="btn btn-success btn-sm radius-30" style="cursor: pointer;" onclick="Calculating('${var.id}')">${var.hsCode}</a></td>
+                                    </c:if>
+                                    <c:if test="${var.paymentYN == 'NO'}">
+                                        <td><a type="button" class="btn btn-primary btn-sm radius-30" style="cursor: pointer;" onclick="Calculating('${var.id}')">${var.hsCode}</a></td>
+                                    </c:if>
                                     <td><textarea style="resize: horizontal">${var.hsName}</textarea></td>
                                     <td>${var.orignCountrNm}</td>
                                     <td>${var.originOrg}</td>

@@ -33,6 +33,10 @@ public class CommodityService {
         return commodityRepo.save(commodity);
     }
 
+    public Commodity saveYN(Commodity commodity){
+        return commodityRepo.save(commodity);
+    }
+
     /* 5) <<Commodity>> учун тартиб рақамини генерация қилади */
     public String getMaxCmdtNumber(String appId) {
         String queryForList = "select\n" +
@@ -62,5 +66,11 @@ public class CommodityService {
 
     public Optional<Commodity> getById(String id){
         return commodityRepo.findById(id);
+    }
+
+    public Commodity findById(String id){
+        if (commodityRepo.findById(id).isPresent())
+            return commodityRepo.findById(id).get();
+        else return null;
     }
 }

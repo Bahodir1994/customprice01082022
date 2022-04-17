@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import uz.customs.customsprice.entity.InitialDecision.*;
 import uz.customs.customsprice.entity.users.User;
+import uz.customs.customsprice.repository.CommodityRepo;
 import uz.customs.customsprice.repository.PaymentRepo;
 import uz.customs.customsprice.service.*;
 
@@ -29,6 +30,7 @@ public class InDecController {
     private final AppsService appsService;
     private final AppsService appsservice;
     private final CommodityService commodityService;
+    private final CommodityRepo commodityRepo;
     private final ConturyService conturyService;
     private final MethodService methodService;
     private final PackagingService packagingService;
@@ -55,11 +57,12 @@ public class InDecController {
     private final String INITIALDECISIONCONFIRMCMDT_CALC = "/resources/pages/InitialDecision/InitialDecisionCalc";
     private final String DELETINGCALCUALTE = "/resources/pages/InitialDecision/DeletePayments";
 
-    public InDecController(InDecService inDecService, AppsService appsService, AppsService appsservice, CommodityService commodityService, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, LocationService locationService, StatusService statusService, PdfService pdfService, PaymentServise paymentServise, ExchangerateService exchangerateService, StatusMService statusMService, StatusHService statusHService, PaymentTypeService paymentTypeService, PaymTypeService paymTypeService, UsersService usersService) {
+    public InDecController(InDecService inDecService, AppsService appsService, AppsService appsservice, CommodityService commodityService, CommodityRepo commodityRepo, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, LocationService locationService, StatusService statusService, PdfService pdfService, PaymentServise paymentServise, ExchangerateService exchangerateService, StatusMService statusMService, StatusHService statusHService, PaymentTypeService paymentTypeService, PaymTypeService paymTypeService, UsersService usersService) {
         this.inDecService = inDecService;
         this.appsService = appsService;
         this.appsservice = appsservice;
         this.commodityService = commodityService;
+        this.commodityRepo = commodityRepo;
         this.conturyService = conturyService;
         this.methodService = methodService;
         this.packagingService = packagingService;
@@ -363,10 +366,18 @@ public class InDecController {
             paymentServise.savePayment(payment);
         }
 
+
         Apps apps = appsService.findById(appId);
         Optional<Commodity> commodity = commodityService.getById(cmdtId);
         Exchangerate exchangerate840 = exchangerateService.getTop1ByIdOrderByDateSetDesc("840");
         BigDecimal rate = BigDecimal.valueOf(exchangerate840.getRate()).multiply(BigDecimal.valueOf(exchangerate840.getAmount()));
+        Commodity commodity1 = commodityService.findById(appId);
+        commodity1.setPaymentYN("YES");
+        commodityService.saveYN(commodity1);
+//        Commodity comm = new Commodity();
+//        comm = commodityRepo.getById(cmdtId);
+//        comm.setPaymentYN("YES");
+//        commodityService.saveYN(comm);
 
 
         List<Payment> payments = paymentServise.getByCmdtId(cmdtId);

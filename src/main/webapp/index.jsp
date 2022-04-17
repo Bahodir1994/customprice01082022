@@ -967,6 +967,11 @@
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/datatable/js/jquery.dataTables.min.js"></script>
 <%-- <script src="<%=request.getContextPath()%>/resources/assets2/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>--%>
 <script>
+    $("#headercolor1").ready(function () {
+        $("html").addClass("color-header headercolor1");
+        $("html").removeClass("headercolor2 headercolor3 headercolor4 headercolor5 headercolor6 headercolor7 headercolor8");
+    });
+
     $(document).ready(function () {
         $('#example').DataTable();
     });

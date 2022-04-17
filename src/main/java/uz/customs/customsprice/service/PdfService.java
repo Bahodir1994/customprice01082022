@@ -133,6 +133,7 @@ public class PdfService {
         renderer.createPDF(outputStream, false);
         renderer.finishPDF();
 
+
         try {
             outputStream.close();
         } catch (java.io.IOException e) {
