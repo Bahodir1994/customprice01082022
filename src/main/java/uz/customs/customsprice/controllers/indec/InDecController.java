@@ -92,55 +92,68 @@ public class InDecController {
         String userLocationName = (String) request.getSession().getAttribute("userLocationName");
         String userPost = (String) request.getSession().getAttribute("userPost");
 
-        Apps apps = appsService.findById(appId);
-        Status status1 = statusService.getById(145);
+        List<Commodity> commodityList = commodityService.getListCommdityPayment(appId);
+        if (commodityList.size() == 0) {
+            Apps apps = appsService.findById(appId);
+            Status status1 = statusService.getById(145);
 
-        /** Хбб тўл.ходимидан хбб тўл.бош га жўнатилган Ариза мақоми ўзгариши 145-(Тасдиқлашга тайёрланган (инспектор томонидан бошлиқга юборилган)) **/
-        Status status2 = statusService.getById(145);
-        apps.setStatus(145);
-        apps.setStatusNm(status2.getName());
-        appsService.saveAppsStatus(apps);
+            /** Хбб тўл.ходимидан хбб тўл.бош га жўнатилган Ариза мақоми ўзгариши 145-(Тасдиқлашга тайёрланган (инспектор томонидан бошлиқга юборилган)) **/
+            Status status2 = statusService.getById(145);
+            apps.setStatus(145);
+            apps.setStatusNm(status2.getName());
+            appsService.saveAppsStatus(apps);
 
-        /** mav object start **/
-        List<Apps> notSortedList = new ArrayList<>();
-        notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
-        mav.addObject("notSortedList", notSortedList);
+            /** mav object start **/
+            List<Apps> notSortedList = new ArrayList<>();
+            notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
+            mav.addObject("notSortedList", notSortedList);
 
-        List<Apps> sortedList = new ArrayList<>();
-        sortedList = appsservice.getListSorted();
-        mav.addObject("sortedList", sortedList);
+            List<Apps> sortedList = new ArrayList<>();
+            sortedList = appsservice.getListSorted();
+            mav.addObject("sortedList", sortedList);
 
-        List<InDec> termsList = new ArrayList<>();
-        termsList = appsservice.getListInDec(request);
-        mav.addObject("termsList", termsList);
+            List<InDec> termsList = new ArrayList<>();
+            termsList = appsservice.getListInDec(request);
+            mav.addObject("termsList", termsList);
 
-        List<User> usersList = new ArrayList<>();
-        usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
-        mav.addObject("userSelectList", usersList);
-        /** mav object end **/
+            List<User> usersList = new ArrayList<>();
+            usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
+            mav.addObject("userSelectList", usersList);
+            /** mav object end **/
 
-        /**todo ЛОК га ёзиш start todo**/
-        StatusM statusM = new StatusM();
-        statusM.setAppId(apps.getId());
-        statusM.setStatus(String.valueOf(apps.getStatus()));
-        statusM.setStatusComment(apps.getStatusNm());
-        statusM.setInsUser(userId);
-        statusMService.saveStatusM(statusM);
+            /**todo ЛОК га ёзиш start todo**/
+            StatusM statusM = new StatusM();
+            statusM.setAppId(apps.getId());
+            statusM.setStatus(String.valueOf(apps.getStatus()));
+            statusM.setStatusComment(apps.getStatusNm());
+            statusM.setInsUser(userId);
+            statusMService.saveStatusM(statusM);
 
-        StatusH statusH = new StatusH();
-        statusH.setStmainID(statusM.getId());
-        statusH.setAppId(statusM.getAppId());
-        statusH.setStatus(String.valueOf(apps.getStatus()));
-        statusH.setStatusComment(apps.getStatusNm());
-        statusH.setInsUser(userId);
-        statusHService.saveStatusH(statusH);
-        /**todo ЛОК га ёзиш end todo**/
-
+            StatusH statusH = new StatusH();
+            statusH.setStmainID(statusM.getId());
+            statusH.setAppId(statusM.getAppId());
+            statusH.setStatus(String.valueOf(apps.getStatus()));
+            statusH.setStatusComment(apps.getStatusNm());
+            statusH.setInsUser(userId);
+            statusHService.saveStatusH(statusH);
+            /**todo ЛОК га ёзиш end todo**/
+        }
         return mav;
     }
 
     @PostMapping(value = DELETINGCALCUALTE)
     public ModelAndView deleteValue(HttpServletRequest request, @RequestParam String payId, @RequestParam String cmdtId, @RequestParam String appId) {
+
+        int paymentCount = 0;
+        List<Payment> payment = commodityService.getListPaymentCount(cmdtId);
+        System.out.println("paymentpaymentpayment == " + payment);
+        System.out.println("paymentpaymentpayment111== " + payment.get(0));
+        paymentCount = Integer.parseInt(String.valueOf(payment.get(0)));
+        if (paymentCount == 1) {
+            Commodity commodity = commodityService.findById(cmdtId);
+            commodity.setPaymentYN("NO");
+            commodityService.saveYN(commodity);
+        }
         paymentRepo.deletePaymentById(payId);
         ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/InitialDecisionSteps/Steps4");
         ModelAndView mav2 = new ModelAndView("resources/pages/InitialDecision/InitialDecisionSteps/Steps4StatusDefault");
@@ -161,6 +174,7 @@ public class InDecController {
         String userLocationName = (String) request.getSession().getAttribute("userLocationName");
         String userPost = (String) request.getSession().getAttribute("userPost");
 
+
 //        mav.addObject("docsList", docsList);
 //        mav.addObject("rollbackInfo", listRollbackSp);
 //        mav.addObject("cmdtId", appId);
@@ -179,6 +193,7 @@ public class InDecController {
             mav2.addObject("appStatusName", apps.getStatusNm());
             mav2.addObject("userRole", userRole);
             mav2.addObject("rate", rate);
+//            mav2.addObject("cmdtPaymentYN", commodityService.getByAppId(appId).getPaymentYN());
             mav = mav2;
         }
         return mav;
@@ -371,7 +386,7 @@ public class InDecController {
         Optional<Commodity> commodity = commodityService.getById(cmdtId);
         Exchangerate exchangerate840 = exchangerateService.getTop1ByIdOrderByDateSetDesc("840");
         BigDecimal rate = BigDecimal.valueOf(exchangerate840.getRate()).multiply(BigDecimal.valueOf(exchangerate840.getAmount()));
-        Commodity commodity1 = commodityService.findById(appId);
+        Commodity commodity1 = commodityService.findById(cmdtId);
         commodity1.setPaymentYN("YES");
         commodityService.saveYN(commodity1);
 //        Commodity comm = new Commodity();
