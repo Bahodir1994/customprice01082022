@@ -2,10 +2,13 @@ package uz.customs.customsprice.service;
 
 import org.springframework.stereotype.Service;
 import uz.customs.customsprice.entity.InitialDecision.Commodity;
+import uz.customs.customsprice.entity.InitialDecision.InDec;
+import uz.customs.customsprice.entity.InitialDecision.Payment;
 import uz.customs.customsprice.repository.CommodityRepo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +20,12 @@ public class CommodityService {
         this.commodityRepo = commodityRepo;
     }
 
-    public Commodity getByAppId(String appId){
+    public Commodity getByAppId(String appId) {
         return commodityRepo.findAllByAppId(appId);
+    }
+
+    public List<Commodity> getListAppId(String appId) {
+        return commodityRepo.findByAppId(appId);
     }
 
     @PersistenceContext
@@ -33,7 +40,7 @@ public class CommodityService {
         return commodityRepo.save(commodity);
     }
 
-    public Commodity saveYN(Commodity commodity){
+    public Commodity saveYN(Commodity commodity) {
         return commodityRepo.save(commodity);
     }
 
@@ -64,13 +71,47 @@ public class CommodityService {
         return result;
     }
 
-    public Optional<Commodity> getById(String id){
+    public Optional<Commodity> getById(String id) {
         return commodityRepo.findById(id);
     }
 
-    public Commodity findById(String id){
+    public Commodity findById(String id) {
         if (commodityRepo.findById(id).isPresent())
             return commodityRepo.findById(id).get();
         else return null;
     }
+
+    public List<Commodity> getListCommdityPayment(String appId) {
+        String queryForList = " select\n" +
+                "    cmdt.id     cmdt_id,\n" +
+                "    count(p.id) payment_count\n" +
+                "from\n" +
+                "    cpid.commodity cmdt\n" +
+                "left join\n" +
+                "    cpid.payment p\n" +
+                "on\n" +
+                "    cmdt.id = p.cmdt_id\n" +
+                "where\n" +
+                "    app_id='" + appId + "'\n" +
+                "    and p.CMDT_ID is null \n" +
+                "group by\n" +
+                "    cmdt.id,\n" +
+                "    p.cmdt_id ";
+        return (List<Commodity>) entityManager.createNativeQuery(queryForList).getResultList();
+    }
+
+    public List<Payment> getListPaymentCount(String cmdtId) {
+        String queryForList = " select\n" +
+                "    count(p.id) payment_count\n" +
+                "from\n" +
+                "    cpid.commodity cmdt\n" +
+                "left join\n" +
+                "    cpid.payment p\n" +
+                "on\n" +
+                "    cmdt.id = p.cmdt_id\n" +
+                "where\n" +
+                "    p.cmdt_id = '" + cmdtId + "' ";
+        return (List<Payment>) entityManager.createNativeQuery(queryForList).getResultList();
+    }
+
 }

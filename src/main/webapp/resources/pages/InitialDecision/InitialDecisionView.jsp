@@ -121,7 +121,8 @@
                                         </tr>
                                         <tr>
                                             <th class="text-end">Транспорт харажатлари:</th>
-                                            <td><a type="button" class="btn btn-outline-primary btn-sm radius-30" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="cursor: pointer;"> <c:out value="${total}"/>
+                                            <td><a type="button" class="btn btn-outline-primary btn-sm radius-30" type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                                   data-bs-target="#exampleModal1" style="cursor: pointer;"> <c:out value="${total}"/>
                                                 <i class="bx bx-info-circle"></i>
                                             </a>
                                             </td>
@@ -138,7 +139,7 @@
                                             <th class="text-end">Фактура қиймати:</th>
                                             <td>
                                                 <a type="button" class="btn btn-outline-primary btn-sm radius-30" data-bs-toggle="modal" data-bs-target="#exampleModalfq" style="cursor: pointer;">
-                                                    ${val[29]} АҚШ
+                                                        ${val[29]} АҚШ
                                                     <i class="bx bx-info-circle"></i>
                                                 </a>
                                             </td>
@@ -196,7 +197,8 @@
                                                         <td class=" ">${val.docType}</td>
                                                         <td class=" ">${val.docNumber}<i class="success fa fa-long-arrow-up"></i></td>
                                                         <td class=" ">${val.docDate}</td>
-                                                        <td class=" "><a href="<%=request.getContextPath()%>download?id=${val.id}" class="btn btn-outline-primary btn-sm"><i class="fa fa-download">${ val.docName}</i></a></td>
+                                                        <td class=" "><a href="<%=request.getContextPath()%>download?id=${val.id}" class="btn btn-outline-primary btn-sm"><i
+                                                                class="fa fa-download">${ val.docName}</i></a></td>
                                                     </tr>
                                                 </c:forEach>
 
@@ -379,13 +381,15 @@
                             <tbody>
                             <c:forEach var="var" items="${allCommodityFor}" varStatus="i">
                                 <tr>
-                                    <c:if test="${var.paymentYN == 'YES'} ">
-                                    <td><a type="button" class="btn btn-success btn-sm radius-30" style="cursor: pointer;" onclick="Calculating('${var.id}')">${var.hsCode}</a></td>
-                                    </c:if>
-                                    <c:if test="${var.paymentYN == 'NO'}">
-                                        <td><a type="button" class="btn btn-primary btn-sm radius-30" style="cursor: pointer;" onclick="Calculating('${var.id}')">${var.hsCode}</a></td>
-                                    </c:if>
-                                    <td><textarea style="resize: horizontal">${var.hsName}</textarea></td>
+                                    <td>
+                                        <c:if test="${var.paymentYN=='YES'}">
+                                            <a type="button" class="btn btn-success btn-sm radius-30" style="cursor: pointer;" onclick="Calculating('${var.id}')">${var.hsCode}</a>
+                                        </c:if>
+                                        <c:if test="${var.paymentYN=='NO'}">
+                                            <a type="button" class="btn btn-primary btn-sm radius-30" style="cursor: pointer;" onclick="Calculating('${var.id}')">${var.hsCode}</a>
+                                        </c:if>
+                                    </td>
+                                    <td><textarea style="resize: horizontal" readonly>${var.hsName}</textarea></td>
                                     <td>${var.orignCountrNm}</td>
                                     <td>${var.originOrg}</td>
                                     <td>${var.inDecNum} / ${var.inDecDate}</td>
@@ -409,14 +413,19 @@
                                            data-bs-target="#exampleExtraLargeModal3" style="cursor: pointer;"></i>
                                     </td>
                                     <td>
+                                        if
                                         <button type="button" class="btn btn-primary btn-block"
                                                 onclick="Calculating('${var.id}')">
                                             <i class="bx bx-calculator"></i>
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-block" data-bs-toggle="modal"
-                                                data-bs-target="#exampleExtraLargeModal4">
-                                            <i class="bx bx-undo"></i>
-                                        </button>
+
+                                        <c:if test="${appStatus == 110}">
+                                            <button type="button" class="btn btn-danger btn-block" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleExtraLargeModal4">
+                                                <i class="bx bx-undo"></i>
+                                            </button>
+                                        </c:if>
+
                                             <%--                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleExtraLargeModal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Очень большой</font></font></button>--%>
                                     </td>
                                 </tr>
@@ -529,12 +538,12 @@
                                                     </textarea>
                                             </div>
                                         </form>
-<%--                                        <button type="button" class="btn btn-danger mt-3"--%>
-<%--                                                onclick="javascript:appRollback('120');">Тўлиқ қайтариш--%>
-<%--                                        </button>--%>
-<%--                                        <button type="button" class="btn btn-warning mt-3"--%>
-<%--                                                onclick="javascript:appRollbackToFix('125');">Тузатиш учун қайтариш--%>
-<%--                                        </button>--%>
+                                        <%--                                        <button type="button" class="btn btn-danger mt-3"--%>
+                                        <%--                                                onclick="javascript:appRollback('120');">Тўлиқ қайтариш--%>
+                                        <%--                                        </button>--%>
+                                        <%--                                        <button type="button" class="btn btn-warning mt-3"--%>
+                                        <%--                                                onclick="javascript:appRollbackToFix('125');">Тузатиш учун қайтариш--%>
+                                        <%--                                        </button>--%>
                                         <div class="form-check form-check-inline form-control-lg">
                                             <input style="cursor: pointer;" checked class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="120">
                                             <label style="cursor: pointer;" class="form-check-label" for="inlineRadio1">Тўлиқ қайтариш</label>

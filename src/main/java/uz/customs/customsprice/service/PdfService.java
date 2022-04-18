@@ -116,6 +116,7 @@ public class PdfService {
         Optional<Commodity> commodity = commodityService.getById(cmdtId);
         String FileName = ("ID" + commodity.get().getCmdtNum() + "-" + inDec.getInDecNum() + ".pdf");
         OutputStream outputStream = new FileOutputStream(sv_dir.getPath() + "/" + FileName);
+
         ITextRenderer renderer = new ITextRenderer();
         renderer.getFontResolver().addFont(urlTTF, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
         String imgPathh = "template/gtk.jpg";

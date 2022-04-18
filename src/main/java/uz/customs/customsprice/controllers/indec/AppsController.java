@@ -40,6 +40,7 @@ public class AppsController {
     private final UserRepository userRepository;
     private final InDecService inDecService;
     private final UsersService usersService;
+    private final CommodityService commodityService;
 
     @Autowired
     InDecRepo inDecRepo;
@@ -56,7 +57,7 @@ public class AppsController {
     private final String INITIAL_DECISION_TERMS_TABLE = "/resources/pages/InitialDecision/ListInDec/ListInDecTermsTable";
     private final String INITIAL_DECISION_TERMS_ROLLBACK = "/resources/pages/InitialDecision/ListInDec/ListInDecTermsRollBack";
 
-    public AppsController(AppsService appsService, ConturyService conturyService, LocationService locationService, StatusService statusService, TermsService termsService, AppsService appsservice, AppsRaspService appsRaspService, AppsRepo appsRepo, TransportTypeService transportTypeService, StatusMService statusMService, StatusHService statusHService, RollBackAppService rollBackAppService, RollbackSpService rollbackSpService, RollBackAppRepo rollBackAppRepo, UserRepository userRepository, InDecService inDecService, UsersService usersService) {
+    public AppsController(AppsService appsService, ConturyService conturyService, LocationService locationService, StatusService statusService, TermsService termsService, AppsService appsservice, AppsRaspService appsRaspService, AppsRepo appsRepo, TransportTypeService transportTypeService, StatusMService statusMService, StatusHService statusHService, RollBackAppService rollBackAppService, RollbackSpService rollbackSpService, RollBackAppRepo rollBackAppRepo, UserRepository userRepository, InDecService inDecService, UsersService usersService, CommodityService commodityService) {
         this.appsService = appsService;
         this.conturyService = conturyService;
         this.locationService = locationService;
@@ -74,6 +75,7 @@ public class AppsController {
         this.userRepository = userRepository;
         this.inDecService = inDecService;
         this.usersService = usersService;
+        this.commodityService = commodityService;
     }
 
 
@@ -196,6 +198,10 @@ public class AppsController {
     @ResponseBody
     public ModelAndView InitialDecisionView(HttpSession session, HttpServletRequest request, @RequestParam String appId) {
         ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/InitialDecisionView");
+//        List<Commodity> commodityList = new ArrayList<>();
+//        commodityList = commodityService.getListAppId(appId);
+
+
 
         Integer userRole = (Integer) request.getSession().getAttribute("userRole");
         Apps apps = appsservice.findById(appId);
@@ -216,6 +222,7 @@ public class AppsController {
 
         mav.addObject("docsList", docsList);
         mav.addObject("appId", appId);
+        mav.addObject("appStatus", apps.getStatus());
 
         return mav;
     }
