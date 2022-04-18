@@ -79,7 +79,7 @@ public class PdfService {
         context.setVariable("inDec", inDecService.getByCmtdId(cmdtId));
         context.setVariable("payment", paymentServise.getByCmdtId(cmdtId));
         context.setVariable("docs", docsService.getByAppIdForPdf(appId));
-        context.setVariable("userName", userName.get().getUsername());
+        context.setVariable("userName", userName.get().getFullname());
         context.setVariable("LocaleDate", date1);
         context.setVariable("url_qrCode", url_qrCode);
         context.setVariable("url_InsUsr", url_InsUsr);

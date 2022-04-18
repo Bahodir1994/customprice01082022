@@ -104,21 +104,17 @@ public class InDecController {
             appsService.saveAppsStatus(apps);
 
             /** mav object start **/
-            List<Apps> notSortedList = new ArrayList<>();
-            notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
-            mav.addObject("notSortedList", notSortedList);
+            List<Apps> notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
+            mav.addObject("notSortedListSize", notSortedList.size());
 
-            List<Apps> sortedList = new ArrayList<>();
-            sortedList = appsservice.getListSorted();
-            mav.addObject("sortedList", sortedList);
+            List<Apps> sortedList = appsservice.getListSorted(request);
+            mav.addObject("sortedListSize", sortedList.size());
 
-            List<InDec> termsList = new ArrayList<>();
-            termsList = appsservice.getListInDec(request);
-            mav.addObject("termsList", termsList);
+            List<InDec> termsList = appsservice.getListInDec(request);
+            mav.addObject("termsListSize", termsList.size());
 
-            List<User> usersList = new ArrayList<>();
-            usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
-            mav.addObject("userSelectList", usersList);
+            List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
+            mav.addObject("termsRollBackListSize", termsRollBackList.size());
             /** mav object end **/
 
             /**todo ЛОК га ёзиш start todo**/
@@ -225,21 +221,17 @@ public class InDecController {
         appsService.saveAppsStatus(apps);
 
         /** mav object start **/
-        List<Apps> notSortedList = new ArrayList<>();
-        notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
-        mav.addObject("notSortedList", notSortedList);
+        List<Apps> notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
+        mav.addObject("notSortedListSize", notSortedList.size());
 
-        List<Apps> sortedList = new ArrayList<>();
-        sortedList = appsservice.getListSorted();
-        mav.addObject("sortedList", sortedList);
+        List<Apps> sortedList = appsservice.getListSorted(request);
+        mav.addObject("sortedListSize", sortedList.size());
 
-        List<InDec> termsList = new ArrayList<>();
-        termsList = appsservice.getListInDec(request);
-        mav.addObject("termsList", termsList);
+        List<InDec> termsList = appsservice.getListInDec(request);
+        mav.addObject("termsListSize", termsList.size());
 
-        List<User> usersList = new ArrayList<>();
-        usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
-        mav.addObject("userSelectList", usersList);
+        List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
+        mav.addObject("termsRollBackListSize", termsRollBackList.size());
         /** mav object end **/
 
         /**todo ЛОК га ёзиш start todo**/
@@ -274,7 +266,7 @@ public class InDecController {
         String userLocationName = (String) request.getSession().getAttribute("userLocationName");
         String userPost = (String) request.getSession().getAttribute("userPost");
         Optional<Commodity> commodity = commodityService.getById(cmdtId);
-        Status status1 = statusService.getById(145);
+        Status status1 = statusService.getById(180);
 
         Apps apps = appsService.findById(appId);
         Status status2 = statusService.getById(170);
@@ -284,21 +276,7 @@ public class InDecController {
         appsService.saveAppsStatus(apps);
 
         /** mav object start **/
-        List<Apps> notSortedList = new ArrayList<>();
-        notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
-        mav.addObject("notSortedList", notSortedList);
 
-        List<Apps> sortedList = new ArrayList<>();
-        sortedList = appsservice.getListSorted();
-        mav.addObject("sortedList", sortedList);
-
-        List<InDec> termsList = new ArrayList<>();
-        termsList = appsservice.getListInDec(request);
-        mav.addObject("termsList", termsList);
-
-        List<User> usersList = new ArrayList<>();
-        usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
-        mav.addObject("userSelectList", usersList);
 
         /**todo ЛОК га ёзиш start todo**/
         StatusM statusM = new StatusM();
@@ -342,6 +320,18 @@ public class InDecController {
 
         /**todo PDF GENERATSIYA  **/
 //        pdfService.createPdf(appId, cmdtId, userName);
+
+        List<Apps> notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
+        mav.addObject("notSortedListSize", notSortedList.size());
+
+        List<Apps> sortedList = appsservice.getListSorted(request);
+        mav.addObject("sortedListSize", sortedList.size());
+
+        List<InDec> termsList = appsservice.getListInDec(request);
+        mav.addObject("termsListSize", termsList.size());
+
+        List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
+        mav.addObject("termsRollBackListSize", termsRollBackList.size());
         return mav;
     }
 

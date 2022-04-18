@@ -84,9 +84,6 @@ public class DBCustomPrice {
             hikariConfig.setJdbcUrl("jdbc:as400://192.168.2.10/CPID");
             hikariConfig.setUsername("rustamadm");
             hikariConfig.setPassword("rustamadm");
-//            hikariConfig.setJdbcUrl("jdbc:as400://192.168.212.231/CPID");
-//            hikariConfig.setUsername("rustam");
-//            hikariConfig.setPassword("9061648");
             hikariConfig.setConnectionTimeout(30000);
             hikariConfig.setValidationTimeout(5000);
             hikariConfig.setMinimumIdle(5);

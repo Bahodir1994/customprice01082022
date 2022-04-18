@@ -152,12 +152,30 @@
 
     function saveInDecRaspIns(appId, inspectorId, rowNum) {
         var inspectorName = $('#userIdF_' + rowNum + ' option:selected').text();
-        alert(' rowNum ===> ' + rowNum + '\n appId ===> ' + appId + '\n inspectorId ===> ' + inspectorId + '\n inspectorName ===> ' + inspectorName);
+        // alert(' rowNum ===> ' + rowNum + '\n appId ===> ' + appId + '\n inspectorId ===> ' + inspectorId + '\n inspectorName ===> ' + inspectorName);
         var dataS = {
             "appId": appId,
             "inspectorId": inspectorId,
             "inspectorName": inspectorName
         }
+        if (inspectorId == 'notSelected') {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'Ходим танланмади',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } else {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Ариза: '+inspectorName+'га тақсимланди!' ,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+
         $.ajax({
             type: "POST",
             data: dataS,
@@ -246,5 +264,6 @@
 
 
 </script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

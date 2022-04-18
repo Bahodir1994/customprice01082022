@@ -45,7 +45,6 @@ public class AppsController {
     @Autowired
     InDecRepo inDecRepo;
 
-
     private final String INITIALDECISION = "/resources/pages/InitialDecision/InitialDecision1";
     private final String INITIALDECISIONRASP = "/resources/pages/InitialDecision/InitialDecisionRasp";
     private final String INITIALDECISIONVIEW = "/resources/pages/InitialDecision/InitialDecisionView";
@@ -129,21 +128,17 @@ public class AppsController {
 
 
         ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec");
-        List<Apps> notSortedList = new ArrayList<>();
-        notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
-        mav.addObject("notSortedList", notSortedList);
+        List<Apps> notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
+        mav.addObject("notSortedListSize", notSortedList.size());
 
-        List sortedList = new ArrayList<>();
-        sortedList = appsservice.getListSorted();
-        mav.addObject("sortedList", sortedList);
+        List<Apps> sortedList = appsservice.getListSorted(request);
+        mav.addObject("sortedListSize", sortedList.size());
 
-        List<InDec> termsList = new ArrayList<>();
-        termsList = appsservice.getListInDec(request);
-        mav.addObject("termsList", termsList);
+        List<InDec> termsList = appsservice.getListInDec(request);
+        mav.addObject("termsListSize", termsList.size());
 
-//        List<Users> usersList = new ArrayList<>();
-//        usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
-//        mav.addObject("userSelectList", usersList);
+        List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
+        mav.addObject("termsRollBackListSize", termsRollBackList.size());
 
         return mav;
     }
@@ -166,7 +161,7 @@ public class AppsController {
         mav.addObject("notSortedList", notSortedList);
 
         List<Apps> sortedList = new ArrayList<>();
-        sortedList = appsservice.getListSorted();
+        sortedList = appsservice.getListSorted(request);
         mav.addObject("sortedList", sortedList);
 
         List<InDec> termsList = new ArrayList<>();
@@ -229,8 +224,10 @@ public class AppsController {
 
     @PostMapping(value = INITIALDECISIONROLLBACK)
     @ResponseBody
-    public ModelAndView InitialDecisionRollBack(HttpServletRequest request, @RequestParam String appId, @RequestParam String commentRollback, @RequestParam String rollback_ids,
-                                                @RequestParam String rollback_names, @RequestParam Integer statusApp) {
+    public ModelAndView InitialDecisionRollBack(
+            HttpServletRequest request, @RequestParam String appId, @RequestParam String commentRollback, @RequestParam String rollback_ids,
+            @RequestParam String rollback_names, @RequestParam Integer statusApp
+    ) {
         ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/InitialDecisionRasp");
 
         String userId = (String) request.getSession().getAttribute("userId");
@@ -279,21 +276,19 @@ public class AppsController {
         /**todo ЛОК га ёзиш end todo**/
 
         List<Apps> notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
-        mav.addObject("notSortedList", notSortedList);
+        mav.addObject("notSortedListSize", notSortedList.size());
 
-        List sortedList = appsservice.getListSorted();
-        mav.addObject("sortedList", sortedList);
+        List<Apps> sortedList = appsservice.getListSorted(request);
+        mav.addObject("sortedListSize", sortedList.size());
 
         List<InDec> termsList = appsservice.getListInDec(request);
-        mav.addObject("termsList", termsList);
+        mav.addObject("termsListSize", termsList.size());
 
-//        List<Users> usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
-//        mav.addObject("userSelectList", usersList);
+        List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
+        mav.addObject("termsRollBackListSize", termsRollBackList.size());
 
         return mav;
     }
-    /*-----------------------------------------------------------------------------------------------------------end*/
-
 
     /*todo Аризалар рўйхати(дастлабки)*/
     @PostMapping(value = INITIAL_DECISION_APP)
@@ -311,7 +306,7 @@ public class AppsController {
         List<Apps> notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
         mav.addObject("notSortedListSize", notSortedList.size());
 
-        List<Apps> sortedList = appsservice.getListSorted();
+        List<Apps> sortedList = appsservice.getListSorted(request);
         mav.addObject("sortedListSize", sortedList.size());
 
         List<InDec> termsList = appsservice.getListInDec(request);
@@ -364,7 +359,7 @@ public class AppsController {
         String userPost = (String) request.getSession().getAttribute("userPost");
 
         List<Apps> sortedList = new ArrayList<>();
-        sortedList = appsservice.getListSorted();
+        sortedList = appsservice.getListSorted(request);
         mav.addObject("sortedList", sortedList);
 
         return mav;
@@ -391,7 +386,6 @@ public class AppsController {
         return mav;
     }
 
-
     /*todo Аризалар рўйхати(дастлабки)*/
     @PostMapping(value = INITIAL_DECISION_TERMS_ROLLBACK)
     @ResponseBody
@@ -412,7 +406,6 @@ public class AppsController {
 
         return mav;
     }
-
 
 }
 

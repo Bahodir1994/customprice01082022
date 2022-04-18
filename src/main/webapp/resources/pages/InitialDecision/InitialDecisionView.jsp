@@ -413,13 +413,12 @@
                                            data-bs-target="#exampleExtraLargeModal3" style="cursor: pointer;"></i>
                                     </td>
                                     <td>
-                                        if
                                         <button type="button" class="btn btn-primary btn-block"
                                                 onclick="Calculating('${var.id}')">
                                             <i class="bx bx-calculator"></i>
                                         </button>
 
-                                        <c:if test="${appStatus == 110}">
+                                        <c:if test="${appStatus != 170 || appStatus != 175}">
                                             <button type="button" class="btn btn-danger btn-block" data-bs-toggle="modal"
                                                     data-bs-target="#exampleExtraLargeModal4">
                                                 <i class="bx bx-undo"></i>

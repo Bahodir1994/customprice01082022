@@ -88,6 +88,7 @@
                     <th style=" border-style: dotted">т/р</th>
                     <th style=" border-style: dotted">Ариза рақами</th>
                     <th style=" border-style: dotted">Холати</th>
+                    <th style=" border-style: dotted">Тўлов холати</th>
                     <th style=" border-style: dotted">Ариза санаси</th>
                     <th style=" border-style: dotted">Хужжат (Pdf)</th>
                     <th style=" border-style: dotted">Манфаатдор шахс</th>
@@ -106,6 +107,7 @@
                         <td><a type="button" class="btn btn-primary btn-sm radius-30 px-4" href="javascript:InitialDecisionView('${terms[0]}')"
                                class="text-primary font-weight-bold"><u>${terms[6]}</u></a></td>
                         <td><div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>${terms[28]}</div></td>
+                        <td>${terms[55]}</td>
                         <td>${terms[1]}</td>
                         <td>
                             <a type="button"  href="<%=request.getContextPath()%>/decisionPdfDownload?appId=${terms[0]}&cmdtId=${terms[32]}" class="btn btn-outline-warning">

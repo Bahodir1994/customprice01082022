@@ -1,5 +1,7 @@
 package uz.customs.customsprice.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import uz.customs.customsprice.entity.InitialDecision.Commodity;
 
@@ -12,5 +14,7 @@ public interface CommodityRepo extends JpaRepository<Commodity, String> {
     Commodity findAllByAppId(String appId);
 
     List<Commodity> findByAppId(String appId);
+
+    Page<Commodity> findByAppId(String appId, Pageable pageable);
 
 }
