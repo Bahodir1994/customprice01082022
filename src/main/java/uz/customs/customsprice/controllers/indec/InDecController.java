@@ -109,7 +109,7 @@ public class InDecController {
             mav.addObject("notSortedList", notSortedList);
 
             List<Apps> sortedList = new ArrayList<>();
-            sortedList = appsservice.getListSorted();
+            sortedList = appsservice.getListSorted(request);
             mav.addObject("sortedList", sortedList);
 
             List<InDec> termsList = new ArrayList<>();
@@ -230,7 +230,7 @@ public class InDecController {
         mav.addObject("notSortedList", notSortedList);
 
         List<Apps> sortedList = new ArrayList<>();
-        sortedList = appsservice.getListSorted();
+        sortedList = appsservice.getListSorted(request);
         mav.addObject("sortedList", sortedList);
 
         List<InDec> termsList = new ArrayList<>();
@@ -289,7 +289,7 @@ public class InDecController {
         mav.addObject("notSortedList", notSortedList);
 
         List<Apps> sortedList = new ArrayList<>();
-        sortedList = appsservice.getListSorted();
+        sortedList = appsservice.getListSorted(request);
         mav.addObject("sortedList", sortedList);
 
         List<InDec> termsList = new ArrayList<>();

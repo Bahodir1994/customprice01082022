@@ -50,7 +50,7 @@
 <div class="page-content">
     <!--start email wrapper-->
     <div class="row">
-        <%if (userRole == 7 || userRole == 8) {%>
+        <%if (userRole == 6 || userRole == 7 || userRole == 8) {%>
         <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecApp('100')">
             <div class="card radius-10 shadow">
                 <div class="card-body">
@@ -58,7 +58,9 @@
                         <div class="widgets-icons rounded-circle mx-auto bg-light-primary text-primary mb-3"><i class="bx bx-news"></i>
                         </div>
                         <h4 class="my-1">
-                            <%if (userRole == 7) {%>
+                            <%
+                                if (userRole == 6 || userRole == 7) {
+                            %>
                             ${notSortedListSize} та
                             <%
                                 }

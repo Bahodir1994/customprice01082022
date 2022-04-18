@@ -66,6 +66,13 @@
 
         <div class="row">
             <table>
+                <tr>
+                    <td style="color: #ffffff!important;">123</td>
+                    <td style="color: #ffffff!important;">123</td>
+                    <td style="color: #ffffff!important;">123</td>
+                </tr>
+            </table>
+            <table>
                 <thead>
                 <tr>
                     <th style="width: 86%; font-size: 15px!important; vertical-align: center!important; text-align: center!important;">
@@ -75,9 +82,9 @@
                     <th style="width: 14%">
                         <img alt=""
                              class="m-20 w-100 text-center text-c-red"
-                             style="width: 80px; height: 80px"
+                             style="width: 70px; height: 70px"
                              id='barcode'
-                             th:src="@{${'https://api.qrserver.com/v1/create-qr-code/?data=' + url_qrCode +'&amp;size=200x200'}}"
+                             th:src="@{${'https://api.qrserver.com/v1/create-qr-code/?data=' + url_qrCode +'&amp;size=100x100'}}"
                              title="${uncodId}"/>
                     </th>
                 </tr>
@@ -202,13 +209,13 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="pay: ${payment}">
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47ClcType}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${{pay.getG47Base}}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltRate}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltBase}" class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47Type()}" class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${{pay.getG47Base()}}" class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltRate()}" class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltBase()}" class="tg-oi4f"></td>
                                     <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltBaseCurrkod()}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${{pay.getG47Sum}}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47Sp}" class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${{pay.getG47Sum()}}" class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47Sp()}" class="tg-oi4f"></td>
                                 </tr>
                                 </tbody>
                             </table>

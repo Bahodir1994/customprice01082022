@@ -134,7 +134,7 @@ public class AppsController {
         mav.addObject("notSortedList", notSortedList);
 
         List sortedList = new ArrayList<>();
-        sortedList = appsservice.getListSorted();
+        sortedList = appsservice.getListSorted(request);
         mav.addObject("sortedList", sortedList);
 
         List<InDec> termsList = new ArrayList<>();
@@ -166,7 +166,7 @@ public class AppsController {
         mav.addObject("notSortedList", notSortedList);
 
         List<Apps> sortedList = new ArrayList<>();
-        sortedList = appsservice.getListSorted();
+        sortedList = appsservice.getListSorted(request);
         mav.addObject("sortedList", sortedList);
 
         List<InDec> termsList = new ArrayList<>();
@@ -281,7 +281,7 @@ public class AppsController {
         List<Apps> notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
         mav.addObject("notSortedList", notSortedList);
 
-        List sortedList = appsservice.getListSorted();
+        List sortedList = appsservice.getListSorted(request);
         mav.addObject("sortedList", sortedList);
 
         List<InDec> termsList = appsservice.getListInDec(request);
@@ -311,7 +311,7 @@ public class AppsController {
         List<Apps> notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
         mav.addObject("notSortedListSize", notSortedList.size());
 
-        List<Apps> sortedList = appsservice.getListSorted();
+        List<Apps> sortedList = appsservice.getListSorted(request);
         mav.addObject("sortedListSize", sortedList.size());
 
         List<InDec> termsList = appsservice.getListInDec(request);
@@ -364,7 +364,7 @@ public class AppsController {
         String userPost = (String) request.getSession().getAttribute("userPost");
 
         List<Apps> sortedList = new ArrayList<>();
-        sortedList = appsservice.getListSorted();
+        sortedList = appsservice.getListSorted(request);
         mav.addObject("sortedList", sortedList);
 
         return mav;

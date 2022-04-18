@@ -33,6 +33,7 @@ public class AppsService {
         userRole = (Integer) request.getSession().getAttribute("userRole");
         userLocation = (String) request.getSession().getAttribute("userLocation");
         userPost = (String) request.getSession().getAttribute("userPost");
+        String userIdS= (String) request.getSession().getAttribute("userIdS");
 
         String sqlWhere = "", sqlJoin = "", sqlJoinVal = "";
         if (userRole == 1) {
@@ -51,10 +52,10 @@ public class AppsService {
                     "on\n" +
                     "    a.id=ar.app_id";
             sqlWhere = " and a.status=110 \n " +
-                    " and ar.inspector_id='" + userId + "' ";
+                    " and ar.inspector_id='" + userIdS + "' ";
         }
         if (userRole == 6) {
-            sqlWhere =" and a.status=160 \n ";
+            sqlWhere = " and a.status=160 \n ";
         }
 
         String queryForList = "select\n" +
@@ -103,7 +104,25 @@ public class AppsService {
     }
 
     /* 2)Барча статуси "Янги"+"Имзоланган"+"Бекор қилинган" дан ташқари бўлган аризалар*/
-    public List getListSorted() {
+    public List getListSorted(HttpServletRequest request) {
+
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userIdS = (String) request.getSession().getAttribute("userIdS");
+
+        String sqlWhere = "", sqlJoin = "", sqlJoinVal = "";
+        if (userRole == 1 || userRole == 2) {
+            sqlWhere = " and a.status not in (100, 170, 175) \n ";
+        }
+        if (userRole == 7) {
+            sqlWhere = " and a.status not in (100, 170, 175) \n and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
+        }
+        if (userRole == 8) {
+            sqlWhere = " and a.status = 110 \n and ar.inspector_id = '" + userIdS + "' and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
+        }
+
         String queryForList = "select\n" +
                 "    a.id,\n" +
                 "    a.instime,\n" +
@@ -145,11 +164,9 @@ public class AppsService {
                 "on\n" +
                 "    a.id=ar.app_id\n" +
                 "where\n" +
-                "    a.status not in (100,\n" +
-                "                     170,\n" +
-                "                     175)\n" +
-                "and a.isdeleted=0\n" +
+                " a.isdeleted=0\n" +
                 "and ar.id is not null\n" +
+                "" + sqlWhere + "\n " +
                 "order by\n" +
                 "    a.instime desc";
         return entityManager.createNativeQuery(queryForList).getResultList();
@@ -589,7 +606,7 @@ public class AppsService {
                 "    a.app_date,\n" +
                 "    a.customer_country_nm,\n" +
                 "    a.customer_country,\n" +
-          /*10*/"    a.location_id,\n" +
+                /*10*/"    a.location_id,\n" +
                 "    a.location_nm,\n" +
                 "    a.org_name,\n" +
                 "    a.person_addr,\n" +
@@ -599,7 +616,7 @@ public class AppsService {
                 "    a.person_pin,\n" +
                 "    a.person_position,\n" +
                 "    a.person_tin,\n" +
-          /*20*/"    a.seller_org,\n" +
+                /*20*/"    a.seller_org,\n" +
                 "    a.sender_country,\n" +
                 "    a.sender_country_nm,\n" +
                 "    a.sender_org,\n" +
@@ -681,7 +698,7 @@ public class AppsService {
                 "    a.app_date,\n" +
                 "    a.customer_country_nm,\n" +
                 "    a.customer_country,\n" +
-          /*10*/"    a.location_id,\n" +
+                /*10*/"    a.location_id,\n" +
                 "    a.location_nm,\n" +
                 "    a.org_name,\n" +
                 "    a.person_addr,\n" +
@@ -691,7 +708,7 @@ public class AppsService {
                 "    a.person_pin,\n" +
                 "    a.person_position,\n" +
                 "    a.person_tin,\n" +
-          /*20*/"    a.seller_org,\n" +
+                /*20*/"    a.seller_org,\n" +
                 "    a.sender_country,\n" +
                 "    a.sender_country_nm,\n" +
                 "    a.sender_org,\n" +
@@ -703,7 +720,7 @@ public class AppsService {
                 "    ar.inspector_id   inspector_id,\n" +
                 "    ar.inspector_name inspector_name,\n" +
                 "    a.comment,\n" +
-          /*32*/"    cmdt.id cmdt_id,\n" +
+                /*32*/"    cmdt.id cmdt_id,\n" +
                 "    i.id indec_id,\n" +
                 "    i.instime indec_instime,\n" +
                 "    i.insuser indec_insuser,\n" +
@@ -711,7 +728,7 @@ public class AppsService {
                 "    i.updtime indec_updtime,\n" +
                 "    i.upduser indec_upduser,\n" +
                 "    i.comment_marks,\n" +
-          /*40*/"    i.customs_payments,\n" +
+                /*40*/"    i.customs_payments,\n" +
                 "    i.customs_preference,\n" +
                 "    i.hs_code,\n" +
                 "    i.hs_name,\n" +
@@ -721,7 +738,7 @@ public class AppsService {
                 "    i.in_dec_location_nm,\n" +
                 "    i.in_dec_num,\n" +
                 "    i.method,\n" +
-          /*50*/"    i.method_nm,\n" +
+                /*50*/"    i.method_nm,\n" +
                 "    i.origin_country,\n" +
                 "    i.origin_country_nm,\n" +
                 "    i.person_id,\n" +

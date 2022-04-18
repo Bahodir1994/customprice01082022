@@ -44,6 +44,7 @@
             session.setAttribute("role", "0");
             session.setAttribute("userRole", "0");
             session.setAttribute("userId", "0");
+            session.setAttribute("userIdS", user.getId());
             session.setAttribute("userName", "0");
             session.setAttribute("userLocation", "0");
             session.setAttribute("userPost", "0");
@@ -52,6 +53,7 @@
             session.setAttribute("role", user.getRole());
             session.setAttribute("userRole", user.getRole());
             session.setAttribute("userId", user.getUserid());
+            session.setAttribute("userIdS", user.getId());
             session.setAttribute("userName", user.getFullname());
             session.setAttribute("userLocation", user.getLocation());
             session.setAttribute("userPost", user.getPost());
@@ -59,11 +61,19 @@
         }
     }
     Integer roleI = (Integer) session.getAttribute("role");
+    session.setAttribute("role", roleI);
+    session.setAttribute("userRole", roleI);
+    session.setAttribute("userId", user.getUserid());
+    session.setAttribute("userIdS", user.getId());
+    session.setAttribute("userName", user.getFullname());
+    session.setAttribute("userLocation", user.getLocation());
+    session.setAttribute("userPost", user.getPost());
     String roleN = "";
     for (Role role : roleList) {
         if (role.getCode().equals(roleI)) {
             roleN = role.getName();
             System.out.println(user.getRole() + " ===>> " + user.getUserid() + " ===>> " + user.getId());
+            System.out.println(user.getRole() + " ===>> " + user.getId() + " 7777===>> " + user.getId());
             System.out.println(user.getFullname() + " ===>> " + roleN);
             break;
         }

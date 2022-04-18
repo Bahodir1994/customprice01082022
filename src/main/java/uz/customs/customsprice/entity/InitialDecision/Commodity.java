@@ -190,7 +190,7 @@ public class Commodity extends AbstractAuditingEntity {
 
     @Column(name = "PAYMENT_YN", columnDefinition = " VARCHAR(3) DEFAULT 'NO' ")
 //    @Digits(message = "Устун фақат сонлардан иборат бўлиши лозим", integer = 2, fraction = 0)
-    private String paymentYN;
+    private String paymentYN = "NO";
 
     public Commodity() {
     }
