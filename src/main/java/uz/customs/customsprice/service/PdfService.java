@@ -80,7 +80,8 @@ public class PdfService {
         context.setVariable("docs", docsService.getByAppIdForPdf(commodityForApp.getAppId()));
         context.setVariable("userName", userName.getFullname());
         context.setVariable("LocaleDate", date1);
-        StringBuilder urlText = new StringBuilder("192.168.214.135:8080/CUSTOMSPRICE/decisionPdfDownload?cmdtId="+cmdtId);
+//        StringBuilder urlText = new StringBuilder("192.168.214.135:8080/CUSTOMSPRICE/decisionPdfDownload?cmdtId="+cmdtId);
+        StringBuilder urlText = new StringBuilder("https://d-qaror.customs.uz/decisionPdfDownload?cmdtId=" + cmdtId);
         context.setVariable("url_qrCode", urlText);
         context.setVariable("url_InsUsr", url_InsUsr);
         context.setVariable("htmlData", htmlService.getforHtmlById("1"));
