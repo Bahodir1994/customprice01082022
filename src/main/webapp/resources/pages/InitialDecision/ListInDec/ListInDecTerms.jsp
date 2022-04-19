@@ -82,7 +82,7 @@
 <div class="row mt-3">
     <div class="col-12 col-lg-12">
         <div class="table-responsive">
-            <table id="example3"  class="table table-striped table-bordered table-responsive">
+            <table id="example3" class="table table-striped table-bordered table-responsive">
                 <thead class="bg-light-primary" style="border-color: #0a58ca; border-style: dotted">
                 <tr>
                     <th style=" border-style: dotted">т/р</th>
@@ -104,13 +104,24 @@
                 <c:forEach var="terms" items="${termsList}" varStatus="i">
                     <tr style="vertical-align: center">
                         <td>${i.index+1}</td>
-                        <td><a type="button" class="btn btn-primary btn-sm radius-30 px-4" href="javascript:InitialDecisionView('${terms[0]}')"
+                        <td><a type="button" class="btn btn-primary btn-sm radius-30 px-4"
+                               href="javascript:InitialDecisionView('${terms[0]}')"
                                class="text-primary font-weight-bold"><u>${terms[6]}</u></a></td>
-                        <td><div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>${terms[28]}</div></td>
-                        <td>${terms[55]}</td>
+                        <td>
+                            <div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3"><i
+                                    class='bx bxs-circle align-middle me-1'></i>${terms[28]}</div>
+                        </td>
+                        <td>
+                            <c:if test="${terms[54] == 180}"><a class="btn btn-outline-danger"
+                                                                onclick="javascript:SaveTPO('${terms[33]}')">${terms[55]}</a></c:if>
+                            <c:if test="${terms[54] == 185}"><a class="btn btn-outline-success"
+                                                                onclick="javascript:resultTPO('<h6>${terms[39]}</h6>')">${terms[55]}</a></c:if>
+                        </td>
                         <td>${terms[1]}</td>
                         <td>
-                            <a type="button"  href="<%=request.getContextPath()%>/decisionPdfDownload?appId=${terms[0]}&cmdtId=${terms[32]}" class="btn btn-outline-warning">
+                            <a type="button"
+                               href="<%=request.getContextPath()%>/decisionPdfDownload?cmdtId=${terms[32]}"
+                               class="btn btn-outline-warning">
                                 <i class="bx bxs-file-pdf" style="font-size: 30px"></i>
                             </a>
                         </td>
@@ -125,6 +136,28 @@
                 </c:forEach>
                 </tbody>
             </table>
+            <div class="col">
+                <!-- Modal Pay -->
+                <div class="modal fade" id="exampleModalPAY" tabindex="-1" aria-labelledby="exampleModalLabel11"
+                     style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel11">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                consectetur.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ёпиш</button>
+                                <button type="button" class="btn btn-primary">Сақлаш</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -209,6 +242,57 @@
             }
         });
     });
+
+    function SaveTPO(inDecId) {
+        Swal.fire({
+            title: 'Тўлдирилган ТПО рақами ва санаси',
+            html:
+                '<input id="TPO_NUM" type="number" class="swal2-input" placeholder="ТПО рақами">' +
+                '<input id="TPO_DATE" type="date" class="swal2-input" placeholder="ТПО тўлдирилган санаси">',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Сақлаш',
+            denyButtonText: `Рад этиш`,
+        }).then((result) => {
+            // alert($('#TPO_NUM').val() + ' / ' + $('#TPO_DATE').val());
+            var dataS = {
+                "inDecId": inDecId,
+                "TPO_NUM": $('#TPO_NUM').val(),
+                "TPO_DATE": $('#TPO_DATE').val()
+            }
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    data: dataS,
+                    dataType: "html",
+                    url: "<%=request.getContextPath()%>/saveInDec/resources/pages/InitialDecision/InitialDecisionTPO",
+                    header: 'Content-type: text/html; charset=utf-8',
+                    success: function (res) {
+                        $('div#ListInDecTable').html(res);
+                    },
+                    error: function (res) {
+                    }
+                });
+                Swal.fire('Сақланди!', '', 'success')
+            } else if (result.isDenied) {
+                Swal.fire('Маълумотлар сақланмади', '', 'info')
+            }
+        })
+
+        // alert(inDecId + $("#cmdtId").val() + $("#appId").val());
+
+        /*-------------------------------*/
+
+
+    }
+
+    function resultTPO(commentMarks) {
+        Swal.fire('' +
+            '<h5>Божхона кирим ордери асосида дастлабки қарор учун тўлов қилинган</h5>'
+            +'<h6>БКО рақами ва санаси:</h6>'+ commentMarks);
+    }
+
 </script>
 </body>
 </html>
