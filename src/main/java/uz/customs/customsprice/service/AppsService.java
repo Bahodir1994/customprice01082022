@@ -606,7 +606,7 @@ public class AppsService {
                 "    a.app_date,\n" +
                 "    a.customer_country_nm,\n" +
                 "    a.customer_country,\n" +
-          /*10*/"    a.location_id,\n" +
+                /*10*/"    a.location_id,\n" +
                 "    a.location_nm,\n" +
                 "    a.org_name,\n" +
                 "    a.person_addr,\n" +
@@ -616,7 +616,7 @@ public class AppsService {
                 "    a.person_pin,\n" +
                 "    a.person_position,\n" +
                 "    a.person_tin,\n" +
-          /*20*/"    a.seller_org,\n" +
+                /*20*/"    a.seller_org,\n" +
                 "    a.sender_country,\n" +
                 "    a.sender_country_nm,\n" +
                 "    a.sender_org,\n" +

@@ -42,9 +42,12 @@ public class UsersService {
         return (List<User>) entityManager.createNativeQuery(queryList, User.class).getResultList();
     }
 
-    public Optional<User> getById(String id){
-        return  userRepository.findById(id);
-    }
 
+
+    public User getById(String id) {
+        if (userRepository.findById(id).isPresent())
+            return userRepository.findById(id).get();
+        else return null;
+    }
 
 }

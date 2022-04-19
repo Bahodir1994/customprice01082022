@@ -40,8 +40,8 @@ public class DecisionPdfDownload {
 
 
     @GetMapping
-    public void downloadFile(@Param("appId") String appId, @Param("cmdtId") String cmdtId, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        pdfService.createPdf(appId, cmdtId);
+    public void downloadFile(@Param("cmdtId") String cmdtId, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        pdfService.createPdf(cmdtId);
 
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("utf-8");

@@ -52,11 +52,12 @@ public class PdfService {
     }
 
 
-    public void createPdf(String appId, String cmdtId) throws IOException, BadElementException {
-        Apps apps = appsService.findById(appId);
+    public void createPdf(String cmdtId) throws IOException, BadElementException {
+        Commodity commodityForApp = commodityService.findById(cmdtId);
+        Apps apps = appsService.findById(commodityForApp.getAppId());
         InDec inDec2 = inDecService.getByCmtdId(cmdtId);
         String IdUser = inDec2.getInsUser();
-        Optional<User> userName = usersService.getById(IdUser);
+        User userName = usersService.getById(IdUser);
 
 
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
@@ -65,25 +66,24 @@ public class PdfService {
         TemplateEngine templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
 
-        BarcodeQRCode qrCode = new BarcodeQRCode("http://youtube.com", 150, 150, null);
+        BarcodeQRCode qrCode = new BarcodeQRCode("https://new.customs.uz/", 150, 150, null);
         Image img = qrCode.getImage();
-        String url_qrCode = "http://youtube.com";
-//        url_qrCode = url_qrCode + "?appId=" + appId;
-        String url_InsUsr = "http://google.com";
+        String url_InsUsr = "https://new.customs.uz/" + userName.getFullname();
         Date date1 = Calendar.getInstance().getTime();
 
-        System.out.println("salom");
+//        System.out.println("salom");
         Context context = new Context();
-        context.setVariable("apps", appsService.findById(appId));
+        context.setVariable("apps", appsService.findById(commodityForApp.getAppId()));
         context.setVariable("cmdt", commodityService.getById(cmdtId));
         context.setVariable("inDec", inDecService.getByCmtdId(cmdtId));
         context.setVariable("payment", paymentServise.getByCmdtId(cmdtId));
-        context.setVariable("docs", docsService.getByAppIdForPdf(appId));
-        context.setVariable("userName", userName.get().getFullname());
+        context.setVariable("docs", docsService.getByAppIdForPdf(commodityForApp.getAppId()));
+        context.setVariable("userName", userName.getFullname());
         context.setVariable("LocaleDate", date1);
-        context.setVariable("url_qrCode", url_qrCode);
+        StringBuilder urlText = new StringBuilder("192.168.214.135:8080/CUSTOMSPRICE/decisionPdfDownload?cmdtId="+cmdtId);
+        context.setVariable("url_qrCode", urlText);
         context.setVariable("url_InsUsr", url_InsUsr);
-        context.setVariable("htmlData",  htmlService.getforHtmlById("1"));
+        context.setVariable("htmlData", htmlService.getforHtmlById("1"));
 
         String processHtml = templateEngine.process("templates/PdfGenerate.html", context);
 
