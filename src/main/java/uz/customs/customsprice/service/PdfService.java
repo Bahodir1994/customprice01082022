@@ -127,7 +127,7 @@ public class PdfService {
 
         decisionPdf.setCmdtId(cmdtId);
         decisionPdf.setInDecId(inDec.getId());
-        decisionPdf.setPdfPath(sv_dir.getPath() + "/" + FileName);
+        decisionPdf.setPdfPath(sv_dir.getPath());
         String pdfFormat = "application/pdf";
         decisionPdf.setPdfFormat(pdfFormat);
         decisionPdf.setPdfName(FileName);
@@ -135,6 +135,7 @@ public class PdfService {
 
         renderer.createPDF(outputStream, false);
         renderer.finishPDF();
+        renderer.getDocument();
 
 
         try {
@@ -142,6 +143,7 @@ public class PdfService {
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
+
 
     }
 

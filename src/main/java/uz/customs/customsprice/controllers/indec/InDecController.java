@@ -56,6 +56,7 @@ public class InDecController {
     private final String INDEC_GENERATE_PDF = "/resources/pages/InitialDecision/InitialDecisionGeneratePdf";
     private final String INITIALDECISIONCONFIRMCMDT_CALC = "/resources/pages/InitialDecision/InitialDecisionCalc";
     private final String DELETINGCALCUALTE = "/resources/pages/InitialDecision/DeletePayments";
+    private final String INITIALDECISIONCONFIRMTPO = "/resources/pages/InitialDecision/InitialDecisionTPO";
 
     public InDecController(InDecService inDecService, AppsService appsService, AppsService appsservice, CommodityService commodityService, CommodityRepo commodityRepo, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, LocationService locationService, StatusService statusService, PdfService pdfService, PaymentServise paymentServise, ExchangerateService exchangerateService, StatusMService statusMService, StatusHService statusHService, PaymentTypeService paymentTypeService, PaymTypeService paymTypeService, UsersService usersService) {
         this.inDecService = inDecService;
@@ -332,6 +333,23 @@ public class InDecController {
 
         List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
         mav.addObject("termsRollBackListSize", termsRollBackList.size());
+        return mav;
+    }
+
+    @PostMapping(value = INITIALDECISIONCONFIRMTPO)
+    public ModelAndView saveTPO(InDec inDec, HttpServletRequest request, @RequestParam String inDecId, @RequestParam String TPO_NUM, @RequestParam String TPO_DATE) throws IOException, BadElementException {
+        ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec/ListInDecTerms");
+
+        InDec inDec1 = inDecService.getById(inDecId);
+        inDec1.setStatus(185);
+        Status status = statusService.getById(185);
+        inDec1.setStatusNm(status.getName());
+        inDec1.setCommentMarks(TPO_NUM+'/'+TPO_DATE);
+        inDecService.saveInDec(inDec1);
+
+        List<InDec> termsList = appsservice.getListInDec(request);
+        mav.addObject("termsList", termsList);
+
         return mav;
     }
 

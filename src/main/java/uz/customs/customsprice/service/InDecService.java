@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InDecService {
@@ -22,6 +23,12 @@ public class InDecService {
 
     public InDec getByCmtdId(String cmtdId) {
         return inDecRepo.findByCmdtId(cmtdId);
+    }
+
+    public InDec getById(String id) {
+        if (inDecRepo.findById(id).isPresent())
+            return inDecRepo.findById(id).get();
+        else return null;
     }
 
     @PersistenceContext
@@ -97,6 +104,9 @@ public class InDecService {
             }
         }
         return result;
+    }
+
+    public void saveInDec(Optional<InDec> inDec1) {
     }
 
 }
