@@ -82,10 +82,15 @@ public class InDec extends AbstractAuditingEntity {
     @Column(name = "STATUS_NM", columnDefinition = "VARCHAR(450) CCSID 1208")
     private String statusNm;
 
+    @Column(name = "IN_DEC_END_DATE", columnDefinition = "date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date inDecEndDate;
+
     public InDec() {
     }
 
-    public InDec(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Commodity commodity, String cmdtId, String inDecNum, Date inDecDate, String inDecLocation, String inDecLocationNm, String personId, String hsCode, String hsName, String method, String methodNm, String originCountry, String orignCountrNm, String inDecBasis, String commentMarks, BigDecimal customsPreference, BigDecimal customsPayments, int status, String statusNm) {
+    public InDec(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Commodity commodity, String cmdtId, String inDecNum, Date inDecDate, String inDecLocation, String inDecLocationNm, String personId, String hsCode, String hsName, String method, String methodNm, String originCountry, String orignCountrNm, String inDecBasis, String commentMarks, BigDecimal customsPreference, BigDecimal customsPayments, int status, String statusNm, Date inDecEndDate) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.commodity = commodity;
@@ -107,6 +112,7 @@ public class InDec extends AbstractAuditingEntity {
         this.customsPayments = customsPayments;
         this.status = status;
         this.statusNm = statusNm;
+        this.inDecEndDate = inDecEndDate;
     }
 
     public String getId() {
@@ -267,5 +273,13 @@ public class InDec extends AbstractAuditingEntity {
 
     public void setStatusNm(String statusNm) {
         this.statusNm = statusNm;
+    }
+
+    public Date getInDecEndDate() {
+        return inDecEndDate;
+    }
+
+    public void setInDecEndDate(Date inDecEndDate) {
+        this.inDecEndDate = inDecEndDate;
     }
 }

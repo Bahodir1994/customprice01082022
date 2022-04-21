@@ -651,7 +651,8 @@ public class AppsService {
                 "    i.origin_country_nm,\n" +
                 "    i.person_id,\n" +
                 "    i.status indec_status,\n" +
-                "    i.status_nm indec_status_nm\n" +
+                "    i.status_nm indec_status_nm,\n" +
+                "    i.in_dec_end_date\n" +
                 "from\n" +
                 "    cpid.in_dec i\n" +
                 "left join\n" +

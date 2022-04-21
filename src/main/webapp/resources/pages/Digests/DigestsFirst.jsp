@@ -50,121 +50,92 @@
 <div id="ModalSentMess" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true"></div>
 <div class="page-content">
     <!--start email wrapper-->
-    <div class="email-wrapper">
-        <div class="email-sidebar">
-            <div class="email-sidebar-header d-grid"><a href="javascript:;" class="btn btn-primary compose-mail-btn"><i
-                    class='bx bx-list-check me-2'></i>Товарлар</a>
-            </div>
-            <div class="email-sidebar-content">
-                <div class="email-navigation">
-                    <div class="list-group list-group-flush" id="myTab" role="tablist">
-                        <a class="list-group-item d-flex align-items-center active" data-bs-toggle="tab" href="#successhome" role="tab" aria-selected="true">
-                            <i class='bx bxs-alarm-snooze me-3 font-20'></i>
-                            <span>Рад этилган БЮД</span>
-                            <span class="badge bg-primary rounded-pill ms-auto">2</span>
-                        </a>
-                        <a class="list-group-item d-flex align-items-center" data-bs-toggle="tab" href="#successprofile" role="tab" aria-selected="false">
-                            <i class='bx bxs-inbox me-3 font-20'></i>
-                            <span>Маслахатлашув</span>
-                            <span class="badge bg-primary rounded-pill ms-auto">1</span>
-                        </a>
-                        <a class="list-group-item d-flex align-items-center" data-bs-toggle="tab" href="#successcontact" role="tab" aria-selected="false">
-                            <i class="bx bxs-star me-3 font-20 nav-item"></i>
-                            <span>Шартли чиқарилган товарлар</span>
-                            <span class="badge bg-primary rounded-pill ms-auto">2</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="email-meeting">
-<%--                    <div class="list-group list-group-flush">--%>
-<%--                        <div class="list-group-item"><span>Meet</span>--%>
-<%--                        </div>--%>
-<%--                        <a href="javascript:;" class="list-group-item d-flex align-items-center"><i--%>
-<%--                                class='bx bxs-video me-3 font-20'></i><span>Start a meeting</span></a>--%>
-<%--                        <a href="javascript:;" class="list-group-item d-flex align-items-center"><i--%>
-<%--                                class='bx bxs-group me-3 font-20'></i><span>Join a meeting</span></a>--%>
-<%--                        <div class="list-group-item email-hangout cursor-pointer border-top">--%>
-<%--                            <div class="d-flex align-items-center">--%>
-<%--                                <div class="chat-user-online">--%>
-<%--                                    <img src="<%=request.getContextPath()%>/resources/assets2/images/avatars/avatar-1.png"--%>
-<%--                                         width="42" height="42" class="rounded-circle" alt=""/>--%>
-<%--                                </div>--%>
-<%--                                <div class="flex-grow-1 ms-2">--%>
-<%--                                    <p class="mb-0">Jessica Doe</p>--%>
-<%--                                </div>--%>
-<%--                                <div class="dropdown">--%>
-<%--                                    <div class="font-24 dropdown-toggle dropdown-toggle-nocaret"--%>
-<%--                                         data-bs-toggle="dropdown"><i class='bx bx-plus'></i>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item"--%>
-<%--                                                                                    href="javascript:;">Settings</a>--%>
-<%--                                        <div class="dropdown-divider"></div>--%>
-<%--                                        <a class="dropdown-item" href="javascript:;">Help & Feedback</a>--%>
-<%--                                        <a class="dropdown-item" href="javascript:;">Enable Split View Mode</a>--%>
-<%--                                        <a class="dropdown-item" href="javascript:;">Keyboard Shortcuts</a>--%>
-<%--                                        <div class="dropdown-divider"></div>--%>
-<%--                                        <a class="dropdown-item" href="javascript:;">Sign Out</a>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-                </div>
-            </div>
-        </div>
-        <div class="email-header d-xl-flex align-items-center">
-            <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
-                <div class="">
-                    <input class="result form-control" type="date" id="date" placeholder="Сана ...дан">
-                </div>
-            </div>
-            <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
-                <div class="">
-                    <input class="result form-control" type="date" id="date2" placeholder="Сана ...гача">
-                </div>
-            </div>
-            <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
-                <select class="form-select" id="validationTooltip04" required="">
-                    <option selected="" disabled="disabled" value="" ><p class="text-muted">Ариза мақоми</p></option>
-                    <option value="100">Янги</option>
-                    <option value="110">Кўриб чиқиш учун тақсимланган</option>
-                    <option value="145">Тасдиқлашга тайрланган</option>
-                </select>
-            </div>
-            <div class="ms-auto d-flex align-items-center">
-                <button class="btn btn-white px-2 ms-2"><i class='bx bx-chevron-left me-0'></i>
-                </button>
-                <button class="btn btn-white px-2 ms-2"><i class='bx bx-chevron-right me-0'></i>
-                </button>
-            </div>
-            <div class="d-flex align-items-center">
-                <div class="email-toggle-btn"><i class='bx bx-menu'></i>
-                </div>
+    <div class="">
 
-                <div class="">
-                    <button type="button" class="btn btn-white ms-2"><i class='bx bx-refresh me-0'></i>
-                    </button>
-                </div>
-                <div class="">
-                    <button type="button" class="btn btn-white ms-2"><i class='bx bx-downvote me-0'></i>
-                    </button>
-                </div>
-                <div class="d-none d-md-flex">
-                    <button type="button" class="btn btn-white ms-2"><i class='bx bx-file me-0'></i>
-                    </button>
-                </div>
-                <div class="">
-                    <button type="button" class="btn btn-white ms-2"><i class='bx bx-trash me-0'></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="email-content" id="myTabContent">
+        <div class="col">
+            <h6 class="mb-0 text-uppercase">Шартли белгиланган товарлар</h6>
+            <hr>
             <div class="card">
                 <div class="card-body">
-                    <div class="tab-content">
-                        <div class="tab-pane fade show active" id="successhome" role="tabpanel">
+                    <ul class="nav nav-tabs nav-primary" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab" aria-selected="false">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-icon"><i class="bx bxs-home font-18 me-1"></i>
+                                    </div>
+                                    <div class="tab-title">Рад этилган БЮД</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile" role="tab" aria-selected="true">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-icon"><i class="bx bxs-user-pin font-18 me-1"></i>
+                                    </div>
+                                    <div class="tab-title">Маслахатлашув</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" href="#primarycontact" role="tab" aria-selected="false">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-icon"><i class="bx bxs-microphone font-18 me-1"></i>
+                                    </div>
+                                    <div class="tab-title">Шартли чиқарилган товарлар</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content py-3">
+                        <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
                             <div class="table-responsive">
+                                <div class="d-xl-flex align-items-center mb-4">
+                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
+                                        <div class="">
+                                            <input class="result form-control" type="date"  placeholder="Сана ...дан">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
+                                        <div class="">
+                                            <input class="result form-control" type="date"  placeholder="Сана ...гача">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
+                                        <select class="form-select" id="validationTooltip041" required="">
+                                            <option selected="" disabled="disabled" value="" ><p class="text-muted">Ариза мақоми</p></option>
+                                            <option value="100">Янги</option>
+                                            <option value="110">Кўриб чиқиш учун тақсимланган</option>
+                                            <option value="145">Тасдиқлашга тайрланган</option>
+                                        </select>
+                                    </div>
+                                    <div class="ms-auto d-flex align-items-center">
+                                        <button class="btn btn-white px-2 ms-2"><i class='bx bx-chevron-left me-0'></i>
+                                        </button>
+                                        <button class="btn btn-white px-2 ms-2"><i class='bx bx-chevron-right me-0'></i>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="email-toggle-btn"><i class='bx bx-menu'></i>
+                                        </div>
+
+                                        <div class="">
+                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-refresh me-0'></i>
+                                            </button>
+                                        </div>
+                                        <div class="">
+                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-downvote me-0'></i>
+                                            </button>
+                                        </div>
+                                        <div class="d-none d-md-flex">
+                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-file me-0'></i>
+                                            </button>
+                                        </div>
+                                        <div class="">
+                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-trash me-0'></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <table id="example1"  class="table table-striped table-bordered table-sm">
                                     <thead class="table-light">
                                     <tr>
@@ -201,8 +172,55 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="successprofile" role="tabpanel">
+                        <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
                             <div class="table-responsive">
+                                <div class="d-xl-flex align-items-center mb-4">
+                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
+                                        <div class="">
+                                            <input class="result form-control" type="date" placeholder="Сана ...дан">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
+                                        <div class="">
+                                            <input class="result form-control" type="date" placeholder="Сана ...гача">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
+                                        <select class="form-select" id="validationTooltip042" required="">
+                                            <option selected="" disabled="disabled" value="" ><p class="text-muted">Ариза мақоми</p></option>
+                                            <option value="100">Янги</option>
+                                            <option value="110">Кўриб чиқиш учун тақсимланган</option>
+                                            <option value="145">Тасдиқлашга тайрланган</option>
+                                        </select>
+                                    </div>
+                                    <div class="ms-auto d-flex align-items-center">
+                                        <button class="btn btn-white px-2 ms-2"><i class='bx bx-chevron-left me-0'></i>
+                                        </button>
+                                        <button class="btn btn-white px-2 ms-2"><i class='bx bx-chevron-right me-0'></i>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="email-toggle-btn"><i class='bx bx-menu'></i>
+                                        </div>
+
+                                        <div class="">
+                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-refresh me-0'></i>
+                                            </button>
+                                        </div>
+                                        <div class="">
+                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-downvote me-0'></i>
+                                            </button>
+                                        </div>
+                                        <div class="d-none d-md-flex">
+                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-file me-0'></i>
+                                            </button>
+                                        </div>
+                                        <div class="">
+                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-trash me-0'></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <table id="example2"  class="table table-striped table-bordered table-sm">
                                     <thead class="table-light">
                                     <tr>
@@ -245,8 +263,55 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="successcontact" role="tabpanel">
+                        <div class="tab-pane fade" id="primarycontact" role="tabpanel">
                             <div class="table-responsive">
+                                <div class="d-xl-flex align-items-center mb-4">
+                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
+                                        <div class="">
+                                            <input class="result form-control" type="date"  placeholder="Сана ...дан">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
+                                        <div class="">
+                                            <input class="result form-control" type="date"  placeholder="Сана ...гача">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
+                                        <select class="form-select" id="validationTooltip043" required="">
+                                            <option selected="" disabled="disabled" value="" ><p class="text-muted">Ариза мақоми</p></option>
+                                            <option value="100">Янги</option>
+                                            <option value="110">Кўриб чиқиш учун тақсимланган</option>
+                                            <option value="145">Тасдиқлашга тайрланган</option>
+                                        </select>
+                                    </div>
+                                    <div class="ms-auto d-flex align-items-center">
+                                        <button class="btn btn-white px-2 ms-2"><i class='bx bx-chevron-left me-0'></i>
+                                        </button>
+                                        <button class="btn btn-white px-2 ms-2"><i class='bx bx-chevron-right me-0'></i>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="email-toggle-btn"><i class='bx bx-menu'></i>
+                                        </div>
+
+                                        <div class="">
+                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-refresh me-0'></i>
+                                            </button>
+                                        </div>
+                                        <div class="">
+                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-downvote me-0'></i>
+                                            </button>
+                                        </div>
+                                        <div class="d-none d-md-flex">
+                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-file me-0'></i>
+                                            </button>
+                                        </div>
+                                        <div class="">
+                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-trash me-0'></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <table id="example3" class="table table-striped table-bordered table-sm">
                                     <thead class="table-light">
                                     <tr>
@@ -297,388 +362,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- dsfsfds -->
                 </div>
             </div>
-            <!--
-            <div class="email-list">
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Wordpress</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">It is a long established fact that a reader will be distracted by the readable...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">5:56 PM</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Locanto</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">The point of using Lorem Ipsum is that it has a more-or-less normal...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">5:45 PM</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1 bg-body">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Facebook</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">There are many variations of passages of Lorem Ipsum available, majority suffered...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">4:32 PM</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Alex Xender</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">4:25 PM</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Alisha Mastana</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">4:18 PM</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Synergy Technology</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">If you are going to use a passage of Lorem Ipsum, you need to be sure there...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">3:56 PM</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Robina Consultant</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">3:43 PM</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1 bg-body">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>HCl Technologies</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">Bonorum et Malorum" by Cicero are also reproduced in their exact original form...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">2:25 PM</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1 bg-body">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Tata India</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">But I must explain to you how all this mistaken idea of denouncing pleasure...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">2:14 PM</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1 bg-body">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Jessica Jhons</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">At vero eos et accusamus et iusto odio dignissimos ducimus...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">1:30 PM</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Anaxa Marvel</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">1:15 PM</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1 bg-body">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Maxwell Linga</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">On the other hand, we denounce with righteous indignation and dislike...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">12:45 AM</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Cricket India</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">Oct 25</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Start Sports Australia</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">Excepteur sint occaecat cupidatat non proident, sunt in culpa...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">Oct 22</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1 bg-body">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Diana Dating Services</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">Nor again is there anyone who loves or pursues or desires to obtain pain...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">Oct 18</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1 bg-body">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Himalaya India</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">Oct 10</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>NASA USA</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">All the Lorem Ipsum generators on the Internet tend to repeat predefined...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">Sep 28</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Indeed Jobs</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">Content here, content here', making it look like readable English...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">Sep 22</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Wordfence</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">Various versions have evolved over the years, sometimes by accident...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">Sep 18</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>DocsApp India</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">But I must explain to you how all this mistaken idea of denouncing pleasure...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">Sep 12</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1 bg-body">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Alex ReliableSoft</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">Sep 02</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1 bg-body">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Ryan Robinson</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">Business it will frequently occur that pleasures have to be repudiated...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">Aug 22</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>TechGig Job Alert</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">Aug 18</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1 bg-body">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Paytm India</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">All the Lorem Ipsum generators on the Internet tend to repeat predefined...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">Jul 27</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="app-emailread.html">
-                    <div class="d-md-flex align-items-center email-message px-3 py-1">
-                        <div class="d-flex align-items-center email-actions">
-                            <input class="form-check-input" type="checkbox" value="" /> <i class='bx bx-star font-20 mx-2 email-star'></i>
-                            <p class="mb-0"><b>Uber America</b>
-                            </p>
-                        </div>
-                        <div class="">
-                            <p class="mb-0">Chunks as necessary, making this the first true generator on the Internet...</p>
-                        </div>
-                        <div class="ms-auto">
-                            <p class="mb-0 email-time">Jul 24</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            -->
         </div>
 
 

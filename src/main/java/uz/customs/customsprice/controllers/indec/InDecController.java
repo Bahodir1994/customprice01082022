@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextpdf.text.BadElementException;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +21,9 @@ import uz.customs.customsprice.service.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("/saveInDec")
@@ -256,7 +258,7 @@ public class InDecController {
     }
 
     @PostMapping(value = INITIALDECISIONCONFIRMXBBFINISH)
-    public ModelAndView saveFromXBB(InDec inDec, HttpServletRequest request, @RequestParam String cmdtId, @RequestParam String appId) throws IOException, BadElementException {
+    public ModelAndView saveFromXBB(InDec inDec, HttpServletRequest request, @RequestParam String cmdtId, @RequestParam String appId) throws IOException, BadElementException, ParseException {
         ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec");
 
         String userId = (String) request.getSession().getAttribute("userId");
@@ -311,6 +313,16 @@ public class InDecController {
         inDec.setMethodNm(commodity.get().getMethodNm());
         inDec.setOriginCountry(commodity.get().getOriginCountry());
         inDec.setOrignCountrNm(commodity.get().getOrignCountrNm());
+
+
+
+        Date date = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, 90); //minus number would decrement the days
+        System.out.println(cal.getTime());
+
+        inDec.setInDecEndDate(cal.getTime());
 //        inDec.setInDecBasis(); //?
 //        inDec.setCommentMarks(); //?
 //        inDec.setCustomsPreference(); //?

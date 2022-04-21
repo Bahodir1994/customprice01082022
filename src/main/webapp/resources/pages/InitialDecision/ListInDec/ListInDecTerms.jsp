@@ -94,9 +94,8 @@
                     <th style=" border-style: dotted">Манфаатдор шахс</th>
                     <th style=" border-style: dotted">Қарор рақами</th>
                     <th style=" border-style: dotted">Қарор санаси</th>
-                    <th style=" border-style: dotted">Амал қилиш муддати</th>
                     <th style=" border-style: dotted">Етказиб бериш шарти</th>
-                    <th style=" border-style: dotted">Бекор қилиш санаси</th>
+                    <th style=" border-style: dotted">Амал қилиш муддати</th>
                     <th style=" border-style: dotted">Инспектор</th>
                 </tr>
                 </thead>
@@ -128,9 +127,8 @@
                         <td>${terms[14]}</td>
                         <td>${terms[48]}</td>
                         <td>${terms[45]}</td>
-                        <td>${terms[9]}-${terms[8]}</td>
                         <td>${terms[25]}</td>
-                        <td>${terms[9]}-${terms[8]}</td>
+                        <td>${terms[56]}</td>
                         <td>${terms[30]}</td>
                     </tr>
                 </c:forEach>
@@ -189,6 +187,7 @@
             closeOnClear: false
         });
     });
+
 </script>
 <script>
     $(document).ready(function () {
@@ -250,7 +249,6 @@
                 '<input id="TPO_NUM" type="number" class="swal2-input" placeholder="ТПО рақами">' +
                 '<input id="TPO_DATE" type="date" class="swal2-input" placeholder="ТПО тўлдирилган санаси">',
             showDenyButton: true,
-            showCancelButton: true,
             confirmButtonText: 'Сақлаш',
             denyButtonText: `Рад этиш`,
         }).then((result) => {
@@ -260,34 +258,76 @@
                 "TPO_NUM": $('#TPO_NUM').val(),
                 "TPO_DATE": $('#TPO_DATE').val()
             }
+
+
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                $.ajax({
-                    type: "POST",
-                    data: dataS,
-                    dataType: "html",
-                    url: "<%=request.getContextPath()%>/saveInDec/resources/pages/InitialDecision/InitialDecisionTPO",
-                    header: 'Content-type: text/html; charset=utf-8',
-                    success: function (res) {
-                        $('div#ListInDecTable').html(res);
-                    },
-                    error: function (res) {
-                    }
-                });
-                Swal.fire('Сақланди!', '', 'success')
+
+                if ($('#TPO_NUM').val() === "" || $('#TPO_DATE').val() ==="") {
+                    Swal.fire(
+                        '<i class="fa fa-info-circle"></i> Маълумотлар тўлдирилмаган!'
+                    )
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        data: dataS,
+                        dataType: "html",
+                        url: "<%=request.getContextPath()%>/saveInDec/resources/pages/InitialDecision/InitialDecisionTPO",
+                        header: 'Content-type: text/html; charset=utf-8',
+                        success: function (res) {
+                            $('div#ListInDecTable').html(res);
+                        },
+                        error: function (res) {
+                        }
+                    });
+                    Swal.fire('Сақланди!', '', 'success')
+                }
+
             } else if (result.isDenied) {
                 Swal.fire('Маълумотлар сақланмади', '', 'info')
             }
         })
-
-        // alert(inDecId + $("#cmdtId").val() + $("#appId").val());
-
-        /*-------------------------------*/
-
-
     }
 
+
     function resultTPO(commentMarks) {
+
+        <%--Swal.fire({--%>
+        <%--    title: 'Тўлдирилган ТПО рақами ва санаси',--%>
+        <%--    html:--%>
+        <%--        '<input id="TPO_NUM" type="number" class="swal2-input" placeholder="ТПО рақами">' +--%>
+        <%--        '<input id="TPO_DATE" type="date" class="swal2-input" placeholder="ТПО тўлдирилган санаси">',--%>
+        <%--    showDenyButton: true,--%>
+        <%--    showCancelButton: true,--%>
+        <%--    confirmButtonText: 'Сақлаш',--%>
+        <%--    denyButtonText: `Рад этиш`,--%>
+        <%--}).then((result) => {--%>
+        <%--    // alert($('#TPO_NUM').val() + ' / ' + $('#TPO_DATE').val());--%>
+        <%--    var dataS = {--%>
+        <%--        "inDecId": inDecId,--%>
+        <%--        "TPO_NUM": $('#TPO_NUM').val(),--%>
+        <%--        "TPO_DATE": $('#TPO_DATE').val()--%>
+        <%--    }--%>
+        <%--    /* Read more about isConfirmed, isDenied below */--%>
+        <%--    if (result.isConfirmed) {--%>
+        <%--        $.ajax({--%>
+        <%--            type: "POST",--%>
+        <%--            data: dataS,--%>
+        <%--            dataType: "html",--%>
+        <%--            url: "<%=request.getContextPath()%>/saveInDec/resources/pages/InitialDecision/InitialDecisionTPO",--%>
+        <%--            header: 'Content-type: text/html; charset=utf-8',--%>
+        <%--            success: function (res) {--%>
+        <%--                $('div#ListInDecTable').html(res);--%>
+        <%--            },--%>
+        <%--            error: function (res) {--%>
+        <%--            }--%>
+        <%--        });--%>
+        <%--        Swal.fire('Сақланди!', '', 'success')--%>
+        <%--    } else if (result.isDenied) {--%>
+        <%--        Swal.fire('Маълумотлар сақланмади', '', 'info')--%>
+        <%--    }--%>
+        <%--})--%>
+
         Swal.fire('' +
             '<h5>Божхона кирим ордери асосида дастлабки қарор учун тўлов қилинган</h5>'
             +'<h6>БКО рақами ва санаси:</h6>'+ commentMarks);
