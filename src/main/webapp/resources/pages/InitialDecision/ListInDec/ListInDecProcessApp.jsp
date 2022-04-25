@@ -20,11 +20,9 @@
     String userLocation = (String) request.getSession().getAttribute("userLocation");
     String userLocationName = (String) request.getSession().getAttribute("userLocationName");
     String userPost = (String) request.getSession().getAttribute("userPost");
-    System.out.println(" userRole(ListInDecTable) ===> " + userRole);
-    System.out.println(" userId(ListInDecTable) ===> " + userId);
 %>
-<body>
 
+<body>
 <div class="fm-search">
     <div class="mb-0">
         <div class="d-flex justify-content-center">
@@ -79,10 +77,10 @@
         </div>
     </div>
 </div>
-<div class="row mt-3">
+<div class="row mt-3" >
     <div class="col-12 col-lg-12">
-        <div class="table-responsive">
-            <table id="example1" class="table table-striped table-bordered table-responsive">
+        <div class="table-responsive" >
+            <table id="example2"  class="table table-striped table-bordered table-responsive" >
                 <thead class="bg-light-primary" style="border-color: #0a58ca; border-style: dotted">
                 <tr>
                     <th style="border-style: dotted">т/р</th>
@@ -91,130 +89,61 @@
                     <th style="border-style: dotted">Ариза санаси</th>
                     <th style="border-style: dotted">Мафаатдор шахс</th>
                     <th style="border-style: dotted">Савдо қилувчи</th>
-                    <th style="border-style: dotted">Ишлаб чиқарувчи</th>
                     <th style="border-style: dotted">Сотувчи мамлакат</th>
-                    <%if (userRole == 7) {%>
-                    <th style="border-style: dotted">Ходим</th>
-                    <th style="border-style: dotted">Тақсимлаш</th>
-                    <%}%>
+                    <th style="border-style: dotted">Кимга тақсимланган</th>
                 </tr>
                 </thead>
-                <tbody>
-                <c:set var="appId"/>
-                <c:forEach var="notSorted" items="${notSortedList}" varStatus="i">
-                    <c:set var="appId" value="${notSorted.id}"/>
-                    <c:set var="rowCount" value="${0}"/>
+                <tbody >
+                <c:forEach var="sorted" items="${listProcessApp}" varStatus="i">
                     <tr>
-                        <td>${i.index + 1}</td>
-                        <td id="appIdF"><a type="button" class="btn btn-primary btn-sm radius-30 px-4"
-                                           href="javascript:InitialDecisionView('${notSorted.id}')"
-                                           class="text-primary font-weight-bold"><u>${notSorted.appNum}</u></a>
-                        </td>
-                        <td>
-                            <div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class='bx bxs-circle me-1'></i>
-                                <c:if test="${(notSorted.status == 110 && userRole != 8) || notSorted.status != 110}">
-                                    ${notSorted.statusNm}
-                                </c:if>
-                                <c:if test="${notSorted.status == 110 && userRole == 8}">
-                                    Янги
-                                </c:if>
-                            </div>
-                        </td>
-                        <td>${notSorted.insTime.toLocaleString()}</td>
-                        <td>${notSorted.personFio}</td>
-                        <td>${notSorted.customerCountry}-${notSorted.customerCountryNm}</td>
-                        <td>${notSorted.customerCountry}-${notSorted.customerCountryNm}</td>
-                        <td>${notSorted.senderCountry}-${notSorted.senderCountryNm}</td>
-                        <%if (userRole == 7) {%>
-                        <td>
-                            <select class="form-select shadow-sm" required="" id="userIdF_${i.index + 1}"
-                                    name="userId_${i.index + 1}">
-                                <option value="notSelected"></option>
-                                <c:forEach var="userSelect" items="${userSelectList}" varStatus="iUser">
-                                    <option value="${userSelect.id}"><u>${userSelect.fullname}</u></option>
-                                </c:forEach>
-                            </select>
-                        </td>
-                        <td style="border-style: dotted">
-
-                            <button type="button" class="btn btn-success btn-block"
-                                    onclick="saveInDecRaspIns('${notSorted.id}', $('#userIdF_${i.index + 1}').val(), ${i.index + 1})">
-                                <i class='bx bxs-edit'></i>
-                            </button>
-
-                        </td>
-                        <%}%>
+                        <td>${i.index+1}</td>
+                        <td><a type="button" class="btn btn-primary btn-sm radius-30 px-4" href="javascript:InitialDecisionView('${sorted[0]}')"
+                               class="text-primary font-weight-bold"><u>${sorted[6]}</u></a></td>
+                        <td><div class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>${sorted[25]}</div></td>
+                        <td>${sorted[1]}</td>
+                        <td>${sorted[14]}</td>
+                        <td>${sorted[9]}-${sorted[8]}</td>
+                        <td>${sorted[21]}-${sorted[22]}</td>
+                        <td>${sorted[31]}</td>
                     </tr>
                 </c:forEach>
-                <%--                                        <td><div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class='bx bxs-circle me-1'></i>FulFilled</div></td>--%>
-                <%--                                        <td><div class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Confirmed</div></td>--%>
-                <%--                                        <td><div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Partially shipped</div></td>--%>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
 <script>
-
-    function saveInDecRaspIns(appId, inspectorId, rowNum) {
-        var inspectorName = $('#userIdF_' + rowNum + ' option:selected').text();
-        // alert(' rowNum ===> ' + rowNum + '\n appId ===> ' + appId + '\n inspectorId ===> ' + inspectorId + '\n inspectorName ===> ' + inspectorName);
-        var dataS = {
-            "appId": appId,
-            "inspectorId": inspectorId,
-            "inspectorName": inspectorName
-        }
-        if (inspectorId == 'notSelected') {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: 'Ходим танланмади',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        } else {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Ариза: ' + inspectorName + 'га тақсимланди!',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        }
-
-        $.ajax({
-            type: "POST",
-            data: dataS,
-            url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp1",
-            dataType: "html",
-            header: 'Content-type: text/html; charset=utf-8',
-            success: function (res) {
-                var typeMessage = '';
-                var titletexts = '';
-                var textText = '';
-                if (inspectorId == 'notSelected') {
-                    typeMessage = 'error';
-                    titletexts = 'Ариза тақсиманишида хатолик!';
-                    textText = 'Тақсимлаш учун ходим танланмаган';
-                } else {
-                    typeMessage = 'success';
-                    titletexts = 'Ариза мувофақиятли сақланди!';
-                    textText = 'Ариза ' + inspectorName + ' га тақсимланди';
-                }
-                $('div#MainContent').html(res);
-                // $('button#messageSucces').css({'display': ''});
-                // $('button#messageSucces').click();
-                new PNotify({
-                    title: titletexts,
-                    text: textText,
-                    type: typeMessage,
-                    styling: 'bootstrap3'
-                });
-            },
-            error: function (res) {
-            }
+    $('.datepicker').pickadate({
+        selectMonths: true,
+        selectYears: true
+    }),
+        $('.timepicker').pickatime()
+</script>
+<script>
+    $(function () {
+        $('#date-time').bootstrapMaterialDatePicker({
+            format: 'DD-MM-YYYY',
+            closeOnClear: false
         });
-    }
+        $('#date').bootstrapMaterialDatePicker({
+            time: false,
+            closeOnClear: true
+        });
+        $('#date2').bootstrapMaterialDatePicker({
+            time: false,
+
+
+        });
+        $('#time').bootstrapMaterialDatePicker({
+            date: false,
+            format: 'HH:mm',
+            closeOnClear: false
+        });
+    });
+</script>
+<script>
+    /* Ариза тафсилоти */
 
     $(document).ready(function () {
         $('#example1').DataTable({
@@ -267,9 +196,6 @@
             }
         });
     });
-
-
 </script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

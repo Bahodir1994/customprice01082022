@@ -118,10 +118,13 @@ public class InDecController {
 
             List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
             mav.addObject("termsRollBackListSize", termsRollBackList.size());
+
+            List<Apps> listProcessApp = appsservice.getListProcessApp(request);
+            mav.addObject("listProcessAppSize", listProcessApp.size());
             /** mav object end **/
 
             /**todo ЛОК га ёзиш start todo**/
-            StatusM statusM = new StatusM();
+            StatusM statusM = statusMService.getByAppId(appId);
             statusM.setAppId(apps.getId());
             statusM.setStatus(String.valueOf(apps.getStatus()));
             statusM.setStatusComment(apps.getStatusNm());
@@ -235,10 +238,14 @@ public class InDecController {
 
         List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
         mav.addObject("termsRollBackListSize", termsRollBackList.size());
+
+        List<Apps> listProcessApp = appsservice.getListProcessApp(request);
+        mav.addObject("listProcessAppSize", listProcessApp.size());
+
         /** mav object end **/
 
         /**todo ЛОК га ёзиш start todo**/
-        StatusM statusM = new StatusM();
+        StatusM statusM = statusMService.getByAppId(appId);
         statusM.setAppId(apps.getId());
         statusM.setStatus(String.valueOf(apps.getStatus()));
         statusM.setStatusComment(apps.getStatusNm());
@@ -282,7 +289,7 @@ public class InDecController {
 
 
         /**todo ЛОК га ёзиш start todo**/
-        StatusM statusM = new StatusM();
+        StatusM statusM = statusMService.getByAppId(appId);
         statusM.setAppId(apps.getId());
         statusM.setStatus(String.valueOf(apps.getStatus()));
         statusM.setStatusComment(apps.getStatusNm());
@@ -345,6 +352,10 @@ public class InDecController {
 
         List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
         mav.addObject("termsRollBackListSize", termsRollBackList.size());
+
+        List<Apps> listProcessApp = appsservice.getListProcessApp(request);
+        mav.addObject("listProcessAppSize", listProcessApp.size());
+
         return mav;
     }
 
