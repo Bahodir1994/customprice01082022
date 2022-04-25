@@ -54,6 +54,7 @@
 
         <div class="col">
             <h6 class="mb-0 text-uppercase">Шартли белгиланган товарлар</h6>
+
             <hr>
             <div class="card">
                 <div class="card-body">
@@ -141,6 +142,7 @@
                                     <tr>
                                         <th style="border-style: dotted">т/р</th>
                                         <th style="border-style: dotted">БЮД рақами</th>
+                                        <th style="border-style: dotted">PDF</th>
                                         <th style="border-style: dotted">Қарор рақами</th>
                                         <th style="border-style: dotted">Сана</th>
                                         <th style="border-style: dotted">Товарлар сони</th>
@@ -156,6 +158,7 @@
                                         <tr>
                                             <td>${i.index + 1}</td>
                                             <td><a type="button" class="btn btn-primary btn-sm radius-30 px-4" href="#" class="text-primary font-weight-bold"><u>${val[0]}</u></a></td>
+                                            <td><button class="btn btn-outline-danger pull-bs-canvas-right" onclick="javascript:openPDF('${val[15]}', 'rad etish qarori')"><i class="bx bxs-file-pdf bx-sm"></i></button></td>
                                             <td>${val[1]}</td>
                                             <td><fmt:formatDate pattern = "yyyy-MM-dd"  value = "${timefm1}" /></td>
                                             <td>
@@ -431,13 +434,80 @@
                 </div>
             </div>
         </div>
+        <div>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+            <style>
+                .bs-canvas-overlay {
+                    opacity: 0.85;
+                    z-index: 1100;
+                }
+
+                .bs-canvas {
+                    top: 0;
+                    z-index: 1110;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                    width: 900px;
+                    transition: margin .4s ease-out;
+                    -webkit-transition: margin .4s ease-out;
+                    -moz-transition: margin .4s ease-out;
+                    -ms-transition: margin .4s ease-out;
+                }
+
+                .bs-canvas-left {
+                    left: 0;
+                    margin-left: -900px;
+                }
+
+                .bs-canvas-right {
+                    right: 0;
+                    margin-right: -900px;
+                }
+
+                /* Only for demo */
+            </style>
+
+            <div class="bs-canvas bs-canvas-right position-fixed bg-light h-100 border-5">
+                <header class="bs-canvas-header p-3 bg-primary overflow-auto">
+                    <button type="button" class="bs-canvas-close float-left close" aria-label="Close"><span aria-hidden="true" class="text-light">&times;</span></button>
+                    <h4 class="d-inline-block text-light mb-0 float-right">Хужжатлар ойнаси</h4>
+                </header>
+                <div id="pdfViewer">
+                    <!--pdf opener-->
+                </div>
+            </div>
+<%--            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>--%>
+<%--            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>--%>
+<%--            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>--%>
+            <script>
+                jQuery(document).ready(function($){
+                    $(document).on('click', '.pull-bs-canvas-right, .pull-bs-canvas-left', function(){
+                        $('body').prepend('<div class="bs-canvas-overlay bg-dark position-fixed w-100 h-100"></div>');
+                        if($(this).hasClass('pull-bs-canvas-right'))
+                            $('.bs-canvas-right').addClass('mr-0');
+                        else
+                            $('.bs-canvas-left').addClass('ml-0');
+                        return false;
+                    });
+
+                    $(document).on('click', '.bs-canvas-close, .bs-canvas-overlay', function(){
+                        var elm = $(this).hasClass('bs-canvas-close') ? $(this).closest('.bs-canvas') : $('.bs-canvas');
+                        elm.removeClass('mr-0 ml-0');
+                        $('.bs-canvas-overlay').remove();
+                        return false;
+                    });
+                });
+            </script>
+        </div>
+
         <!--end compose mail-->
         <!--start email overlay-->
-        <div class="overlay email-toggle-btn-mobile"></div>
+<%--        <div class="overlay email-toggle-btn-mobile" id="pdfViewer"></div>--%>
         <!--end email overlay-->
     </div>
     <!--end email wrapper-->
 </div>
+
 <!--end page wrapper -->
 <!--end wrapper -->
 <script>
@@ -470,6 +540,29 @@
     });
 </script>
 <script>
+    /* PDF open */
+    function openPDF(declId, docType) {
+        var dataS = {
+            "declId": declId,
+            "docType": docType
+        }
+        $.ajax({
+            type: "POST",
+            data: dataS,
+            url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/Pcabinet",
+            dataType: "html",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (res) {
+                $('div#pdfViewer').html(res);
+                window.location.href('#pdfViewer');
+
+            },
+            error: function (res) {
+            }
+        });
+    }
+
+
     $(document).ready(function () {
         $('#example1').DataTable({
             "language": {
