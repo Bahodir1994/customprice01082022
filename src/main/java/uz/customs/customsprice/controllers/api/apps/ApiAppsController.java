@@ -74,6 +74,7 @@ public class ApiAppsController {
                 apps.setInsUser(personsIdGet.get().getTin());
                 appsService.saveApps(apps);
 
+                /**todo ЛОК га ёзиш start todo**/
                 StatusM statusM = new StatusM();
                 statusM.setAppId(apps.getId());
                 statusM.setStatus(String.valueOf(apps.getStatus()));
@@ -88,6 +89,7 @@ public class ApiAppsController {
                 statusH.setStatusComment(apps.getStatusNm());
                 statusH.setInsUser(personsIdGet.get().getTin());
                 statusHService.saveStatusH(statusH);
+                /**todo ЛОК га ёзиш end todo**/
 
                 JSONObject obj = new JSONObject();
                 obj.put("message", "Success");

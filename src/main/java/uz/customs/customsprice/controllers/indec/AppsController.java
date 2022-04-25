@@ -55,6 +55,7 @@ public class AppsController {
     private final String INITIAL_DECISION_RASP_TABLE = "/resources/pages/InitialDecision/ListInDec/ListInDecRasp";
     private final String INITIAL_DECISION_TERMS_TABLE = "/resources/pages/InitialDecision/ListInDec/ListInDecTermsTable";
     private final String INITIAL_DECISION_TERMS_ROLLBACK = "/resources/pages/InitialDecision/ListInDec/ListInDecTermsRollBack";
+    private final String INITIAL_DECISION_PROCESS = "/resources/pages/InitialDecision/ListInDec/ListInDecProcessApp";
 
     public AppsController(AppsService appsService, ConturyService conturyService, LocationService locationService, StatusService statusService, TermsService termsService, AppsService appsservice, AppsRaspService appsRaspService, AppsRepo appsRepo, TransportTypeService transportTypeService, StatusMService statusMService, StatusHService statusHService, RollBackAppService rollBackAppService, RollbackSpService rollbackSpService, RollBackAppRepo rollBackAppRepo, UserRepository userRepository, InDecService inDecService, UsersService usersService, CommodityService commodityService) {
         this.appsService = appsService;
@@ -108,7 +109,7 @@ public class AppsController {
             appsservice.saveAppsStatus(app);
 
             /**todo ЛОК га ёзиш start todo**/
-            StatusM statusM = new StatusM();
+            StatusM statusM = statusMService.getByAppId(appId);
             statusM.setAppId(app.getId());
             statusM.setStatus(String.valueOf(app.getStatus()));
             statusM.setStatusComment(app.getStatusNm());
@@ -139,6 +140,9 @@ public class AppsController {
 
         List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
         mav.addObject("termsRollBackListSize", termsRollBackList.size());
+
+        List<Apps> listProcessApp = appsservice.getListProcessApp(request);
+        mav.addObject("listProcessAppSize", listProcessApp.size());
 
         return mav;
     }
@@ -197,9 +201,34 @@ public class AppsController {
 //        commodityList = commodityService.getListAppId(appId);
 
 
-
         Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userId = (String) request.getSession().getAttribute("userId");
         Apps apps = appsservice.findById(appId);
+        if (userRole == 8 && apps.getStatus() == 110) {
+            Status status = statusService.getById(115);
+            apps.setStatus(status.getId());
+            apps.setStatusNm(status.getName());
+            appsservice.saveAppsStatus(apps);
+
+            /**todo ЛОК га ёзиш start todo**/
+//            StatusM statusM = new StatusM();
+            StatusM statusM = statusMService.getByAppId(appId);
+            statusM.setAppId(apps.getId());
+            statusM.setStatus(String.valueOf(apps.getStatus()));
+            statusM.setStatusComment(apps.getStatusNm());
+            statusM.setInsUser(userId);
+            statusMService.saveStatusM(statusM);
+
+            StatusH statusH = new StatusH();
+            statusH.setStmainID(statusM.getId());
+            statusH.setAppId(statusM.getAppId());
+            statusH.setStatus(String.valueOf(apps.getStatus()));
+            statusH.setStatusComment(apps.getStatusNm());
+            statusH.setInsUser(userId);
+            statusHService.saveStatusH(statusH);
+            /**todo ЛОК га ёзиш end todo**/
+
+        }
 
         List<Apps> InitialDecisionViewApp = appsservice.getInitialDecisionView(appId);
         mav.addObject("appInfo", InitialDecisionViewApp);
@@ -218,6 +247,7 @@ public class AppsController {
         mav.addObject("docsList", docsList);
         mav.addObject("appId", appId);
         mav.addObject("appStatus", apps.getStatus());
+        mav.addObject("userRole", userRole);
 
         return mav;
     }
@@ -259,7 +289,7 @@ public class AppsController {
         }
 
         /**todo ЛОК га ёзиш start todo**/
-        StatusM statusM = new StatusM();
+        StatusM statusM = statusMService.getByAppId(appId);
         statusM.setAppId(app.getId());
         statusM.setStatus(String.valueOf(app.getStatus()));
         statusM.setStatusComment(app.getStatusNm());
@@ -286,6 +316,9 @@ public class AppsController {
 
         List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
         mav.addObject("termsRollBackListSize", termsRollBackList.size());
+
+        List<Apps> listProcessApp = appsservice.getListProcessApp(request);
+        mav.addObject("listProcessAppSize", listProcessApp.size());
 
         return mav;
     }
@@ -315,6 +348,9 @@ public class AppsController {
         List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
         mav.addObject("termsRollBackListSize", termsRollBackList.size());
 
+        List<Apps> listProcessApp = appsservice.getListProcessApp(request);
+        mav.addObject("listProcessAppSize", listProcessApp.size());
+
 //        List<Users> usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
 //        mav.addObject("userSelectList", usersList);
 
@@ -337,6 +373,7 @@ public class AppsController {
         List<Apps> notSortedList = new ArrayList<>();
         notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
         mav.addObject("notSortedList", notSortedList);
+        mav.addObject("userRole", userRole);
 
         List<User> usersList = new ArrayList<>();
 //        usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
@@ -361,6 +398,27 @@ public class AppsController {
         List<Apps> sortedList = new ArrayList<>();
         sortedList = appsservice.getListSorted(request);
         mav.addObject("sortedList", sortedList);
+
+        return mav;
+    }
+
+
+    /*todo Аризалар рўйхати(кўриб чиқилмоқда - жараёнда)*/
+    @PostMapping(value = INITIAL_DECISION_PROCESS)
+    @ResponseBody
+    public ModelAndView InitialDecisionProcessApp(HttpServletRequest request, @RequestParam(name = "id") String status) {
+        ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec/ListInDecProcessApp");
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userName = (String) request.getSession().getAttribute("userName");
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userRoleName = (String) request.getSession().getAttribute("userRoleName");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userLocationName = (String) request.getSession().getAttribute("userLocationName");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+
+        List<Apps> listProcessApp = new ArrayList<>();
+        listProcessApp = appsservice.getListProcessApp(request);
+        mav.addObject("listProcessApp", listProcessApp);
 
         return mav;
     }

@@ -91,14 +91,14 @@
         </div>
         <%}%>
         <%--        </c:if>--%>
-        <div class="col">
+        <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecProcessApp('115')">
             <div class="card radius-10 shadow">
                 <div class="card-body">
                     <div class="text-center">
                         <div class="widgets-icons rounded-circle mx-auto bg-light-info text-info mb-3"><i class="bx bxl-linkedin-square"></i>
                         </div>
-                        <h4 class="my-1">15 та</h4>
-                        <p class="mb-0 text-secondary">Жараёнда</p>
+                        <h4 class="my-1">${listProcessAppSize} та</h4>
+                        <p class="mb-0 text-secondary">Кўриб чиқилмоқда</p>
                     </div>
                 </div>
             </div>
@@ -228,11 +228,6 @@
     });
 
     function ListInDecRaspTable(status) {
-        if (status == '100') {
-        }
-        if (status == '110') {
-        }
-        // var inspectorName = $('#userIdF_' + rowNum + ' option:selected').text();
         var x = '0';
         var dataS = {
             "id": x,
@@ -243,6 +238,27 @@
             data: dataS,
             <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
             url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/ListInDec/ListInDecRasp",
+            dataType: "html",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (res) {
+                $('div#ListInDecTable').html(res);
+            },
+            error: function (res) {
+            }
+        });
+    }
+
+    function ListInDecProcessApp(status) {
+        var x = '0';
+        var dataS = {
+            "id": x,
+            "status": status
+        }
+        $.ajax({
+            type: "POST",
+            data: dataS,
+            <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
+            url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/ListInDec/ListInDecProcessApp",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {

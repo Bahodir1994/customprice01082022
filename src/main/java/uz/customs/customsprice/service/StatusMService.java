@@ -15,4 +15,8 @@ public class StatusMService {
     public StatusM saveStatusM(StatusM statusM) {
         return statusMRepo.save(statusM);
     }
+
+    public StatusM getByAppId(String appId) {
+        return statusMRepo.findByAppId(appId);
+    }
 }
