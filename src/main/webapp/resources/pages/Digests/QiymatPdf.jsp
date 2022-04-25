@@ -17,7 +17,7 @@
 <body>
 <div class="">
     <div class="row">
-        <div class="" id="pdf_area_2">
+        <div class="m-2" id="pdf_area_2">
 <%--            <object--%>
 <%--                    data='${pdfFile}'--%>
 <%--                    type="application/pdf"--%>
