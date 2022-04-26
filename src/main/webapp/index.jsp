@@ -1256,7 +1256,7 @@
             "tov_id": tov_id
         }
         $.ajax({
-            type: "POST",
+            type: "GET",
             data: dataS,
             url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/QiymatShartliModal",
             dataType: "html",
