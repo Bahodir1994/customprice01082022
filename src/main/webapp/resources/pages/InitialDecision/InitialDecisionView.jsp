@@ -63,7 +63,7 @@
                                             padding: 7px 10px;
                                             background-color: #122;
                                             border-radius: 3px;
-                                            color: #FFF;
+                                            color: #225e9e;
                                             transition: .50s ease-in-out;
                                             position: absolute;
                                             left: 15px;
@@ -186,19 +186,19 @@
                                                     <th style="border-style: dotted" class="column-title">№</th>
                                                     <th style="border-style: dotted" class="column-title">Хужжат тури</th>
                                                     <th style="border-style: dotted" class="column-title">Хужжат рақами</th>
-                                                    <th style="border-style: dotted" class="column-title">Хужжат санаси</th>
+<%--                                                    <th style="border-style: dotted" class="column-title">Хужжат санаси</th>--%>
                                                     <th style="border-style: dotted" class="column-title">Хужжат файли</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <c:forEach var="val" items="${docsList}" varStatus="i">
+                                                <c:forEach var="pepe" items="${earxivList}" varStatus="i">
                                                     <tr class="even pointer">
                                                         <td class=" ">${i.index+1}</td>
-                                                        <td class=" ">${val.docType}</td>
-                                                        <td class=" ">${val.docNumber}<i class="success fa fa-long-arrow-up"></i></td>
-                                                        <td class=" ">${val.docDate}</td>
-                                                        <td class=" "><a href="<%=request.getContextPath()%>download?id=${val.id}" class="btn btn-outline-primary btn-sm"><i
-                                                                class="fa fa-download">${ val.docName}</i></a></td>
+                                                        <td class=" ">${pepe.docTypeName}</td>
+                                                        <td class=" ">${pepe.docType}<i class="success fa fa-long-arrow-up"></i></td>
+<%--                                                        <td class=" ">${val.docDate}</td>--%>
+                                                        <td class=" "><a href="<%=request.getContextPath()%>/download/${pepe.hash}/${pepe.fileId}" class="btn btn-outline-primary btn-sm"><i
+                                                                class="fa fa-download">${pepe.docname}</i></a></td>
                                                     </tr>
                                                 </c:forEach>
 

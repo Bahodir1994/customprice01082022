@@ -12,6 +12,7 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Table(name = "EARXIV", indexes = {@Index(columnList = "id", unique = true), @Index(columnList = "insuser", unique = false), @Index(columnList = "isdeleted", unique = false)})
@@ -81,7 +82,7 @@ public class Earxiv extends AbstractAuditingEntity {
 
     @Column(name = "SET_FOLDER_ID")
     @Size(max = 20, message = "1")
-    @NotBlank(message = "2")
+//    @NotBlank(message = "2")
     private String setFolderId;
 
     @Column(name = "PART_NO", columnDefinition = "SMALLINT DEFAULT 1")
@@ -90,10 +91,15 @@ public class Earxiv extends AbstractAuditingEntity {
     @Column(name = "DOC_ID", length = 50)
     private String docId;
 
+
+    @Column(name = "HASH", length = 255)
+    private String hash;
+
     public Earxiv() {
     }
 
-    public Earxiv(String id, Apps apps, String appId, String folderId, String name, String userInn, String userPnfl, String docname, String docType, String fileId, String status, String docTypeName, String setFolderId, String partyNo, String docId) {
+    public Earxiv(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, String folderId, String name, String userInn, String userPnfl, String docname, String docType, String fileId, String status, String docTypeName, String setFolderId, String partyNo, String docId, String hash) {
+        super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.apps = apps;
         this.appId = appId;
@@ -109,6 +115,7 @@ public class Earxiv extends AbstractAuditingEntity {
         this.setFolderId = setFolderId;
         this.partyNo = partyNo;
         this.docId = docId;
+        this.hash = hash;
     }
 
     public String getId() {
@@ -229,5 +236,13 @@ public class Earxiv extends AbstractAuditingEntity {
 
     public void setDocId(String docId) {
         this.docId = docId;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 }

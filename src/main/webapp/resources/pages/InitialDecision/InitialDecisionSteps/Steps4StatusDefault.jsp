@@ -68,7 +68,7 @@
                             <th>Қўш.ўл.бир</th>
                             <th>Ҳисобланган</th>
                             <th>Тўлов тури</th>
-                            <c:if test="${appStatus == 110 &&  userRole == 8}">
+                            <c:if test="${appStatus == 115 &&  userRole == 8}">
                                 <th>Тозалаш</th>
                             </c:if>
                         </tr>
@@ -87,7 +87,7 @@
                                 <td>${val.g47Sum}</td>
                                 <td>${val.g47Sp}</td>
 
-                                <c:if test="${appStatus == 110 &&  userRole == 8}">
+                                <c:if test="${appStatus == 115 &&  userRole == 8}">
                                     <td>
                                         <button onclick="javascript:ClearCalculate('${val.id}')"  class="btn btn-danger btn-block">
                                             <i class="bx bx-trash-alt"></i>

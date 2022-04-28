@@ -6,13 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import uz.customs.customsprice.entity.InitialDecision.*;
-import uz.customs.customsprice.entity.files.Docs;
+import uz.customs.customsprice.entity.earxiv.Earxiv;
 import uz.customs.customsprice.entity.users.User;
-import uz.customs.customsprice.repository.AppsRepo;
-import uz.customs.customsprice.repository.InDecRepo;
-import uz.customs.customsprice.repository.RollBackAppRepo;
-import uz.customs.customsprice.repository.UserRepository;
+import uz.customs.customsprice.repository.*;
 import uz.customs.customsprice.service.*;
+import uz.customs.customsprice.service.earxiv.EarxivService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -41,9 +39,13 @@ public class AppsController {
     private final InDecService inDecService;
     private final UsersService usersService;
     private final CommodityService commodityService;
+    private final EarxivService earxivService;
 
     @Autowired
     InDecRepo inDecRepo;
+
+    @Autowired
+    EarxivRepo earxivRepo;
 
     private final String INITIALDECISION = "/resources/pages/InitialDecision/InitialDecision1";
     private final String INITIALDECISIONRASP = "/resources/pages/InitialDecision/InitialDecisionRasp";
@@ -59,7 +61,7 @@ public class AppsController {
     private final String INITIAL_DECISION_SUBMITTED = "/resources/pages/InitialDecision/ListInDec/ListInDecSubmittedApp";
     private final String INITIAL_DECISION_SIGNED = "/resources/pages/InitialDecision/ListInDec/ListInDecSignedApp";
 
-    public AppsController(AppsService appsService, ConturyService conturyService, LocationService locationService, StatusService statusService, TermsService termsService, AppsService appsservice, AppsRaspService appsRaspService, AppsRepo appsRepo, TransportTypeService transportTypeService, StatusMService statusMService, StatusHService statusHService, RollBackAppService rollBackAppService, RollbackSpService rollbackSpService, RollBackAppRepo rollBackAppRepo, UserRepository userRepository, InDecService inDecService, UsersService usersService, CommodityService commodityService) {
+    public AppsController(AppsService appsService, ConturyService conturyService, LocationService locationService, StatusService statusService, TermsService termsService, AppsService appsservice, AppsRaspService appsRaspService, AppsRepo appsRepo, TransportTypeService transportTypeService, StatusMService statusMService, StatusHService statusHService, RollBackAppService rollBackAppService, RollbackSpService rollbackSpService, RollBackAppRepo rollBackAppRepo, UserRepository userRepository, InDecService inDecService, UsersService usersService, CommodityService commodityService, EarxivService earxivService) {
         this.appsService = appsService;
         this.conturyService = conturyService;
         this.locationService = locationService;
@@ -78,6 +80,7 @@ public class AppsController {
         this.inDecService = inDecService;
         this.usersService = usersService;
         this.commodityService = commodityService;
+        this.earxivService = earxivService;
     }
 
 
@@ -250,9 +253,10 @@ public class AppsController {
         List<RollbackSp> listRollbackSp = rollbackSpService.getlistRollbackSp();
         mav.addObject("rollbackInfo", listRollbackSp);
 
-        List<Docs> docsList = appsservice.getDocsListAppId(appId);
-
-        mav.addObject("docsList", docsList);
+//        List<Docs> docsList = appsservice.getDocsListAppId(appId);
+        List<Earxiv> earxivList = new ArrayList<>();
+        earxivList = earxivRepo.findByAppId(appId);
+        mav.addObject("earxivList", earxivList);
         mav.addObject("appId", appId);
         mav.addObject("appStatus", apps.getStatus());
         mav.addObject("userRole", userRole);

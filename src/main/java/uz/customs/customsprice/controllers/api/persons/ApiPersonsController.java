@@ -12,8 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import uz.customs.customsprice.entity.InitialDecision.Persons;
 import uz.customs.customsprice.service.PersonsService;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -59,13 +65,16 @@ public class ApiPersonsController {
                 obj.put("message", "Success");
                 obj.put("data", personsPinGet);
                 obj.put("status", "207");
-                return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
             }
             JSONObject obj = new JSONObject();
             obj.put("message", "Error");
             obj.put("data", "Маълумотлар мос келмади");
             obj.put("status", "207");
-            return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
         }
     }
+
+
+
 }

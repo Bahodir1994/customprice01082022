@@ -229,6 +229,7 @@
                                     <tr>
                                         <th style="border-style: dotted">т/р</th>
                                         <th style="border-style: dotted">БЮД рақами</th>
+                                        <th style="border-style: dotted">PDF</th>
                                         <th style="border-style: dotted">Қарор рақами</th>
                                         <th style="border-style: dotted">Сана</th>
                                         <th style="border-style: dotted">Товарлар сони</th>
@@ -248,6 +249,7 @@
                                         <tr>
                                             <td>${i.index + 1}</td>
                                             <td><a type="button" class="btn btn-primary btn-sm radius-30 px-4" href="#" class="text-primary font-weight-bold"><u>${val[0]}</u></a></td>
+                                            <td><button class="btn btn-outline-danger pull-bs-canvas-right" onclick="javascript:openPDF('${val[10]}', 'maslahatlashuv qarori')"><i class="bx bxs-file-pdf bx-sm"></i></button></td>
                                             <td>${val[1]}</td>
                                             <td><fmt:formatDate pattern = "yyyy-MM-dd"  value = "${timefm2}" /></td>
                                             <td>
@@ -259,7 +261,7 @@
                                             <td><fmt:formatNumber value = "${sum4}" maxFractionDigits="3" /></td>
                                             <td><fmt:formatNumber value = "${total2}" maxFractionDigits="3" /></td>
                                             <td><fmt:formatNumber value = "${val[8]}"  pattern="#.##"/></td>
-                                            <td>Машарипов Жамшид(${val[4]})</td>
+                                            <td>(${val[4]})</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -320,6 +322,7 @@
                                     <tr>
                                         <th style="border-style: dotted">т/р</th>
                                         <th style="border-style: dotted">БЮД рақами</th>
+                                        <th style="border-style: dotted">PDF</th>
                                         <th style="border-style: dotted">Қарор рақами</th>
                                         <th style="border-style: dotted">Сана</th>
                                         <th style="border-style: dotted">Товарлар сони</th>
@@ -343,6 +346,7 @@
                                         <tr>
                                             <td>${i.index + 1}</td>
                                             <td><a type="button" class="btn btn-primary btn-sm radius-30 px-4" href="#" class="text-primary font-weight-bold"><u>${val[0]}</u></a></td>
+                                            <td><button class="btn btn-outline-danger pull-bs-canvas-right" onclick="javascript:openPDF('${val[12]}', 'shartli belgilash qarori')"><i class="bx bxs-file-pdf bx-sm"></i></button></td>
                                             <td>${val[1]}</td>
                                             <td><fmt:formatDate pattern = "yyyy-MM-dd"  value = "${timefm3}" /></td>
                                             <td>
