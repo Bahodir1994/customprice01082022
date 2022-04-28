@@ -68,7 +68,6 @@ public class PdfService {
 
         BarcodeQRCode qrCode = new BarcodeQRCode("https://new.customs.uz/", 150, 150, null);
         Image img = qrCode.getImage();
-//        String url_InsUsr = "https://new.customs.uz/" + userName.getFullname();
         String url_InsUsr = "https://new.customs.uz/";
         Date date1 = Calendar.getInstance().getTime();
 
