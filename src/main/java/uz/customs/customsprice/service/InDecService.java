@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,19 @@ public class InDecService {
     public InDec getById(String id) {
         if (inDecRepo.findById(id).isPresent())
             return inDecRepo.findById(id).get();
+        else return null;
+    }
+
+    public InDec getByInDecNumAndInDecDateAndPersonId(String inDecNum, Date inDecDate, String personId) {
+        if (inDecRepo.findByInDecNumAndInDecDateAndPersonId(inDecNum, inDecDate, personId) != null)
+            return inDecRepo.findByInDecNumAndInDecDateAndPersonId(inDecNum, inDecDate, personId);
+        else return null;
+    }
+
+
+    public InDec getByInDecDate(Date inDecDate) {
+        if (inDecRepo.findByInDecDate(inDecDate) != null)
+            return inDecRepo.findByInDecDate(inDecDate);
         else return null;
     }
 

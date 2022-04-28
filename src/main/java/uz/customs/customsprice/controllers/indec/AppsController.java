@@ -56,6 +56,8 @@ public class AppsController {
     private final String INITIAL_DECISION_TERMS_TABLE = "/resources/pages/InitialDecision/ListInDec/ListInDecTermsTable";
     private final String INITIAL_DECISION_TERMS_ROLLBACK = "/resources/pages/InitialDecision/ListInDec/ListInDecTermsRollBack";
     private final String INITIAL_DECISION_PROCESS = "/resources/pages/InitialDecision/ListInDec/ListInDecProcessApp";
+    private final String INITIAL_DECISION_SUBMITTED = "/resources/pages/InitialDecision/ListInDec/ListInDecSubmittedApp";
+    private final String INITIAL_DECISION_SIGNED = "/resources/pages/InitialDecision/ListInDec/ListInDecSignedApp";
 
     public AppsController(AppsService appsService, ConturyService conturyService, LocationService locationService, StatusService statusService, TermsService termsService, AppsService appsservice, AppsRaspService appsRaspService, AppsRepo appsRepo, TransportTypeService transportTypeService, StatusMService statusMService, StatusHService statusHService, RollBackAppService rollBackAppService, RollbackSpService rollbackSpService, RollBackAppRepo rollBackAppRepo, UserRepository userRepository, InDecService inDecService, UsersService usersService, CommodityService commodityService) {
         this.appsService = appsService;
@@ -141,8 +143,14 @@ public class AppsController {
         List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
         mav.addObject("termsRollBackListSize", termsRollBackList.size());
 
-        List<Apps> listProcessApp = appsservice.getListProcessApp(request);
+        List<Apps> listProcessApp = appsservice.getListProcessApp(request, "115");
         mav.addObject("listProcessAppSize", listProcessApp.size());
+
+        List<Apps> listSubmittedApp = appsservice.getListProcessApp(request, "145");
+        mav.addObject("listSubmittedAppSize", listSubmittedApp.size());
+
+        List<Apps> listSignedApp = appsservice.getListProcessApp(request, "160");
+        mav.addObject("listSignedAppSize", listSignedApp.size());
 
         return mav;
     }
@@ -317,8 +325,14 @@ public class AppsController {
         List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
         mav.addObject("termsRollBackListSize", termsRollBackList.size());
 
-        List<Apps> listProcessApp = appsservice.getListProcessApp(request);
+        List<Apps> listProcessApp = appsservice.getListProcessApp(request, "115");
         mav.addObject("listProcessAppSize", listProcessApp.size());
+
+        List<Apps> listSubmittedApp = appsservice.getListProcessApp(request, "145");
+        mav.addObject("listSubmittedAppSize", listSubmittedApp.size());
+
+        List<Apps> listSignedApp = appsservice.getListProcessApp(request, "160");
+        mav.addObject("listSignedAppSize", listSignedApp.size());
 
         return mav;
     }
@@ -348,8 +362,14 @@ public class AppsController {
         List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
         mav.addObject("termsRollBackListSize", termsRollBackList.size());
 
-        List<Apps> listProcessApp = appsservice.getListProcessApp(request);
+        List<Apps> listProcessApp = appsservice.getListProcessApp(request, "115");
         mav.addObject("listProcessAppSize", listProcessApp.size());
+
+        List<Apps> listSubmittedApp = appsservice.getListProcessApp(request, "145");
+        mav.addObject("listSubmittedAppSize", listSubmittedApp.size());
+
+        List<Apps> listSignedApp = appsservice.getListProcessApp(request, "160");
+        mav.addObject("listSignedAppSize", listSignedApp.size());
 
 //        List<Users> usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
 //        mav.addObject("userSelectList", usersList);
@@ -406,7 +426,7 @@ public class AppsController {
     /*todo Аризалар рўйхати(кўриб чиқилмоқда - жараёнда)*/
     @PostMapping(value = INITIAL_DECISION_PROCESS)
     @ResponseBody
-    public ModelAndView InitialDecisionProcessApp(HttpServletRequest request, @RequestParam(name = "id") String status) {
+    public ModelAndView InitialDecisionProcessApp(HttpServletRequest request, @RequestParam(name = "id") String id, @RequestParam String status) {
         ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec/ListInDecProcessApp");
         String userId = (String) request.getSession().getAttribute("userId");
         String userName = (String) request.getSession().getAttribute("userName");
@@ -416,9 +436,46 @@ public class AppsController {
         String userLocationName = (String) request.getSession().getAttribute("userLocationName");
         String userPost = (String) request.getSession().getAttribute("userPost");
 
-        List<Apps> listProcessApp = new ArrayList<>();
-        listProcessApp = appsservice.getListProcessApp(request);
+        List<Apps> listProcessApp = appsservice.getListProcessApp(request, status);
         mav.addObject("listProcessApp", listProcessApp);
+
+        return mav;
+    }
+
+    /*todo Аризалар рўйхати(кўриб чиқилмоқда - тасдиқлашга киритилган)*/
+    @PostMapping(value = INITIAL_DECISION_SUBMITTED)
+    @ResponseBody
+    public ModelAndView InitialDecisionSubmittedApp(HttpServletRequest request, @RequestParam(name = "id") String id, @RequestParam String status) {
+        ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec/ListInDecSubmittedApp");
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userName = (String) request.getSession().getAttribute("userName");
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userRoleName = (String) request.getSession().getAttribute("userRoleName");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userLocationName = (String) request.getSession().getAttribute("userLocationName");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+
+        List<Apps> listSubmittedApp = appsservice.getListProcessApp(request, status);
+        mav.addObject("listSubmittedApp", listSubmittedApp);
+
+        return mav;
+    }
+
+    /*todo Аризалар рўйхати(кўриб чиқилмоқда - имзолашга киритилган)*/
+    @PostMapping(value = INITIAL_DECISION_SIGNED)
+    @ResponseBody
+    public ModelAndView InitialDecisionSignedApp(HttpServletRequest request, @RequestParam(name = "id") String id, @RequestParam String status) {
+        ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec/ListInDecSignedApp");
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userName = (String) request.getSession().getAttribute("userName");
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userRoleName = (String) request.getSession().getAttribute("userRoleName");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userLocationName = (String) request.getSession().getAttribute("userLocationName");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+
+        List<Apps> listSignedApp = appsservice.getListProcessApp(request, status);
+        mav.addObject("listSignedApp", listSignedApp);
 
         return mav;
     }

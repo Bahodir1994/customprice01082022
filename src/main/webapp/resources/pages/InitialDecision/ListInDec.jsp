@@ -50,7 +50,7 @@
 <div class="page-content">
     <!--start email wrapper-->
     <div class="row">
-        <%if (userRole == 6 || userRole == 7 || userRole == 8) {%>
+        <%if (userRole == 7 || userRole == 8) {%>
         <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecApp('100')">
             <div class="card radius-10 shadow">
                 <div class="card-body">
@@ -59,7 +59,7 @@
                         </div>
                         <h4 class="my-1">
                             <%
-                                if (userRole == 6 || userRole == 7) {
+                                if (userRole == 7) {
                             %>
                             ${notSortedListSize} та
                             <%
@@ -91,6 +91,7 @@
         </div>
         <%}%>
         <%--        </c:if>--%>
+        <%if (userRole == 1 || userRole == 7 || userRole == 8) {%>
         <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecProcessApp('115')">
             <div class="card radius-10 shadow">
                 <div class="card-body">
@@ -103,18 +104,38 @@
                 </div>
             </div>
         </div>
-        <div class="col">
+<%--        <%}%>--%>
+
+<%--        <%if (userRole == 1 || userRole == 7 || userRole == 8) {%>--%>
+        <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecSubmittedApp('145')">
             <div class="card radius-10 shadow">
                 <div class="card-body">
                     <div class="text-center">
                         <div class="widgets-icons rounded-circle mx-auto bg-light-success text-success mb-3"><i class="bx bx-captions"></i>
                         </div>
-                        <h4 class="my-1">38 та</h4>
+                        <h4 class="my-1">${listSubmittedAppSize} та</h4>
+                        <p class="mb-0 text-secondary">Тасдиқлашга киритилган</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%}%>
+
+        <%if (userRole == 1 || userRole == 6 || userRole == 7) {%>
+        <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecSignedApp('160')">
+            <div class="card radius-10 shadow">
+                <div class="card-body">
+                    <div class="text-center">
+                        <div class="widgets-icons rounded-circle mx-auto bg-light-success text-success mb-3"><i class="bx bx-captions"></i>
+                        </div>
+                        <h4 class="my-1">${listSignedAppSize} та</h4>
                         <p class="mb-0 text-secondary">Имзога киритилган</p>
                     </div>
                 </div>
             </div>
         </div>
+        <%}%>
+
         <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="javascript:ListInDecTermstTable('170')">
             <div class="card radius-10 shadow">
                 <div class="card-body">
@@ -127,6 +148,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col">
             <div class="card radius-10 shadow">
                 <div class="card-body">
@@ -139,6 +161,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="javascript:ListInDecTermsRollBack('175')">
             <div class="card radius-10 shadow">
                 <div class="card-body">
@@ -259,6 +282,48 @@
             data: dataS,
             <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
             url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/ListInDec/ListInDecProcessApp",
+            dataType: "html",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (res) {
+                $('div#ListInDecTable').html(res);
+            },
+            error: function (res) {
+            }
+        });
+    }
+
+    function ListInDecSubmittedApp(status) {
+        var x = '0';
+        var dataS = {
+            "id": x,
+            "status": status
+        }
+        $.ajax({
+            type: "POST",
+            data: dataS,
+            <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
+            url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/ListInDec/ListInDecSubmittedApp",
+            dataType: "html",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (res) {
+                $('div#ListInDecTable').html(res);
+            },
+            error: function (res) {
+            }
+        });
+    }
+
+    function ListInDecSignedApp(status) {
+        var x = '0';
+        var dataS = {
+            "id": x,
+            "status": status
+        }
+        $.ajax({
+            type: "POST",
+            data: dataS,
+            <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
+            url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/ListInDec/ListInDecSignedApp",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {

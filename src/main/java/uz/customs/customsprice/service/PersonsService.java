@@ -25,7 +25,9 @@ public class PersonsService {
     }
 
     public Persons getByPin(String pin){
-        return personrepo.findByPin(pin);
+        if (personrepo.findByPin(pin) != null){
+            return personrepo.findByPin(pin);
+        } else return null;
     }
 
     public Persons getByTin(String tin) {

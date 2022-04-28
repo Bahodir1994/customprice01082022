@@ -33,7 +33,7 @@ public class AppsService {
         userRole = (Integer) request.getSession().getAttribute("userRole");
         userLocation = (String) request.getSession().getAttribute("userLocation");
         userPost = (String) request.getSession().getAttribute("userPost");
-        String userIdS= (String) request.getSession().getAttribute("userIdS");
+        String userIdS = (String) request.getSession().getAttribute("userIdS");
 
         String sqlWhere = "", sqlJoin = "", sqlJoinVal = "";
         if (userRole == 1) {
@@ -173,7 +173,7 @@ public class AppsService {
     }
 
     /* 2)Барча статуси "Янги"+"Имзоланган"+"Бекор қилинган" дан ташқари бўлган аризалар*/
-    public List getListProcessApp(HttpServletRequest request) {
+    public List getListProcessApp(HttpServletRequest request, String status) {
 
         Integer userRole = (Integer) request.getSession().getAttribute("userRole");
         String userLocation = (String) request.getSession().getAttribute("userLocation");
@@ -183,13 +183,16 @@ public class AppsService {
 
         String sqlWhere = "", sqlJoin = "", sqlJoinVal = "";
         if (userRole == 1 || userRole == 2) {
-            sqlWhere = " and a.status = 115 \n ";
+            sqlWhere = " and a.status = " + status + " \n ";
+        }
+        if (userRole == 6) {
+            sqlWhere = " and a.status = " + status + " \n and ar.location = '" + userLocation + "' ";
         }
         if (userRole == 7) {
-            sqlWhere = " and a.status = 115 \n and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
+            sqlWhere = " and a.status = " + status + " \n and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
         }
         if (userRole == 8) {
-            sqlWhere = " and a.status = 115 \n and ar.inspector_id = '" + userIdS + "' and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
+            sqlWhere = " and a.status = " + status + " \n and ar.inspector_id = '" + userIdS + "' and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
         }
 
         String queryForList = "select\n" +
@@ -242,8 +245,7 @@ public class AppsService {
     }
 
 
-
-    /* 4) <<app_num>> га ариза рафамини киритади */
+    /* 4) <<app_num>> га ариза рақамини киритади */
     public Apps saveApps(Apps apps) {
         LocalDateTime now = LocalDateTime.now();
         String appsNum = getMaxNumber();
@@ -652,7 +654,7 @@ public class AppsService {
                 "    i.updtime indec_updtime,\n" +
                 "    i.upduser indec_upduser,\n" +
                 "    i.comment_marks,\n" +
-          /*40*/"    i.customs_payments,\n" +
+                /*40*/"    i.customs_payments,\n" +
                 "    i.customs_preference,\n" +
                 "    i.hs_code,\n" +
                 "    i.hs_name,\n" +
@@ -662,7 +664,7 @@ public class AppsService {
                 "    i.in_dec_location_nm,\n" +
                 "    i.in_dec_num,\n" +
                 "    i.method,\n" +
-          /*50*/"    i.method_nm,\n" +
+                /*50*/"    i.method_nm,\n" +
                 "    i.origin_country,\n" +
                 "    i.origin_country_nm,\n" +
                 "    i.person_id,\n" +

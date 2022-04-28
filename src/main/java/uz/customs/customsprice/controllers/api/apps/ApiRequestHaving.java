@@ -1,87 +1,76 @@
-//package uz.customs.customsprice.controllers.api.apps;
-//
-//import org.json.JSONObject;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.validation.BindingResult;
-//import org.springframework.validation.FieldError;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import uz.customs.customsprice.entity.InitialDecision.*;
-//
-//import javax.validation.Valid;
-//import java.util.HashMap;
-//import java.util.Map;
-//import java.util.Optional;
-//import java.util.stream.Collectors;
-//
-//
-//@Controller
-//@RequestMapping("/appsrequesthaving")
-//public class ApiRequestHaving {
-//    @PostMapping
-//    public ResponseEntity<Object> valuesave(@RequestBody @Valid Apps apps, BindingResult br) {
-//        Map<String, String> errors = new HashMap<>();
-//        if (br.hasErrors()) {
-//            errors = br.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-//            JSONObject obj = new JSONObject();
-//            obj.put("message", "Error");
-//            obj.put("errors", errors);
-//            obj.put("status", "400");
-//            return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
-//        } else {
-//            Optional<Persons> personsIdGet = personsService.getById(apps.getPersonId());
-//            if (personsIdGet.isPresent()) {
-//                Country country = conturyService.getByCodeAndLngaTpcd(apps.getCustomerCountry(), "UZ");
-//                apps.setCustomerCountryNm(country.getCdNm());
-//
-//                country = conturyService.getByCodeAndLngaTpcd(apps.getSenderCountry(), "UZ");
-//                apps.setSenderCountryNm(country.getCdNm());
-//
-//                Location location = locationService.getById(apps.getLocationId());
-//                apps.setLocationNm(location.getName1());
-//
-//                Status status = statusService.getById(apps.getStatus());
-//                apps.setStatusNm(status.getName());
-//
-//                Terms terms = termsService.findByIdAndLngaTpcd(apps.getTerms(), "UZ");
-//                apps.setTermsNm(terms.getSign());
-//
-//                apps.setInsUser(personsIdGet.get().getTin());
-//                appsService.saveApps(apps);
-//
-//                /**todo ЛОК га ёзиш start todo**/
-//                StatusM statusM = new StatusM();
-//                statusM.setAppId(apps.getId());
-//                statusM.setStatus(String.valueOf(apps.getStatus()));
-//                statusM.setStatusComment(apps.getStatusNm());
-//                statusM.setInsUser(personsIdGet.get().getTin());
-//                statusMService.saveStatusM(statusM);
-//
-//                StatusH statusH = new StatusH();
-//                statusH.setStmainID(statusM.getId());
-//                statusH.setAppId(statusM.getAppId());
-//                statusH.setStatus(String.valueOf(apps.getStatus()));
-//                statusH.setStatusComment(apps.getStatusNm());
-//                statusH.setInsUser(personsIdGet.get().getTin());
-//                statusHService.saveStatusH(statusH);
-//                /**todo ЛОК га ёзиш end todo**/
-//
-//                JSONObject obj = new JSONObject();
-//                obj.put("message", "Success");
-//                obj.put("data", apps);
-//                obj.put("status", "200");
-//                ResponseEntity.status(0);
-//                return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
-//            }else {
-//                JSONObject obj = new JSONObject();
-//                obj.put("message", "Error");
-//                obj.put("errors", "personId топилмади!");
-//                obj.put("status", "400");
-//                return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
-//            }
-//
-//
-//}
+package uz.customs.customsprice.controllers.api.apps;
+
+import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.*;
+import uz.customs.customsprice.entity.InitialDecision.*;
+import uz.customs.customsprice.service.InDecService;
+import uz.customs.customsprice.service.PersonsService;
+
+import javax.validation.Valid;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
+
+
+@Controller
+@RequestMapping()
+public class ApiRequestHaving {
+    private final PersonsService personsService;
+    private final InDecService inDecService;
+
+    public ApiRequestHaving(PersonsService personsService, InDecService inDecService) {
+        this.personsService = personsService;
+        this.inDecService = inDecService;
+    }
+
+    @GetMapping("/appsrequesthaving")
+    public ResponseEntity<Map<String, Object>>valuesave(@RequestParam String inDecNum, @RequestParam String inDecDate, @RequestParam String personPin) throws ParseException {
+        Map<String, String> errors = new HashMap<>();
+        try{
+            Date inDecDateValue = new SimpleDateFormat("dd.MM.yyyy").parse(inDecDate);
+        }
+         catch (Exception e) {
+             JSONObject obj = new JSONObject();
+             obj.put("message", "Error");
+             obj.put("errors", "Sana formati noto'g'ri kiritildi!");
+             obj.put("status", "400");
+             return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
+        }
+
+
+        Date inDecDateValue = new SimpleDateFormat("dd.MM.yyyy").parse(inDecDate);
+        Persons persons = new Persons();
+        persons = personsService.getByPin(personPin);
+
+        if (persons == null) {
+            JSONObject obj = new JSONObject();
+            obj.put("message", "Error");
+            obj.put("errors", "Foydalanuvchi JSHSHIR raqami topilmadi");
+            obj.put("status", "400");
+            return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
+        }
+
+
+
+        if (inDecService.getByInDecNumAndInDecDateAndPersonId(inDecNum, inDecDateValue, persons.getId()) != null) {
+            JSONObject obj = new JSONObject();
+            obj.put("message", "Success");
+            obj.put("data", true);
+            obj.put("status", "200");
+            ResponseEntity.status(0);
+            return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
+        } else {
+            JSONObject obj = new JSONObject();
+            obj.put("message", "Error");
+            obj.put("errors", "Dastlabki qaror topilmadi!");
+            obj.put("status", "400");
+            return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+}

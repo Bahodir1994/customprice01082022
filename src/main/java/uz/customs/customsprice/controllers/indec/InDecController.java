@@ -119,8 +119,14 @@ public class InDecController {
             List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
             mav.addObject("termsRollBackListSize", termsRollBackList.size());
 
-            List<Apps> listProcessApp = appsservice.getListProcessApp(request);
+            List<Apps> listProcessApp = appsservice.getListProcessApp(request, "115");
             mav.addObject("listProcessAppSize", listProcessApp.size());
+
+            List<Apps> listSubmittedApp = appsservice.getListProcessApp(request, "145");
+            mav.addObject("listSubmittedAppSize", listSubmittedApp.size());
+
+            List<Apps> listSignedApp = appsservice.getListProcessApp(request, "160");
+            mav.addObject("listSignedAppSize", listSignedApp.size());
             /** mav object end **/
 
             /**todo ЛОК га ёзиш start todo**/
@@ -239,8 +245,14 @@ public class InDecController {
         List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
         mav.addObject("termsRollBackListSize", termsRollBackList.size());
 
-        List<Apps> listProcessApp = appsservice.getListProcessApp(request);
+        List<Apps> listProcessApp = appsservice.getListProcessApp(request, "115");
         mav.addObject("listProcessAppSize", listProcessApp.size());
+
+        List<Apps> listSubmittedApp = appsservice.getListProcessApp(request, "145");
+        mav.addObject("listSubmittedAppSize", listSubmittedApp.size());
+
+        List<Apps> listSignedApp = appsservice.getListProcessApp(request, "160");
+        mav.addObject("listSignedAppSize", listSignedApp.size());
 
         /** mav object end **/
 
@@ -353,8 +365,14 @@ public class InDecController {
         List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
         mav.addObject("termsRollBackListSize", termsRollBackList.size());
 
-        List<Apps> listProcessApp = appsservice.getListProcessApp(request);
+        List<Apps> listProcessApp = appsservice.getListProcessApp(request, "115");
         mav.addObject("listProcessAppSize", listProcessApp.size());
+
+        List<Apps> listSubmittedApp = appsservice.getListProcessApp(request, "145");
+        mav.addObject("listSubmittedAppSize", listSubmittedApp.size());
+
+        List<Apps> listSignedApp = appsservice.getListProcessApp(request, "160");
+        mav.addObject("listSignedAppSize", listSignedApp.size());
 
         return mav;
     }

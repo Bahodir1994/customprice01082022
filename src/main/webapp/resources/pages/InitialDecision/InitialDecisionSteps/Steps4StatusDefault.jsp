@@ -28,10 +28,10 @@
                         </div>
                         <div class="col text-end">
                             <c:if test="${userRole == 8}">
-                                <c:if test="${appStatus == 110}">
+                                <c:if test="${appStatus == 115}">
                                     <button onclick="javascript:sendCalcInDec()" class="btn btn-success">Жўнатиш</button>
                                 </c:if>
-                                <c:if test="${appStatus != 110}">
+                                <c:if test="${appStatus != 115}">
                                     <h5>Ариза мақоми: ${appStatusName}</h5>
                                 </c:if>
                             </c:if>
