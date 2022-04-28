@@ -58,7 +58,7 @@ public class Persons extends AbstractAuditingEntity {
     private String tin;
 
     @Column(name = "per_adr", columnDefinition = "VARCHAR(765) CCSID 1208")
-    @NotBlank(message =  "lastName - исми майдони бўш бўлиши мумкин эмас")
+    @NotBlank(message =  "per_adr - исми майдони бўш бўлиши мумкин эмас")
     @Size(max = 255, message = "Устун маълумоти катталиги чекланган")
     private String perAdr;
 
