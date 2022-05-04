@@ -87,10 +87,22 @@ public class InDec extends AbstractAuditingEntity {
     @Temporal(TemporalType.DATE)
     private Date inDecEndDate;
 
+    @Column(name = "IN_DEC_USR_ENDED_DATE", columnDefinition = "date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date inDecUserEndedDate;
+
+    @Column(name = "COMMENT_ENDED", columnDefinition = "VARCHAR(600) CCSID 1208")
+    private String commentEnded;
+
+    /*if endActiv == 100 its activ else ended inDec*/
+    @Column(name = "END_ACTIV", columnDefinition = "SMALLINT DEFAULT 100")
+    private int endActiv = 100;
+
     public InDec() {
     }
 
-    public InDec(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Commodity commodity, String cmdtId, String inDecNum, Date inDecDate, String inDecLocation, String inDecLocationNm, String personId, String hsCode, String hsName, String method, String methodNm, String originCountry, String orignCountrNm, String inDecBasis, String commentMarks, BigDecimal customsPreference, BigDecimal customsPayments, int status, String statusNm, Date inDecEndDate) {
+    public InDec(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Commodity commodity, String cmdtId, String inDecNum, Date inDecDate, String inDecLocation, String inDecLocationNm, String personId, String hsCode, String hsName, String method, String methodNm, String originCountry, String orignCountrNm, String inDecBasis, String commentMarks, BigDecimal customsPreference, BigDecimal customsPayments, int status, String statusNm, Date inDecEndDate, Date inDecUserEndedDate, String commentEnded, int endActiv) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.commodity = commodity;
@@ -113,6 +125,9 @@ public class InDec extends AbstractAuditingEntity {
         this.status = status;
         this.statusNm = statusNm;
         this.inDecEndDate = inDecEndDate;
+        this.inDecUserEndedDate = inDecUserEndedDate;
+        this.commentEnded = commentEnded;
+        this.endActiv = endActiv;
     }
 
     public String getId() {
@@ -281,5 +296,29 @@ public class InDec extends AbstractAuditingEntity {
 
     public void setInDecEndDate(Date inDecEndDate) {
         this.inDecEndDate = inDecEndDate;
+    }
+
+    public Date getInDecUserEndedDate() {
+        return inDecUserEndedDate;
+    }
+
+    public void setInDecUserEndedDate(Date inDecUserEndedDate) {
+        this.inDecUserEndedDate = inDecUserEndedDate;
+    }
+
+    public String getCommentEnded() {
+        return commentEnded;
+    }
+
+    public void setCommentEnded(String commentEnded) {
+        this.commentEnded = commentEnded;
+    }
+
+    public int getEndActiv() {
+        return endActiv;
+    }
+
+    public void setEndActiv(int endActiv) {
+        this.endActiv = endActiv;
     }
 }

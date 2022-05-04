@@ -82,7 +82,9 @@ public class FreedocEntity {
     }
 
     public String getHash() {
-        return hash;
+        if (hash !=null) {
+            return hash;
+        } else return null;
     }
 
     public void setHash(String hash) {

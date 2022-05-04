@@ -25,10 +25,15 @@
 <%--                    height="678">--%>
 <%--                <p>This browser does not support PDF!</p>--%>
 <%--            </object>--%>
-            <object height="1000px" data="data:application/pdf;base64,${pdfFile}" type="application/pdf" width="100%"></object>
+    <c:if test="${pdfFile == null || pdfFile == 'null' || pdfFile ==''}">
+        <h2 class="text-center text-warning mt-5">Хужжат топилмади!</h2>
+    </c:if>
+    <c:if test="${pdfFile != null}">
+    <object height="1000px" data="data:application/pdf;base64,${pdfFile}" type="application/pdf" width="100%"></object>
+    </c:if>
             <div class="position-absolute bg-white d-flex justify-content-center align-items-center" id="wrap_btn_2"
                  style="cursor:pointer; top: 50%; left: 0; height: 40px; width: 30px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
-                <i class="fa-solid fa-caret-left f-20" id="caret_2"></i>
+                <i class="bx bx-left-arrow bx-sm" onclick="closeNav()" id="caret_2"></i>
             </div>
 
         </div>

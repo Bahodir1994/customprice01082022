@@ -96,6 +96,17 @@
                     <th style=" border-style: dotted">Қарор санаси</th>
                     <th style=" border-style: dotted">Етказиб бериш шарти</th>
                     <th style=" border-style: dotted">Амал қилиш муддати</th>
+                    <c:forEach var="termss" items="${termsList}" varStatus="i">
+                    <c:if test="${termss[59] == 100 && userRole == 6}">
+                            <th style="border-style: dotted">Бекор қилиш</th>
+                    </c:if>
+                    <c:if test="${termss[59] == 100 && userRole != 6}">
+                    </c:if>
+                    <c:if test="${termss[59] == 200}">
+                        <th style="border-style: dotted">Бекор қилиш</th>
+                    </c:if>
+
+                    </c:forEach>
                     <th style=" border-style: dotted">Инспектор</th>
                 </tr>
                 </thead>
@@ -129,6 +140,15 @@
                         <td>${terms[45]}</td>
                         <td>${terms[25]}</td>
                         <td>${terms[56]}</td>
+                        <c:if test="${terms[59] == 100 && userRole == 6}">
+                            <td><button class="btn btn-outline-primary" onclick="inDecCancelled('${terms[33]}')"><i class="bx bx-message-alt-x bx-sm"></i></button></td>
+                        </c:if>
+                        <c:if test="${terms[59] == 100 && userRole != 6}">
+
+                        </c:if>
+                        <c:if test="${terms[59] == 200}">
+                            <td>Бекор қилинган</td>
+                        </c:if>
                         <td>${terms[30]}</td>
                     </tr>
                 </c:forEach>
@@ -289,6 +309,49 @@
         })
     }
 
+    function inDecCancelled(inDecId) {
+        Swal.fire({
+            title: 'Бекор қилиш сабабини киритинг',
+            html:
+                '<textarea id="TPO_NUM" type="number" class="swal2-input m-0 w-100" placeholder="Изох учун"/>',
+            showDenyButton: true,
+            confirmButtonText: 'Сақлаш',
+            denyButtonText: `Рад этиш`,
+        }).then((result) => {
+            var dataS = {
+                "inDecId": inDecId,
+                "TPO_NUM": $('#TPO_NUM').val(),
+            }
+
+
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+
+                if ($('#TPO_NUM').val() === "") {
+                    Swal.fire(
+                        '<i class="fa fa-info-circle"></i> Маълумотлар тўлдирилмаган!'
+                    )
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        data: dataS,
+                        dataType: "html",
+                        url: "<%=request.getContextPath()%>/saveInDec/resources/pages/InitialDecision/InitialDecisionCancelled",
+                        header: 'Content-type: text/html; charset=utf-8',
+                        success: function (res) {
+                            $('div#ListInDecTable').html(res);
+                        },
+                        error: function (res) {
+                        }
+                    });
+                    Swal.fire('Сақланди!', '', 'success')
+                }
+
+            } else if (result.isDenied) {
+                Swal.fire('Маълумотлар сақланмади', '', 'info')
+            }
+        })
+    }
 
     function resultTPO(commentMarks) {
 

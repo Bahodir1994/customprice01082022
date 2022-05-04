@@ -670,7 +670,10 @@ public class AppsService {
                 "    i.person_id,\n" +
                 "    i.status indec_status,\n" +
                 "    i.status_nm indec_status_nm,\n" +
-                "    i.in_dec_end_date\n" +
+                "    i.in_dec_end_date,\n" +
+                "    i.IN_DEC_USR_ENDED_DATE,\n" +
+                "    i.COMMENT_ENDED,\n" +
+                "    i.END_ACTIV\n" +
                 "from\n" +
                 "    cpid.in_dec i\n" +
                 "left join\n" +

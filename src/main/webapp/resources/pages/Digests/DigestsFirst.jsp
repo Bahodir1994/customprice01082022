@@ -52,9 +52,8 @@
     <!--start email wrapper-->
     <div class="">
 
-        <div class="col">
+        <div id="main" class="col">
             <h6 class="mb-0 text-uppercase">Шартли белгиланган товарлар</h6>
-
             <hr>
             <div class="card">
                 <div class="card-body">
@@ -373,147 +372,64 @@
             </div>
         </div>
 
-
-        <!--start compose mail-->
-        <div class="compose-mail-popup">
-            <div class="card">
-                <div class="card-header bg-dark text-white py-2 cursor-pointer">
-                    <div class="d-flex align-items-center">
-                        <div class="compose-mail-title">New Message</div>
-                        <div class="compose-mail-close ms-auto">x</div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="email-form">
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="To"/>
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Subject"/>
-                        </div>
-                        <div class="mb-3">
-                            <textarea class="form-control" placeholder="Message" rows="10" cols="10"></textarea>
-                        </div>
-                        <div class="mb-0">
-                            <div class="d-flex align-items-center">
-                                <div class="">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary">Action</button>
-                                        <button type="button"
-                                                class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
-                                                data-bs-toggle="dropdown"><span
-                                                class="visually-hidden">Toggle Dropdown</span>
-                                        </button>
-                                        <div class="dropdown-menu"><a class="dropdown-item"
-                                                                      href="javascript:;">Action</a>
-                                            <a class="dropdown-item" href="javascript:;">Another action</a>
-                                            <a class="dropdown-item" href="javascript:;">Something else here</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="javascript:;">Separated link</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="ms-2">
-                                    <button type="button" class="btn border-0 btn-sm btn-white"><i
-                                            class="lni lni-text-format"></i>
-                                    </button>
-                                    <button type="button" class="btn border-0 btn-sm btn-white"><i
-                                            class='bx bx-link-alt'></i>
-                                    </button>
-                                    <button type="button" class="btn border-0 btn-sm btn-white"><i
-                                            class="lni lni-emoji-tounge"></i>
-                                    </button>
-                                    <button type="button" class="btn border-0 btn-sm btn-white"><i
-                                            class="lni lni-google-drive"></i>
-                                    </button>
-                                </div>
-                                <div class="ms-auto">
-                                    <button type="button" class="btn border-0 btn-sm btn-white"><i
-                                            class="lni lni-trash"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<%--            <button style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</button>--%>
             <style>
-                .bs-canvas-overlay {
-                    opacity: 0.85;
-                    z-index: 1100;
-                }
 
-                .bs-canvas {
+                .sidenav {
+                    height: 100%;
+                    width: 0;
+                    position: fixed;
+                    z-index: 1;
                     top: 0;
-                    z-index: 1110;
-                    overflow-x: hidden;
-                    overflow-y: auto;
-                    width: 900px;
-                    transition: margin .4s ease-out;
-                    -webkit-transition: margin .4s ease-out;
-                    -moz-transition: margin .4s ease-out;
-                    -ms-transition: margin .4s ease-out;
-                }
-
-                .bs-canvas-left {
                     left: 0;
-                    margin-left: -900px;
+                    background-color: rgba(255, 255, 255, 0.93);
+                    overflow-x: hidden;
+                    transition: 0.5s;
+                    padding-top: 90px;
                 }
 
-                .bs-canvas-right {
-                    right: 0;
-                    margin-right: -900px;
+                .sidenav a {
+                    padding: 8px 8px 8px 32px;
+                    text-decoration: none;
+                    font-size: 25px;
+                    color: #818181;
+                    display: block;
+                    transition: 0.3s;
                 }
 
-                /* Only for demo */
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+                .sidenav .closebtn {
+                    position: absolute;
+                    top: 0;
+                    right: 25px;
+                    font-size: 36px;
+                    margin-left: 50px;
+                }
+
+                #main {
+                    transition: margin-left .5s;
+                    padding: 0px;
+                }
+
+                @media screen and (max-height: 450px) {
+                    .sidenav {padding-top: 15px;}
+                    .sidenav a {font-size: 18px;}
+                }
             </style>
-
-            <div class="bs-canvas bs-canvas-right position-fixed bg-light h-100 border-5">
-                <header class="bs-canvas-header p-3 bg-primary overflow-auto">
-                    <button type="button" class="bs-canvas-close float-left close" aria-label="Close"><span aria-hidden="true" class="text-light">&times;</span></button>
-                    <h4 class="d-inline-block text-light mb-0 float-right">Хужжатлар ойнаси</h4>
-                </header>
+            <div id="mySidenav" class="sidenav">
+                <button class="btn-outline-primary" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</button>
                 <div id="pdfViewer">
                     <!--pdf opener-->
                 </div>
             </div>
-<%--            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>--%>
-<%--            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>--%>
-<%--            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>--%>
-            <script>
-                jQuery(document).ready(function($){
-                    $(document).on('click', '.pull-bs-canvas-right, .pull-bs-canvas-left', function(){
-                        $('body').prepend('<div class="bs-canvas-overlay bg-dark position-fixed w-100 h-100"></div>');
-                        if($(this).hasClass('pull-bs-canvas-right'))
-                            $('.bs-canvas-right').addClass('mr-0');
-                        else
-                            $('.bs-canvas-left').addClass('ml-0');
-                        return false;
-                    });
-
-                    $(document).on('click', '.bs-canvas-close, .bs-canvas-overlay', function(){
-                        var elm = $(this).hasClass('bs-canvas-close') ? $(this).closest('.bs-canvas') : $('.bs-canvas');
-                        elm.removeClass('mr-0 ml-0');
-                        $('.bs-canvas-overlay').remove();
-                        return false;
-                    });
-                });
-            </script>
         </div>
-
-        <!--end compose mail-->
-        <!--start email overlay-->
-<%--        <div class="overlay email-toggle-btn-mobile" id="pdfViewer"></div>--%>
-        <!--end email overlay-->
     </div>
-    <!--end email wrapper-->
 </div>
 
-<!--end page wrapper -->
-<!--end wrapper -->
 <script>
     $('.datepicker').pickadate({
         selectMonths: true,
@@ -550,6 +466,8 @@
             "declId": declId,
             "docType": docType
         }
+        document.getElementById("mySidenav").style.width = "650px";
+        document.getElementById("main").style.marginLeft = "550px";
         $.ajax({
             type: "POST",
             data: dataS,
@@ -565,8 +483,10 @@
             }
         });
     }
-
-
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+    }
     $(document).ready(function () {
         $('#example1').DataTable({
             "language": {

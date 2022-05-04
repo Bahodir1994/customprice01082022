@@ -112,12 +112,17 @@ public class DigestsController {
         ModelAndView mav = new ModelAndView("resources/pages/Digests/QiymatPdf");
 
         FreedocEntity freedocEntity = freeDocService.getByDeclIdAndAndDocType(declId, docType);
-        String hashPdf = freedocEntity.getHash();
-        FreehashEntity freehashEntity = freeHashService.getByHash(hashPdf);
-        String imageBase64 = "";
-        imageBase64 = new String(Base64.getEncoder().encode(freehashEntity.getFiledata()));
-        mav.addObject("pdfFile", imageBase64);
-        return mav;
+        if (freedocEntity == null || freedocEntity.equals("")){
+            mav.addObject("pdfFile", null);
+            return mav;
+        } else {
+            String hashPdf = freedocEntity.getHash();
+            FreehashEntity freehashEntity = freeHashService.getByHash(hashPdf);
+            String imageBase64 = "";
+            imageBase64 = new String(Base64.getEncoder().encode(freehashEntity.getFiledata()));
+            mav.addObject("pdfFile", imageBase64);
+            return mav;
+        }
     }
 
 
