@@ -9,9 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import uz.customs.customsprice.entity.files.DecisionPdf;
 import uz.customs.customsprice.repository.DecisionPdfRepo;
-import uz.customs.customsprice.service.AppsService;
-import uz.customs.customsprice.service.DecisionPdfService;
-import uz.customs.customsprice.service.PdfService;
+import uz.customs.customsprice.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -179,14 +177,18 @@ public class DecisionPdfDownload {
     private final AppsService appsService;
     private final DecisionPdfService decisionPdfService;
     private final PdfService pdfService;
+    private final InDecService inDecService;
+    private final PdfServiceCancelled pdfServiceCancelled;
 
     @Autowired
     DecisionPdfRepo decisionPdfRepo;
 
-    public DecisionPdfDownload(AppsService appsService, DecisionPdfService decisionPdfService, PdfService pdfService) {
+    public DecisionPdfDownload(AppsService appsService, DecisionPdfService decisionPdfService, PdfService pdfService, InDecService inDecService, PdfServiceCancelled pdfServiceCancelled) {
         this.appsService = appsService;
         this.decisionPdfService = decisionPdfService;
         this.pdfService = pdfService;
+        this.inDecService = inDecService;
+        this.pdfServiceCancelled = pdfServiceCancelled;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_PDF_VALUE)
@@ -195,7 +197,11 @@ public class DecisionPdfDownload {
         //If user is not authorized - he should be thrown out from here itself
 
         //Authorized user will download the file
-        pdfService.createPdf(cmdtId);
+        if (inDecService.getByCmtdId(cmdtId).getEndActiv() == 100){
+            pdfService.createPdf(cmdtId);
+        } else {
+            pdfServiceCancelled.createPdfCancelled(cmdtId);
+        }
         Optional<DecisionPdf> decisionPdf = Optional.ofNullable(decisionPdfService.getByCmdtId(cmdtId));
         String pdfName = decisionPdf.get().getPdfName();
         String pdfPath = decisionPdf.get().getPdfPath();

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextpdf.text.BadElementException;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import uz.customs.customsprice.entity.InitialDecision.*;
-import uz.customs.customsprice.entity.users.User;
 import uz.customs.customsprice.repository.CommodityRepo;
 import uz.customs.customsprice.repository.PaymentRepo;
 import uz.customs.customsprice.service.*;
@@ -22,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.*;
 
 @Controller
@@ -59,6 +56,7 @@ public class InDecController {
     private final String INITIALDECISIONCONFIRMCMDT_CALC = "/resources/pages/InitialDecision/InitialDecisionCalc";
     private final String DELETINGCALCUALTE = "/resources/pages/InitialDecision/DeletePayments";
     private final String INITIALDECISIONCONFIRMTPO = "/resources/pages/InitialDecision/InitialDecisionTPO";
+    private final String INDECCANCELLED = "/resources/pages/InitialDecision/InitialDecisionCancelled";
 
     public InDecController(InDecService inDecService, AppsService appsService, AppsService appsservice, CommodityService commodityService, CommodityRepo commodityRepo, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, LocationService locationService, StatusService statusService, PdfService pdfService, PaymentServise paymentServise, ExchangerateService exchangerateService, StatusMService statusMService, StatusHService statusHService, PaymentTypeService paymentTypeService, PaymTypeService paymTypeService, UsersService usersService) {
         this.inDecService = inDecService;
@@ -380,6 +378,13 @@ public class InDecController {
     @PostMapping(value = INITIALDECISIONCONFIRMTPO)
     public ModelAndView saveTPO(InDec inDec, HttpServletRequest request, @RequestParam String inDecId, @RequestParam String TPO_NUM, @RequestParam String TPO_DATE) throws IOException, BadElementException {
         ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec/ListInDecTerms");
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userName = (String) request.getSession().getAttribute("userName");
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userRoleName = (String) request.getSession().getAttribute("userRoleName");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userLocationName = (String) request.getSession().getAttribute("userLocationName");
+        String userPost = (String) request.getSession().getAttribute("userPost");
 
         InDec inDec1 = inDecService.getById(inDecId);
         inDec1.setStatus(185);
@@ -390,6 +395,7 @@ public class InDecController {
 
         List<InDec> termsList = appsservice.getListInDec(request);
         mav.addObject("termsList", termsList);
+        mav.addObject("userRole", userRole);
 
         return mav;
     }
@@ -455,4 +461,34 @@ public class InDecController {
         mav.addObject("rate", rate);
         return mav;
     }
+
+    @PostMapping(value = INDECCANCELLED)
+    public ModelAndView saveInDecCancelled(HttpServletRequest request, @RequestParam String inDecId, @RequestParam String TPO_NUM) throws IOException, BadElementException  {
+        ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec/ListInDecTerms");
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userName = (String) request.getSession().getAttribute("userName");
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userRoleName = (String) request.getSession().getAttribute("userRoleName");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userLocationName = (String) request.getSession().getAttribute("userLocationName");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+
+        InDec inDec1 = inDecService.getById(inDecId);
+        inDec1.setEndActiv(200);
+        inDec1.setCommentEnded(TPO_NUM);
+        Date date1 = Calendar.getInstance().getTime();
+        inDec1.setInDecUserEndedDate(date1);
+//        Status status = statusService.getById(185);
+//        inDec1.setStatusNm(status.getName());
+//        inDec1.setCommentMarks(TPO_NUM+'/'+TPO_DATE);
+        inDecService.saveInDec(inDec1);
+
+        List<InDec> termsList = appsservice.getListInDec(request);
+        mav.addObject("termsList", termsList);
+        mav.addObject("userRole", userRole);
+
+        return mav;
+    }
+
 }
+

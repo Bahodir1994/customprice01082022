@@ -14,6 +14,8 @@ public class FreeDocService {
     }
 
     public FreedocEntity getByDeclIdAndAndDocType(String declId, String docType) {
-        return freeDocRepo.findByDeclIdAndAndDocType(declId, docType);
+        if (freeDocRepo.findByDeclIdAndAndDocType(declId, docType) != null) {
+            return freeDocRepo.findByDeclIdAndAndDocType(declId, docType);
+        } else return null;
     }
 }
