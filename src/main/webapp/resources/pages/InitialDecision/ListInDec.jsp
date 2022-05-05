@@ -104,9 +104,9 @@
                 </div>
             </div>
         </div>
-<%--        <%}%>--%>
+        <%--        <%}%>--%>
 
-<%--        <%if (userRole == 1 || userRole == 7 || userRole == 8) {%>--%>
+        <%--        <%if (userRole == 1 || userRole == 7 || userRole == 8) {%>--%>
         <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecSubmittedApp('145')">
             <div class="card radius-10 shadow">
                 <div class="card-body">
@@ -149,14 +149,14 @@
             </div>
         </div>
 
-        <div class="col">
+        <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="javascript:ListAppReturned('125')">
             <div class="card radius-10 shadow">
                 <div class="card-body">
                     <div class="text-center">
                         <div class="widgets-icons rounded-circle mx-auto bg-light-danger text-danger mb-3"><i class="bx bx-repeat"></i>
                         </div>
-                        <h4 class="my-1">29 та</h4>
-                        <p class="mb-0 text-secondary">Тузатиш учун қайтарилган</p>
+                        <h4 class="my-1">${listAppReturnedSize} та</h4>
+                        <p class="mb-0 text-secondary">Тузатишга қайтарилган</p>
                     </div>
                 </div>
             </div>
@@ -376,6 +376,27 @@
             data: dataS,
             <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
             url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/ListInDec/ListInDecTermsRollBack",
+            dataType: "html",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (res) {
+                $('div#ListInDecTable').html(res);
+            },
+            error: function (res) {
+            }
+        });
+    }
+
+    function ListAppReturned(status) {
+        var x = '0';
+        var dataS = {
+            "id": x,
+            "status": status
+        }
+        $.ajax({
+            type: "POST",
+            data: dataS,
+            <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
+            url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/ListInDec/ListAppReturned",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {

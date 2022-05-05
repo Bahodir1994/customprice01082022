@@ -1,6 +1,7 @@
 package uz.customs.customsprice.service;
 
 import org.springframework.stereotype.Service;
+import uz.customs.customsprice.controllers.indec.AppsController;
 import uz.customs.customsprice.entity.InitialDecision.Apps;
 import uz.customs.customsprice.entity.InitialDecision.Commodity;
 import uz.customs.customsprice.entity.InitialDecision.InDec;
@@ -104,7 +105,7 @@ public class AppsService {
     }
 
     /* 2)Барча статуси "Янги"+"Имзоланган"+"Бекор қилинган" дан ташқари бўлган аризалар*/
-    public List getListSorted(HttpServletRequest request) {
+    public List getListAppReturned(HttpServletRequest request, String status) {
 
         Integer userRole = (Integer) request.getSession().getAttribute("userRole");
         String userLocation = (String) request.getSession().getAttribute("userLocation");
@@ -114,13 +115,16 @@ public class AppsService {
 
         String sqlWhere = "", sqlJoin = "", sqlJoinVal = "";
         if (userRole == 1 || userRole == 2) {
-            sqlWhere = " and a.status not in (100, 115, 170, 175) \n ";
+            sqlWhere = " and a.status in (120, 125) \n ";
+        }
+        if (userRole == 6) {
+            sqlWhere = " and a.status in (120, 125) \n and ar.location = '" + userLocation + "' ";
         }
         if (userRole == 7) {
-            sqlWhere = " and a.status not in (100, 115, 170, 175) \n and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
+            sqlWhere = " and a.status in (120, 125) \n and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
         }
         if (userRole == 8) {
-            sqlWhere = " and a.status = 110 \n and ar.inspector_id = '" + userIdS + "' and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
+            sqlWhere = " and a.status in (120, 125) \n and ar.inspector_id = '" + userIdS + "' and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
         }
 
         String queryForList = "select\n" +
@@ -693,6 +697,7 @@ public class AppsService {
                 "where\n" +
                 "    i.isdeleted=0\n" +
                 "and a.status = 170\n" +
+                "and i.end_activ = 100\n" +
                 "" + sql_os + "\n " +
                 "order by\n" +
                 "    a.instime desc";
@@ -765,7 +770,11 @@ public class AppsService {
                 "    i.origin_country_nm,\n" +
                 "    i.person_id,\n" +
                 "    i.status indec_status,\n" +
-                "    i.status_nm indec_status_nm\n" +
+                "    i.status_nm indec_status_nm,\n" +
+                "    i.in_dec_end_date,\n" +
+                "    i.IN_DEC_USR_ENDED_DATE,\n" +
+                "    i.COMMENT_ENDED,\n" +
+                "    i.END_ACTIV\n" +
                 "from\n" +
                 "    cpid.in_dec i\n" +
                 "left join\n" +
@@ -784,11 +793,81 @@ public class AppsService {
                 "    a.id=ar.app_id\n" +
                 "where\n" +
                 "    i.isdeleted=0\n" +
-                "and a.status = 175\n" +
+                "and a.status = 170\n" +
+                "and i.end_activ = 200\n" +
                 "" + sql_os + "\n " +
                 "order by\n" +
                 "    a.instime desc";
         return (List<InDec>) entityManager.createNativeQuery(queryForList).getResultList();
+    }
+
+    /* 2)Барча статуси "Янги"+"Имзоланган"+"Бекор қилинган" дан ташқари бўлган аризалар*/
+    public List getListSorted(HttpServletRequest request) {
+
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userIdS = (String) request.getSession().getAttribute("userIdS");
+
+        String sqlWhere = "", sqlJoin = "", sqlJoinVal = "";
+        if (userRole == 1 || userRole == 2) {
+            sqlWhere = " and a.status not in (100, 115, 170, 175) \n ";
+        }
+        if (userRole == 7) {
+            sqlWhere = " and a.status not in (100, 115, 170, 175) \n and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
+        }
+        if (userRole == 8) {
+            sqlWhere = " and a.status = 110 \n and ar.inspector_id = '" + userIdS + "' and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
+        }
+
+        String queryForList = "select\n" +
+                "    a.id,\n" +
+                "    a.instime,\n" +
+                "    a.insuser,\n" +
+                "    a.isdeleted,\n" +
+                "    a.updtime,\n" +
+                "    a.upduser,\n" +
+                "    a.app_num,\n" +
+                "    a.app_date,\n" +
+                "    a.customer_country_nm,\n" +
+                "    a.customer_country,\n" +
+                "    a.location_id,\n" +
+                "    a.location_nm,\n" +
+                "    a.org_name,\n" +
+                "    a.person_addr,\n" +
+                "    a.person_fio,\n" +
+                "    a.person_mail,\n" +
+                "    a.person_phone,\n" +
+                "    a.person_pin,\n" +
+                "    a.person_position,\n" +
+                "    a.person_tin,\n" +
+                "    a.seller_org,\n" +
+                "    a.sender_country,\n" +
+                "    a.sender_country_nm,\n" +
+                "    a.sender_org,\n" +
+                "    a.status,\n" +
+                "    a.status_nm,\n" +
+                "    a.terms,\n" +
+                "    a.terms_nm,\n" +
+                "    a.terms_addr,\n" +
+                "    a.trans_exp,\n" +
+                "    ar.inspector_id   inspector_id,\n" +
+                "    ar.inspector_name inspector_name,\n" +
+                "    a.comment \n" +
+                "from\n" +
+                "    cpid.apps a\n" +
+                "left join\n" +
+                "    cpid.apps_rasp ar\n" +
+                "on\n" +
+                "    a.id=ar.app_id\n" +
+                "where\n" +
+                " a.isdeleted=0\n" +
+                "and ar.id is not null\n" +
+                "" + sqlWhere + "\n " +
+                "order by\n" +
+                "    a.instime desc";
+        return entityManager.createNativeQuery(queryForList).getResultList();
     }
 
 }

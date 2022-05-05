@@ -186,7 +186,7 @@
                                                     <th style="border-style: dotted" class="column-title">№</th>
                                                     <th style="border-style: dotted" class="column-title">Хужжат тури</th>
                                                     <th style="border-style: dotted" class="column-title">Хужжат рақами</th>
-<%--                                                    <th style="border-style: dotted" class="column-title">Хужжат санаси</th>--%>
+                                                    <%--                                                    <th style="border-style: dotted" class="column-title">Хужжат санаси</th>--%>
                                                     <th style="border-style: dotted" class="column-title">Хужжат файли</th>
                                                 </tr>
                                                 </thead>
@@ -196,7 +196,7 @@
                                                         <td class=" ">${i.index+1}</td>
                                                         <td class=" ">${pepe.docTypeName}</td>
                                                         <td class=" ">${pepe.docType}<i class="success fa fa-long-arrow-up"></i></td>
-<%--                                                        <td class=" ">${val.docDate}</td>--%>
+                                                            <%--                                                        <td class=" ">${val.docDate}</td>--%>
                                                         <td class=" "><a href="<%=request.getContextPath()%>/download/${pepe.hash}/${pepe.fileId}" class="btn btn-outline-primary btn-sm"><i
                                                                 class="fa fa-download">${pepe.docname}</i></a></td>
                                                     </tr>
@@ -375,7 +375,9 @@
                                 <th>Ўрамлар сони:</th>
                                 <th>Юк жойлари сони:</th>
                                 <th>Усул:</th>
-                                <th>Тўл.хис/Қайтариш</th>
+<%--                                <c:if test="${appStatus != 120 && appStatus != 125 && appStatus != 170 && appStatus != 175}">--%>
+                                    <th>Тўл.хис/Қайтариш</th>
+<%--                                </c:if>--%>
                             </tr>
                             </thead>
                             <tbody>
@@ -418,7 +420,7 @@
                                             <i class="bx bx-calculator"></i>
                                         </button>
 
-                                        <c:if test="${appStatus != 170 || appStatus != 175}">
+                                        <c:if test="${appStatus != 120 && appStatus != 125 && appStatus != 170 && appStatus != 175}">
                                             <button type="button" class="btn btn-danger btn-block" data-bs-toggle="modal"
                                                     data-bs-target="#exampleExtraLargeModal4">
                                                 <i class="bx bx-undo"></i>
@@ -514,35 +516,17 @@
                                             </div>
                                             <div class="form-group W100" style="margin-top:2px; display: none;">
                                                 <label class="sr-only" for="HS_NM_FULL">Страна-транзит</label>
-                                                <textarea class="form-control input-sm" rows="4" id="HS_NM_FULL"
-                                                          name="HS_NM_FULL" maxlength="150" style="width:85%">
-                                                        <%=HS_NM_FULL%>
-                                                </textarea>
-                                                <textarea class="form-control input-sm" rows="2" id="HS_CD_FULL"
-                                                          name="HS_CD_FULL" maxlength="150" style="width:85%">
-                                                    <%--<%=HS_CD_FULL%>--%>
-                                                </textarea>
+                                                <textarea class="form-control input-sm" rows="4" id="HS_NM_FULL" name="HS_NM_FULL" maxlength="150" style="width:85%"><%=HS_NM_FULL%></textarea>
+                                                <textarea class="form-control input-sm" rows="2" id="HS_CD_FULL" name="HS_CD_FULL" maxlength="150" style="width:85%"></textarea>
                                             </div>
                                             <div class="border-primary" style="">
-                                                <textarea class="form-control input-sm mt-1" rows="4"
-                                                          id="HS_NM_FULLS" name="HS_NM_FULLS" maxlength="150"
-                                                          style="width:100%" readonly>
-                                                </textarea>
+                                                <textarea class="form-control input-sm mt-1" rows="4" id="HS_NM_FULLS" name="HS_NM_FULLS" maxlength="150" style="width:100%" readonly></textarea>
                                             </div>
                                             <div class="border-primary" style="">
-                                                    <textarea class="resizable_textarea form-control mt-1"
-                                                              placeholder="Қўшимча маълумот киритиш учун... " rows="4"
-                                                              style="max-height: 300px;width:100%" id="commentRollback"
-                                                              name="commentRollback">
-                                                    </textarea>
+                                                    <textarea class="resizable_textarea form-control mt-1" placeholder="Қўшимча маълумот киритиш учун... " rows="4"
+                                                              style="max-height: 300px;width:100%" id="commentRollback" name="commentRollback"></textarea>
                                             </div>
                                         </form>
-                                        <%--                                        <button type="button" class="btn btn-danger mt-3"--%>
-                                        <%--                                                onclick="javascript:appRollback('120');">Тўлиқ қайтариш--%>
-                                        <%--                                        </button>--%>
-                                        <%--                                        <button type="button" class="btn btn-warning mt-3"--%>
-                                        <%--                                                onclick="javascript:appRollbackToFix('125');">Тузатиш учун қайтариш--%>
-                                        <%--                                        </button>--%>
                                         <div class="form-check form-check-inline form-control-lg">
                                             <input style="cursor: pointer;" checked class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="120">
                                             <label style="cursor: pointer;" class="form-check-label" for="inlineRadio1">Тўлиқ қайтариш</label>
@@ -556,7 +540,7 @@
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><font
                                                 style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ёпиш</font></font>
                                         </button>
-                                        <button type="button" class="btn btn-primary" onclick="javascript:appRollback();"><font
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="javascript:appRollback();"><font
                                                 style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сақлаш</font></font></button>
                                     </div>
                                 </div>

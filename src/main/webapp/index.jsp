@@ -727,7 +727,7 @@
                     </li>
 <%--                    <%}%>--%>
                     <li>
-                        <a class="has-arrow" href="javascript:ErrorMessage(0);">
+                        <a class="has-arrow" href="javascript:CostMonitoring(0);">
                             <div class="parent-icon"><i class="bx bx-line-chart"></i>
                             </div>
                             <div class="menu-title">Қиймат мониторинги</div>
@@ -1312,6 +1312,26 @@
                 if (res.status == 401) {
                     $(".logOutForm").submit();
                 }
+            }
+        });
+    }
+
+    /* Қиймат мониторинги */
+    function CostMonitoring(x) {
+        var dataS = {
+            "x": x
+        }
+        $.ajax({
+            type: "POST",
+            data: dataS,
+            url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/DigestsPage",
+            dataType: "html",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (res) {
+                $('div#MainContent').html(res);
+
+            },
+            error: function (res) {
             }
         });
     }

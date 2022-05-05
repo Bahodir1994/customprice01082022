@@ -60,6 +60,7 @@ public class AppsController {
     private final String INITIAL_DECISION_PROCESS = "/resources/pages/InitialDecision/ListInDec/ListInDecProcessApp";
     private final String INITIAL_DECISION_SUBMITTED = "/resources/pages/InitialDecision/ListInDec/ListInDecSubmittedApp";
     private final String INITIAL_DECISION_SIGNED = "/resources/pages/InitialDecision/ListInDec/ListInDecSignedApp";
+    private final String INITIAL_DECISION_APP_RETURNED = "/resources/pages/InitialDecision/ListInDec/ListAppReturned";
 
     public AppsController(AppsService appsService, ConturyService conturyService, LocationService locationService, StatusService statusService, TermsService termsService, AppsService appsservice, AppsRaspService appsRaspService, AppsRepo appsRepo, TransportTypeService transportTypeService, StatusMService statusMService, StatusHService statusHService, RollBackAppService rollBackAppService, RollbackSpService rollbackSpService, RollBackAppRepo rollBackAppRepo, UserRepository userRepository, InDecService inDecService, UsersService usersService, CommodityService commodityService, EarxivService earxivService) {
         this.appsService = appsService;
@@ -155,13 +156,16 @@ public class AppsController {
         List<Apps> listSignedApp = appsservice.getListProcessApp(request, "160");
         mav.addObject("listSignedAppSize", listSignedApp.size());
 
+        List<Apps> listAppReturned = appsservice.getListAppReturned(request, "125");
+        mav.addObject("listAppReturnedSize", listAppReturned.size());
+
         return mav;
     }
 
     /*todo Аризалар рўйхати(дастлабки)*/
     @PostMapping(value = INITIALDECISIONRASP)
     @ResponseBody
-    public ModelAndView InitialDecisionRasp(HttpServletRequest request, @RequestParam(name = "id") String status) {
+    public ModelAndView InitialDecisionRasp(HttpServletRequest request, @RequestParam(name = "id") String id, @RequestParam String status) {
         ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/InitialDecisionRasp");
         String userId = (String) request.getSession().getAttribute("userId");
         String userName = (String) request.getSession().getAttribute("userName");
@@ -186,6 +190,31 @@ public class AppsController {
 //        List<Users> usersList = new ArrayList<>();
 //        usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
 //        mav.addObject("userSelectList", usersList);
+
+        return mav;
+    }
+
+    /*todo Қайтарилган аризалар рўйхати (тузатиш учун қайтарилган ёки тўлиқ қайтарилган) */
+    @PostMapping(value = INITIAL_DECISION_APP_RETURNED)
+    @ResponseBody
+    public ModelAndView ListAppReturned(HttpServletRequest request, @RequestParam(name = "id") String status) {
+        ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec/ListInDecRasp");
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userName = (String) request.getSession().getAttribute("userName");
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userRoleName = (String) request.getSession().getAttribute("userRoleName");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userLocationName = (String) request.getSession().getAttribute("userLocationName");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+
+//        List<Apps> sortedList = new ArrayList<>();
+//        sortedList = appsservice.getListSorted(request);
+//        mav.addObject("sortedList", sortedList);
+
+        List<Apps> listAppReturned = appsservice.getListAppReturned(request, status);
+//        mav.addObject("listAppReturned", listAppReturned);
+        mav.addObject("sortedList", listAppReturned);
+        mav.addObject("status", status);
 
         return mav;
     }
@@ -270,7 +299,8 @@ public class AppsController {
             HttpServletRequest request, @RequestParam String appId, @RequestParam String commentRollback, @RequestParam String rollback_ids,
             @RequestParam String rollback_names, @RequestParam Integer statusApp
     ) {
-        ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/InitialDecisionRasp");
+//        ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/InitialDecisionRasp");
+        ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec");
 
         String userId = (String) request.getSession().getAttribute("userId");
         String userName = (String) request.getSession().getAttribute("userName");
@@ -338,6 +368,9 @@ public class AppsController {
         List<Apps> listSignedApp = appsservice.getListProcessApp(request, "160");
         mav.addObject("listSignedAppSize", listSignedApp.size());
 
+        List<Apps> listAppReturned = appsservice.getListAppReturned(request, "125");
+        mav.addObject("listAppReturnedSize", listAppReturned.size());
+
         return mav;
     }
 
@@ -374,6 +407,9 @@ public class AppsController {
 
         List<Apps> listSignedApp = appsservice.getListProcessApp(request, "160");
         mav.addObject("listSignedAppSize", listSignedApp.size());
+
+        List<Apps> listAppReturned = appsservice.getListAppReturned(request, "125");
+        mav.addObject("listAppReturnedSize", listAppReturned.size());
 
 //        List<Users> usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
 //        mav.addObject("userSelectList", usersList);

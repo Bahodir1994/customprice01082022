@@ -144,7 +144,6 @@
                             <td><button class="btn btn-outline-primary" onclick="inDecCancelled('${terms[33]}')"><i class="bx bx-message-alt-x bx-sm"></i></button></td>
                         </c:if>
                         <c:if test="${terms[59] == 100 && userRole != 6}">
-
                         </c:if>
                         <c:if test="${terms[59] == 200}">
                             <td>Бекор қилинган</td>
