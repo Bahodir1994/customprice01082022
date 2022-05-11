@@ -71,7 +71,6 @@ public class PdfService {
         String url_InsUsr = "https://new.customs.uz/";
         Date date1 = Calendar.getInstance().getTime();
 
-//        System.out.println("salom");
         Context context = new Context();
         context.setVariable("apps", appsService.findById(commodityForApp.getAppId()));
         context.setVariable("cmdt", commodityService.getById(cmdtId));
@@ -80,15 +79,12 @@ public class PdfService {
         context.setVariable("docs", docsService.getByAppIdForPdf(commodityForApp.getAppId()));
         context.setVariable("userName", userName.getFullname());
         context.setVariable("LocaleDate", date1);
-//        StringBuilder urlText = new StringBuilder("192.168.214.135:8080/CUSTOMSPRICE/decisionPdfDownload?cmdtId="+cmdtId);
         StringBuilder urlText = new StringBuilder("https://d-qaror.customs.uz/decisionPdfDownload?cmdtId=" + cmdtId);
         context.setVariable("url_qrCode", urlText);
         context.setVariable("url_InsUsr", url_InsUsr);
         context.setVariable("htmlData", htmlService.getforHtmlById("1"));
 
         String processHtml = templateEngine.process("templates/PdfGenerate.html", context);
-
-//        String urlTTF = "D:\\IN_DEC_FILES\\DECISION_PDF\\";
         String urlTTF = "D:/FontStyle/TimesNewRoman.ttf";
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
