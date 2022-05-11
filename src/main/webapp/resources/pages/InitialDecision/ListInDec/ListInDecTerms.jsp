@@ -93,7 +93,8 @@
                     <th style=" border-style: dotted">Холати</th>
                     <th style=" border-style: dotted">Тўлов холати</th>
                     <th style=" border-style: dotted">Ариза санаси</th>
-                    <th style=" border-style: dotted">Хужжат (Pdf)</th>
+<%--                    <th style=" border-style: dotted">Хужжат (Pdf)</th>--%>
+                    <th style=" border-style: dotted">Хужжат (Pdf2)</th>
                     <th style=" border-style: dotted">Манфаатдор шахс</th>
                     <th style=" border-style: dotted">Қарор рақами</th>
                     <th style=" border-style: dotted">Қарор санаси</th>
@@ -131,9 +132,15 @@
                                                                 onclick="javascript:resultTPO('<h6>${terms[39]}</h6>')">${terms[55]}</a></c:if>
                         </td>
                         <td>${terms[1]}</td>
+<%--                        <td>--%>
+<%--                            <a type="button"--%>
+<%--                               href="<%=request.getContextPath()%>/decisionPdfDownload?cmdtId=${terms[32]}"--%>
+<%--                               class="btn btn-outline-warning">--%>
+<%--                                <i class="bx bxs-file-pdf" style="font-size: 30px"></i>--%>
+<%--                            </a>--%>
+<%--                        </td>--%>
                         <td>
-                            <a type="button"
-                               href="<%=request.getContextPath()%>/decisionPdfDownload?cmdtId=${terms[32]}"
+                            <a type="button" onclick="openInDecPdf('${terms[32]}')"
                                class="btn btn-outline-warning">
                                 <i class="bx bxs-file-pdf" style="font-size: 30px"></i>
                             </a>
@@ -183,11 +190,6 @@
     </div>
 
 <script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-    }
-
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("main").style.marginLeft= "0";
@@ -321,6 +323,26 @@
                 Swal.fire('Маълумотлар сақланмади', '', 'info')
             }
         })
+    }
+
+    function openInDecPdf(cmdtId){
+        document.getElementById("mySidenav").style.width = "650px";
+        document.getElementById("main").style.marginLeft = "570px";
+        var dataS = {
+            "cmdtId": cmdtId,
+        }
+        $.ajax({
+            type: "POST",
+            data: dataS,
+            dataType: "html",
+            url: "<%=request.getContextPath()%>/openInDecPdf/resources/openInDecPdfOne",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (res) {
+                $('div#openInPdf').html(res);
+            },
+            error: function (res) {
+            }
+        });
     }
 
     function inDecCancelled(inDecId) {

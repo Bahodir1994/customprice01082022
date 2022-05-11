@@ -91,11 +91,9 @@
     }
 </style>
 <div id="mySidenav" class="sidenav">
-    <button href="javascript:void(0)" class="btn btn-primary" onclick="closeNav()">&times;</button>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+<div id="openInPdf">
+ <!--PDF open here-->
+</div>
 </div>
 <!--start page wrapper -->
 <div id="main" class="page-content">
