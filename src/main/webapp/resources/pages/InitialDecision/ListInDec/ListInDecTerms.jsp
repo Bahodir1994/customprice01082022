@@ -21,12 +21,14 @@
     String userLocationName = (String) request.getSession().getAttribute("userLocationName");
     String userPost = (String) request.getSession().getAttribute("userPost");
 %>
-<head>
-    <title>Title</title>
-</head>
+
 <body>
-<div class="fm-search">
-    <div class="mb-0">
+
+
+
+
+    <div class="fm-search">
+        <div class="mb-0">
         <div class="d-flex justify-content-center">
             <div class="col-md-3 m-2">
                 <label class="">Мақоми</label>
@@ -77,10 +79,11 @@
                 </div>
             </div>
         </div>
+            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
     </div>
-</div>
-<div class="row mt-3">
-    <div class="col-12 col-lg-12">
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 col-lg-12">
         <div class="table-responsive">
             <table id="example3" class="table table-striped table-bordered table-responsive">
                 <thead class="bg-light-primary" style="border-color: #0a58ca; border-style: dotted">
@@ -177,7 +180,19 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+    }
+</script>
 <script>
     $('.datepicker').pickadate({
         selectMonths: true,
