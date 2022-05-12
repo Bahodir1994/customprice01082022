@@ -671,7 +671,7 @@
                          alt="logo icon">
                 </div>
                 <div>
-                    <h4 class="logo-text">Synadmin</h4>
+                    <h4 class="logo-text">БОЖХОНА ҚИЙМАТИ</h4>
                 </div>
                 <div class="toggle-icon ms-auto"><i class='bx bx-first-page'></i>
                 </div>
@@ -862,24 +862,15 @@
     </div>
     <!-- end header wrapper-->
     <!-- start page wrapper -->
+
     <%--todo Асосий----------------------------------------------------қисми------------------------дан--%>
     <div class="page-wrapper" id="MainContent" role="main" style="min-height: 850px!important;">
         <%--todo страницаларни чақириш жойи--%>
     </div>
     <%--todo Асосий----------------------------------------------------қисми------------------------гача--%>
-    <!-- end page wrapper -->
-    <!-- start overlay-->
-<%--    <div class="search-overlay"></div>--%>
-<%--    <div class="overlay toggle-icon"></div>--%>
-    <!-- end overlay-->
-<%--    <!-- Start Back To Top Button --> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>--%>
-    <!-- End Back To Top Button -->
-    <%--		<footer class="page-footer">--%>
-    <%--			<p class="mb-0">Copyright © 2021. All right reserved.</p>--%>
-    <%--		</footer>--%>
+
 </div>
-<!--end wrapper-->
-<!--start switcher-->
+
 <div class="switcher-wrapper">
     <div class="switcher-btn"><i class='bx bx-cog bx-spin'></i>
     </div>
@@ -943,10 +934,9 @@
         </div>
     </div>
 </div>
-<!-- end switcher -->
-<!-- Bootstrap JS -->
+
+
 <script src="<%=request.getContextPath()%>/resources/assets2/js/bootstrap.bundle.min.js"></script>
-<!-- plugins -->
 <script src="<%=request.getContextPath()%>/resources/assets2/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/simplebar/js/simplebar.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/metismenu/js/metisMenu.min.js"></script>
@@ -963,19 +953,12 @@
     new PerfectScrollbar('.dashboard-top-countries');
 </script>
 <script src="<%=request.getContextPath()%>/resources/assets2/js/index.js"></script>
-<!-- app JS-->
 <script src="<%=request.getContextPath()%>/resources/assets2/js/app.js"></script>
-
-
-<!--   -->
 <script>
     new PerfectScrollbar('.email-navigation');
     new PerfectScrollbar('.email-list');
 </script>
-<%--<script src="<%=request.getContextPath()%>/resources/assets2/js/bootstrap.bundle.min.js"></script>--%>
-<!--plugins-->
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/datatable/js/jquery.dataTables.min.js"></script>
-<%-- <script src="<%=request.getContextPath()%>/resources/assets2/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>--%>
 <script>
     $("#headercolor1").ready(function () {
         $("html").addClass("color-header headercolor1");
@@ -1047,10 +1030,6 @@
     })(jQuery);
 </script>
 
-
-<!--   -->
-
-
 <script>
     $(document).ready(function () {
         var dataS = {
@@ -1093,7 +1072,6 @@
             }
         });
     }
-
 
     /* Маълумотларни твқсимлаш */
     function InitialDecisionRasp(x) {
@@ -1324,7 +1302,7 @@
         $.ajax({
             type: "POST",
             data: dataS,
-            url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/DigestsPage",
+            url: "<%=request.getContextPath()%>/costmonitoring/resources/pages/CostMonitoring/FiltrCM",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {

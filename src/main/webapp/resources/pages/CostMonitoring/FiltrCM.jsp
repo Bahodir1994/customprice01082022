@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<%--
-  Created by IntelliJ IDEA.
-  User: ADMIN
-  Date: 28.04.2022
-  Time: 13:00
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<html>
+<%
+    String userId = (String) request.getSession().getAttribute("userId");
+    String userName = (String) request.getSession().getAttribute("userName");
+    Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+    String userRoleName = (String) request.getSession().getAttribute("userRoleName");
+    String userLocation = (String) request.getSession().getAttribute("userLocation");
+    String userLocationName = (String) request.getSession().getAttribute("userLocationName");
+    String userPost = (String) request.getSession().getAttribute("userPost");
+%>
 <head>
-    <title></title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,582 +37,258 @@
     <link href="<%=request.getContextPath()%>/resources/assets2/css/header-colors.css"/>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
-    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet"/>
     <!-- loader-->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
+
 <body>
+<!--wrapper-->
+<style>
+    .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 120px;
+    }
 
-<!--start page wrapper -->
-<div id="ModalSentMess" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true"></div>
-<div class="page-content">
-    <!--start email wrapper-->
-    <div class="">
+    .sidenav a {
+        padding: 8px 80px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
 
-        <div class="col">
-            <h6 class="mb-0 text-uppercase">Шартли белгиланган товарлар</h6>
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
 
-            <hr>
-            <div class="card">
-                <div class="card-body">
-                    <ul class="nav nav-tabs nav-primary" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab" aria-selected="false">
-                                <div class="d-flex align-items-center">
-                                    <div class="tab-icon"><i class="bx bxs-home font-18 me-1"></i>
-                                    </div>
-                                    <div class="tab-title">Рад этилган БЮД</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile" role="tab" aria-selected="true">
-                                <div class="d-flex align-items-center">
-                                    <div class="tab-icon"><i class="bx bxs-user-pin font-18 me-1"></i>
-                                    </div>
-                                    <div class="tab-title">Маслахатлашув</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="tab" href="#primarycontact" role="tab" aria-selected="false">
-                                <div class="d-flex align-items-center">
-                                    <div class="tab-icon"><i class="bx bxs-microphone font-18 me-1"></i>
-                                    </div>
-                                    <div class="tab-title">Шартли чиқарилган товарлар</div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content py-3">
-                        <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
-                            <div class="table-responsive">
-                                <div class="d-xl-flex align-items-center mb-4">
-                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
-                                        <div class="">
-                                            <input class="result form-control" type="date"  placeholder="Сана ...дан">
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
-                                        <div class="">
-                                            <input class="result form-control" type="date"  placeholder="Сана ...гача">
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
-                                        <select class="form-select" id="validationTooltip041" required="">
-                                            <option selected="" disabled="disabled" value="" ><p class="text-muted">Ариза мақоми</p></option>
-                                            <option value="100">Янги</option>
-                                            <option value="110">Кўриб чиқиш учун тақсимланган</option>
-                                            <option value="145">Тасдиқлашга тайрланган</option>
-                                        </select>
-                                    </div>
-                                    <div class="ms-auto d-flex align-items-center">
-                                        <button class="btn btn-white px-2 ms-2"><i class='bx bx-chevron-left me-0'></i>
-                                        </button>
-                                        <button class="btn btn-white px-2 ms-2"><i class='bx bx-chevron-right me-0'></i>
-                                        </button>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <div class="email-toggle-btn"><i class='bx bx-menu'></i>
-                                        </div>
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
 
-                                        <div class="">
-                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-refresh me-0'></i>
-                                            </button>
-                                        </div>
-                                        <div class="">
-                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-downvote me-0'></i>
-                                            </button>
-                                        </div>
-                                        <div class="d-none d-md-flex">
-                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-file me-0'></i>
-                                            </button>
-                                        </div>
-                                        <div class="">
-                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-trash me-0'></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <table id="example1"  class="table table-striped table-bordered table-sm">
-                                    <thead class="table-light">
-                                    <tr>
-                                        <th style="border-style: dotted">т/р</th>
-                                        <th style="border-style: dotted">БЮД рақами</th>
-                                        <th style="border-style: dotted">PDF</th>
-                                        <th style="border-style: dotted">Қарор рақами</th>
-                                        <th style="border-style: dotted">Сана</th>
-                                        <th style="border-style: dotted">Товарлар сони</th>
-                                        <th style="border-style: dotted">Товарлар бруттоси(кг)</th>
-                                        <th style="border-style: dotted">Рад этиш сабаблари</th>
-                                        <th style="border-style: dotted">Инспектор</th>
-                                    </tr>
-                                    </thead>
-<%--                                    <tbody>--%>
-<%--                                    <c:forEach var="val" items="${qiymatReject}" varStatus="i">--%>
-<%--                                        <c:set var = "timefm1" value = "${val[3]}"/>--%>
-<%--                                        <c:set var = "brutto1" value = "${val[12]}"/>--%>
-<%--                                        <tr>--%>
-<%--                                            <td>${i.index + 1}</td>--%>
-<%--                                            <td><a type="button" class="btn btn-primary btn-sm radius-30 px-4" href="#" class="text-primary font-weight-bold"><u>${val[0]}</u></a></td>--%>
-<%--                                            <td><button class="btn btn-outline-danger pull-bs-canvas-right" onclick="javascript:openPDF('${val[15]}', 'rad etish qarori')"><i class="bx bxs-file-pdf bx-sm"></i></button></td>--%>
-<%--                                            <td>${val[1]}</td>--%>
-<%--                                            <td><fmt:formatDate pattern = "yyyy-MM-dd"  value = "${timefm1}" /></td>--%>
-<%--                                            <td>--%>
-<%--                                                <button type="button" class="btn btn-success" onclick="javascript:QiymatRejects('${val[15]}')">--%>
-<%--                                                        ${val[14]}   <i class='bx bx-detail'></i>--%>
-<%--                                                </button>--%>
-<%--                                            </td>--%>
-<%--                                            <td><fmt:formatNumber value = "${brutto1}"  pattern="#.##"/></td>--%>
-<%--                                            <td>${val[5]} ${val[6]} ${val[7]} ${val[8]}</td>--%>
-<%--                                            <td>Инс.ид-${val[4]}</td>--%>
-<%--                                        </tr>--%>
-<%--                                    </c:forEach>--%>
-<%--                                    </tbody>--%>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
-                            <div class="table-responsive">
-                                <div class="d-xl-flex align-items-center mb-4">
-                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
-                                        <div class="">
-                                            <input class="result form-control" type="date" placeholder="Сана ...дан">
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
-                                        <div class="">
-                                            <input class="result form-control" type="date" placeholder="Сана ...гача">
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
-                                        <select class="form-select" id="validationTooltip042" required="">
-                                            <option selected="" disabled="disabled" value="" ><p class="text-muted">Ариза мақоми</p></option>
-                                            <option value="100">Янги</option>
-                                            <option value="110">Кўриб чиқиш учун тақсимланган</option>
-                                            <option value="145">Тасдиқлашга тайрланган</option>
-                                        </select>
-                                    </div>
-                                    <div class="ms-auto d-flex align-items-center">
-                                        <button class="btn btn-white px-2 ms-2"><i class='bx bx-chevron-left me-0'></i>
-                                        </button>
-                                        <button class="btn btn-white px-2 ms-2"><i class='bx bx-chevron-right me-0'></i>
-                                        </button>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <div class="email-toggle-btn"><i class='bx bx-menu'></i>
-                                        </div>
+    #main {
+        transition: margin-left .5s;
+        padding: 16px;
+    }
 
-                                        <div class="">
-                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-refresh me-0'></i>
-                                            </button>
-                                        </div>
-                                        <div class="">
-                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-downvote me-0'></i>
-                                            </button>
-                                        </div>
-                                        <div class="d-none d-md-flex">
-                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-file me-0'></i>
-                                            </button>
-                                        </div>
-                                        <div class="">
-                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-trash me-0'></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <table id="example2"  class="table table-striped table-bordered table-sm">
-                                    <thead class="table-light">
-                                    <tr>
-                                        <th style="border-style: dotted">т/р</th>
-                                        <th style="border-style: dotted">БЮД рақами</th>
-                                        <th style="border-style: dotted">Қарор рақами</th>
-                                        <th style="border-style: dotted">Сана</th>
-                                        <th style="border-style: dotted">Товарлар сони</th>
-                                        <th style="border-style: dotted">БЮД да ҳисобланган бож. тўл.(млн. сўмда)</th>
-                                        <th style="border-style: dotted">Жами ҳисобланган бож. тўл.(млн. сўмда)</th>
-                                        <th style="border-style: dotted">Қўшимча ҳисобланган бож. тўл.(млн. сўмда)</th>
-                                        <th style="border-style: dotted">Товарлар бруттоси(кг)</th>
-                                        <th style="border-style: dotted">Инспектор</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach var="val" items="${qiymatconsult}" varStatus="i">
-                                        <c:set var="total2" value="${val[5]-val[6]}"/>
-                                        <c:set var = "timefm2" value = "${val[3]}"/>
-                                        <c:set var = "sum3" value = "${val[6]}"/>
-                                        <c:set var = "sum4" value = "${val[5]}"/>
-                                        <tr>
-                                            <td>${i.index + 1}</td>
-                                            <td><a type="button" class="btn btn-primary btn-sm radius-30 px-4" href="#" class="text-primary font-weight-bold"><u>${val[0]}</u></a></td>
-                                            <td>${val[1]}</td>
-                                            <td><fmt:formatDate pattern = "yyyy-MM-dd"  value = "${timefm2}" /></td>
-                                            <td>
-                                                <button type="button" class="btn btn-success" onclick="javascript:QiymatRejects('${val[10]}')">
-                                                        ${val[9]}   <i class='bx bx-detail'></i>
-                                                </button>
-                                            </td>
-                                            <td><fmt:formatNumber value = "${sum3}" maxFractionDigits="3" /></td>
-                                            <td><fmt:formatNumber value = "${sum4}" maxFractionDigits="3" /></td>
-                                            <td><fmt:formatNumber value = "${total2}" maxFractionDigits="3" /></td>
-                                            <td><fmt:formatNumber value = "${val[8]}"  pattern="#.##"/></td>
-                                            <td>Машарипов Жамшид(${val[4]})</td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="primarycontact" role="tabpanel">
-                            <div class="table-responsive">
-                                <div class="d-xl-flex align-items-center mb-4">
-                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
-                                        <div class="">
-                                            <input class="result form-control" type="date"  placeholder="Сана ...дан">
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
-                                        <div class="">
-                                            <input class="result form-control" type="date"  placeholder="Сана ...гача">
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
-                                        <select class="form-select" id="validationTooltip043" required="">
-                                            <option selected="" disabled="disabled" value="" ><p class="text-muted">Ариза мақоми</p></option>
-                                            <option value="100">Янги</option>
-                                            <option value="110">Кўриб чиқиш учун тақсимланган</option>
-                                            <option value="145">Тасдиқлашга тайрланган</option>
-                                        </select>
-                                    </div>
-                                    <div class="ms-auto d-flex align-items-center">
-                                        <button class="btn btn-white px-2 ms-2"><i class='bx bx-chevron-left me-0'></i>
-                                        </button>
-                                        <button class="btn btn-white px-2 ms-2"><i class='bx bx-chevron-right me-0'></i>
-                                        </button>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <div class="email-toggle-btn"><i class='bx bx-menu'></i>
-                                        </div>
-
-                                        <div class="">
-                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-refresh me-0'></i>
-                                            </button>
-                                        </div>
-                                        <div class="">
-                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-downvote me-0'></i>
-                                            </button>
-                                        </div>
-                                        <div class="d-none d-md-flex">
-                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-file me-0'></i>
-                                            </button>
-                                        </div>
-                                        <div class="">
-                                            <button type="button" class="btn btn-white ms-2"><i class='bx bx-trash me-0'></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <table id="example3" class="table table-striped table-bordered table-sm">
-                                    <thead class="table-light">
-                                    <tr>
-                                        <th style="border-style: dotted">т/р</th>
-                                        <th style="border-style: dotted">БЮД рақами</th>
-                                        <th style="border-style: dotted">Қарор рақами</th>
-                                        <th style="border-style: dotted">Сана</th>
-                                        <th style="border-style: dotted">Товарлар сони</th>
-                                        <th style="border-style: dotted">БЮД да ҳисобланган бож. тўл.(млн. сўмда)</th>
-                                        <th style="border-style: dotted">Жами ҳисобланган бож. тўл.(млн. сўмда)</th>
-                                        <th style="border-style: dotted">Қўшимча ҳисобланган бож. тўл.(млн. сўмда)</th>
-                                        <th style="border-style: dotted">Товарлар бруттоси(кг)</th>
-                                        <th style="border-style: dotted">Амал қилиш санаси</th>
-                                        <th style="border-style: dotted">Амал қилиш муддати</th>
-                                        <th style="border-style: dotted">Инспектор</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach var="val" items="${qiymatshartli}" varStatus="i">
-                                        <c:set var="total" value="${val[5]-val[6]}"/>
-                                        <c:set var = "timefm3" value = "${val[3]}"/>
-                                        <c:set var = "timefm4" value = "${val[10]}"/>
-                                        <c:set var = "num" value = "${val[8]}"/>
-                                        <c:set var = "sum" value = "${val[6]}"/>
-                                        <c:set var = "sum2" value = "${val[5]}"/>
-                                        <tr>
-                                            <td>${i.index + 1}</td>
-                                            <td><a type="button" class="btn btn-primary btn-sm radius-30 px-4" href="#" class="text-primary font-weight-bold"><u>${val[0]}</u></a></td>
-                                            <td>${val[1]}</td>
-                                            <td><fmt:formatDate pattern = "yyyy-MM-dd"  value = "${timefm3}" /></td>
-                                            <td>
-                                                <button type="button" class="btn btn-success" onclick="javascript:QiymatRejects('${val[12]}')">
-                                                        ${val[9]}   <i class='bx bx-detail'></i>
-                                                </button>
-
-                                            </td>
-                                            <td><fmt:formatNumber value = "${sum}" maxFractionDigits="3" /></td>
-                                            <td><fmt:formatNumber value = "${sum2}" maxFractionDigits="3" /></td>
-                                            <td><fmt:formatNumber value = "${total}" maxFractionDigits="3" /></td>
-                                            <td><fmt:formatNumber value = "${num}"  pattern="#.##"/></td>
-                                            <td><fmt:formatDate pattern = "yyyy-mm-dd"  value = "${timefm4}" /></td>
-                                            <td>${val[11]} кун</td>
-                                            <td>Инс.ид-(${val[4]})</td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!--start compose mail-->
-        <div class="compose-mail-popup">
-            <div class="card">
-                <div class="card-header bg-dark text-white py-2 cursor-pointer">
-                    <div class="d-flex align-items-center">
-                        <div class="compose-mail-title">New Message</div>
-                        <div class="compose-mail-close ms-auto">x</div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="email-form">
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="To"/>
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Subject"/>
-                        </div>
-                        <div class="mb-3">
-                            <textarea class="form-control" placeholder="Message" rows="10" cols="10"></textarea>
-                        </div>
-                        <div class="mb-0">
-                            <div class="d-flex align-items-center">
-                                <div class="">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary">Action</button>
-                                        <button type="button"
-                                                class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
-                                                data-bs-toggle="dropdown"><span
-                                                class="visually-hidden">Toggle Dropdown</span>
-                                        </button>
-                                        <div class="dropdown-menu"><a class="dropdown-item"
-                                                                      href="javascript:;">Action</a>
-                                            <a class="dropdown-item" href="javascript:;">Another action</a>
-                                            <a class="dropdown-item" href="javascript:;">Something else here</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="javascript:;">Separated link</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="ms-2">
-                                    <button type="button" class="btn border-0 btn-sm btn-white"><i
-                                            class="lni lni-text-format"></i>
-                                    </button>
-                                    <button type="button" class="btn border-0 btn-sm btn-white"><i
-                                            class='bx bx-link-alt'></i>
-                                    </button>
-                                    <button type="button" class="btn border-0 btn-sm btn-white"><i
-                                            class="lni lni-emoji-tounge"></i>
-                                    </button>
-                                    <button type="button" class="btn border-0 btn-sm btn-white"><i
-                                            class="lni lni-google-drive"></i>
-                                    </button>
-                                </div>
-                                <div class="ms-auto">
-                                    <button type="button" class="btn border-0 btn-sm btn-white"><i
-                                            class="lni lni-trash"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-            <style>
-                .bs-canvas-overlay {
-                    opacity: 0.85;
-                    z-index: 1100;
-                }
-
-                .bs-canvas {
-                    top: 0;
-                    z-index: 1110;
-                    overflow-x: hidden;
-                    overflow-y: auto;
-                    width: 900px;
-                    transition: margin .4s ease-out;
-                    -webkit-transition: margin .4s ease-out;
-                    -moz-transition: margin .4s ease-out;
-                    -ms-transition: margin .4s ease-out;
-                }
-
-                .bs-canvas-left {
-                    left: 0;
-                    margin-left: -900px;
-                }
-
-                .bs-canvas-right {
-                    right: 0;
-                    margin-right: -900px;
-                }
-
-                /* Only for demo */
-            </style>
-
-            <div class="bs-canvas bs-canvas-right position-fixed bg-light h-100 border-5">
-                <header class="bs-canvas-header p-3 bg-primary overflow-auto">
-                    <button type="button" class="bs-canvas-close float-left close" aria-label="Close"><span aria-hidden="true" class="text-light">&times;</span></button>
-                    <h4 class="d-inline-block text-light mb-0 float-right">Хужжатлар ойнаси</h4>
-                </header>
-                <div id="pdfViewer">
-                    <!--pdf opener-->
-                </div>
-            </div>
-            <%--            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>--%>
-            <%--            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>--%>
-            <%--            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>--%>
-            <script>
-                jQuery(document).ready(function($){
-                    $(document).on('click', '.pull-bs-canvas-right, .pull-bs-canvas-left', function(){
-                        $('body').prepend('<div class="bs-canvas-overlay bg-dark position-fixed w-100 h-100"></div>');
-                        if($(this).hasClass('pull-bs-canvas-right'))
-                            $('.bs-canvas-right').addClass('mr-0');
-                        else
-                            $('.bs-canvas-left').addClass('ml-0');
-                        return false;
-                    });
-
-                    $(document).on('click', '.bs-canvas-close, .bs-canvas-overlay', function(){
-                        var elm = $(this).hasClass('bs-canvas-close') ? $(this).closest('.bs-canvas') : $('.bs-canvas');
-                        elm.removeClass('mr-0 ml-0');
-                        $('.bs-canvas-overlay').remove();
-                        return false;
-                    });
-                });
-            </script>
-        </div>
-
-        <!--end compose mail-->
-        <!--start email overlay-->
-        <%--        <div class="overlay email-toggle-btn-mobile" id="pdfViewer"></div>--%>
-        <!--end email overlay-->
+    @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+    }
+</style>
+<div id="mySidenav" class="sidenav">
+    <div id="openInPdf">
+        <!--PDF open here-->
     </div>
-    <!--end email wrapper-->
 </div>
+<!--start page wrapper -->
+<div id="main" class="page-content">
+    <!--start email wrapper-->
 
+    <!--end email wrapper-->
+    <div class="col-12 col-lg-12 shadow">
+
+        <div class="card">
+            <div class="fm-search m-3">
+                <div class="mb-0">
+                    <div class="row">
+                        <div class="col-md-2 m-2">
+                            <label class="">ХББ</label>
+                            <select class="form-select shadow-sm"  required="">
+                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
+                                <option value="100">1701 ГТК Руз</option>
+                                <option value="110">1726 Тошкент шахар</option>
+                                <option value="145">1756 Андижон</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 m-2">
+                            <label class="">Пост</label>
+                            <select class="form-select shadow-sm" required="">
+                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
+                                <option value="100">1701 ГТК Руз</option>
+                                <option value="110">1726 Тошкент шахар</option>
+                                <option value="145">1756 Андижон</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 m-2">
+                            <label class="">Як жўнатувчи мамлакат</label>
+                            <select class="form-select shadow-sm" required="">
+                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
+                                <option value="100">1701 ГТК Руз</option>
+                                <option value="110">1726 Тошкент шахар</option>
+                                <option value="145">1756 Андижон</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 m-2">
+                            <label class="">Келиб чиқиш мамлакати</label>
+                            <select class="form-select shadow-sm" required="">
+                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
+                                <option value="100">1701 ГТК Руз</option>
+                                <option value="110">1726 Тошкент шахар</option>
+                                <option value="145">1756 Андижон</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 m-2">
+                            <label class="">Савдо қилувчи мамлакат</label>
+                            <select class="form-select shadow-sm" required="">
+                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
+                                <option value="100">1701 ГТК Руз</option>
+                                <option value="110">1726 Тошкент шахар</option>
+                                <option value="145">1756 Андижон</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 m-2">
+                            <div class="">
+                                <label class="">ТИФ ТН коди</label>
+                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 m-2">
+                            <div class="">
+                                <label class="">ТИФ ТН коди</label>
+                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
+                            </div>
+                        </div>
+                        <div class="col-md-2 m-2">
+                            <label class="">Божхона қиймати усули</label>
+                            <select class="form-select shadow-sm" required="">
+                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
+                                <option value="100">1701 ГТК Руз</option>
+                                <option value="110">1726 Тошкент шахар</option>
+                                <option value="145">1756 Андижон</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 m-2">
+                            <label class="">Транспорт тури</label>
+                            <select class="form-select shadow-sm" required="">
+                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
+                                <option value="100">1701 ГТК Руз</option>
+                                <option value="110">1726 Тошкент шахар</option>
+                                <option value="145">1756 Андижон</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 m-2">
+                            <div class="">
+                                <label class="">СТИР</label>
+                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
+                            </div>
+                        </div>
+                        <div class="col-md-2 m-2">
+                            <div class="">
+                                <label class="">Етказиб бериш шарти</label>
+                                <select class="form-select shadow-sm" id="validationTooltip05" required="">
+                                    <option selected="" disabled="disabled" value=""><p class="text-muted">Барчаси</p></option>
+                                    <option value="100">Жисмоний шахс</option>
+                                    <option value="110">Юридик шахс</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 m-2">
+                            <div class="">
+                                <label class="">Етказиб бериш манзили</label>
+                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
+                            </div>
+                        </div>
+                        <div class="col-md-2 m-2">
+                            <div class="">
+                                <label class="">Товар номи</label>
+                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
+                            </div>
+                        </div>
+                        <div class="col-md-2 m-2">
+                            <div class="">
+                                <label class="">Сана(дан)</label>
+                                <input class="result form-control shadow-sm" type="date" id="date" placeholder="йил-ой-кун">
+                            </div>
+                        </div>
+                        <div class="col-md-2 m-2">
+                            <div class="">
+                                <label>Сана(гача)</label>
+                                <input class="result form-control shadow-sm" type="date" id="date2" placeholder="йил-ой-кун">
+                            </div>
+                        </div>
+                        <div class="col-md-2 m-2">
+                            <button type="button" class="btn btn-primary btn-block mt-3" onclick="searchResultTable(0)"><i class='bx bx-refresh'></i>Излаш</button>
+                            <button type="reset" class="btn btn-primary btn-block mt-3"><i class='bx bx-refresh'></i>Янгилаш</button>
+                        </div>
+<%--                        <div class="col-md-2 m-2">--%>
+<%--                            <button type="button" class="btn btn-primary btn-block mt-3" onclick="searchResultTable(0)"><i class='bx bx-refresh'></i>Янгилаш</button>--%>
+<%--                        </div>--%>
+                    </div>
+<%--                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>--%>
+                </div>
+            </div>
+            <hr>
+            <div class="card-body" id="ListInDecTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
+            </div>
+        </div>
+    </div>
+</div>
 <!--end page wrapper -->
 <!--end wrapper -->
 <script>
-    $('.datepicker').pickadate({
-        selectMonths: true,
-        selectYears: true
-    }),
-        $('.timepicker').pickatime()
-</script>
-<script>
-    $(function () {
-        $('#date-time').bootstrapMaterialDatePicker({
-            format: 'DD-MM-YYYY',
-            closeOnClear: false
-        });
-        $('#date').bootstrapMaterialDatePicker({
-            time: false,
-            closeOnClear: true
-        });
-        $('#date2').bootstrapMaterialDatePicker({
-            time: false,
+    (function ($) {
+        function getTimer(obj) {
+            return obj.data('swd_timer');
+        }
 
+        function setTimer(obj, timer) {
+            obj.data('swd_timer', timer);
+        }
 
-        });
-        $('#time').bootstrapMaterialDatePicker({
-            date: false,
-            format: 'HH:mm',
-            closeOnClear: false
-        });
-    });
-</script>
-<script>
-    /* PDF open */
-    function openPDF(declId, docType) {
+        $.fn.showWithDelay = function (delay) {
+            var self = this;
+            if (getTimer(this)) {
+                window.clearTimeout(getTimer(this)); // prevents duplicate timers
+            }
+            setTimer(this, window.setTimeout(function () {
+                setTimer(self, false);
+                $(self).show();
+            }, delay));
+        };
+        $.fn.hideWithDelay = function () {
+
+            if (getTimer(this)) {
+                window.clearTimeout(getTimer(this));
+                setTimer(this, false);
+            }
+            $(this).hide();
+        }
+    })(jQuery);
+
+    function searchResultTable(x) {
         var dataS = {
-            "declId": declId,
-            "docType": docType
+            "x": x,
         }
         $.ajax({
             type: "POST",
             data: dataS,
-            url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/Pcabinet",
+            <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
+            url: "<%=request.getContextPath()%>/costmonitoring/resources/pages/CostMonitoring/ResultCM",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {
-                $('div#pdfViewer').html(res);
-                window.location.href('#pdfViewer');
-
+                $('div#ListInDecTable').html(res);
             },
             error: function (res) {
             }
         });
     }
 
-
-    $(document).ready(function () {
-        $('#example1').DataTable({
-            "language": {
-                "zeroRecords": "Сиз излаган маълумот мавжуд эмас!",
-                "infoFiltered": "(_MAX_ та маълумот сараланди)",
-                "infoEmpty": "Маълумотлар топилмади",
-                "info": "Жами _PAGES_ та, _PAGE_-сахифа ",
-                "lengthMenu": "Кўрсатилмоқда _MENU_ та ариза",
-                "Show": "Кўрсатилмоқда",
-                "search": "Излаш",
-                "paginate": {
-                    "next": "Кейинги",
-                    "previous": "Олдинги",
-                }
-            }
-        });
-    });
-    $(document).ready(function () {
-        $('#example2').DataTable({
-            "language": {
-                "zeroRecords": "Сиз излаган маълумот мавжуд эмас!",
-                "infoFiltered": "(_MAX_ та маълумот сараланди)",
-                "infoEmpty": "Маълумотлар топилмади",
-                "info": "Жами _PAGES_ та, _PAGE_-сахифа ",
-                "lengthMenu": "Кўрсатилмоқда _MENU_ та ариза",
-                "Show": "Кўрсатилмоқда",
-                "search": "Излаш",
-                "paginate": {
-                    "next": "Кейинги",
-                    "previous": "Олдинги",
-                }
-            }
-        });
-    });
-    $(document).ready(function () {
-        $('#example3').DataTable({
-            "language": {
-                "zeroRecords": "Сиз излаган маълумот мавжуд эмас!",
-                "infoFiltered": "(_MAX_ та маълумот сараланди)",
-                "infoEmpty": "Маълумотлар топилмади",
-                "info": "Жами _PAGES_ та, _PAGE_-сахифа ",
-                "lengthMenu": "Кўрсатилмоқда _MENU_ та ариза",
-                "Show": "Кўрсатилмоқда",
-                "search": "Излаш",
-                "paginate": {
-                    "next": "Кейинги",
-                    "previous": "Олдинги",
-                }
-            }
-        });
-    });
 </script>
-
 </body>
-</html>

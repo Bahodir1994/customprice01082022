@@ -25,6 +25,7 @@ import java.util.List;
 @RequestMapping("/costmonitoring")
 public class CostMonitoringController {
     private final String COSTMONITORINGPAGE = "/resources/pages/CostMonitoring/FiltrCM";
+    private final String COSTMONITORINGRESULTPAGE = "/resources/pages/CostMonitoring/ResultCM";
     private final QiymatconsultService qiymatconsultService;
     private final FreeDocService freeDocService;
     private final FreeHashService freeHashService;
@@ -42,17 +43,17 @@ public class CostMonitoringController {
 
     @PostMapping(value = COSTMONITORINGPAGE)
     @ResponseBody
-    public ModelAndView DigestsFirst(HttpSession session) {
+    public ModelAndView FilterCM(HttpSession session) {
         ModelAndView mav = new ModelAndView("resources/pages/CostMonitoring/FiltrCM");
 
-        List<QiymatconsultEntity> qiymatconsultEntityList = qiymatconsultService.getListQiymatconsulting();
-        mav.addObject("qiymatconsult", qiymatconsultEntityList);
+        return mav;
+    }
 
-        List<QiymatconsultEntity> qiymatRejectEntityList = qiymatconsultService.getListQiymatReject();
-        mav.addObject("qiymatReject", qiymatRejectEntityList);
 
-        List<QiymatconsultEntity> qiymatShartliEntityList = qiymatconsultService.getListQiymatshartli();
-        mav.addObject("qiymatshartli", qiymatShartliEntityList);
+    @PostMapping(value = COSTMONITORINGRESULTPAGE)
+    @ResponseBody
+    public ModelAndView ResultCM(HttpSession session) {
+        ModelAndView mav = new ModelAndView("resources/pages/CostMonitoring/ResultCM");
 
         return mav;
     }
