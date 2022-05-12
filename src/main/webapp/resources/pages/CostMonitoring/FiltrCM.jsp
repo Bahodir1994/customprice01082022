@@ -125,7 +125,7 @@
                             </select>
                         </div>
                         <div class="col-md-2 m-2">
-                            <label class="">Як жўнатувчи мамлакат</label>
+                            <label class="">Юук жўнатувчи мамлакат</label>
                             <select class="form-select shadow-sm" required="">
                                 <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
                                 <option value="100">1701 ГТК Руз</option>
@@ -160,7 +160,7 @@
 
                         <div class="col-md-2 m-2">
                             <div class="">
-                                <label class="">ТИФ ТН коди</label>
+                                <label class="">Рўйхат рақами</label>
                                 <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
                             </div>
                         </div>
