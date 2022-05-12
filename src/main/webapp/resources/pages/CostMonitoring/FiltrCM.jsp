@@ -97,6 +97,8 @@
 </div>
 <!--start page wrapper -->
 <div id="main" class="page-content">
+    <h6 class="mb-0 text-uppercase">Қиймат мониторинги</h6>
+    <hr>
     <!--start email wrapper-->
 
     <!--end email wrapper-->
@@ -223,7 +225,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
-                            <button type="button" class="btn btn-primary btn-block mt-3" onclick="searchResultTable(0)"><i class='bx bx-refresh'></i>Излаш</button>
+                            <button type="button" class="btn btn-primary btn-block mt-3" onclick="searchResultTableCM(0)"><i class='bx bx-refresh'></i>Излаш</button>
                             <button type="reset" class="btn btn-primary btn-block mt-3"><i class='bx bx-refresh'></i>Янгилаш</button>
                         </div>
 <%--                        <div class="col-md-2 m-2">--%>
@@ -234,7 +236,7 @@
                 </div>
             </div>
             <hr>
-            <div class="card-body" id="ListInDecTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
+            <div class="card-body" id="ListCMTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
             </div>
         </div>
     </div>
@@ -271,7 +273,7 @@
         }
     })(jQuery);
 
-    function searchResultTable(x) {
+    function searchResultTableCM(x) {
         var dataS = {
             "x": x,
         }
@@ -283,7 +285,7 @@
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {
-                $('div#ListInDecTable').html(res);
+                $('div#ListCMTable').html(res);
             },
             error: function (res) {
             }

@@ -742,7 +742,7 @@
                         <%--							</ul>--%>
                     </li>
                     <li>
-                        <a class="has-arrow" href="javascript:ErrorMessage(0);">
+                        <a class="has-arrow" href="javascript:LogicalControl(0);">
                             <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
                             </div>
                             <div class="menu-title">Мантиқий назорат</div>
@@ -1313,6 +1313,27 @@
             }
         });
     }
+
+    /* Мантиқий назорат */
+    function LogicalControl(x) {
+        var dataS = {
+            "x": x
+        }
+        $.ajax({
+            type: "POST",
+            data: dataS,
+            url: "<%=request.getContextPath()%>/logicalcontrolss/resources/pages/LogicalControl/FilterLC",
+            dataType: "html",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (res) {
+                $('div#MainContent').html(res);
+
+            },
+            error: function (res) {
+            }
+        });
+    }
+
 
 </script>
 </body>
