@@ -86,8 +86,13 @@
     }
 
     @media screen and (max-height: 450px) {
-        .sidenav {padding-top: 15px;}
-        .sidenav a {font-size: 18px;}
+        .sidenav {
+            padding-top: 15px;
+        }
+
+        .sidenav a {
+            font-size: 18px;
+        }
     }
 </style>
 <div id="mySidenav" class="sidenav">
@@ -110,47 +115,45 @@
                     <div class="row">
                         <div class="col-md-2 m-2">
                             <label class="">ХББ</label>
-                            <select class="form-select shadow-sm"  required="">
-                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
-                                <option value="100">1701 ГТК Руз</option>
-                                <option value="110">1726 Тошкент шахар</option>
-                                <option value="145">1756 Андижон</option>
+                            <select class="form-select shadow-sm" required="" id="locationId" name="locationId" onchange="changeLocation()">
+                                <%-- todo                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>--%>
+                                <option value="">--- Танланг ---</option>
+                                <c:forEach var="locations" items="${locationList}" varStatus="i">
+                                    <option value="${locations.id}">${locations.id} - ${locations.name1}</option>
+                                </c:forEach>
                             </select>
                         </div>
                         <div class="col-md-2 m-2">
                             <label class="">Пост</label>
-                            <select class="form-select shadow-sm" required="">
-                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
-                                <option value="100">1701 ГТК Руз</option>
-                                <option value="110">1726 Тошкент шахар</option>
-                                <option value="145">1756 Андижон</option>
+                            <select class="form-select shadow-sm" required="" id="postId" name="postId">
+                                <option value="">--- Танланг ---</option>
                             </select>
                         </div>
                         <div class="col-md-2 m-2">
                             <label class="">Юук жўнатувчи мамлакат</label>
                             <select class="form-select shadow-sm" required="">
-                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
-                                <option value="100">1701 ГТК Руз</option>
-                                <option value="110">1726 Тошкент шахар</option>
-                                <option value="145">1756 Андижон</option>
+                                <option value="">--- Танланг ---</option>
+                                <c:forEach var="vals" items="${countryList}" varStatus="i">
+                                    <option value="${vals.code}">${vals.code} - ${vals.cdNm}</option>
+                                </c:forEach>
                             </select>
                         </div>
                         <div class="col-md-2 m-2">
                             <label class="">Келиб чиқиш мамлакати</label>
                             <select class="form-select shadow-sm" required="">
-                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
-                                <option value="100">1701 ГТК Руз</option>
-                                <option value="110">1726 Тошкент шахар</option>
-                                <option value="145">1756 Андижон</option>
+                                <option value="">--- Танланг ---</option>
+                                <c:forEach var="vals" items="${countryList}" varStatus="i">
+                                    <option value="${vals.code}">${vals.code} - ${vals.cdNm}</option>
+                                </c:forEach>
                             </select>
                         </div>
                         <div class="col-md-2 m-2">
                             <label class="">Савдо қилувчи мамлакат</label>
                             <select class="form-select shadow-sm" required="">
-                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
-                                <option value="100">1701 ГТК Руз</option>
-                                <option value="110">1726 Тошкент шахар</option>
-                                <option value="145">1756 Андижон</option>
+                                <option value="">--- Танланг ---</option>
+                                <c:forEach var="vals" items="${countryList}" varStatus="i">
+                                    <option value="${vals.code}">${vals.code} - ${vals.cdNm}</option>
+                                </c:forEach>
                             </select>
                         </div>
                         <div class="col-md-2 m-2">
@@ -169,7 +172,7 @@
                         <div class="col-md-2 m-2">
                             <label class="">Божхона қиймати усули</label>
                             <select class="form-select shadow-sm" required="">
-                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
+                                <option value="">--- Танланг ---</option>
                                 <option value="100">1701 ГТК Руз</option>
                                 <option value="110">1726 Тошкент шахар</option>
                                 <option value="145">1756 Андижон</option>
@@ -178,7 +181,7 @@
                         <div class="col-md-2 m-2">
                             <label class="">Транспорт тури</label>
                             <select class="form-select shadow-sm" required="">
-                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
+                                <option value="">--- Танланг ---</option>
                                 <option value="100">1701 ГТК Руз</option>
                                 <option value="110">1726 Тошкент шахар</option>
                                 <option value="145">1756 Андижон</option>
@@ -194,7 +197,7 @@
                             <div class="">
                                 <label class="">Етказиб бериш шарти</label>
                                 <select class="form-select shadow-sm" id="validationTooltip05" required="">
-                                    <option selected="" disabled="disabled" value=""><p class="text-muted">Барчаси</p></option>
+                                    <option value="">--- Танланг ---</option>
                                     <option value="100">Жисмоний шахс</option>
                                     <option value="110">Юридик шахс</option>
                                 </select>
@@ -228,11 +231,11 @@
                             <button type="button" class="btn btn-primary btn-block mt-3" onclick="searchResultTableCM(0)"><i class='bx bx-refresh'></i>Излаш</button>
                             <button type="reset" class="btn btn-primary btn-block mt-3"><i class='bx bx-refresh'></i>Янгилаш</button>
                         </div>
-<%--                        <div class="col-md-2 m-2">--%>
-<%--                            <button type="button" class="btn btn-primary btn-block mt-3" onclick="searchResultTable(0)"><i class='bx bx-refresh'></i>Янгилаш</button>--%>
-<%--                        </div>--%>
+                        <%--                        <div class="col-md-2 m-2">--%>
+                        <%--                            <button type="button" class="btn btn-primary btn-block mt-3" onclick="searchResultTable(0)"><i class='bx bx-refresh'></i>Янгилаш</button>--%>
+                        <%--                        </div>--%>
                     </div>
-<%--                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>--%>
+                    <%--                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>--%>
                 </div>
             </div>
             <hr>
@@ -275,7 +278,8 @@
 
     function searchResultTableCM(x) {
         var dataS = {
-            "x": x,
+            "locationId": $('#locationId').val(),
+            "postId": $('#postId').val()
         }
         $.ajax({
             type: "POST",
@@ -290,6 +294,49 @@
             error: function (res) {
             }
         });
+    }
+
+    function changeLocation() {
+        // $("#post").clear();
+        var log_f = true;
+        var log_n = '';
+        var arr = [];
+        var arr2 = [];
+        var locationId = $('#locationId').val().substr(2, 2);
+        // alert(' locationId := ' + locationId);
+
+        var dataS = {
+            "locationId": locationId
+        }
+
+        if (locationId == null || locationId == '') {
+            for (var i = document.getElementById("postId").options.length; i-- > 0;)
+                document.getElementById("postId").options[i] = null;
+            $("#postId").append('<option value="">--- Танланг ---</option>');
+            log_f = false;
+        }
+
+        if (log_f) {
+            $.ajax({
+                type: "POST",
+                data: dataS,
+                url: "<%=request.getContextPath()%>/costmonitoring/resources/pages/CostMonitoring/FiltrCMPost",
+                // dataType: "json",
+                header: 'Content-type: application/json; charset=utf-8',
+                success: function (res) {
+                    // $("#breeds").attr('disabled', false);
+                    for (var i = document.getElementById("postId").options.length; i-- > 0;)
+                        document.getElementById("postId").options[i] = null;
+                    $("#postId").append('<option value="">--- Танланг ---</option>');
+                    $.each(res, function (index, value) {
+                        console.log("value: " + value)
+                        $("#postId").append('<option value=' + value['code'] + '>' + value['code'] + ' - ' + value['cdNm'] + '</option>');
+                    });
+                },
+                error: function (res) {
+                }
+            });
+        }
     }
 
 </script>
