@@ -61,6 +61,13 @@ public class Utils {
         return String.valueOf(s);
     }
 
+    public static String formatDecimal(Double price) {
+        DecimalFormat formatter = new DecimalFormat("###,###,###.00");
+        if (price == 0.0) return "0,0";
+        else
+            return formatter.format(price);
+    }
+
     public static String formatDecimal2(Double price) {
         DecimalFormat formatter = new DecimalFormat("###,###,###.00");
         if (price == 0.0) return "0,0";
@@ -75,6 +82,16 @@ public class Utils {
             return false;
         }
         return true;
+    }
+
+    public static String toDate(Date t) {
+        if (t != null) {
+            Locale l = new Locale("ru", "");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", l);
+            return sdf.format(t);
+        } else {
+            return "";
+        }
     }
 
     public static String toDate00(Date t) {

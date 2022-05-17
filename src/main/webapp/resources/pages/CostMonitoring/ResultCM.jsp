@@ -101,8 +101,44 @@
 
         <c:forEach var="mtcVal" items="${mtcReplList}" varStatus="i">
             <tr>
-<%--                <td>${mtcVal.id}</td>--%>
-                <td>${mtcVal.id}</td>
+                <td align="center"><b>${i.index+1}</b></td>
+                <td align="center">${mtcVal.g7a}/${mtcVal.g7b}/${mtcVal.g7c}</td>
+                <td align="center">${mtcVal.g1a} ${mtcVal.g1b}</td>
+                <td align="center">${mtcVal.g1b} ${mtcVal.g37b} ${mtcVal.g37c}</td>
+                <td align="center"><textarea cols="40" rows="1" style="border: none; overflow-y:auto; font-size: 12px; font-family: Arial;" readonly="readonly">${mtcVal.g2name}</textarea></td>
+                <td align="center">${mtcVal.g33}</td>
+                <td align="center">${mtcVal.g32}</td>
+                <td width="300px" align="right">
+                    <table style="width: 300px">
+                        <tr style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0;">
+                            <td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0;">
+                                <textarea rows="3" style="border:none; overflow-y:auto; font-size: 12px; font-family: Arial; width: 100%" readonly="readonly">${mtcVal.g31name}</textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td align="center">${mtcVal.g31marka}</td>
+                <td align="center">${mtcVal.g38}</td>
+                <td align="center">${mtcVal.g35}</td>
+                <td align="center">${mtcVal.g45_usd}</td>
+                <td align="center">${mtcVal.g41name}</td>
+                <td align="center">${mtcVal.g31amount}</td>
+                <td align="center">${mtcVal.ves_edizm}</td>
+                <td align="center">${mtcVal.g34name}</td>
+                <td align="center">${mtcVal.g15name}</td>
+                <td align="center">${mtcVal.g11name}</td>
+                <td align="center">${mtcVal.g25}</td>
+                <td align="center">${mtcVal.g22a}</td>
+                <td align="center">${mtcVal.g23}</td>
+                <td align="center">${mtcVal.g13}</td>
+                <td align="center">${mtcVal.metod_otc}</td>
+                <td align="center">${mtcVal.g45_edizm_valkont}</td>
+                <td align="center">${mtcVal.g45usd_edizm}</td>
+                <td align="center">${mtcVal.g45_index_valkont}</td>
+                <td align="center">${mtcVal.g45_index}</td>
+                <td align="center">${mtcVal.gc3date}</td>
+                <td align="center">${mtcVal.vid_tulov == 1 ? "1-Облагаемый" : "2-Необлагаемый"}</td>
+                <td align="center">${mtcVal.doc_type == 2 ? "КТС" : mtcVal.doc_type == 3 ? "КТД" : "Нет"}</td>
             </tr>
         </c:forEach>
 

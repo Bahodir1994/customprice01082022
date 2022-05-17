@@ -41,6 +41,7 @@
     <link href="<%=request.getContextPath()%>/resources/assets2/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet"/>
     <!-- loader-->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://path/to/font-awesome/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -131,7 +132,7 @@
                         </div>
                         <div class="col-md-2 m-2">
                             <label class="">Юук жўнатувчи мамлакат</label>
-                            <select class="form-select shadow-sm" required="">
+                            <select class="form-select shadow-sm" required="" id="g15" name="g15">
                                 <option value="">--- Танланг ---</option>
                                 <c:forEach var="vals" items="${countryList}" varStatus="i">
                                     <option value="${vals.code}">${vals.code} - ${vals.cdNm}</option>
@@ -140,7 +141,7 @@
                         </div>
                         <div class="col-md-2 m-2">
                             <label class="">Келиб чиқиш мамлакати</label>
-                            <select class="form-select shadow-sm" required="">
+                            <select class="form-select shadow-sm" required="" id="g34" name="g34">
                                 <option value="">--- Танланг ---</option>
                                 <c:forEach var="vals" items="${countryList}" varStatus="i">
                                     <option value="${vals.code}">${vals.code} - ${vals.cdNm}</option>
@@ -149,7 +150,7 @@
                         </div>
                         <div class="col-md-2 m-2">
                             <label class="">Савдо қилувчи мамлакат</label>
-                            <select class="form-select shadow-sm" required="">
+                            <select class="form-select shadow-sm" required="" id="g11" name="g11">
                                 <option value="">--- Танланг ---</option>
                                 <c:forEach var="vals" items="${countryList}" varStatus="i">
                                     <option value="${vals.code}">${vals.code} - ${vals.cdNm}</option>
@@ -159,38 +160,38 @@
                         <div class="col-md-2 m-2">
                             <div class="">
                                 <label class="">ТИФ ТН коди</label>
-                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
+                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди" id="g33" name="g33">
                             </div>
                         </div>
 
                         <div class="col-md-2 m-2">
                             <div class="">
                                 <label class="">Рўйхат рақами</label>
-                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
+                                <input class="result form-control shadow-sm" type="text" placeholder="Рўйхат рақами">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
                             <label class="">Божхона қиймати усули</label>
-                            <select class="form-select shadow-sm" required="">
+                            <select class="form-select shadow-sm" required="" style="font-style: italic">
                                 <option value="">--- Танланг ---</option>
-                                <option value="100">1701 ГТК Руз</option>
-                                <option value="110">1726 Тошкент шахар</option>
-                                <option value="145">1756 Андижон</option>
+                                <c:forEach var="vals" items="${methodList}" varStatus="i">
+                                    <option value="${vals.id}">${i.index+1}-усул (${vals.name})</option>
+                                </c:forEach>
                             </select>
                         </div>
                         <div class="col-md-2 m-2">
                             <label class="">Транспорт тури</label>
-                            <select class="form-select shadow-sm" required="">
+                            <select class="form-select shadow-sm" required="" id="">
                                 <option value="">--- Танланг ---</option>
-                                <option value="100">1701 ГТК Руз</option>
-                                <option value="110">1726 Тошкент шахар</option>
-                                <option value="145">1756 Андижон</option>
+                                <c:forEach var="vals" items="${transportTypeSList}" varStatus="i">
+                                    <option value="${vals.code}">${vals.cdDesc} ${vals.cdNm}</option>
+                                </c:forEach>
                             </select>
                         </div>
                         <div class="col-md-2 m-2">
                             <div class="">
                                 <label class="">СТИР</label>
-                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
+                                <input class="result form-control shadow-sm" type="text" placeholder="СТИР">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
@@ -198,33 +199,34 @@
                                 <label class="">Етказиб бериш шарти</label>
                                 <select class="form-select shadow-sm" id="validationTooltip05" required="">
                                     <option value="">--- Танланг ---</option>
-                                    <option value="100">Жисмоний шахс</option>
-                                    <option value="110">Юридик шахс</option>
+                                    <c:forEach var="vals" items="${termsList}" varStatus="i">
+                                        <option value="${vals.raqam}">${vals.name}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
                             <div class="">
                                 <label class="">Етказиб бериш манзили</label>
-                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
+                                <input class="result form-control shadow-sm" type="text" placeholder="Етказиб бериш манзили">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
                             <div class="">
                                 <label class="">Товар номи</label>
-                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
+                                <input class="result form-control shadow-sm" type="text" placeholder="Товар номи">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
                             <div class="">
                                 <label class="">Сана(дан)</label>
-                                <input class="result form-control shadow-sm" type="date" id="date" placeholder="йил-ой-кун">
+                                <input class="result form-control shadow-sm" type="date" id="gdvipdate1" placeholder="йил-ой-кун">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
                             <div class="">
                                 <label>Сана(гача)</label>
-                                <input class="result form-control shadow-sm" type="date" id="date2" placeholder="йил-ой-кун">
+                                <input class="result form-control shadow-sm" type="date" id="gdvipdate2" placeholder="йил-ой-кун">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
@@ -279,7 +281,9 @@
     function searchResultTableCM(x) {
         var dataS = {
             "locationId": $('#locationId').val(),
-            "postId": $('#postId').val()
+            "postId": $('#postId').val(),
+            "gdvipdate1": $('#gdvipdate1').val(),
+            "gdvipdate2": $('#gdvipdate2').val()
         }
         $.ajax({
             type: "POST",

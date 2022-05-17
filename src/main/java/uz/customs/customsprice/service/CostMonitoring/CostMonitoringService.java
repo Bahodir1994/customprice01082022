@@ -21,16 +21,19 @@ public class CostMonitoringService {
         this.costMonitoringRepository = costMonitoringRepository;
     }
 
-    public List getListCostMonitoring(String locationId, String postId) {
+    public List getListCostMonitoring(String locationId, String postId, String gdvipdate1, String gdvipdate2) {
         String sql_os = "";
 //        sql_os = (locationId != null && !locationId.equals("") ? sql_os + " and d.g7a = '" + locationId + "' " : sql_os);
         sql_os = (postId != null && !postId.equals("") ? sql_os + " and d.g7a = '" + postId + "' " : sql_os);
+        sql_os = (gdvipdate1 != null && !gdvipdate1.equals("") ? sql_os + " and d.gdvipdate >= '" + gdvipdate1 + "' " : sql_os);
+        sql_os = (gdvipdate2 != null && !gdvipdate2.equals("") ? sql_os + " and d.gdvipdate <= '" + gdvipdate2 + "' " : sql_os);
+
         String queryForList = " select\n" +
                 "    d.id id,\n" +
                 "    d.decl_id decl_id,\n" +
                 "    d.cmdt_id cmdt_id,\n" +
                 "    d.g7a g7a,\n" +
-                "    d.g7b g7b,\n" +
+                "    char(d.g7b, eur) g7b,\n" +
                 "    d.g7c g7c,\n" +
                 "    d.g1a g1a,\n" +
                 "    d.g1b g1b,\n" +
@@ -89,10 +92,10 @@ public class CostMonitoringService {
                 "    d.g42_index g42_index,\n" +
                 "    d.g42_edizm_valkont g42_edizm_valkont,\n" +
                 "    d.g42_index_valkont g42_index_valkont,\n" +
-                "    d.gc3date gc3date,\n" +
+                "    char(d.gc3date, eur) gc3date,\n" +
                 "    d.vid_tulov vid_tulov,\n" +
                 "    d.doc_type doc_type,\n" +
-                "    d.gdvipdate gdvipdate,\n" +
+                "    char(d.gdvipdate, eur) gdvipdate,\n" +
                 "    d.status status,\n" +
                 "    d.instime instime,\n" +
                 "    d.updtime updtime,\n" +
@@ -128,10 +131,8 @@ public class CostMonitoringService {
                 "    d.g41=c41.id\n" +
                 "where\n" +
                 "    d.status=1\n" +
-                "and d.gdvipdate >= '11.05.2022'\n" +
-                "and d.gdvipdate <= current_date\n" +
-//                "and d.g1a='ИМ'\n" +
-//                "and d.g1b='40'\n" +
+                "and d.g1a='ИМ'\n" +
+                "and d.g1b='40'\n" +
 //                "and d.metod_otc in ('1',\n" +
 //                "                    '4',\n" +
 //                "                    '5',\n" +
@@ -142,7 +143,7 @@ public class CostMonitoringService {
                 "fetch\n" +
                 "    first 10 rows only ";
         List<Object[]> list = entityManager.createNativeQuery(queryForList).getResultList();
-        return  list;
+        return list;
     }
 
 }

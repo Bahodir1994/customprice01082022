@@ -1,92 +1,93 @@
 package uz.customs.customsprice.payload;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class CostMonitoringResponse {
-    private String id;
-    private String decl_id;
-    private String cmdt_id;
-    private String g7a;
-    private Date g7b;
-    private String g7c;
-    private String g1a;
-    private String g1b;
-    private String g2name;
-    private String g2code2;
-    private String g8name;
-    private String g8code2;
-    private String g9name;
-    private String g9code2;
-    private String g11;
-    private BigDecimal g12;
-    private BigDecimal g13;
-    private String g15;
-    private String g17;
-    private String g20b;
-    private String g20name;
-    private String g22a;
-    private BigDecimal g22b;
-    private BigDecimal g23;
-    private BigDecimal g23scale;
-    private String g25;
-    private String g26;
-    private String g20fr;
-    private String g24a;
-    private String g24b;
-    private String idn;
-    private String g31name;
-    private String g31marka;
-    private BigDecimal g31amount;
-    private short g32;
-    private String g33;
-    private String g34;
-    private BigDecimal g35;
-    private String g37b;
-    private String g37c;
-    private BigDecimal g38;
-    private String g41;
-    private BigDecimal g42;
-    private String g43;
-    private BigDecimal g45;
-    private BigDecimal g46;
-    private String g31edizm;
-    private BigDecimal g45usd;
-    private String unitname;
-    private BigDecimal ves_edizm;
-    private BigDecimal metod_otc;
-    private BigDecimal g45_usd;
-    private BigDecimal g45usd_edizm;
-    private BigDecimal g45sum_edizm;
-    private BigDecimal g45_index;
-    private BigDecimal g45_edizm_valkont;
-    private BigDecimal g45_index_valkont;
-    private BigDecimal g42_usd;
-    private BigDecimal g42usd_edizm;
-    private BigDecimal g42sum_edizm;
-    private BigDecimal g42_index;
-    private BigDecimal g42_edizm_valkont;
-    private BigDecimal g42_index_valkont;
-    private Date gc3date;
-    private String vid_tulov;
-    private String doc_type;
-    private String gdvipdate;
-    private String status;
-    private String instime;
-    private String updtime;
-    private String curtime;
-    private String mtcid;
-    private String id_mtc;
-    private String g11name;
-    private String g15name;
-    private String g17name;
-    private String g34name;
-    private String g41name;
+    /* 0 */ private String id;  /* 0 */
+    /* 1 */ private String decl_id;  /* 1 */
+    /* 2 */ private String cmdt_id;  /* 2 */
+    /* 3 */ private String g7a;  /* 3 */
+    /* 4 */ private String g7b;  /* 4 */
+    /* 5 */ private String g7c;  /* 5 */
+    /* 6 */ private String g1a;  /* 6 */
+    /* 7 */ private String g1b;  /* 7 */
+    /* 8 */ private String g2name;  /* 8 */
+    /* 9 */ private String g2code2;  /* 9 */
+    /* 10 */ private String g8name;  /* 10 */
+    /* 11 */ private String g8code2;  /* 11 */
+    /* 12 */ private String g9name;  /* 12 */
+    /* 13 */ private String g9code2;  /* 13 */
+    /* 14 */ private String g11;  /* 14 */
+    /* 15 */ private BigDecimal g12;  /* 15 */
+    /* 16 */ private BigDecimal g13;  /* 16 */
+    /* 17 */ private String g15;  /* 17 */
+    /* 18 */ private String g17;  /* 18 */
+    /* 19 */ private String g20b;  /* 19 */
+    /* 20 */ private String g20name;  /* 20 */
+    /* 21 */ private String g22a;  /* 21 */
+    /* 22 */ private BigDecimal g22b;  /* 22 */
+    /* 23 */ private BigDecimal g23;  /* 23 */
+    /* 24 */ private BigDecimal g23scale;  /* 24 */
+    /* 25 */ private String g25;  /* 25 */
+    /* 26 */ private String g26;  /* 26 */
+    /* 27 */ private String g20fr;  /* 27 */
+    /* 28 */ private String g24a;  /* 28 */
+    /* 29 */ private String g24b;  /* 29 */
+    /* 30 */ private String idn;  /* 30 */
+    /* 31 */ private String g31name;  /* 31 */
+    /* 32 */ private String g31marka;  /* 32 */
+    /* 33 */ private BigDecimal g31amount;  /* 33 */
+    /* 34 */ private short g32;  /* 34 */
+    /* 35 */ private String g33;  /* 35 */
+    /* 36 */ private String g34;  /* 36 */
+    /* 37 */ private BigDecimal g35;  /* 37 */
+    /* 38 */ private String g37b;  /* 38 */
+    /* 39 */ private String g37c;  /* 39 */
+    /* 40 */ private BigDecimal g38;  /* 40 */
+    /* 41 */ private String g41;  /* 41 */
+    /* 42 */ private BigDecimal g42;  /* 42 */
+    /* 43 */ private String g43;  /* 43 */
+    /* 44 */ private BigDecimal g45;  /* 44 */
+    /* 45 */ private BigDecimal g46;  /* 45 */
+    /* 46 */ private String g31edizm;  /* 46 */
+    /* 47 */ private BigDecimal g45usd;  /* 47 */
+    /* 48 */ private String unitname;  /* 48 */
+    /* 49 */ private BigDecimal ves_edizm;  /* 49 */
+    /* 50 */ private String metod_otc;  /* 50 */
+    /* 51 */ private BigDecimal g45_usd;  /* 51 */
+    /* 52 */ private BigDecimal g45usd_edizm;  /* 52 */
+    /* 53 */ private BigDecimal g45sum_edizm;  /* 53 */
+    /* 54 */ private BigDecimal g45_index;  /* 54 */
+    /* 55 */ private BigDecimal g45_edizm_valkont;  /* 55 */
+    /* 56 */ private BigDecimal g45_index_valkont;  /* 56 */
+    /* 57 */ private BigDecimal g42_usd;  /* 57 */
+    /* 58 */ private BigDecimal g42usd_edizm;  /* 58 */
+    /* 59 */ private BigDecimal g42sum_edizm;  /* 59 */
+    /* 60 */ private BigDecimal g42_index;  /* 60 */
+    /* 61 */ private BigDecimal g42_edizm_valkont;  /* 61 */
+    /* 62 */ private BigDecimal g42_index_valkont;  /* 62 */
+    /* 63 */ private String gc3date;  /* 63 */
+    /* 64 */ private short vid_tulov;  /* 64 */
+    /* 65 */ private short doc_type;  /* 65 */
+    /* 66 */ private String gdvipdate;  /* 66 */
+    /* 67 */ private short status;  /* 67 */
+    /* 68 */ private Timestamp instime;  /* 68 */
+    /* 69 */ private Timestamp updtime;  /* 69 */
+    /* 70 */ private Timestamp curtime;  /* 70 */
+    /* 71 */ private Integer mtcid;  /* 71 */
+    /* 72 */ private Integer id_mtc;  /* 72 */
+    /* 73 */ private String g11name;  /* 73 */
+    /* 74 */ private String g15name;  /* 74 */
+    /* 75 */ private String g17name;  /* 75 */
+    /* 76 */ private String g34name;  /* 76 */
+    /* 77 */ private String g41name;  /* 77 */
 
     public CostMonitoringResponse() {
     }
 
-    public CostMonitoringResponse(String id, String decl_id, String cmdt_id, String g7a, Date g7b, String g7c, String g1a, String g1b, String g2name, String g2code2, String g8name, String g8code2, String g9name, String g9code2, String g11, BigDecimal g12, BigDecimal g13, String g15, String g17, String g20b, String g20name, String g22a, BigDecimal g22b, BigDecimal g23, BigDecimal g23scale, String g25, String g26, String g20fr, String g24a, String g24b, String idn, String g31name, String g31marka, BigDecimal g31amount, short g32, String g33, String g34, BigDecimal g35, String g37b, String g37c, BigDecimal g38, String g41, BigDecimal g42, String g43, BigDecimal g45, BigDecimal g46, String g31edizm, BigDecimal g45usd, String unitname, BigDecimal ves_edizm, BigDecimal metod_otc, BigDecimal g45_usd, BigDecimal g45usd_edizm, BigDecimal g45sum_edizm, BigDecimal g45_index, BigDecimal g45_edizm_valkont, BigDecimal g45_index_valkont, BigDecimal g42_usd, BigDecimal g42usd_edizm, BigDecimal g42sum_edizm, BigDecimal g42_index, BigDecimal g42_edizm_valkont, BigDecimal g42_index_valkont, Date gc3date, String vid_tulov, String doc_type, String gdvipdate, String status, String instime, String updtime, String curtime, String mtcid, String id_mtc, String g11name, String g15name, String g17name, String g34name, String g41name) {
+    public CostMonitoringResponse(String id, String decl_id, String cmdt_id, String g7a, String g7b, String g7c, String g1a, String g1b, String g2name, String g2code2, String g8name, String g8code2, String g9name, String g9code2, String g11, BigDecimal g12, BigDecimal g13, String g15, String g17, String g20b, String g20name, String g22a, BigDecimal g22b, BigDecimal g23, BigDecimal g23scale, String g25, String g26, String g20fr, String g24a, String g24b, String idn, String g31name, String g31marka, BigDecimal g31amount, short g32, String g33, String g34, BigDecimal g35, String g37b, String g37c, BigDecimal g38, String g41, BigDecimal g42, String g43, BigDecimal g45, BigDecimal g46, String g31edizm, BigDecimal g45usd, String unitname, BigDecimal ves_edizm, String metod_otc, BigDecimal g45_usd, BigDecimal g45usd_edizm, BigDecimal g45sum_edizm, BigDecimal g45_index, BigDecimal g45_edizm_valkont, BigDecimal g45_index_valkont, BigDecimal g42_usd, BigDecimal g42usd_edizm, BigDecimal g42sum_edizm, BigDecimal g42_index, BigDecimal g42_edizm_valkont, BigDecimal g42_index_valkont, String gc3date, short vid_tulov, short doc_type, String gdvipdate, short status, Timestamp instime, Timestamp updtime, Timestamp curtime, Integer mtcid, Integer id_mtc, String g11name, String g15name, String g17name, String g34name, String g41name) {
         this.id = id;
         this.decl_id = decl_id;
         this.cmdt_id = cmdt_id;
@@ -199,11 +200,11 @@ public class CostMonitoringResponse {
         this.g7a = g7a;
     }
 
-    public Date getG7b() {
+    public String getG7b() {
         return g7b;
     }
 
-    public void setG7b(Date g7b) {
+    public void setG7b(String g7b) {
         this.g7b = g7b;
     }
 
@@ -567,11 +568,11 @@ public class CostMonitoringResponse {
         this.ves_edizm = ves_edizm;
     }
 
-    public BigDecimal getMetod_otc() {
+    public String getMetod_otc() {
         return metod_otc;
     }
 
-    public void setMetod_otc(BigDecimal metod_otc) {
+    public void setMetod_otc(String metod_otc) {
         this.metod_otc = metod_otc;
     }
 
@@ -671,27 +672,27 @@ public class CostMonitoringResponse {
         this.g42_index_valkont = g42_index_valkont;
     }
 
-    public Date getGc3date() {
+    public String getGc3date() {
         return gc3date;
     }
 
-    public void setGc3date(Date gc3date) {
+    public void setGc3date(String gc3date) {
         this.gc3date = gc3date;
     }
 
-    public String getVid_tulov() {
+    public short getVid_tulov() {
         return vid_tulov;
     }
 
-    public void setVid_tulov(String vid_tulov) {
+    public void setVid_tulov(short vid_tulov) {
         this.vid_tulov = vid_tulov;
     }
 
-    public String getDoc_type() {
+    public short getDoc_type() {
         return doc_type;
     }
 
-    public void setDoc_type(String doc_type) {
+    public void setDoc_type(short doc_type) {
         this.doc_type = doc_type;
     }
 
@@ -703,51 +704,51 @@ public class CostMonitoringResponse {
         this.gdvipdate = gdvipdate;
     }
 
-    public String getStatus() {
+    public short getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(short status) {
         this.status = status;
     }
 
-    public String getInstime() {
+    public Timestamp getInstime() {
         return instime;
     }
 
-    public void setInstime(String instime) {
+    public void setInstime(Timestamp instime) {
         this.instime = instime;
     }
 
-    public String getUpdtime() {
+    public Timestamp getUpdtime() {
         return updtime;
     }
 
-    public void setUpdtime(String updtime) {
+    public void setUpdtime(Timestamp updtime) {
         this.updtime = updtime;
     }
 
-    public String getCurtime() {
+    public Timestamp getCurtime() {
         return curtime;
     }
 
-    public void setCurtime(String curtime) {
+    public void setCurtime(Timestamp curtime) {
         this.curtime = curtime;
     }
 
-    public String getMtcid() {
+    public Integer getMtcid() {
         return mtcid;
     }
 
-    public void setMtcid(String mtcid) {
+    public void setMtcid(Integer mtcid) {
         this.mtcid = mtcid;
     }
 
-    public String getId_mtc() {
+    public Integer getId_mtc() {
         return id_mtc;
     }
 
-    public void setId_mtc(String id_mtc) {
+    public void setId_mtc(Integer id_mtc) {
         this.id_mtc = id_mtc;
     }
 
@@ -791,4 +792,87 @@ public class CostMonitoringResponse {
         this.g41name = g41name;
     }
 
+    @Override
+    public String toString() {
+        return "CostMonitoringResponse{" +
+                "id='" + id + '\'' +
+                ", decl_id='" + decl_id + '\'' +
+                ", cmdt_id='" + cmdt_id + '\'' +
+                ", g7a='" + g7a + '\'' +
+                ", g7b='" + g7b + '\'' +
+                ", g7c='" + g7c + '\'' +
+                ", g1a='" + g1a + '\'' +
+                ", g1b='" + g1b + '\'' +
+                ", g2name='" + g2name + '\'' +
+                ", g2code2='" + g2code2 + '\'' +
+                ", g8name='" + g8name + '\'' +
+                ", g8code2='" + g8code2 + '\'' +
+                ", g9name='" + g9name + '\'' +
+                ", g9code2='" + g9code2 + '\'' +
+                ", g11='" + g11 + '\'' +
+                ", g12=" + g12 +
+                ", g13=" + g13 +
+                ", g15='" + g15 + '\'' +
+                ", g17='" + g17 + '\'' +
+                ", g20b='" + g20b + '\'' +
+                ", g20name='" + g20name + '\'' +
+                ", g22a='" + g22a + '\'' +
+                ", g22b=" + g22b +
+                ", g23=" + g23 +
+                ", g23scale=" + g23scale +
+                ", g25='" + g25 + '\'' +
+                ", g26='" + g26 + '\'' +
+                ", g20fr='" + g20fr + '\'' +
+                ", g24a='" + g24a + '\'' +
+                ", g24b='" + g24b + '\'' +
+                ", idn='" + idn + '\'' +
+                ", g31name='" + g31name + '\'' +
+                ", g31marka='" + g31marka + '\'' +
+                ", g31amount=" + g31amount +
+                ", g32=" + g32 +
+                ", g33='" + g33 + '\'' +
+                ", g34='" + g34 + '\'' +
+                ", g35=" + g35 +
+                ", g37b='" + g37b + '\'' +
+                ", g37c='" + g37c + '\'' +
+                ", g38=" + g38 +
+                ", g41='" + g41 + '\'' +
+                ", g42=" + g42 +
+                ", g43='" + g43 + '\'' +
+                ", g45=" + g45 +
+                ", g46=" + g46 +
+                ", g31edizm='" + g31edizm + '\'' +
+                ", g45usd=" + g45usd +
+                ", unitname='" + unitname + '\'' +
+                ", ves_edizm=" + ves_edizm +
+                ", metod_otc='" + metod_otc + '\'' +
+                ", g45_usd=" + g45_usd +
+                ", g45usd_edizm=" + g45usd_edizm +
+                ", g45sum_edizm=" + g45sum_edizm +
+                ", g45_index=" + g45_index +
+                ", g45_edizm_valkont=" + g45_edizm_valkont +
+                ", g45_index_valkont=" + g45_index_valkont +
+                ", g42_usd=" + g42_usd +
+                ", g42usd_edizm=" + g42usd_edizm +
+                ", g42sum_edizm=" + g42sum_edizm +
+                ", g42_index=" + g42_index +
+                ", g42_edizm_valkont=" + g42_edizm_valkont +
+                ", g42_index_valkont=" + g42_index_valkont +
+                ", gc3date='" + gc3date + '\'' +
+                ", vid_tulov=" + vid_tulov +
+                ", doc_type=" + doc_type +
+                ", gdvipdate='" + gdvipdate + '\'' +
+                ", status=" + status +
+                ", instime=" + instime +
+                ", updtime=" + updtime +
+                ", curtime=" + curtime +
+                ", mtcid=" + mtcid +
+                ", id_mtc=" + id_mtc +
+                ", g11name='" + g11name + '\'' +
+                ", g15name='" + g15name + '\'' +
+                ", g17name='" + g17name + '\'' +
+                ", g34name='" + g34name + '\'' +
+                ", g41name='" + g41name + '\'' +
+                '}';
+    }
 }
