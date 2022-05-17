@@ -30,7 +30,7 @@
         <thead class="bg-light-primary" style="border-color: #0a58ca; border-style: dotted">
         <tr>
             <th style="border-style: dotted; background-color: #f8d7da;">т/р</th>
-            <th style="border-style: dotted; background-color: #f8d7da;"><i class="bx bx-edit"></i></th>
+            <th style="border-style: dotted; background-color: #f8d7da;"><i class="bx bx-edit"></i>Таҳрир</th>
             <th style="border-style: dotted; background-color: #f8d7da;">ҲББ томонидан юбоирлган хат рақами</th>
             <th style="border-style: dotted; background-color: #f8d7da;">ҲББ томонидан юбоирлган хат санаси</th>
             <th style="border-style: dotted; background-color: #f8d7da;">Ташкилот номи</th>
@@ -54,6 +54,7 @@
         <tbody>
             <tr>
                 <td>11</td>
+                <td><button class="btn btn-outline-primary"><i class="bx bx-edit"></i></button></td>
                 <td>11</td>
                 <td>11</td>
                 <td>11</td>

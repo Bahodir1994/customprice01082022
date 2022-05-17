@@ -236,56 +236,56 @@
                                             </select>
                                         </div>
 <%--                                        <!--todo 2-bosqich-->--%>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">Юборилган сўровнома рақами:</label>
-                                            <input  class="form-control was-validated" type="number" id="sendReqNum"  name="sendReqNum">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">Юборилган сўровнома санаси:</label>
-                                            <input  class="form-control was-validated" type="date" id="reqDate" name="reqDate">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">Сўровномага олинган жавоб хати	:</label>
-                                            <input  class="form-control was-validated" type="number" id="responseNum"  name="responseNum">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">Сўровномага олинган жавоб хати санаси:</label>
-                                            <input  class="form-control was-validated" type="date" id="responseDate"  name="responseDate">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">Сўровномага олинган жавоб хатини ҲББга юборилган хат рақами:</label>
-                                            <input  class="form-control was-validated" type="number" id="responseNumSendXbbNum" name="responseNumSendXbbNum">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">Сўровномага олинган жавоб хатини ҲББга юборилган хат санаси:</label>
-                                            <input  class="form-control was-validated" type="date" id="responseNumSendXbbDate"  name="responseNumSendXbbDate">
-                                        </div>
-                                        <!--todo 3-bosqich-->
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">Сўровнома натижаси бўйича жавоб хати рақами:</label>
-                                            <input  class="form-control was-validated" type="number" id="resultAnswerMailNum" name="resultAnswerMailNum">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">Сўровнома натижаси бўйича жавоб хати санаси:</label>
-                                            <input  class="form-control was-validated" type="date" id="resultAnswerMailDate"  name="resultAnswerMailDate">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">ҲББ хулоса рақами:</label>
-                                            <input  class="form-control was-validated" type="number" id="xbbVerdictNum" name="xbbVerdictNum">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">ҲББ хулоса санаси:</label>
-                                            <input  class="form-control was-validated" type="date" id="xbbVerdictDate"  name="xbbVerdictDate">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">Камомад суммаси:</label>
-                                            <input  class="form-control was-validated" type="number" id="sum"  name="sum">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">Изох:</label>
-                                            <input  class="form-control was-validated" type="text" id="comment"  name="comment">
-                                        </div>
-                                    </div>
+<%--                                        <div class="form-group col-md-3">--%>
+<%--                                            <label  class="col-form-label text-primary">Юборилган сўровнома рақами:</label>--%>
+<%--                                            <input  class="form-control was-validated" type="number" id="sendReqNum"  name="sendReqNum">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="form-group col-md-3">--%>
+<%--                                            <label  class="col-form-label text-primary">Юборилган сўровнома санаси:</label>--%>
+<%--                                            <input  class="form-control was-validated" type="date" id="reqDate" name="reqDate">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="form-group col-md-3">--%>
+<%--                                            <label  class="col-form-label text-primary">Сўровномага олинган жавоб хати	:</label>--%>
+<%--                                            <input  class="form-control was-validated" type="number" id="responseNum"  name="responseNum">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="form-group col-md-3">--%>
+<%--                                            <label  class="col-form-label text-primary">Сўровномага олинган жавоб хати санаси:</label>--%>
+<%--                                            <input  class="form-control was-validated" type="date" id="responseDate"  name="responseDate">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="form-group col-md-3">--%>
+<%--                                            <label  class="col-form-label text-primary">Сўровномага олинган жавоб хатини ҲББга юборилган хат рақами:</label>--%>
+<%--                                            <input  class="form-control was-validated" type="number" id="responseNumSendXbbNum" name="responseNumSendXbbNum">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="form-group col-md-3">--%>
+<%--                                            <label  class="col-form-label text-primary">Сўровномага олинган жавоб хатини ҲББга юборилган хат санаси:</label>--%>
+<%--                                            <input  class="form-control was-validated" type="date" id="responseNumSendXbbDate"  name="responseNumSendXbbDate">--%>
+<%--                                        </div>--%>
+<%--                                        <!--todo 3-bosqich-->--%>
+<%--                                        <div class="form-group col-md-3">--%>
+<%--                                            <label  class="col-form-label text-primary">Сўровнома натижаси бўйича жавоб хати рақами:</label>--%>
+<%--                                            <input  class="form-control was-validated" type="number" id="resultAnswerMailNum" name="resultAnswerMailNum">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="form-group col-md-3">--%>
+<%--                                            <label  class="col-form-label text-primary">Сўровнома натижаси бўйича жавоб хати санаси:</label>--%>
+<%--                                            <input  class="form-control was-validated" type="date" id="resultAnswerMailDate"  name="resultAnswerMailDate">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="form-group col-md-3">--%>
+<%--                                            <label  class="col-form-label text-primary">ҲББ хулоса рақами:</label>--%>
+<%--                                            <input  class="form-control was-validated" type="number" id="xbbVerdictNum" name="xbbVerdictNum">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="form-group col-md-3">--%>
+<%--                                            <label  class="col-form-label text-primary">ҲББ хулоса санаси:</label>--%>
+<%--                                            <input  class="form-control was-validated" type="date" id="xbbVerdictDate"  name="xbbVerdictDate">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="form-group col-md-3">--%>
+<%--                                            <label  class="col-form-label text-primary">Камомад суммаси:</label>--%>
+<%--                                            <input  class="form-control was-validated" type="number" id="sum"  name="sum">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="form-group col-md-3">--%>
+<%--                                            <label  class="col-form-label text-primary">Изох:</label>--%>
+<%--                                            <input  class="form-control was-validated" type="text" id="comment"  name="comment">--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary" onclick="saveValueFromInput()">Сақлаш</button>
                                     </div>
@@ -367,7 +367,7 @@
             "orgName": $('#orgName').val(),
             "hsCode": $('#hsCode').val(),
             "productName": $('#productName').val(),
-            "sendReqCountryCode": $('#sendReqCountryCode').val(),
+            "sendReqCountryCode": $('#sendReqCountryCode').val()/*,
             "sendReqNum": $('#sendReqNum').val(),
             "reqDate": $('#reqDate').val(),
             "responseNum": $('#responseNum').val(),
@@ -379,7 +379,7 @@
             "xbbVerdictNum": $('#xbbVerdictNum').val(),
             "xbbVerdictDate": $('#xbbVerdictDate').val(),
             "sum": $('#sum').val(),
-            "comment": $('#comment').val()
+            "comment": $('#comment').val()*/
         }
         $.ajax({
             type: "POST",
