@@ -142,38 +142,35 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Мантиқий назорат қўшиш</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="p-4 border rounded">
+                                                        <div class="card-body" style="border-style: dotted; color: #0a58ca; border-radius: 15px; border-width: 1px">
                                                                 <form class="was-validated">
                                                                     <div class="mb-3">
-                                                                        <label for="validationTextarea" class="form-label">Мантиқий назорат номи</label>
-                                                                        <input class="form-control is-invalid" id="validationTextarea" placeholder="" required></input>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="validationTextarea" class="form-label">Мантиқий назорат хабари</label>
-                                                                        <textarea class="form-control is-invalid" id="validationTextarea2" placeholder="" required></textarea>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="validationTextarea" class="form-label">Мантиқий назорат хабари</label>
-                                                                        <input type="text" class="form-control" aria-label="file example" required>
-                                                                        <div class="invalid-feedback">Сана устуни бўш бўлиши мумкун эмас!</div>
+                                                                        <label class="form-label">Мантиқий назорат номи</label>
+                                                                        <input type="text" class="form-control" aria-label="file example"  id="val11" required>
+                                                                        <div class="invalid-feedback">Мантиқий назорат номи бўш бўлиши мумкун эмас!</div>
                                                                     </div>
                                                                     <hr>
                                                                     <div class="mb-3">
-                                                                        <label for="validationTextarea" class="form-label">Мантиқий назорат санаси(дан)</label>
+                                                                        <label class="form-label">Мантиқий назорат хабари</label>
+                                                                        <textarea type="text" class="form-control" aria-label="file example" required></textarea>
+                                                                        <div class="invalid-feedback">Мантиқий назорат хабари бўш бўлиши мумкун эмас!</div>
+                                                                    </div>
+                                                                    <hr>
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Мантиқий назорат санаси(дан)</label>
                                                                         <input type="date" class="form-control" aria-label="file example" required>
                                                                         <div class="invalid-feedback">Сана устуни бўш бўлиши мумкун эмас!</div>
                                                                     </div>
                                                                     <hr>
                                                                     <div class="mb-3">
-                                                                        <label for="validationTextarea" class="form-label">Мантиқий назорат санаси(гача)</label>
+                                                                        <label class="form-label">Мантиқий назорат санаси(гача)</label>
                                                                         <input type="date" class="form-control" aria-label="file example" required>
                                                                         <div class="invalid-feedback">Сана устуни бўш бўлиши мумкун эмас!</div>
                                                                     </div>
@@ -190,13 +187,16 @@
 <%--                                                                    </div>--%>
                                                                     <div class="mb-3">
                                                                         <input type="file" class="form-control" aria-label="file example" required>
-                                                                        <div class="invalid-feedback">Example invalid form file feedback</div>
+                                                                        <div class="invalid-feedback">Файл бириктириш мажбурий!</div>
                                                                     </div>
+                                                                    <script>
+
+                                                                    </script>
                                                                     <div class="mb-3">
-                                                                        <button class="btn btn-primary" onclick="SaveNewLC(0)" type="button" disabled>Сақлаш</button>
+                                                                        <button class="btn btn-primary disabled" onclick="SaveNewLC(0)" type="button">Сақлаш</button>
                                                                     </div>
                                                                 </form>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -473,7 +473,9 @@
     }
 
     function SaveNewLC(x) {
-        alert("sweeet")
+        var forms = document.querySelectorAll('.needs-validation');
+        if(forms[0].checkValidity())
+        {alert("sweeet")
         Swal.fire({
             title: 'Тўлдирилган ТПО рақами ва санаси',
             html:
@@ -517,7 +519,7 @@
             } else if (result.isDenied) {
                 Swal.fire('Маълумотлар сақланмади', '', 'info')
             }
-        })
+        })}
     }
 
 </script>

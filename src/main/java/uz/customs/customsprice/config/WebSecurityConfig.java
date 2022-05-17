@@ -67,6 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/decisionPdfDownload/**").permitAll()
                 .antMatchers("/appsrequesthaving/**").permitAll()
                 .antMatchers("/upload-file/**").permitAll()
+                .antMatchers("/inrenationalsurvaey/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -781,7 +781,7 @@
                         <%--							</ul>--%>
                     </li>
                     <li>
-                        <a class="has-arrow" href="javascript:ErrorMessage(0);">
+                        <a class="has-arrow" href="javascript:InternationalSurvay(0);">
                             <div class="parent-icon"><i class="bx bx-lock"></i>
                             </div>
                             <div class="menu-title">Халқаро сўровнома</div>
@@ -1334,6 +1334,26 @@
         });
     }
 
+
+    /* Халқаро Сўровнома */
+    function InternationalSurvay(x) {
+        var dataS = {
+            "x": x
+        }
+        $.ajax({
+            type: "POST",
+            data: dataS,
+            url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/FilterIS",
+            dataType: "html",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (res) {
+                $('div#MainContent').html(res);
+
+            },
+            error: function (res) {
+            }
+        });
+    }
 
 </script>
 </body>
