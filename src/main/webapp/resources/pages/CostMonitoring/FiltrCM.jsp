@@ -1,3 +1,4 @@
+<%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
@@ -220,7 +221,7 @@
                         <div class="col-md-2 m-2">
                             <div class="">
                                 <label class="">Сана(дан)</label>
-                                <input class="result form-control shadow-sm" type="date" id="gdvipdate1" placeholder="йил-ой-кун">
+                                <input class="result form-control shadow-sm" type="date" id="gdvipdate1" placeholder="йил-ой-кун" value="<%=new Date()%>">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
@@ -231,7 +232,7 @@
                         </div>
                         <div class="col-md-2 m-2">
                             <button type="button" class="btn btn-primary btn-block mt-3" onclick="searchResultTableCM(0)"><i class='bx bx-refresh'></i>Излаш</button>
-                            <button type="reset" class="btn btn-primary btn-block mt-3"><i class='bx bx-refresh'></i>Янгилаш</button>
+                            <button type="reset" class="btn btn-primary btn-block mt-3"><i class='bx bx-eraser'></i>Тозалаш</button>
                         </div>
                         <%--                        <div class="col-md-2 m-2">--%>
                         <%--                            <button type="button" class="btn btn-primary btn-block mt-3" onclick="searchResultTable(0)"><i class='bx bx-refresh'></i>Янгилаш</button>--%>
