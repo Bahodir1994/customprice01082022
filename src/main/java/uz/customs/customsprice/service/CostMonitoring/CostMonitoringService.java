@@ -21,12 +21,39 @@ public class CostMonitoringService {
         this.costMonitoringRepository = costMonitoringRepository;
     }
 
-    public List getListCostMonitoring(String locationId, String postId, String gdvipdate1, String gdvipdate2) {
+    public List getListCostMonitoring(
+            String locationId,
+            String postId,
+            String gdvipdate1,
+            String gdvipdate2,
+            String g11,
+            String g15,
+            String g34,
+            String g33,
+            String g31name,
+            String g25,
+            String g8code2,
+            String metod_otc,
+            String g20b,
+            String g20name,
+            String g7c
+            ) {
         String sql_os = "";
 //        sql_os = (locationId != null && !locationId.equals("") ? sql_os + " and d.g7a = '" + locationId + "' " : sql_os);
         sql_os = (postId != null && !postId.equals("") ? sql_os + " and d.g7a = '" + postId + "' " : sql_os);
         sql_os = (gdvipdate1 != null && !gdvipdate1.equals("") ? sql_os + " and d.gdvipdate >= '" + gdvipdate1 + "' " : sql_os);
         sql_os = (gdvipdate2 != null && !gdvipdate2.equals("") ? sql_os + " and d.gdvipdate <= '" + gdvipdate2 + "' " : sql_os);
+        sql_os = (g11 != null && !g11.equals("") ? sql_os + " and d.g11 = '" + g11 + "' " : sql_os);
+        sql_os = (g15 != null && !g15.equals("") ? sql_os + " and d.g15 = '" + g15 + "' " : sql_os);
+        sql_os = (g34 != null && !g34.equals("") ? sql_os + " and d.g34 = '" + g34 + "' " : sql_os);
+        sql_os = (g33 != null && !g33.equals("") ? g33.length() < 10 ? sql_os + " and d.g33 like '" + g33 + "%'" : sql_os + " and d.g33 = '" + g33 + "'" : sql_os);
+        sql_os = (g31name != null && !g31name.equals("") ? sql_os + " and lower(d.g31name) like lower ('%" + g31name + "%')" : sql_os);
+        sql_os = (g25 != null && !g25.equals("") ? sql_os + " and d.g25 = '" + g25 + "' " : sql_os);
+        sql_os = (g8code2 != null && !g8code2.equals("") ? sql_os + " and d.g8code2 = '" + g8code2 + "' " : sql_os);
+        sql_os = (metod_otc != null && !metod_otc.equals("") ? sql_os + " and d.metod_otc = '" + metod_otc + "' " : sql_os);
+        sql_os = (g20b != null && !g20b.equals("") ? sql_os + " and d.g20b = '" + g20b + "' " : sql_os);
+        sql_os = (g20name != null && !g20name.equals("") ? sql_os + " and lower(d.g20name) like lower ('%" + g20name + "%')" : sql_os);
+        sql_os = (g7c != null && !g7c.equals("") ? sql_os + " and d.g7c = '" + g7c + "' " : sql_os);
 
         String queryForList = " select\n" +
                 "    d.id id,\n" +
@@ -133,10 +160,10 @@ public class CostMonitoringService {
                 "    d.status=1\n" +
                 "and d.g1a='ИМ'\n" +
                 "and d.g1b='40'\n" +
-//                "and d.metod_otc in ('1',\n" +
-//                "                    '4',\n" +
-//                "                    '5',\n" +
-//                "                    '6.1')\n" +
+                "and d.metod_otc in ('1',\n" +
+                "                    '4',\n" +
+                "                    '5',\n" +
+                "                    '6.1')\n" +
                 "and d.vid_tulov = 1\n" +
                 "--and d.G33 like '8407%'\n" +
                 "" + sql_os + "\n" +

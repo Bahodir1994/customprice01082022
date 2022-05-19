@@ -352,4 +352,13 @@ public class Utils {
         String formattedDate = formatter.format(aDate);
         return formattedDate;
     }
+
+    public static String tecDate00() {
+        Locale l = new Locale("ru", "");
+        Date aDate = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", l);
+        String formattedDate = formatter.format(aDate);
+        return formattedDate;
+    }
+
 }

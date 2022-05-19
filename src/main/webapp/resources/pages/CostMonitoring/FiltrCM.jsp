@@ -1,4 +1,8 @@
 <%@ page import="java.util.Date" %>
+<%@ page import="uz.customs.customsprice.utils.Utils" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.GregorianCalendar" %>
+<%@ page import="java.util.Calendar" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
@@ -14,6 +18,23 @@
     String userLocation = (String) request.getSession().getAttribute("userLocation");
     String userLocationName = (String) request.getSession().getAttribute("userLocationName");
     String userPost = (String) request.getSession().getAttribute("userPost");
+
+    String gdvipdate1 = Utils.tecDate00();
+    String gdvipdate2 = Utils.tecDate00();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    GregorianCalendar gc = new GregorianCalendar();
+    java.util.Date d = new Date();
+    gc.setTime(d);
+    int dayBefore = gc.get(Calendar.DAY_OF_YEAR);
+    gc.roll(Calendar.DAY_OF_YEAR, -1);
+    int dayAfter = gc.get(Calendar.DAY_OF_YEAR);
+    if (dayAfter > dayBefore) {
+        gc.roll(Calendar.YEAR, -1);
+    }
+    gc.get(Calendar.DATE);
+    java.util.Date yesterday = gc.getTime();
+    gdvipdate1 = Utils.toDate00(yesterday);
+
 %>
 <head>
     <!-- Required meta tags -->
@@ -119,11 +140,18 @@
                             <label class="">ХББ</label>
                             <select class="form-select shadow-sm" required="" id="locationId" name="locationId" onchange="changeLocation()">
                                 <%-- todo                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>--%>
-                                <option value="">--- Танланг ---</option>
+                                <%--                                <option value="">--- Танланг ---</option>--%>
                                 <c:forEach var="locations" items="${locationList}" varStatus="i">
                                     <option value="${locations.id}">${locations.id} - ${locations.name1}</option>
                                 </c:forEach>
+                                <%--                                    <c:if test="${locations.id == '1701'}">selected="selected"</c:if>--%>
                             </select>
+                            <%--                            <script>--%>
+                            <%--                                if ($('#locationId').val() == '1701') {--%>
+                            <%--                                    alert($('#locationId').val());--%>
+                            <%--                                    $('#locationId').attr('selected', true);--%>
+                            <%--                                }--%>
+                            <%--                            </script>--%>
                         </div>
                         <div class="col-md-2 m-2">
                             <label class="">Пост</label>
@@ -167,22 +195,34 @@
 
                         <div class="col-md-2 m-2">
                             <div class="">
-                                <label class="">Рўйхат рақами</label>
-                                <input class="result form-control shadow-sm" type="text" placeholder="Рўйхат рақами">
+                                <label class="">БЮД рақами</label>
+                                <input class="result form-control shadow-sm" type="text" placeholder="Рўйхат рақами" id="g7c">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
                             <label class="">Божхона қиймати усули</label>
-                            <select class="form-select shadow-sm" required="" style="font-style: italic">
+                            <select class="form-select shadow-sm" required="" style="font-style: italic" id="metod_otc">
                                 <option value="">--- Танланг ---</option>
-                                <c:forEach var="vals" items="${methodList}" varStatus="i">
-                                    <option value="${vals.id}">${i.index+1}-усул (${vals.name})</option>
-                                </c:forEach>
+<%--                                <c:forEach var="vals" items="${methodList}" varStatus="i">--%>
+<%--                                    <option value="${vals.id}">${i.index+1}-усул (${vals.name})</option>--%>
+<%--                                </c:forEach>--%>
+<%--                                <option value="0">Все</option>--%>
+                                <option value="1">1</option>
+<%--                                <option value="2">2</option>--%>
+<%--                                <option value="3">3</option>--%>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+<%--                                <option value="6">6</option>--%>
+                                <option value="6.1">6.1</option>
+<%--                                <option value="6.2">6.2</option>--%>
+<%--                                <option value="6.3">6.3</option>--%>
+<%--                                <option value="6.4">6.4</option>--%>
+<%--                                <option value="6.5">6.5</option>--%>
                             </select>
                         </div>
                         <div class="col-md-2 m-2">
                             <label class="">Транспорт тури</label>
-                            <select class="form-select shadow-sm" required="" id="">
+                            <select class="form-select shadow-sm" required="" id="g25">
                                 <option value="">--- Танланг ---</option>
                                 <c:forEach var="vals" items="${transportTypeSList}" varStatus="i">
                                     <option value="${vals.code}">${vals.cdDesc} ${vals.cdNm}</option>
@@ -192,16 +232,16 @@
                         <div class="col-md-2 m-2">
                             <div class="">
                                 <label class="">СТИР</label>
-                                <input class="result form-control shadow-sm" type="text" placeholder="СТИР">
+                                <input class="result form-control shadow-sm" type="text" placeholder="СТИР" id="g8code2">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
                             <div class="">
                                 <label class="">Етказиб бериш шарти</label>
-                                <select class="form-select shadow-sm" id="validationTooltip05" required="">
+                                <select class="form-select shadow-sm" id="g20b" required="">
                                     <option value="">--- Танланг ---</option>
                                     <c:forEach var="vals" items="${termsList}" varStatus="i">
-                                        <option value="${vals.raqam}">${vals.name}</option>
+                                        <option value="${vals.sign}">${vals.name}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -209,25 +249,25 @@
                         <div class="col-md-2 m-2">
                             <div class="">
                                 <label class="">Етказиб бериш манзили</label>
-                                <input class="result form-control shadow-sm" type="text" placeholder="Етказиб бериш манзили">
+                                <input class="result form-control shadow-sm" type="text" placeholder="Етказиб бериш манзили" id="g20name">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
                             <div class="">
                                 <label class="">Товар номи</label>
-                                <input class="result form-control shadow-sm" type="text" placeholder="Товар номи">
+                                <input class="result form-control shadow-sm" type="text" placeholder="Товар номи" id="g31name">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
                             <div class="">
                                 <label class="">Сана(дан)</label>
-                                <input class="result form-control shadow-sm" type="date" id="gdvipdate1" placeholder="йил-ой-кун" value="<%=new Date()%>">
+                                <input class="result form-control shadow-sm" type="date" id="gdvipdate1" value="<%=gdvipdate1%>">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
                             <div class="">
                                 <label>Сана(гача)</label>
-                                <input class="result form-control shadow-sm" type="date" id="gdvipdate2" placeholder="йил-ой-кун">
+                                <input class="result form-control shadow-sm" type="date" id="gdvipdate2" value="<%=gdvipdate2%>">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
@@ -279,28 +319,6 @@
         }
     })(jQuery);
 
-    function searchResultTableCM(x) {
-        var dataS = {
-            "locationId": $('#locationId').val(),
-            "postId": $('#postId').val(),
-            "gdvipdate1": $('#gdvipdate1').val(),
-            "gdvipdate2": $('#gdvipdate2').val()
-        }
-        $.ajax({
-            type: "POST",
-            data: dataS,
-            <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
-            url: "<%=request.getContextPath()%>/costmonitoring/resources/pages/CostMonitoring/ResultCM",
-            dataType: "html",
-            header: 'Content-type: text/html; charset=utf-8',
-            success: function (res) {
-                $('div#ListCMTable').html(res);
-            },
-            error: function (res) {
-            }
-        });
-    }
-
     function changeLocation() {
         // $("#post").clear();
         var log_f = true;
@@ -337,6 +355,58 @@
                         console.log("value: " + value)
                         $("#postId").append('<option value=' + value['code'] + '>' + value['code'] + ' - ' + value['cdNm'] + '</option>');
                     });
+                },
+                error: function (res) {
+                }
+            });
+        }
+    }
+
+    function searchResultTableCM(x) {
+        var log_f = true;
+        var log_n = '';
+        var arr = [];
+        var gtk = 0, err = 1;
+
+        // if ($('#locationId').val() != "1701" && $('#postId').val() != "" && $('#g7c').val() != "") {
+        //     err = 0;
+        // }
+        if (err != 0 && ($.trim($('#g33').val()) == "" || $.trim($('#g33').val()).length < 4)) {
+            gtk = 0;
+            $('#g33').css({'border': '3px solid red'});
+        } else {
+            gtk = 1;
+            $('#g33').css({'border': '1px solid black'});
+        }
+
+        var dataS = {
+            "locationId": $('#locationId').val(),
+            "postId": $('#postId').val(),
+            "gdvipdate1": $('#gdvipdate1').val(),
+            "gdvipdate2": $('#gdvipdate2').val(),
+            "g11": $('#g11').val(),
+            "g15": $('#g15').val(),
+            "g34": $('#g34').val(),
+            "g33": $('#g33').val(),
+            "g31name": $('#g31name').val(),
+            "g25": $('#g25').val(),
+            "g8code2": $('#g8code2').val(),
+            "metod_otc": $('#metod_otc').val(),
+            "g20b": $('#g20b').val(),
+            "g20name": $('#g20name').val(),
+            "g7c": $('#g7c').val()
+        }
+
+        if (gtk === 1) {
+            $.ajax({
+                type: "POST",
+                data: dataS,
+                <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
+                url: "<%=request.getContextPath()%>/costmonitoring/resources/pages/CostMonitoring/ResultCM",
+                dataType: "html",
+                header: 'Content-type: text/html; charset=utf-8',
+                success: function (res) {
+                    $('div#ListCMTable').html(res);
                 },
                 error: function (res) {
                 }

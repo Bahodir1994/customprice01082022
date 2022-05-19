@@ -99,10 +99,43 @@ public class CostMonitoringController {
 
     @PostMapping(value = COSTMONITORINGRESULTPAGE)
     @ResponseBody
-    public ModelAndView ResultCM(HttpSession session, @RequestParam String locationId, @RequestParam String postId, @RequestParam String gdvipdate1,
-                                 @RequestParam String gdvipdate2) {
+    public ModelAndView ResultCM(
+            HttpSession session,
+            @RequestParam String locationId,
+            @RequestParam String postId,
+            @RequestParam String gdvipdate1,
+            @RequestParam String gdvipdate2,
+            @RequestParam String g11,
+            @RequestParam String g15,
+            @RequestParam String g34,
+            @RequestParam String g33,
+            @RequestParam String g31name,
+            @RequestParam String g25,
+            @RequestParam String g8code2,
+            @RequestParam String metod_otc,
+            @RequestParam String g20b,
+            @RequestParam String g20name,
+            @RequestParam String g7c
+    ) {
         ModelAndView mav = new ModelAndView("resources/pages/CostMonitoring/ResultCM");
-        List<Object[]> mtcReplList = costMonitoringService.getListCostMonitoring(locationId, postId, gdvipdate1, gdvipdate2);
+        List<Object[]> mtcReplList = new ArrayList<>();
+        mtcReplList = costMonitoringService.getListCostMonitoring(
+                locationId,
+                postId,
+                gdvipdate1,
+                gdvipdate2,
+                g11,
+                g15,
+                g34,
+                g33,
+                g31name,
+                g25,
+                g8code2,
+                metod_otc,
+                g20b,
+                g20name,
+                g7c
+        );
         List<CostMonitoringResponse> list = new ArrayList<>();
         for (int i = 0; i < mtcReplList.size(); i++) {
             CostMonitoringResponse response = new CostMonitoringResponse(
