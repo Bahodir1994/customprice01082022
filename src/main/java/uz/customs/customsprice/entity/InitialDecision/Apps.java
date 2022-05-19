@@ -115,7 +115,7 @@ public class Apps extends AbstractAuditingEntity {
     private String personPhone;
 
     @Column(name = "LOCATION_ID", length = 4)
-//    @NotBlank(message =  "Устун тўлдирилмаган")
+    @NotBlank(message =  "Устун тўлдирилмаган")
     @Digits(message = "Устун фақат сонлардан иборат бўлиши лозим", integer = 4, fraction = 0)
     private String locationId;
 

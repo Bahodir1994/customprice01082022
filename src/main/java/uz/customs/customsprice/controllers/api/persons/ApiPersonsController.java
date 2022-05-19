@@ -49,7 +49,7 @@ public class ApiPersonsController {
                 obj.put("message", "Error");
                 obj.put("errors", errors);
                 obj.put("status", "400");
-                return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
             }
             personsService.savepersons(persons);
             JSONObject obj = new JSONObject();

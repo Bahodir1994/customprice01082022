@@ -27,8 +27,8 @@ public class DecisionPdfService {
         return decisionPdfRepo.findByHash256(hash256);
     }
 
-    public DecisionPdf saveDecisionPdf(DecisionPdf decisionPdf) {
-        return decisionPdfRepo.save(decisionPdf);
+    public void saveDecisionPdf(DecisionPdf decisionPdf) {
+        decisionPdfRepo.save(decisionPdf);
     }
 
 }

@@ -7,13 +7,15 @@ import uz.customs.customsprice.entity.InitialDecision.TransportType;
 import uz.customs.customsprice.entity.earxiv.Earxiv;
 
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Data
 public class AppsAndDocsAndTransportsDTO {
-
     private Apps apps;
+
     private List<Earxiv> docs;
+
     private List<TransportType> transports;
 
     public AppsAndDocsAndTransportsDTO() {
