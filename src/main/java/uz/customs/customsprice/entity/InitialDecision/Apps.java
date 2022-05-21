@@ -78,7 +78,7 @@ public class Apps extends AbstractAuditingEntity {
 
     @Column(name = "ORG_NAME", columnDefinition = "VARCHAR(900) CCSID 1208")
     @NotBlank(message =  "Устун тўлдирилмаган")
-    @Size(max = 50, message = "Устун маълумоти катталиги чекланган")
+    @Size(max = 300, message = "Устун маълумоти катталиги чекланган")
     private String orgName;
 
     @Column(name = "PERSON_POSITION", length = 2)
@@ -88,7 +88,7 @@ public class Apps extends AbstractAuditingEntity {
 
     @Column(name = "PERSON_ADDR", columnDefinition = "VARCHAR(900) CCSID 1208")
     @NotBlank(message =  "Устун тўлдирилмаган")
-    @Size(max = 50, message = "Устун маълумоти катталиги чекланган")
+    @Size(max = 300, message = "Устун маълумоти катталиги чекланган")
     private String personAddr;
 
     @Column(name = "PERSON_TIN", length = 9)

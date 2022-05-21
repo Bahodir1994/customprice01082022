@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+<%--            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>--%>
     </div>
     </div>
     <div class="row mt-3">
