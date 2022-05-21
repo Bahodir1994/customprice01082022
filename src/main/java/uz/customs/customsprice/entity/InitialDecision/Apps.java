@@ -82,8 +82,8 @@ public class Apps extends AbstractAuditingEntity {
     private String orgName;
 
     @Column(name = "PERSON_POSITION", length = 2)
-    @NotBlank(message =  "Устун тўлдирилмаган")
-    @Size(min = 2, max = 2, message = "Устун хато тўлдирилган")
+    @NotBlank(message =  "Шахс тури тўлдирилмаган")
+    @Size(min = 2, max = 2, message = "Шахс тури хато тўлдирилган")
     private String personPosition;
 
     @Column(name = "PERSON_ADDR", columnDefinition = "VARCHAR(900) CCSID 1208")
