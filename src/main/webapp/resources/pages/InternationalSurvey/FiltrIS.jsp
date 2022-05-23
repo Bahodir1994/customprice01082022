@@ -22,7 +22,8 @@
     <link href="<%=request.getContextPath()%>/resources/assets2/images/favicon-32x32.png" type="image/png"/>
     <!--plugins-->
     <link href="<%=request.getContextPath()%>/resources/assets2/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
-    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css"
+          rel="stylesheet"/>
     <!-- loader-->
     <link href="<%=request.getContextPath()%>/resources/assets2/css/pace.min.css" rel="stylesheet"/>
     <script src="<%=request.getContextPath()%>/resources/assets2/js/pace.min.js"></script>
@@ -37,8 +38,10 @@
     <link href="<%=request.getContextPath()%>/resources/assets2/css/header-colors.css"/>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
-    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css"
+          rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/metismenu/css/metisMenu.min.css"
+          rel="stylesheet"/>
     <!-- loader-->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
@@ -86,8 +89,13 @@
     }
 
     @media screen and (max-height: 450px) {
-        .sidenav {padding-top: 15px;}
-        .sidenav a {font-size: 18px;}
+        .sidenav {
+            padding-top: 15px;
+        }
+
+        .sidenav a {
+            font-size: 18px;
+        }
     }
 </style>
 <div id="mySidenav" class="sidenav">
@@ -105,209 +113,261 @@
     <div class="col-12 col-lg-12 shadow">
 
         <div class="card">
-            <div class="fm-search m-3">
+            <div class="fm-search mt-2 mb-1 ml-3 mr-3">
                 <div class="mb-0">
-                    <div class="row">
-                        <div class="col-md-2 m-2">
-                            <label class="">Хат рақами</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="ҲББ томонидан юбоирлган хат рақами"></i>
-                            <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
-                        </div>
-                        <div class="col-md-2 m-2">
-                            <label class="">Санаси</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="ҲББ томонидан юбоирлган хат санаси"></i>
-                            <input class="result form-control shadow-sm" type="date" id="date2" placeholder="йил-ой-кун">
-                        </div>
-                        <div class="col-md-2 m-2">
-                            <label class="">ТИФ ТН код</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="ТИФ ТН код"></i>
-                            <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
-                        </div>
-                        <div class="col-md-2 m-2">
-                            <label class="">Товар номи</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Товар номи"></i>
-                            <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
-                        </div>
-                        <div class="col-md-2 m-2">
-                            <label class="">Сўровнома юборилган давлат</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Сўровнома юборилган давлат"></i>
-                            <select class="form-select shadow-sm" required="">
-                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>
-                                <option value="100">1701 ГТК Руз</option>
-                                <option value="110">1726 Тошкент шахар</option>
-                                <option value="145">1756 Андижон</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2 m-2">
-                            <div class="">
-                                <label class="">Юборилган сўровнома рақами</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Юборилган сўровнома рақами"></i>
-                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
+                    <div class="row m-3">
+                        <div class="row">
+                            <div class="col">
+                                <label class="">Хат рақами</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
+                                                                     data-bs-placement="top"
+                                                                     title="ҲББ томонидан юбоирлган хат рақами"></i>
+                                <input class="result form-control shadow-sm" type="text" id="xbbMailNumS"
+                                       name="xbbMailNumS">
+                            </div>
+                            <div class="col">
+                                <label class="">Санаси</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
+                                                                 data-bs-placement="top"
+                                                                 title="ҲББ томонидан юбоирлган хат санаси"></i>
+                                <input class="result form-control shadow-sm" type="date" id="xbbMailDateS"
+                                       name="xbbMailDateS">
+                            </div>
+                            <div class="col">
+                                <label class="">ТИФ ТН код</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
+                                                                     data-bs-placement="top" title="ТИФ ТН код"></i>
+                                <input class="result form-control shadow-sm" type="text" id="hsCodeS" name="hsCodeS">
+                            </div>
+                            <div class="col">
+                                <label class="">Товар номи</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
+                                                                     data-bs-placement="top" title="Товар номи"></i>
+                                <input class="result form-control shadow-sm" type="text" id="productNameS"
+                                       name="productNameS">
+                            </div>
+                            <div class="col">
+                                <label class="">Сўровнома юборилган давлат</label><i class="bx bx-info-circle"
+                                                                                     data-bs-toggle="tooltip"
+                                                                                     data-bs-placement="top"
+                                                                                     title="Сўровнома юборилган давлат"></i>
+                                <select class="form-select shadow-sm" id="sendReqCountryCodeS"
+                                        name="sendReqCountryCodeS" required="">
+                                    <option value="">--Танланг--</option>
+                                    <c:forEach var="countr" items="${countryList}">
+                                        <option value="${countr.cdId}">${countr.cdNm}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
                         </div>
-
-                        <div class="col-md-2 m-2">
-                            <div class="">
-                                <label class="">Юборилган сўровнома санаси</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Юборилган сўровнома санаси"></i>
-                                <input class="result form-control shadow-sm" type="date" id="date2" placeholder="йил-ой-кун">
+                        <div class="row">
+                            <div class="col">
+                                <div class="">
+                                    <label class="">Юборилган сўровнома рақами</label><i class="bx bx-info-circle"
+                                                                                         data-bs-toggle="tooltip"
+                                                                                         data-bs-placement="top"
+                                                                                         title="Юборилган сўровнома рақами"></i>
+                                    <input class="result form-control shadow-sm" type="text" id="sendReqNumS"
+                                           name="sendReqNumS">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="">
+                                    <label class="">Юборилган сўровнома санаси</label><i class="bx bx-info-circle"
+                                                                                         data-bs-toggle="tooltip"
+                                                                                         data-bs-placement="top"
+                                                                                         title="Юборилган сўровнома санаси"></i>
+                                    <input class="result form-control shadow-sm" type="date" id="reqDateS"
+                                           name="reqDateS">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label class="">Сўровномага олинган жавоб хати</label><i class="bx bx-info-circle"
+                                                                                         data-bs-toggle="tooltip"
+                                                                                         data-bs-placement="top"
+                                                                                         title="Сўровномага олинган жавоб хати"></i>
+                                <input class="result form-control shadow-sm" type="text" id="responseNumS"
+                                       name="responseNumS">
+                            </div>
+                            <div class="col">
+                                <label class="">Олинган жавоб хати санаси</label><i class="bx bx-info-circle"
+                                                                                    data-bs-toggle="tooltip"
+                                                                                    data-bs-placement="top"
+                                                                                    title="Сўровномага олинган жавоб хати санаси"></i>
+                                <input class="result form-control shadow-sm" type="date" id="responseDateS"
+                                       name="responseDateS">
+                            </div>
+                            <div class="col">
+                                <div class="">
+                                    <label class="">ХББга юборилган хат рақами</label><i class="bx bx-info-circle"
+                                                                                         data-bs-toggle="tooltip"
+                                                                                         data-bs-placement="top"
+                                                                                         title="Сўровномага олинган жавоб хатини ҲББга юборилган хат рақами"></i>
+                                    <input class="result form-control shadow-sm" type="text" id="responseNumSendXbbNumS"
+                                           name="responseNumSendXbbNumS">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-2 m-2">
-                            <label class="">Сўровномага олинган жавоб хати</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Сўровномага олинган жавоб хати"></i>
-                            <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
-                        </div>
-                        <div class="col-md-2 m-2">
-                            <label class="">Олинган жавоб хати санаси</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Сўровномага олинган жавоб хати санаси"></i>
-                            <input class="result form-control shadow-sm" type="date" id="date2" placeholder="йил-ой-кун">
-                        </div>
-                        <div class="col-md-2 m-2">
-                            <div class="">
-                                <label class="">ХББга юборилган хат рақами</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Сўровномага олинган жавоб хатини ҲББга юборилган хат рақами"></i>
-                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
+                        <div class="row">
+                            <div class="col">
+                                <div class="">
+                                    <label class="">ҲББга юборилган хат санаси</label><i class="bx bx-info-circle"
+                                                                                         data-bs-toggle="tooltip"
+                                                                                         data-bs-placement="top"
+                                                                                         title="Сўровномага олинган жавоб хатини ҲББга юборилган хат санаси"></i>
+                                    <input class="result form-control shadow-sm" type="date"
+                                           id="responseNumSendXbbDateS" name="responseNumSendXbbDateS">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="">
+                                    <label class="">Натижаси бўйича жавоб хати рақами</label><i
+                                        class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Сўровнома натижаси бўйича жавоб хати рақами"></i>
+                                    <input class="result form-control shadow-sm" type="text" id="resultAnswerMailNumS"
+                                           name="resultAnswerMailNumS">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="">
+                                    <label class="">Натижаси бўйича жавоб хати санаси</label><i
+                                        class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Сўровнома натижаси бўйича жавоб хати санаси"></i>
+                                    <input class="result form-control shadow-sm" type="date" id="resultAnswerMailDateS"
+                                           name="resultAnswerMailDateS">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="">
+                                    <label class="">ҲББ хулоса рақами</label><i class="bx bx-info-circle"
+                                                                                data-bs-toggle="tooltip"
+                                                                                data-bs-placement="top"
+                                                                                title="ҲББ хулоса рақами"></i>
+                                    <input class="result form-control shadow-sm" type="text" id="xbbVerdictNumS"
+                                           name="xbbVerdictNumS">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="">
+                                    <label>ҲББ хулоса санаси</label><i class="bx bx-info-circle"
+                                                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                       title="ҲББ хулоса санаси"></i>
+                                    <input class="result form-control shadow-sm" type="date" id="xbbVerdictDateS"
+                                           name="xbbVerdictDateS">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Cўровнома холати</label>
+                                <select class="form-select" id="statusS" name="statusS">
+                                    <option value="">--Танланг--</option>
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                    <option value="300">300</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-2 m-2">
-                            <div class="">
-                                <label class="">ҲББга юборилган хат санаси</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Сўровномага олинган жавоб хатини ҲББга юборилган хат санаси"></i>
-                                <input class="result form-control shadow-sm" type="date" id="date2" placeholder="йил-ой-кун">
+                        <div class="row mb-0">
+                            <div class="col text-center">
+                                <button type="button" class="btn btn-outline-primary btn-block mt-3"
+                                        onclick="searchResultTableIS(0)"><i class='bx bx-refresh'></i>Излаш
+                                </button>
+                                <button type="reset" class="btn btn-outline-primary btn-block mt-3" onclick="reset(1)">
+                                    <i class='bx bx-trash'></i>Тозалаш
+                                </button>
+                                <button type="button" class="btn btn-outline-primary btn-block mt-3" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="resetModal()"><i class='bx bx-plus'></i>Киритиш
+                                </button>
                             </div>
                         </div>
-                        <div class="col-md-2 m-2">
-                            <div class="">
-                                <label class="">Натижаси бўйича жавоб хати рақами</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Сўровнома натижаси бўйича жавоб хати рақами"></i>
-                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
-                            </div>
-                        </div>
-                        <div class="col-md-2 m-2">
-                            <div class="">
-                                <label class="">Натижаси бўйича жавоб хати санаси</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Сўровнома натижаси бўйича жавоб хати санаси"></i>
-                                <input class="result form-control shadow-sm" type="date" id="date2" placeholder="йил-ой-кун">
-                            </div>
-                        </div>
-                        <div class="col-md-2 m-2">
-                            <div class="">
-                                <label class="">ҲББ хулоса рақами</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="ҲББ хулоса рақами"></i>
-                                <input class="result form-control shadow-sm" type="text" placeholder="Товар ТИФ ТН коди">
-                            </div>
-                        </div>
-                        <div class="col-md-2 m-2">
-                            <div class="">
-                                <label>ҲББ хулоса санаси</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="ҲББ хулоса санаси"></i>
-                                <input class="result form-control shadow-sm" type="date" id="date2" placeholder="йил-ой-кун">
-                            </div>
-                        </div>
-                        <div class="col-md-3 m-3">
-                            <button type="button" class="btn btn-primary btn-block mt-3" onclick="searchResultTableIS(0)"><i class='bx bx-refresh'></i>Излаш</button>
-                            <button type="reset" class="btn btn-primary btn-block mt-3"><i class='bx bx-trash'></i>Янгилаш</button>
-                            <button type="button" class="btn btn-primary btn-block mt-3" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class='bx bx-plus'></i>Киритиш</button>
-                        </div>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <!-- Modal 1-qadam-->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
                             <div class="modal-dialog modal-xl col-md-12">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Халқаро сўровнома киритиш</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" id="closeModalSave" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body row">
                                         <!--todo 1-bosqich-->
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">ҲББ томонидан юбоирлган хат рақами:</label>
-                                            <input  class="form-control was-validated" type="number"  id="xbbMailNum"  name="xbbMailNum">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">ҲББ томонидан юбоирлган хат санаси:</label>
-                                            <input  class="form-control was-validated" type="date" id="xbbMailDate"  name="xbbMailDate">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">Ташкилот номи:</label>
-                                            <input  class="form-control was-validated" type="text" id="orgName"  name="orgName">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">ТИФ ТН код:</label>
-                                            <input  class="form-control was-validated" type="number" id="hsCode"  name="hsCode">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">Товар номи:</label>
-                                            <input  class="form-control was-validated" type="text" id="productName"  name="productName">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label  class="col-form-label text-primary">Сўровнома юборилган давлат:</label>
-                                            <select  class="form-control was-validated" type="text" id="sendReqCountryCode"  name="sendReqCountryCode">
-                                                <option value="">--- Танланг ---</option>
-                                                <c:forEach var="vals" items="${countryList}" varStatus="i">
-                                                    <option value="${vals.code}">${vals.code} - ${vals.cdNm}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-<%--                                        <!--todo 2-bosqich-->--%>
-<%--                                        <div class="form-group col-md-3">--%>
-<%--                                            <label  class="col-form-label text-primary">Юборилган сўровнома рақами:</label>--%>
-<%--                                            <input  class="form-control was-validated" type="number" id="sendReqNum"  name="sendReqNum">--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-group col-md-3">--%>
-<%--                                            <label  class="col-form-label text-primary">Юборилган сўровнома санаси:</label>--%>
-<%--                                            <input  class="form-control was-validated" type="date" id="reqDate" name="reqDate">--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-group col-md-3">--%>
-<%--                                            <label  class="col-form-label text-primary">Сўровномага олинган жавоб хати	:</label>--%>
-<%--                                            <input  class="form-control was-validated" type="number" id="responseNum"  name="responseNum">--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-group col-md-3">--%>
-<%--                                            <label  class="col-form-label text-primary">Сўровномага олинган жавоб хати санаси:</label>--%>
-<%--                                            <input  class="form-control was-validated" type="date" id="responseDate"  name="responseDate">--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-group col-md-3">--%>
-<%--                                            <label  class="col-form-label text-primary">Сўровномага олинган жавоб хатини ҲББга юборилган хат рақами:</label>--%>
-<%--                                            <input  class="form-control was-validated" type="number" id="responseNumSendXbbNum" name="responseNumSendXbbNum">--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-group col-md-3">--%>
-<%--                                            <label  class="col-form-label text-primary">Сўровномага олинган жавоб хатини ҲББга юборилган хат санаси:</label>--%>
-<%--                                            <input  class="form-control was-validated" type="date" id="responseNumSendXbbDate"  name="responseNumSendXbbDate">--%>
-<%--                                        </div>--%>
-<%--                                        <!--todo 3-bosqich-->--%>
-<%--                                        <div class="form-group col-md-3">--%>
-<%--                                            <label  class="col-form-label text-primary">Сўровнома натижаси бўйича жавоб хати рақами:</label>--%>
-<%--                                            <input  class="form-control was-validated" type="number" id="resultAnswerMailNum" name="resultAnswerMailNum">--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-group col-md-3">--%>
-<%--                                            <label  class="col-form-label text-primary">Сўровнома натижаси бўйича жавоб хати санаси:</label>--%>
-<%--                                            <input  class="form-control was-validated" type="date" id="resultAnswerMailDate"  name="resultAnswerMailDate">--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-group col-md-3">--%>
-<%--                                            <label  class="col-form-label text-primary">ҲББ хулоса рақами:</label>--%>
-<%--                                            <input  class="form-control was-validated" type="number" id="xbbVerdictNum" name="xbbVerdictNum">--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-group col-md-3">--%>
-<%--                                            <label  class="col-form-label text-primary">ҲББ хулоса санаси:</label>--%>
-<%--                                            <input  class="form-control was-validated" type="date" id="xbbVerdictDate"  name="xbbVerdictDate">--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-group col-md-3">--%>
-<%--                                            <label  class="col-form-label text-primary">Камомад суммаси:</label>--%>
-<%--                                            <input  class="form-control was-validated" type="number" id="sum"  name="sum">--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-group col-md-3">--%>
-<%--                                            <label  class="col-form-label text-primary">Изох:</label>--%>
-<%--                                            <input  class="form-control was-validated" type="text" id="comment"  name="comment">--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" onclick="saveValueFromInput()">Сақлаш</button>
+                                        <form class="row g-3 needs-validation" novalidate>
+                                            <div class="form-group col-md-3">
+                                                <label for="xbbMailNum" class="form-label text-primary">ҲББ томонидан юбоирлган хат рақами:</label>
+                                                <input class="form-control  was-validated" type="number"  id="xbbMailNum" name="xbbMailNum" required>
+                                                <div class="valid-feedback">Текширилди</div>
+                                                <div class="invalid-feedback">Хат рақамини киритинг!</div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="xbbMailNum" class="form-label text-primary">ҲББ томонидан юбоирлган хат санаси:</label>
+                                                <input class="form-control was-validated" type="date" id="xbbMailDate" name="xbbMailDate" required>
+                                                <div class="valid-feedback">Текширилди</div>
+                                                <div class="invalid-feedback">Хат санасини киритинг!</div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="orgName" class="form-label text-primary">Ташкилот номи:</label>
+                                                <input class="form-control was-validated" type="text" id="orgName" name="orgName" required>
+                                                <div class="valid-feedback">Текширилди</div>
+                                                <div class="invalid-feedback">Ташкилот номини киритинг!</div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="hsCode" class="form-label text-primary">ТИФ ТН код:</label>
+                                                <input class="form-control was-validated" type="number" id="hsCode" name="hsCode" required>
+                                                <div class="valid-feedback">Текширилди</div>
+                                                <div class="invalid-feedback">ТИФ ТН кодини киритинг!</div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="productName" class="form-label text-primary">Товар номи:</label>
+                                                <input class="form-control was-validated" type="text" id="productName" name="productName" required>
+                                                <div class="valid-feedback">Текширилди</div>
+                                                <div class="invalid-feedback">Товар номини киритинг!</div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="sendReqCountryCode" class="form-label text-primary">Сўровнома юборилган
+                                                    давлат:</label>
+                                                <select class="form-control was-validated" type="text"
+                                                        id="sendReqCountryCode" name="sendReqCountryCode" required>
+                                                    <option selected disabled value="">--- Танланг ---</option>
+                                                    <c:forEach var="vals" items="${countryList}" varStatus="i">
+                                                        <option value="${vals.code}">${vals.code} - ${vals.cdNm}</option>
+                                                    </c:forEach>
+                                                </select>
+                                                <div class="valid-feedback">Текширилди</div>
+                                                <div class="invalid-feedback">Сўровнома юборилган давлатни танланг</div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary"
+                                                        onclick="saveValueFromInputS()">Сақлаш
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-<%--                        <div class="col-md-2 m-2">--%>
-<%--                            <button type="button" class="btn btn-primary btn-block mt-3" onclick="searchResultTable(0)"><i class='bx bx-refresh'></i>Янгилаш</button>--%>
-<%--                        </div>--%>
                     </div>
-<%--                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>--%>
                 </div>
             </div>
             <hr>
-            <div class="card-body" id="ListCMTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
+            <div class="row" id="divRowCount" style="display: none;">
+                <div class="col text-primary text-end">
+                    кўрсатимоқда
+                </div>
+                <div class="col-md-1 text-primary">
+                    <select class="form-select ml-2" id="size" name="size" onchange="searchResultTableIS(0)">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+                <div class="col text-primary">
+                    та маълумот
+                </div>
+            </div>
+            <div class="card-body" id="ListCMTable"
+                 style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
             </div>
         </div>
     </div>
 </div>
-<!--end page wrapper -->
-<!--end wrapper -->
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
 <script>
     (function ($) {
         function getTimer(obj) {
@@ -338,29 +398,49 @@
         }
     })(jQuery);
 
-    function searchResultTableIS(x) {
+    function searchResultTableIS(x,root=null) {
+        if(root) root.preventDefault();
+        // var status = $('#statusS').val();
         var dataS = {
-            "x": x,
+            "xbbMailDate": $("#xbbMailDateS").val().toString(),
+            "xbbMailNum": $("#xbbMailNumS").val(),
+            "hsCode": $("#hsCodeS").val(),
+            "productName": $("#productNameS").val(),
+            "sendReqCountryCode": $("#sendReqCountryCodeS").val(),
+            "sendReqNum": $("#sendReqNumS").val(),
+            "reqDate": $("#reqDateS").val(),
+            "responseNum": $("#responseNumS").val(),
+            "responseDate": $("#responseDateS").val(),
+            "responseNumSendXbbNum": $("#responseNumSendXbbNumS").val(),
+            "responseNumSendXbbDate": $("#responseNumSendXbbDateS").val(),
+            "resultAnswerMailNum": $("#resultAnswerMailNumS").val(),
+            "resultAnswerMailDate": $("#resultAnswerMailDateS").val(),
+            "xbbVerdictNum": $("#xbbVerdictNumS").val(),
+            "xbbVerdictDate": $("#xbbVerdictDateS").val(),
+            "status": $("#statusS").val(),
+            "page": x,
+            "size": $("#size").val()
         }
         $.ajax({
-            type: "POST",
+            type: "GET",
             data: dataS,
-            <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
             url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/ResultIS",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {
                 $('div#ListCMTable').html(res);
+                $('div#divRowCount').css({'display': ''});
+                // document.body.style.cursor = 'default';
             },
             error: function (res) {
+                if (res.status == 401) {
+                    $(".logOutForm").submit();
+                }
             }
         });
+
     }
-
-
-
-    function saveValueFromInput() {
-        alert("sdsdsdad")
+    function saveValueFromInputS() {
         var dataS = {
             "xbbMailNum": $('#xbbMailNum').val(),
             "xbbMailDate": $('#xbbMailDate').val(),
@@ -381,6 +461,85 @@
             "sum": $('#sum').val(),
             "comment": $('#comment').val()*/
         }
+
+        // if (testValidation() == true) {
+        //     alert(' ok ' + testValidation());
+        // } else {
+        //     alert('no' + testValidation());
+        // }
+
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                // form.addEventListener('click', function (event) {
+                if (!form.checkValidity()) {
+                    // event.preventDefault()
+                    // event.stopPropagation()
+                    form.classList.add('was-validated')
+                }
+                if (form.checkValidity()) {
+                    $.ajax({
+                        type: "POST",
+                        data: dataS,
+                        <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
+                        url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/SaveIS",
+                        dataType: "html",
+                        header: 'Content-type: text/html; charset=utf-8',
+                        success: function (data) {
+                            $('#closeModalSave').trigger('click');
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Дастлабки маълумотлар сақланди',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        },
+                        error: function (request, status, error) {
+                            console.log(request.responseText);
+                            console.log(status)
+                            console.log("sadsdsdadas")
+                            $('#closeModalSave').trigger('click');
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'error',
+                                title: 'Хатолик!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            //do stuff
+                        }
+                    });
+                }
+                // }, false)
+            })
+    }
+    function saveValueFromInputSStep2(id, status) {
+        var dataS = {
+            /*"xbbMailNum": $('#xbbMailNum').val(),
+            "xbbMailDate": $('#xbbMailDate').val(),
+            "orgName": $('#orgName').val(),
+            "hsCode": $('#hsCode').val(),
+            "productName": $('#productName').val(),*/
+            "sendReqCountryCode": $('#sendReqCountryCode').val(),
+            "sendReqNum": $('#sendReqNum').val(),
+            "reqDate": $('#reqDate').val(),
+            "responseNum": $('#responseNum').val(),
+            "responseDate": $('#responseDate').val(),
+            "responseNumSendXbbNum": $('#responseNumSendXbbNum').val(),/*,
+            "responseNumSendXbbDate": $('#responseNumSendXbbDate').val(),
+            "resultAnswerMailNum": $('#resultAnswerMailNum').val(),
+            "resultAnswerMailDate": $('#resultAnswerMailDate').val(),
+            "xbbVerdictNum": $('#xbbVerdictNum').val(),
+            "xbbVerdictDate": $('#xbbVerdictDate').val(),
+            "sum": $('#sum').val(),
+            "comment": $('#comment').val()*/
+            /******************************/
+            "id": id,
+            "status": status
+        }
         $.ajax({
             type: "POST",
             data: dataS,
@@ -388,13 +547,252 @@
             url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/SaveIS",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
-            success: function (res) {
-                $('div#ListCMTable').html(res);
+            success: function (data) {
+                $('#closeModalSave2').trigger('click');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Дастлабки маълумотлар сақланди',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             },
-            error: function (res) {
+            error: function (request, status, error) {
+                console.log(request.responseText);
+                console.log(status)
+                console.log("sadsdsdadas")
+                $('#closeModalSave2').trigger('click');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Хатолик!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                //do stuff
             }
         });
+
+        <%--var forms = document.querySelectorAll('.needs-validation')--%>
+
+        <%--// Loop over them and prevent submission--%>
+        <%--Array.prototype.slice.call(forms)--%>
+        <%--    .forEach(function (form) {--%>
+        <%--        // form.addEventListener('click', function (event) {--%>
+        <%--        if (!form.checkValidity()) {--%>
+        <%--            // event.preventDefault()--%>
+        <%--            // event.stopPropagation()--%>
+        <%--            form.classList.add('was-validated')--%>
+        <%--        }--%>
+        <%--        if (form.checkValidity()) {--%>
+        <%--            $.ajax({--%>
+        <%--                type: "POST",--%>
+        <%--                data: dataS,--%>
+        <%--                &lt;%&ndash;url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",&ndash;%&gt;--%>
+        <%--                url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/SaveIS",--%>
+        <%--                dataType: "html",--%>
+        <%--                header: 'Content-type: text/html; charset=utf-8',--%>
+        <%--                success: function (data) {--%>
+        <%--                    $('#closeModalSave').trigger('click');--%>
+        <%--                    Swal.fire({--%>
+        <%--                        position: 'top-end',--%>
+        <%--                        icon: 'success',--%>
+        <%--                        title: 'Дастлабки маълумотлар сақланди',--%>
+        <%--                        showConfirmButton: false,--%>
+        <%--                        timer: 1500--%>
+        <%--                    })--%>
+        <%--                },--%>
+        <%--                error: function (request, status, error) {--%>
+        <%--                    console.log(request.responseText);--%>
+        <%--                    console.log(status)--%>
+        <%--                    console.log("sadsdsdadas")--%>
+        <%--                    $('#closeModalSave').trigger('click');--%>
+        <%--                    Swal.fire({--%>
+        <%--                        position: 'top-end',--%>
+        <%--                        icon: 'error',--%>
+        <%--                        title: 'Хатолик!',--%>
+        <%--                        showConfirmButton: false,--%>
+        <%--                        timer: 1500--%>
+        <%--                    })--%>
+        <%--                    //do stuff--%>
+        <%--                }--%>
+        <%--            });--%>
+        <%--        }--%>
+        <%--        // }, false)--%>
+        <%--    })--%>
+    }
+    function saveValueFromInputSStep3(id, status) {
+        alert('lolo');
+        var dataS = {
+            //     if (xx === 33){
+            //
+            // }
+            /*"xbbMailNum": $('#xbbMailNum').val(),
+            "xbbMailDate": $('#xbbMailDate').val(),
+            "orgName": $('#orgName').val(),
+            "hsCode": $('#hsCode').val(),
+            "productName": $('#productName').val(),
+            "sendReqCountryCode": $('#sendReqCountryCode').val(),
+            "sendReqNum": $('#sendReqNum').val(),
+            "reqDate": $('#reqDate').val(),
+            "responseNum": $('#responseNum').val(),
+            "responseDate": $('#responseDate').val(),
+            "responseNumSendXbbNum": $('#responseNumSendXbbNum').val(),
+            "responseNumSendXbbDate": $('#responseNumSendXbbDate').val(),*/
+            "resultAnswerMailNum": $('#resultAnswerMailNum').val(),
+            "resultAnswerMailDate": $('#resultAnswerMailDate').val(),
+            "xbbVerdictNum": $('#xbbVerdictNum').val(),
+            "xbbVerdictDate": $('#xbbVerdictDate').val(),
+            "sum": $('#sum').val(),
+            "comment": $('#comment').val(),
+            /******************************/
+            "id": id,
+            "status": status
+        }
+
+        // if (testValidation() == true) {
+        //     alert(' ok ' + testValidation());
+        // } else {
+        //     alert('no' + testValidation());
+        // }
+
+        $.ajax({
+            type: "POST",
+            data: dataS,
+            <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
+            url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/SaveIS",
+            dataType: "html",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (data) {
+                $('#closeModalSave').trigger('click');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Дастлабки маълумотлар сақланди',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            },
+            error: function (request, status, error) {
+                console.log(request.responseText);
+                console.log(status)
+                console.log("sadsdsdadas")
+                $('#closeModalSave').trigger('click');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Хатолик!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                //do stuff
+            }
+        });
+
+        <%--var forms = document.querySelectorAll('.needs-validation')--%>
+
+        <%--// Loop over them and prevent submission--%>
+        <%--Array.prototype.slice.call(forms)--%>
+        <%--    .forEach(function (form) {--%>
+        <%--        // form.addEventListener('click', function (event) {--%>
+        <%--        if (!form.checkValidity()) {--%>
+        <%--            // event.preventDefault()--%>
+        <%--            // event.stopPropagation()--%>
+        <%--            form.classList.add('was-validated')--%>
+        <%--        }--%>
+        <%--        if (form.checkValidity()) {--%>
+        <%--            $.ajax({--%>
+        <%--                type: "POST",--%>
+        <%--                data: dataS,--%>
+        <%--                &lt;%&ndash;url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",&ndash;%&gt;--%>
+        <%--                url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/SaveIS",--%>
+        <%--                dataType: "html",--%>
+        <%--                header: 'Content-type: text/html; charset=utf-8',--%>
+        <%--                success: function (data) {--%>
+        <%--                    $('#closeModalSave').trigger('click');--%>
+        <%--                    Swal.fire({--%>
+        <%--                        position: 'top-end',--%>
+        <%--                        icon: 'success',--%>
+        <%--                        title: 'Дастлабки маълумотлар сақланди',--%>
+        <%--                        showConfirmButton: false,--%>
+        <%--                        timer: 1500--%>
+        <%--                    })--%>
+        <%--                },--%>
+        <%--                error: function (request, status, error) {--%>
+        <%--                    console.log(request.responseText);--%>
+        <%--                    console.log(status)--%>
+        <%--                    console.log("sadsdsdadas")--%>
+        <%--                    $('#closeModalSave').trigger('click');--%>
+        <%--                    Swal.fire({--%>
+        <%--                        position: 'top-end',--%>
+        <%--                        icon: 'error',--%>
+        <%--                        title: 'Хатолик!',--%>
+        <%--                        showConfirmButton: false,--%>
+        <%--                        timer: 1500--%>
+        <%--                    })--%>
+        <%--                    //do stuff--%>
+        <%--                }--%>
+        <%--            });--%>
+        <%--        }--%>
+        <%--        // }, false)--%>
+        <%--    })--%>
+    }
+    function reset(x) {
+        document.getElementById("xbbMailDateS").value = '';
+        document.getElementById("xbbMailNumS").value = '';
+        document.getElementById("hsCodeS").value = '';
+        document.getElementById("productNameS").value = '';
+        document.getElementById("sendReqCountryCodeS").value = '';
+        document.getElementById("sendReqNumS").value = '';
+        document.getElementById("reqDateS").value = '';
+        document.getElementById("responseNumS").value = '';
+        document.getElementById("responseDateS").value = '';
+        document.getElementById("responseNumSendXbbNumS").value = '';
+        document.getElementById("responseNumSendXbbDateS").value = '';
+        document.getElementById("resultAnswerMailNumS").value = '';
+        document.getElementById("resultAnswerMailDateS").value = '';
+        document.getElementById("xbbVerdictNumS").value = '';
+        document.getElementById("xbbVerdictDateS").value = '';
+        document.getElementById("statusS").value = '';
+    }
+    function resetModal() {
+        document.getElementById("xbbMailNum").value = '';
+        document.getElementById("xbbMailDate").value = '';
+        document.getElementById("orgName").value = '';
+        document.getElementById("hsCode").value = '';
+        document.getElementById("productName").value = '';
+        document.getElementById("sendReqCountryCode").value = '';
     }
 
 </script>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    function testValidation() {
+        let b = false;
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('click', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                        b = false;
+                    } else {
+                        b = true;
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+
+        return b;
+    }
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>

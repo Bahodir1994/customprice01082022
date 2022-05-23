@@ -23,4 +23,10 @@ public class InternationalSurveyService {
             return internationalSurveyRepo.findById(id);
         } else return null;
     }
+
+    public InternationalSurveyEntity getByIdAndStatus(String id, String status){
+        if (internationalSurveyRepo.findByIdAndStatus(id, status) != null){
+            return internationalSurveyRepo.findByIdAndStatus(id, status);
+        } else return null;
+    }
 }

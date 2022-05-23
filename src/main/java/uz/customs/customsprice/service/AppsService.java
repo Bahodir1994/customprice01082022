@@ -447,7 +447,8 @@ public class AppsService {
                 /*39 - */"    c.tech_char,\n" +
                 /*40 - */"    c.trade_mark,\n" +
                 /*41 - */"    c.trade_name,\n" +
-                /*42 - */"    c.payment_yn\n" +
+                /*42 - */"    c.payment_yn,\n" +
+                /*43 - */"    c.method_description\n" +
                 "from\n" +
                 "    cpid.commodity c\n" +
                 "left join\n" +
@@ -505,7 +506,8 @@ public class AppsService {
                 /*38 - */"    c.standarts, \n" +
                 /*39 - */"    c.tech_char, \n" +
                 /*40 - */"    c.trade_mark, \n" +
-                /*41 - */"    c.trade_name\n" +
+                /*41 - */"    c.trade_name,\n" +
+                /*42 - */"    c.method_description\n" +
 
                 "from\n" +
                 "    cpid.commodity c\n" +

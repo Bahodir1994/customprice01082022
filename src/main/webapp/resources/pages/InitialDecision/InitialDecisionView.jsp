@@ -412,7 +412,8 @@
                                     <td>
                                             ${var.methodNm}
                                         <i class="bx bx-info-circle bx-sm" data-bs-toggle="modal"
-                                           data-bs-target="#exampleExtraLargeModal3" style="cursor: pointer;"></i>
+                                           data-bs-target="#exampleExtraLargeModal3" style="cursor: pointer;" onclick="check_methodDesc('${i.index+1}', '${var.methodDescription}')"></i>
+                                        <textarea id="methodDesc">${var.methodDescription}</textarea>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-block"
@@ -907,5 +908,11 @@
     };
 
     /*------------------------------*/
+
+
+    function check_methodDesc(rowNum, methodDesc) {
+
+    }
+
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

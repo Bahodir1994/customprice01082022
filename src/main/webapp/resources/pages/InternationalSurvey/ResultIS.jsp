@@ -24,58 +24,324 @@
     System.out.println(" userId(ListInDecTable) ===> " + userId);
 %>
 <body>
+<style>
+    .filterable {
+        margin-top: 15px;
+    }
+    .filterable .panel-heading .pull-right {
+        margin-top: -20px;
+    }
+    .filterable .filters input[disabled] {
+        background-color: transparent;
+        border: none;
+        cursor: auto;
+        box-shadow: none;
+        padding: 0;
+        height: auto;
+    }
+    .filterable .filters input[disabled]::-webkit-input-placeholder {
+        color: #333;
+    }
+    .filterable .filters input[disabled]::-moz-placeholder {
+        color: #333;
+    }
+    .filterable .filters input[disabled]:-ms-input-placeholder {
+        color: #333;
+    }
 
-<div class="table-responsive">
-    <table id="example1" class="table table-striped table-bordered table-responsive">
-        <thead class="bg-light-primary" style="border-color: #0a58ca; border-style: dotted">
-        <tr>
-            <th style="border-style: dotted; background-color: #f8d7da;">т/р</th>
-            <th style="border-style: dotted; background-color: #f8d7da;"><i class="bx bx-edit"></i>Таҳрир</th>
-            <th style="border-style: dotted; background-color: #f8d7da;">ҲББ томонидан юбоирлган хат рақами</th>
-            <th style="border-style: dotted; background-color: #f8d7da;">ҲББ томонидан юбоирлган хат санаси</th>
-            <th style="border-style: dotted; background-color: #f8d7da;">Ташкилот номи</th>
-            <th style="border-style: dotted; background-color: #f8d7da;">ТИФ ТН код</th>
-            <th style="border-style: dotted; background-color: #f8d7da;">Товар номи</th>
-            <th style="border-style: dotted; background-color: #f8d7da;">Сўровнома юборилган давлат</th>
-            <th style="border-style: dotted; background-color: #FBD38D;">Юборилган сўровнома рақами</th>
-            <th style="border-style: dotted; background-color: #FBD38D;">Юборилган сўровнома санаси</th>
-            <th style="border-style: dotted; background-color: #FBD38D;">Сўровномага олинган жавоб хати</th>
-            <th style="border-style: dotted; background-color: #FBD38D;">Сўровномага олинган жавоб хати санаси</th>
-            <th style="border-style: dotted; background-color: #FBD38D;">Сўровномага олинган жавоб хатини ҲББга юборилган хат рақами</th>
-            <th style="border-style: dotted; background-color: #FBD38D;">Сўровномага олинган жавоб хатини ҲББга юборилган хат санаси</th>
-            <th style="border-style: dotted; background-color: #f8f9fe;">Сўровнома натижаси бўйича жавоб хати рақами</th>
-            <th style="border-style: dotted; background-color: #f8f9fe;">Сўровнома натижаси бўйича жавоб хати санаси</th>
-            <th style="border-style: dotted; background-color: #f8f9fe;">ҲББ хулоса рақами</th>
-            <th style="border-style: dotted; background-color: #f8f9fe;">ҲББ хулоса санаси</th>
-            <th style="border-style: dotted; background-color: #f8f9fe;">Камомад суммаси</th>
-            <th style="border-style: dotted; background-color: #f8f9fe;">Изоҳ</th>
+</style>
+<script>
+    $(document).ready(function(){
+        $('.filterable .btn-filter').click(function(){
+            var $panel = $(this).parents('.filterable'),
+                $filters = $panel.find('.filters input'),
+                $tbody = $panel.find('.table tbody');
+            if ($filters.prop('disabled') == true) {
+                $filters.prop('disabled', false);
+                $filters.first().focus();
+            } else {
+                $filters.val('').prop('disabled', true);
+                $tbody.find('.no-result').remove();
+                $tbody.find('tr').show();
+            }
+        });
+
+        $('.filterable .filters input').keyup(function(e){
+            /* Ignore tab key */
+            var code = e.keyCode || e.which;
+            if (code == '9') return;
+            /* Useful DOM data and selectors */
+            var $input = $(this),
+                inputContent = $input.val().toLowerCase(),
+                $panel = $input.parents('.filterable'),
+                column = $panel.find('.filters th').index($input.parents('th')),
+                $table = $panel.find('.table'),
+                $rows = $table.find('tbody tr');
+            /* Dirtiest filter function ever ;) */
+            var $filteredRows = $rows.filter(function(){
+                var value = $(this).find('td').eq(column).text().toLowerCase();
+                return value.indexOf(inputContent) === -1;
+            });
+            /* Clean previous no-result if exist */
+            $table.find('tbody .no-result').remove();
+            /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+            $rows.show();
+            $filteredRows.hide();
+            /* Prepend no-result row if all rows are filtered */
+            if ($filteredRows.length === $rows.length) {
+                $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">Маълумот топилмади!</td></tr>'));
+            }
+        });
+    });
+</script>
+
+<div class="panel panel-primary filterable table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="border border-radius-lg">
+        <tr class="filters text-yellow" style="background-color: #357ebd">
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><button class="btn btn-default btn-xs btn-filter text-light"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                <input type="hidden" class="form-control form-control-sm" placeholder="">
+            </th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="hidden" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"></th>
+        </tr>
+        <tr class="filters bg-white text-dark">
+            <th style="border-style: dotted; text-align: center;" class="">т/р</th>
+            <th style="border-style: dotted; text-align: center;" class=""><i class="bx bx-edit"></i>Таҳрир</th>
+            <th style="border-style: dotted; text-align: center;" class="">ҲББ томонидан юбоирлган<br>хат рақами</th>
+            <th style="border-style: dotted; text-align: center;" class="">ҲББ томонидан юбоирлган<br>хат санаси</th>
+            <th style="border-style: dotted; text-align: center;" class="">Ташкилот номи</th>
+            <th style="border-style: dotted; text-align: center;" class="">ТИФ ТН код</th>
+            <th style="border-style: dotted; text-align: center;" class="">Товар номи</th>
+            <th style="border-style: dotted; text-align: center;" class="">Сўровнома юборилган<br>давлат</th>
+            <th style="border-style: dotted; text-align: center;" class="">Юборилган сўровнома<br>рақами</th>
+            <th style="border-style: dotted; text-align: center;" class="">Юборилган сўровнома<br>санаси</th>
+            <th style="border-style: dotted; text-align: center;" class="">Сўровномага олинган<br>жавоб хати</th>
+            <th style="border-style: dotted; text-align: center;" class="">Сўровномага олинган жавоб<br>хати санаси</th>
+            <th style="border-style: dotted; text-align: center;" class="">Сўровномага олинган жавоб хатини<br>ҲББга юборилган хат рақами</th>
+            <th style="border-style: dotted; text-align: center;" class="">Сўровномага олинган жавоб хатини<br>ҲББга юборилган хат санаси</th>
+            <th style="border-style: dotted; text-align: center;" class="">Сўровнома натижаси бўйича жавоб<br>хати рақами</th>
+            <th style="border-style: dotted; text-align: center;" class="">Сўровнома натижаси бўйича жавоб<br>хати санаси</th>
+            <th style="border-style: dotted; text-align: center;" class="">ҲББ хулоса рақами</th>
+            <th style="border-style: dotted; text-align: center;" class="">ҲББ хулоса санаси</th>
+            <th style="border-style: dotted; text-align: center;" class="">Камомад суммаси</th>
+            <th style="border-style: dotted; text-align: center;" class="">Изоҳ</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody class="">
+        <c:if test="${tutorials.size() >= 1}">
+            <c:forEach var="tut" items="${tutorials}" varStatus="i">
+                <tr>
+                    <td>${((currentPage+1) * getPageSize - getPageSize + 1)+i.index}</td>
+                    <c:if test="${tut.status == '100'}">
+                        <td><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="bx bx-plus"></i></button></td>
+                    </c:if>
+                    <c:if test="${tut.status == '200'}">
+                        <td><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3"><i class="bx bx-plus"></i></button></td>
+                    </c:if>
+                    <c:if test="${tut.status == '300'}">
+                        <%--                    <td><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="resetModal()"><i class="bx bx-edit"></i></button></td>--%>
+                        <td>Comment</td>
+                    </c:if>
+                    <td>${tut.xbbMailNum}</td>
+                    <td>${tut.xbbMailDate}</td>
+                    <td>${tut.orgName}</td>
+                    <td>${tut.hsCode}</td>
+                    <td>${tut.productName}</td>
+                    <td>${tut.sendReqCountryCode}</td>
+                    <td>${tut.sendReqCountryNm}</td>
+                    <td>${tut.sendReqNum}</td>
+                    <td>${tut.reqDate}</td>
+                    <td>${tut.responseNum}</td>
+                    <td>${tut.responseDate}</td>
+                    <td>${tut.responseNumSendXbbNum}</td>
+                    <td>${tut.responseNumSendXbbDate}</td>
+                    <td>${tut.resultAnswerMailNum}</td>
+                    <td>${tut.resultAnswerMailDate}</td>
+                    <td>${tut.xbbVerdictNum}</td>
+                    <td>${tut.sum}</td>
+                    <td>${tut.comment}</td>
+                </tr>
+                <!-- Modal 2-qadam-->
+                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-xl col-md-12">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel2">Халқаро сўровнома киритиш №-2</h5>
+                                <button type="button" class="btn-close" id="closeModalSave2" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body row">
+                                <!--todo 2-bosqich-->
+                                <form class="row g-3 needs-validation" novalidate>
+                                    <div class="form-group col-md-3">
+                                        <label  class="col-form-label text-primary">Юборилган сўровнома рақами:</label>
+                                        <input  class="form-control was-validated" type="number" id="sendReqNum"  name="sendReqNum">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label  class="col-form-label text-primary">Юборилган сўровнома санаси:</label>
+                                        <input  class="form-control was-validated" type="date" id="reqDate" name="reqDate">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label  class="col-form-label text-primary">Сўровномага олинган жавоб хати	:</label>
+                                        <input  class="form-control was-validated" type="number" id="responseNum"  name="responseNum">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label  class="col-form-label text-primary">Сўровномага олинган жавоб хати санаси:</label>
+                                        <input  class="form-control was-validated" type="date" id="responseDate"  name="responseDate">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label  class="col-form-label text-primary">Сўровномага олинган жавоб хатини ҲББга юборилган хат рақами:</label>
+                                        <input  class="form-control was-validated" type="number" id="responseNumSendXbbNum" name="responseNumSendXbbNum">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label  class="col-form-label text-primary">Сўровномага олинган жавоб хатини ҲББга юборилган хат санаси:</label>
+                                        <input  class="form-control was-validated" type="date" id="responseNumSendXbbDate"  name="responseNumSendXbbDate">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="saveValueFromInputSStep2('${tut.id}', '${tut.status}')">Сақлаш
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal 3-qadam-->
+                <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-xl col-md-12">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel3">Халқаро сўровнома киритиш №-3</h5>
+                                <button type="button" class="btn-close" id="closeModalSave3" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body row">
+                                <!--todo 3-bosqich-->
+                                <form class="row g-3 needs-validation" novalidate>
+                                    <div class="form-group col-md-3">
+                                        <label  class="col-form-label text-primary">Сўровнома натижаси бўйича жавоб хати рақами:</label>
+                                        <input  class="form-control was-validated" type="number" id="resultAnswerMailNum" name="resultAnswerMailNum">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label  class="col-form-label text-primary">Сўровнома натижаси бўйича жавоб хати санаси:</label>
+                                        <input  class="form-control was-validated" type="date" id="resultAnswerMailDate"  name="resultAnswerMailDate">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label  class="col-form-label text-primary">ҲББ хулоса рақами:</label>
+                                        <input  class="form-control was-validated" type="number" id="xbbVerdictNum" name="xbbVerdictNum">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label  class="col-form-label text-primary">ҲББ хулоса санаси:</label>
+                                        <input  class="form-control was-validated" type="date" id="xbbVerdictDate"  name="xbbVerdictDate">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label  class="col-form-label text-primary">Камомад суммаси:</label>
+                                        <input  class="form-control was-validated" type="number" id="sum"  name="sum">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label  class="col-form-label text-primary">Изох:</label>
+                                        <input  class="form-control was-validated" type="text" id="comment"  name="comment">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="saveValueFromInputSStep3('${tut.id}', '${tut.status}')">Сақлаш
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+        </c:if>
+        <c:if test="${tutorials.size() < 1}">
             <tr>
-                <td>11</td>
-                <td><button class="btn btn-outline-primary"><i class="bx bx-edit"></i></button></td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
-                <td>11</td>
+                <td class="no-result text-center" style="text-align: center" colspan="6">Маълумотлар топилмади!</td>
+                <td class="no-result text-center" style="text-align: center" colspan="8">Маълумотлар топилмади!</td>
+                <td class="no-result text-center" style="text-align: center" colspan="6">Маълумотлар топилмади!</td>
             </tr>
-      </tbody>
+        </c:if>
+        </tbody>
     </table>
 </div>
-
+<div class="row mt-1">
+    <div class="col-md-5 align-middle">
+        <c:if test="${((currentPage+1) * getPageSize - getPageSize + tutorials.size()) > 1}">
+                    <span class="text-primary h5 mt-4">
+                        ${(currentPage+1) * getPageSize - getPageSize + 1} дан
+                        ${((currentPage+1) * getPageSize - getPageSize + tutorials.size())} гача;
+                        Жами:${totalItems} та маълумот
+                    </span>
+        </c:if>
+        <c:if test="${((currentPage+1) * getPageSize - getPageSize + tutorials.size()) <= 0}">
+            <span class="text-primary h5 mt-4">Маълумотлар топилмади!</span>
+        </c:if>
+    </div>
+    <div class="col-md-7">
+        <nav class="" aria-label="Page navigation example">
+            <ul class="pagination">
+                <c:if test="${currentPage > 1}">
+                    <li class="page-item"><a class="page-link" href="#" onclick="searchResultTableIS('${0}',event)">Дастлабки</a></li>
+                </c:if>
+                <c:if test="${currentPage <= 1}">
+                    <li class="page-item"><a class="page-link" href="#" disabled="disabled" style="cursor: not-allowed">Дастлабки</a></li>
+                </c:if>
+                <c:if test="${currentPage > 0}">
+                    <li class="page-item"><a class="page-link" href="#" onclick="searchResultTableIS('${currentPage-1}',event)"><i class="bx bxs-chevron-left"></i></a></li>
+                </c:if>
+                <c:if test="${currentPage <= 0}">
+                    <li class="page-item"><a class="page-link" disabled="disabled" href="#" onclick="${currentPage-1}, event" style="cursor: not-allowed"><i class="bx bxs-chevron-left"></i></a></li>
+                </c:if>
+                <%--                    <li class="page-item"><a class="page-link" href="#">...</a></li>--%>
+                <%--                    <li class="page-item"><a class="page-link" href="#">1</a></li>--%>
+                <li class="page-item"><a class="page-link bg-primary text-white" href="#">${currentPage+1}</a></li>
+                <%--                    <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
+                <%--                    <li class="page-item"><a class="page-link" href="#">...</a></li>--%>
+                <c:if test="${currentPage < (totalPages-1)}">
+                    <li class="page-item"><a class="page-link" href="#"  onclick="searchResultTableIS('${currentPage+1}',event)"><i class="bx bxs-chevron-right"></i></a></li>
+                </c:if>
+                <c:if test="${currentPage == (totalPages-1)}">
+                    <li class="page-item"><a class="page-link" disabled="disabled" href="#" onclick="${currentPage+1}" style="cursor: not-allowed"><i class="bx bxs-chevron-right"></i></a></li>
+                </c:if>
+                <c:if test="${currentPage < (totalPages-2)}">
+                    <li class="page-item"><a class="page-link" href="#" onclick="searchResultTableIS('${totalPages-1}', event)">Охирги</a></li>
+                </c:if>
+                <c:if test="${currentPage >= (totalPages-2)}">
+                    <li class="page-item"><a class="page-link" href="#" disabled="disabled" style="cursor: not-allowed">Охирги</a></li>
+                </c:if>
+            </ul>
+        </nav>
+    </div>
+</div>
+<%--    next ==>>${next}<br>--%>
+<%--    hasPrevious ==>>${hasPrevious}<br>--%>
+<%--    getOffset ==>>${getOffset}<br>--%>
+<%--    getPageSize ==>>${getPageSize}<br>--%>
+<%--    first ==>>${first}<br>--%>
+<%--    getPageNumber ==>>${getPageNumber}<br>--%>
+<%--    getSort ==>>${getSort}<br>--%>
+<%--    isPaged ==>>${isPaged}<br>--%>
+<%--    toOptional ==>>${toOptional}<br>--%>
+<%--    previousOrFirst ==> ${previousOrFirst}<br>--%>
+<%--    withPage ==> ${withPage}<br>--%>
+<%--    isUnpaged ==> ${isUnpaged}<br>--%>
 </body>

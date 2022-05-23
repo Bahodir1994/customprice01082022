@@ -10,7 +10,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import uz.customs.customsprice.entity.entityConfig.AbstractAuditingEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -33,8 +32,8 @@ public class InternationalSurveyEntity extends AbstractAuditingEntity {
 
     /*****************Ташкилот номи**********************/
     @Column(name = "XBB_MAIL_DATE")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date xbbMailDate;
 
     /****************ТИФ ТН код***********************/
@@ -67,8 +66,8 @@ public class InternationalSurveyEntity extends AbstractAuditingEntity {
 
     /***************************************/
     @Column(name = "REQ_DATE")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date reqDate;
 
     /***************************************/
@@ -77,8 +76,8 @@ public class InternationalSurveyEntity extends AbstractAuditingEntity {
 
     /***************************************/
     @Column(name = "RESPONSE_DATE")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date responseDate;
 
     /***************************************/
@@ -87,8 +86,8 @@ public class InternationalSurveyEntity extends AbstractAuditingEntity {
 
     /***************************************/
     @Column(name = "RESPONSE_NUM_SEND_XBB_DATE")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date responseNumSendXbbDate;
 
 /***********************************************************************************************************************/
@@ -99,8 +98,8 @@ public class InternationalSurveyEntity extends AbstractAuditingEntity {
 
     /***************************************/
     @Column(name = "RESULT_ANSWER_MAIL_DATE")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date resultAnswerMailDate;
 
     /***************************************/
@@ -109,8 +108,8 @@ public class InternationalSurveyEntity extends AbstractAuditingEntity {
 
     /***************************************/
     @Column(name = "XBB_VERDICT_DATE")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date xbbVerdictDate;
 
     /***************************************/
@@ -121,13 +120,14 @@ public class InternationalSurveyEntity extends AbstractAuditingEntity {
     @Column(name = "COMMENT",  columnDefinition = "VARCHAR(800) CCSID 1208")
     private String comment;
 
-    @Column(name = "STATUS",  columnDefinition = "SMALLINT DEFAULT 100")
-    private int status = 100;
+    @Column(name = "STATUS",  columnDefinition = "VARCHAR(10) CCSID 1208")
+    private String status = "100";
 
     public InternationalSurveyEntity() {
     }
 
-    public InternationalSurveyEntity(String id, String xbbMailNum, Date xbbMailDate, String orgName, String hsCode, String productName, String sendReqCountryCode, String sendReqCountryNm, String sendReqNum, Date reqDate, String responseNum, Date responseDate, String responseNumSendXbbNum, Date responseNumSendXbbDate, String resultAnswerMailNum, Date resultAnswerMailDate, String xbbVerdictNum, Date xbbVerdictDate, BigDecimal sum, String comment, int status) {
+    public InternationalSurveyEntity(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, String xbbMailNum, Date xbbMailDate, String orgName, String hsCode, String productName, String sendReqCountryCode, String sendReqCountryNm, String sendReqNum, Date reqDate, String responseNum, Date responseDate, String responseNumSendXbbNum, Date responseNumSendXbbDate, String resultAnswerMailNum, Date resultAnswerMailDate, String xbbVerdictNum, Date xbbVerdictDate, BigDecimal sum, String comment, String status) {
+        super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.xbbMailNum = xbbMailNum;
         this.xbbMailDate = xbbMailDate;
@@ -311,11 +311,11 @@ public class InternationalSurveyEntity extends AbstractAuditingEntity {
         this.comment = comment;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

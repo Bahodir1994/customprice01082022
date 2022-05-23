@@ -155,29 +155,24 @@ public class Commodity extends AbstractAuditingEntity {
     private BigDecimal packQty;
 
     @Column(name = "EXTRA_INFO", columnDefinition = "VARCHAR(2000) CCSID 1208")
-    @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(max = 600, message = "Устун маълумоти катталиги чекланган")
     private String extraInfo;
 
     @Column(name = "HS_DEC_NUM", length = 20)
-    @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(max = 20, message = "Устун маълумоти катталиги чекланган")
     private String hsDecNum;
 
     @Column(name = "HS_DEC_DATE")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "Устун тўлдирилмаган")
     @Temporal(TemporalType.DATE)
     private Date hsDecDate;
 
     @Column(name = "IN_DEC_DATE")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "Устун тўлдирилмаган")
     @Temporal(TemporalType.DATE)
     private Date inDecDate;
 
     @Column(name = "IN_DEC_NUM", length = 30)
-    @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(max = 30, message = "Устун маълумоти катталиги чекланган")
     private String inDecNum;
 
@@ -188,6 +183,9 @@ public class Commodity extends AbstractAuditingEntity {
     @Column(name = "METHOD_NM", columnDefinition = "VARCHAR(180) CCSID 1208")
     private String methodNm;
 
+    @Column(name = "METHOD_DESCRIPTION", columnDefinition = "VARCHAR(1500) CCSID 1208")
+    private String methodDescription;
+
     @Column(name = "PAYMENT_YN", columnDefinition = " VARCHAR(3) DEFAULT 'NO' ")
 //    @Digits(message = "Устун фақат сонлардан иборат бўлиши лозим", integer = 2, fraction = 0)
     private String paymentYN = "NO";
@@ -195,7 +193,7 @@ public class Commodity extends AbstractAuditingEntity {
     public Commodity() {
     }
 
-    public Commodity(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, Integer cmdtNum, String originCountry, String orignCountrNm, String originOrg, String tradeName, String tradeMark, String mark, String model, String article, String sort, String standarts, String functions, String comProp, String techChar, String productGoal, String hsCode, String hsName, BigDecimal brutto, BigDecimal netto, BigDecimal basicQty, String extraUnits, BigDecimal extraQty, BigDecimal price, String currencyType, BigDecimal cargoSpace, String packType, String packTypeNm, BigDecimal packQty, String extraInfo, String hsDecNum, Date hsDecDate, Date inDecDate, String inDecNum, String method, String methodNm, String paymentYN) {
+    public Commodity(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, Integer cmdtNum, String originCountry, String orignCountrNm, String originOrg, String tradeName, String tradeMark, String mark, String model, String article, String sort, String standarts, String functions, String comProp, String techChar, String productGoal, String hsCode, String hsName, BigDecimal brutto, BigDecimal netto, BigDecimal basicQty, String extraUnits, BigDecimal extraQty, BigDecimal price, String currencyType, BigDecimal cargoSpace, String packType, String packTypeNm, BigDecimal packQty, String extraInfo, String hsDecNum, Date hsDecDate, Date inDecDate, String inDecNum, String method, String methodNm, String methodDescription, String paymentYN) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.apps = apps;
@@ -235,6 +233,7 @@ public class Commodity extends AbstractAuditingEntity {
         this.inDecNum = inDecNum;
         this.method = method;
         this.methodNm = methodNm;
+        this.methodDescription = methodDescription;
         this.paymentYN = paymentYN;
     }
 
@@ -540,6 +539,14 @@ public class Commodity extends AbstractAuditingEntity {
 
     public void setMethodNm(String methodNm) {
         this.methodNm = methodNm;
+    }
+
+    public String getMethodDescription() {
+        return methodDescription;
+    }
+
+    public void setMethodDescription(String methodDescription) {
+        this.methodDescription = methodDescription;
     }
 
     public String getPaymentYN() {
