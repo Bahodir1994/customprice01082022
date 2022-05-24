@@ -160,22 +160,25 @@
                         <%--                    <td><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="resetModal()"><i class="bx bx-edit"></i></button></td>--%>
                         <td>Comment</td>
                     </c:if>
+                    <!-- 1 start-->
                     <td>${tut.xbbMailNum}</td>
                     <td>${tut.xbbMailDate}</td>
                     <td>${tut.orgName}</td>
                     <td>${tut.hsCode}</td>
                     <td>${tut.productName}</td>
-                    <td>${tut.sendReqCountryCode}</td>
                     <td>${tut.sendReqCountryNm}</td>
+                    <!-- 2 start-->
                     <td>${tut.sendReqNum}</td>
                     <td>${tut.reqDate}</td>
                     <td>${tut.responseNum}</td>
                     <td>${tut.responseDate}</td>
                     <td>${tut.responseNumSendXbbNum}</td>
                     <td>${tut.responseNumSendXbbDate}</td>
+                    <!-- 3 start-->
                     <td>${tut.resultAnswerMailNum}</td>
                     <td>${tut.resultAnswerMailDate}</td>
                     <td>${tut.xbbVerdictNum}</td>
+                    <td>${tut.xbbVerdictDate}</td>
                     <td>${tut.sum}</td>
                     <td>${tut.comment}</td>
                 </tr>
@@ -190,30 +193,42 @@
                             </div>
                             <div class="modal-body row">
                                 <!--todo 2-bosqich-->
-                                <form class="row g-3 needs-validation" novalidate>
+                                <form id="fm2" name="fm2" class="row g-3 needs-validation2" novalidate>
                                     <div class="form-group col-md-3">
-                                        <label  class="col-form-label text-primary">Юборилган сўровнома рақами:</label>
-                                        <input  class="form-control was-validated" type="number" id="sendReqNum"  name="sendReqNum">
+                                        <label  for="sendReqNum" class="form-label text-primary">Юборилган сўровнома рақами:</label>
+                                        <input class="form-control was-validated" type="number" id="sendReqNum"  name="sendReqNum" required>
+                                        <div class="valid-feedback">Текширилди</div>
+                                        <div class="invalid-feedback">Сўровнома рақамини киритинг!</div>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label  class="col-form-label text-primary">Юборилган сўровнома санаси:</label>
-                                        <input  class="form-control was-validated" type="date" id="reqDate" name="reqDate">
+                                        <label for="reqDate" class="form-label text-primary">Юборилган сўровнома санаси:</label>
+                                        <input  class="form-control was-validated" type="date" id="reqDate" name="reqDate" required>
+                                        <div class="valid-feedback">Текширилди</div>
+                                        <div class="invalid-feedback">Сўровнома санасини киритинг!</div>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label  class="col-form-label text-primary">Сўровномага олинган жавоб хати	:</label>
-                                        <input  class="form-control was-validated" type="number" id="responseNum"  name="responseNum">
+                                        <label for="responseNum" class="form-label text-primary">Сўровномага олинган жавоб хати:</label>
+                                        <input  class="form-control was-validated" type="number" id="responseNum"  name="responseNum" required>
+                                        <div class="valid-feedback">Текширилди</div>
+                                        <div class="invalid-feedback">Жавоб хати рақамини киритинг!</div>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label  class="col-form-label text-primary">Сўровномага олинган жавоб хати санаси:</label>
-                                        <input  class="form-control was-validated" type="date" id="responseDate"  name="responseDate">
+                                        <label for="responseDate" class="form-label text-primary">Сўровномага олинган жавоб хати санаси:</label>
+                                        <input class="form-control was-validated" type="date" id="responseDate"  name="responseDate" required>
+                                        <div class="valid-feedback">Текширилди</div>
+                                        <div class="invalid-feedback">Хат санасини киритинг!</div>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label  class="col-form-label text-primary">Сўровномага олинган жавоб хатини ҲББга юборилган хат рақами:</label>
-                                        <input  class="form-control was-validated" type="number" id="responseNumSendXbbNum" name="responseNumSendXbbNum">
+                                        <label for="responseNumSendXbbNum" class="form-label text-primary">Сўровномага олинган жавоб хатини<br> ҲББга юборилган хат рақами:</label>
+                                        <input  class="form-control was-validated" type="number" id="responseNumSendXbbNum" name="responseNumSendXbbNum" required>
+                                        <div class="valid-feedback">Текширилди</div>
+                                        <div class="invalid-feedback">Хат рақамини киритинг!</div>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label  class="col-form-label text-primary">Сўровномага олинган жавоб хатини ҲББга юборилган хат санаси:</label>
-                                        <input  class="form-control was-validated" type="date" id="responseNumSendXbbDate"  name="responseNumSendXbbDate">
+                                        <label for="responseNumSendXbbDate" class="form-label text-primary">Сўровномага олинган жавоб хатини<br> ҲББга юборилган хат санаси:</label>
+                                        <input  class="form-control was-validated" type="date" id="responseNumSendXbbDate"  name="responseNumSendXbbDate" required>
+                                        <div class="valid-feedback">Текширилди</div>
+                                        <div class="invalid-feedback">Хат санасини киритинг!</div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary"
@@ -236,30 +251,30 @@
                             </div>
                             <div class="modal-body row">
                                 <!--todo 3-bosqich-->
-                                <form class="row g-3 needs-validation" novalidate>
+                                <form class="row g-3 needs-validation3" novalidate>
                                     <div class="form-group col-md-3">
-                                        <label  class="col-form-label text-primary">Сўровнома натижаси бўйича жавоб хати рақами:</label>
-                                        <input  class="form-control was-validated" type="number" id="resultAnswerMailNum" name="resultAnswerMailNum">
+                                        <label for="resultAnswerMailNum" class="form-label text-primary">Сўровнома натижаси бўйича<br> жавоб хати рақами:</label>
+                                        <input  class="form-control was-validated" type="number" id="resultAnswerMailNum" name="resultAnswerMailNum" required>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label  class="col-form-label text-primary">Сўровнома натижаси бўйича жавоб хати санаси:</label>
-                                        <input  class="form-control was-validated" type="date" id="resultAnswerMailDate"  name="resultAnswerMailDate">
+                                        <label for="resultAnswerMailDate" class="form-label text-primary">Сўровнома натижаси бўйича<br> жавоб хати санаси:</label>
+                                        <input  class="form-control was-validated" type="date" id="resultAnswerMailDate"  name="resultAnswerMailDate" required>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label  class="col-form-label text-primary">ҲББ хулоса рақами:</label>
-                                        <input  class="form-control was-validated" type="number" id="xbbVerdictNum" name="xbbVerdictNum">
+                                        <label for="xbbVerdictNum" class="form-label text-primary">ҲББ хулоса рақами:</label>
+                                        <input  class="form-control was-validated" type="number" id="xbbVerdictNum" name="xbbVerdictNum" required>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label  class="col-form-label text-primary">ҲББ хулоса санаси:</label>
-                                        <input  class="form-control was-validated" type="date" id="xbbVerdictDate"  name="xbbVerdictDate">
+                                        <label for="xbbVerdictDate" class="form-label text-primary">ҲББ хулоса санаси:</label>
+                                        <input  class="form-control was-validated" type="date" id="xbbVerdictDate"  name="xbbVerdictDate" required>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label  class="col-form-label text-primary">Камомад суммаси:</label>
-                                        <input  class="form-control was-validated" type="number" id="sum"  name="sum">
+                                        <label for="sum" class="form-label text-primary">Камомад суммаси:</label>
+                                        <input  class="form-control was-validated" type="number" id="sum"  name="sum" required>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label  class="col-form-label text-primary">Изох:</label>
-                                        <input  class="form-control was-validated" type="text" id="comment"  name="comment">
+                                        <label for="comment" class="form-label text-primary">Изох:</label>
+                                        <input  class="form-control was-validated" type="text" id="comment"  name="comment" required>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary"
@@ -286,11 +301,11 @@
 <div class="row mt-1">
     <div class="col-md-5 align-middle">
         <c:if test="${((currentPage+1) * getPageSize - getPageSize + tutorials.size()) > 1}">
-                    <span class="text-primary h5 mt-4">
-                        ${(currentPage+1) * getPageSize - getPageSize + 1} дан
-                        ${((currentPage+1) * getPageSize - getPageSize + tutorials.size())} гача;
-                        Жами:${totalItems} та маълумот
-                    </span>
+            <span class="text-primary h5 mt-4">
+                ${(currentPage+1) * getPageSize - getPageSize + 1} дан
+                ${((currentPage+1) * getPageSize - getPageSize + tutorials.size())} гача;
+                Жами:${totalItems} та маълумот
+            </span>
         </c:if>
         <c:if test="${((currentPage+1) * getPageSize - getPageSize + tutorials.size()) <= 0}">
             <span class="text-primary h5 mt-4">Маълумотлар топилмади!</span>
@@ -332,16 +347,152 @@
         </nav>
     </div>
 </div>
-<%--    next ==>>${next}<br>--%>
-<%--    hasPrevious ==>>${hasPrevious}<br>--%>
-<%--    getOffset ==>>${getOffset}<br>--%>
-<%--    getPageSize ==>>${getPageSize}<br>--%>
-<%--    first ==>>${first}<br>--%>
-<%--    getPageNumber ==>>${getPageNumber}<br>--%>
-<%--    getSort ==>>${getSort}<br>--%>
-<%--    isPaged ==>>${isPaged}<br>--%>
-<%--    toOptional ==>>${toOptional}<br>--%>
-<%--    previousOrFirst ==> ${previousOrFirst}<br>--%>
-<%--    withPage ==> ${withPage}<br>--%>
-<%--    isUnpaged ==> ${isUnpaged}<br>--%>
+<script>
+    function saveValueFromInputSStep2(id, status) {
+        alert(id + '\n' + status);
+        var dataS = {
+            /*"xbbMailNum": $('#xbbMailNum').val(),
+            "xbbMailDate": $('#xbbMailDate').val(),
+            "orgName": $('#orgName').val(),
+            "hsCode": $('#hsCode').val(),
+            "productName": $('#productName').val(),
+            "sendReqCountryCode": $('#sendReqCountryCode').val(),*/
+            "sendReqNum": $('#sendReqNum').val(),
+            "reqDate": $('#reqDate').val(),
+            "responseNum": $('#responseNum').val(),
+            "responseDate": $('#responseDate').val(),
+            "responseNumSendXbbNum": $('#responseNumSendXbbNum').val(),
+            "responseNumSendXbbDate": $('#responseNumSendXbbDate').val(),/*,
+            "resultAnswerMailNum": $('#resultAnswerMailNum').val(),
+            "resultAnswerMailDate": $('#resultAnswerMailDate').val(),
+            "xbbVerdictNum": $('#xbbVerdictNum').val(),
+            "xbbVerdictDate": $('#xbbVerdictDate').val(),
+            "sum": $('#sum').val(),
+            "comment": $('#comment').val()*/
+            /******************************/
+            "id": id,
+            "status": status
+        }
+        var forms = document.querySelectorAll('.needs-validation2')
+        // var forms = document.getElementById('#fm2')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                // form.addEventListener('click', function (event) {
+                if (!form.checkValidity()) {
+                    // event.preventDefault()
+                    // event.stopPropagation()
+                    form.classList.add('was-validated')
+                }
+                if (form.checkValidity()) {
+                    $.ajax({
+                        type: "POST",
+                        data: dataS,
+                        <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
+                        url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/SaveIS",
+                        dataType: "html",
+                        header: 'Content-type: text/html; charset=utf-8',
+                        success: function (data) {
+                            $('#closeModalSave2').trigger('click');
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Иккиламчи маълумотлар сақланди',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        },
+                        error: function (request, status, error) {
+                            console.log(request.responseText);
+                            console.log(status)
+                            $('#closeModalSave2').trigger('click');
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'error',
+                                title: 'Хатолик!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            //do stuff
+                        }
+                    });
+                }
+                // }, false)
+            })
+    }
+    function saveValueFromInputSStep3(id, status) {
+        alert('lolo');
+        var dataS = {
+            /*"xbbMailNum": $('#xbbMailNum').val(),
+            "xbbMailDate": $('#xbbMailDate').val(),
+            "orgName": $('#orgName').val(),
+            "hsCode": $('#hsCode').val(),
+            "productName": $('#productName').val(),
+            "sendReqCountryCode": $('#sendReqCountryCode').val(),
+            "sendReqNum": $('#sendReqNum').val(),
+            "reqDate": $('#reqDate').val(),
+            "responseNum": $('#responseNum').val(),
+            "responseDate": $('#responseDate').val(),
+            "responseNumSendXbbNum": $('#responseNumSendXbbNum').val(),
+            "responseNumSendXbbDate": $('#responseNumSendXbbDate').val(),*/
+            "resultAnswerMailNum": $('#resultAnswerMailNum').val(),
+            "resultAnswerMailDate": $('#resultAnswerMailDate').val(),
+            "xbbVerdictNum": $('#xbbVerdictNum').val(),
+            "xbbVerdictDate": $('#xbbVerdictDate').val(),
+            "sum": $('#sum').val(),
+            "comment": $('#comment').val(),
+            /******************************/
+            "id": id,
+            "status": status
+        }
+
+        var forms = document.querySelectorAll('.needs-validation3')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                // form.addEventListener('click', function (event) {
+                if (!form.checkValidity()) {
+                    // event.preventDefault()
+                    // event.stopPropagation()
+                    form.classList.add('was-validated')
+                }
+                if (form.checkValidity()) {
+                    $.ajax({
+                        type: "POST",
+                        data: dataS,
+                        <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
+                        url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/SaveIS",
+                        dataType: "html",
+                        header: 'Content-type: text/html; charset=utf-8',
+                        success: function (data) {
+                            $('#closeModalSave3').trigger('click');
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Якуний маълумотлар сақланди',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        },
+                        error: function (request, status, error) {
+                            console.log(request.responseText);
+                            console.log(status)
+                            $('#closeModalSave3').trigger('click');
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'error',
+                                title: 'Хатолик!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            //do stuff
+                        }
+                    });
+                }
+
+            })
+    }
+</script>
 </body>

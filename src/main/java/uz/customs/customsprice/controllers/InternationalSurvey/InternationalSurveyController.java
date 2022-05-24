@@ -163,21 +163,20 @@ public class InternationalSurveyController {
                                  @RequestParam(required = false) String orgName,
                                  @RequestParam(required = false) String hsCode,
                                  @RequestParam(required = false) String productName,
-                                 /***********************************************/
                                  @RequestParam(required = false) String sendReqCountryCode,
+                                 /***********************************************/
                                  @RequestParam(required = false) String sendReqNum,
                                  @RequestParam(required = false) String reqDate,
                                  @RequestParam(required = false) String responseNum,
                                  @RequestParam(required = false) String responseDate,
                                  @RequestParam(required = false) String responseNumSendXbbNum,
-                                 /***********************************************/
                                  @RequestParam(required = false) String responseNumSendXbbDate,
+                                 /***********************************************/
                                  @RequestParam(required = false) String resultAnswerMailNum,
                                  @RequestParam(required = false) String resultAnswerMailDate,
                                  @RequestParam(required = false) String xbbVerdictNum,
                                  @RequestParam(required = false) String xbbVerdictDate,
                                  @RequestParam(required = false) String sum,
-                                 /***********************************************/
                                  @RequestParam(required = false) String comment,
                                  /***********************************************/
                                  @RequestParam(required = false) String id,
@@ -187,16 +186,19 @@ public class InternationalSurveyController {
         if (Objects.equals(id, "") || id == null){
             try {
                 InternationalSurveyEntity internationalSurveyEntity = new InternationalSurveyEntity();
-                internationalSurveyEntity.setXbbMailNum(xbbMailNum);
+                /*1*/internationalSurveyEntity.setXbbMailNum(xbbMailNum);
                 if (!Objects.equals(xbbMailDate, "")){
-                    internationalSurveyEntity.setXbbMailDate(Date.valueOf(xbbMailDate));
+                    /*2*/internationalSurveyEntity.setXbbMailDate(Date.valueOf(xbbMailDate));
                 }
-                internationalSurveyEntity.setOrgName(orgName);
-                internationalSurveyEntity.setHsCode(hsCode);
-                internationalSurveyEntity.setProductName(productName);
+                /*3*/internationalSurveyEntity.setOrgName(orgName);
+                /*4*/internationalSurveyEntity.setHsCode(hsCode);
+                /*5*/internationalSurveyEntity.setProductName(productName);
+                Country country = conturyService.getByCodeAndLngaTpcd(sendReqCountryCode, "UZ");
+                /*6.1*/internationalSurveyEntity.setSendReqCountryCode(sendReqCountryCode);
+                /*6.2*/internationalSurveyEntity.setSendReqCountryNm(country.getCdNm());
                 /**100-First step**/ /**200-Second step**/ /**300-Third step**/
                 internationalSurveyEntity.setStatus("100");
-                internationalSurveyService.savingValue(internationalSurveyEntity);
+                /*finish*/internationalSurveyService.savingValue(internationalSurveyEntity);
                 return new ResponseEntity(HttpStatus.OK);
             }catch (Exception e) {return new ResponseEntity(HttpStatus.BAD_REQUEST);}
         }
@@ -204,38 +206,36 @@ public class InternationalSurveyController {
             try {
                 InternationalSurveyEntity internationalSurveyEntity = internationalSurveyService.getByIdAndStatus(id, status);
                 if (Objects.equals(internationalSurveyEntity.getStatus(), "100")){
-                    internationalSurveyEntity.setSendReqCountryCode(sendReqCountryCode);
-                    Country country = conturyService.getByCodeAndLngaTpcd(sendReqCountryCode, "UZ");
-                    internationalSurveyEntity.setSendReqCountryNm(country.getCdNm());
-                    internationalSurveyEntity.setSendReqNum(sendReqNum);
+                    /*7*/internationalSurveyEntity.setSendReqNum(sendReqNum);
                     if (!Objects.equals(reqDate, "")){
-                        internationalSurveyEntity.setReqDate(Date.valueOf(reqDate));
+                        /*8*/internationalSurveyEntity.setReqDate(Date.valueOf(reqDate));
                     }
-                    internationalSurveyEntity.setResponseNum(responseNum);
+                    /*9*/internationalSurveyEntity.setResponseNum(responseNum);
                     if (!Objects.equals(responseDate, "")){
-                        internationalSurveyEntity.setResponseDate(Date.valueOf(responseDate));
+                        /*10*/internationalSurveyEntity.setResponseDate(Date.valueOf(responseDate));
                     }
-                    internationalSurveyEntity.setResponseNumSendXbbNum(responseNumSendXbbNum);
+                    /*11*/internationalSurveyEntity.setResponseNumSendXbbNum(responseNumSendXbbNum);
+                    if (!Objects.equals(responseNumSendXbbDate, "")){
+                        /*12*/internationalSurveyEntity.setResponseNumSendXbbDate(Date.valueOf(responseNumSendXbbDate));
+                    }
                     /**100-First step**/ /**200-Second step**/ /**300-Third step**/
                     internationalSurveyEntity.setStatus("200");
                     internationalSurveyService.savingValue(internationalSurveyEntity);
                     return new ResponseEntity(HttpStatus.OK);
                 }
                 if (Objects.equals(internationalSurveyEntity.getStatus(), "200")){
-                    if (!Objects.equals(responseNumSendXbbDate, "")){
-                        internationalSurveyEntity.setResponseNumSendXbbDate(Date.valueOf(responseNumSendXbbDate));
-                    }
-                    internationalSurveyEntity.setResultAnswerMailNum(resultAnswerMailNum);
+                    /*13*/internationalSurveyEntity.setResultAnswerMailNum(resultAnswerMailNum);
                     if (!Objects.equals(resultAnswerMailDate, "")){
-                        internationalSurveyEntity.setResultAnswerMailDate(Date.valueOf(resultAnswerMailDate));
+                        /*14*/internationalSurveyEntity.setResultAnswerMailDate(Date.valueOf(resultAnswerMailDate));
                     }
-                    internationalSurveyEntity.setXbbVerdictNum(xbbVerdictNum);
+                    /*15*/internationalSurveyEntity.setXbbVerdictNum(xbbVerdictNum);
                     if (!Objects.equals(xbbVerdictDate, "")){
-                        internationalSurveyEntity.setXbbVerdictDate(Date.valueOf(xbbVerdictDate));
+                        /*16*/internationalSurveyEntity.setXbbVerdictDate(Date.valueOf(xbbVerdictDate));
                     }
                     if (!Objects.equals(sum, "")){
-                        internationalSurveyEntity.setSum(BigDecimal.valueOf(Long.parseLong(sum)));
+                        /*17*/internationalSurveyEntity.setSum(BigDecimal.valueOf(Long.parseLong(sum)));
                     }
+                    /*18*/internationalSurveyEntity.setComment(comment);
                     /**100-First step**/ /**200-Second step**/ /**300-Third step**/
                     internationalSurveyEntity.setStatus("300");
                     internationalSurveyService.savingValue(internationalSurveyEntity);

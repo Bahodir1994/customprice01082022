@@ -36,53 +36,35 @@ public class Earxiv extends AbstractAuditingEntity {
     private String appId;
 
     @Column(name = "FOLDER_ID")
-    @Size(max = 15, message = "1")
-    @NotBlank(message = "2")
     private String folderId;
 
     @Column(name = "NAME", columnDefinition = "VARCHAR(200) CCSID 1208")
-    @Size(max = 100, message = "1")
-    @NotBlank(message = "2")
     private String name;
 
     @Column(name = "USER_INN")
-    @Size(max = 15, message = "1")
-    @NotBlank(message = "2")
     private String userInn;
 
     @Column(name = "USER_PNFL")
-    @Size(max = 20, message = "1")
-    @NotBlank(message = "2")
     private String userPnfl;
 
     @Column(name = "DOCNAME", columnDefinition = "VARCHAR(200) CCSID 1208")
-    @Size(max = 100, message = "1")
-    @NotBlank(message = "2")
     private String docname;
 
     @Column(name = "DOC_TYPE")
-    @Size(max = 10, message = "1")
-    @NotBlank(message = "2")
     private String docType;
 
     @Column(name = "FILE_ID")
-    @Size(max = 20, message = "1")
-    @NotBlank(message = "2")
+    @Size(max = 20, message = "Рақамлар катталиги чекланган(20 та гача)!")
+    @NotBlank(message = "Майдон бўш бўлиши мумкун эмас!")
     private String fileId;
 
     @Column(name = "STATUS")
-    @Size(max = 2, message = "1")
-    @NotBlank(message = "2")
     private String status;
 
     @Column(name = "DOC_TYPE_NAME", columnDefinition = "VARCHAR(200) CCSID 1208")
-    @Size(max = 100, message = "1")
-    @NotBlank(message = "2")
     private String docTypeName;
 
     @Column(name = "SET_FOLDER_ID")
-    @Size(max = 20, message = "1")
-//    @NotBlank(message = "2")
     private String setFolderId;
 
     @Column(name = "PART_NO", columnDefinition = "SMALLINT DEFAULT 1")
