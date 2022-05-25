@@ -375,9 +375,9 @@
                                 <th>Ўрамлар сони:</th>
                                 <th>Юк жойлари сони:</th>
                                 <th>Усул:</th>
-<%--                                <c:if test="${appStatus != 120 && appStatus != 125 && appStatus != 170 && appStatus != 175}">--%>
-                                    <th>Тўл.хис/Қайтариш</th>
-<%--                                </c:if>--%>
+                                <%--                                <c:if test="${appStatus != 120 && appStatus != 125 && appStatus != 170 && appStatus != 175}">--%>
+                                <th>Тўл.хис/Қайтариш</th>
+                                <%--                                </c:if>--%>
                             </tr>
                             </thead>
                             <tbody>
@@ -412,8 +412,9 @@
                                     <td>
                                             ${var.methodNm}
                                         <i class="bx bx-info-circle bx-sm" data-bs-toggle="modal"
-                                           data-bs-target="#exampleExtraLargeModal3" style="cursor: pointer;" onclick="check_methodDesc('${i.index+1}', '${var.methodDescription}')"></i>
-                                        <textarea id="methodDesc">${var.methodDescription}</textarea>
+                                           data-bs-target="#exampleExtraLargeModal3" style="cursor: pointer;"
+                                           onclick="check_methodDesc('${i.index+1}', '${var.methodNm}', '${var.methodDescription}')"></i>
+                                        <textarea id="methodDesc" style="display: none;">${var.methodDescription}</textarea>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-block"
@@ -450,7 +451,7 @@
                                     <div class="modal-body">
                                         <div class="col-md-12">
                                             <div class="table-responsive">
-                                                <table class="table">
+                                                <table class="table tableMethodDesc">
                                                     <thead>
                                                     <tr>
                                                         <th>Божхона қийматини аниқлаш усули</th>
@@ -458,12 +459,12 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>Олиб кириладиган товарга доир битимнинг қиймати бўйича</td>
-                                                        <td>Жўнатувчи мамлакатнинг экспорт божхона юк декларацияси
-                                                            мавжуд эмас
-                                                        </td>
-                                                    </tr>
+<%--                                                    <tr>--%>
+<%--                                                        <td>Олиб кириладиган товарга доир битимнинг қиймати бўйича</td>--%>
+<%--                                                        <td>Жўнатувчи мамлакатнинг экспорт божхона юк декларацияси--%>
+<%--                                                            мавжуд эмас--%>
+<%--                                                        </td>--%>
+<%--                                                    </tr>--%>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -910,8 +911,22 @@
     /*------------------------------*/
 
 
-    function check_methodDesc(rowNum, methodDesc) {
+    function check_methodDesc(rowNum, methodNm, methodDesc) {
+        var newRow = $("table.tableMethodDesc tbody");
+        var cols = '<tr class="trMethodDesc">';
 
+        // var row = document.getElementsByClassName(".trMethodDesc");
+        // row.parentNode.removeChild(row);
+
+        let list_methodDesc = [];
+        list_methodDesc = methodDesc.split("~~~~~");
+
+        for (let i = 0; i < list_methodDesc.length - 1; i++) {
+            cols += '<td>' + methodNm + '</td>';
+            cols += '<td>' + list_methodDesc[i] + '</td>';
+            cols += '</tr>';
+        }
+        newRow.append(cols);
     }
 
 </script>

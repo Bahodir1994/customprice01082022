@@ -49,57 +49,46 @@ public class Commodity extends AbstractAuditingEntity {
     private String originOrg;
 
     @Column(name = "TRADE_NAME", columnDefinition = "VARCHAR(765) CCSID 1208")
-    @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(max = 255, message = "Устун маълумоти катталиги чекланган")
     private String tradeName;
 
     @Column(name = "TRADE_MARK", columnDefinition = "VARCHAR(765) CCSID 1208")
-    @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(max = 255, message = "Устун маълумоти катталиги чекланган")
     private String tradeMark;
 
     @Column(name = "MARK", columnDefinition = "VARCHAR(765) CCSID 1208")
-    @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(max = 255, message = "Устун маълумоти катталиги чекланган")
     private String mark;
 
     @Column(name = "MODEL", columnDefinition = "VARCHAR(765) CCSID 1208")
-    @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(max = 255, message = "Устун маълумоти катталиги чекланган")
     private String model;
 
     @Column(name = "ARTICLE", columnDefinition = "VARCHAR(765) CCSID 1208")
-    @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(max = 255, message = "Устун маълумоти катталиги чекланган")
     private String article;
 
     @Column(name = "SORT", columnDefinition = "VARCHAR(765) CCSID 1208")
-    @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(max = 255, message = "Устун маълумоти катталиги чекланган")
     private String sort;
 
     @Column(name = "STANDARTS", columnDefinition = "VARCHAR(1500) CCSID 1208")
-    @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(max = 500, message = "Устун маълумоти катталиги чекланган")
     private String standarts;
 
     @Column(name = "FUNCTIONS", columnDefinition = "VARCHAR(1500) CCSID 1208")
-    @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(max = 500, message = "Устун маълумоти катталиги чекланган")
     private String functions;
 
     @Column(name = "COM_PROP", columnDefinition = "VARCHAR(4000) CCSID 1208")
-    @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(max = 1300, message = "Устун маълумоти катталиги чекланган")
     private String comProp;
 
     @Column(name = "TECH_CHAR", columnDefinition = "VARCHAR(2000) CCSID 1208")
-    @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(max = 600, message = "Устун маълумоти катталиги чекланган")
     private String techChar;
 
     @Column(name = "PRODUCT_GOAL", columnDefinition = "VARCHAR(900) CCSID 1208")
-    @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(max = 30, message = "Устун маълумоти катталиги чекланган")
     private String productGoal;
 

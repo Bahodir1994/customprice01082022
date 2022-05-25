@@ -63,6 +63,11 @@ public class ApiCommodityController {
                 Tnved2 tnved2 = tnved2Service.getByIdAndFinishdate(commodity.getHsCode());
                 commodity.setHsName(tnved2.getName());
 
+                if (commodity.getHsDecDate() != null && !"".equals(String.valueOf(commodity.getHsDecDate())) && !"null".equals(String.valueOf(commodity.getHsDecDate()))) commodity.setHsDecDate(commodity.getHsDecDate());
+                if (commodity.getInDecDate() != null && !"".equals(String.valueOf(commodity.getInDecDate())) && !"null".equals(String.valueOf(commodity.getInDecDate()))) commodity.setInDecDate(commodity.getInDecDate());
+                if (commodity.getInDecNum() != null && !"".equals(commodity.getInDecNum()) && !"null".equals(commodity.getInDecNum())) commodity.setInDecNum(commodity.getInDecNum());
+                if (commodity.getExtraUnits() != null && !"".equals(commodity.getExtraUnits()) && !"null".equals(commodity.getExtraUnits())) commodity.setExtraUnits(commodity.getExtraUnits());
+
                 commodityService.saveCommodity(commodity);
                 return ResponseHandler.generateResponse("Commodity ma`lumotlari saqlandi!", HttpStatus.OK, commodity);
             } else {

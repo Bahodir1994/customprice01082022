@@ -145,20 +145,48 @@
             <th style="border-style: dotted; text-align: center;" class="">Изоҳ</th>
         </tr>
         </thead>
+        <style>
+            .mess {
+                display: inline-block; /* Строчно-блочный элемент */
+                position: relative; /* Относительное позиционирование */
+            }
+            .mess:hover::after {
+                content: attr(data-title); /* Выводим текст */
+                position: absolute; /* Абсолютное позиционирование */
+                left: 20%; top: 30%; /* Положение подсказки */
+                z-index: 1; /* Отображаем подсказку поверх других элементов */
+                background: rgb(9, 9, 9); /* Полупрозрачный цвет фона */
+                font-family: Arial, sans-serif; /* Гарнитура шрифта */
+                font-size: 11px; /* Размер текста подсказки */
+                color: #f8f9fe!important;
+                padding: 5px 10px; /* Поля */
+                border: 1px solid #333; /* Параметры рамки */
+                border-radius: 30px;
+            }
+        </style>
         <tbody class="">
         <c:if test="${tutorials.size() >= 1}">
             <c:forEach var="tut" items="${tutorials}" varStatus="i">
                 <tr>
                     <td>${((currentPage+1) * getPageSize - getPageSize + 1)+i.index}</td>
                     <c:if test="${tut.status == '100'}">
-                        <td><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="bx bx-plus"></i></button></td>
+                        <c:if test="${userLocation == '1701' && (userRole == 3 || userRole ==4)}">
+                            <td><button class="btn btn-outline-primary" data-title="Сиз учун тақиқланган!" data-bs-toggle="modal" data-bs-target="#exampleModal2" onclick="$('#interSurveyId2').val('${tut.id}');$('#interSurveyStatus2').val('${tut.status}')"><i class="bx bx-plus"></i></button></td>
+                        </c:if>
+                        <c:if test="${userLocation != '1701' && (userRole != 3 || userRole != 4)}">
+                            <td><button class="mess btn btn-outline-primary" data-title="Сиз учун тақиқланган!"><i class="bx bx-info-circle"></i></button></td>
+                        </c:if>
                     </c:if>
                     <c:if test="${tut.status == '200'}">
-                        <td><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3"><i class="bx bx-plus"></i></button></td>
+                        <c:if test="${tut.insUser == userId}">
+                            <td><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3" onclick="$('#interSurveyId3').val('${tut.id}');$('#interSurveyStatus3').val('${tut.status}')"><i class="bx bx-plus"></i></button></td>
+                        </c:if>
+                        <c:if test="${tut.insUser != userId}">
+                            <td><button class="mess btn btn-outline-primary" data-title="Сиз учун тақиқланган!"><i class="bx bx-info-circle"></i></button></td>
+                        </c:if>
                     </c:if>
                     <c:if test="${tut.status == '300'}">
-                        <%--                    <td><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="resetModal()"><i class="bx bx-edit"></i></button></td>--%>
-                        <td>Comment</td>
+                        <td><button class="mess btn btn-outline-success" data-title="Якунланган"><i class="bx bx-check"></i></button></td>
                     </c:if>
                     <!-- 1 start-->
                     <td>${tut.xbbMailNum}</td>
@@ -193,46 +221,48 @@
                             </div>
                             <div class="modal-body row">
                                 <!--todo 2-bosqich-->
-                                <form id="fm2" name="fm2" class="row g-3 needs-validation2" novalidate>
+                                <form class="row g-3 needs-validation2" >
                                     <div class="form-group col-md-3">
                                         <label  for="sendReqNum" class="form-label text-primary">Юборилган сўровнома рақами:</label>
-                                        <input class="form-control was-validated" type="number" id="sendReqNum"  name="sendReqNum" required>
+                                        <input class="form-control" type="hidden" id="interSurveyId2"  name="interSurveyId2">
+                                        <input class="form-control" type="hidden" id="interSurveyStatus2"  name="interSurveyStatus2">
+                                        <input class="form-control" type="number" id="sendReqNum"  name="sendReqNum">
                                         <div class="valid-feedback">Текширилди</div>
-                                        <div class="invalid-feedback">Сўровнома рақамини киритинг!</div>
+                                        <div class="" id="sendReqNumValid"></div>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="reqDate" class="form-label text-primary">Юборилган сўровнома санаси:</label>
-                                        <input  class="form-control was-validated" type="date" id="reqDate" name="reqDate" required>
+                                        <input  class="form-control" type="date" id="reqDate" name="reqDate">
                                         <div class="valid-feedback">Текширилди</div>
-                                        <div class="invalid-feedback">Сўровнома санасини киритинг!</div>
+                                        <div class="" id="reqDateValid"></div>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="responseNum" class="form-label text-primary">Сўровномага олинган жавоб хати:</label>
-                                        <input  class="form-control was-validated" type="number" id="responseNum"  name="responseNum" required>
+                                        <input  class="form-control" type="number" id="responseNum"  name="responseNum">
                                         <div class="valid-feedback">Текширилди</div>
-                                        <div class="invalid-feedback">Жавоб хати рақамини киритинг!</div>
+                                        <div class="" id="responseNumValid"></div>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="responseDate" class="form-label text-primary">Сўровномага олинган жавоб хати санаси:</label>
-                                        <input class="form-control was-validated" type="date" id="responseDate"  name="responseDate" required>
+                                        <input class="form-control" type="date" id="responseDate"  name="responseDate">
                                         <div class="valid-feedback">Текширилди</div>
-                                        <div class="invalid-feedback">Хат санасини киритинг!</div>
+                                        <div class="" id="responseDateValid"></div>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="responseNumSendXbbNum" class="form-label text-primary">Сўровномага олинган жавоб хатини<br> ҲББга юборилган хат рақами:</label>
-                                        <input  class="form-control was-validated" type="number" id="responseNumSendXbbNum" name="responseNumSendXbbNum" required>
+                                        <input  class="form-control" type="number" id="responseNumSendXbbNum" name="responseNumSendXbbNum">
                                         <div class="valid-feedback">Текширилди</div>
-                                        <div class="invalid-feedback">Хат рақамини киритинг!</div>
+                                        <div class="" id="responseNumSendXbbNumValid"></div>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="responseNumSendXbbDate" class="form-label text-primary">Сўровномага олинган жавоб хатини<br> ҲББга юборилган хат санаси:</label>
-                                        <input  class="form-control was-validated" type="date" id="responseNumSendXbbDate"  name="responseNumSendXbbDate" required>
+                                        <input  class="form-control" type="date" id="responseNumSendXbbDate"  name="responseNumSendXbbDate">
                                         <div class="valid-feedback">Текширилди</div>
-                                        <div class="invalid-feedback">Хат санасини киритинг!</div>
+                                        <div class="" id="responseNumSendXbbDateValid"></div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary"
-                                                onclick="saveValueFromInputSStep2('${tut.id}', '${tut.status}')">Сақлаш
+                                                onclick="saveValueFromInputSStep2(event)">Сақлаш
                                         </button>
                                     </div>
                                 </form>
@@ -251,34 +281,48 @@
                             </div>
                             <div class="modal-body row">
                                 <!--todo 3-bosqich-->
-                                <form class="row g-3 needs-validation3" novalidate>
-                                    <div class="form-group col-md-3">
-                                        <label for="resultAnswerMailNum" class="form-label text-primary">Сўровнома натижаси бўйича<br> жавоб хати рақами:</label>
-                                        <input  class="form-control was-validated" type="number" id="resultAnswerMailNum" name="resultAnswerMailNum" required>
+                                <form class="row g-3 needs-validation3">
+                                    <div class="form-group col-md-3 mt-2">
+                                        <label for="resultAnswerMailNum" class="mess form-label text-primary" data-title="Сўровнома натижаси бўйича жавоб хати рақами">Сўров.нат.бўй.жав.хат.рақами:</label>
+                                        <input class="form-control" type="hidden" id="interSurveyId3"  name="interSurveyId3">
+                                        <input class="form-control" type="hidden" id="interSurveyStatus3"  name="interSurveyStatus3">
+                                        <input  class="form-control" type="number" id="resultAnswerMailNum" name="resultAnswerMailNum">
+                                        <div class="valid-feedback">Текширилди</div>
+                                        <div class="" id="resultAnswerMailNumValid"></div>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="resultAnswerMailDate" class="form-label text-primary">Сўровнома натижаси бўйича<br> жавоб хати санаси:</label>
-                                        <input  class="form-control was-validated" type="date" id="resultAnswerMailDate"  name="resultAnswerMailDate" required>
+                                    <div class="form-group col-md-3 mt-2">
+                                        <label for="resultAnswerMailDate" class="mess form-label text-primary" data-title="Сўровнома натижаси бўйича жавоб хати санаси">Сўров.нат.бўй.жав.хат.санаси:</label>
+                                        <input  class="form-control" type="date" id="resultAnswerMailDate"  name="resultAnswerMailDate">
+                                        <div class="valid-feedback">Текширилди</div>
+                                        <div class="" id="resultAnswerMailDateValid"></div>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mt-2">
                                         <label for="xbbVerdictNum" class="form-label text-primary">ҲББ хулоса рақами:</label>
-                                        <input  class="form-control was-validated" type="number" id="xbbVerdictNum" name="xbbVerdictNum" required>
+                                        <input  class="form-control" type="number" id="xbbVerdictNum" name="xbbVerdictNum">
+                                        <div class="valid-feedback">Текширилди</div>
+                                        <div class="" id="xbbVerdictNumValid"></div>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mt-2">
                                         <label for="xbbVerdictDate" class="form-label text-primary">ҲББ хулоса санаси:</label>
-                                        <input  class="form-control was-validated" type="date" id="xbbVerdictDate"  name="xbbVerdictDate" required>
+                                        <input  class="form-control" type="date" id="xbbVerdictDate"  name="xbbVerdictDate">
+                                        <div class="valid-feedback">Текширилди</div>
+                                        <div class="" id="xbbVerdictDateValid"></div>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mt-2">
                                         <label for="sum" class="form-label text-primary">Камомад суммаси:</label>
-                                        <input  class="form-control was-validated" type="number" id="sum"  name="sum" required>
+                                        <input  class="form-control was-validated" type="number" id="sum"  name="sum">
+                                        <div class="valid-feedback">Текширилди</div>
+                                        <div class="" id="sumValid"></div>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mt-2">
                                         <label for="comment" class="form-label text-primary">Изох:</label>
-                                        <input  class="form-control was-validated" type="text" id="comment"  name="comment" required>
+                                        <input  class="form-control was-validated" type="text" id="comment"  name="comment">
+                                        <div class="valid-feedback">Текширилди</div>
+                                        <div class="" id="commentValid"></div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary"
-                                                onclick="saveValueFromInputSStep3('${tut.id}', '${tut.status}')">Сақлаш
+                                                onclick="saveValueFromInputSStep3()">Сақлаш
                                         </button>
                                     </div>
                                 </form>
@@ -348,8 +392,8 @@
     </div>
 </div>
 <script>
-    function saveValueFromInputSStep2(id, status) {
-        alert(id + '\n' + status);
+    function saveValueFromInputSStep2(e=null) {
+
         var dataS = {
             /*"xbbMailNum": $('#xbbMailNum').val(),
             "xbbMailDate": $('#xbbMailDate').val(),
@@ -370,59 +414,86 @@
             "sum": $('#sum').val(),
             "comment": $('#comment').val()*/
             /******************************/
-            "id": id,
-            "status": status
+            "id": $('#interSurveyId2').val(),
+            "status": $('#interSurveyStatus2').val()
         }
-        var forms = document.querySelectorAll('.needs-validation2')
-        // var forms = document.getElementById('#fm2')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                // form.addEventListener('click', function (event) {
-                if (!form.checkValidity()) {
-                    // event.preventDefault()
-                    // event.stopPropagation()
-                    form.classList.add('was-validated')
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify(dataS),
+            url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/SaveIS2",
+            dataType: "json",
+            async: true,
+            contentType: 'application/json',
+            success: function (res) {
+                $('#closeModalSave2').trigger('click');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Дастлабки маълумотлар сақланди',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            },
+            error: function (response) {
+                if (typeof response.responseJSON.sendReqNum != "undefined" && response.responseJSON.sendReqNum != null && response.responseJSON.sendReqNum != "" && response.responseJSON.sendReqNum != "undefined") {
+                    $('#sendReqNumValid').html(response.responseJSON.sendReqNum).addClass('text-danger mb-2');
+                    $('#sendReqNum').addClass('border border-danger');
+                }else {
+                    $('#sendReqNum').removeClass('border border-danger');
+                    $('#sendReqNumValid').html('');
+                    $('#sendReqNum').addClass('border border-success');
                 }
-                if (form.checkValidity()) {
-                    $.ajax({
-                        type: "POST",
-                        data: dataS,
-                        <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
-                        url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/SaveIS",
-                        dataType: "html",
-                        header: 'Content-type: text/html; charset=utf-8',
-                        success: function (data) {
-                            $('#closeModalSave2').trigger('click');
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Иккиламчи маълумотлар сақланди',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                        },
-                        error: function (request, status, error) {
-                            console.log(request.responseText);
-                            console.log(status)
-                            $('#closeModalSave2').trigger('click');
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'error',
-                                title: 'Хатолик!',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                            //do stuff
-                        }
-                    });
+                if (typeof response.responseJSON.reqDate != "undefined" && response.responseJSON.reqDate != null && response.responseJSON.reqDate != "" && response.responseJSON.reqDate != "undefined") {
+                    $('#reqDateValid').html(response.responseJSON.reqDate).addClass('text-danger');
+                    $('#reqDate').addClass('border border-danger');
+                }else {
+                    $('#reqDate').removeClass('border border-danger');
+                    $('#reqDateValid').html('');
+                    $('#reqDate').addClass('border border-success');
                 }
-                // }, false)
-            })
+                if (typeof response.responseJSON.responseNum != "undefined" && response.responseJSON.responseNum != null && response.responseJSON.responseNum != "" && response.responseJSON.responseNum != "undefined") {
+                    $('#responseNumValid').html(response.responseJSON.responseNum).addClass('text-danger');
+                    $('#responseNum').addClass('border border-danger');
+                }else {
+                    $('#responseNum').removeClass('border border-danger');
+                    $('#responseNumValid').html('');
+                    $('#responseNum').addClass('border border-success');
+                }
+                if (typeof response.responseJSON.responseDate != "undefined" && response.responseJSON.responseDate != null && response.responseJSON.responseDate != "" && response.responseJSON.responseDate != "undefined") {
+                    $('#responseDateValid').html(response.responseJSON.responseDate).addClass('text-danger');
+                    $('#responseDate').addClass('border border-danger');
+                }else {
+                    $('#responseDate').removeClass('border border-danger');
+                    $('#responseDateValid').html('');
+                    $('#responseDate').addClass('border border-success');
+                }
+                if (typeof response.responseJSON.responseNumSendXbbNum != "undefined" && response.responseJSON.responseNumSendXbbNum != null && response.responseJSON.responseNumSendXbbNum != "" && response.responseJSON.responseNumSendXbbNum != "undefined") {
+                    $('#responseNumSendXbbNumValid').html(response.responseJSON.responseNumSendXbbNum).addClass('text-danger');
+                    $('#responseNumSendXbbNum').addClass('border border-danger');
+                }else {
+                    $('#responseNumSendXbbNum').removeClass('border border-danger');
+                    $('#responseNumSendXbbNumValid').html('');
+                    $('#responseNumSendXbbNum').addClass('border border-success');
+                }
+                if (typeof response.responseJSON.responseNumSendXbbDate != "undefined" && response.responseJSON.responseNumSendXbbDate != null && response.responseJSON.responseNumSendXbbDate != "" && response.responseJSON.responseNumSendXbbDate != "undefined") {
+                    $('#responseNumSendXbbDateValid').html(response.responseJSON.responseNumSendXbbDate).addClass('text-danger');
+                    $('#responseNumSendXbbDate').addClass('border border-danger');
+                }else {
+                    $('#responseNumSendXbbDate').removeClass('border border-danger');
+                    $('#responseNumSendXbbDateValid').html('');
+                    $('#responseNumSendXbbDate').addClass('border border-success');
+                }
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Хатолик!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        });
     }
-    function saveValueFromInputSStep3(id, status) {
-        alert('lolo');
+    function saveValueFromInputSStep3() {
         var dataS = {
             /*"xbbMailNum": $('#xbbMailNum').val(),
             "xbbMailDate": $('#xbbMailDate').val(),
@@ -443,56 +514,85 @@
             "sum": $('#sum').val(),
             "comment": $('#comment').val(),
             /******************************/
-            "id": id,
-            "status": status
+            "id": $('#interSurveyId3').val(),
+            "status": $('#interSurveyStatus3').val()
         }
-
-        var forms = document.querySelectorAll('.needs-validation3')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                // form.addEventListener('click', function (event) {
-                if (!form.checkValidity()) {
-                    // event.preventDefault()
-                    // event.stopPropagation()
-                    form.classList.add('was-validated')
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify(dataS),
+            url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/SaveIS3",
+            dataType: "json",
+            async: true,
+            contentType: 'application/json',
+            success: function (res) {
+                $('#closeModalSave3').trigger('click');
+                searchResultTableIS();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Дастлабки маълумотлар сақланди',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            },
+            error: function (response) {
+                if (typeof response.responseJSON.resultAnswerMailNum != "undefined" && response.responseJSON.resultAnswerMailNum != null && response.responseJSON.resultAnswerMailNum != "" && response.responseJSON.resultAnswerMailNum != "undefined") {
+                    $('#resultAnswerMailNumValid').html(response.responseJSON.resultAnswerMailNum).addClass('text-danger mb-2')
+                    $('#resultAnswerMailNum').addClass('border border-danger')
+                }else {
+                    $('#resultAnswerMailNum').removeClass('border border-danger');
+                    $('#resultAnswerMailNumValid').html('');
+                    $('#resultAnswerMailNum').addClass('border border-success');
                 }
-                if (form.checkValidity()) {
-                    $.ajax({
-                        type: "POST",
-                        data: dataS,
-                        <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
-                        url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/SaveIS",
-                        dataType: "html",
-                        header: 'Content-type: text/html; charset=utf-8',
-                        success: function (data) {
-                            $('#closeModalSave3').trigger('click');
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Якуний маълумотлар сақланди',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                        },
-                        error: function (request, status, error) {
-                            console.log(request.responseText);
-                            console.log(status)
-                            $('#closeModalSave3').trigger('click');
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'error',
-                                title: 'Хатолик!',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                            //do stuff
-                        }
-                    });
+                if (typeof response.responseJSON.resultAnswerMailDate != "undefined" && response.responseJSON.resultAnswerMailDate != null && response.responseJSON.resultAnswerMailDate != "" && response.responseJSON.resultAnswerMailDate != "undefined") {
+                    $('#resultAnswerMailDateValid').html(response.responseJSON.resultAnswerMailDate).addClass('text-danger mb-2')
+                    $('#resultAnswerMailDate').addClass('border border-danger')
+                }else {
+                    $('#resultAnswerMailDate').removeClass('border border-danger');
+                    $('#resultAnswerMailDateValid').html('');
+                    $('#resultAnswerMailDate').addClass('border border-success');
                 }
-
-            })
+                if (typeof response.responseJSON.xbbVerdictNum != "undefined" && response.responseJSON.xbbVerdictNum != null && response.responseJSON.xbbVerdictNum != "" && response.responseJSON.xbbVerdictNum != "undefined") {
+                    $('#xbbVerdictNumValid').html(response.responseJSON.xbbVerdictNum).addClass('text-danger mb-2')
+                    $('#xbbVerdictNum').addClass('border border-danger')
+                }else {
+                    $('#xbbVerdictNum').removeClass('border border-danger');
+                    $('#xbbVerdictNumValid').html('');
+                    $('#xbbVerdictNum').addClass('border border-success');
+                }
+                if (typeof response.responseJSON.xbbVerdictDate != "undefined" && response.responseJSON.xbbVerdictDate != null && response.responseJSON.xbbVerdictDate != "" && response.responseJSON.xbbVerdictDate != "undefined") {
+                    $('#xbbVerdictDateValid').html(response.responseJSON.xbbVerdictDate).addClass('text-danger mb-2')
+                    $('#xbbVerdictDate').addClass('border border-danger')
+                }else {
+                    $('#xbbVerdictDate').removeClass('border border-danger');
+                    $('#xbbVerdictDateValid').html('');
+                    $('#xbbVerdictDate').addClass('border border-success');
+                }
+                if (typeof response.responseJSON.sum != "undefined" && response.responseJSON.sum != null && response.responseJSON.sum != "" && response.responseJSON.sum != "undefined") {
+                    $('#sumValid').html(response.responseJSON.sum).addClass('text-danger mb-2')
+                    $('#sum').addClass('border border-danger')
+                }else {
+                    $('#sum').removeClass('border border-danger');
+                    $('#sumValid').html('');
+                    $('#sum').addClass('border border-success');
+                }
+                if (typeof response.responseJSON.comment != "undefined" && response.responseJSON.comment != null && response.responseJSON.comment != "" && response.responseJSON.comment != "undefined") {
+                    $('#commentValid').html(response.responseJSON.comment).addClass('text-danger mb-2')
+                    $('#comment').addClass('border border-danger')
+                }else {
+                    $('#comment').removeClass('border border-danger');
+                    $('#commentValid').html('');
+                    $('#comment').addClass('border border-success');
+                }
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Хатолик!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        });
     }
 </script>
 </body>

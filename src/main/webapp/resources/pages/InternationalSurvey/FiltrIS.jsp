@@ -256,11 +256,12 @@
                                 <label>Cўровнома холати</label>
                                 <select class="form-select" id="statusS" name="statusS">
                                     <option value="">--Танланг--</option>
-                                    <option value="100">100</option>
-                                    <option value="200">200</option>
-                                    <option value="300">300</option>
+                                    <option value="100">Янги</option>
+                                    <option value="200">Жараёнда</option>
+                                    <option value="300">Якунланган</option>
                                 </select>
                             </div>
+                            <div id="target" name="target"></div>
                         </div>
                         <div class="row mb-0">
                             <div class="col text-center">
@@ -270,7 +271,9 @@
                                 <button type="reset" class="btn btn-outline-primary btn-block mt-3" onclick="reset(1)">
                                     <i class='bx bx-trash'></i>Тозалаш
                                 </button>
-                                <button type="button" class="btn btn-outline-primary btn-block mt-3" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="resetModal()"><i class='bx bx-plus'></i>Киритиш
+                                <button type="button" class="btn btn-outline-primary btn-block mt-3"
+                                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                        onclick="resetModal()"><i class='bx bx-plus'></i>Киритиш
                                 </button>
                             </div>
                         </div>
@@ -281,53 +284,60 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Халқаро сўровнома киритиш</h5>
-                                        <button type="button" class="btn-close" id="closeModalSave" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" id="closeModalSave"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body row">
                                         <!--todo 1-bosqich-->
-                                        <form class="row g-3 needs-validation" novalidate>
+                                        <form class="row g-3 needs-validation">
                                             <div class="form-group col-md-3">
                                                 <label for="xbbMailNum" class="form-label text-primary">ҲББ томонидан юбоирлган хат рақами:</label>
-                                                <input class="form-control  was-validated" type="number"  id="xbbMailNum" name="xbbMailNum" required>
+                                                <input class="form-control" type="number" id="xbbMailNum" name="xbbMailNum">
                                                 <div class="valid-feedback">Текширилди</div>
-                                                <div class="invalid-feedback">Хат рақамини киритинг!</div>
+                                                <div class="" id="xbbMailNumValid"></div>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="xbbMailNum" class="form-label text-primary">ҲББ томонидан юбоирлган хат санаси:</label>
-                                                <input class="form-control was-validated" type="date" id="xbbMailDate" name="xbbMailDate" required>
+                                                <label for="xbbMailNum" class="form-label text-primary">ҲББ томонидан
+                                                    юбоирлган хат санаси:</label>
+                                                <input class="form-control" type="date" id="xbbMailDate"
+                                                       name="xbbMailDate">
                                                 <div class="valid-feedback">Текширилди</div>
-                                                <div class="invalid-feedback">Хат санасини киритинг!</div>
+                                                <div class="" id="xbbMailDateValid"></div>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="orgName" class="form-label text-primary">Ташкилот номи:</label>
-                                                <input class="form-control was-validated" type="text" id="orgName" name="orgName" required>
+                                                <label for="orgName" class="form-label text-primary">Ташкилот
+                                                    номи:</label>
+                                                <input class="form-control was-validated" type="text" id="orgName"
+                                                       name="orgName">
                                                 <div class="valid-feedback">Текширилди</div>
-                                                <div class="invalid-feedback">Ташкилот номини киритинг!</div>
+                                                <div class="" id="orgNameValid"></div>
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label for="hsCode" class="form-label text-primary">ТИФ ТН код:</label>
-                                                <input class="form-control was-validated" type="number" id="hsCode" name="hsCode" required>
+                                                <input class="form-control" type="number" id="hsCode" name="hsCode">
                                                 <div class="valid-feedback">Текширилди</div>
-                                                <div class="invalid-feedback">ТИФ ТН кодини киритинг!</div>
+                                                <div class="" id="hsCodeValid"></div>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="productName" class="form-label text-primary">Товар номи:</label>
-                                                <input class="form-control was-validated" type="text" id="productName" name="productName" required>
+                                                <label for="productName" class="form-label text-primary">Товар
+                                                    номи:</label>
+                                                <input class="form-control" type="text" id="productName"
+                                                       name="productName">
                                                 <div class="valid-feedback">Текширилди</div>
-                                                <div class="invalid-feedback">Товар номини киритинг!</div>
+                                                <div class="" id="productNameValid"></div>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="sendReqCountryCode" class="form-label text-primary">Сўровнома юборилган
+                                                <label for="sendReqCountryCode" class="form-label text-primary">Сўровнома
+                                                    юборилган
                                                     давлат:</label>
-                                                <select class="form-control was-validated" type="text"
-                                                        id="sendReqCountryCode" name="sendReqCountryCode" required>
-                                                    <option selected disabled value="">--- Танланг ---</option>
+                                                <select class="form-control" type="text" id="sendReqCountryCode" name="sendReqCountryCode">
+                                                    <option class="font-italic" selected value="">--- Танланг ---</option>
                                                     <c:forEach var="vals" items="${countryList}" varStatus="i">
-                                                        <option value="${vals.code}">${vals.code} - ${vals.cdNm}</option>
+                                                        <option value="${vals.code}">${vals.code}- ${vals.cdNm}</option>
                                                     </c:forEach>
                                                 </select>
                                                 <div class="valid-feedback">Текширилди</div>
-                                                <div class="invalid-feedback">Сўровнома юборилган давлатни танланг</div>
+                                                <div class="" id="sendReqCountryCodeValid"></div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-primary"
@@ -397,10 +407,8 @@
             $(this).hide();
         }
     })(jQuery);
-
-    function searchResultTableIS(x,root=null) {
-        if(root) root.preventDefault();
-        // var status = $('#statusS').val();
+    function searchResultTableIS(x, root = null) {
+        if (root) root.preventDefault();
         var dataS = {
             "xbbMailDate": $("#xbbMailDateS").val().toString(),
             "xbbMailNum": $("#xbbMailNumS").val(),
@@ -447,7 +455,7 @@
             "orgName": $('#orgName').val(),
             "hsCode": $('#hsCode').val(),
             "productName": $('#productName').val(),
-            "sendReqCountryCode": $('#sendReqCountryCode').val()/*,
+            "sendReqCountryCode": $('#sendReqCountryCode').val()/*
             "sendReqNum": $('#sendReqNum').val(),
             "reqDate": $('#reqDate').val(),
             "responseNum": $('#responseNum').val(),
@@ -461,54 +469,88 @@
             "sum": $('#sum').val(),
             "comment": $('#comment').val()*/
         }
-
-        var forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                // form.addEventListener('click', function (event) {
-                if (!form.checkValidity()) {
-                    // event.preventDefault()
-                    // event.stopPropagation()
-                    form.classList.add('was-validated')
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify(dataS),
+            <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
+            url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/SaveIS1",
+            dataType: "json",
+            async: true,
+            contentType: 'application/json',
+            success: function (res) {
+                $('#closeModalSave').trigger('click');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Дастлабки маълумотлар сақланди',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            },
+            error: function (response) {
+                if (typeof response.responseJSON.xbbMailNum != "undefined" && response.responseJSON.xbbMailNum != null && response.responseJSON.xbbMailNum != "" && response.responseJSON.xbbMailNum != "undefined") {
+                    $('#xbbMailNumValid').html(response.responseJSON.xbbMailNum).addClass('text-danger');
+                    $('#xbbMailNum').addClass('border border-danger')
+                } else {
+                    $('#xbbMailNum').removeClass('border border-danger');
+                    $('#xbbMailNumValid').html('');
+                    $('#xbbMailNum').addClass('border border-success');
                 }
-                if (form.checkValidity()) {
-                    $.ajax({
-                        type: "POST",
-                        data: dataS,
-                        <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
-                        url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/SaveIS",
-                        dataType: "html",
-                        header: 'Content-type: text/html; charset=utf-8',
-                        success: function (data) {
-                            $('#closeModalSave').trigger('click');
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Дастлабки маълумотлар сақланди',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                        },
-                        error: function (request, status, error) {
-                            console.log(request.responseText);
-                            console.log(status)
-                            console.log("sadsdsdadas")
-                            $('#closeModalSave').trigger('click');
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'error',
-                                title: 'Хатолик!',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                            //do stuff
-                        }
-                    });
+
+                if (typeof response.responseJSON.xbbMailDate != "undefined" && response.responseJSON.xbbMailDate != null && response.responseJSON.xbbMailDate != "" && response.responseJSON.xbbMailDate != "undefined") {
+                    $('#xbbMailDateValid').html(response.responseJSON.xbbMailDate).addClass('text-danger');
+                    $('#xbbMailDate').addClass('border border-danger')
+                } else {
+                    $('#xbbMailDate').removeClass('border border-danger');
+                    $('#xbbMailDateValid').html('');
+                    $('#xbbMailDate').addClass('border border-success');
                 }
-                // }, false)
-            })
+
+                if (typeof response.responseJSON.orgName != "undefined" && response.responseJSON.orgName != null && response.responseJSON.orgName != "" && response.responseJSON.orgName != "undefined") {
+                    $('#orgNameValid').html(response.responseJSON.orgName).addClass('text-danger');
+                    $('#orgName').addClass('border border-danger')
+                } else {
+                    $('#orgName').removeClass('border border-danger');
+                    $('#orgNameValid').html('');
+                    $('#orgName').addClass('border border-success');
+                }
+
+                if (typeof response.responseJSON.hsCode != "undefined" && response.responseJSON.hsCode != null && response.responseJSON.hsCode != "" && response.responseJSON.hsCode != "undefined") {
+                    $('#hsCodeValid').html(response.responseJSON.hsCode).addClass('text-danger');
+                    $('#hsCode').addClass('border border-danger')
+                } else {
+                    $('#hsCode').removeClass('border border-danger');
+                    $('#hsCodeValid').html('');
+                    $('#hsCode').addClass('border border-success');
+                }
+
+                if (typeof response.responseJSON.productName != "undefined" && response.responseJSON.productName != null && response.responseJSON.productName != "" && response.responseJSON.productName != "undefined") {
+                    $('#productNameValid').html(response.responseJSON.productName).addClass('text-danger');
+                    $('#productName').addClass('border border-danger')
+                } else {
+                    $('#productName').removeClass('border border-danger');
+                    $('#productNameValid').html('');
+                    $('#productName').addClass('border border-success');
+                }
+
+                if (typeof response.responseJSON.sendReqCountryCode != "undefined" && response.responseJSON.sendReqCountryCode != null && response.responseJSON.sendReqCountryCode != "" && response.responseJSON.sendReqCountryCode != "undefined") {
+                    $('#sendReqCountryCodeValid').html(response.responseJSON.sendReqCountryCode).addClass('text-danger');
+                    $('#sendReqCountryCode').addClass('border border-danger')
+                } else {
+                    $('#sendReqCountryCode').removeClass('border border-danger');
+                    $('#sendReqCountryCodeValid').html('');
+                    $('#sendReqCountryCode').addClass('border border-success');
+                }
+
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Хатолик!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        });
     }
     function reset(x) {
         document.getElementById("xbbMailDateS").value = '';
@@ -536,7 +578,6 @@
         document.getElementById("productName").value = '';
         document.getElementById("sendReqCountryCode").value = '';
     }
-
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
