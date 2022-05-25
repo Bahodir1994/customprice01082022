@@ -207,13 +207,10 @@
 <%--                                    <option value="${vals.id}">${i.index+1}-усул (${vals.name})</option>--%>
 <%--                                </c:forEach>--%>
 <%--                                <option value="0">Все</option>--%>
-                                <option value="1">1</option>
-<%--                                <option value="2">2</option>--%>
-<%--                                <option value="3">3</option>--%>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-<%--                                <option value="6">6</option>--%>
-                                <option value="6.1">6.1</option>
+                                <option value="1">1-усул</option>
+                                <option value="4">4-усул</option>
+                                <option value="5">5-усул</option>
+                                <option value="6.1">6.1-усул</option>
 <%--                                <option value="6.2">6.2</option>--%>
 <%--                                <option value="6.3">6.3</option>--%>
 <%--                                <option value="6.4">6.4</option>--%>
@@ -241,7 +238,7 @@
                                 <select class="form-select shadow-sm" id="g20b" required="">
                                     <option value="">--- Танланг ---</option>
                                     <c:forEach var="vals" items="${termsList}" varStatus="i">
-                                        <option value="${vals.sign}">${vals.name}</option>
+                                        <option value="${vals.raqam}">${vals.raqam} - ${vals.sign}</option>
                                     </c:forEach>
                                 </select>
                             </div>
