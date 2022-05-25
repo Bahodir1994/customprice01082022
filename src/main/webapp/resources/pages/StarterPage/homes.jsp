@@ -44,9 +44,9 @@
                 <div class="col border-end border-light-2">
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
-                            <p class="mb-1 text-white">Sessions</p>
-                            <h3 class="mb-3 text-white">876</h3>
-                            <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i>2.1%</span> vs last 7 days</p>
+                            <p class="mb-1 text-white">Ўртача божхона қиймати индекси</p>
+                            <h3 class="mb-3 text-white">14.72 $</h3>
+                            <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i>2.1%</span> охирги 7 кунда</p>
                             <div id="chart1"></div>
                         </div>
                     </div>
@@ -54,9 +54,9 @@
                 <div class="col border-end border-light-2">
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
-                            <p class="mb-1 text-white">Total Users</p>
-                            <h3 class="mb-3 text-white">4.5M</h3>
-                            <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i> 4.2% </span> last 7 days</p>
+                            <p class="mb-1 text-white">Дастлабки қарорлар сони</p>
+                            <h3 class="mb-3 text-white">2 та</h3>
+                            <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i> 4.2% </span> охирги 7 кунда</p>
                             <div id="chart2"></div>
                         </div>
                     </div>
@@ -64,9 +64,9 @@
                 <div class="col border-end border-light-2">
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
-                            <p class="mb-1 text-white">Page Views</p>
-                            <h3 class="mb-3 text-white">64,835</h3>
-                            <p class="font-13 text-white"><span class="text-danger"><i class="lni lni-arrow-down"></i> 3.6%</span> vs last 7 days</p>
+                            <p class="mb-1 text-white">Фойдаланувчилар сони</p>
+                            <h3 class="mb-3 text-white">48 та</h3>
+                            <p class="font-13 text-white"><span class="text-danger"><i class="lni lni-arrow-down"></i> 3.6%</span> охирги 7 кунда</p>
                             <div id="chart3"></div>
                         </div>
                     </div>
@@ -74,9 +74,9 @@
                 <div class="col border-end border-light-2">
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
-                            <p class="mb-1 text-white">Bounce Rate</p>
-                            <h3 class="mb-3 text-white">42.68%</h3>
-                            <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i> 2.5%</span> vs last 7 days</p>
+                            <p class="mb-1 text-white">Шартли белгиланган товарлар</p>
+                            <h3 class="font-22 mb-3 text-white">408 729 503,39 сўм</h3>
+                            <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i> 2.5%</span> охирги 7 кунда</p>
                             <div id="chart4"></div>
                         </div>
                     </div>
@@ -84,10 +84,10 @@
                 <div class="col col-md-12">
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
-                            <p class="mb-1 text-white">Avg. Session Duration</p>
+                            <p class="mb-1 text-white">Дастурдан фойдаланиш вақтингиз</p>
                             <h3 class="mb-3 text-white">00:04:60</h3>
-                            <p class="font-13 text-white"><span class="text-danger"><i class="lni lni-arrow-down"></i> 5.2%</span> vs last 7 days</p>
-                            <div id="chart5"></div>
+                            <p class="font-13 text-white"><span class="text-danger"><i class=""></i> Эслатма</span> Фойдаланиш вақти 10 дақиқа</p>
+<%--                            <div id="chart5"></div>--%>
                         </div>
                     </div>
                 </div>
@@ -100,16 +100,16 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div>
-                                <h6 class="mb-0">Sales Overview</h6>
+                                <h6 class="mb-0">Энг кўп импорт қилинаётган товарларнинг божхона қиймати индекси</h6>
                             </div>
                             <div class="dropdown ms-auto">
                                 <button class="btn btn-white btn-sm radius-10 dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    This Month
+                                    ТИФ ТН коди
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">This Week</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" href="#">3304 99 000 0</a></li>
+                                    <li><a class="dropdown-item" href="#">1001 99 000 0</a></li>
+                                    <li><a class="dropdown-item" href="#">9033 00 000 0</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div>
-                                <h6 class="mb-0">Visitor Status</h6>
+                                <h6 class="mb-0">божхона қиймати индекси пасайиб кетаётган товарлар</h6>
                             </div>
                             <div class="d-flex align-items-center ms-auto font-13 gap-2">
                                 <span class="border px-1 rounded cursor-pointer"><i class='bx bxs-circle text-primary me-1'></i>New Visitor</span>

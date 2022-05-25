@@ -26,7 +26,7 @@ public class InternationalSurveyStep3DTO {
     @Size(min = 3, max = 30, message = "Майдон белгилари сони 3 та дан<br> 30 та гача бўлиши лозим!")
     private String sum;
 
-    @NotNull(message = "Изох майдони дастлаб тўлдирилиши лозим!")
+    @NotBlank(message = "Изох майдони дастлаб тўлдирилиши лозим!")
     private String comment;
 
     private String id;

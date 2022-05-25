@@ -28,6 +28,6 @@ public class InternationalSurveyStep1DTO {
     @Size(min = 2, max = 200, message = "Майдон белгилари сони 2 та дан 200 та гача бўлиши лозим!")
     private String productName;
 
-    @NotNull(message = "Давлат номини танланг!")
+    @NotBlank(message = "Давлат номини танланг!")
     private String sendReqCountryCode;
 }

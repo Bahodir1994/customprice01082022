@@ -479,6 +479,7 @@
             contentType: 'application/json',
             success: function (res) {
                 $('#closeModalSave').trigger('click');
+                searchResultTableIS();
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',

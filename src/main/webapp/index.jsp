@@ -171,7 +171,7 @@
                                  style="width: 45px;">
                         </div>
                         <div class="">
-                            <h4 class="logo-text">Божхона қиймати назорати</h4>
+                            <a class="logo-text h4" href="/">Божхона қиймати назорати</a>
                         </div>
                     </div>
                     <div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>
