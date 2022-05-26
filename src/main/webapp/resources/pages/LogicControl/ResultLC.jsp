@@ -26,26 +26,59 @@
 <body>
 
 <div class="table-responsive">
-  <table id="example1" class="table table-striped table-bordered table-responsive">
+  <table id="exampleLC" class="table table-striped table-bordered table-responsive" >
     <thead class="bg-light-primary" style="border-color: #0a58ca; border-style: dotted">
     <tr>
       <th style="border-style: dotted">т/р</th>
-      <th style="border-style: dotted">Мантиқий назорат номи</th>
+      <th style="border-style: dotted">Мантиқий назорат рақами</th>
+      <th style="border-style: dotted">Файл</th>
+      <th style="border-style: dotted; width: 20px!important;">Мантиқий назорат номи</th>
+      <th style="border-style: dotted">Мантиқий назорат хуқукий асоси</th>
       <th style="border-style: dotted">Мантиқий назорат хабари</th>
-      <th style="border-style: dotted">Илова қилинган файл</th>
-      <th style="border-style: dotted">Амал қилиш муддати</th>
+      <th style="border-style: dotted">Киритилган вақти</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>11</td>
-      <td>11</td>
-      <td>11</td>
-      <td>11</td>
-      <td>11</td>
-    </tr>
+    <c:forEach var="logContrl" items="${logContrlList}" varStatus="i">
+      <tr>
+        <td>${i.index+1}</td>
+        <td>${logContrl.flkNum}</td>
+        <td><button class="btn btn-outline-primary btn-sm btn-block"  onclick="openNavLc('${logContrl.id}', ${logContrl.flkNum})"><i class="bx bxs-file-pdf"></i></button></td>
+        <td><textarea cols="68" style="text-align: center">${logContrl.flkName}</textarea></td>
+        <td nowrap   align="left" valign= "top">${logContrl.flkBase}</td>
+        <td><textarea cols="82">${logContrl.flkMsg}</textarea></td>
+        <td>${logContrl.flkDate}</td>
+
+      </tr>
+    </c:forEach>
     </tbody>
   </table>
 </div>
+<style>
+  div.dt-buttons {
+    position: fixed;
+    top: 0;
+    right: 0;
+  }
+</style>
+<script>
 
+  $(document).ready(function () {
+    $('#exampleLC').DataTable({
+      "language": {
+        "zeroRecords": "Сиз излаган маълумот мавжуд эмас!",
+        "infoFiltered": "(_MAX_ та маълумот сараланди)",
+        "infoEmpty": "Маълумотлар топилмади",
+        "info": "Жами _PAGES_ та, _PAGE_-сахифа ",
+        "lengthMenu": "Кўрсатилмоқда _MENU_ та ариза",
+        "Show": "Кўрсатилмоқда",
+        "search": "Излаш",
+        "paginate": {
+          "next": "Кейинги",
+          "previous": "Олдинги",
+        }
+      }
+    });
+  });
+</script>
 </body>

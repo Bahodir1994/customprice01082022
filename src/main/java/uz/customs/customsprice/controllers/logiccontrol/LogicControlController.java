@@ -1,40 +1,112 @@
 package uz.customs.customsprice.controllers.logiccontrol;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import uz.customs.customsprice.repository.QiymatconsultRepo;
-import uz.customs.customsprice.service.QiymatconsultService;
-import uz.customs.customsprice.service.pcabinet.FreeDocService;
-import uz.customs.customsprice.service.pcabinet.FreeHashService;
+import uz.customs.customsprice.entity.logcontrol.CroscheckMainEntity;
+import uz.customs.customsprice.entity.logcontrol.FileCrosCheckMain;
+import uz.customs.customsprice.repository.FileCheckMainRepo;
+import uz.customs.customsprice.repository.logcontrol.LogControlRepo;
+import uz.customs.customsprice.service.FileCheckMainService;
+
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Date;
+import java.util.Base64;
+import java.util.List;
+import java.util.Objects;
+
+import static com.itextpdf.text.Utilities.convertToHex;
 
 @Controller
 @RequestMapping("/logicalcontrolss")
 public class LogicControlController {
     private final String FILTERLC = "/resources/pages/LogicalControl/FilterLC";
     private final String RESULTLC = "/resources/pages/LogicalControl/ResultLC";
+    private final String MODALPDFLC = "/resources/pages/LogicalControl/pdfModalLC";
+    private final String SAVELCPDFMODAL = "/resources/pages/LogicalControl/savePdfFile";
+    private final FileCheckMainService fileCheckMainService;
 
+    @Autowired
+    LogControlRepo logControlRepo;
+
+    @Autowired
+    FileCheckMainRepo fileCheckMainRepo;
+
+    public LogicControlController(FileCheckMainService fileCheckMainService) {
+        this.fileCheckMainService = fileCheckMainService;
+    }
 
     @PostMapping(value = FILTERLC)
     @ResponseBody
     public ModelAndView FilterLC(HttpSession session) {
         ModelAndView mav = new ModelAndView("resources/pages/LogicControl/FilterLC");
-
         return mav;
     }
 
-
-    @PostMapping(value = RESULTLC)
+    @GetMapping(value = RESULTLC)
     @ResponseBody
-    public ModelAndView ResultLC(HttpSession session) {
+    public ModelAndView ResultLC(HttpSession session, @RequestParam(required = false)String flkNum, @RequestParam(required = false)String flkName, @RequestParam(required = false)String Dfrom, @RequestParam(required = false)String Dtoo) {
         ModelAndView mav = new ModelAndView("resources/pages/LogicControl/ResultLC");
-
+        Date DfromRes = null;
+        Date DtooRes = null;
+        if (!Objects.equals(Dfrom, "") && Dfrom !=null){
+            DfromRes = Date.valueOf(Dfrom);
+        }
+        if (!Objects.equals(Dtoo, "") && Dtoo !=null){
+            DtooRes = Date.valueOf(Dtoo);
+        }
+        List<CroscheckMainEntity> croscheckMainEntity = logControlRepo.findByFlkNumAndFlkNameAndStatusAndFlkDepAndFlkDateBetween(flkNum, flkName, String.valueOf(1), "01308", DfromRes, DtooRes);
+        mav.addObject("logContrlList", croscheckMainEntity);
         return mav;
     }
 
+    @PostMapping(value = MODALPDFLC)
+    @ResponseBody
+    public ModelAndView pdfModalLC(HttpSession session, @RequestParam()String id, @RequestParam()String flkNum){
+        FileCrosCheckMain fileCrosCheckMain = new FileCrosCheckMain();
+        fileCrosCheckMain = fileCheckMainService.getByFlkId(id);
+        if (fileCrosCheckMain == null){
+            ModelAndView modelAndView  = new ModelAndView("/resources/pages/LogicControl/pdfModalLC");
+            modelAndView.addObject("flkNum", flkNum);
+            modelAndView.addObject("id", id);
+            return modelAndView;
+        }else {
+            ModelAndView modelAndView  = new ModelAndView("/resources/pages/LogicControl/OpenerPdfLc");
+            String imageBase64 = "";
+            imageBase64 = new String(Base64.getEncoder().encode(fileCrosCheckMain.getData()));
+            modelAndView.addObject("pdfFile", imageBase64);
+            return modelAndView;
+        }
+
+    }
+
+    @PostMapping(value = SAVELCPDFMODAL)
+    @ResponseBody
+    public ResponseEntity<Object> savePdf(@RequestParam("file") MultipartFile multipartFile, @RequestParam("flkId")String flkId) throws IOException, NoSuchAlgorithmException {
+        FileCrosCheckMain fileCrosCheckMain = new FileCrosCheckMain();
+        try {
+            fileCrosCheckMain.setData(multipartFile.getBytes());
+            fileCrosCheckMain.setFlkId(flkId);
+            String hashtext = null;
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(multipartFile.getBytes());
+            hashtext = convertToHex(messageDigest);
+            fileCrosCheckMain.setHash(hashtext);
+//            fileCrosCheckMain.setFlkNum(flkNum);
+            fileCheckMainRepo.save(fileCrosCheckMain);
+            return ResponseEntity.status(201).body(multipartFile.getOriginalFilename());
+        }catch (Exception e) {
+            return ResponseEntity.status(400).body(multipartFile.getOriginalFilename());
+        }
+
+
+    }
 
 }

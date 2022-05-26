@@ -1035,16 +1035,15 @@
         var dataS = {
             "x": '0',
         };
-        var tipform = "<%=request.getContextPath()%>/resources/pages/StarterPage/homes.jsp";
-        $.post({
-            async: false,
-            url: tipform,
+        $.ajax({
+            type: "GET",
+            url: "<%=request.getContextPath()%>/resources/pages/StarterPage/homes",
             data: dataS,
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {
                 $('div#MainContent').html(res);
-                document.body.style.cursor = 'default';
+                // document.body.style.cursor = 'default';
             },
             error: function (res) {
                 if (res.status == 401) {
@@ -1052,7 +1051,32 @@
                 }
             }
         });
+
     });
+
+
+    <%--$(document).ready(function () {--%>
+    <%--    var dataS = {--%>
+    <%--        "x": '0',--%>
+    <%--    };--%>
+    <%--    var tipform = "<%=request.getContextPath()%>/resources/pages/StarterPage/homes.jsp";--%>
+    <%--    $.post({--%>
+    <%--        async: false,--%>
+    <%--        url: tipform,--%>
+    <%--        data: dataS,--%>
+    <%--        dataType: "html",--%>
+    <%--        header: 'Content-type: text/html; charset=utf-8',--%>
+    <%--        success: function (res) {--%>
+    <%--            $('div#MainContent').html(res);--%>
+    <%--            document.body.style.cursor = 'default';--%>
+    <%--        },--%>
+    <%--        error: function (res) {--%>
+    <%--            if (res.status == 401) {--%>
+    <%--                $(".logOutForm").submit();--%>
+    <%--            }--%>
+    <%--        }--%>
+    <%--    });--%>
+    <%--});--%>
 
     /*Tovarlarni toifalash */
     function ListClassProduct(x) {

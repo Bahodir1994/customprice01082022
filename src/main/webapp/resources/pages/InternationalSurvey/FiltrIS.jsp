@@ -151,7 +151,7 @@
                                         name="sendReqCountryCodeS" required="">
                                     <option value="">--Танланг--</option>
                                     <c:forEach var="countr" items="${countryList}">
-                                        <option value="${countr.cdId}">${countr.cdNm}</option>
+                                        <option value="${countr.code}">${countr.cdNm}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -263,20 +263,6 @@
                             </div>
                             <div id="target" name="target"></div>
                         </div>
-                        <div class="row mb-0">
-                            <div class="col text-center">
-                                <button type="button" class="btn btn-outline-primary btn-block mt-3"
-                                        onclick="searchResultTableIS(0)"><i class='bx bx-refresh'></i>Излаш
-                                </button>
-                                <button type="reset" class="btn btn-outline-primary btn-block mt-3" onclick="reset(1)">
-                                    <i class='bx bx-trash'></i>Тозалаш
-                                </button>
-                                <button type="button" class="btn btn-outline-primary btn-block mt-3"
-                                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        onclick="resetModal()"><i class='bx bx-plus'></i>Киритиш
-                                </button>
-                            </div>
-                        </div>
                         <!-- Modal 1-qadam-->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                              aria-hidden="true">
@@ -353,21 +339,40 @@
                 </div>
             </div>
             <hr>
-            <div class="row" id="divRowCount" style="display: none;">
-                <div class="col text-primary text-end">
-                    кўрсатимоқда
-                </div>
-                <div class="col-md-1 text-primary">
-                    <select class="form-select ml-2" id="size" name="size" onchange="searchResultTableIS(0)">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="30">30</option>
-                        <option value="50">50</option>
-                    </select>
-                </div>
-                <div class="col text-primary">
-                    та маълумот
-                </div>
+            <div class=" mb-0">
+                <table style="width: 100%!important;">
+                    <thead>
+                    <tr>
+                        <th class="col-md-6">
+                            <div class="col m-2" id="divRowCount" style="display: none;">
+                                <div class="col-md-1 text-primary">
+                                    <select class="form-select" id="size" name="size" onchange="searchResultTableIS(0)">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="30">30</option>
+                                        <option value="50">50</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="col-md-6 text-end justify-content-center">
+                            <div class="col m-2">
+                                <button type="button" class="btn btn-outline-primary btn-block mt-2"
+                                        onclick="searchResultTableIS(0)"><i class='bx bx-refresh'></i>Излаш
+                                </button>
+                                <button type="reset" class="btn btn-outline-primary btn-block mt-2" onclick="reset(1)">
+                                    <i class='bx bx-trash'></i>Тозалаш
+                                </button>
+                                <button type="button" class="btn btn-outline-primary btn-block mt-2"
+                                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                        onclick="resetModal()"><i class='bx bx-plus'></i>Киритиш
+                                </button>
+                            </div>
+                        </th>
+                    </tr>
+                    </thead>
+
+                </table>
             </div>
             <div class="card-body" id="ListCMTable"
                  style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">

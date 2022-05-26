@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import uz.customs.customsprice.entity.users.Role;
 import uz.customs.customsprice.entity.users.User;
@@ -54,7 +55,6 @@ public class UserController {
     }
 
     @GetMapping(INDEX)
-//    public ModelAndView index() {
     public ModelAndView index(HttpSession session, HttpServletRequest request) throws SocketException, UnknownHostException {
         String lang = Utils.nullClear((String) session.getAttribute("lang"));
         logService.create(request, session.getId(), 0);
@@ -120,4 +120,12 @@ public class UserController {
         if (lang.equals("EN")) lang = "GB";
         return mav;
     }
+
+    @RequestMapping("/resources/pages/StarterPage/homes")
+    public ModelAndView homePage(HttpServletRequest request, HttpSession session){
+        ModelAndView modelAndView = new ModelAndView("/resources/pages/StarterPage/homes");
+        modelAndView.addObject("setting", "ma'lumot");
+        return modelAndView;
+    }
+
 }
