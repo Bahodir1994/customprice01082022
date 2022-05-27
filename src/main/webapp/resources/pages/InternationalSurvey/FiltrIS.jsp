@@ -278,7 +278,7 @@
                                         <form class="row g-3 needs-validation">
                                             <div class="form-group col-md-3">
                                                 <label for="xbbMailNum" class="form-label text-primary">ҲББ томонидан юбоирлган хат рақами:</label>
-                                                <input class="form-control" type="number" id="xbbMailNum" name="xbbMailNum">
+                                                <input class="form-control" type="text" id="xbbMailNum" name="xbbMailNum">
                                                 <div class="valid-feedback">Текширилди</div>
                                                 <div class="" id="xbbMailNumValid"></div>
                                             </div>
@@ -300,7 +300,7 @@
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label for="hsCode" class="form-label text-primary">ТИФ ТН код:</label>
-                                                <input class="form-control" type="number" id="hsCode" name="hsCode">
+                                                <input class="form-control" type="text" id="hsCode" name="hsCode">
                                                 <div class="valid-feedback">Текширилди</div>
                                                 <div class="" id="hsCodeValid"></div>
                                             </div>

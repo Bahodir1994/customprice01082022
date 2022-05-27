@@ -2,7 +2,6 @@ package uz.customs.customsprice.controllers.logiccontrol;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -89,7 +88,7 @@ public class LogicControlController {
 
     @PostMapping(value = SAVELCPDFMODAL)
     @ResponseBody
-    public ResponseEntity<Object> savePdf(@RequestParam("file") MultipartFile multipartFile, @RequestParam("flkId")String flkId) throws IOException, NoSuchAlgorithmException {
+    public HttpStatus savePdf(@RequestParam("file") MultipartFile multipartFile, @RequestParam("flkId")String flkId) throws IOException, NoSuchAlgorithmException {
         FileCrosCheckMain fileCrosCheckMain = new FileCrosCheckMain();
         try {
             fileCrosCheckMain.setData(multipartFile.getBytes());
@@ -101,9 +100,9 @@ public class LogicControlController {
             fileCrosCheckMain.setHash(hashtext);
 //            fileCrosCheckMain.setFlkNum(flkNum);
             fileCheckMainRepo.save(fileCrosCheckMain);
-            return ResponseEntity.status(201).body(multipartFile.getOriginalFilename());
+            return HttpStatus.OK;
         }catch (Exception e) {
-            return ResponseEntity.status(400).body(multipartFile.getOriginalFilename());
+            return HttpStatus.BAD_REQUEST;
         }
 
 

@@ -109,7 +109,7 @@
                         <div class="col mt-2 mb-2">
                             <div class="">
                                 <label class="">Рақами</label>
-                                <input class="result form-control shadow-sm" type="number" id="flkNum" name="flkNum" placeholder="Мантиқий назорат рақами">
+                                <input class="result form-control shadow-sm" type="text" id="flkNum" name="flkNum" placeholder="Мантиқий назорат рақами">
                             </div>
                         </div>
                         <div class="col mt-2 mb-2">
@@ -132,7 +132,7 @@
                         </div>
                         <div class="col mt-2 mb-2">
                             <button type="button" class="btn btn-primary mt-3" onclick="searchResultTableLC(0)"><i class='bx bx-refresh'></i>Излаш</button>
-                            <button type="button" class="btn btn-primary mt-3" onclick="clearForm(0)"><i class='bx bx-trash'></i>Тозалаш</button>
+                            <button type="button" class="btn btn-primary mt-3" onclick="clearForm(0)"><i class='bx bx-trash'></i></button>
 
 <%--                            onclick="SaveNewLC(0)"--%>
 

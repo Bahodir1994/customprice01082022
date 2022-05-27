@@ -142,21 +142,21 @@
 
     }
 </style>
-<script>
-    function clickEffect(e) {
-        var d = document.createElement("div");
-        d.className = "clickEffect";
-        d.style.top = e.clientY + "px";
-        d.style.left = e.clientX + "px";
-        document.body.appendChild(d);
-        d.addEventListener('animationend', function () {
-            d.parentElement.removeChild(d);
-        }.bind(this));
-    }
+<%--<script>--%>
+<%--    function clickEffect(e) {--%>
+<%--        var d = document.createElement("div");--%>
+<%--        d.className = "clickEffect";--%>
+<%--        d.style.top = e.clientY + "px";--%>
+<%--        d.style.left = e.clientX + "px";--%>
+<%--        document.body.appendChild(d);--%>
+<%--        d.addEventListener('animationend', function () {--%>
+<%--            d.parentElement.removeChild(d);--%>
+<%--        }.bind(this));--%>
+<%--    }--%>
 
-    document.addEventListener('click', clickEffect);
+<%--    document.addEventListener('click', clickEffect);--%>
 
-</script>
+<%--</script>--%>
 <!--wrapper-->
 <div class="wrapper">
     <!-- start header wrapper-->
@@ -171,7 +171,7 @@
                                  style="width: 45px;">
                         </div>
                         <div class="">
-                            <a class="logo-text h4" href="/">Божхона қиймати назорати</a>
+                            <a class="logo-text h4" href="/CUSTOMSPRICE">Божхона қиймати назорати</a>
                         </div>
                     </div>
                     <div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>
@@ -556,8 +556,8 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown dropdown-large">
-                                <a type="button" class="btn btn-sm radius-30 text-white" style="cursor: pointer; background-color: #0a58ca; font-size: 24px" id="id_date"></a>
-                                <a type="button" class="btn btn-sm radius-30 text-white" style="cursor: pointer; background-color: #0a58ca; font-size: 24px" id="id_clock"></a>
+<%--                                <a type="button" class="btn btn-sm radius-30 text-white" style="cursor: pointer; background-color: #0a58ca; font-size: 24px" id="id_date"></a>--%>
+                                <a type="button" class="btn btn-sm radius-15 text-white bg-gradient-blues" style="font-size: 24px" id="id_clock"></a>
                                 <script>
                                     function digitalClock() {
                                         var date = new Date();
@@ -571,7 +571,7 @@
                                         if (hours < 10) hours = "0" + hours;
                                         if (minutes < 10) minutes = "0" + minutes;
                                         if (seconds < 10) seconds = "0" + seconds;
-                                        document.getElementById("id_date").innerHTML = years + "/" + month + "/" + day;
+                                        // document.getElementById("id_date").innerHTML = years + "/" + month + "/" + day;
                                         document.getElementById("id_clock").innerHTML =hours + ":" + minutes + ":" + seconds;
 
                                         setTimeout("digitalClock()", 1000);
