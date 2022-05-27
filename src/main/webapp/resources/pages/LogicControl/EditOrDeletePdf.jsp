@@ -25,32 +25,33 @@
 <body>
 <!-- Modal SaveNewLC -->
 <div class="m-5">
-    <h5>Файл бириктирилмаган</h5>
-    <c:if test="${userId == '18990' || userId == 'AB170110000063971'}">
+    <h5>Мавжуд: ${originalName}</h5>
+    <%--    <c:if test="${userId == '18990' || userId == 'AB170110000063971'}">--%>
+    <hr>
+    <form method="POST"
+          action="/spring-mvc-java/uploadFileWithAddtionalData"
+          enctype="multipart/form-data">
+        <div class="mb-3">
+            <p>Мантиқий назорат рақами: ${flkNum}</p>
+            <input hidden id="flkNum" name="flkNum" value="${flkNum}">
+            <input hidden id="flkId" name="flkId" value="${id}">
+        </div>
         <hr>
-        <form method="POST"
-              action="/spring-mvc-java/uploadFileWithAddtionalData"
-              enctype="multipart/form-data">
-            <div class="mb-3">
-                <h6>Мантиқий назорат рақами: ${flkNum}</h6>
-                <input hidden id="flkNum" name="flkNum" value="${flkNum}">
-                <input hidden id="flkId" name="flkId" value="${id}">
-            </div>
-            <hr>
-            <h6>Файлни бириктиринг:</h6>
-            <div class="input-group">
+        <h5>Файлни ўзгартириш</h5>
+        <p>Файлни бириктиринг:</p>
+        <div class="input-group">
 
-                <input type="file" class="form-control" id="fileVal" name="fileVal"
-                       aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-            </div>
-        </form>
-    </c:if>
+            <input type="file" class="form-control" id="fileVal" name="fileVal"
+                   aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+        </div>
+    </form>
+    <%--    </c:if>--%>
 
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeNavLc()">Ёпиш</button>
-        <c:if test="${userId == '18990' || userId == 'AB170110000063971'}">
-            <button type="button" class="btn btn-primary" onclick="SaveNewLCPdf()">Сақлаш</button>
-        </c:if>
+        <%--        <c:if test="${userId == '18990' || userId == 'AB170110000063971'}">--%>
+        <button type="button" class="btn btn-primary" onclick="SaveNewLCPdf()">Сақлаш</button>
+        <%--        </c:if>--%>
     </div>
 </div>
 

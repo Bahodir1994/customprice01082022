@@ -29,12 +29,12 @@
     <thead class="table-light">
     <tr>
       <th style="text-align: center;">т/р</th>
-      <th style="text-align: center;">Мантиқий назорат рақами</th>
+      <th style="text-align: center;">Мантиқий назорат<br> рақами</th>
       <th style="text-align: center;">Файл</th>
       <th style="text-align: center;; width: 20px!important;">Мантиқий назорат номи</th>
       <th style="text-align: center;">Мантиқий назорат хуқукий асоси</th>
       <th style="text-align: center;">Мантиқий назорат хабари</th>
-      <th style="text-align: center;">Киритилган вақти</th>
+      <th style="text-align: center;">Киритилган<br> вақти</th>
     </tr>
     </thead>
     <tbody>
@@ -42,7 +42,12 @@
       <tr>
         <td style="text-align: center;">${i.index+1}</td>
         <td style="text-align: center;">${logContrl.flkNum}</td>
-        <td style="text-align: center;"><button class="btn btn-outline-primary btn-sm btn-block"  onclick="openNavLc('${logContrl.id}', ${logContrl.flkNum})"><i class="bx bxs-file-pdf"></i></button></td>
+        <td style="text-align: center;">
+          <button class="btn btn-outline-primary btn-sm btn-block"  onclick="openNavLc('${logContrl.id}', ${logContrl.flkNum})"><i class="bx bxs-file-pdf"></i></button>
+          <c:if test="${userId == '18990' || userId == 'AB170110000063971'}">
+            <button class="btn btn-outline-primary btn-sm btn-block"  onclick="EditOrDeletePdf('${logContrl.id}', ${logContrl.flkNum})"><i class="bx bxs-message-add"></i></button>
+          </c:if>
+        </td>
         <td style="text-align: center;"><textarea cols="68" style="text-align: center">${logContrl.flkName}</textarea></td>
         <td nowrap   align="left" valign= "top" style="text-align: center;">${logContrl.flkBase}</td>
         <td style="text-align: center;"><textarea cols="82">${logContrl.flkMsg}</textarea></td>

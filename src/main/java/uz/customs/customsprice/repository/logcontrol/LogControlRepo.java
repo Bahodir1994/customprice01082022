@@ -26,4 +26,5 @@ public interface LogControlRepo extends JpaRepository<CroscheckMainEntity, Strin
               @Param("DfromRes")Date DfromRes,
               @Param("DtooRes")Date DtooRes
     );
+
 }

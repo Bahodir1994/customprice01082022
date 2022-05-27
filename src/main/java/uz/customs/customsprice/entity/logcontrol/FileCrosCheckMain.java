@@ -33,6 +33,9 @@ public class FileCrosCheckMain extends AbstractAuditingEntity {
     @Column(name = "CONTENT_TYPE", columnDefinition = "VARCHAR(300)")
     private String contentType;
 
+    @Column(name = "ORIGINAL_NAME", columnDefinition = "VARCHAR(300)")
+    private String orginialName;
+
     @Lob
     @Column(name = "DATA", columnDefinition="BLOB")
     private byte[] data;
@@ -40,13 +43,14 @@ public class FileCrosCheckMain extends AbstractAuditingEntity {
     public FileCrosCheckMain() {
     }
 
-    public FileCrosCheckMain(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, String flkId, String flkNum, String hash, String contentType, byte[] data) {
+    public FileCrosCheckMain(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, String flkId, String flkNum, String hash, String contentType, String orginialName, byte[] data) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.flkId = flkId;
         this.flkNum = flkNum;
         this.hash = hash;
         this.contentType = contentType;
+        this.orginialName = orginialName;
         this.data = data;
     }
 
@@ -88,6 +92,14 @@ public class FileCrosCheckMain extends AbstractAuditingEntity {
 
     public void setContentType(String contentType) {
         this.contentType = contentType;
+    }
+
+    public String getOrginialName() {
+        return orginialName;
+    }
+
+    public void setOrginialName(String orginialName) {
+        this.orginialName = orginialName;
     }
 
     public byte[] getData() {

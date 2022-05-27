@@ -692,6 +692,7 @@
 //                        if (userRole == 1 || userRole == 6 || userRole == 7 || userRole == 8) {
 //                            System.out.println("userRole212132323==" + userRole);
                     %> <%--todo (ҲББ Тўловлар бошлиғи ҳамда ҲББ Тўловлар ходими менюси)--%>
+
                     <li>
                         <%--							<a href="javascript:InitialDecisionRasp(0)" class="has-arrow">--%>
                         <a href="javascript:ListInDec(0)" class="has-arrow">
@@ -713,6 +714,31 @@
                         <%--								<li> <a href="app-invoice.html"><i class="bx bx-right-arrow-alt"></i>Invoice</a>--%>
                         <%--								</li>--%>
                         <%--								<li> <a href="app-fullcalender.html"><i class="bx bx-right-arrow-alt"></i>Calendar</a>--%>
+                        <%--								</li>--%>
+                        <%--							</ul>--%>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:ErrorMessage(0);">
+                            <div class="parent-icon icon-color-6"><i class="bx bx-donate-blood"></i>
+                            </div>
+                            <div class="menu-title">Қарздорликлар хисоби</div>
+                        </a>
+                        <%--							<ul>--%>
+                        <%--								<li> <a href="user-profile.html"><i class="bx bx-right-arrow-alt"></i>User Profile</a>--%>
+                        <%--								</li>--%>
+                        <%--								<li> <a href="timeline.html"><i class="bx bx-right-arrow-alt"></i>Timeline</a>--%>
+                        <%--								</li>--%>
+                        <%--								<li> <a href="pricing-table.html"><i class="bx bx-right-arrow-alt"></i>Pricing</a>--%>
+                        <%--								</li>--%>
+                        <%--								<li> <a class="has-arrow" href="javascript:;"><i class="bx bx-right-arrow-alt"></i>Errors</a>--%>
+                        <%--									<ul>--%>
+                        <%--										<li> <a href="errors-404-error.html"><i class="bx bx-right-arrow-alt"></i>404 Error</a>--%>
+                        <%--										</li>--%>
+                        <%--										<li> <a href="errors-500-error.html"><i class="bx bx-right-arrow-alt"></i>500 Error</a>--%>
+                        <%--										</li>--%>
+                        <%--										<li> <a href="errors-coming-soon.html"><i class="bx bx-right-arrow-alt"></i>Coming Soon</a>--%>
+                        <%--										</li>--%>
+                        <%--									</ul>--%>
                         <%--								</li>--%>
                         <%--							</ul>--%>
                     </li>
@@ -791,31 +817,6 @@
                         <%--								<li> <a href="authentication-reset-password.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Reset Password</a>--%>
                         <%--								</li>--%>
                         <%--								<li> <a href="authentication-lock-screen.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Lock Screen</a>--%>
-                        <%--								</li>--%>
-                        <%--							</ul>--%>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:ErrorMessage(0);">
-                            <div class="parent-icon icon-color-6"><i class="bx bx-donate-blood"></i>
-                            </div>
-                            <div class="menu-title">Кўрсатма хатлар</div>
-                        </a>
-                        <%--							<ul>--%>
-                        <%--								<li> <a href="user-profile.html"><i class="bx bx-right-arrow-alt"></i>User Profile</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="timeline.html"><i class="bx bx-right-arrow-alt"></i>Timeline</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="pricing-table.html"><i class="bx bx-right-arrow-alt"></i>Pricing</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a class="has-arrow" href="javascript:;"><i class="bx bx-right-arrow-alt"></i>Errors</a>--%>
-                        <%--									<ul>--%>
-                        <%--										<li> <a href="errors-404-error.html"><i class="bx bx-right-arrow-alt"></i>404 Error</a>--%>
-                        <%--										</li>--%>
-                        <%--										<li> <a href="errors-500-error.html"><i class="bx bx-right-arrow-alt"></i>500 Error</a>--%>
-                        <%--										</li>--%>
-                        <%--										<li> <a href="errors-coming-soon.html"><i class="bx bx-right-arrow-alt"></i>Coming Soon</a>--%>
-                        <%--										</li>--%>
-                        <%--									</ul>--%>
                         <%--								</li>--%>
                         <%--							</ul>--%>
                     </li>

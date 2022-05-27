@@ -250,13 +250,34 @@
             "id": id,
             "flkNum": flkNum,
         }
-        alert(flkNum)
         document.getElementById("modalPdfLC").style.width = "600px";
         document.getElementById("bodyLc").style.marginLeft = "500px";
         $.ajax({
             type: "POST",
             data: dataS,
             url: "<%=request.getContextPath()%>/logicalcontrolss/resources/pages/LogicalControl/pdfModalLC",
+            dataType: "html",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (res) {
+                $('div#openInPdfLC').html(res);
+            },
+            error: function (res) {
+            }
+        });
+
+    }
+
+    function EditOrDeletePdf(id, flkNum) {
+        var dataS = {
+            "id": id,
+            "flkNum": flkNum,
+        }
+        document.getElementById("modalPdfLC").style.width = "600px";
+        document.getElementById("bodyLc").style.marginLeft = "500px";
+        $.ajax({
+            type: "POST",
+            data: dataS,
+            url: "<%=request.getContextPath()%>/logicalcontrolss/resources/pages/LogicalControl/EditOrDeletePdf",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {
