@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import uz.customs.customsprice.entity.InitialDecision.Apps;
 import uz.customs.customsprice.entity.InitialDecision.Commodity;
-import uz.customs.customsprice.repository.AppsRepo;
-import uz.customs.customsprice.repository.CommodityRepo;
+import uz.customs.customsprice.entity.InitialDecision.StatusH;
+import uz.customs.customsprice.entity.InitialDecision.TransportType;
+import uz.customs.customsprice.entity.earxiv.Earxiv;
+import uz.customs.customsprice.repository.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,38 +32,21 @@ public class OutProgram {
     @Autowired
     CommodityRepo commodityRepo;
 
-//    @GetMapping("/tutorials")
-//    public ResponseEntity<Map<String, Object>> getAllTutorials(
-//            @RequestParam(required = false) String personId,
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "3") int size
-//    ) {
-//        try {
-//            List<Apps> tutorials = new ArrayList<Apps>();
-//            Pageable paging = PageRequest.of(page, size);
-//
-//            Page<Apps> pageTuts;
-//            if (personId == null)
-//                pageTuts = appsRepo.findAll(paging);
-//            else
-//                pageTuts = appsRepo.findByPersonId(personId, paging);
-//            tutorials = pageTuts.getContent();
-//            Map<String, Object> response = new HashMap<>();
-//            response.put("tutorials", tutorials);
-//            response.put("currentPage", pageTuts.getNumber());
-//            response.put("totalItems", pageTuts.getTotalElements());
-//            response.put("totalPages", pageTuts.getTotalPages());
-//            return new ResponseEntity<>(response, HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    @Autowired
+    TransportTypeRepo transportTypeRepo;
 
+    @Autowired
+    EarxivRepo earxivRepo;
+
+    @Autowired
+    StatusHRepo statusHRepo;
+
+    /************************(PersonId бўйча App ларни беради)****************************/
     @GetMapping("/tutorials/published")
-    public ResponseEntity<Map<String, Object>> findByPublished(
+    public ResponseEntity<Map<String, Object>> findByPersonIdToApp(
             @RequestParam(required = false) String personId,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size
+            @RequestParam(defaultValue = "50") int size
     ) {
         try {
             List<Apps> tutorials = new ArrayList<Apps>();
@@ -70,7 +56,7 @@ public class OutProgram {
             tutorials = pageTuts.getContent();
 
             Map<String, Object> response = new HashMap<>();
-            response.put("tutorials", tutorials);
+            response.put("appsList", tutorials);
             response.put("currentPage", pageTuts.getNumber());
             response.put("totalItems", pageTuts.getTotalElements());
             response.put("totalPages", pageTuts.getTotalPages());
@@ -81,12 +67,12 @@ public class OutProgram {
         }
     }
 
-
+    /************************(AppId бўйча Commodity ларни беради)****************************/
     @GetMapping("/tutorials/commoditys")
-    public ResponseEntity<Map<String, Object>> findByPublishedCmdt(
+    public ResponseEntity<Map<String, Object>> findByAppIdToCmdt(
             @RequestParam(required = false) String appId,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size
+            @RequestParam(defaultValue = "50") int size
     ) {
         try {
             List<Commodity> tutorials = new ArrayList<Commodity>();
@@ -96,7 +82,7 @@ public class OutProgram {
             tutorials = pageTuts.getContent();
 
             Map<String, Object> response = new HashMap<>();
-            response.put("tutorials", tutorials);
+            response.put("commodityList", tutorials);
             response.put("currentPage", pageTuts.getNumber());
             response.put("totalItems", pageTuts.getTotalElements());
             response.put("totalPages", pageTuts.getTotalPages());
@@ -107,4 +93,81 @@ public class OutProgram {
         }
     }
 
+    /************************(AppId бўйча TransportType ларни беради)****************************/
+    @GetMapping("/tutorials/transporttype")
+    public ResponseEntity<Map<String, Object>> findByAppIdToTransportType(
+            @RequestParam(required = false) String appId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "50") int size
+    ) {
+        try {
+            List<TransportType> tutorials = new ArrayList<TransportType>();
+            Pageable paging = PageRequest.of(page, size);
+
+            Page<TransportType> pageTuts = transportTypeRepo.findByAppId(appId, paging);
+            tutorials = pageTuts.getContent();
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("transportTypeList", tutorials);
+            response.put("currentPage", pageTuts.getNumber());
+            response.put("totalItems", pageTuts.getTotalElements());
+            response.put("totalPages", pageTuts.getTotalPages());
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /************************(AppId бўйча Docs ларни беради)****************************/
+    @GetMapping("/tutorials/earxivdocs")
+    public ResponseEntity<Map<String, Object>> findByAppIdToDocsEarxiv(
+            @RequestParam(required = false) String appId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "50") int size
+    ) {
+        try {
+            List<Earxiv> tutorials = new ArrayList<Earxiv>();
+            Pageable paging = PageRequest.of(page, size);
+
+            Page<Earxiv> pageTuts = earxivRepo.findByAppId(appId, paging);
+            tutorials = pageTuts.getContent();
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("docsList", tutorials);
+            response.put("currentPage", pageTuts.getNumber());
+            response.put("totalItems", pageTuts.getTotalElements());
+            response.put("totalPages", pageTuts.getTotalPages());
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /************************(AppId бўйча Aриза StatusHistory ларни беради)****************************/
+    @GetMapping("/tutorials/historystatus")
+    public ResponseEntity<Map<String, Object>> findByAppIdToAppByStatusHistory(
+            @RequestParam(required = false) String appId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "50") int size
+    ) {
+        try {
+            List<StatusH> tutorials = new ArrayList<StatusH>();
+            Pageable paging = PageRequest.of(page, size);
+
+            Page<StatusH> pageTuts = statusHRepo.findByAppId(appId, paging);
+            tutorials = pageTuts.getContent();
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("statusAppHistoryList", tutorials);
+            response.put("currentPage", pageTuts.getNumber());
+            response.put("totalItems", pageTuts.getTotalElements());
+            response.put("totalPages", pageTuts.getTotalPages());
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

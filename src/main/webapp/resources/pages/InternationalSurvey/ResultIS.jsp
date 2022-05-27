@@ -20,8 +20,6 @@
     String userLocation = (String) request.getSession().getAttribute("userLocation");
     String userLocationName = (String) request.getSession().getAttribute("userLocationName");
     String userPost = (String) request.getSession().getAttribute("userPost");
-    System.out.println(" userRole(ListInDecTable) ===> " + userRole);
-    System.out.println(" userId(ListInDecTable) ===> " + userId);
 %>
 <body>
 <style>
@@ -96,53 +94,53 @@
 </script>
 
 <div class="panel panel-primary filterable table-responsive">
-    <table class="table table-striped table-bordered">
-        <thead class="border border-radius-lg">
-        <tr class="filters text-yellow" style="background-color: #357ebd">
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><button class="btn btn-default btn-xs btn-filter text-light"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+    <table class="table align-middle mb-0 table-striped shadow-sm" style="border-style: dotted; border-width: 0.2px">
+        <thead class="table-light">
+        <tr class="filters">
+            <th><button class="btn btn-default btn-xs btn-filter text-primary"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 <input type="hidden" class="form-control form-control-sm" placeholder="">
             </th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="hidden" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th style="border-width: 1px; border-style: dotted; border-color: rgba(2,11,66,0.66)"></th>
+            <th ><input type="hidden" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th ></th>
         </tr>
         <tr class="filters bg-white text-dark">
-            <th style="border-style: dotted; text-align: center;" class="">т/р</th>
-            <th style="border-style: dotted; text-align: center;" class=""><i class="bx bx-edit"></i>Таҳрир</th>
-            <th style="border-style: dotted; text-align: center;" class="">ҲББ томонидан юбоирлган<br>хат рақами</th>
-            <th style="border-style: dotted; text-align: center;" class="">ҲББ томонидан юбоирлган<br>хат санаси</th>
-            <th style="border-style: dotted; text-align: center;" class="">Ташкилот номи</th>
-            <th style="border-style: dotted; text-align: center;" class="">ТИФ ТН код</th>
-            <th style="border-style: dotted; text-align: center;" class="">Товар номи</th>
-            <th style="border-style: dotted; text-align: center;" class="">Сўровнома юборилган<br>давлат</th>
-            <th style="border-style: dotted; text-align: center;" class="">Юборилган сўровнома<br>рақами</th>
-            <th style="border-style: dotted; text-align: center;" class="">Юборилган сўровнома<br>санаси</th>
-            <th style="border-style: dotted; text-align: center;" class="">Сўровномага олинган<br>жавоб хати</th>
-            <th style="border-style: dotted; text-align: center;" class="">Сўровномага олинган жавоб<br>хати санаси</th>
-            <th style="border-style: dotted; text-align: center;" class="">Сўровномага олинган жавоб хатини<br>ҲББга юборилган хат рақами</th>
-            <th style="border-style: dotted; text-align: center;" class="">Сўровномага олинган жавоб хатини<br>ҲББга юборилган хат санаси</th>
-            <th style="border-style: dotted; text-align: center;" class="">Сўровнома натижаси бўйича жавоб<br>хати рақами</th>
-            <th style="border-style: dotted; text-align: center;" class="">Сўровнома натижаси бўйича жавоб<br>хати санаси</th>
-            <th style="border-style: dotted; text-align: center;" class="">ҲББ хулоса рақами</th>
-            <th style="border-style: dotted; text-align: center;" class="">ҲББ хулоса санаси</th>
-            <th style="border-style: dotted; text-align: center;" class="">Камомад суммаси</th>
-            <th style="border-style: dotted; text-align: center;" class="">Изоҳ</th>
+            <th style="text-align: center;" class="">т/р</th>
+            <th style="text-align: center;" class=""><i class="bx bx-edit"></i>Таҳрир</th>
+            <th style="text-align: center;" class="">ҲББ томонидан юбоирлган<br>хат рақами</th>
+            <th style="text-align: center;" class="">ҲББ томонидан юбоирлган<br>хат санаси</th>
+            <th style="text-align: center;" class="">Ташкилот номи</th>
+            <th style="text-align: center;" class="">ТИФ ТН код</th>
+            <th style="text-align: center;" class="">Товар номи</th>
+            <th style="text-align: center;" class="">Сўровнома юборилган<br>давлат</th>
+            <th style="text-align: center;" class="">Юборилган сўровнома<br>рақами</th>
+            <th style="text-align: center;" class="">Юборилган сўровнома<br>санаси</th>
+            <th style="text-align: center;" class="">Сўровномага олинган<br>жавоб хати</th>
+            <th style="text-align: center;" class="">Сўровномага олинган жавоб<br>хати санаси</th>
+            <th style="text-align: center;" class="">Сўровномага олинган жавоб хатини<br>ҲББга юборилган хат рақами</th>
+            <th style="text-align: center;" class="">Сўровномага олинган жавоб хатини<br>ҲББга юборилган хат санаси</th>
+            <th style="text-align: center;" class="">Сўровнома натижаси бўйича жавоб<br>хати рақами</th>
+            <th style="text-align: center;" class="">Сўровнома натижаси бўйича жавоб<br>хати санаси</th>
+            <th style="text-align: center;" class="">ҲББ хулоса рақами</th>
+            <th style="text-align: center;" class="">ҲББ хулоса санаси</th>
+            <th style="text-align: center;" class="">Камомад суммаси</th>
+            <th style="text-align: center;" class="">Изоҳ</th>
         </tr>
         </thead>
         <style>
@@ -189,26 +187,26 @@
                         <td><button class="mess btn btn-outline-success" data-title="Якунланган"><i class="bx bx-check"></i></button></td>
                     </c:if>
                     <!-- 1 start-->
-                    <td>${tut.xbbMailNum}</td>
-                    <td>${tut.xbbMailDate}</td>
-                    <td>${tut.orgName}</td>
-                    <td>${tut.hsCode}</td>
-                    <td>${tut.productName}</td>
-                    <td>${tut.sendReqCountryNm}</td>
+                    <td style="text-align: center;">${tut.xbbMailNum}</td>
+                    <td style="text-align: center;">${tut.xbbMailDate}</td>
+                    <td style="text-align: center;">${tut.orgName}</td>
+                    <td style="text-align: center;">${tut.hsCode}</td>
+                    <td style="text-align: center;">${tut.productName}</td>
+                    <td style="text-align: center;">${tut.sendReqCountryNm}</td>
                     <!-- 2 start-->
-                    <td>${tut.sendReqNum}</td>
-                    <td>${tut.reqDate}</td>
-                    <td>${tut.responseNum}</td>
-                    <td>${tut.responseDate}</td>
-                    <td>${tut.responseNumSendXbbNum}</td>
-                    <td>${tut.responseNumSendXbbDate}</td>
+                    <td style="text-align: center;">${tut.sendReqNum}</td>
+                    <td style="text-align: center;">${tut.reqDate}</td>
+                    <td style="text-align: center;">${tut.responseNum}</td>
+                    <td style="text-align: center;">${tut.responseDate}</td>
+                    <td style="text-align: center;">${tut.responseNumSendXbbNum}</td>
+                    <td style="text-align: center;">${tut.responseNumSendXbbDate}</td>
                     <!-- 3 start-->
-                    <td>${tut.resultAnswerMailNum}</td>
-                    <td>${tut.resultAnswerMailDate}</td>
-                    <td>${tut.xbbVerdictNum}</td>
-                    <td>${tut.xbbVerdictDate}</td>
-                    <td>${tut.sum}</td>
-                    <td>${tut.comment}</td>
+                    <td style="text-align: center;">${tut.resultAnswerMailNum}</td>
+                    <td style="text-align: center;">${tut.resultAnswerMailDate}</td>
+                    <td style="text-align: center;">${tut.xbbVerdictNum}</td>
+                    <td style="text-align: center;">${tut.xbbVerdictDate}</td>
+                    <td style="text-align: center;">${tut.sum}</td>
+                    <td style="text-align: center;">${tut.comment}</td>
                 </tr>
                 <!-- Modal 2-qadam-->
                 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"

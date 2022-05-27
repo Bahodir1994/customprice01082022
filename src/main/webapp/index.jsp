@@ -386,10 +386,9 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown dropdown-large">
-<%--                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#"--%>
-<%--                                   role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span--%>
-<%--                                        class="alert-count">8</span>--%>
-<%--                                    <i class='bx bx-comment'></i>--%>
+<%--                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
+<%--                                    <span class="alert-count">8</span>--%>
+<%--                                    <i class='bx bx-time'></i>--%>
 <%--                                </a>--%>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <a href="javascript:;">
@@ -555,9 +554,9 @@
                                     </a>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown dropdown-large">
+                            <li class="">
 <%--                                <a type="button" class="btn btn-sm radius-30 text-white" style="cursor: pointer; background-color: #0a58ca; font-size: 24px" id="id_date"></a>--%>
-                                <a type="button" class="btn btn-sm radius-15 text-white bg-gradient-blues" style="font-size: 24px" id="id_clock"></a>
+                                <h6 type="button" class="btn btn-sm radius-15 bg-outline-primary text-success" style="font-size: 24px" id="id_clock"></h6>
                                 <script>
                                     function digitalClock() {
                                         var date = new Date();
@@ -577,14 +576,6 @@
                                         setTimeout("digitalClock()", 1000);
                                     };
                                 </script>
-<%--                                <form id="form" method="post" action="">--%>
-
-<%--                                    <div class="flex">--%>
-<%--                                        <span class="currency">$</span>--%>
-<%--                                        <input id="amount" name="amount" type="text" maxlength="40" />--%>
-<%--                                    </div>--%>
-<%--                                </form>--%>
-
                             </li>
                         </ul>
                     </div>

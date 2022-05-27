@@ -12,6 +12,7 @@ import uz.customs.customsprice.repository.FileCheckMainRepo;
 import uz.customs.customsprice.repository.logcontrol.LogControlRepo;
 import uz.customs.customsprice.service.FileCheckMainService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -68,19 +69,23 @@ public class LogicControlController {
 
     @PostMapping(value = MODALPDFLC)
     @ResponseBody
-    public ModelAndView pdfModalLC(HttpSession session, @RequestParam()String id, @RequestParam()String flkNum){
+    public ModelAndView pdfModalLC(HttpServletRequest request, HttpSession session, @RequestParam()String id, @RequestParam()String flkNum){
+        String userId = (String) request.getSession().getAttribute("userId");
+
         FileCrosCheckMain fileCrosCheckMain = new FileCrosCheckMain();
         fileCrosCheckMain = fileCheckMainService.getByFlkId(id);
         if (fileCrosCheckMain == null){
             ModelAndView modelAndView  = new ModelAndView("/resources/pages/LogicControl/pdfModalLC");
             modelAndView.addObject("flkNum", flkNum);
             modelAndView.addObject("id", id);
+            modelAndView.addObject("userId", userId);
             return modelAndView;
         }else {
             ModelAndView modelAndView  = new ModelAndView("/resources/pages/LogicControl/OpenerPdfLc");
             String imageBase64 = "";
             imageBase64 = new String(Base64.getEncoder().encode(fileCrosCheckMain.getData()));
             modelAndView.addObject("pdfFile", imageBase64);
+            modelAndView.addObject("logControlFile", fileCrosCheckMain.getContentType());
             return modelAndView;
         }
 
@@ -98,7 +103,7 @@ public class LogicControlController {
             byte[] messageDigest = md.digest(multipartFile.getBytes());
             hashtext = convertToHex(messageDigest);
             fileCrosCheckMain.setHash(hashtext);
-//            fileCrosCheckMain.setFlkNum(flkNum);
+            fileCrosCheckMain.setContentType(multipartFile.getContentType());
             fileCheckMainRepo.save(fileCrosCheckMain);
             return HttpStatus.OK;
         }catch (Exception e) {

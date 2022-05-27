@@ -18,7 +18,19 @@
 <div class="">
     <div class="row">
         <div class="m-2" id="pdf_area_2">
-                <object height="1000px" data="data:application/pdf;base64,${pdfFile}" type="application/pdf" width="100%"></object>
+            <object
+                    <c:if test="${logControlFile == null || logControlFile == ''}">
+                        data='data:application/pdf;base64,${pdfFile}'
+                    </c:if>
+                    <c:if test="${logControlFile != null || logControlFile != ''}">
+                        data='data:${logControlFile};base64,${pdfFile}'
+                    </c:if>
+                    type="${logControlFile}"
+                    width="100%"
+                    height="1000px"
+                    name="aaaaaa">
+
+            </object>
             <div class="position-absolute bg-white d-flex justify-content-center align-items-center" id="wrap_btn_2"
                  style="cursor:pointer; top: 50%; left: 0; height: 40px; width: 30px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
                 <i class="bx bx-left-arrow bx-sm" onclick="closeNavLc()" id="caret_2"></i>

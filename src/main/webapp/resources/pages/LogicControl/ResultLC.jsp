@@ -20,34 +20,33 @@
   String userLocation = (String) request.getSession().getAttribute("userLocation");
   String userLocationName = (String) request.getSession().getAttribute("userLocationName");
   String userPost = (String) request.getSession().getAttribute("userPost");
-  System.out.println(" userRole(ListInDecTable) ===> " + userRole);
-  System.out.println(" userId(ListInDecTable) ===> " + userId);
+
 %>
 <body>
 
 <div class="table-responsive">
-  <table id="exampleLC" class="table table-striped table-bordered table-responsive" >
-    <thead class="bg-light-primary" style="border-color: #0a58ca; border-style: dotted">
+  <table id="exampleLC" class="table table-striped align-middle mb-0 shadow-sm" style="border-style: dotted; border-width: 0.2px">
+    <thead class="table-light">
     <tr>
-      <th style="border-style: dotted">т/р</th>
-      <th style="border-style: dotted">Мантиқий назорат рақами</th>
-      <th style="border-style: dotted">Файл</th>
-      <th style="border-style: dotted; width: 20px!important;">Мантиқий назорат номи</th>
-      <th style="border-style: dotted">Мантиқий назорат хуқукий асоси</th>
-      <th style="border-style: dotted">Мантиқий назорат хабари</th>
-      <th style="border-style: dotted">Киритилган вақти</th>
+      <th style="text-align: center;">т/р</th>
+      <th style="text-align: center;">Мантиқий назорат рақами</th>
+      <th style="text-align: center;">Файл</th>
+      <th style="text-align: center;; width: 20px!important;">Мантиқий назорат номи</th>
+      <th style="text-align: center;">Мантиқий назорат хуқукий асоси</th>
+      <th style="text-align: center;">Мантиқий назорат хабари</th>
+      <th style="text-align: center;">Киритилган вақти</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach var="logContrl" items="${logContrlList}" varStatus="i">
       <tr>
-        <td>${i.index+1}</td>
-        <td>${logContrl.flkNum}</td>
-        <td><button class="btn btn-outline-primary btn-sm btn-block"  onclick="openNavLc('${logContrl.id}', ${logContrl.flkNum})"><i class="bx bxs-file-pdf"></i></button></td>
-        <td><textarea cols="68" style="text-align: center">${logContrl.flkName}</textarea></td>
-        <td nowrap   align="left" valign= "top">${logContrl.flkBase}</td>
-        <td><textarea cols="82">${logContrl.flkMsg}</textarea></td>
-        <td>${logContrl.flkDate}</td>
+        <td style="text-align: center;">${i.index+1}</td>
+        <td style="text-align: center;">${logContrl.flkNum}</td>
+        <td style="text-align: center;"><button class="btn btn-outline-primary btn-sm btn-block"  onclick="openNavLc('${logContrl.id}', ${logContrl.flkNum})"><i class="bx bxs-file-pdf"></i></button></td>
+        <td style="text-align: center;"><textarea cols="68" style="text-align: center">${logContrl.flkName}</textarea></td>
+        <td nowrap   align="left" valign= "top" style="text-align: center;">${logContrl.flkBase}</td>
+        <td style="text-align: center;"><textarea cols="82">${logContrl.flkMsg}</textarea></td>
+        <td style="text-align: center;">${logContrl.flkDate}</td>
 
       </tr>
     </c:forEach>

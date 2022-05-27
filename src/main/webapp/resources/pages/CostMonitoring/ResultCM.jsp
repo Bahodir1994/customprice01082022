@@ -20,8 +20,6 @@
     String userLocation = (String) request.getSession().getAttribute("userLocation");
     String userLocationName = (String) request.getSession().getAttribute("userLocationName");
     String userPost = (String) request.getSession().getAttribute("userPost");
-    System.out.println(" userRole(ListInDecTable) ===> " + userRole);
-    System.out.println(" userId(ListInDecTable) ===> " + userId);
 %>
 <body>
 

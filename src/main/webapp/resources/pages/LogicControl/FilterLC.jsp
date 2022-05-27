@@ -22,7 +22,8 @@
     <link href="<%=request.getContextPath()%>/resources/assets2/images/favicon-32x32.png" type="image/png"/>
     <!--plugins-->
     <link href="<%=request.getContextPath()%>/resources/assets2/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
-    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css"
+          rel="stylesheet"/>
     <!-- loader-->
     <link href="<%=request.getContextPath()%>/resources/assets2/css/pace.min.css" rel="stylesheet"/>
     <script src="<%=request.getContextPath()%>/resources/assets2/js/pace.min.js"></script>
@@ -37,8 +38,10 @@
     <link href="<%=request.getContextPath()%>/resources/assets2/css/header-colors.css"/>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
-    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css"
+          rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/metismenu/css/metisMenu.min.css"
+          rel="stylesheet"/>
     <!-- loader-->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
@@ -87,8 +90,13 @@
     }
 
     @media screen and (max-height: 450px) {
-        .sidenav {padding-top: 15px;}
-        .sidenav a {font-size: 18px;}
+        .sidenav {
+            padding-top: 15px;
+        }
+
+        .sidenav a {
+            font-size: 18px;
+        }
     }
 </style>
 <div id="modalPdfLC" class="sidenav border border-bottom-0 border-top-0 border-primary mr-3">
@@ -109,32 +117,40 @@
                         <div class="col mt-2 mb-2">
                             <div class="">
                                 <label class="">Рақами</label>
-                                <input class="result form-control shadow-sm" type="text" id="flkNum" name="flkNum" placeholder="Мантиқий назорат рақами">
+                                <input class="result form-control shadow-sm" type="text" id="flkNum" name="flkNum"
+                                       placeholder="Мантиқий назорат рақами"
+                                       onkeypress="if (event.keyCode == 13) {searchResultTableLC(0); return false;} "/>
                             </div>
                         </div>
                         <div class="col mt-2 mb-2">
                             <div class="">
                                 <label class="">Номи</label>
-                                <input class="result form-control shadow-sm" type="text" id="flkName" name="flkName" placeholder="Мантиқий назорат номи">
+                                <input class="result form-control shadow-sm" type="text" id="flkName" name="flkName"
+                                       placeholder="Мантиқий назорат номи">
                             </div>
                         </div>
                         <div class="col mt-2 mb-2">
                             <div class="">
                                 <label class="">Сана(дан)</label>
-                                <input class="result form-control shadow-sm" type="date" id="Dfrom" name="Dfrom" placeholder="йил-ой-кун">
+                                <input class="result form-control shadow-sm" type="date" id="Dfrom" name="Dfrom"
+                                       placeholder="йил-ой-кун">
                             </div>
                         </div>
                         <div class="col mt-2 mb-2">
                             <div class="">
                                 <label>Сана(гача)</label>
-                                <input class="result form-control shadow-sm" type="date" id="Dtoo" name="Dtoo" placeholder="йил-ой-кун">
+                                <input class="result form-control shadow-sm" type="date" id="Dtoo" name="Dtoo"
+                                       placeholder="йил-ой-кун">
                             </div>
                         </div>
                         <div class="col mt-2 mb-2">
-                            <button type="button" class="btn btn-primary mt-3" onclick="searchResultTableLC(0)"><i class='bx bx-refresh'></i>Излаш</button>
-                            <button type="button" class="btn btn-primary mt-3" onclick="clearForm(0)"><i class='bx bx-trash'></i></button>
+                            <button type="button" class="btn btn-primary mt-3" onclick="searchResultTableLC(0)"><i
+                                    class='bx bx-refresh'></i>Излаш
+                            </button>
+                            <button type="button" class="btn btn-primary mt-3" onclick="clearForm(0)"><i
+                                    class='bx bx-trash'></i></button>
 
-<%--                            onclick="SaveNewLC(0)"--%>
+                            <%--                            onclick="SaveNewLC(0)"--%>
 
                         </div>
                     </div>
@@ -142,7 +158,8 @@
                 </div>
             </div>
             <hr>
-            <div class="card-body" id="ListLCTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
+            <div class="card-body" id="ListLCTable"
+                 style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
             </div>
         </div>
     </div>
@@ -199,6 +216,7 @@
             $(this).hide();
         }
     })(jQuery);
+
     function searchResultTableLC(x) {
         var dataS = {
             "flkNum": $("#flkNum").val(),
@@ -219,7 +237,8 @@
             }
         });
     }
-    function clearForm(x){
+
+    function clearForm(x) {
         document.getElementById("flkNum").value = '';
         document.getElementById("flkName").value = '';
         document.getElementById("Dfrom").value = '';
@@ -248,9 +267,10 @@
         });
 
     }
+
     function closeNavLc() {
         document.getElementById("modalPdfLC").style.width = "0";
-        document.getElementById("bodyLc").style.marginLeft= "0";
+        document.getElementById("bodyLc").style.marginLeft = "0";
     }
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
