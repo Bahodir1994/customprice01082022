@@ -143,6 +143,7 @@ public class InternationalSurveyController {
             viewModel.addObject("currentPage", pageTuts.getNumber());
             viewModel.addObject("totalItems", pageTuts.getTotalElements());
             viewModel.addObject("totalPages", pageTuts.getTotalPages());
+            viewModel.addObject("getPageSize", pageTuts.getSize());
 
             viewModel.addObject("userId", userId);
             viewModel.addObject("userLocation", userLocation);

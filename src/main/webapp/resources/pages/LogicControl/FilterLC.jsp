@@ -114,79 +114,50 @@
             <div class="fm-search m-3">
                 <div class="mb-0">
                     <div class="row">
-                        <div class="col mt-2 mb-2">
-                            <div class="">
+                        <div class="col-md-2 mt-2 mb-2">
+                            <div class="col">
                                 <label class="">Рақами</label>
                                 <input class="result form-control shadow-sm" type="text" id="flkNum" name="flkNum"
                                        placeholder="Мантиқий назорат рақами"
                                        onkeypress="if (event.keyCode == 13) {searchResultTableLC(0); return false;} "/>
                             </div>
                         </div>
-                        <div class="col mt-2 mb-2">
-                            <div class="">
+                        <div class="col-md-4 mt-2 mb-2">
+                            <div class="col">
                                 <label class="">Номи</label>
                                 <input class="result form-control shadow-sm" type="text" id="flkName" name="flkName"
                                        placeholder="Мантиқий назорат номи">
                             </div>
                         </div>
-                        <div class="col mt-2 mb-2">
-                            <div class="">
+                        <div class="col-md-2 mt-2 mb-2">
+                            <div class="col">
                                 <label class="">Сана(дан)</label>
                                 <input class="result form-control shadow-sm" type="date" id="Dfrom" name="Dfrom"
                                        placeholder="йил-ой-кун">
                             </div>
                         </div>
-                        <div class="col mt-2 mb-2">
-                            <div class="">
+                        <div class="col-md-2 mt-2 mb-2">
+                            <div class="col">
                                 <label>Сана(гача)</label>
-                                <input class="result form-control shadow-sm" type="date" id="Dtoo" name="Dtoo"
-                                       placeholder="йил-ой-кун">
+                                <input class="result form-control shadow-sm" type="date" id="Dtoo" name="Dtoo" placeholder="йил-ой-кун">
                             </div>
                         </div>
-                        <div class="col mt-2 mb-2">
-                            <button type="button" class="btn btn-primary mt-3" onclick="searchResultTableLC(0)"><i
-                                    class='bx bx-refresh'></i>Излаш
-                            </button>
-                            <button type="button" class="btn btn-primary mt-3" onclick="clearForm(0)"><i
-                                    class='bx bx-trash'></i></button>
-
-                            <%--                            onclick="SaveNewLC(0)"--%>
-
+                        <div class="col-md-2 mt-2 mb-2">
+                            <button type="button" class="btn btn-primary mt-3 btn-block" onclick="searchResultTableLC(0)"><i class='bx bx-refresh'></i>Излаш</button>
+                            <button type="button" class="btn btn-primary mt-3 btn-block" onclick="clearForm(0)"><i class='bx bx-trash'></i>Тозалаш</button>
                         </div>
                     </div>
-                    <%--<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>--%>
                 </div>
             </div>
             <hr>
-            <div class="card-body" id="ListLCTable"
-                 style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
+            <div class="card-body" id="ListLCTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
+                <div id="loaderII" class="col-md-12 spinner-border text-primary  position-absolute top-50 start-50 visually-hidden" role="status">
+
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
-</script>
 <script>
     (function ($) {
         function getTimer(obj) {
@@ -218,6 +189,7 @@
     })(jQuery);
 
     function searchResultTableLC(x) {
+        $('#loaderII').removeClass('visually-hidden')
         var dataS = {
             "flkNum": $("#flkNum").val(),
             "flkName": $("#flkName").val(),
@@ -231,9 +203,17 @@
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {
-                $('div#ListLCTable').html(res);
+                setTimeout(()=>{
+                    $('div#ListLCTable').html(res);
+                    $('#loaderII').addClass('visually-hidden')
+                },1000)
+
+                //$('#loaderII').addClass('visually-hidden');
             },
             error: function (res) {
+                setTimeout(()=>{
+                    $('#loaderII').addClass('visually-hidden')
+                },1000)
             }
         });
     }

@@ -168,10 +168,10 @@
                 <tr>
                     <td>${((currentPage+1) * getPageSize - getPageSize + 1)+i.index}</td>
                     <c:if test="${tut.status == '100'}">
-                        <c:if test="${userLocation == '1701' && (userRole == 3 || userRole ==4)}">
+                        <c:if test="${userLocation == '1701'}">
                             <td><button class="btn btn-outline-primary" data-title="Сиз учун тақиқланган!" data-bs-toggle="modal" data-bs-target="#exampleModal2" onclick="$('#interSurveyId2').val('${tut.id}');$('#interSurveyStatus2').val('${tut.status}')"><i class="bx bx-plus"></i></button></td>
                         </c:if>
-                        <c:if test="${userLocation != '1701' && (userRole != 3 || userRole != 4)}">
+                        <c:if test="${userLocation != '1701'}">
                             <td><button class="mess btn btn-outline-primary" data-title="Сиз учун тақиқланган!"><i class="bx bx-info-circle"></i></button></td>
                         </c:if>
                     </c:if>
@@ -370,7 +370,7 @@
                 </c:if>
                 <%--                    <li class="page-item"><a class="page-link" href="#">...</a></li>--%>
                 <%--                    <li class="page-item"><a class="page-link" href="#">1</a></li>--%>
-                <li class="page-item"><a class="page-link bg-primary text-white" href="#">${currentPage+1}</a></li>
+                <li class="page-item"><a class="page-link text-dark" href="#">${currentPage+1}</a></li>
                 <%--                    <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
                 <%--                    <li class="page-item"><a class="page-link" href="#">...</a></li>--%>
                 <c:if test="${currentPage < (totalPages-1)}">

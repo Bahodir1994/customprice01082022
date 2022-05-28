@@ -45,7 +45,6 @@
     <!-- loader-->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
-
 <body>
 <!--wrapper-->
 <style>
@@ -376,12 +375,14 @@
             </div>
             <div class="card-body" id="ListCMTable"
                  style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
+                <div id="loaderII" class="col-md-12 spinner-border text-primary  position-absolute top-50 start-50 visually-hidden" role="status">
+
+                </div>
             </div>
         </div>
     </div>
 </div>
 </div>
-
 <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
 <script>
     (function ($) {
@@ -413,6 +414,7 @@
         }
     })(jQuery);
     function searchResultTableIS(x, root = null) {
+        $('#loaderII').removeClass('visually-hidden')
         if (root) root.preventDefault();
         var dataS = {
             "xbbMailDate": $("#xbbMailDateS").val().toString(),
@@ -443,6 +445,7 @@
             success: function (res) {
                 $('div#ListCMTable').html(res);
                 $('div#divRowCount').css({'display': ''});
+                $('#loaderII').addClass('visually-hidden');
                 // document.body.style.cursor = 'default';
             },
             error: function (res) {

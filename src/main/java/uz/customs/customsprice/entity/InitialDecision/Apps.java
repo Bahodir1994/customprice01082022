@@ -127,7 +127,7 @@ public class Apps extends AbstractAuditingEntity {
     private BigDecimal transExp;
 
     @Column(name = "STATUS", columnDefinition = "SMALLINT DEFAULT 100")
-    private int status = 100;
+    private int status;
 
     @Column(name = "STATUS_NM", columnDefinition = "VARCHAR(450) CCSID 1208")
     private String statusNm;

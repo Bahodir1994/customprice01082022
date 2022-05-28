@@ -25,56 +25,52 @@
 <body>
 <!-- Modal SaveNewLC -->
 <div class="m-5">
-    <h5>Мавжуд: ${originalName}</h5>
+
+    <h5>Файл Мавжуд:</h5>
     <%--    <c:if test="${userId == '18990' || userId == 'AB170110000063971'}">--%>
-    <hr>
     <form method="POST"
           action="/spring-mvc-java/uploadFileWithAddtionalData"
           enctype="multipart/form-data">
         <div class="mb-3">
-            <p>Мантиқий назорат рақами: ${flkNum}</p>
+            <p>Мантиқий назорат рақами ва файл номи:</p>
             <input hidden id="flkNum" name="flkNum" value="${flkNum}">
             <input hidden id="flkId" name="flkId" value="${id}">
+            <input class="form-control" disabled="disabled" value="${flkNum} / ${originalName}">
+        </div>
+        <div class="modal-footer text-end">
+            <button type="button" class="btn btn-danger" onclick="DeleteLCPdf()"><i class="bx bx-trash-alt"></i>Ўчириш</button>
         </div>
         <hr>
         <h5>Файлни ўзгартириш</h5>
         <p>Файлни бириктиринг:</p>
-        <div class="input-group">
-
-            <input type="file" class="form-control" id="fileVal" name="fileVal"
-                   aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+        <div class="input-group text-end">
+            <input type="file" class="form-control" id="fileVal" name="fileVal" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
         </div>
     </form>
     <%--    </c:if>--%>
 
-    <button type="button" class="btn btn-primary" onclick="SaveNewLCPdf('delete')">Ўчириш</button>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeNavLc()">Ёпиш</button>
+        <button type="button" class="btn btn-secondary justify-content-center" data-bs-dismiss="modal" onclick="closeNavLc()"><i class="bx bx-window-close"></i>Ёпиш</button>
         <%--        <c:if test="${userId == '18990' || userId == 'AB170110000063971'}">--%>
-        <button type="button" class="btn btn-primary" onclick="SaveNewLCPdf('update')">Сақлашoio</button>
+        <button type="button" class="btn btn-primary" onclick="SaveNewLCPdf()"><i class="bx bx-save"></i>Сақлаш</button>
 
         <%--        </c:if>--%>
+    </div>
+
+    <div>
+        <p style="font-style: italic">Эслатма: Агар файл мавжуд бўлса, янги фал бириктирилганда олдинги файл ўчирилиб, янги файл ёзилади. Ўчириш тугмаси босилганда фай фақат ўчирилади.</p>
     </div>
 </div>
 
 
 <script>
-    function SaveNewLCPdf(stat) {
+    function SaveNewLCPdf() {
         let flkId = $('#flkId').val();
         let files = fileVal.files[0];
-        let delOrEd = stat;
 
         let dataSS = new FormData();
         dataSS.append('flkId', flkId);
         dataSS.append('file', files);
-        dataSS.append('deleteOrUpdate', delOrEd);
-
-        // var dataS = {
-        //     "file" : $('#file').val(),
-        //     "flkId": $('#flkId').val(),
-        //     "flkNum": $('#flkNum').val()
-        // }
-        alert($('#fileVal').val() + $('#flkId').val() + $('#flkNum').val())
         $.ajax({
             type: 'POST',
             contentType: false,
@@ -85,22 +81,20 @@
             async: true,
             url: "<%=request.getContextPath()%>/logicalcontrolss/resources/pages/LogicalControl/savePdfFile",
             success: function (res) {
-                console.log(res)
                 closeNavLc()
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Файл сақланди',
+                    title: 'Бажарилди!',
                     showConfirmButton: false,
                     timer: 1500
                 })
             },
             error: function (res) {
-                console.log(res)
                 Swal.fire({
                     position: 'top-end',
                     icon: 'error',
-                    title: 'Хатолик! Файл хажми катталиги 5Mb дан катта!',
+                    title: 'Хатолик!',
                     showConfirmButton: false,
                     timer: 2000
                 })
@@ -108,48 +102,38 @@
         });
     }
 
+    function DeleteLCPdf() {
+        var dataS = {
+            "flkId": $('#flkId').val(),
+        }
+        $.ajax({
+            type: "POST",
+            data: dataS,
+            url: "<%=request.getContextPath()%>/logicalcontrolss/resources/pages/LogicalControl/DeleteLCPdf",
+            dataType: "html",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (res) {
+                closeNavLc()
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Бажарилди!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            },
+            error: function (res) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Хатолик!',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+        });
 
-    <%--function oformitDiedPerson(){--%>
-    <%--    let id =$('#id_pochta').val();--%>
-    <%--    let myfile = document.getElementById("file1");--%>
-    <%--    let files = myfile.files;--%>
-
-    <%--    let data = new FormData();--%>
-
-    <%--    for (let i = 0; i < files.length; i++) {--%>
-    <%--        data.append('file' + i, files[i]);--%>
-    <%--    }--%>
-    <%--    data.append('id_prof', id);--%>
-    <%--    data.append('title', $('#title').val());--%>
-
-    <%--    $.ajax({--%>
-    <%--        url: '<%=request.getContextPath()%>/oformitDiedPerson',--%>
-    <%--        type: 'POST',--%>
-    <%--        contentType: false,--%>
-    <%--        data: data,--%>
-    <%--        dataType: 'json',--%>
-    <%--        processData: false,--%>
-    <%--        cache: false,--%>
-    <%--        success: function (res) {--%>
-    <%--            if (res.status === '200'){--%>
-    <%--                console.log('succes')--%>
-    <%--                $('#close-modal').click();--%>
-    <%--                // setTimeout($('#close-modal').click(), 300)--%>
-    <%--                SearchNewByDecl($('#ps').val());--%>
-    <%--                toastr.success('Операция выполнена успешно');--%>
-    <%--            }else if(res.status === '202' ){--%>
-    <%--                toastr.error('Ошибка файл уже существует');--%>
-    <%--            }else {--%>
-    <%--                toastr.error('Ошибка при выполнении операции');--%>
-    <%--            }--%>
-
-    <%--        },--%>
-    <%--        error: function (res) {--%>
-    <%--            console.log('error')--%>
-    <%--            toastr.error('Ошибка при выполнении операции');--%>
-    <%--        }--%>
-    <%--    })--%>
-    <%--};--%>
+    }
 
 </script>
 

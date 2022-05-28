@@ -33,6 +33,7 @@ public class LogicControlController {
     private final String MODALPDFLC = "/resources/pages/LogicalControl/pdfModalLC";
     private final String SAVELCPDFMODAL = "/resources/pages/LogicalControl/savePdfFile";
     private final String EDITORDELETEPDF = "/resources/pages/LogicalControl/EditOrDeletePdf";
+    private final String DELETELCPDF = "/resources/pages/LogicalControl/DeleteLCPdf";
     private final FileCheckMainService fileCheckMainService;
 
     @Autowired
@@ -97,12 +98,8 @@ public class LogicControlController {
 
     @PostMapping(value = SAVELCPDFMODAL)
     @ResponseBody
-    public HttpStatus savePdf(@RequestParam("file") MultipartFile multipartFile, @RequestParam("flkId")String flkId, @RequestParam("deleteOrEdit")String deleteOrEdit) throws IOException, NoSuchAlgorithmException {
+    public HttpStatus savePdf(@RequestParam("file") MultipartFile multipartFile, @RequestParam("flkId")String flkId) throws IOException, NoSuchAlgorithmException {
         FileCrosCheckMain fileCrosCheckMain = new FileCrosCheckMain();
-        if (Objects.equals(deleteOrEdit, "delete")){
-            fileCheckMainRepo.deleteFileCrosCheckMainByFlkId(flkId);
-            return HttpStatus.OK;
-        }else {
             try {
                 if (fileCheckMainRepo.findByFlkId(flkId) != null ){
                     fileCheckMainRepo.deleteFileCrosCheckMainByFlkId(flkId);
@@ -114,6 +111,7 @@ public class LogicControlController {
                     hashtext = convertToHex(messageDigest);
                     fileCrosCheckMain.setHash(hashtext);
                     fileCrosCheckMain.setContentType(multipartFile.getContentType());
+                    fileCrosCheckMain.setOrginialName(multipartFile.getOriginalFilename());
                     fileCheckMainRepo.save(fileCrosCheckMain);
                     return HttpStatus.OK;
                 }
@@ -126,13 +124,28 @@ public class LogicControlController {
                     hashtext = convertToHex(messageDigest);
                     fileCrosCheckMain.setHash(hashtext);
                     fileCrosCheckMain.setContentType(multipartFile.getContentType());
+                    fileCrosCheckMain.setOrginialName(multipartFile.getOriginalFilename());
                     fileCheckMainRepo.save(fileCrosCheckMain);
                     return HttpStatus.OK;
                 }
             }catch (Exception e) {
                 return HttpStatus.BAD_REQUEST;
             }
-        }
+    }
+
+    @PostMapping(value = DELETELCPDF)
+    @ResponseBody
+    public HttpStatus DeleteLCPdf(@RequestParam("flkId")String flkId) throws IOException, NoSuchAlgorithmException {
+        FileCrosCheckMain fileCrosCheckMain = new FileCrosCheckMain();
+        fileCrosCheckMain = fileCheckMainRepo.findByFlkId(flkId);
+        if (fileCrosCheckMain != null){
+            try{
+                fileCheckMainRepo.deleteFileCrosCheckMainByFlkId(flkId);
+                return HttpStatus.OK;
+            }catch (Exception e){
+                return HttpStatus.BAD_REQUEST;
+            }
+        } else return HttpStatus.BAD_REQUEST;
 
     }
 

@@ -69,7 +69,6 @@
         //     "flkId": $('#flkId').val(),
         //     "flkNum": $('#flkNum').val()
         // }
-        alert($('#fileVal').val() + $('#flkId').val() + $('#flkNum').val())
         $.ajax({
             type: 'POST',
             contentType: false,
