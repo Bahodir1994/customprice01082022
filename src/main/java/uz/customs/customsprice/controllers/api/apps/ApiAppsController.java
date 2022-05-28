@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import uz.customs.customsprice.controllers.api.files.AppsAndDocsAndTransportsDTO;
 import uz.customs.customsprice.controllers.api.helper.ResponseHandler;
 import uz.customs.customsprice.entity.InitialDecision.*;
+import uz.customs.customsprice.entity.classifier.TransportTypeS;
 import uz.customs.customsprice.entity.earxiv.Earxiv;
 import uz.customs.customsprice.repository.EarxivRepo;
 import uz.customs.customsprice.repository.TransportTypeRepo;
+import uz.customs.customsprice.repository.classifier.TransportTypeSRepo;
 import uz.customs.customsprice.service.*;
 import uz.customs.customsprice.service.earxiv.EarxivService;
 
@@ -38,8 +40,9 @@ public class ApiAppsController {
     private final EarxivService earxivService;
     private final EarxivRepo earxivRepo;
     private final TransportTypeRepo transportTypeRepo;
+    private final TransportTypeSRepo transportTypeSRepo;
 
-    public ApiAppsController(AppsService appsService, ConturyService conturyService, LocationService locationService, StatusService statusService, TermsService termsService, PersonsService personsService, StatusHService statusHService, StatusMService statusMService, TransportTypeService transportTypeService, EarxivService earxivService, EarxivRepo earxivRepo, TransportTypeRepo transportTypeRepo) {
+    public ApiAppsController(AppsService appsService, ConturyService conturyService, LocationService locationService, StatusService statusService, TermsService termsService, PersonsService personsService, StatusHService statusHService, StatusMService statusMService, TransportTypeService transportTypeService, EarxivService earxivService, EarxivRepo earxivRepo, TransportTypeRepo transportTypeRepo, TransportTypeSRepo transportTypeSRepo) {
         this.appsService = appsService;
         this.conturyService = conturyService;
         this.locationService = locationService;
@@ -52,6 +55,7 @@ public class ApiAppsController {
         this.earxivService = earxivService;
         this.earxivRepo = earxivRepo;
         this.transportTypeRepo = transportTypeRepo;
+        this.transportTypeSRepo = transportTypeSRepo;
     }
 
     /*---------------------------------------------------------------------------------------------------------start*/
@@ -162,10 +166,21 @@ public class ApiAppsController {
                     Optional<Apps> appIdGet = Optional.ofNullable(appsService.findById(apps.getId()));
                     if (appIdGet.isPresent()) {
                         TransportType transportType = new TransportType();
+                        Country countryFinish = conturyService.getByCodeAndLngaTpcd(type.getFinishCountry(), "UZ");
+                        Country countryEnd = conturyService.getByCodeAndLngaTpcd(type.getEndCountry(), "UZ");
+                        TransportTypeS transportTypeS = transportTypeSRepo.findByCodeAndLngaTpcd(type.getTarnsportType(), "UZ");
+
                         transportType.setAppId(apps.getId());
+
                         transportType.setFinishCountry(type.getFinishCountry());
+                        transportType.setFinishCountryNm(countryFinish.getCdNm());
+
                         transportType.setEndCountry(type.getEndCountry());
+                        transportType.setEndCountryNm(countryEnd.getCdNm());
+
                         transportType.setTarnsportType(type.getTarnsportType());
+                        transportType.setTarnsportTypeNm(transportTypeS.getCdNm());
+
                         transportType.setTransportPrice(type.getTransportPrice());
                         transportTypeService.savetrtype(transportType);
                         ResponseHandler.generateResponse("TransportType ma`lumotlari saqlandi!", HttpStatus.OK, transportType);
@@ -209,7 +224,6 @@ public class ApiAppsController {
                     earxivService.create(earxiv);
                     ResponseHandler.generateResponse("Xujjat ma`lumotlari saqlandi!", HttpStatus.OK, earxiv);
                 }
-
 
                 /**todo ЛОК га ёзиш start todo**/
                 StatusM statusM = new StatusM();
@@ -335,15 +349,12 @@ public class ApiAppsController {
                 /*4*/Status status = statusService.getById(130);
                 appsUpdate.setStatusNm(status.getName());
 
-
-
                 /*1*/Country country = conturyService.getByCodeAndLngaTpcd(apps.getCustomerCountry(), "UZ");
                      appsUpdate.setCustomerCountryNm(country.getCdNm());
                 /*2*/country = conturyService.getByCodeAndLngaTpcd(apps.getSenderCountry(), "UZ");
                      appsUpdate.setSenderCountryNm(country.getCdNm());
                 /*3*/Location location = locationService.getById(apps.getLocationId());
                      appsUpdate.setLocationNm(location.getName1());
-
                 /*5*/Terms terms = termsService.findByIdAndLngaTpcd(apps.getTerms(), "UZ");
                      appsUpdate.setTermsNm(terms.getSign());
                 /*6*/appsUpdate.setInsUser(personsIdGet.get().getTin());
@@ -355,13 +366,23 @@ public class ApiAppsController {
                     Optional<Apps> appIdGet = Optional.ofNullable(appsService.findById(appsUpdate.getId()));
                     if (appIdGet.isPresent()) {
                         TransportType transportType = new TransportType();
-                        transportType.setAppId(appsUpdate.getId());
+                        Country countryFinish = conturyService.getByCodeAndLngaTpcd(type.getFinishCountry(), "UZ");
+                        Country countryEnd = conturyService.getByCodeAndLngaTpcd(type.getEndCountry(), "UZ");
+                        TransportTypeS transportTypeS = transportTypeSRepo.findByCodeAndLngaTpcd(type.getTarnsportType(), "UZ");
+
+                        transportType.setAppId(apps.getId());
+
                         transportType.setFinishCountry(type.getFinishCountry());
+                        transportType.setFinishCountryNm(countryFinish.getCdNm());
+
                         transportType.setEndCountry(type.getEndCountry());
+                        transportType.setEndCountryNm(countryEnd.getCdNm());
+
                         transportType.setTarnsportType(type.getTarnsportType());
+                        transportType.setTarnsportTypeNm(transportTypeS.getCdNm());
+
                         transportType.setTransportPrice(type.getTransportPrice());
                         transportTypeService.savetrtype(transportType);
-                        ResponseHandler.generateResponse("TransportType ma`lumotlari saqlandi!", HttpStatus.OK, transportType);
                     } else {
                         JSONObject obj = new JSONObject();
                         obj.put("message", "Error");

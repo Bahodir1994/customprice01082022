@@ -30,11 +30,20 @@ public class TransportType extends AbstractAuditingEntity {
     @Column(name = "finish_country", length = 3)
     private String finishCountry;
 
+    @Column(name = "finish_country_NM", columnDefinition = "VARCHAR(120) CCSID 1208")
+    private String finishCountryNm;
+
     @Column(name = "end_country", length = 3)
     private String endCountry;
 
+    @Column(name = "end_country_NM", columnDefinition = "VARCHAR(120) CCSID 1208")
+    private String endCountryNm;
+
     @Column(name = "tarnsport_type", length = 2)
     private String tarnsportType;
+
+    @Column(name = "tarnsport_type_NM", columnDefinition = "VARCHAR(120) CCSID 1208")
+    private String tarnsportTypeNm;
 
     @Column(name = "transport_price", length = 4)
     private BigDecimal transportPrice;
@@ -42,14 +51,17 @@ public class TransportType extends AbstractAuditingEntity {
     public TransportType() {
     }
 
-    public TransportType(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, String finishCountry, String endCountry, String tarnsportType, BigDecimal transportPrice) {
+    public TransportType(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, String finishCountry, String finishCountryNm, String endCountry, String endCountryNm, String tarnsportType, String tarnsportTypeNm, BigDecimal transportPrice) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.apps = apps;
         this.appId = appId;
         this.finishCountry = finishCountry;
+        this.finishCountryNm = finishCountryNm;
         this.endCountry = endCountry;
+        this.endCountryNm = endCountryNm;
         this.tarnsportType = tarnsportType;
+        this.tarnsportTypeNm = tarnsportTypeNm;
         this.transportPrice = transportPrice;
     }
 
@@ -85,6 +97,14 @@ public class TransportType extends AbstractAuditingEntity {
         this.finishCountry = finishCountry;
     }
 
+    public String getFinishCountryNm() {
+        return finishCountryNm;
+    }
+
+    public void setFinishCountryNm(String finishCountryNm) {
+        this.finishCountryNm = finishCountryNm;
+    }
+
     public String getEndCountry() {
         return endCountry;
     }
@@ -93,12 +113,28 @@ public class TransportType extends AbstractAuditingEntity {
         this.endCountry = endCountry;
     }
 
+    public String getEndCountryNm() {
+        return endCountryNm;
+    }
+
+    public void setEndCountryNm(String endCountryNm) {
+        this.endCountryNm = endCountryNm;
+    }
+
     public String getTarnsportType() {
         return tarnsportType;
     }
 
     public void setTarnsportType(String tarnsportType) {
         this.tarnsportType = tarnsportType;
+    }
+
+    public String getTarnsportTypeNm() {
+        return tarnsportTypeNm;
+    }
+
+    public void setTarnsportTypeNm(String tarnsportTypeNm) {
+        this.tarnsportTypeNm = tarnsportTypeNm;
     }
 
     public BigDecimal getTransportPrice() {
