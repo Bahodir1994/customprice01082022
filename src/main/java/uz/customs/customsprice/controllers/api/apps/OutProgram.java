@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import uz.customs.customsprice.entity.InitialDecision.Apps;
-import uz.customs.customsprice.entity.InitialDecision.Commodity;
-import uz.customs.customsprice.entity.InitialDecision.StatusH;
-import uz.customs.customsprice.entity.InitialDecision.TransportType;
+import uz.customs.customsprice.entity.InitialDecision.*;
 import uz.customs.customsprice.entity.earxiv.Earxiv;
 import uz.customs.customsprice.repository.*;
 
@@ -40,6 +37,9 @@ public class OutProgram {
 
     @Autowired
     StatusHRepo statusHRepo;
+
+    @Autowired
+    PersonsRepo personsRepo;
 
     /************************(PersonId бўйча App ларни беради)****************************/
     @GetMapping("/tutorials/published")
@@ -79,10 +79,15 @@ public class OutProgram {
             Pageable paging = PageRequest.of(page, size);
 
             Page<Commodity> pageTuts = commodityRepo.findByAppId(appId, paging);
+            Apps apps = appsRepo.getById(appId);
+            apps.getPersonId();
+            Persons persons = new Persons();
+            persons = personsRepo.getById(apps.getPersonId());
             tutorials = pageTuts.getContent();
 
             Map<String, Object> response = new HashMap<>();
             response.put("commodityList", tutorials);
+            response.put("person", persons);
             response.put("currentPage", pageTuts.getNumber());
             response.put("totalItems", pageTuts.getTotalElements());
             response.put("totalPages", pageTuts.getTotalPages());
