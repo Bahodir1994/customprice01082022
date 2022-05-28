@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import uz.customs.customsprice.controllers.api.helper.ResponseHandler;
 import uz.customs.customsprice.entity.InitialDecision.*;
+import uz.customs.customsprice.repository.CurrencyEntityRepo;
 import uz.customs.customsprice.service.*;
 
 import javax.validation.Valid;
@@ -29,14 +30,16 @@ public class ApiCommodityController {
     private final MethodService methodService;
     private final PackagingService packagingService;
     private final Tnved2Service tnved2Service;
+    private final CurrencyEntityRepo currencyEntityRepo;
 
-    public ApiCommodityController(AppsService appsService, CommodityService commodityService, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service) {
+    public ApiCommodityController(AppsService appsService, CommodityService commodityService, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, CurrencyEntityRepo currencyEntityRepo) {
         this.appsService = appsService;
         this.commodityService = commodityService;
         this.conturyService = conturyService;
         this.methodService = methodService;
         this.packagingService = packagingService;
         this.tnved2Service = tnved2Service;
+        this.currencyEntityRepo = currencyEntityRepo;
     }
 
 
@@ -62,6 +65,10 @@ public class ApiCommodityController {
 
                 Tnved2 tnved2 = tnved2Service.getByIdAndFinishdate(commodity.getHsCode());
                 commodity.setHsName(tnved2.getName());
+
+                CurrencyEntity currencyEntity = currencyEntityRepo.findByCodeAndLngaTpcd(commodity.getCurrencyType(), "RU");
+                commodity.setCurrencyNm(currencyEntity.getCdDesc());
+                commodity.setCurrencyNmSymbol(currencyEntity.getCdId());
 
                 if (commodity.getHsDecDate() != null && !"".equals(String.valueOf(commodity.getHsDecDate())) && !"null".equals(String.valueOf(commodity.getHsDecDate()))) commodity.setHsDecDate(commodity.getHsDecDate());
                 if (commodity.getInDecDate() != null && !"".equals(String.valueOf(commodity.getInDecDate())) && !"null".equals(String.valueOf(commodity.getInDecDate()))) commodity.setInDecDate(commodity.getInDecDate());

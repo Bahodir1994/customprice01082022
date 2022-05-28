@@ -179,10 +179,16 @@ public class Commodity extends AbstractAuditingEntity {
 //    @Digits(message = "Устун фақат сонлардан иборат бўлиши лозим", integer = 2, fraction = 0)
     private String paymentYN = "NO";
 
+    @Column(name = "currency_NM", columnDefinition = "VARCHAR(120) CCSID 1208")
+    private String currencyNm;
+
+    @Column(name = "currency_NMSymbol", columnDefinition = "VARCHAR(120) CCSID 1208")
+    private String currencyNmSymbol;
+
     public Commodity() {
     }
 
-    public Commodity(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, Integer cmdtNum, String originCountry, String orignCountrNm, String originOrg, String tradeName, String tradeMark, String mark, String model, String article, String sort, String standarts, String functions, String comProp, String techChar, String productGoal, String hsCode, String hsName, BigDecimal brutto, BigDecimal netto, BigDecimal basicQty, String extraUnits, BigDecimal extraQty, BigDecimal price, String currencyType, BigDecimal cargoSpace, String packType, String packTypeNm, BigDecimal packQty, String extraInfo, String hsDecNum, Date hsDecDate, Date inDecDate, String inDecNum, String method, String methodNm, String methodDescription, String paymentYN) {
+    public Commodity(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, Integer cmdtNum, String originCountry, String orignCountrNm, String originOrg, String tradeName, String tradeMark, String mark, String model, String article, String sort, String standarts, String functions, String comProp, String techChar, String productGoal, String hsCode, String hsName, BigDecimal brutto, BigDecimal netto, BigDecimal basicQty, String extraUnits, BigDecimal extraQty, BigDecimal price, String currencyType, BigDecimal cargoSpace, String packType, String packTypeNm, BigDecimal packQty, String extraInfo, String hsDecNum, Date hsDecDate, Date inDecDate, String inDecNum, String method, String methodNm, String methodDescription, String paymentYN, String currencyNm, String currencyNmSymbol) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.apps = apps;
@@ -224,6 +230,8 @@ public class Commodity extends AbstractAuditingEntity {
         this.methodNm = methodNm;
         this.methodDescription = methodDescription;
         this.paymentYN = paymentYN;
+        this.currencyNm = currencyNm;
+        this.currencyNmSymbol = currencyNmSymbol;
     }
 
     public String getId() {
@@ -544,5 +552,21 @@ public class Commodity extends AbstractAuditingEntity {
 
     public void setPaymentYN(String paymentYN) {
         this.paymentYN = paymentYN;
+    }
+
+    public String getCurrencyNm() {
+        return currencyNm;
+    }
+
+    public void setCurrencyNm(String currencyNm) {
+        this.currencyNm = currencyNm;
+    }
+
+    public String getCurrencyNmSymbol() {
+        return currencyNmSymbol;
+    }
+
+    public void setCurrencyNmSymbol(String currencyNmSymbol) {
+        this.currencyNmSymbol = currencyNmSymbol;
     }
 }
