@@ -148,8 +148,8 @@ public class ApiAppsController {
 
                 Location location = locationService.getById(apps.getLocationId());
                 apps.setLocationNm(location.getName1());
-
-                Status status = statusService.getById(apps.getStatus());
+                apps.setStatus(100);
+                Status status = statusService.getById(100);
                 apps.setStatusNm(status.getName());
 
                 Terms terms = termsService.findByIdAndLngaTpcd(apps.getTerms(), "UZ");
@@ -332,6 +332,9 @@ public class ApiAppsController {
                 appsUpdate.setLocationId(apps.getLocationId());
                 appsUpdate.setTransExp(apps.getTransExp());
                 appsUpdate.setStatus(130);
+                /*4*/Status status = statusService.getById(130);
+                appsUpdate.setStatusNm(status.getName());
+
 
 
                 /*1*/Country country = conturyService.getByCodeAndLngaTpcd(apps.getCustomerCountry(), "UZ");
@@ -340,8 +343,7 @@ public class ApiAppsController {
                      appsUpdate.setSenderCountryNm(country.getCdNm());
                 /*3*/Location location = locationService.getById(apps.getLocationId());
                      appsUpdate.setLocationNm(location.getName1());
-                /*4*/Status status = statusService.getById(130);
-                     appsUpdate.setStatusNm(status.getName());
+
                 /*5*/Terms terms = termsService.findByIdAndLngaTpcd(apps.getTerms(), "UZ");
                      appsUpdate.setTermsNm(terms.getSign());
                 /*6*/appsUpdate.setInsUser(personsIdGet.get().getTin());
@@ -422,7 +424,7 @@ public class ApiAppsController {
 
                 JSONObject obj = new JSONObject();
                 obj.put("message", "Success");
-                obj.put("data", apps);
+                obj.put("data", appsUpdate);
                 obj.put("status", "200");
                 ResponseEntity.status(0);
                 return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
