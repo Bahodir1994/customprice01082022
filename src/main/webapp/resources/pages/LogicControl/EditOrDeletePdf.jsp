@@ -47,23 +47,27 @@
     </form>
     <%--    </c:if>--%>
 
+    <button type="button" class="btn btn-primary" onclick="SaveNewLCPdf('delete')">Ўчириш</button>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeNavLc()">Ёпиш</button>
         <%--        <c:if test="${userId == '18990' || userId == 'AB170110000063971'}">--%>
-        <button type="button" class="btn btn-primary" onclick="SaveNewLCPdf()">Сақлаш</button>
+        <button type="button" class="btn btn-primary" onclick="SaveNewLCPdf('update')">Сақлашoio</button>
+
         <%--        </c:if>--%>
     </div>
 </div>
 
 
 <script>
-    function SaveNewLCPdf(flkIdPdf,) {
+    function SaveNewLCPdf(stat) {
         let flkId = $('#flkId').val();
         let files = fileVal.files[0];
+        let delOrEd = stat;
 
         let dataSS = new FormData();
         dataSS.append('flkId', flkId);
-        dataSS.append('file', files)
+        dataSS.append('file', files);
+        dataSS.append('deleteOrUpdate', delOrEd);
 
         // var dataS = {
         //     "file" : $('#file').val(),

@@ -97,36 +97,43 @@ public class LogicControlController {
 
     @PostMapping(value = SAVELCPDFMODAL)
     @ResponseBody
-    public HttpStatus savePdf(@RequestParam("file") MultipartFile multipartFile, @RequestParam("flkId")String flkId) throws IOException, NoSuchAlgorithmException {
+    public HttpStatus savePdf(@RequestParam("file") MultipartFile multipartFile, @RequestParam("flkId")String flkId, @RequestParam("deleteOrEdit")String deleteOrEdit) throws IOException, NoSuchAlgorithmException {
         FileCrosCheckMain fileCrosCheckMain = new FileCrosCheckMain();
-        try {
-            if (fileCheckMainRepo.findByFlkId(flkId) != null ){
-                fileCheckMainRepo.deleteFileCrosCheckMainByFlkId(flkId);
-                fileCrosCheckMain.setData(multipartFile.getBytes());
-                fileCrosCheckMain.setFlkId(flkId);
-                String hashtext = null;
-                MessageDigest md = MessageDigest.getInstance("MD5");
-                byte[] messageDigest = md.digest(multipartFile.getBytes());
-                hashtext = convertToHex(messageDigest);
-                fileCrosCheckMain.setHash(hashtext);
-                fileCrosCheckMain.setContentType(multipartFile.getContentType());
-                fileCheckMainRepo.save(fileCrosCheckMain);
-                return HttpStatus.OK;
-            }else {
-                fileCrosCheckMain.setData(multipartFile.getBytes());
-                fileCrosCheckMain.setFlkId(flkId);
-                String hashtext = null;
-                MessageDigest md = MessageDigest.getInstance("MD5");
-                byte[] messageDigest = md.digest(multipartFile.getBytes());
-                hashtext = convertToHex(messageDigest);
-                fileCrosCheckMain.setHash(hashtext);
-                fileCrosCheckMain.setContentType(multipartFile.getContentType());
-                fileCheckMainRepo.save(fileCrosCheckMain);
-                return HttpStatus.OK;
+        if (Objects.equals(deleteOrEdit, "delete")){
+            fileCheckMainRepo.deleteFileCrosCheckMainByFlkId(flkId);
+            return HttpStatus.OK;
+        }else {
+            try {
+                if (fileCheckMainRepo.findByFlkId(flkId) != null ){
+                    fileCheckMainRepo.deleteFileCrosCheckMainByFlkId(flkId);
+                    fileCrosCheckMain.setData(multipartFile.getBytes());
+                    fileCrosCheckMain.setFlkId(flkId);
+                    String hashtext = null;
+                    MessageDigest md = MessageDigest.getInstance("MD5");
+                    byte[] messageDigest = md.digest(multipartFile.getBytes());
+                    hashtext = convertToHex(messageDigest);
+                    fileCrosCheckMain.setHash(hashtext);
+                    fileCrosCheckMain.setContentType(multipartFile.getContentType());
+                    fileCheckMainRepo.save(fileCrosCheckMain);
+                    return HttpStatus.OK;
+                }
+                else {
+                    fileCrosCheckMain.setData(multipartFile.getBytes());
+                    fileCrosCheckMain.setFlkId(flkId);
+                    String hashtext = null;
+                    MessageDigest md = MessageDigest.getInstance("MD5");
+                    byte[] messageDigest = md.digest(multipartFile.getBytes());
+                    hashtext = convertToHex(messageDigest);
+                    fileCrosCheckMain.setHash(hashtext);
+                    fileCrosCheckMain.setContentType(multipartFile.getContentType());
+                    fileCheckMainRepo.save(fileCrosCheckMain);
+                    return HttpStatus.OK;
+                }
+            }catch (Exception e) {
+                return HttpStatus.BAD_REQUEST;
             }
-        }catch (Exception e) {
-            return HttpStatus.BAD_REQUEST;
         }
+
     }
 
     @PostMapping(value = EDITORDELETEPDF)

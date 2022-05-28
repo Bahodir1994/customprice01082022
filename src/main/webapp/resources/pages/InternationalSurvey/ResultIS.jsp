@@ -343,11 +343,11 @@
 <div class="row mt-1">
     <div class="col-md-5 align-middle">
         <c:if test="${((currentPage+1) * getPageSize - getPageSize + tutorials.size()) > 1}">
-            <span class="text-primary h5 mt-4">
+            <p class="text-primary mt-4">
                 ${(currentPage+1) * getPageSize - getPageSize + 1} дан
                 ${((currentPage+1) * getPageSize - getPageSize + tutorials.size())} гача;
                 Жами:${totalItems} та маълумот
-            </span>
+            </p>
         </c:if>
         <c:if test="${((currentPage+1) * getPageSize - getPageSize + tutorials.size()) <= 0}">
             <span class="text-primary h5 mt-4">Маълумотлар топилмади!</span>
