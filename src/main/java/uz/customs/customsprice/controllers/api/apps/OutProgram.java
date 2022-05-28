@@ -14,10 +14,7 @@ import uz.customs.customsprice.entity.InitialDecision.*;
 import uz.customs.customsprice.entity.earxiv.Earxiv;
 import uz.customs.customsprice.repository.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -79,15 +76,13 @@ public class OutProgram {
             Pageable paging = PageRequest.of(page, size);
 
             Page<Commodity> pageTuts = commodityRepo.findByAppId(appId, paging);
-            Apps apps = appsRepo.getById(appId);
-            apps.getPersonId();
-            Persons persons = new Persons();
-            persons = personsRepo.getById(apps.getPersonId());
-            tutorials = pageTuts.getContent();
+            Optional<Apps> apps = appsRepo.findById(appId);
 
+            tutorials = pageTuts.getContent();
             Map<String, Object> response = new HashMap<>();
             response.put("commodityList", tutorials);
-            response.put("person", persons);
+            response.put("apps", apps);
+
             response.put("currentPage", pageTuts.getNumber());
             response.put("totalItems", pageTuts.getTotalElements());
             response.put("totalPages", pageTuts.getTotalPages());
