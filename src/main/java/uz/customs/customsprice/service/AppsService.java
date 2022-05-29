@@ -448,7 +448,9 @@ public class AppsService {
                 /*40 - */"    c.trade_mark,\n" +
                 /*41 - */"    c.trade_name,\n" +
                 /*42 - */"    c.payment_yn,\n" +
-                /*43 - */"    c.method_description\n" +
+                /*43 - */"    c.method_description,\n" +
+                /*44 - */"    c.currency_nm, \n" +
+                /*45 - */"    c.currency_nmsymbol \n" +
                 "from\n" +
                 "    cpid.commodity c\n" +
                 "left join\n" +

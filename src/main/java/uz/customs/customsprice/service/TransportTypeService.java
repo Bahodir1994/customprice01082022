@@ -37,7 +37,10 @@ public class TransportTypeService {
                 "    c2.cd_nm end_country,\n" +
                 "    c1.cd_nm finish_country,\n" +
                 "    tt.name  tarnsport_type,\n" +
-                "    t.transport_price\n" +
+                "    t.transport_price, \n" +
+                "    t.end_country_nm, \n" +
+                "    t.finish_country_nm, \n" +
+                "    t.tarnsport_type_nm \n" +
                 "from\n" +
                 "    transporttype t\n" +
                 "left join\n" +
