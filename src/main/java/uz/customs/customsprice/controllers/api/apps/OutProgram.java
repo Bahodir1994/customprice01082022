@@ -38,6 +38,9 @@ public class OutProgram {
     @Autowired
     PersonsRepo personsRepo;
 
+    @Autowired
+    LocationRepo locationRepo;
+
     /************************(PersonId бўйча App ларни беради)****************************/
     @GetMapping("/tutorials/published")
     public ResponseEntity<Map<String, Object>> findByPersonIdToApp(
@@ -170,4 +173,27 @@ public class OutProgram {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    /******************************************************************************************************************/
+
+    @GetMapping("/custom/locations")
+    public ResponseEntity<Map<String, Object>> findAllLocations(
+    ) {
+        try {
+
+            List<Location> location = new ArrayList<>();
+            location = locationRepo.findAll();
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("locations", location);
+            response.put("message", "succes");
+            response.put("status", 200);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

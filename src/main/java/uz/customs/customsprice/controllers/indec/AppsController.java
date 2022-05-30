@@ -244,6 +244,26 @@ public class AppsController {
         Integer userRole = (Integer) request.getSession().getAttribute("userRole");
         String userId = (String) request.getSession().getAttribute("userId");
         Apps apps = appsservice.findById(appId);
+
+        List<Apps> InitialDecisionViewApp = appsservice.getInitialDecisionView(appId);
+        mav.addObject("appInfo", InitialDecisionViewApp);
+
+        List<Commodity> getInitialDecisionViewCommodity = appsservice.getInitialDecisionViewCommodity(appId);
+        mav.addObject("allCommodityFor", getInitialDecisionViewCommodity);
+
+        List<TransportType> getInDecViewTrType = transportTypeService.getByAppId(appId);
+        mav.addObject("transports", getInDecViewTrType);
+
+        List<RollbackSp> listRollbackSp = rollbackSpService.getlistRollbackSp();
+        mav.addObject("rollbackInfo", listRollbackSp);
+
+//        List<Docs> docsList = appsservice.getDocsListAppId(appId);
+        List<Earxiv> earxivList = new ArrayList<>();
+        earxivList = earxivRepo.findByAppId(appId);
+        mav.addObject("earxivList", earxivList);
+        mav.addObject("appId", appId);
+        mav.addObject("appStatus", apps.getStatus());
+        mav.addObject("userRole", userRole);
         if (userRole == 8 && apps.getStatus() == 110) {
             Status status = statusService.getById(115);
             apps.setStatus(status.getId());
@@ -269,26 +289,6 @@ public class AppsController {
             /**todo ЛОК га ёзиш end todo**/
 
         }
-
-        List<Apps> InitialDecisionViewApp = appsservice.getInitialDecisionView(appId);
-        mav.addObject("appInfo", InitialDecisionViewApp);
-
-        List<Commodity> getInitialDecisionViewCommodity = appsservice.getInitialDecisionViewCommodity(appId);
-        mav.addObject("allCommodityFor", getInitialDecisionViewCommodity);
-
-        List<TransportType> getInDecViewTrType = transportTypeService.getByAppId(appId);
-        mav.addObject("transports", getInDecViewTrType);
-
-        List<RollbackSp> listRollbackSp = rollbackSpService.getlistRollbackSp();
-        mav.addObject("rollbackInfo", listRollbackSp);
-
-//        List<Docs> docsList = appsservice.getDocsListAppId(appId);
-        List<Earxiv> earxivList = new ArrayList<>();
-        earxivList = earxivRepo.findByAppId(appId);
-        mav.addObject("earxivList", earxivList);
-        mav.addObject("appId", appId);
-        mav.addObject("appStatus", apps.getStatus());
-        mav.addObject("userRole", userRole);
 
         return mav;
     }
