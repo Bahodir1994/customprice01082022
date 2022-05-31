@@ -371,42 +371,9 @@
                 </table>
             </div>
             <div id="loaderII" class="col-md-12 position-absolute top-50 start-50 visually-hidden" role="status" style="z-index: 999999">
-                <div id="circle">
-                    <div class="loader">
-                        <div class="loader">
-                            <div class="loader">
-                                <div class="loader">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <p style="text-align: center">Юкланмоқда...</p>
+                <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
-                <style>
-                    #circle {
-                        position: absolute;
-                        top: 50%;
-                        left: 0%;
-                        transform: translate(-50%,-50%);
-                        width: 150px;
-                        height: 150px;
-                    }
-
-                    .loader {
-                        background-color: rgb(255, 255, 255);
-                        width: calc(100% - 0px);
-                        height: calc(100% - 0px);
-                        border: 8px solid #c0d1e3;
-                        border-top: 8px solid #0929d7;
-                        border-radius: 50%;
-                        animation: rotate 5s linear infinite;
-                    }
-
-                    @keyframes rotate {
-                        100% {transform: rotate(360deg);}
-                    }
-                </style>
             </div>
             <div class="card-body" id="ListCMTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
             </div>
