@@ -44,7 +44,7 @@ public class OutProgram {
     /************************(PersonId бўйча App ларни беради)****************************/
     @GetMapping("/tutorials/published")
     public ResponseEntity<Map<String, Object>> findByPersonIdToApp(
-            @RequestParam(required = false) String personId,
+            @RequestParam(required = false) String personPin,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "50") int size
     ) {
@@ -52,7 +52,7 @@ public class OutProgram {
             List<Apps> tutorials = new ArrayList<Apps>();
             Pageable paging = PageRequest.of(page, size);
 
-            Page<Apps> pageTuts = appsRepo.findByPersonId(personId, paging);
+            Page<Apps> pageTuts = appsRepo.findByPersonPin(personPin, paging);
             tutorials = pageTuts.getContent();
 
             Map<String, Object> response = new HashMap<>();
