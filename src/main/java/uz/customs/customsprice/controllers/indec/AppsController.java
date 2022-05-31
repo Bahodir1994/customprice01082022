@@ -245,8 +245,6 @@ public class AppsController {
         String userId = (String) request.getSession().getAttribute("userId");
         Apps apps = appsservice.findById(appId);
 
-
-//        List<Docs> docsList = appsservice.getDocsListAppId(appId);
         List<Earxiv> earxivList = new ArrayList<>();
         earxivList = earxivRepo.findByAppId(appId);
         mav.addObject("earxivList", earxivList);
@@ -260,7 +258,6 @@ public class AppsController {
             appsservice.saveAppsStatus(apps);
 
             /**todo ЛОК га ёзиш start todo**/
-//            StatusM statusM = new StatusM();
             StatusM statusM = statusMService.getByAppId(appId);
             statusM.setAppId(apps.getId());
             statusM.setStatus(String.valueOf(apps.getStatus()));

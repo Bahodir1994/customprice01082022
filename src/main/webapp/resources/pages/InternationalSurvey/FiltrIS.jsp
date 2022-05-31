@@ -117,29 +117,26 @@
                     <div class="row m-3">
                         <div class="row">
                             <div class="col">
-                                <label class="">Хат рақами</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
-                                                                     data-bs-placement="top"
-                                                                     title="ҲББ томонидан юбоирлган хат рақами"></i>
-                                <input class="result form-control shadow-sm" type="text" id="xbbMailNumS"
-                                       name="xbbMailNumS">
+                                <label class="">Хат рақами</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="ҲББ томонидан юбоирлган хат рақами"></i>
+                                <input class="result form-control shadow-sm" type="text" id="xbbMailNumS" name="xbbMailNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                             </div>
                             <div class="col">
                                 <label class="">Санаси</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
                                                                  data-bs-placement="top"
                                                                  title="ҲББ томонидан юбоирлган хат санаси"></i>
                                 <input class="result form-control shadow-sm" type="date" id="xbbMailDateS"
-                                       name="xbbMailDateS">
+                                       name="xbbMailDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                             </div>
                             <div class="col">
                                 <label class="">ТИФ ТН код</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
                                                                      data-bs-placement="top" title="ТИФ ТН код"></i>
-                                <input class="result form-control shadow-sm" type="text" id="hsCodeS" name="hsCodeS">
+                                <input class="result form-control shadow-sm" type="text" id="hsCodeS" name="hsCodeS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                             </div>
                             <div class="col">
                                 <label class="">Товар номи</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
                                                                      data-bs-placement="top" title="Товар номи"></i>
                                 <input class="result form-control shadow-sm" type="text" id="productNameS"
-                                       name="productNameS">
+                                       name="productNameS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                             </div>
                             <div class="col">
                                 <label class="">Сўровнома юборилган давлат</label><i class="bx bx-info-circle"
@@ -147,7 +144,7 @@
                                                                                      data-bs-placement="top"
                                                                                      title="Сўровнома юборилган давлат"></i>
                                 <select class="form-select shadow-sm" id="sendReqCountryCodeS"
-                                        name="sendReqCountryCodeS" required="">
+                                        name="sendReqCountryCodeS" required="" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                     <option value="">--Танланг--</option>
                                     <c:forEach var="countr" items="${countryList}">
                                         <option value="${countr.code}">${countr.cdNm}</option>
@@ -163,7 +160,7 @@
                                                                                          data-bs-placement="top"
                                                                                          title="Юборилган сўровнома рақами"></i>
                                     <input class="result form-control shadow-sm" type="text" id="sendReqNumS"
-                                           name="sendReqNumS">
+                                           name="sendReqNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                 </div>
                             </div>
                             <div class="col">
@@ -173,7 +170,7 @@
                                                                                          data-bs-placement="top"
                                                                                          title="Юборилган сўровнома санаси"></i>
                                     <input class="result form-control shadow-sm" type="date" id="reqDateS"
-                                           name="reqDateS">
+                                           name="reqDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                 </div>
                             </div>
                             <div class="col">
@@ -182,7 +179,7 @@
                                                                                          data-bs-placement="top"
                                                                                          title="Сўровномага олинган жавоб хати"></i>
                                 <input class="result form-control shadow-sm" type="text" id="responseNumS"
-                                       name="responseNumS">
+                                       name="responseNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                             </div>
                             <div class="col">
                                 <label class="">Олинган жавоб хати санаси</label><i class="bx bx-info-circle"
@@ -190,7 +187,7 @@
                                                                                     data-bs-placement="top"
                                                                                     title="Сўровномага олинган жавоб хати санаси"></i>
                                 <input class="result form-control shadow-sm" type="date" id="responseDateS"
-                                       name="responseDateS">
+                                       name="responseDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                             </div>
                             <div class="col">
                                 <div class="">
@@ -199,7 +196,7 @@
                                                                                          data-bs-placement="top"
                                                                                          title="Сўровномага олинган жавоб хатини ҲББга юборилган хат рақами"></i>
                                     <input class="result form-control shadow-sm" type="text" id="responseNumSendXbbNumS"
-                                           name="responseNumSendXbbNumS">
+                                           name="responseNumSendXbbNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                 </div>
                             </div>
                         </div>
@@ -211,7 +208,7 @@
                                                                                          data-bs-placement="top"
                                                                                          title="Сўровномага олинган жавоб хатини ҲББга юборилган хат санаси"></i>
                                     <input class="result form-control shadow-sm" type="date"
-                                           id="responseNumSendXbbDateS" name="responseNumSendXbbDateS">
+                                           id="responseNumSendXbbDateS" name="responseNumSendXbbDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                 </div>
                             </div>
                             <div class="col">
@@ -220,7 +217,7 @@
                                         class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="Сўровнома натижаси бўйича жавоб хати рақами"></i>
                                     <input class="result form-control shadow-sm" type="text" id="resultAnswerMailNumS"
-                                           name="resultAnswerMailNumS">
+                                           name="resultAnswerMailNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                 </div>
                             </div>
                             <div class="col">
@@ -229,7 +226,7 @@
                                         class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="Сўровнома натижаси бўйича жавоб хати санаси"></i>
                                     <input class="result form-control shadow-sm" type="date" id="resultAnswerMailDateS"
-                                           name="resultAnswerMailDateS">
+                                           name="resultAnswerMailDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                 </div>
                             </div>
                             <div class="col">
@@ -239,7 +236,7 @@
                                                                                 data-bs-placement="top"
                                                                                 title="ҲББ хулоса рақами"></i>
                                     <input class="result form-control shadow-sm" type="text" id="xbbVerdictNumS"
-                                           name="xbbVerdictNumS">
+                                           name="xbbVerdictNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                 </div>
                             </div>
                             <div class="col">
@@ -248,12 +245,12 @@
                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
                                                                        title="ҲББ хулоса санаси"></i>
                                     <input class="result form-control shadow-sm" type="date" id="xbbVerdictDateS"
-                                           name="xbbVerdictDateS">
+                                           name="xbbVerdictDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                 </div>
                             </div>
                             <div class="col">
                                 <label>Cўровнома холати</label>
-                                <select class="form-select" id="statusS" name="statusS">
+                                <select class="form-select" id="statusS" name="statusS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                     <option value="">--Танланг--</option>
                                     <option value="100">Янги</option>
                                     <option value="200">Жараёнда</option>
@@ -373,11 +370,45 @@
 
                 </table>
             </div>
-            <div class="card-body" id="ListCMTable"
-                 style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
-                <div id="loaderII" class="col-md-12 spinner-border text-primary  position-absolute top-50 start-50 visually-hidden" role="status">
+            <div id="loaderII" class="col-md-12 position-absolute top-50 start-50 visually-hidden" role="status" style="z-index: 999999">
+                <div id="circle">
+                    <div class="loader">
+                        <div class="loader">
+                            <div class="loader">
+                                <div class="loader">
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="text-align: center">Юкланмоқда...</p>
                 </div>
+                <style>
+                    #circle {
+                        position: absolute;
+                        top: 50%;
+                        left: 0%;
+                        transform: translate(-50%,-50%);
+                        width: 150px;
+                        height: 150px;
+                    }
+
+                    .loader {
+                        background-color: rgb(255, 255, 255);
+                        width: calc(100% - 0px);
+                        height: calc(100% - 0px);
+                        border: 8px solid #c0d1e3;
+                        border-top: 8px solid #0929d7;
+                        border-radius: 50%;
+                        animation: rotate 5s linear infinite;
+                    }
+
+                    @keyframes rotate {
+                        100% {transform: rotate(360deg);}
+                    }
+                </style>
+            </div>
+            <div class="card-body" id="ListCMTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
             </div>
         </div>
     </div>
@@ -443,15 +474,16 @@
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {
-                $('div#ListCMTable').html(res);
-                $('div#divRowCount').css({'display': ''});
-                $('#loaderII').addClass('visually-hidden');
-                // document.body.style.cursor = 'default';
+                setTimeout(()=>{
+                    $('div#ListCMTable').html(res);
+                    $('div#divRowCount').css({'display': ''});
+                    $('#loaderII').addClass('visually-hidden');
+                },1000)
             },
             error: function (res) {
-                if (res.status == 401) {
-                    $(".logOutForm").submit();
-                }
+                setTimeout(()=>{
+                    $('#loaderII').addClass('visually-hidden')
+                },1000)
             }
         });
 

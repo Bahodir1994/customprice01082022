@@ -126,7 +126,8 @@
                             <div class="col">
                                 <label class="">Номи</label>
                                 <input class="result form-control shadow-sm" type="text" id="flkName" name="flkName"
-                                       placeholder="Мантиқий назорат номи">
+                                       placeholder="Мантиқий назорат номи"
+                                       onkeypress="if (event.keyCode == 13) {searchResultTableLC(0); return false;} ">
                             </div>
                         </div>
                         <div class="col-md-2 mt-2 mb-2">
@@ -150,10 +151,76 @@
                 </div>
             </div>
             <hr>
-            <div class="card-body" id="ListLCTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
-                <div id="loaderII" class="col-md-12 spinner-border text-primary  position-absolute top-50 start-50 visually-hidden" role="status">
-
+            <div id="loaderII" class="col-md-12 position-absolute top-50 start-50 visually-hidden" role="status" style="z-index: 999999">
+                <div class="loading">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
                 </div>
+                <style>
+                    .loading {
+                        display: flex;
+                    }
+                    .loading .dot {
+                        position: relative;
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                    }
+                    .loading .dot::before {
+                        position: absolute;
+                        content: "";
+                        width: 100%;
+                        height: 100%;
+                        background: inherit;
+                        border-radius: inherit;
+                        animation: wave 2s ease-out infinite;
+                    }
+                    .loading .dot:nth-child(1) {
+                        background: #7ef9ff;
+                    }
+                    .loading .dot:nth-child(1)::before {
+                        animation-delay: 0.2s;
+                    }
+                    .loading .dot:nth-child(2) {
+                        background: #89cff0;
+                    }
+                    .loading .dot:nth-child(2)::before {
+                        animation-delay: 0.4s;
+                    }
+                    .loading .dot:nth-child(3) {
+                        background: #4682b4;
+                    }
+                    .loading .dot:nth-child(3)::before {
+                        animation-delay: 0.6s;
+                    }
+                    .loading .dot:nth-child(4) {
+                        background: #0f52ba;
+                    }
+                    .loading .dot:nth-child(4)::before {
+                        animation-delay: 0.8s;
+                    }
+                    .loading .dot:nth-child(5) {
+                        background: #000080;
+                    }
+                    .loading .dot:nth-child(5)::before {
+                        animation-delay: 1s;
+                    }
+
+                    @keyframes wave {
+                        50%, 75% {
+                            transform: scale(2.5);
+                        }
+                        80%, 100% {
+                            opacity: 0;
+                        }
+                    }
+                </style>
+            </div>
+            <div class="card-body" id="ListLCTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
+
             </div>
         </div>
     </div>
@@ -207,8 +274,6 @@
                     $('div#ListLCTable').html(res);
                     $('#loaderII').addClass('visually-hidden')
                 },1000)
-
-                //$('#loaderII').addClass('visually-hidden');
             },
             error: function (res) {
                 setTimeout(()=>{
