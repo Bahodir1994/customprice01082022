@@ -15,20 +15,20 @@ import java.sql.Date;
 public interface InternationalSurveyRepo extends JpaRepository<InternationalSurveyEntity, String> {
 
     @Query("SELECT c FROM InternationalSurveyEntity c WHERE" +
-            "(:xbbMailNum='' or :xbbMailNum is null or c.xbbMailNum = :xbbMailNum) and"+
+            "(:xbbMailNum='' or :xbbMailNum is null or lower(c.xbbMailNum) like lower(CONCAT('%',:xbbMailNum,'%')) ) and"+
             "(:xbbMailDate is null or c.xbbMailDate = :xbbMailDate) and"+
-            "(:hsCode='' or :hsCode is null or c.hsCode = :hsCode) and"+
-            "(:productName='' or :productName is null or c.productName = :productName) and"+
+            "(:hsCode='' or :hsCode is null or lower(c.hsCode) like lower(CONCAT('%',:hsCode,'%'))) and"+
+            "(:productName='' or :productName is null or lower(c.productName) like lower(CONCAT('%',:productName,'%'))) and"+
             "(:sendReqCountryCode='' or :sendReqCountryCode is null or c.sendReqCountryCode = :sendReqCountryCode) and"+
-            "(:sendReqNum='' or :sendReqNum is null or c.sendReqNum = :sendReqNum) and"+
+            "(:sendReqNum='' or :sendReqNum is null or lower(c.sendReqNum) like lower(CONCAT('%',:sendReqNum,'%'))) and"+
             "(:reqDate is null or c.reqDate = :reqDate) and"+
-            "(:responseNum='' or :responseNum is null or c.responseNum = :responseNum) and"+
+            "(:responseNum='' or :responseNum is null or lower(c.responseNum) like lower(CONCAT('%',:responseNum,'%'))) and"+
             "(:responseDate is null or c.responseDate = :responseDate) and"+
-            "(:responseNumSendXbbNum='' or :responseNumSendXbbNum is null or c.responseNumSendXbbNum = :responseNumSendXbbNum) and"+
+            "(:responseNumSendXbbNum='' or :responseNumSendXbbNum is null or lower(c.responseNumSendXbbNum) like lower(CONCAT('%',:responseNumSendXbbNum,'%'))) and"+
             "(:responseNumSendXbbDate is null or c.responseNumSendXbbDate = :responseNumSendXbbDate) and"+
-            "(:resultAnswerMailNum='' or :resultAnswerMailNum is null or c.resultAnswerMailNum = :resultAnswerMailNum) and"+
+            "(:resultAnswerMailNum='' or :resultAnswerMailNum is null or lower(c.resultAnswerMailNum) like lower(CONCAT('%',:resultAnswerMailNum,'%'))) and"+
             "(:resultAnswerMailDate is null or c.resultAnswerMailDate = :resultAnswerMailDate) and"+
-            "(:xbbVerdictNum='' or :xbbVerdictNum is null or c.xbbVerdictNum = :xbbVerdictNum) and"+
+            "(:xbbVerdictNum='' or :xbbVerdictNum is null or lower(c.xbbVerdictNum) like lower(CONCAT('%',:xbbVerdictNum,'%'))) and"+
             "(:xbbVerdictDate is null or c.xbbVerdictDate = :xbbVerdictDate) and"+
             "(:status='' or :status is null or c.status = :status)")
 //                "(:status='' or c.status = :status)")
