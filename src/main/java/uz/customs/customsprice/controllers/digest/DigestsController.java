@@ -161,6 +161,7 @@ public class DigestsController {
         List<Object[]> declList = bydHistoryService.getListGTDHistory(g7a, g7b, g7c);
 
         String p7a = "", p7b = "", p7c = "", declId = "";
+        String asd = "asd";
 
         if (declList.size() > 0) {
             p7a = Utils.nullClear(declList.get(0)[7]).toString();
@@ -172,10 +173,6 @@ public class DigestsController {
             List<DeclarationEntity> declDetailsList = bydHistoryService.getListGTDHistoryDetails(p7a, p7b, p7c, declId);
             mav.addObject("declDetailsList", declDetailsList);
         }
-
-
-
-
         return mav;
     }
     /***********БОЖХОНА ЮК ДЕКЛАРАЦИЯЛАРИ ТАРИХИ **********************************************/
