@@ -1,4 +1,4 @@
-package uz.customs.customsprice.controllers.InternationalSurvey;
+package uz.customs.customsprice.controllers.internationalSurvey;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +19,6 @@ import uz.customs.customsprice.service.ConturyService;
 import uz.customs.customsprice.service.InternationalSurveyS.InternationalSurveyService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.math.BigDecimal;

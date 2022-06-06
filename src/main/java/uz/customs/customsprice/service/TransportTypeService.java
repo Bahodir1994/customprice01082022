@@ -1,7 +1,6 @@
 package uz.customs.customsprice.service;
 
 import org.springframework.stereotype.Service;
-import uz.customs.customsprice.entity.InitialDecision.Apps;
 import uz.customs.customsprice.entity.InitialDecision.TransportType;
 import uz.customs.customsprice.repository.TransportTypeRepo;
 

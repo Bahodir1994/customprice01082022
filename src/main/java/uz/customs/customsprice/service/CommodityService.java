@@ -2,13 +2,11 @@ package uz.customs.customsprice.service;
 
 import org.springframework.stereotype.Service;
 import uz.customs.customsprice.entity.InitialDecision.Commodity;
-import uz.customs.customsprice.entity.InitialDecision.InDec;
 import uz.customs.customsprice.entity.InitialDecision.Payment;
 import uz.customs.customsprice.repository.CommodityRepo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 

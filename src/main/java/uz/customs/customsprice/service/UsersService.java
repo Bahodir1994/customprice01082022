@@ -1,14 +1,12 @@
 package uz.customs.customsprice.service;
 
 import org.springframework.stereotype.Service;
-import uz.customs.customsprice.entity.InitialDecision.Commodity;
 import uz.customs.customsprice.entity.users.User;
 import uz.customs.customsprice.repository.UserRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsersService {

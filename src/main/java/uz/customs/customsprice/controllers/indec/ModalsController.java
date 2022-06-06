@@ -34,7 +34,7 @@ public class ModalsController {
     @PostMapping(value = COSTMONITORING)
     @ResponseBody
     public ModelAndView CostMonitoring(HttpSession session, @RequestParam String id) {
-        ModelAndView mav = new ModelAndView("/resources/pages/CostMonitoring/CostMonitoring");
+        ModelAndView mav = new ModelAndView("/resources/pages/CostMonitoring/costMonitoring");
         mav.addObject("country", costMonitoringService.getCostMonitoring("1"));
         return mav;
     }

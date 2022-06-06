@@ -68,11 +68,14 @@ public class ApiAppsController {
         JSONObject jsonObject;
         JSONObject jsonObject2;
 
-        /*1*/Apps apps = appsAndDocsAndTransportsDTO.getApps();
+        /*1*/
+        Apps apps = appsAndDocsAndTransportsDTO.getApps();
 
-        /*2*/List<TransportType> transportTypes = appsAndDocsAndTransportsDTO.getTransports();
+        /*2*/
+        List<TransportType> transportTypes = appsAndDocsAndTransportsDTO.getTransports();
 
-        /*3*/List<Earxiv> earxivS = appsAndDocsAndTransportsDTO.getDocs();
+        /*3*/
+        List<Earxiv> earxivS = appsAndDocsAndTransportsDTO.getDocs();
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -86,7 +89,7 @@ public class ApiAppsController {
                 for (ConstraintViolation violation : violations) {
                     System.out.println(violation.getPropertyPath());
                     System.out.println(violation.getMessage());
-                    jsonObject.put(violation.getPropertyPath().toString(),violation.getMessage());
+                    jsonObject.put(violation.getPropertyPath().toString(), violation.getMessage());
 //                    errorTransportType.put(violation.getPropertyPath().toString() , violation.getMessage());
                 }
                 errorTransportType.put(e, jsonObject);
@@ -101,7 +104,7 @@ public class ApiAppsController {
                 for (ConstraintViolation violation : violationearxivS) {
                     System.out.println(violation.getPropertyPath());
                     System.out.println(violation.getMessage());
-                    jsonObject2.put(violation.getPropertyPath().toString(),violation.getMessage());
+                    jsonObject2.put(violation.getPropertyPath().toString(), violation.getMessage());
 //                    errorEarxiv.put(violation.getPropertyPath().toString() + e, violation.getMessage());
                 }
                 errorEarxiv.put(k, jsonObject2);
@@ -120,7 +123,7 @@ public class ApiAppsController {
         }
 //        }
 
-        if(errorTransportType.size() > 0||errorApps.size() > 0||errorEarxiv.size() > 0) {
+        if (errorTransportType.size() > 0 || errorApps.size() > 0 || errorEarxiv.size() > 0) {
             JSONObject obj = new JSONObject();
             obj.put("message", "Error");
 
@@ -138,10 +141,7 @@ public class ApiAppsController {
             obj.put("status", "400");
             return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
 
-        }
-
-
-        else {
+        } else {
             Optional<Persons> personsIdGet = personsService.getById(apps.getPersonId());
             if (personsIdGet.isPresent()) {
                 Country country = conturyService.getByCodeAndLngaTpcd(apps.getCustomerCountry(), "UZ");
@@ -266,10 +266,33 @@ public class ApiAppsController {
         Map<Integer, Object> errorEarxiv = new HashMap<>();
         JSONObject jsonObject;
         JSONObject jsonObject2;
+        Map<String, String> errorAppsAll = new HashMap<>();
 
-        /*1*/Apps apps = appsAndDocsAndTransportsDTO.getApps();
-        /*2*/List<TransportType> transportTypes = appsAndDocsAndTransportsDTO.getTransports();
-        /*3*/List<Earxiv> earxivS = appsAndDocsAndTransportsDTO.getDocs();
+        if (appsAndDocsAndTransportsDTO.getApps() == null) {
+            errorAppsAll.put("apps", "Ариза маълумотлари буш булиши мумкин эмас!");
+        }
+        if (appsAndDocsAndTransportsDTO.getTransports() == null) {
+            errorAppsAll.put("transport", "Транспорт маълумотлари буш булиши мумкин эмас!");
+        }
+        if (appsAndDocsAndTransportsDTO.getDocs() == null) {
+            errorAppsAll.put("docs", "Хужжат маълумотлари буш булиши мумкин эмас!");
+        }
+
+        if (errorAppsAll.size() > 0) {
+            JSONObject obj = new JSONObject();
+            obj.put("message", "Error");
+            obj.put("errors", errorAppsAll);
+            obj.put("status", "400");
+            return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
+        }
+
+
+        /*1*/
+        Apps apps = appsAndDocsAndTransportsDTO.getApps();
+        /*2*/
+        List<TransportType> transportTypes = appsAndDocsAndTransportsDTO.getTransports();
+        /*3*/
+        List<Earxiv> earxivS = appsAndDocsAndTransportsDTO.getDocs();
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -283,7 +306,7 @@ public class ApiAppsController {
                 for (ConstraintViolation violation : violations) {
                     System.out.println(violation.getPropertyPath());
                     System.out.println(violation.getMessage());
-                    jsonObject.put(violation.getPropertyPath().toString(),violation.getMessage());
+                    jsonObject.put(violation.getPropertyPath().toString(), violation.getMessage());
                 }
                 errorTransportType.put(e, jsonObject);
                 e++;
@@ -297,7 +320,7 @@ public class ApiAppsController {
                 for (ConstraintViolation violation : violationearxivS) {
                     System.out.println(violation.getPropertyPath());
                     System.out.println(violation.getMessage());
-                    jsonObject2.put(violation.getPropertyPath().toString(),violation.getMessage());
+                    jsonObject2.put(violation.getPropertyPath().toString(), violation.getMessage());
                 }
                 errorEarxiv.put(k, jsonObject2);
                 k++;
@@ -312,22 +335,27 @@ public class ApiAppsController {
                 errorApps.put(violation.getPropertyPath().toString(), violation.getMessage());
             }
         }
-        if(errorTransportType.size() > 0||errorApps.size() > 0||errorEarxiv.size() > 0) {
+        if (errorTransportType.size() > 0 || errorApps.size() > 0 || errorEarxiv.size() > 0) {
             JSONObject obj = new JSONObject();
             obj.put("message", "Error");
-            if (errorTransportType.size() > 0) {obj.put("errorsTransportType", errorTransportType);}
-            if (errorApps.size() > 0) {obj.put("errorsApps", errorApps);}
-            if (errorEarxiv.size() > 0) {obj.put("errorEarxiv", errorEarxiv);}
+            if (errorTransportType.size() > 0) {
+                obj.put("errorsTransportType", errorTransportType);
+            }
+            if (errorApps.size() > 0) {
+                obj.put("errorsApps", errorApps);
+            }
+            if (errorEarxiv.size() > 0) {
+                obj.put("errorEarxiv", errorEarxiv);
+            }
             obj.put("status", "400");
             return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
-        }
-        else {
+        } else {
             Optional<Persons> personsIdGet = personsService.getById(apps.getPersonId());
-            if (personsIdGet.isPresent()) {
+            Apps appsUpdate = appsService.findById(apps.getId());
+            if (personsIdGet.isPresent() && appsUpdate != null) {
                 /******************************************(Apps update all by appId)**********************************/
-                Apps appsUpdate = appsService.findById(apps.getId());
 
-                appsUpdate.setId(apps.getId());
+//                appsUpdate.setId(apps.getId());
                 appsUpdate.setPersonId(apps.getPersonId());
                 appsUpdate.setCustomerCountry(apps.getCustomerCountry());
                 appsUpdate.setSenderCountry(apps.getSenderCountry());
@@ -346,18 +374,24 @@ public class ApiAppsController {
                 appsUpdate.setLocationId(apps.getLocationId());
                 appsUpdate.setTransExp(apps.getTransExp());
                 appsUpdate.setStatus(130);
-                /*4*/Status status = statusService.getById(130);
+                /*4*/
+                Status status = statusService.getById(130);
                 appsUpdate.setStatusNm(status.getName());
 
-                /*1*/Country country = conturyService.getByCodeAndLngaTpcd(apps.getCustomerCountry(), "UZ");
-                     appsUpdate.setCustomerCountryNm(country.getCdNm());
-                /*2*/country = conturyService.getByCodeAndLngaTpcd(apps.getSenderCountry(), "UZ");
-                     appsUpdate.setSenderCountryNm(country.getCdNm());
-                /*3*/Location location = locationService.getById(apps.getLocationId());
-                     appsUpdate.setLocationNm(location.getName1());
-                /*5*/Terms terms = termsService.findByIdAndLngaTpcd(apps.getTerms(), "UZ");
-                     appsUpdate.setTermsNm(terms.getSign());
-                /*6*/appsUpdate.setInsUser(personsIdGet.get().getTin());
+                /*1*/
+                Country country = conturyService.getByCodeAndLngaTpcd(apps.getCustomerCountry(), "UZ");
+                appsUpdate.setCustomerCountryNm(country.getCdNm());
+                /*2*/
+                country = conturyService.getByCodeAndLngaTpcd(apps.getSenderCountry(), "UZ");
+                appsUpdate.setSenderCountryNm(country.getCdNm());
+                /*3*/
+                Location location = locationService.getById(apps.getLocationId());
+                appsUpdate.setLocationNm(location.getName1());
+                /*5*/
+                Terms terms = termsService.findByIdAndLngaTpcd(apps.getTerms(), "UZ");
+                appsUpdate.setTermsNm(terms.getSign());
+                /*6*/
+                appsUpdate.setInsUser(personsIdGet.get().getTin());
 
                 appsService.saveApps(appsUpdate);
                 /*************(TransportType delete all by appId and save new transporttype Lists)*********************/
@@ -452,7 +486,7 @@ public class ApiAppsController {
             } else {
                 JSONObject obj = new JSONObject();
                 obj.put("message", "Error");
-                obj.put("errors", "Bunday ID li foydalanuvchi топилмади!");
+                obj.put("errors", "Фойдаланувчи ёки ариза маълумотлари топилмади!");
                 obj.put("status", "400");
                 return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
             }

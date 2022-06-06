@@ -1,8 +1,6 @@
 package uz.customs.customsprice.controllers.indec;
 
-import com.itextpdf.html2pdf.HtmlConverter;
 import com.itextpdf.text.DocumentException;
-import com.lowagie.text.pdf.PdfReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +14,6 @@ import uz.customs.customsprice.service.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

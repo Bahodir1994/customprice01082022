@@ -940,7 +940,7 @@
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/variable-pie.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/export-data.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/accessibility.js"></script>
-<script src="<%=request.getContextPath()%>/resources/assets2/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
+<%--<script src="<%=request.getContextPath()%>/resources/assets2/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>--%>
 <script>
     new PerfectScrollbar('.dashboard-top-countries');
 </script>

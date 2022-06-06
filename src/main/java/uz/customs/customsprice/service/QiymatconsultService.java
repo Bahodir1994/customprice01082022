@@ -2,7 +2,7 @@ package uz.customs.customsprice.service;
 
 import org.springframework.stereotype.Service;
 import uz.customs.customsprice.entity.Digests.QiymatconsultEntity;
-import uz.customs.customsprice.repository.QiymatconsultRepo;
+import uz.customs.customsprice.repository.digests.QiymatconsultRepo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

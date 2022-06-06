@@ -1,14 +1,8 @@
 package uz.customs.customsprice.service;
 
 import org.springframework.stereotype.Service;
-import uz.customs.customsprice.entity.InitialDecision.Apps;
 import uz.customs.customsprice.entity.InitialDecision.AppsRasp;
-import uz.customs.customsprice.entity.InitialDecision.Terms;
 import uz.customs.customsprice.repository.AppsRaspRepo;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.List;
 
 @Service
 public class AppsRaspService {

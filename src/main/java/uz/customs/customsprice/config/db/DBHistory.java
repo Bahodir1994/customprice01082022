@@ -23,12 +23,12 @@ import java.util.Properties;
 import static uz.customs.customsprice.CustomspriceApplication.MODEL_PACKAGE;
 
 @Configuration
-@ConfigurationProperties("spring.datasource.digests")
-@EnableJpaRepositories(repositoryFactoryBeanClass = DataTablesRepositoryFactoryBean.class, entityManagerFactoryRef = "entityManagerFactoryDigests", transactionManagerRef =
-        "transactionManagerdigests", basePackages = {"uz.customs.customsprice.repository.digests"})
-public class DBDigests {
-    protected final String PERSISTENCE_UNIT_NAME = "digests";
-    protected final Properties JPA_DIGESTS = new Properties() {{
+@ConfigurationProperties("spring.datasource.historys")
+@EnableJpaRepositories(repositoryFactoryBeanClass = DataTablesRepositoryFactoryBean.class, entityManagerFactoryRef = "entityManagerFactoryHistory", transactionManagerRef =
+        "transactionManagerhistorys", basePackages = {"uz.customs.customsprice.repository.historys"})
+public class DBHistory {
+    protected final String PERSISTENCE_UNIT_NAME = "historys";
+    protected final Properties JPA_HISTORY = new Properties() {{
         put("database-platform", "org.hibernate.dialect.DB2400Dialect");
         put("hibernate.ddl-auto", "none");
         put("hibernate.hbm2ddl.auto", "none");
@@ -37,19 +37,19 @@ public class DBDigests {
     }};
 
     @Bean
-    @Qualifier("digests")
-    public HikariDataSource digests() throws UnknownHostException, SocketException {
+    @Qualifier("historys")
+    public HikariDataSource history() throws UnknownHostException, SocketException {
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setAutoCommit(true);
         hikariConfig.addDataSourceProperty("characterEncoding", "utf8");
         hikariConfig.addDataSourceProperty("encoding", "UTF-8");
         hikariConfig.addDataSourceProperty("useUnicode", "true");
-        hikariConfig.setPoolName("digests");
+        hikariConfig.setPoolName("history");
         hikariConfig.setDriverClassName("com.ibm.as400.access.AS400JDBCDriver");
-        hikariConfig.setJdbcUrl("jdbc:as400://192.168.212.228/EPIGUED");
+        hikariConfig.setJdbcUrl("jdbc:as400://192.168.212.225/ASOD");
         hikariConfig.setConnectionTestQuery("select current_timestamp cts from sysibm.sysdummy1");
-        hikariConfig.setUsername("rustam");
-        hikariConfig.setPassword("rustam");
+        hikariConfig.setUsername("EDOUSER");
+        hikariConfig.setPassword("RaSsWoRdS");
         String ip = "";
         try (final DatagramSocket socket = new DatagramSocket()) {
             socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
@@ -74,21 +74,21 @@ public class DBDigests {
     }
 
 
-    @PersistenceContext(unitName = "digests")
-    @Bean(name = "entityManagerFactoryDigests")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryDigests(final HikariDataSource digests) {
+    @PersistenceContext(unitName = "historys")
+    @Bean(name = "entityManagerFactoryHistory")
+    public LocalContainerEntityManagerFactoryBean entityManagerFactoryHistory(@Qualifier(value = "historys") final HikariDataSource historys) {
 
         return new LocalContainerEntityManagerFactoryBean() {{
-            setDataSource(digests);
+            setDataSource(historys);
             setPersistenceProviderClass(HibernatePersistenceProvider.class);
             setPersistenceUnitName(PERSISTENCE_UNIT_NAME);
             setPackagesToScan(MODEL_PACKAGE);
-            setJpaProperties(JPA_DIGESTS);
+            setJpaProperties(JPA_HISTORY);
         }};
     }
 
     @Bean
-    public PlatformTransactionManager transactionManagerDigests(final @Qualifier("entityManagerFactoryDigests") LocalContainerEntityManagerFactoryBean entityManagerFactoryDigests) {
-        return new JpaTransactionManager(entityManagerFactoryDigests.getObject());
+    public PlatformTransactionManager transactionManagerHistory(final @Qualifier("entityManagerFactoryHistory") LocalContainerEntityManagerFactoryBean entityManagerFactoryHistory) {
+        return new JpaTransactionManager(entityManagerFactoryHistory.getObject());
     }
 }

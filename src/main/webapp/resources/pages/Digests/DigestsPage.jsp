@@ -27,7 +27,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="our_solution_category">
                                 <div class="solution_cards_box">
-                                    <div class="solution_card" onclick="javascript:DigestsFirst(0)">
+                                    <div class="solution_card" onclick="DigestsFirst(0)">
                                         <div class="hover_color_bubble"></div>
                                         <div class="so_top_icon">
                                             <svg id="Layer_1" enable-background="new 0 0 512 512" height="50" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg">
@@ -316,7 +316,7 @@
                                             <button type="button" class="read_more_btn">БАТАФСИЛ</button>
                                         </div>
                                     </div>
-                                    <div class="solution_card">
+                                    <div class="solution_card" onclick="BYDHistory(0)">
                                         <div class="hover_color_bubble"></div>
                                         <div class="so_top_icon">
                                             <svg id="Layer_1" enable-background="new 0 0 512 512" height="50" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg">
@@ -671,7 +671,7 @@
 </div>
 
 <script>
-    /* Справочник */
+    /* ШАРТЛИ БЕЛГИЛАНГАН ТОВАРЛАР */
     function DigestsFirst(x) {
         var dataS = {
             "x": x
@@ -681,6 +681,27 @@
             type: "POST",
             data: dataS,
             url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/DigestsFirst",
+            dataType: "html",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (res) {
+                document.body.style.cursor = "default";
+                $('div#MainContent').html(res);
+            },
+            error: function (res) {
+            }
+        });
+    }
+
+    /* BYDHistory */
+    function BYDHistory(x) {
+        var dataS = {
+            "x": x
+        }
+        document.body.style.cursor = "wait";
+        $.ajax({
+            type: "POST",
+            data: dataS,
+            url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/FilterBYDHistory",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {
