@@ -1,4 +1,4 @@
-package uz.customs.customsprice.controllers.internationalSurvey;
+package uz.customs.customsprice.controllers.InternationalSurvey;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

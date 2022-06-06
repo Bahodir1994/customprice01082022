@@ -1,4 +1,4 @@
-package uz.customs.customsprice.controllers.internationalSurvey;
+package uz.customs.customsprice.controllers.InternationalSurvey;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,26 +1,21 @@
-package uz.customs.customsprice.controllers.costMonitoring;
+package uz.customs.customsprice.controllers.CostMonitoring;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import uz.customs.customsprice.entity.InitialDecision.*;
-import uz.customs.customsprice.entity.classifier.TransportTypeS;
+import uz.customs.customsprice.entity.classifier.TransportS;
 import uz.customs.customsprice.payload.CostMonitoringResponse;
 import uz.customs.customsprice.payload.PostResponse;
+import uz.customs.customsprice.repository.*;
 import uz.customs.customsprice.repository.classifier.PostRepository;
-import uz.customs.customsprice.repository.classifier.TransportTypeSRepo;
-import uz.customs.customsprice.repository.CountyRepo;
-import uz.customs.customsprice.repository.LocationRepo;
-import uz.customs.customsprice.repository.MethodRepo;
-import uz.customs.customsprice.repository.TermsRepo;
+import uz.customs.customsprice.repository.classifier.TransportSRepository;
 import uz.customs.customsprice.service.ConturyService;
 import uz.customs.customsprice.service.CostMonitoring.CostMonitoringService;
+import uz.customs.customsprice.utils.Utils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,9 +27,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/costmonitoring")
 public class CostMonitoringController {
+    private final String JSP = "/resultCM";
     private final String COSTMONITORINGPAGE = "/resources/pages/CostMonitoring/FiltrCM";
     private final String COSTMONITORING_POST = "/resources/pages/CostMonitoring/FiltrCMPost";
-    private final String COSTMONITORINGRESULTPAGE = "/resources/pages/CostMonitoring/ResultCM";
+    private final String COSTMONITORINGRESULTPAGE = "/resources/pages/CostMonitoring/ResultCM1";
+    private final String DATA_PAGINATION = "/server_side/pagination";
 
     private final ConturyService conturyService;
     private final CostMonitoringService costMonitoringService;
@@ -52,7 +49,7 @@ public class CostMonitoringController {
     MethodRepo methodRepo;
 
     @Autowired
-    TransportTypeSRepo transportTypeSRepo;
+    TransportSRepository transportSRepository;
 
     @Autowired
     TermsRepo termsRepo;
@@ -67,16 +64,25 @@ public class CostMonitoringController {
     public ModelAndView FilterCM(HttpSession session) {
         ModelAndView mav = new ModelAndView("resources/pages/CostMonitoring/FiltrCM");
         String lngaTpcd = "UZ";
+        String code = "10,";
         List<Country> countryList = countyRepo.findAllByLngaTpcdOrderByCodeAsc(lngaTpcd);
         List<Terms> termsList = termsRepo.findAllByLngaTpcdOrderByRaqamAsc(lngaTpcd);
         List<Location> locationList = locationRepo.findAll();
         List<Method> methodList = methodRepo.findAll();
-        List<TransportTypeS> transportTypeSList = transportTypeSRepo.findAll();
+//        List<TransportTypeS> transportTypeSList = transportTypeSRepo.findAll();
+        List<TransportS> transportSList = transportSRepository.findByLngaTpcd(lngaTpcd);
         mav.addObject("countryList", countryList);
         mav.addObject("locationList", locationList);
         mav.addObject("methodList", methodList);
-        mav.addObject("transportTypeSList", transportTypeSList);
+        mav.addObject("transportSList", transportSList);
         mav.addObject("termsList", termsList);
+        return mav;
+    }
+
+    @GetMapping(value = JSP)
+    @ResponseBody
+    public ModelAndView resultCM(HttpSession session) {
+        ModelAndView mav = new ModelAndView("resources/pages/CostMonitoring/ResultCM");
         return mav;
     }
 
@@ -96,6 +102,75 @@ public class CostMonitoringController {
             postResponseList.add(postResponse);
         }
         return ResponseEntity.ok(postResponseList);
+    }
+
+    @GetMapping(value = DATA_PAGINATION)
+    public ResponseEntity<CostMonitoringResponse1> pagination(HttpServletRequest request) {
+//        ModelAndView mav = new ModelAndView("resources/pages/CostMonitoring/ResultCM");
+
+        String filter = (request.getParameter("search[value]") == null || (request.getParameter("search[value]").equals("null") || request.getParameter("search[value]").equals("")) ? "" : request.getParameter("search[value]"));
+        String draw = (request.getParameter("draw") == null || (request.getParameter("draw").equals("null") || request.getParameter("draw").equals("")) ? "" : request.getParameter("draw"));
+        String limit = (request.getParameter("length") == null || (request.getParameter("length").equals("null") || request.getParameter("length").equals("")) ? "" : request.getParameter("length"));
+        String order = (request.getParameter("order[0][column]") == null || (request.getParameter("order[0][column]").equals("null") || request.getParameter("order[0][column]").equals("")) ? "" : request.getParameter("order[0][column]"));
+        String start = (request.getParameter("start") == null || (request.getParameter("start").equals("null") || request.getParameter("start").equals("")) ? "" : request.getParameter("start"));
+        String dir = (request.getParameter("order[0][dir]") == null || (request.getParameter("order[0][dir]").equals("null") || request.getParameter("order[0][dir]").equals("")) ? "" : request.getParameter("order[0][dir]"));
+
+        String locationId = Utils.nullClear(request.getParameter("locationId"));
+        String postId = Utils.nullClear(request.getParameter("postId"));
+        String gdvipdate1 = Utils.nullClear(request.getParameter("gdvipdate1"));
+        String gdvipdate2 = Utils.nullClear(request.getParameter("gdvipdate2"));
+        String g11 = Utils.nullClear(request.getParameter("g11"));
+        String g15 = Utils.nullClear(request.getParameter("g15"));
+        String g34 = Utils.nullClear(request.getParameter("g34"));
+        String g33 = Utils.nullClear(request.getParameter("g33"));
+        String g31name = Utils.nullClear(request.getParameter("g31name"));
+        String g25 = Utils.nullClear(request.getParameter("g25"));
+        String g8code2 = Utils.nullClear(request.getParameter("g8code2"));
+        String metod_otc = Utils.nullClear(request.getParameter("metod_otc"));
+        String g20b = Utils.nullClear(request.getParameter("g20b"));
+        String g20name = Utils.nullClear(request.getParameter("g20name"));
+        String g7c = Utils.nullClear(request.getParameter("g7c"));
+
+//
+////
+//        CostMonitoringResponse1 costMonitoringResponse = new CostMonitoringResponse1();
+//        costMonitoringResponse.setDraw(2);
+//        costMonitoringResponse.setRecordsTotal(40);
+//        costMonitoringResponse.setRecordsFiltered(40);
+//        costMonitoringResponse.setData();
+        return ResponseEntity.ok(costMonitoringService.getListCostMonitoring1(
+                filter, limit, order, start, dir,
+                locationId,
+                postId,
+                gdvipdate1,
+                gdvipdate2,
+                g11,
+                g15,
+                g34,
+                g33,
+                g31name,
+                g25,
+                g8code2,
+                metod_otc,
+                g20b,
+                g20name,
+                g7c
+        ));
+
+
+//        List<CostMonitoringData> costMonitoringDataList = new ArrayList<>();
+//
+//        CostMonitoringData item = new CostMonitoringData();
+//        for (int i = 0; i < 40; i++) {
+//            item.setData1("data" + i);
+//            item.setData2("data" + i);
+//            item.setData3("data" + i);
+//            item.setData4("data" + i);
+//            item.setData5("data" + i);
+//            item.setData6("data" + i);
+//            costMonitoringDataList.add(item);
+//        }
+//        costMonitoringResponse.setData(costMonitoringDataList);
     }
 
     @PostMapping(value = COSTMONITORINGRESULTPAGE)
@@ -118,7 +193,7 @@ public class CostMonitoringController {
             @RequestParam String g20name,
             @RequestParam String g7c
     ) {
-        ModelAndView mav = new ModelAndView("resources/pages/CostMonitoring/ResultCM");
+        ModelAndView mav = new ModelAndView("resources/pages/CostMonitoring/ResultCM1");
         List<Object[]> mtcReplList = new ArrayList<>();
         mtcReplList = costMonitoringService.getListCostMonitoring(
                 locationId,

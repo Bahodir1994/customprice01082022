@@ -47,7 +47,10 @@
     <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
     <!-- loader-->
     <link href="<%=request.getContextPath()%>/resources/assets2/css/pace.min.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/resources/assets2/data-table/jquery.dataTables.min.css" rel="stylesheet"/>
     <script src="<%=request.getContextPath()%>/resources/assets2/js/pace.min.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/assets2/data-table/jquery.dataTables.min.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/assets2/data-table/jquery-3.5.1.js"></script>
     <!-- Bootstrap CSS -->
     <link href="<%=request.getContextPath()%>/resources/assets2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
@@ -64,6 +67,7 @@
     <!-- loader-->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://path/to/font-awesome/css/font-awesome.min.css">
+    <%--    <link rel="stylesheet" href="https://path/to/font-awesome/css/font-awesome.min.css">--%>
 </head>
 
 <body>
@@ -146,12 +150,13 @@
                                 </c:forEach>
                                 <%--                                    <c:if test="${locations.id == '1701'}">selected="selected"</c:if>--%>
                             </select>
-                            <%--                            <script>--%>
-                            <%--                                if ($('#locationId').val() == '1701') {--%>
-                            <%--                                    alert($('#locationId').val());--%>
-                            <%--                                    $('#locationId').attr('selected', true);--%>
-                            <%--                                }--%>
-                            <%--                            </script>--%>
+                            <script>
+                                // if ($('#locationId').val() == '1701') {
+                                //     alert($('#locationId').val());
+                                //     $('#locationId').attr('selected', true);
+                                // }
+                                $('#locationId').val('1701');
+                            </script>
                         </div>
                         <div class="col-md-2 m-2">
                             <label class="">Пост</label>
@@ -203,26 +208,26 @@
                             <label class="">Божхона қиймати усули</label>
                             <select class="form-select shadow-sm" required="" style="font-style: italic" id="metod_otc">
                                 <option value="">--- Танланг ---</option>
-<%--                                <c:forEach var="vals" items="${methodList}" varStatus="i">--%>
-<%--                                    <option value="${vals.id}">${i.index+1}-усул (${vals.name})</option>--%>
-<%--                                </c:forEach>--%>
-<%--                                <option value="0">Все</option>--%>
+                                <%--                                <c:forEach var="vals" items="${methodList}" varStatus="i">--%>
+                                <%--                                    <option value="${vals.id}">${i.index+1}-усул (${vals.name})</option>--%>
+                                <%--                                </c:forEach>--%>
+                                <%--                                <option value="0">Все</option>--%>
                                 <option value="1">1-усул</option>
                                 <option value="4">4-усул</option>
                                 <option value="5">5-усул</option>
                                 <option value="6.1">6.1-усул</option>
-<%--                                <option value="6.2">6.2</option>--%>
-<%--                                <option value="6.3">6.3</option>--%>
-<%--                                <option value="6.4">6.4</option>--%>
-<%--                                <option value="6.5">6.5</option>--%>
+                                <%--                                <option value="6.2">6.2</option>--%>
+                                <%--                                <option value="6.3">6.3</option>--%>
+                                <%--                                <option value="6.4">6.4</option>--%>
+                                <%--                                <option value="6.5">6.5</option>--%>
                             </select>
                         </div>
                         <div class="col-md-2 m-2">
                             <label class="">Транспорт тури</label>
                             <select class="form-select shadow-sm" required="" id="g25">
                                 <option value="">--- Танланг ---</option>
-                                <c:forEach var="vals" items="${transportTypeSList}" varStatus="i">
-                                    <option value="${vals.code}">${vals.cdDesc} ${vals.cdNm}</option>
+                                <c:forEach var="vals" items="${transportSList}" varStatus="i">
+                                    <option value="${vals.code}">${vals.code} - ${vals.cdShortNm}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -368,12 +373,17 @@
         // if ($('#locationId').val() != "1701" && $('#postId').val() != "" && $('#g7c').val() != "") {
         //     err = 0;
         // }
-        if (err != 0 && ($.trim($('#g33').val()) == "" || $.trim($('#g33').val()).length < 4)) {
+        if (err != 0 && (
+            ($.trim($('#g33').val()) == null || $.trim($('#g33').val()) == "" || $.trim($('#g33').val()).length < 4) &&
+            ($.trim($('#g31name').val()) == null || $.trim($('#g31name').val()) == "" || $.trim($('#g31name').val()).length < 5)
+        )) {
             gtk = 0;
             $('#g33').css({'border': '3px solid red'});
+            $('#g31name').css({'border': '3px solid red'});
         } else {
             gtk = 1;
             $('#g33').css({'border': '1px solid black'});
+            $('#g31name').css({'border': '1px solid black'});
         }
 
         var dataS = {
@@ -395,15 +405,33 @@
         }
 
         if (gtk === 1) {
+            <%--$.ajax({--%>
+            <%--    // type: "POST",--%>
+            <%--    // type: "POST",--%>
+            <%--    // type: "POST",--%>
+            <%--    type: "GET",--%>
+            <%--    data: dataS,--%>
+            <%--    &lt;%&ndash;url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",&ndash;%&gt;--%>
+            <%--    &lt;%&ndash;url: "<%=request.getContextPath()%>/costmonitoring/resources/pages/CostMonitoring/ResultCM",&ndash;%&gt;--%>
+            <%--    &lt;%&ndash;url: "<%=request.getContextPath()%>/costmonitoring/resources/pages/CostMonitoring/ResultCM",&ndash;%&gt;--%>
+            <%--    &lt;%&ndash;url: "<%=request.getContextPath()%>/costmonitoring/resources/pages/CostMonitoring/ResultCM",&ndash;%&gt;--%>
+            <%--    url: "<%=request.getContextPath()%>/costmonitoring/server_side/pagination",--%>
+            <%--    dataType: "html",--%>
+            <%--    header: 'Content-type: text/html; charset=utf-8',--%>
+            <%--    success: function (res) {--%>
+            <%--        $('div#ListCMTable').html(res);--%>
+            <%--    },--%>
+            <%--    error: function (res) {--%>
+            <%--    }--%>
+            <%--});--%>
             $.ajax({
-                type: "POST",
-                data: dataS,
-                <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
-                url: "<%=request.getContextPath()%>/costmonitoring/resources/pages/CostMonitoring/ResultCM",
+                type: "GET",
+                url: "<%=request.getContextPath()%>/costmonitoring/resultCM",
                 dataType: "html",
                 header: 'Content-type: text/html; charset=utf-8',
                 success: function (res) {
                     $('div#ListCMTable').html(res);
+
                 },
                 error: function (res) {
                 }
@@ -413,3 +441,5 @@
 
 </script>
 </body>
+
+

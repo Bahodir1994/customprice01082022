@@ -20,128 +20,183 @@
     String userLocation = (String) request.getSession().getAttribute("userLocation");
     String userLocationName = (String) request.getSession().getAttribute("userLocationName");
     String userPost = (String) request.getSession().getAttribute("userPost");
+    System.out.println(" userRole(ListInDecTable) ===> " + userRole);
+    System.out.println(" userId(ListInDecTable) ===> " + userId);
 %>
+<head>
+    <link href="<%=request.getContextPath()%>/resources/assets2/data-table/jquery.dataTables.min.css" rel="stylesheet"/>
+</head>
 <body>
 
 <div class="table-responsive">
-    <table id="example1" class="table table-striped table-bordered table-responsive">
-        <thead class="bg-light-primary" style="border-color: #0a58ca; border-style: dotted">
+    <table id="example" class="display" style="width:100%">
+        <thead>
         <tr>
-            <th style="border-style: dotted">т/р</th>
-            <th style="border-style: dotted">БЮД рўйхат рақами</th>
-            <th style="border-style: dotted">Божхона режими</th>
-            <th style="border-style: dotted">Товарларни олиб ўтиш хусусияти</th>
-            <th style="border-style: dotted">Юк жўнатувчи номи</th>
-            <th style="border-style: dotted">ТИФ ТН коди</th>
-            <th style="border-style: dotted">БЮДдаги товар рақами</th>
-            <th style="border-style: dotted">Товар номи</th>
-            <th style="border-style: dotted">Нетто оғирлиги</th>
-            <th style="border-style: dotted">Брутто оғирлиги</th>
-
-            <th style="border-style: dotted">Божхона қиймати АҚШ долл</th>
-            <th style="border-style: dotted">Қўшимча ўлчов бирлиги</th>
-            <th style="border-style: dotted">Қўшимча ўлчов бирлигидаги миқдори</th>
-            <th style="border-style: dotted">Бир миқдори оғирлиги</th>
-            <th style="border-style: dotted">Келиб чиқиш мамлакати</th>
-            <th style="border-style: dotted">Юк жўнатувчи мамлакат</th>
-            <th style="border-style: dotted">Савдо қилувчи мамлакат</th>
-            <th style="border-style: dotted">Транспорт тури</th>
-            <th style="border-style: dotted">СТИР</th>
-            <th style="border-style: dotted">Божхона қиймати</th>
-
-            <th style="border-style: dotted">Етказиб бериш шарти</th>
-            <th style="border-style: dotted">Етказиб бериш манзили</th>
-            <th style="border-style: dotted">Валюта</th>
-            <th style="border-style: dotted">Божхона қийматини аниқлаш усули</th>
-            <th style="border-style: dotted">Божхона қиймати бир бирлик учун валютада</th>
-            <th style="border-style: dotted">Божхона қиймати бир бирлик учун АҚШ долларида</th>
-            <th style="border-style: dotted">Божхона қиймати индекси валютада</th>
-            <th style="border-style: dotted">Божхона қиймати индекси АҚШ долларида</th>
-            <th style="border-style: dotted">Божхона чегарасаин кесиб ўтиш санаси</th>
-            <th style="border-style: dotted">БДТ қилинган ёки қилинмаган</th>
+            <th>т/р</th>
+            <th>БЮД рўйхат рақами</th>
+            <th>Божхона режими</th>
+            <th>Товарларни олиб ўтиш хусусияти</th>
+            <th>Юк жўнатувчи номи</th>
+            <th>ТИФ ТН коди</th>
+            <th>БЮДдаги товар рақами</th>
+            <th>Товар номи</th>
+            <th>Марка</th>
+            <th>Нетто оғирлиги</th>
+            <th>Брутто оғирлиги</th>
+            <th>Божхона қиймати АҚШ долл</th>
+            <th>Қўшимча ўлчов бирлиги</th>
+            <th>Қўшимча ўлчов бирлигидаги миқдори</th>
+            <th>Бир миқдори оғирлиги</th>
+            <th>Келиб чиқиш мамлакати</th>
+            <th>Юк жўнатувчи мамлакат</th>
+            <th>Савдо қилувчи мамлакат</th>
+            <th>Транспорт тури</th>
+            <th>СТИР</th>
+            <th>Божхона қиймати</th>
+            <th>Етказиб бериш шарти</th>
+            <th>Етказиб бериш манзили</th>
+            <th>Шартнома валютаси</th>
+            <th>Божхона қийматини аниқлаш усули</th>
+            <th>Божхона қиймати бир бирлик учун валютада</th>
+            <th>Божхона қиймати бир бирлик учун АҚШ долларида</th>
+            <th>Божхона қиймати индекси валютада</th>
+            <th>Божхона қиймати индекси АҚШ долларида</th>
+            <th>Божхона чегарасаин кесиб ўтиш санаси</th>
         </tr>
         </thead>
-        <tbody>
-        <%--        <tr>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--            <td>11</td>--%>
-        <%--        </tr>--%>
-
-        <c:forEach var="mtcVal" items="${mtcReplList}" varStatus="i">
-            <tr>
-                <td align="center"><b>${i.index+1}</b></td>
-                <td align="center">${mtcVal.g7a}/${mtcVal.g7b}/${mtcVal.g7c}</td>
-                <td align="center">${mtcVal.g1a} ${mtcVal.g1b}</td>
-                <td align="center">${mtcVal.g1b} ${mtcVal.g37b} ${mtcVal.g37c}</td>
-                <td align="center"><textarea cols="40" rows="1" style="border: none; overflow-y:auto; font-size: 12px; font-family: Arial;" readonly="readonly">${mtcVal.g2name}</textarea></td>
-                <td align="center">${mtcVal.g33}</td>
-                <td align="center">${mtcVal.g32}</td>
-                <td width="300px" align="right">
-                    <table style="width: 300px">
-                        <tr style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0;">
-                            <td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0;">
-                                <textarea rows="3" style="border:none; overflow-y:auto; font-size: 12px; font-family: Arial; width: 100%" readonly="readonly">${mtcVal.g31name}</textarea>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td align="center">${mtcVal.g31marka}</td>
-                <td align="center">${mtcVal.g38}</td>
-                <td align="center">${mtcVal.g35}</td>
-                <td align="center">${mtcVal.g45_usd}</td>
-                <td align="center">${mtcVal.g41name}</td>
-                <td align="center">${mtcVal.g31amount}</td>
-                <td align="center">${mtcVal.ves_edizm}</td>
-                <td align="center">${mtcVal.g34name}</td>
-                <td align="center">${mtcVal.g15name}</td>
-                <td align="center">${mtcVal.g11name}</td>
-                <td align="center">${mtcVal.g25}</td>
-                <td align="center">${mtcVal.g22a}</td>
-                <td align="center">${mtcVal.g23}</td>
-                <td align="center">${mtcVal.g13}</td>
-                <td align="center">${mtcVal.metod_otc}</td>
-                <td align="center">${mtcVal.g45_edizm_valkont}</td>
-                <td align="center">${mtcVal.g45usd_edizm}</td>
-                <td align="center">${mtcVal.g45_index_valkont}</td>
-                <td align="center">${mtcVal.g45_index}</td>
-                <td align="center">${mtcVal.gc3date}</td>
-                <td align="center">${mtcVal.vid_tulov == 1 ? "1-Облагаемый" : "2-Необлагаемый"}</td>
-                <td align="center">${mtcVal.doc_type == 2 ? "КТС" : mtcVal.doc_type == 3 ? "КТД" : "Нет"}</td>
-            </tr>
-        </c:forEach>
-
-        </tbody>
+        <tfoot>
+        <tr>
+            <th>т/р</th>
+            <th>БЮД рўйхат рақами</th>
+            <th>Божхона режими</th>
+            <th>Товарларни олиб ўтиш хусусияти</th>
+            <th>Юк жўнатувчи номи</th>
+            <th>ТИФ ТН коди</th>
+            <th>БЮДдаги товар рақами</th>
+            <th>Товар номи</th>
+            <th>Марка</th>
+            <th>Нетто оғирлиги</th>
+            <th>Брутто оғирлиги</th>
+            <th>Божхона қиймати АҚШ долл</th>
+            <th>Қўшимча ўлчов бирлиги</th>
+            <th>Қўшимча ўлчов бирлигидаги миқдори</th>
+            <th>Бир миқдори оғирлиги</th>
+            <th>Келиб чиқиш мамлакати</th>
+            <th>Юк жўнатувчи мамлакат</th>
+            <th>Савдо қилувчи мамлакат</th>
+            <th>Транспорт тури</th>
+            <th>СТИР</th>
+            <th>Божхона қиймати</th>
+            <th>Етказиб бериш шарти</th>
+            <th>Етказиб бериш манзили</th>
+            <th>Шартнома валютаси</th>
+            <th>Божхона қийматини аниқлаш усули</th>
+            <th>Божхона қиймати бир бирлик учун валютада</th>
+            <th>Божхона қиймати бир бирлик учун АҚШ долларида</th>
+            <th>Божхона қиймати индекси валютада</th>
+            <th>Божхона қиймати индекси АҚШ долларида</th>
+            <th>Божхона чегарасаин кесиб ўтиш санаси</th>
+        </tr>
+        </tfoot>
     </table>
 </div>
 
+<script src="<%=request.getContextPath()%>/resources/assets2/data-table/jquery.dataTables.min.js"></script>
+<%--<script src="<%=request.getContextPath()%>/resources/assets2/data-table/jquery-3.5.1.js"></script>--%>
+<script>
+
+    $(document).ready(function () {
+        m = 0;
+        var cmT = $('#example').DataTable({
+            "processing": true,
+            "searching": true,
+            "paging": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "<%=request.getContextPath()%>/costmonitoring/server_side/pagination",
+                "data": function (d) {
+                    d.locationId = $('#locationId').val();
+                    d.postId = $('#postId').val();
+                    d.gdvipdate1 = $('#gdvipdate1').val();
+                    d.gdvipdate2 = $('#gdvipdate2').val();
+                    d.g11 = $('#g11').val();
+                    d.g15 = $('#g15').val();
+                    d.g34 = $('#g34').val();
+                    d.g33 = $('#g33').val();
+                    d.g31name = $('#g31name').val();
+                    d.g25 = $('#g25').val();
+                    d.g8code2 = $('#g8code2').val();
+                    d.metod_otc = $('#metod_otc').val();
+                    d.g20b = $('#g20b').val();
+                    d.g20name = $('#g20name').val();
+                    d.g7c = $('#g7c').val();
+                }
+            },
+            <%--ajax: '<%=request.getContextPath()%>/costmonitoring/server_side/pagination',--%>
+            "columns": [
+                // {"data": "g7a"},
+                {
+                    "searchable": false,
+                    "orderable": false,
+                    "targets": 0,
+                    render: function (data, type, row, meta) {
+                        var info = cmT.page.info();
+                        var len = cmT.page.len();
+                        var n = info.page;
+                        var k = len * n + m + 1;
+                        m++;
+                        return k;
+                    },
+                    "width": "3%"
+                },
+                {"data": "g7abc"},
+                {"data": "g1a"},
+                {"data": "g1b"},
+                // {"data": "g2name"},
+                {
+                    data: 'g2name',
+                    "targets": 4,
+                    render: function (data) {
+                        return "<textarea cols='40' rows='1' style='border: none; overflow-y:auto; font-size: 12px; font-family: Arial;' readonly='readonly'>" + data + "</textarea>";
+                    }
+                },
+                {"data": "g33"},
+                {"data": "g32"},
+                // {"data": "g31name"},
+                {
+                    data: 'g31name',
+                    "targets": 7,
+                    render: function (data) {
+                        return "<table style='width: 300px'><tr style='border-left: 0; border-right: 0; border-top: 0; border-bottom: 0;'><td style='border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; margin: 0px;'><textarea rows='3' style='border:none; overflow-y:auto; font-size: 12px; font-family: Arial; width: 100%; margin: 0px;' readonly='readonly'>" + data + "</textarea></td></tr></table>";
+                    }
+                },
+                {"data": "g31marka"},
+                {"data": "g38"},
+                {"data": "g35"},
+                {"data": "g45_usd"},
+                {"data": "g41name"},
+                {"data": "g31amount"},
+                {"data": "ves_edizm"},
+                {"data": "g34name"},
+                {"data": "g15name"},
+                {"data": "g11name"},
+                {"data": "g25"},
+                {"data": "g8code2"},
+                {"data": "g45_usd"},
+                {"data": "g20b"},
+                {"data": "g20name"},
+                {"data": "g22a"},
+                {"data": "metod_otc"},
+                {"data": "g45_edizm_valkont"},
+                {"data": "g45usd_edizm"},
+                {"data": "g45_index_valkont"},
+                {"data": "g45_index"},
+                {"data": "gc3date"}
+            ]
+        });
+        console.log("g33 : " + $("#g33").val());
+    });
+</script>
 </body>
+
+
