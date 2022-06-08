@@ -129,9 +129,59 @@
 </div>
 <!--start page wrapper -->
 <div id="main" class="page-content">
-    <h6 class="mb-0 text-uppercase">Қиймат мониторинги</h6>
-    <hr>
-    <!--start email wrapper-->
+    <style>
+        @-webkit-keyframes scroll {
+            0% {
+                -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+            }
+            100% {
+                -webkit-transform: translate(-100%, 0);
+                transform: translate(-100%, 0)
+            }
+        }
+
+        @-moz-keyframes scroll {
+            0% {
+                -moz-transform: translate(0, 0);
+                transform: translate(0, 0);
+            }
+            100% {
+                -moz-transform: translate(-100%, 0);
+                transform: translate(-100%, 0)
+            }
+        }
+
+
+        @keyframes scroll {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(-100%, 0)
+            }
+        }
+
+
+        .marquee {
+            display: block;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .marquee span {
+            color: #0a58ca;
+            display: inline-block;
+            padding-left: 100%;
+            -webkit-animation: scroll 5s infinite linear;
+            -moz-animation: scroll 5s infinite linear;
+            animation: scroll 35s infinite linear;
+        }
+    </style>
+    <span style="cursor: pointer"><a href="#" class="text-success">БОШ САХИФА</a> / </span></span><span class=""><b>ҚИЙМАТ МОНИТОРИНГИ</b></span> <span>    <h6 class="marquee"><span>Ушбу ойнада акс этадиган маълумотлар Божхона қиймати учун асос сифатида фойдаланиладиган нарх маълумотлари тўпламига киради. Ушбу нархлардан божхона қийматини таққослаш мақсадида фойдаланиш мумкун.</span></h6>
+</span>
+    <hr class="mt-0"><!--start email wrapper-->
 
     <!--end email wrapper-->
     <div class="col-12 col-lg-12 shadow">
@@ -233,8 +283,8 @@
                         </div>
                         <div class="col-md-2 m-2">
                             <div class="">
-                                <label class="">СТИР</label>
-                                <input class="result form-control shadow-sm" type="text" placeholder="СТИР" id="g8code2">
+                                <label class="">СТИР(Импортёр)</label>
+                                <input class="result form-control shadow-sm" type="text" placeholder="СТИР(Импортёр)" id="g8code2">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">

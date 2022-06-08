@@ -25,10 +25,8 @@
 <body>
 
 
-
-
-    <div class="fm-search">
-        <div class="mb-0">
+<div class="fm-search">
+    <div class="mb-0">
         <div class="d-flex justify-content-center">
             <div class="col-md-3 m-2">
                 <label class="">Мақоми</label>
@@ -79,11 +77,11 @@
                 </div>
             </div>
         </div>
-<%--            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>--%>
+        <%--            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>--%>
     </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-12 col-lg-12">
+</div>
+<div class="row mt-3">
+    <div class="col-12 col-lg-12">
         <div class="table-responsive">
             <table id="example3" class="table table-striped table-bordered table-responsive">
                 <thead class="bg-light-primary" style="border-color: #0a58ca; border-style: dotted">
@@ -93,7 +91,6 @@
                     <th style=" border-style: dotted">Холати</th>
                     <th style=" border-style: dotted">Тўлов холати</th>
                     <th style=" border-style: dotted">Ариза санаси</th>
-<%--                    <th style=" border-style: dotted">Хужжат (Pdf)</th>--%>
                     <th style=" border-style: dotted">Хужжат (Pdf2)</th>
                     <th style=" border-style: dotted">Манфаатдор шахс</th>
                     <th style=" border-style: dotted">Қарор рақами</th>
@@ -101,15 +98,14 @@
                     <th style=" border-style: dotted">Етказиб бериш шарти</th>
                     <th style=" border-style: dotted">Амал қилиш муддати</th>
                     <c:forEach var="termss" items="${termsList}" varStatus="i">
-                    <c:if test="${termss[59] == 100 && userRole == 6}">
+                        <c:if test="${termss[59] == 100 && userRole == 6}">
                             <th style="border-style: dotted">Бекор қилиш</th>
-                    </c:if>
-                    <c:if test="${termss[59] == 100 && userRole != 6}">
-                    </c:if>
-                    <c:if test="${termss[59] == 200}">
-                        <th style="border-style: dotted">Бекор қилиш</th>
-                    </c:if>
-
+                        </c:if>
+                        <c:if test="${termss[59] == 100 && userRole != 6}">
+                        </c:if>
+                        <c:if test="${termss[59] == 200}">
+                            <th style="border-style: dotted">Бекор қилиш</th>
+                        </c:if>
                     </c:forEach>
                     <th style=" border-style: dotted">Инспектор</th>
                 </tr>
@@ -126,19 +122,21 @@
                                     class='bx bxs-circle align-middle me-1'></i>${terms[28]}</div>
                         </td>
                         <td>
-                            <c:if test="${terms[54] == 180}"><a class="btn btn-outline-danger"
+                            <%
+                                String disabled = "";
+                                if (userRole == 8) {
+                                    disabled = "";
+                                } else {
+                                    disabled = "disabled";
+                                }
+                            %>
+
+                            <c:if test="${terms[54] == 180}"><a class="btn btn-outline-danger <%=disabled%>"
                                                                 onclick="javascript:SaveTPO('${terms[33]}')">${terms[55]}</a></c:if>
                             <c:if test="${terms[54] == 185}"><a class="btn btn-outline-success"
                                                                 onclick="javascript:resultTPO('<h6>${terms[39]}</h6>')">${terms[55]}</a></c:if>
                         </td>
                         <td>${terms[1]}</td>
-<%--                        <td>--%>
-<%--                            <a type="button"--%>
-<%--                               href="<%=request.getContextPath()%>/decisionPdfDownload?cmdtId=${terms[32]}"--%>
-<%--                               class="btn btn-outline-warning">--%>
-<%--                                <i class="bx bxs-file-pdf" style="font-size: 30px"></i>--%>
-<%--                            </a>--%>
-<%--                        </td>--%>
                         <td>
                             <a type="button" onclick="openInDecPdf('${terms[32]}')"
                                class="btn btn-outline-warning">
@@ -151,7 +149,10 @@
                         <td>${terms[25]}</td>
                         <td>${terms[56]}</td>
                         <c:if test="${terms[59] == 100 && userRole == 6}">
-                            <td><button class="btn btn-outline-primary" onclick="inDecCancelled('${terms[33]}')"><i class="bx bx-message-alt-x bx-sm"></i></button></td>
+                            <td>
+                                <button class="btn btn-outline-primary" onclick="inDecCancelled('${terms[33]}')"><i
+                                        class="bx bx-message-alt-x bx-sm"></i></button>
+                            </td>
                         </c:if>
                         <c:if test="${terms[59] == 100 && userRole != 6}">
                         </c:if>
@@ -187,12 +188,12 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 
 <script>
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft= "0";
+        document.getElementById("main").style.marginLeft = "0";
     }
 </script>
 <script>
@@ -280,10 +281,10 @@
 
     function SaveTPO(inDecId) {
         Swal.fire({
-            title: 'Тўлдирилган ТПО рақами ва санаси',
+            title: 'Тўлдирилган БКО рақами ва санаси',
             html:
-                '<input id="TPO_NUM" type="number" class="swal2-input" placeholder="ТПО рақами">' +
-                '<input id="TPO_DATE" type="date" class="swal2-input" placeholder="ТПО тўлдирилган санаси">',
+                '<input id="TPO_NUM" type="text" class="swal2-input" placeholder="БКО рақами">' +
+                '<input id="TPO_DATE" type="date" class="swal2-input" placeholder="БКО тўлдирилган санаси">',
             showDenyButton: true,
             confirmButtonText: 'Сақлаш',
             denyButtonText: `Рад этиш`,
@@ -299,7 +300,7 @@
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
 
-                if ($('#TPO_NUM').val() === "" || $('#TPO_DATE').val() ==="") {
+                if ($('#TPO_NUM').val() === "" || $('#TPO_DATE').val() === "") {
                     Swal.fire(
                         '<i class="fa fa-info-circle"></i> Маълумотлар тўлдирилмаган!'
                     )
@@ -325,7 +326,7 @@
         })
     }
 
-    function openInDecPdf(cmdtId){
+    function openInDecPdf(cmdtId) {
         document.getElementById("mySidenav").style.width = "650px";
         document.getElementById("main").style.marginLeft = "570px";
         var dataS = {
@@ -429,7 +430,7 @@
 
         Swal.fire('' +
             '<h5>Божхона кирим ордери асосида дастлабки қарор учун тўлов қилинган</h5>'
-            +'<h6>БКО рақами ва санаси:</h6>'+ commentMarks);
+            + '<h6>БКО рақами ва санаси:</h6>' + commentMarks);
     }
 
 </script>
