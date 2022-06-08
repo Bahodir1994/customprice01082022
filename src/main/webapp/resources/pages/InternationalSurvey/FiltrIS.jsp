@@ -464,11 +464,9 @@
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {
-                setTimeout(()=>{
-                    $('div#ListCMTable').html(res);
-                    $('div#divRowCount').css({'display': ''});
-                    $('#loaderII').addClass('visually-hidden');
-                },1000)
+                $('div#ListCMTable').html(res);
+                $('div#divRowCount').css({'display': ''});
+                $('#loaderII').addClass('visually-hidden');
             },
             error: function (res) {
                 setTimeout(()=>{
