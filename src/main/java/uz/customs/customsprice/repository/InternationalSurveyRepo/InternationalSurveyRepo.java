@@ -15,6 +15,8 @@ import java.sql.Date;
 public interface InternationalSurveyRepo extends JpaRepository<InternationalSurveyEntity, String> {
 
     @Query("SELECT c FROM InternationalSurveyEntity c WHERE" +
+            "(:userLocationCode='' or :userLocationCode is null or c.userLocationCode = :userLocationCode) and"+
+            "(:directionTypeCode='' or :directionTypeCode is null or c.directionTypeCode = :directionTypeCode) and"+
             "(:xbbMailNum='' or :xbbMailNum is null or lower(c.xbbMailNum) like lower(CONCAT('%',:xbbMailNum,'%')) ) and"+
             "(:xbbMailDate is null or c.xbbMailDate = :xbbMailDate) and"+
             "(:hsCode='' or :hsCode is null or lower(c.hsCode) like lower(CONCAT('%',:hsCode,'%'))) and"+
@@ -34,6 +36,8 @@ public interface InternationalSurveyRepo extends JpaRepository<InternationalSurv
 //                "(:status='' or c.status = :status)")
     Page<InternationalSurveyEntity>
     findAllByOrgNameAndHsCode(
+            @Param("userLocationCode") String userLocationCode,
+            @Param("directionTypeCode") String directionTypeCode,
             @Param("xbbMailNum") String xbbMailNum,
             @Param("xbbMailDate") Date xbbMailDate,
             @Param("hsCode") String hsCode,

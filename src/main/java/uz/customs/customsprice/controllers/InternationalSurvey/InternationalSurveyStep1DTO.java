@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
@@ -19,7 +21,7 @@ public class InternationalSurveyStep1DTO {
     @Size(min = 2, max = 200, message = "Майдон белгилари сони 2 та дан 200 та гача бўлиши лозим!")
     private String orgName;
 
-    @Size(min = 4, max = 12, message = "Майдон белгилари сони 4 та дан 12 та гача бўлиши лозим!")
+    @NotBlank(message = "Майдон бўш бўлиши мумкун эмас!")
     private String hsCode;
 
     @Size(min = 2, max = 200, message = "Майдон белгилари сони 2 та дан 200 та гача бўлиши лозим!")
@@ -27,4 +29,11 @@ public class InternationalSurveyStep1DTO {
 
     @NotBlank(message = "Давлат номини танланг!")
     private String sendReqCountryCode;
+
+    @NotBlank(message = "Йўналиш турини танланг!")
+    private String directionTypeSave;
+
+    @NotNull(message = "Майдон бўш бўлиши мумкун эмас!")
+    private BigDecimal sumProbability;
+
 }

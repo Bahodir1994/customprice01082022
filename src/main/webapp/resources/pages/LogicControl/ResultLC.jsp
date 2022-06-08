@@ -22,6 +22,9 @@
   String userPost = (String) request.getSession().getAttribute("userPost");
 
 %>
+<head>
+  <link href="<%=request.getContextPath()%>/resources/assets2/data-table/jquery.dataTables.min.css" rel="stylesheet"/>
+</head>
 <body>
 
 <div class="table-responsive">
@@ -65,8 +68,9 @@
     right: 0;
   }
 </style>
-<script>
 
+<script src="<%=request.getContextPath()%>/resources/assets2/data-table/jquery.dataTables.min.js"></script>
+<script>
   $(document).ready(function () {
     $('#exampleLC').DataTable({
       "language": {

@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface LocationRepo extends JpaRepository<Location, String> {
     Optional<Location> findById(String id);
+
+    List<Location> findAllByIdIsNot(String id);
 }

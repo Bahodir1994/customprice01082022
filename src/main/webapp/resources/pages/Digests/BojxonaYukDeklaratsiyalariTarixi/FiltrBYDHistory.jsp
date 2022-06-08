@@ -109,7 +109,7 @@
 </div>
 <!--start page wrapper -->
 <div id="main" class="page-content">
-    <span ><a style="cursor: pointer" class="text-success" href="#">БОШ САХИФА</a> / </span><span><a style="cursor: pointer;" class="text-success" href="#">СПРАВОЧНИК</a> / </span><span><b>БОЖХОНА ЮК ДЕКЛАРАЦИЯЛАРИ ТАРИХИ</b></span>
+    <span><a style="cursor: pointer" class="text-success" href="#">БОШ САХИФА</a> / </span><span><a style="cursor: pointer;" class="text-success" href="#">СПРАВОЧНИК</a> / </span><span><b>БОЖХОНА ЮК ДЕКЛАРАЦИЯЛАРИ ТАРИХИ</b></span>
     <hr>
     <div class="col-12 col-lg-12 shadow">
         <div class="card">
@@ -118,43 +118,28 @@
                     <div class="row m-3">
                         <div class="row">
                             <div class="col">
-                                <label class="">ХББ</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
-                                                              data-bs-placement="top" title="ХББ"></i>
+                                <label class="">ҲББ</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
+                                                              data-bs-placement="top" title="ҲББ"></i>
                                 <select class="form-select shadow-sm" required="" id="locationId" name="locationId"
                                         onchange="changeLocation()">
+                                    <option value="">--Танланг--</option>
                                     <c:forEach var="locations" items="${locationList}" varStatus="i">
                                         <option value="${locations.id}">${locations.id} - ${locations.name1}</option>
                                     </c:forEach>
-                                    <%--                                    <option value="1700">СТК Ташкент АЭРО</option>--%>
-                                    <%--                                    <option value="1701">ГТК РУз</option>--%>
-                                    <%--                                    <option value="1703">Андижанская обл</option>--%>
-                                    <%--                                    <option value="1706">Бухарская обл</option>--%>
-                                    <%--                                    <option value="1708">Джизакская обл</option>--%>
-                                    <%--                                    <option value="1710">Кашкадарьинская обл</option>--%>
-                                    <%--                                    <option value="1712">Навоийская обл</option>--%>
-                                    <%--                                    <option value="1714">Наманганская обл</option>--%>
-                                    <%--                                    <option value="1718">Самаркандская обл</option>--%>
-                                    <%--                                    <option value="1722">Сурхандарьинская обл</option>--%>
-                                    <%--                                    <option value="1724">Сырдарьинская обл</option>--%>
-                                    <%--                                    <option value="1726">г.Ташкент</option>--%>
-                                    <%--                                    <option value="1727">Ташкентская обл</option>--%>
-                                    <%--                                    <option value="1730">Ферганская обл</option>--%>
-                                    <%--                                    <option value="1733">Хорезмская обл</option>--%>
-                                    <%--                                    <option value="1735">Республика Каракалпакистан</option>--%>
                                 </select>
-                                <script>$('#locationId').val('1701');</script>
+                                <div id="locationIdValid"></div>
+                                <%--                                <script>$('#locationId').val('1701');</script>--%>
                             </div>
                             <div class="col">
                                 <label class="">Пост</label><i class="bx bx-info-circle"
                                                                data-bs-toggle="tooltip"
                                                                data-bs-placement="top"
                                                                title="Пост"></i>
-                                <select class="form-select shadow-sm" id="g7a"
-                                        name="g7a" required=""
-                                        onkeypress="if (event.keyCode == 13) {searchResultTableBYDHistory(0); return false;} "/>
+                                <select class="form-select shadow-sm" id="g7a" name="g7a" required=""/>
                                 <option value="">--Танланг--</option>
-<%--                                <option value="26002">Тошкент товар ТИФ БП</option>--%>
+                                <%--                                <option value="26002">Тошкент товар ТИФ БП</option>--%>
                                 </select>
+                                <div id="g7aValid"></div>
                             </div>
                             <div class="col">
                                 <label class="">Сана</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
@@ -162,40 +147,54 @@
                                 <input class="result form-control shadow-sm" type="date" id="g7b" name="g7b"
                                        onkeypress="if (event.keyCode == 13) {searchResultTableBYDHistory(0); return false;}"
                                        value="<%=g7b%>" size="10" maxlength="10"/>
+                                <div id="g7bValid"></div>
                             </div>
                             <div class="col">
-                                <label class="">Номер ГТД</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="Номер ГТД"></i>
+                                <label class="">БЮД рақами</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
+                                                                     data-bs-placement="top" title="Номер ГТД"></i>
                                 <input class="result form-control shadow-sm" type="number" id="g7c" name="g7c"
                                        value="0046613" size="7" maxlength="7"
                                        onkeypress="if (event.keyCode == 13) {searchResultTableBYDHistory(0); return false;} "/>
+                                <div id="g7cValid"></div>
                             </div>
                             <div class="col">
                                 <label class="">СТИР</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
                                                                data-bs-placement="top" title="ИНН"></i>
-                                <input class="result form-control shadow-sm" type="number" id="Inn" name="Inn" size="9"
-                                       maxlength="9"
-                                       onkeypress="if (event.keyCode == 13) {searchResultTableBYDHistory(0); return false;} "/>
+                                <input class="result form-control shadow-sm" type="number" id="g8code2" name="g8code2" size="9" maxlength="9" onkeypress="if (event.keyCode == 13)
+                                {searchResultTableBYDHistory(0); return false;} "/>
+                                <div id="g8code2Valid"></div>
                             </div>
                             <div class="col">
                                 <label class="">Режим</label><i class="bx bx-info-circle"
                                                                 data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title="Сўровнома юборилган давлат"></i>
-                                <select class="form-select shadow-sm" id="sendReqCountryCodeS"
-                                        name="sendReqCountryCodeS" required=""
-                                        onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} "/>
+                                <select class="form-select shadow-sm" id="g1b" name="g1b" required=""/>
                                 <option value="">--Танланг--</option>
-                                <c:forEach var="countr" items="${countryList}">
-                                    <option value="${countr.code}">${countr.cdNm}</option>
-                                </c:forEach>
+                                <option value="10">ЭК - 10</option>
+                                <option value="11">ЭК - 11</option>
+                                <option value="12">ЭК - 12</option>
+                                <option value="40">ИМ - 40</option>
+                                <option value="41">ИМ - 41</option>
+                                <option value="42">ИМ - 42</option>
+                                <option value="51">ИМ - 51</option>
+                                <option value="61">ИМ - 61</option>
+                                <option value="70">ИМ - 70</option>
+                                <option value="71">ИМ - 71</option>
+                                <option value="72">ИМ - 72</option>
+                                <option value="73">ИМ - 73</option>
+                                <option value="74">ИМ - 74</option>
+                                <option value="75">ИМ - 75</option>
+                                <option value="76">ИМ - 76</option>
+                                <option value="80">ТР - 80</option>
                                 </select>
+                                <div id="g1bValid"></div>
                             </div>
                             <div class="col mt-2">
                                 <button type="button" id="izlash" class="btn btn-outline-primary btn-block mt-2"
                                         onclick="searchResultTableBYDHistory(0)"><i class='bx bx-refresh'></i>Излаш
                                 </button>
-                                <button type="reset" class="btn btn-outline-primary btn-block mt-2" onclick="reset(1)">
+                                <button type="reset" class="btn btn-outline-primary btn-block mt-2" onclick="resetGTDFilter(1)">
                                     <i class='bx bx-trash'></i>
                                 </button>
                             </div>
@@ -249,37 +248,110 @@
     })(jQuery);
 
     function searchResultTableBYDHistory(x, root = null) {
-        $('#loaderII').removeClass('visually-hidden')
         if (root) root.preventDefault();
         // String g7a = "26002";
         // String g7b = "02.06.2022";
         // String g7c = "0046613";
-        var dataS = {
-            "page": x,
-            "size": $("#size").val(),
-            "g7a": $("#g7a").val(),
-            "g7b": $("#g7b").val(),
-            "g7c": $("#g7c").val()
+
+        var log_f = true;
+        var log_n = '';
+        var arr = [];
+
+        if ($('#locationId').val() == null || $('#locationId').val() == '') {
+            $('#locationIdValid').html('ҲББни танланг').addClass('text-danger');
+            $('#locationId').addClass('border border-danger')
+            log_f = false;
+        } else if ($('#locationId').val() == '1701') {
+            $('#locationIdValid').html('ҲББ майдонига ДБҚ танланиши мумкин эмас').addClass('text-danger');
+            $('#locationId').addClass('border border-danger')
+            log_f = false;
+        } else {
+            $('#locationId').removeClass('border border-danger');
+            $('#locationId').addClass('border border-success');
+            $('#locationIdValid').html('');
         }
-        $.ajax({
-            type: "GET",
-            data: dataS,
-            url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/ResultBYDHistory",
-            dataType: "html",
-            header: 'Content-type: text/html; charset=utf-8',
-            success: function (res) {
-                setTimeout(() => {
-                    $('div#ListCMTable').html(res);
-                    $('div#divRowCount').css({'display': ''});
-                    $('#loaderII').addClass('visually-hidden');
-                }, 1000)
-            },
-            error: function (res) {
-                setTimeout(() => {
-                    $('#loaderII').addClass('visually-hidden')
-                }, 1000)
+
+        if ($('#g7a').val() == null || $('#g7a').val() == '') {
+            $('#g7aValid').html('Постни танланг').addClass('text-danger');
+            $('#g7a').addClass('border border-danger')
+            log_f = false;
+        } else {
+            $('#g7a').removeClass('border border-danger');
+            $('#g7a').addClass('border border-success');
+            $('#g7aValid').html('');
+        }
+
+        if ($('#g7b').val() == null || $('#g7b').val() == '') {
+            $('#g7bValid').html('Сана киритинг').addClass('text-danger');
+            $('#g7b').addClass('border border-danger')
+            log_f = false;
+        } else {
+            $('#g7b').removeClass('border border-danger');
+            $('#g7b').addClass('border border-success');
+            $('#g7bValid').html('');
+        }
+
+        if ($.trim($('#g7c').val()) == null || $.trim($('#g7c').val()) == '') {
+            $('#g7cValid').html('БЮД рақамини киритинг').addClass('text-danger');
+            $('#g7c').addClass('border border-danger')
+            log_f = false;
+        } else if ($.trim($('#g7c').val()).length > 7 || $.trim($('#g7c').val()).length < 7) {
+            $('#g7cValid').html('БЮД рақами 7 та сондан иборат бўлиши лозим').addClass('text-danger');
+            $('#g7c').addClass('border border-danger')
+            log_f = false;
+        } else {
+            $('#g7c').removeClass('border border-danger');
+            $('#g7c').addClass('border border-success');
+            $('#g7cValid').html('');
+        }
+
+        if ($.trim($('#g8code2').val()) != null && $.trim($('#g8code2').val()) != '') {
+            if ($.trim($('#g8code2').val()).length != 9 && $.trim($('#g8code2').val()).length != 14) {
+                $('#g8code2Valid').html('СТИР 9 та, ЖШШИР 14 та бўлиши лозим').addClass('text-danger');
+                $('#g8code2').addClass('border border-danger')
+                log_f = false;
+            } else {
+                $('#g8code2').removeClass('border border-danger');
+                $('#g8code2').addClass('border border-success');
+                $('#g8code2Valid').html('');
             }
-        });
+        } else {
+            $('#g8code2').removeClass('border border-danger');
+            $('#g8code2').addClass('border border-success');
+            $('#g8code2Valid').html('');
+        }
+
+        if (log_f) {
+            $('#loaderII').removeClass('visually-hidden')
+            var dataS = {
+                "page": x,
+                "size": $("#size").val(),
+                "g7a": $("#g7a").val(),
+                "g7b": $("#g7b").val(),
+                "g7c": $("#g7c").val(),
+                "g8code2": $("#g8code2").val(),
+                "g1b": $("#g1b").val()
+            }
+            $.ajax({
+                type: "GET",
+                data: dataS,
+                url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/ResultBYDHistory",
+                dataType: "html",
+                header: 'Content-type: text/html; charset=utf-8',
+                success: function (res) {
+                    setTimeout(() => {
+                        $('div#ListCMTable').html(res);
+                        $('div#divRowCount').css({'display': ''});
+                        $('#loaderII').addClass('visually-hidden');
+                    }, 1000)
+                },
+                error: function (res) {
+                    setTimeout(() => {
+                        $('#loaderII').addClass('visually-hidden')
+                    }, 1000)
+                }
+            });
+        } else return false;
     }
 
     function changeLocation() {
@@ -344,13 +416,13 @@
         document.getElementById("statusS").value = '';
     }
 
-    function resetModal() {
-        document.getElementById("xbbMailNum").value = '';
-        document.getElementById("xbbMailDate").value = '';
-        document.getElementById("orgName").value = '';
-        document.getElementById("hsCode").value = '';
-        document.getElementById("productName").value = '';
-        document.getElementById("sendReqCountryCode").value = '';
+    function resetGTDFilter(x) {
+        document.getElementById("locationId").value = '';
+        document.getElementById("g7a").value = '';
+        document.getElementById("g7b").value = '';
+        document.getElementById("g7c").value = '';
+        document.getElementById("g8code2").value = '';
+        document.getElementById("g1b").value = '';
     }
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

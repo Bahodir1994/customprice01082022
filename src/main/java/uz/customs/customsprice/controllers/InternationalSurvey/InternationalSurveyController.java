@@ -12,10 +12,15 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import uz.customs.customsprice.entity.InitialDecision.Country;
+import uz.customs.customsprice.entity.InitialDecision.Location;
+import uz.customs.customsprice.entity.InternationalSurveyEntity.DirectionType;
 import uz.customs.customsprice.entity.InternationalSurveyEntity.InternationalSurveyEntity;
 import uz.customs.customsprice.repository.CountyRepo;
+import uz.customs.customsprice.repository.InternationalSurveyRepo.DirectionTypeRepo;
 import uz.customs.customsprice.repository.InternationalSurveyRepo.InternationalSurveyRepo;
+import uz.customs.customsprice.repository.LocationRepo;
 import uz.customs.customsprice.service.ConturyService;
+import uz.customs.customsprice.service.InternationalSurveyS.DirectionTypeService;
 import uz.customs.customsprice.service.InternationalSurveyS.InternationalSurveyService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,27 +39,46 @@ public class InternationalSurveyController {
     private final String INTERNATIONALSURVEYSAVEIS1 = "/resources/pages/InternationalSurvay/SaveIS1";
     private final String INTERNATIONALSURVEYSAVEIS2 = "/resources/pages/InternationalSurvay/SaveIS2";
     private final String INTERNATIONALSURVEYSAVEIS3 = "/resources/pages/InternationalSurvay/SaveIS3";
+    private final String INTERNATIONALSURVEYSAVESUMAPPROVEDADD = "/resources/pages/InternationalSurvay/SaveSumApprovedAdd";
 
     private final InternationalSurveyService internationalSurveyService;
     private final InternationalSurveyRepo internationalSurveyRepo;
     private final ConturyService conturyService;
+    private final DirectionTypeService directionTypeService;
+    private final DirectionTypeRepo directionTypeRepo;
+    private final LocationRepo locationRepo;
 
-    public InternationalSurveyController(InternationalSurveyService internationalSurveyService, InternationalSurveyRepo internationalSurveyRepo, ConturyService conturyService) {
+    public InternationalSurveyController(InternationalSurveyService internationalSurveyService, InternationalSurveyRepo internationalSurveyRepo, ConturyService conturyService, DirectionTypeRepo directionTypeRepo, DirectionTypeService directionTypeService, DirectionTypeRepo directionTypeRepo1, LocationRepo locationRepo) {
         this.internationalSurveyService = internationalSurveyService;
         this.internationalSurveyRepo = internationalSurveyRepo;
         this.conturyService = conturyService;
+        this.directionTypeService = directionTypeService;
+        this.directionTypeRepo = directionTypeRepo1;
+        this.locationRepo = locationRepo;
     }
-
     @Autowired
     CountyRepo countyRepo;
 
     @PostMapping(value = INTERNATIONALSURVEYPAGE)
     @ResponseBody
-    public ModelAndView FilterIS(HttpSession session) {
+    public ModelAndView FilterIS(HttpSession session, HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userName = (String) request.getSession().getAttribute("userName");
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userRoleName = (String) request.getSession().getAttribute("userRoleName");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userLocationName = (String) request.getSession().getAttribute("userLocationName");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+
         ModelAndView mav = new ModelAndView("resources/pages/InternationalSurvey/FiltrIS");
         String lngaTpcd = "UZ";
         List<Country> countryList = countyRepo.findAllByLngaTpcdOrderByCodeAsc(lngaTpcd);
+        List<DirectionType> directionType = directionTypeRepo.findAll();
+        List<Location> location = locationRepo.findAll();
         mav.addObject("countryList", countryList);
+        mav.addObject("userLocation", userLocation);
+        mav.addObject("directionType", directionType);
+        mav.addObject("location", location);
         return mav;
     }
 
@@ -63,6 +87,8 @@ public class InternationalSurveyController {
     public ModelAndView ResultIS(
             HttpSession session,
             HttpServletRequest request,
+            @RequestParam(required = false) String userLocationCode,
+            @RequestParam(required = false) String directionTypeCode,
             @RequestParam(required = false) String xbbMailDate,
             @RequestParam(required = false) String xbbMailNum,
             @RequestParam(required = false) String hsCode,
@@ -81,12 +107,11 @@ public class InternationalSurveyController {
             @RequestParam(required = false) String status,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "0") int size
-
     ) {
-
         String userId = (String) request.getSession().getAttribute("userId");
         String userLocation = (String) request.getSession().getAttribute("userLocation");
         Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        List<Location> location = locationRepo.findAll();
 
         ModelAndView viewModel = new ModelAndView("resources/pages/InternationalSurvey/ResultIS");
         java.sql.Date xbbMailDateS = null;
@@ -118,6 +143,8 @@ public class InternationalSurveyController {
             Pageable paging = PageRequest.of(page, size);
             Page<InternationalSurveyEntity> pageTuts =
                     internationalSurveyRepo.findAllByOrgNameAndHsCode(
+                            userLocationCode,
+                            directionTypeCode,
                             xbbMailNum,
                             xbbMailDateS,
                             hsCode,
@@ -136,7 +163,6 @@ public class InternationalSurveyController {
                             status,
                             paging
                     );
-
             tutorials = pageTuts.getContent();
             viewModel.addObject("tutorials", tutorials);
             viewModel.addObject("currentPage", pageTuts.getNumber());
@@ -144,11 +170,11 @@ public class InternationalSurveyController {
             viewModel.addObject("totalPages", pageTuts.getTotalPages());
             viewModel.addObject("getPageSize", pageTuts.getSize());
 
+            viewModel.addObject("locationDirectory", location);
             viewModel.addObject("userId", userId);
             viewModel.addObject("userLocation", userLocation);
             viewModel.addObject("userRole", userRole);
-
-
+            System.out.println(userId);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -157,66 +183,87 @@ public class InternationalSurveyController {
     }
 
     @PostMapping(value = INTERNATIONALSURVEYSAVEIS1)
-    public ResponseEntity<Object> addFirst(@RequestBody @Valid InternationalSurveyStep1DTO internationalSurveyStep1DTO, BindingResult result) {
+    public ResponseEntity<Object> addFirst(@RequestBody @Valid InternationalSurveyStep1DTO internationalSurveyStep1DTO, BindingResult result, HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userName = (String) request.getSession().getAttribute("userName");
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userRoleName = (String) request.getSession().getAttribute("userRoleName");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userLocationName = (String) request.getSession().getAttribute("userLocationName");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+
         Map<String, String> errors = new HashMap<>();
         if (result.hasErrors()) {
             errors = result.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-            System.out.println(" errors :=== " + errors);
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         } else {
             InternationalSurveyEntity internationalSurveyEntity = new InternationalSurveyEntity();
-            /*1*/
-            internationalSurveyEntity.setXbbMailNum(internationalSurveyStep1DTO.getXbbMailNum());
-            if (!Objects.equals(internationalSurveyStep1DTO.getXbbMailDate(), "")) {
-                /*2*/
-                internationalSurveyEntity.setXbbMailDate(Date.valueOf(internationalSurveyStep1DTO.getXbbMailDate()));
+            if(!Objects.equals(internationalSurveyStep1DTO.getXbbMailNum(), "1701")){
+                internationalSurveyEntity.setXbbMailNum(internationalSurveyStep1DTO.getXbbMailNum());
             }
-            /*3*/
+            if (!Objects.equals(internationalSurveyStep1DTO.getXbbMailDate(), "")) {
+                if(userLocation != "1701" && internationalSurveyStep1DTO.getXbbMailDate() != "1111-11-11"){
+                    internationalSurveyEntity.setXbbMailDate(Date.valueOf(internationalSurveyStep1DTO.getXbbMailDate()));
+                }
+            }
             internationalSurveyEntity.setOrgName(internationalSurveyStep1DTO.getOrgName());
-            /*4*/
             internationalSurveyEntity.setHsCode(internationalSurveyStep1DTO.getHsCode());
-            /*5*/
             internationalSurveyEntity.setProductName(internationalSurveyStep1DTO.getProductName());
             Country country = conturyService.getByCodeAndLngaTpcd(internationalSurveyStep1DTO.getSendReqCountryCode(), "UZ");
-            /*6.1*/
             internationalSurveyEntity.setSendReqCountryCode(internationalSurveyStep1DTO.getSendReqCountryCode());
-            /*6.2*/
             internationalSurveyEntity.setSendReqCountryNm(country.getCdNm());
+            DirectionType directionType = directionTypeService.getByCode(internationalSurveyStep1DTO.getDirectionTypeSave());
+            internationalSurveyEntity.setDirectionTypeCode(internationalSurveyStep1DTO.getDirectionTypeSave());
+            internationalSurveyEntity.setDirectionTypeName(directionType.getName());
+            if (!Objects.equals(internationalSurveyStep1DTO.getSumProbability(), "")) {
+                internationalSurveyEntity.setSumProbability(internationalSurveyStep1DTO.getSumProbability());
+            }
+            internationalSurveyEntity.setSavedUserFirstId(userId);
+            internationalSurveyEntity.setSavedUserFirst(userName);
+            internationalSurveyEntity.setUserLocationCode(userLocation);
+            internationalSurveyEntity.setUserLocationName(userLocationName);
             /**100-First step**/ /**200-Second step**/ /**300-Third step**/
             internationalSurveyEntity.setStatus("100");
             /*finish*/
             internationalSurveyService.savingValue(internationalSurveyEntity);
-//            return new ResponseEntity<>("success", HttpStatus.OK);
             return ResponseEntity.status(201).body(internationalSurveyEntity);
         }
     }
 
     @PostMapping(value = INTERNATIONALSURVEYSAVEIS2)
-    public ResponseEntity<Object> addSecond(@RequestBody @Valid InternationalSurveyStep2DTO internationalSurveyStep2DTO, BindingResult result) {
+    public ResponseEntity<Object> addSecond(@RequestBody @Valid InternationalSurveyStep2DTO internationalSurveyStep2DTO, BindingResult result, HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userName = (String) request.getSession().getAttribute("userName");
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userRoleName = (String) request.getSession().getAttribute("userRoleName");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userLocationName = (String) request.getSession().getAttribute("userLocationName");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+
         Map<String, String> errors = new HashMap<>();
         if (result.hasErrors()) {
             errors = result.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
             return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
         } else {
             InternationalSurveyEntity internationalSurveyEntity = internationalSurveyService.getByIdAndStatus(internationalSurveyStep2DTO.getId(), internationalSurveyStep2DTO.getStatus());
-            /*7*/
             internationalSurveyEntity.setSendReqNum(internationalSurveyStep2DTO.getSendReqNum());
             if (!Objects.equals(internationalSurveyStep2DTO.getReqDate(), "")) {
-                /*8*/
                 internationalSurveyEntity.setReqDate(Date.valueOf(internationalSurveyStep2DTO.getReqDate()));
             }
-            /*9*/
             internationalSurveyEntity.setResponseNum(internationalSurveyStep2DTO.getResponseNum());
             if (!Objects.equals(internationalSurveyStep2DTO.getResponseDate(), "")) {
-                /*10*/
                 internationalSurveyEntity.setResponseDate(Date.valueOf(internationalSurveyStep2DTO.getResponseDate()));
             }
-            /*11*/
             internationalSurveyEntity.setResponseNumSendXbbNum(internationalSurveyStep2DTO.getResponseNumSendXbbNum());
             if (!Objects.equals(internationalSurveyStep2DTO.getResponseNumSendXbbDate(), "")) {
-                /*12*/
                 internationalSurveyEntity.setResponseNumSendXbbDate(Date.valueOf(internationalSurveyStep2DTO.getResponseNumSendXbbDate()));
             }
+            internationalSurveyEntity.setExecutiveTerritoryCode(internationalSurveyStep2DTO.getExecutiveTerritoryCode());
+            Optional<Location> location = locationRepo.findById(internationalSurveyStep2DTO.getExecutiveTerritoryCode());
+            internationalSurveyEntity.setExecutiveTerritoryName(location.get().getName1());
+            internationalSurveyEntity.setDistributed(internationalSurveyStep2DTO.getDistributed());
+            internationalSurveyEntity.setSavedUserSecondId(userId);
+            internationalSurveyEntity.setSavedUserSecond(userName);
             /**100-First step**/ /**200-Second step**/ /**300-Third step**/
             internationalSurveyEntity.setStatus("200");
             internationalSurveyService.savingValue(internationalSurveyEntity);
@@ -225,35 +272,82 @@ public class InternationalSurveyController {
     }
 
     @PostMapping(value = INTERNATIONALSURVEYSAVEIS3)
-    public ResponseEntity<Object> addSecond(@RequestBody @Valid InternationalSurveyStep3DTO internationalSurveyStep3DTO, BindingResult result) {
+    public ResponseEntity<Object> addSecond(@RequestBody @Valid InternationalSurveyStep3DTO internationalSurveyStep3DTO, BindingResult result, HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userName = (String) request.getSession().getAttribute("userName");
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userRoleName = (String) request.getSession().getAttribute("userRoleName");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userLocationName = (String) request.getSession().getAttribute("userLocationName");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+
         Map<String, String> errors = new HashMap<>();
         if (result.hasErrors()) {
             errors = result.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
             return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
         } else {
             InternationalSurveyEntity internationalSurveyEntity = internationalSurveyService.getByIdAndStatus(internationalSurveyStep3DTO.getId(), internationalSurveyStep3DTO.getStatus());
-            /*13*/
             internationalSurveyEntity.setResultAnswerMailNum(internationalSurveyStep3DTO.getResultAnswerMailNum());
             if (!Objects.equals(internationalSurveyStep3DTO.getResultAnswerMailDate(), "")) {
-                /*14*/
                 internationalSurveyEntity.setResultAnswerMailDate(Date.valueOf(internationalSurveyStep3DTO.getResultAnswerMailDate()));
             }
-            /*15*/
             internationalSurveyEntity.setXbbVerdictNum(internationalSurveyStep3DTO.getXbbVerdictNum());
             if (!Objects.equals(internationalSurveyStep3DTO.getXbbVerdictDate(), "")) {
-                /*16*/
                 internationalSurveyEntity.setXbbVerdictDate(Date.valueOf(internationalSurveyStep3DTO.getXbbVerdictDate()));
             }
             if (!Objects.equals(internationalSurveyStep3DTO.getSum(), "")) {
-                /*17*/
-                internationalSurveyEntity.setSum(BigDecimal.valueOf(Long.parseLong(internationalSurveyStep3DTO.getSum())));
+                internationalSurveyEntity.setSum(internationalSurveyStep3DTO.getSum());
             }
-            /*18*/
+            if (!Objects.equals(internationalSurveyStep3DTO.getSumАpproved(), "")){
+                internationalSurveyEntity.setSumАpproved(internationalSurveyStep3DTO.getSumАpproved());
+            }
+            internationalSurveyEntity.setSumOnControl(
+                internationalSurveyEntity.getSum().subtract(internationalSurveyStep3DTO.getSumАpproved())
+            );
+            internationalSurveyEntity.setSavedUserThirdId(userId);
+            internationalSurveyEntity.setSavedUserThird(userName);
             internationalSurveyEntity.setComment(internationalSurveyStep3DTO.getComment());
+            internationalSurveyEntity.setFabula(internationalSurveyStep3DTO.getFabula());
             /**100-First step**/ /**200-Second step**/ /**300-Third step**/
             internationalSurveyEntity.setStatus("300");
             internationalSurveyService.savingValue(internationalSurveyEntity);
             return ResponseEntity.status(201).body(internationalSurveyEntity);
+        }
+    }
+
+    @PostMapping(value = INTERNATIONALSURVEYSAVESUMAPPROVEDADD)
+    public ResponseEntity<Object> addSummApprovedPlus(@RequestBody InternationalSurveyAddNewSumApproved internationalSurveyAddNewSumApproved, HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userName = (String) request.getSession().getAttribute("userName");
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userRoleName = (String) request.getSession().getAttribute("userRoleName");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userLocationName = (String) request.getSession().getAttribute("userLocationName");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+
+        Map<String, String> errors = new HashMap<>();
+        try {
+            InternationalSurveyEntity internationalSurveyEntity = internationalSurveyService.getById(internationalSurveyAddNewSumApproved.getIsId());
+            BigDecimal newSumApproved;
+            if (!Objects.equals(internationalSurveyAddNewSumApproved.getSumApprovedAdd(), "")){
+                newSumApproved = internationalSurveyEntity.getSumАpproved().add(internationalSurveyAddNewSumApproved.getSumApprovedAdd());
+            } else newSumApproved = BigDecimal.valueOf(0.00);
+
+            internationalSurveyEntity.setSumАpproved(newSumApproved);
+            BigDecimal newSumOnControl;
+            newSumOnControl = internationalSurveyEntity.getSum().subtract(newSumApproved);
+            internationalSurveyEntity.setSumOnControl(newSumOnControl);
+
+            String newComment = "";
+            if (internationalSurveyAddNewSumApproved.getCommentAdd() != ""){
+                newComment = internationalSurveyAddNewSumApproved.getCommentAdd() + ";" + "<br>" + internationalSurveyEntity.getComment();
+                internationalSurveyEntity.setComment(newComment);
+            }
+            internationalSurveyEntity.setFabula(internationalSurveyAddNewSumApproved.getFabulaAdd());
+            internationalSurveyService.savingValue(internationalSurveyEntity);
+            return ResponseEntity.status(201).body(internationalSurveyEntity);
+        } catch (Exception e){
+            return new ResponseEntity<Object>("error", HttpStatus.BAD_REQUEST);
         }
     }
 }

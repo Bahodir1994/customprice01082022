@@ -104,18 +104,32 @@
 </div>
 <!--start page wrapper -->
 <div id="main" class="page-content">
-    <h6 class="mb-0 text-uppercase">ХАЛҚАРО СЎРОВНОМА</h6>
+    <span style="cursor: pointer"><a href="#" class="text-success">БОШ САХИФА</a> / </span></span><span class=""><b>ХАЛҚАРО СЎРОВНОМА</b></span>
     <hr>
-    <!--start email wrapper-->
-
-    <!--end email wrapper-->
     <div class="col-12 col-lg-12 shadow">
-
         <div class="card">
             <div class="fm-search mt-2 mb-1 ml-3 mr-3">
                 <div class="mb-0">
                     <div class="row m-3">
                         <div class="row">
+                            <div class="col">
+                                <label class="">Таркибий тузилма</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Таркибий тузилмалар"></i>
+                                <select class="result form-control shadow-sm" type="text" id="userLocationCode" name="userLocationCode" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} ">
+                                    <option class="font-italic" selected value="">--- Танланг ---</option>
+                                    <c:forEach var="usrLoc" items="${location}" varStatus="i">
+                                        <option value="${usrLoc.id}">${usrLoc.name1}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label class="">Йўналиш</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Халқаро сўровнома йўналиш тури"></i>
+                                <select class="result form-control shadow-sm" type="text" id="directionTypeCode" name="directionTypeCode" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} ">
+                                    <option class="font-italic" selected value="">--- Танланг ---</option>
+                                    <c:forEach var="dirTyp" items="${directionType}" varStatus="i">
+                                        <option value="${dirTyp.code}">${dirTyp.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
                             <div class="col">
                                 <label class="">Хат рақами</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="ҲББ томонидан юбоирлган хат рақами"></i>
                                 <input class="result form-control shadow-sm" type="text" id="xbbMailNumS" name="xbbMailNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
@@ -132,6 +146,8 @@
                                                                      data-bs-placement="top" title="ТИФ ТН код"></i>
                                 <input class="result form-control shadow-sm" type="text" id="hsCodeS" name="hsCodeS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col">
                                 <label class="">Товар номи</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
                                                                      data-bs-placement="top" title="Товар номи"></i>
@@ -145,14 +161,12 @@
                                                                                      title="Сўровнома юборилган давлат"></i>
                                 <select class="form-select shadow-sm" id="sendReqCountryCodeS"
                                         name="sendReqCountryCodeS" required="" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                                    <option value="">--Танланг--</option>
-                                    <c:forEach var="countr" items="${countryList}">
-                                        <option value="${countr.code}">${countr.cdNm}</option>
-                                    </c:forEach>
+                                <option value="">--Танланг--</option>
+                                <c:forEach var="countr" items="${countryList}">
+                                    <option value="${countr.code}">${countr.cdNm}</option>
+                                </c:forEach>
                                 </select>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col">
                                 <div class="">
                                     <label class="">Юборилган сўровнома рақами</label><i class="bx bx-info-circle"
@@ -181,6 +195,8 @@
                                 <input class="result form-control shadow-sm" type="text" id="responseNumS"
                                        name="responseNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col">
                                 <label class="">Олинган жавоб хати санаси</label><i class="bx bx-info-circle"
                                                                                     data-bs-toggle="tooltip"
@@ -199,8 +215,6 @@
                                            name="responseNumSendXbbNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col">
                                 <div class="">
                                     <label class="">ҲББга юборилган хат санаси</label><i class="bx bx-info-circle"
@@ -229,6 +243,9 @@
                                            name="resultAnswerMailDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                 </div>
                             </div>
+                            <div id="target" name="target"></div>
+                        </div>
+                        <div class="row">
                             <div class="col">
                                 <div class="">
                                     <label class="">ҲББ хулоса рақами</label><i class="bx bx-info-circle"
@@ -251,13 +268,24 @@
                             <div class="col">
                                 <label>Cўровнома холати</label>
                                 <select class="form-select" id="statusS" name="statusS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                                    <option value="">--Танланг--</option>
-                                    <option value="100">Янги</option>
-                                    <option value="200">Жараёнда</option>
-                                    <option value="300">Якунланган</option>
+                                <option value="">--Танланг--</option>
+                                <option value="100">Янги</option>
+                                <option value="200">Жараёнда</option>
+                                <option value="300">Якунланган</option>
                                 </select>
                             </div>
-                            <div id="target" name="target"></div>
+                            <div class="col mt-2">
+                                <button type="button" class="btn btn-outline-primary btn-block mt-2"
+                                        onclick="searchResultTableIS(0)"><i class='bx bx-refresh'></i>Излаш
+                                </button>
+                                <button type="reset" class="btn btn-outline-primary btn-block mt-2" onclick="reset(1)">
+                                    <i class='bx bx-trash'></i>Тозалаш
+                                </button>
+                                <button type="button" class="btn btn-outline-primary btn-block mt-2"
+                                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                        onclick="resetModal()"><i class='bx bx-plus'></i>Киритиш
+                                </button>
+                            </div>
                         </div>
                         <!-- Modal 1-qadam-->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -272,22 +300,23 @@
                                     <div class="modal-body row">
                                         <!--todo 1-bosqich-->
                                         <form class="row g-3 needs-validation">
+                                            <c:if test="${userLocation != '1701'}">
+                                                <div class="form-group col-md-3">
+                                                    <label for="xbbMailNum" class="form-label text-primary"><span class="text-danger">&#x2734;</span>ҲББ томонидан юбоирлган хат рақами:</label>
+                                                    <input class="form-control" type="text" id="xbbMailNum" name="xbbMailNum">
+                                                    <div class="valid-feedback">Текширилди</div>
+                                                    <div class="" id="xbbMailNumValid"></div>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="xbbMailNum" class="form-label text-primary"><span class="text-danger">&#x2734;</span>ҲББ томонидан юбоирлган хат санаси:</label>
+                                                    <input class="form-control" type="date" id="xbbMailDate" name="xbbMailDate">
+                                                    <div class="valid-feedback">Текширилди</div>
+                                                    <div class="" id="xbbMailDateValid"></div>
+                                                </div>
+                                            </c:if>
+
                                             <div class="form-group col-md-3">
-                                                <label for="xbbMailNum" class="form-label text-primary">ҲББ томонидан юбоирлган хат рақами:</label>
-                                                <input class="form-control" type="text" id="xbbMailNum" name="xbbMailNum">
-                                                <div class="valid-feedback">Текширилди</div>
-                                                <div class="" id="xbbMailNumValid"></div>
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="xbbMailNum" class="form-label text-primary">ҲББ томонидан
-                                                    юбоирлган хат санаси:</label>
-                                                <input class="form-control" type="date" id="xbbMailDate"
-                                                       name="xbbMailDate">
-                                                <div class="valid-feedback">Текширилди</div>
-                                                <div class="" id="xbbMailDateValid"></div>
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="orgName" class="form-label text-primary">Ташкилот
+                                                <label for="orgName" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Ташкилот
                                                     номи:</label>
                                                 <input class="form-control was-validated" type="text" id="orgName"
                                                        name="orgName">
@@ -295,13 +324,13 @@
                                                 <div class="" id="orgNameValid"></div>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="hsCode" class="form-label text-primary">ТИФ ТН код:</label>
+                                                <label for="hsCode" class="form-label text-primary"><span class="text-danger">&#x2734;</span>ТИФ ТН код:</label>
                                                 <input class="form-control" type="text" id="hsCode" name="hsCode">
                                                 <div class="valid-feedback">Текширилди</div>
                                                 <div class="" id="hsCodeValid"></div>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="productName" class="form-label text-primary">Товар
+                                                <label for="productName" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Товар
                                                     номи:</label>
                                                 <input class="form-control" type="text" id="productName"
                                                        name="productName">
@@ -309,9 +338,7 @@
                                                 <div class="" id="productNameValid"></div>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="sendReqCountryCode" class="form-label text-primary">Сўровнома
-                                                    юборилган
-                                                    давлат:</label>
+                                                <label for="sendReqCountryCode" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Сўровнома юборилган давлат:</label>
                                                 <select class="form-control" type="text" id="sendReqCountryCode" name="sendReqCountryCode">
                                                     <option class="font-italic" selected value="">--- Танланг ---</option>
                                                     <c:forEach var="vals" items="${countryList}" varStatus="i">
@@ -320,6 +347,25 @@
                                                 </select>
                                                 <div class="valid-feedback">Текширилди</div>
                                                 <div class="" id="sendReqCountryCodeValid"></div>
+                                            </div>
+
+                                            <div class="form-group col-md-3">
+                                                <label for="sendReqCountryCode" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Йўналиш:</label>
+                                                <select class="form-control" type="text" id="directionTypeSave" name="sendReqCountryCode">
+                                                    <option class="font-italic" selected value="">--- Танланг ---</option>
+                                                    <c:forEach var="dirTyp" items="${directionType}" varStatus="i">
+                                                        <option value="${dirTyp.code}">${dirTyp.name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                                <div class="valid-feedback">Текширилди</div>
+                                                <div class="" id="directionTypeSaveValid"></div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="productName" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Эхтимол.қўшим хисобланган:</label>
+                                                <input class="form-control" type="text" id="sumProbability"
+                                                       name="sumProbability">
+                                                <div class="valid-feedback">Текширилди</div>
+                                                <div class="" id="sumProbabilityValid"></div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-primary"
@@ -335,47 +381,22 @@
                 </div>
             </div>
             <hr>
-            <div class=" mb-0">
-                <table style="width: 100%!important;">
-                    <thead>
-                    <tr>
-                        <th class="col-md-6">
-                            <div class="col m-2" id="divRowCount" style="display: none;">
-                                <div class="col-md-1 text-primary">
-                                    <select class="form-select" id="size" name="size" onchange="searchResultTableIS(0)">
-                                        <option value="5">5</option>
-                                        <option value="10">10</option>
-                                        <option value="30">30</option>
-                                        <option value="50">50</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </th>
-                        <th class="col-md-6 text-end justify-content-center">
-                            <div class="col m-2">
-                                <button type="button" class="btn btn-outline-primary btn-block mt-2"
-                                        onclick="searchResultTableIS(0)"><i class='bx bx-refresh'></i>Излаш
-                                </button>
-                                <button type="reset" class="btn btn-outline-primary btn-block mt-2" onclick="reset(1)">
-                                    <i class='bx bx-trash'></i>Тозалаш
-                                </button>
-                                <button type="button" class="btn btn-outline-primary btn-block mt-2"
-                                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        onclick="resetModal()"><i class='bx bx-plus'></i>Киритиш
-                                </button>
-                            </div>
-                        </th>
-                    </tr>
-                    </thead>
-
-                </table>
+            <div class="col-sm-8" id="divRowCount" style="display: none; margin-left: 15px!important;">
+                <div class="col-md-1 text-primary">
+                    <select class="form-select" id="size" name="size" onchange="searchResultTableIS(0)">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
             </div>
             <div id="loaderII" class="col-md-12 position-absolute top-50 start-50 visually-hidden" role="status" style="z-index: 999999">
                 <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
-            <div class="card-body" id="ListCMTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
+            <div class="card-body" id="ListCMTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important; padding: 0rem 1rem!important;">
             </div>
         </div>
     </div>
@@ -415,6 +436,8 @@
         $('#loaderII').removeClass('visually-hidden')
         if (root) root.preventDefault();
         var dataS = {
+            "userLocationCode": $("#userLocationCode").val(),
+            "directionTypeCode": $("#directionTypeCode").val(),
             "xbbMailDate": $("#xbbMailDateS").val().toString(),
             "xbbMailNum": $("#xbbMailNumS").val(),
             "hsCode": $("#hsCodeS").val(),
@@ -456,13 +479,24 @@
 
     }
     function saveValueFromInputS() {
+        let userLocation = '<%=userLocation%>';
+        if (userLocation == '1701') {
+            xbbMailNum2 = '1701';
+            xbbMailDate2 =  '1111-11-11';
+        } else {
+            xbbMailNum2 = $("#xbbMailNum").val();
+            xbbMailDate2 = $("#xbbMailDate").val();
+        }
         var dataS = {
-            "xbbMailNum": $('#xbbMailNum').val(),
-            "xbbMailDate": $('#xbbMailDate').val(),
+            "xbbMailNum": xbbMailNum2,
+            "xbbMailDate": xbbMailDate2,
             "orgName": $('#orgName').val(),
             "hsCode": $('#hsCode').val(),
             "productName": $('#productName').val(),
-            "sendReqCountryCode": $('#sendReqCountryCode').val()/*
+            "sendReqCountryCode": $('#sendReqCountryCode').val(),
+            "directionTypeSave": $('#directionTypeSave').val(),
+            "sumProbability": $('#sumProbability').val()
+            /*
             "sendReqNum": $('#sendReqNum').val(),
             "reqDate": $('#reqDate').val(),
             "responseNum": $('#responseNum').val(),
@@ -550,6 +584,24 @@
                     $('#sendReqCountryCode').addClass('border border-success');
                 }
 
+                if (typeof response.responseJSON.directionTypeSave != "undefined" && response.responseJSON.directionTypeSave != null && response.responseJSON.directionTypeSave != "" && response.responseJSON.directionTypeSave != "undefined") {
+                    $('#directionTypeSaveValid').html(response.responseJSON.directionTypeSave).addClass('text-danger');
+                    $('#directionTypeSave').addClass('border border-danger')
+                } else {
+                    $('#directionTypeSave').removeClass('border border-danger');
+                    $('#directionTypeSaveValid').html('');
+                    $('#directionTypeSave').addClass('border border-success');
+                }
+
+                if (typeof response.responseJSON.sumProbability != "undefined" && response.responseJSON.sumProbability != null && response.responseJSON.sumProbability != "" && response.responseJSON.sumProbability != "undefined") {
+                    $('#sumProbabilityValid').html(response.responseJSON.sumProbability).addClass('text-danger');
+                    $('#sumProbability').addClass('border border-danger')
+                } else {
+                    $('#sumProbability').removeClass('border border-danger');
+                    $('#sumProbabilityValid').html('');
+                    $('#sumProbability').addClass('border border-success');
+                }
+
                 Swal.fire({
                     position: 'top-end',
                     icon: 'error',
@@ -561,6 +613,8 @@
         });
     }
     function reset(x) {
+        document.getElementById("userLocationCode").value = '';
+        document.getElementById("directionTypeCode").value = '';
         document.getElementById("xbbMailDateS").value = '';
         document.getElementById("xbbMailNumS").value = '';
         document.getElementById("hsCodeS").value = '';

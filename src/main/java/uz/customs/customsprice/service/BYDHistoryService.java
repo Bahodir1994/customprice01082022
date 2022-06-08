@@ -21,7 +21,7 @@ public class BYDHistoryService {
         this.entityManagerGTDHistory = entityManagerGTDHistory;
     }
 
-    public List getListGTDHistory(String g7a, String g7b, String g7c) {
+    public List getListGTDHistory(String g7a, String g7b, String g7c, String g8code2, String g1b) {
         String queryForList = "select distinct " +
                 "d.G7A," +
                 " char(d.G7B, eur) g7b," +
@@ -44,6 +44,10 @@ public class BYDHistoryService {
             queryForList = queryForList + " and d.g7b = '" + g7b + "'";
         if (!Utils.nullClear(g7c).equals(""))
             queryForList = queryForList + " and d.g7c = '" + g7c + "'";
+        if (!Utils.nullClear(g8code2).equals(""))
+            queryForList = queryForList + " and d.g8code2 = '" + g8code2 + "'";
+        if (!Utils.nullClear(g1b).equals(""))
+            queryForList = queryForList + " and d.g1b = '" + g1b + "'";
         List<Object[]> listCount = entityManagerGTDHistory.createNativeQuery(queryForList).getResultList();
         return listCount;
     }

@@ -144,7 +144,7 @@
                             <label class="">ХББ</label>
                             <select class="form-select shadow-sm" required="" id="locationId" name="locationId" onchange="changeLocation()">
                                 <%-- todo                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>--%>
-                                <%--                                <option value="">--- Танланг ---</option>--%>
+<%--                                <option value="">--- Танланг ---</option>--%>
                                 <c:forEach var="locations" items="${locationList}" varStatus="i">
                                     <option value="${locations.id}">${locations.id} - ${locations.name1}</option>
                                 </c:forEach>
@@ -441,5 +441,7 @@
 
 </script>
 </body>
+
+
 
 

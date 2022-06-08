@@ -13,7 +13,7 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%
-//    String userId = (String) request.getSession().getAttribute("userId");
+    //    String userId = (String) request.getSession().getAttribute("userId");
 //    Integer userRole = (Integer) request.getSession().getAttribute("userRole");
 //    String userName = (String) request.getSession().getAttribute("userName");
 //    String userRoleName = (String) request.getSession().getAttribute("userRoleName");
@@ -48,6 +48,7 @@
             session.setAttribute("userName", "0");
             session.setAttribute("userLocation", "0");
             session.setAttribute("userPost", "0");
+            session.setAttribute("userLocationName", "0");
 //            userRole = 0;
         } else {
             session.setAttribute("role", user.getRole());
@@ -56,6 +57,7 @@
             session.setAttribute("userIdS", user.getId());
             session.setAttribute("userName", user.getFullname());
             session.setAttribute("userLocation", user.getLocation());
+            session.setAttribute("userLocationName", user.getLocationname());
             session.setAttribute("userPost", user.getPost());
 //            userRole = user.getRole();
         }
@@ -67,14 +69,16 @@
     session.setAttribute("userIdS", user.getId());
     session.setAttribute("userName", user.getFullname());
     session.setAttribute("userLocation", user.getLocation());
+    session.setAttribute("userLocationName", user.getLocationname());
     session.setAttribute("userPost", user.getPost());
     String roleN = "";
     for (Role role : roleList) {
         if (role.getCode().equals(roleI)) {
             roleN = role.getName();
-            System.out.println(user.getRole() + " ===>> " + user.getUserid() + " ===>> " + user.getId());
-            System.out.println(user.getRole() + " ===>> " + user.getId() + " 7777===>> " + user.getId());
-            System.out.println(user.getFullname() + " ===>> " + roleN);
+//            System.out.println(user.getRole() + " ===>> " + user.getUserid() + " ===>> " + user.getId());
+//            System.out.println(user.getRole() + " ===>> " + user.getId() + " 7777===>> " + user.getId());
+//            System.out.println(user.getFullname() + " ===>> " + roleN);
+//            System.out.println(user.getLocationname() + " ===>> " + roleN);
             break;
         }
     }
@@ -85,7 +89,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--favicon-->
-<%--    <link rel="icon" href="<%=request.getContextPath()%>/resources/assets2/images/favicon-32x32.png" type="image/png"/>--%>
+    <%--    <link rel="icon" href="<%=request.getContextPath()%>/resources/assets2/images/favicon-32x32.png" type="image/png"/>--%>
     <link rel="icon" href="${pageContext.servletContext.contextPath}/resources/images/emblem.png" type="image/x-icon">
     <!--plugins-->
     <link href="<%=request.getContextPath()%>/resources/assets2/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
@@ -176,24 +180,24 @@
                     </div>
                     <div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>
                     <div class="top-menu-left d-none d-lg-block ps-3">
-<%--                        <ul class="nav">--%>
-<%--                            <li class="nav-item">--%>
-<%--                                <a class="nav-link" href="app-emailbox.html"><i class='bx bx-envelope'></i></a>--%>
-<%--                            </li>--%>
-<%--                            <li class="nav-item">--%>
-<%--                                <a class="nav-link" href="app-chat-box.html"><i class='bx bx-message'></i></a>--%>
-<%--                            </li>--%>
-<%--                            <li class="nav-item">--%>
-<%--                                <a class="nav-link" href="app-fullcalender.html"><i class='bx bx-calendar'></i></a>--%>
-<%--                            </li>--%>
-<%--                            <li class="nav-item">--%>
-<%--                                <a class="nav-link" href="app-to-do.html"><i class='bx bx-check-square'></i></a>--%>
-<%--                            </li>--%>
-<%--                            <li class="nav-item" style="display: none;">--%>
-<%--                                <span><span class="f-w-600" id="roleName"><%=roleN%></span>: <span class="border-bottom"--%>
-<%--                                                                                                   id="fullName"><%=user.getFullname()%></span></span>--%>
-<%--                            </li>--%>
-<%--                        </ul>--%>
+                        <%--                        <ul class="nav">--%>
+                        <%--                            <li class="nav-item">--%>
+                        <%--                                <a class="nav-link" href="app-emailbox.html"><i class='bx bx-envelope'></i></a>--%>
+                        <%--                            </li>--%>
+                        <%--                            <li class="nav-item">--%>
+                        <%--                                <a class="nav-link" href="app-chat-box.html"><i class='bx bx-message'></i></a>--%>
+                        <%--                            </li>--%>
+                        <%--                            <li class="nav-item">--%>
+                        <%--                                <a class="nav-link" href="app-fullcalender.html"><i class='bx bx-calendar'></i></a>--%>
+                        <%--                            </li>--%>
+                        <%--                            <li class="nav-item">--%>
+                        <%--                                <a class="nav-link" href="app-to-do.html"><i class='bx bx-check-square'></i></a>--%>
+                        <%--                            </li>--%>
+                        <%--                            <li class="nav-item" style="display: none;">--%>
+                        <%--                                <span><span class="f-w-600" id="roleName"><%=roleN%></span>: <span class="border-bottom"--%>
+                        <%--                                                                                                   id="fullName"><%=user.getFullname()%></span></span>--%>
+                        <%--                            </li>--%>
+                        <%--                        </ul>--%>
                     </div>
                     <div class="search-bar flex-grow-1">
                         <div class="position-relative search-bar-box">
@@ -211,9 +215,9 @@
                                 </a>--%>
                             </li>
                             <li class="nav-item dropdown dropdown-large">
-<%--                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button"--%>
-<%--                                   data-bs-toggle="dropdown" aria-expanded="false"> <i class='bx bx-category'></i>--%>
-<%--                                </a>--%>
+                                <%--                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button"--%>
+                                <%--                                   data-bs-toggle="dropdown" aria-expanded="false"> <i class='bx bx-category'></i>--%>
+                                <%--                                </a>--%>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <div class="row row-cols-3 g-3 p-3">
                                         <div class="col text-center">
@@ -256,18 +260,18 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown dropdown-large">
-<%--                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#"--%>
-<%--                                   role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span--%>
-<%--                                        class="alert-count w-50">71</span>--%>
-<%--                                    <i class='bx bx-bell'></i><i class='bx bxs-bell bx-tada'></i>--%>
-<%--                                </a>--%>
+                                <%--                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#"--%>
+                                <%--                                   role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span--%>
+                                <%--                                        class="alert-count w-50">71</span>--%>
+                                <%--                                    <i class='bx bx-bell'></i><i class='bx bxs-bell bx-tada'></i>--%>
+                                <%--                                </a>--%>
                                 <div class="dropdown-menu dropdown-menu-end">
-<%--                                    <a href="javascript:;">--%>
-<%--                                        <div class="msg-header">--%>
-<%--                                            <p class="msg-header-title">Notifications</p>--%>
-<%--                                            <p class="msg-header-clear ms-auto">Marks all as read</p>--%>
-<%--                                        </div>--%>
-<%--                                    </a>--%>
+                                    <%--                                    <a href="javascript:;">--%>
+                                    <%--                                        <div class="msg-header">--%>
+                                    <%--                                            <p class="msg-header-title">Notifications</p>--%>
+                                    <%--                                            <p class="msg-header-clear ms-auto">Marks all as read</p>--%>
+                                    <%--                                        </div>--%>
+                                    <%--                                    </a>--%>
                                     <div class="header-notifications-list">
                                         <a class="dropdown-item" href="javascript:;">
                                             <div class="d-flex align-items-center">
@@ -386,10 +390,10 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown dropdown-large">
-<%--                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
-<%--                                    <span class="alert-count">8</span>--%>
-<%--                                    <i class='bx bx-time'></i>--%>
-<%--                                </a>--%>
+                                <%--                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
+                                <%--                                    <span class="alert-count">8</span>--%>
+                                <%--                                    <i class='bx bx-time'></i>--%>
+                                <%--                                </a>--%>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <a href="javascript:;">
                                         <div class="msg-header">
@@ -555,7 +559,7 @@
                                 </div>
                             </li>
                             <li class="">
-<%--                                <a type="button" class="btn btn-sm radius-30 text-white" style="cursor: pointer; background-color: #0a58ca; font-size: 24px" id="id_date"></a>--%>
+                                <%--                                <a type="button" class="btn btn-sm radius-30 text-white" style="cursor: pointer; background-color: #0a58ca; font-size: 24px" id="id_date"></a>--%>
                                 <h6 type="button" class="btn btn-sm radius-15 bg-outline-primary text-success" style="font-size: 24px" id="id_clock"></h6>
                                 <script>
                                     function digitalClock() {
@@ -587,7 +591,7 @@
                             <div class="user-info ps-3">
                                 <p class="user-name mb-0"><%=user.getFullname()%>
                                 </p>
-                                									<p class="designattion mb-0"><%=roleN%></p>
+                                <p class="designattion mb-0"><%=roleN%></p>
                             </div>
                             <div class="user-info ps-3">
                                 <i class='bx bx-log-in-circle bx-lg'></i>
@@ -689,7 +693,7 @@
                         <%--							</ul>--%>
                     </li>
                     <%
-//                        if (userRole == 1 || userRole == 6 || userRole == 7 || userRole == 8) {
+                        //                        if (userRole == 1 || userRole == 6 || userRole == 7 || userRole == 8) {
 //                            System.out.println("userRole212132323==" + userRole);
                     %> <%--todo (ҲББ Тўловлар бошлиғи ҳамда ҲББ Тўловлар ходими менюси)--%>
 
@@ -742,7 +746,7 @@
                         <%--								</li>--%>
                         <%--							</ul>--%>
                     </li>
-<%--                    <%}%>--%>
+                    <%--                    <%}%>--%>
                     <li>
                         <a class="has-arrow" href="javascript:CostMonitoring(0);">
                             <div class="parent-icon"><i class="bx bx-line-chart"></i>

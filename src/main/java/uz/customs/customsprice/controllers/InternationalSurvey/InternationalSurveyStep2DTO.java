@@ -28,6 +28,11 @@ public class InternationalSurveyStep2DTO {
     @NotBlank(message = "Санани киритиш мажбурий!")
     private String responseNumSendXbbDate;
 
+    @NotBlank(message = "Ижрочи худудни танланг!")
+    private String executiveTerritoryCode;
+
+    private String distributed;
+
     private String id;
     private String status;
 }

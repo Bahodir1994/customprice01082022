@@ -148,28 +148,25 @@ public class DigestsController {
     public ModelAndView FilterBYDHistory(HttpSession session) {
         ModelAndView mav = new ModelAndView("resources/pages/Digests/BojxonaYukDeklaratsiyalariTarixi/FiltrBYDHistory");
         String lngaTpcd = "UZ";
-        List<Location> locationList = locationRepo.findAll();
+//        List<Location> locationList = locationRepo.findAll();
+        String locationId = "1701";
+        List<Location> locationList = locationRepo.findAllByIdIsNot(locationId);
         mav.addObject("locationList", locationList);
         return mav;
     }
 
     @GetMapping(value = RESULTBYDHISTORY)
     @ResponseBody
-    public ModelAndView ResultBYDHistory(HttpSession session, @RequestParam String g7a, @RequestParam String g7b, @RequestParam String g7c) {
+    public ModelAndView ResultBYDHistory(HttpSession session, @RequestParam String g7a, @RequestParam String g7b, @RequestParam String g7c, @RequestParam String g8code2, @RequestParam String g1b) {
         ModelAndView mav = new ModelAndView("resources/pages/Digests/BojxonaYukDeklaratsiyalariTarixi/ResultBYDHistory");
-
-        List<Object[]> declList = bydHistoryService.getListGTDHistory(g7a, g7b, g7c);
-
+        List<Object[]> declList = bydHistoryService.getListGTDHistory(g7a, g7b, g7c, g8code2, g1b);
         String p7a = "", p7b = "", p7c = "", declId = "";
-        String asd = "asd";
-
         if (declList.size() > 0) {
             p7a = Utils.nullClear(declList.get(0)[7]).toString();
             p7b = Utils.nullClear(declList.get(0)[8]).toString();
             p7c = Utils.nullClear(declList.get(0)[9]).toString();
             declId = Utils.nullClear(declList.get(0)[10]).toString();
             mav.addObject("declList", declList);
-
             List<DeclarationEntity> declDetailsList = bydHistoryService.getListGTDHistoryDetails(p7a, p7b, p7c, declId);
             mav.addObject("declDetailsList", declDetailsList);
         }
