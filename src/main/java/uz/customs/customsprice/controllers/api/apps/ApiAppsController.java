@@ -268,6 +268,8 @@ public class ApiAppsController {
         JSONObject jsonObject2;
         Map<String, String> errorAppsAll = new HashMap<>();
 
+        /*Salom*/
+
         if (appsAndDocsAndTransportsDTO.getApps() == null) {
             errorAppsAll.put("apps", "Ариза маълумотлари буш булиши мумкин эмас!");
         }
