@@ -275,13 +275,13 @@
                                 </select>
                             </div>
                             <div class="col mt-2">
-                                <button type="button" class="btn btn-outline-primary btn-block mt-2"
+                                <button type="button" class="btn btn-primary btn-block mt-2"
                                         onclick="searchResultTableIS(0)"><i class='bx bx-refresh'></i>Излаш
                                 </button>
-                                <button type="reset" class="btn btn-outline-primary btn-block mt-2" onclick="reset(1)">
+                                <button type="reset" class="btn btn-primary btn-block mt-2" onclick="reset(1)">
                                     <i class='bx bx-trash'></i>Тозалаш
                                 </button>
-                                <button type="button" class="btn btn-outline-primary btn-block mt-2"
+                                <button type="button" class="btn btn-primary btn-block mt-2"
                                         class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                         onclick="resetModal()"><i class='bx bx-plus'></i>Киритиш
                                 </button>
@@ -464,11 +464,9 @@
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {
-                setTimeout(()=>{
-                    $('div#ListCMTable').html(res);
-                    $('div#divRowCount').css({'display': ''});
-                    $('#loaderII').addClass('visually-hidden');
-                },1000)
+                $('div#ListCMTable').html(res);
+                $('div#divRowCount').css({'display': ''});
+                $('#loaderII').addClass('visually-hidden');
             },
             error: function (res) {
                 setTimeout(()=>{

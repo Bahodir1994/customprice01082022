@@ -93,7 +93,7 @@
 </div>
 
 <div id="bodyLc" class="page-content">
-    <h6 class="mb-0 text-uppercase">Мантиқий назорат</h6>
+    <span style="cursor: pointer"><a href="#" class="text-success">БОШ САХИФА</a> / </span></span><span class=""><b>МАНТИҚИЙ НАЗОРАТ</b></span>
     <hr>
     <div class="col-12 col-lg-12 shadow">
 
@@ -193,10 +193,8 @@
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {
-                setTimeout(()=>{
-                    $('div#ListLCTable').html(res);
-                    $('#loaderII').addClass('visually-hidden')
-                },1000)
+                $('div#ListLCTable').html(res);
+                $('#loaderII').addClass('visually-hidden')
             },
             error: function (res) {
                 setTimeout(()=>{
