@@ -124,6 +124,10 @@ public class Commodity extends AbstractAuditingEntity {
     @Digits(message = "Устун фақат ҳақиқий сонлардан иборат бўлиши лозим", integer = 15, fraction = 3)
     private BigDecimal price;
 
+    @Column(name = "CUSTOMS_PRICE", length = 4)
+    @Digits(message = "Божхона қиймати фақат ҳақиқий сонлардан иборат бўлиши лозим", integer = 15, fraction = 3)
+    private BigDecimal customsPrice;
+
     @Column(name = "CURRENCY_TYPE", length = 3)
     @Digits(message = "Устун фақат сонлардан иборат бўлиши лозим", integer = 3, fraction = 0)
     private String currencyType;
@@ -188,7 +192,7 @@ public class Commodity extends AbstractAuditingEntity {
     public Commodity() {
     }
 
-    public Commodity(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, Integer cmdtNum, String originCountry, String orignCountrNm, String originOrg, String tradeName, String tradeMark, String mark, String model, String article, String sort, String standarts, String functions, String comProp, String techChar, String productGoal, String hsCode, String hsName, BigDecimal brutto, BigDecimal netto, BigDecimal basicQty, String extraUnits, BigDecimal extraQty, BigDecimal price, String currencyType, BigDecimal cargoSpace, String packType, String packTypeNm, BigDecimal packQty, String extraInfo, String hsDecNum, Date hsDecDate, Date inDecDate, String inDecNum, String method, String methodNm, String methodDescription, String paymentYN, String currencyNm, String currencyNmSymbol) {
+    public Commodity(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, Integer cmdtNum, String originCountry, String orignCountrNm, String originOrg, String tradeName, String tradeMark, String mark, String model, String article, String sort, String standarts, String functions, String comProp, String techChar, String productGoal, String hsCode, String hsName, BigDecimal brutto, BigDecimal netto, BigDecimal basicQty, String extraUnits, BigDecimal extraQty, BigDecimal price, BigDecimal customsPrice, String currencyType, BigDecimal cargoSpace, String packType, String packTypeNm, BigDecimal packQty, String extraInfo, String hsDecNum, Date hsDecDate, Date inDecDate, String inDecNum, String method, String methodNm, String methodDescription, String paymentYN, String currencyNm, String currencyNmSymbol) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.apps = apps;
@@ -216,6 +220,7 @@ public class Commodity extends AbstractAuditingEntity {
         this.extraUnits = extraUnits;
         this.extraQty = extraQty;
         this.price = price;
+        this.customsPrice = customsPrice;
         this.currencyType = currencyType;
         this.cargoSpace = cargoSpace;
         this.packType = packType;
@@ -440,6 +445,14 @@ public class Commodity extends AbstractAuditingEntity {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public BigDecimal getCustomsPrice() {
+        return customsPrice;
+    }
+
+    public void setCustomsPrice(BigDecimal customsPrice) {
+        this.customsPrice = customsPrice;
     }
 
     public String getCurrencyType() {

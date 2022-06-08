@@ -354,7 +354,8 @@ public class AppsService {
                 /*27 - */"    sum(cm.netto)  allnetto,\n" +
                 /*28 - */"    sum(cm.brutto) allbrutto,\n" +
                 /*29 - */"    sum(cm.price)  allprice,\n" +
-                /*30 - */"    count(cm.id)   cntcmdt,\n" +
+                /*30 - */"    sum(cm.customs_price)  allcustoms_price,\n" +
+                /*31 - */"    count(cm.id)   cntcmdt,\n" +
                 "    a.comment \n" +
                 "from\n" +
                 "    apps a\n" +
@@ -449,7 +450,8 @@ public class AppsService {
                 /*42 - */"    c.payment_yn,\n" +
                 /*43 - */"    c.method_description,\n" +
                 /*44 - */"    c.currency_nm, \n" +
-                /*45 - */"    c.currency_nmsymbol \n" +
+                /*45 - */"    c.currency_nmsymbol, \n" +
+                /*46 - */"    c.customs_price \n" +
                 "from\n" +
                 "    cpid.commodity c\n" +
                 "left join\n" +
@@ -508,7 +510,8 @@ public class AppsService {
                 /*39 - */"    c.tech_char, \n" +
                 /*40 - */"    c.trade_mark, \n" +
                 /*41 - */"    c.trade_name,\n" +
-                /*42 - */"    c.method_description\n" +
+                /*42 - */"    c.method_description,\n" +
+                /*42 - */"    c.customs_price\n" +
 
                 "from\n" +
                 "    cpid.commodity c\n" +

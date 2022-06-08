@@ -112,7 +112,7 @@
                                         </tr>
                                         <tr>
                                             <th class="text-end">Юк жўнатувчи:</th>
-                                            <td>${val[16]} - "${val[18]}</td>
+                                            <td>${val[17]} - "${val[18]}</td>
 
                                         </tr>
                                         <tr>
@@ -136,13 +136,18 @@
                                     <thead>
                                     <c:forEach var="val" items="${appInfo}" varStatus="i">
                                         <tr>
-                                            <th class="text-end">Фактура қиймати:</th>
+                                            <th class="text-end">Божхона қиймати:</th>
                                             <td>
-                                                <a type="button" class="btn btn-outline-primary btn-sm radius-30" data-bs-toggle="modal" data-bs-target="#exampleModalfq" style="cursor: pointer;">
-                                                        ${val[29]} АҚШ
+                                                <a type="button" class="btn btn-outline-primary btn-sm radius-30" <%--data-bs-toggle="modal" data-bs-target="#exampleModalfq"--%> style="cursor: pointer;">
+                                                        ${val[30]} Сўмда
                                                     <i class="bx bx-info-circle"></i>
                                                 </a>
                                             </td>
+
+                                        </tr>
+                                        <tr>
+                                            <th class="text-end">Фактура қиймати:</th>
+                                            <td>${val[29]} АҚШ</td>
 
                                         </tr>
                                         <tr>
@@ -359,8 +364,10 @@
                                 <th>Товар номи:</th>
                                 <th>Ишлаб чиқарувчи:</th>
                                 <th>Ишлаб чиқарувчи номи:</th>
-                                <th>Илгари берилган дастлабки қарор:</th>
-                                <th>Илгари б.ТИФ ТН бўй.дастл.қарор:</th>
+                                <th>Божхона қиймати:</th>
+                                <th>Фактура қиймати:</th>
+                                <th>Брутто:</th>
+                                <th>Нетто:</th>
                                 <th>Тижорат номи:</th>
                                 <th>Савдо белгиси:</th>
                                 <th>Маркаси:</th>
@@ -374,10 +381,10 @@
                                 <th>Ўрам тури:</th>
                                 <th>Ўрамлар сони:</th>
                                 <th>Юк жойлари сони:</th>
+                                <th>Илгари берилган дастлабки қарор:</th>
+                                <th>Илгари б.ТИФ ТН бўй.дастл.қарор:</th>
                                 <th>Усул:</th>
-                                <%--                                <c:if test="${appStatus != 120 && appStatus != 125 && appStatus != 170 && appStatus != 175}">--%>
                                 <th>Тўл.хис/Қайтариш</th>
-                                <%--                                </c:if>--%>
                             </tr>
                             </thead>
                             <tbody>
@@ -394,8 +401,10 @@
                                     <td><textarea style="resize: horizontal" readonly>${var.hsName}</textarea></td>
                                     <td>${var.orignCountrNm}</td>
                                     <td>${var.originOrg}</td>
-                                    <td>${var.inDecNum} / ${var.inDecDate}</td>
-                                    <td>${var.hsDecNum} / ${var.hsDecDate}</td>
+                                    <td>${var.customsPrice}</td>
+                                    <td>${var.price}</td>
+                                    <td>${var.brutto}</td>
+                                    <td>${var.netto}</td>
                                     <td>${var.tradeName}</td>
                                     <td>${var.tradeMark}</td>
                                     <td>${var.mark}</td>
@@ -409,6 +418,8 @@
                                     <td>${var.packTypeNm}</td>
                                     <td>${var.packQty}</td>
                                     <td>${var.cargoSpace}</td>
+                                    <td>${var.inDecNum} / ${var.inDecDate}</td>
+                                    <td>${var.hsDecNum} / ${var.hsDecDate}</td>
                                     <td>
                                             ${var.methodNm}
                                         <i class="bx bx-info-circle bx-sm" data-bs-toggle="modal"
@@ -459,12 +470,12 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-<%--                                                    <tr>--%>
-<%--                                                        <td>Олиб кириладиган товарга доир битимнинг қиймати бўйича</td>--%>
-<%--                                                        <td>Жўнатувчи мамлакатнинг экспорт божхона юк декларацияси--%>
-<%--                                                            мавжуд эмас--%>
-<%--                                                        </td>--%>
-<%--                                                    </tr>--%>
+                                                    <%--                                                    <tr>--%>
+                                                    <%--                                                        <td>Олиб кириладиган товарга доир битимнинг қиймати бўйича</td>--%>
+                                                    <%--                                                        <td>Жўнатувчи мамлакатнинг экспорт божхона юк декларацияси--%>
+                                                    <%--                                                            мавжуд эмас--%>
+                                                    <%--                                                        </td>--%>
+                                                    <%--                                                    </tr>--%>
                                                     </tbody>
                                                 </table>
                                             </div>
