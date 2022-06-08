@@ -1,8 +1,10 @@
 package uz.customs.customsprice.service;
 
 import org.springframework.stereotype.Service;
+import uz.customs.customsprice.entity.earxiv.Earxiv;
 import uz.customs.customsprice.entity.files.Docs;
 import uz.customs.customsprice.repository.DocsRepo;
+import uz.customs.customsprice.repository.EarxivRepo;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,4 +35,5 @@ public class DocsService {
     }
 
     public List<Docs> getByAppIdForPdf(String appId){return  docsRepo.findByAppId(appId);}
+
 }

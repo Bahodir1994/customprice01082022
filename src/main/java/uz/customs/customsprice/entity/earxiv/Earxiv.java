@@ -73,14 +73,16 @@ public class Earxiv extends AbstractAuditingEntity {
     @Column(name = "DOC_ID", length = 50)
     private String docId;
 
-
     @Column(name = "HASH", length = 255)
     private String hash;
+
+    @Column(name = "FILE_NUM", length = 50)
+    private String fileNum;
 
     public Earxiv() {
     }
 
-    public Earxiv(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, String folderId, String name, String userInn, String userPnfl, String docname, String docType, String fileId, String status, String docTypeName, String setFolderId, String partyNo, String docId, String hash) {
+    public Earxiv(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, String folderId, String name, String userInn, String userPnfl, String docname, String docType, String fileId, String status, String docTypeName, String setFolderId, String partyNo, String docId, String hash, String fileNum) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.apps = apps;
@@ -98,6 +100,7 @@ public class Earxiv extends AbstractAuditingEntity {
         this.partyNo = partyNo;
         this.docId = docId;
         this.hash = hash;
+        this.fileNum = fileNum;
     }
 
     public String getId() {
@@ -226,5 +229,13 @@ public class Earxiv extends AbstractAuditingEntity {
 
     public void setHash(String hash) {
         this.hash = hash;
+    }
+
+    public String getFileNum() {
+        return fileNum;
+    }
+
+    public void setFileNum(String fileNum) {
+        this.fileNum = fileNum;
     }
 }

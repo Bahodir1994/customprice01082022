@@ -27,7 +27,6 @@ public class GeneratePdfController {
         System.out.println("Creating pdf");
 //        pdfService.createPdf();
         System.out.println("Creating finished!");
-
     }
 
 //

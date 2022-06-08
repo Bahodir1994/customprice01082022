@@ -208,6 +208,7 @@ public class ApiAppsController {
                         earxiv.setStatus(fileList.get(0)[7] != null ? fileList.get(0)[7].toString() : "");
                         earxiv.setDocTypeName(fileList.get(0)[8] != null ? fileList.get(0)[8].toString() : "");
                         earxiv.setHash(fileList.get(0)[9] != null ? fileList.get(0)[9].toString() : "");
+                        earxiv.setFileNum(fileList.get(0)[10] != null ? fileList.get(0)[10].toString() : "");
                     } else {
                         earxiv.setAppId("");
                         earxiv.setFolderId("");
@@ -220,6 +221,7 @@ public class ApiAppsController {
                         earxiv.setFileId("");
                         earxiv.setStatus("");
                         earxiv.setHash("");
+                        earxiv.setFileNum("");
                     }
                     earxivService.create(earxiv);
                     ResponseHandler.generateResponse("Xujjat ma`lumotlari saqlandi!", HttpStatus.OK, earxiv);

@@ -747,6 +747,7 @@
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/variable-pie.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/export-data.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/accessibility.js"></script>
+<script src="<%=request.getContextPath()%>/resources/assets2/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
 
 <script>
     new PerfectScrollbar('.dashboard-top-countries');
@@ -852,7 +853,6 @@
 
     });
 
-
     <%--$(document).ready(function () {--%>
     <%--    var dataS = {--%>
     <%--        "x": '0',--%>
@@ -875,7 +875,6 @@
     <%--        }--%>
     <%--    });--%>
     <%--});--%>
-
     /*Tovarlarni toifalash */
     function ListClassProduct(x) {
         var dataS = {
@@ -894,7 +893,6 @@
             }
         });
     }
-
     /* Маълумотларни твқсимлаш */
     function InitialDecisionRasp(x) {
         var dataS = {
@@ -920,7 +918,6 @@
             }
         });
     }
-
     /* Маълумотларни твқсимлаш */
     function ListInDec(x) {
         var dataS = {
@@ -945,7 +942,6 @@
             }
         });
     }
-
     /* Маълумотларнинг инспектор қисми */
     function InitialDecision(x) {
         var dataS = {
@@ -964,7 +960,6 @@
             }
         });
     }
-
     /* Ариза тафсилоти */
     function InitialDecisionView(appId) {
         var dataS = {
@@ -983,7 +978,6 @@
             }
         });
     }
-
     /* Справочник */
     function Digests(x) {
         var dataS = {
@@ -1003,7 +997,6 @@
             }
         });
     }
-
     /* Справочник рад этиш modal */
     function QiymatRejects(tov_id) {
         var dataS = {
@@ -1026,7 +1019,6 @@
             }
         });
     }
-
     /* Справочник консалт modal */
     function QiymatConsult(tov_id) {
         var dataS = {
@@ -1049,7 +1041,6 @@
             }
         });
     }
-
     /* Справочник shartli modal */
     function QiymatShartli(tov_id) {
         var dataS = {
@@ -1072,7 +1063,6 @@
             }
         });
     }
-
     /* Error message */
     function ErrorMessage(x) {
         var dataS = {
@@ -1092,7 +1082,6 @@
             }
         });
     }
-
     function RoleF(roleCode) {
         // alert(' roleCode --> ' + roleCode);
         var dataS = {
@@ -1115,7 +1104,6 @@
             }
         });
     }
-
     /* Қиймат мониторинги */
     function CostMonitoring(x) {
         var dataS = {
@@ -1135,7 +1123,6 @@
             }
         });
     }
-
     /* Мантиқий назорат */
     function LogicalControl(x) {
         var dataS = {
@@ -1155,8 +1142,6 @@
             }
         });
     }
-
-
     /* Халқаро Сўровнома */
     function InternationalSurvay(x) {
         var dataS = {

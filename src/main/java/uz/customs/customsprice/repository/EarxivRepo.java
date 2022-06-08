@@ -15,6 +15,8 @@ public interface EarxivRepo extends JpaRepository<Earxiv, String> {
 
     List<Earxiv> findByAppId(String appId);
 
+    List<Earxiv> findAllByAppId(String appId);
+
     Earxiv findByHashAndFileId(String hash, String fileId);
 
     Page<Earxiv> findByAppId(String appId, Pageable pageable);

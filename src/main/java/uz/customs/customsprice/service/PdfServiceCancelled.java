@@ -15,6 +15,7 @@ import uz.customs.customsprice.entity.InitialDecision.Commodity;
 import uz.customs.customsprice.entity.InitialDecision.InDec;
 import uz.customs.customsprice.entity.files.DecisionPdf;
 import uz.customs.customsprice.entity.users.User;
+import uz.customs.customsprice.service.earxiv.EarxivServiceFrom;
 
 import java.io.*;
 import java.security.MessageDigest;
@@ -39,8 +40,9 @@ public class PdfServiceCancelled {
     private final UsersService usersService;
     private final ForHtmlCancelledService forHtmlCancelledService;
     private final forHtmlService htmlService;
+    private final EarxivServiceFrom earxivServiceFrom;
 
-    public PdfServiceCancelled(AppsService appsService, CommodityService commodityService, InDecService inDecService, DecisionPdfService decisionPdfService, PaymentServise paymentServise, DocsService docsService, UsersService usersService, ForHtmlCancelledService forHtmlCancelledService, forHtmlService htmlService) {
+    public PdfServiceCancelled(AppsService appsService, CommodityService commodityService, InDecService inDecService, DecisionPdfService decisionPdfService, PaymentServise paymentServise, DocsService docsService, UsersService usersService, ForHtmlCancelledService forHtmlCancelledService, forHtmlService htmlService, EarxivServiceFrom earxivServiceFrom) {
         this.appsService = appsService;
         this.commodityService = commodityService;
         this.inDecService = inDecService;
@@ -50,6 +52,7 @@ public class PdfServiceCancelled {
         this.usersService = usersService;
         this.forHtmlCancelledService = forHtmlCancelledService;
         this.htmlService = htmlService;
+        this.earxivServiceFrom = earxivServiceFrom;
     }
 
 
@@ -78,9 +81,9 @@ public class PdfServiceCancelled {
         context.setVariable("cmdt", commodityService.getById(cmdtId));
         context.setVariable("inDec", inDecService.getByCmtdId(cmdtId));
         context.setVariable("payment", paymentServise.getByCmdtId(cmdtId));
-        context.setVariable("docs", docsService.getByAppIdForPdf(commodityForApp.getAppId()));
+        context.setVariable("docs", earxivServiceFrom.getAllByAppIdForPdf2(commodityForApp.getAppId()));
         context.setVariable("userName", userName.getFullname());
-        context.setVariable("LocaleDate", date1);
+        context.setVariable("LocaleDate", inDecService.getByCmtdId(cmdtId).getInsTime());
 //        StringBuilder urlText = new StringBuilder("192.168.214.135:8080/CUSTOMSPRICE/decisionPdfDownload?cmdtId="+cmdtId);
         StringBuilder urlText = new StringBuilder("https://d-qaror.customs.uz/decisionPdfDownload?cmdtId=" + cmdtId);
         context.setVariable("url_qrCode", urlText);
