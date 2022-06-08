@@ -362,7 +362,7 @@
                             <tr>
                                 <th style="position: -webkit-sticky; position: sticky; top: 0;z-index: 2;">ТИФ ТН коди:</th>
                                 <th>Товар номи:</th>
-                                <th>Ишлаб чиқарувчи:</th>
+                                <th>Ишлаб чиқарувчи давлат:</th>
                                 <th>Ишлаб чиқарувчи номи:</th>
                                 <th>Божхона қиймати:</th>
                                 <th>Фактура қиймати:</th>
