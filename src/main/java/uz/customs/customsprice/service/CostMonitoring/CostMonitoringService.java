@@ -164,7 +164,9 @@ public class CostMonitoringService {
                 "and d.metod_otc in ('1',\n" +
                 "                    '4',\n" +
                 "                    '5',\n" +
-                "                    '6.1')\n" +
+                "                    '6.1',\n" +
+                "                    '6.4',\n" +
+                "                    '6.5')\n" +
                 "and d.vid_tulov = 1\n" +
                 "--and d.G33 like '8407%'\n" +
                 "" + sql_os + "\n" +

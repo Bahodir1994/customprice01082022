@@ -268,8 +268,8 @@
                                 <option value="6.1">6.1-усул</option>
                                 <%--                                <option value="6.2">6.2</option>--%>
                                 <%--                                <option value="6.3">6.3</option>--%>
-                                <%--                                <option value="6.4">6.4</option>--%>
-                                <%--                                <option value="6.5">6.5</option>--%>
+                                                                <option value="6.4">6.4-усул</option>
+                                                                <option value="6.5">6.5-усул</option>
                             </select>
                         </div>
                         <div class="col-md-2 m-2">
@@ -300,8 +300,8 @@
                         </div>
                         <div class="col-md-2 m-2">
                             <div class="">
-                                <label class="">Етказиб бериш манзили</label>
-                                <input class="result form-control shadow-sm" type="text" placeholder="Етказиб бериш манзили" id="g20name">
+                                <label class="">Етказиб бериш географик пункти</label>
+                                <input class="result form-control shadow-sm" type="text" placeholder="Етказиб бериш географик пункти" id="g20name">
                             </div>
                         </div>
                         <div class="col-md-2 m-2">
