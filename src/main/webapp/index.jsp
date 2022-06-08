@@ -85,13 +85,10 @@
 %>
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
+    <link href="<%=request.getContextPath()%>/resources/assets2/data-table/jquery.dataTables.min.css" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--favicon-->
-    <%--    <link rel="icon" href="<%=request.getContextPath()%>/resources/assets2/images/favicon-32x32.png" type="image/png"/>--%>
     <link rel="icon" href="${pageContext.servletContext.contextPath}/resources/images/emblem.png" type="image/x-icon">
-    <!--plugins-->
     <link href="<%=request.getContextPath()%>/resources/assets2/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
     <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css"
           rel="stylesheet"/>
@@ -101,10 +98,8 @@
           rel="stylesheet"/>
     <link href="<%=request.getContextPath()%>/resources/assets2/plugins/vectormap/jquery-jvectormap-2.0.2.css"
           rel="stylesheet"/>
-    <!-- loader-->
     <link href="<%=request.getContextPath()%>/resources/assets2/css/pace.min.css" rel="stylesheet"/>
     <script src="<%=request.getContextPath()%>/resources/assets2/js/pace.min.js"></script>
-    <!-- Bootstrap CSS -->
     <link href="<%=request.getContextPath()%>/resources/assets2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/resources/assets2/css/app.css" rel="stylesheet">
@@ -146,22 +141,6 @@
 
     }
 </style>
-<%--<script>--%>
-<%--    function clickEffect(e) {--%>
-<%--        var d = document.createElement("div");--%>
-<%--        d.className = "clickEffect";--%>
-<%--        d.style.top = e.clientY + "px";--%>
-<%--        d.style.left = e.clientX + "px";--%>
-<%--        document.body.appendChild(d);--%>
-<%--        d.addEventListener('animationend', function () {--%>
-<%--            d.parentElement.removeChild(d);--%>
-<%--        }.bind(this));--%>
-<%--    }--%>
-
-<%--    document.addEventListener('click', clickEffect);--%>
-
-<%--</script>--%>
-<!--wrapper-->
 <div class="wrapper">
     <!-- start header wrapper-->
     <div class="header-wrapper">
@@ -180,24 +159,6 @@
                     </div>
                     <div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>
                     <div class="top-menu-left d-none d-lg-block ps-3">
-                        <%--                        <ul class="nav">--%>
-                        <%--                            <li class="nav-item">--%>
-                        <%--                                <a class="nav-link" href="app-emailbox.html"><i class='bx bx-envelope'></i></a>--%>
-                        <%--                            </li>--%>
-                        <%--                            <li class="nav-item">--%>
-                        <%--                                <a class="nav-link" href="app-chat-box.html"><i class='bx bx-message'></i></a>--%>
-                        <%--                            </li>--%>
-                        <%--                            <li class="nav-item">--%>
-                        <%--                                <a class="nav-link" href="app-fullcalender.html"><i class='bx bx-calendar'></i></a>--%>
-                        <%--                            </li>--%>
-                        <%--                            <li class="nav-item">--%>
-                        <%--                                <a class="nav-link" href="app-to-do.html"><i class='bx bx-check-square'></i></a>--%>
-                        <%--                            </li>--%>
-                        <%--                            <li class="nav-item" style="display: none;">--%>
-                        <%--                                <span><span class="f-w-600" id="roleName"><%=roleN%></span>: <span class="border-bottom"--%>
-                        <%--                                                                                                   id="fullName"><%=user.getFullname()%></span></span>--%>
-                        <%--                            </li>--%>
-                        <%--                        </ul>--%>
                     </div>
                     <div class="search-bar flex-grow-1">
                         <div class="position-relative search-bar-box">
@@ -211,13 +172,8 @@
                     <div class="top-menu ms-auto">
                         <ul class="navbar-nav align-items-center">
                             <li class="nav-item mobile-search-icon">
-                                <%--<a class="nav-link" href="#"> <i class='bx bx-search'></i>
-                                </a>--%>
                             </li>
                             <li class="nav-item dropdown dropdown-large">
-                                <%--                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button"--%>
-                                <%--                                   data-bs-toggle="dropdown" aria-expanded="false"> <i class='bx bx-category'></i>--%>
-                                <%--                                </a>--%>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <div class="row row-cols-3 g-3 p-3">
                                         <div class="col text-center">
@@ -260,18 +216,7 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown dropdown-large">
-                                <%--                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#"--%>
-                                <%--                                   role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span--%>
-                                <%--                                        class="alert-count w-50">71</span>--%>
-                                <%--                                    <i class='bx bx-bell'></i><i class='bx bxs-bell bx-tada'></i>--%>
-                                <%--                                </a>--%>
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <%--                                    <a href="javascript:;">--%>
-                                    <%--                                        <div class="msg-header">--%>
-                                    <%--                                            <p class="msg-header-title">Notifications</p>--%>
-                                    <%--                                            <p class="msg-header-clear ms-auto">Marks all as read</p>--%>
-                                    <%--                                        </div>--%>
-                                    <%--                                    </a>--%>
                                     <div class="header-notifications-list">
                                         <a class="dropdown-item" href="javascript:;">
                                             <div class="d-flex align-items-center">
@@ -390,10 +335,6 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown dropdown-large">
-                                <%--                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
-                                <%--                                    <span class="alert-count">8</span>--%>
-                                <%--                                    <i class='bx bx-time'></i>--%>
-                                <%--                                </a>--%>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <a href="javascript:;">
                                         <div class="msg-header">
@@ -597,14 +538,12 @@
                                 <i class='bx bx-log-in-circle bx-lg'></i>
                             </div>
                         </a>
-                        <%--							<div style="overflow-y: auto; max-height: 70vh;">--%>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <%
                                 int i = 1;
                                 String selected = "", active = "", fw = "", fa = "";
                                 for (Role role : roleList) {
                                     if (role.getCode().equals(user.getRole())) {
-//                                    if (role.getCode().equals(8)) {
                                         selected = "selected";
                                         active = "active";
                                         fw = "f-w-600";
@@ -617,7 +556,7 @@
                                     }
                             %>
                             <li class="<%=selected%> <%=active%> <%=fw%>"
-                                title="<%=role.getCode()%>. <%--<fmt:message key="rolUser" bundle="${resourceBundle}"/>--%>">
+                                title="<%=role.getCode()%>.
                                 <a
                                         href="javascript:RoleF('<%=role.getCode()%>')"
                                         class="dropdown-item f-w-600"><i
@@ -628,13 +567,12 @@
                             }%>
                             <hr>
                             <li class="text-c-red"
-                                title="Тизимдан чиқиш<%--<fmt:message key="signOut" bundle="${resourceBundle}"/>--%>"><a
+                                title="Тизимдан чиқиш"><a
                                     href="${pageContext.request.contextPath}/exit.do" class="dropdown-item">
-                                <i class="fa-solid fa-right-from-bracket text-c-red"></i> Чиқиш<%--<fmt:message key="logout" bundle="${resourceBundle}"/>--%>
+                                <i class="fa-solid fa-right-from-bracket text-c-red"></i> Чиқиш
                             </a>
                             </li>
                         </ul>
-                        <%--							</div>--%>
                         <ul class="dropdown-menu dropdown-menu-end" style="display: none;">
                             <li><a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span>Фойдаланувчи</span></a>
                             </li>
@@ -679,47 +617,13 @@
                             </div>
                             <div class="menu-title">Товарларни тоифалаш</div>
                         </a>
-                        <%--							<ul>--%>
-                        <%--								<li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Analytics</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="index2.html"><i class="bx bx-right-arrow-alt"></i>Sales</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="index3.html"><i class="bx bx-right-arrow-alt"></i>eCommerce</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="index4.html"><i class="bx bx-right-arrow-alt"></i>Alternate</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="index5.html"><i class="bx bx-right-arrow-alt"></i>Hospitality</a>--%>
-                        <%--								</li>--%>
-                        <%--							</ul>--%>
                     </li>
-                    <%
-                        //                        if (userRole == 1 || userRole == 6 || userRole == 7 || userRole == 8) {
-//                            System.out.println("userRole212132323==" + userRole);
-                    %> <%--todo (ҲББ Тўловлар бошлиғи ҳамда ҲББ Тўловлар ходими менюси)--%>
-
                     <li>
-                        <%--							<a href="javascript:InitialDecisionRasp(0)" class="has-arrow">--%>
                         <a href="javascript:ListInDec(0)" class="has-arrow">
                             <div class="parent-icon"><i class="bx bx-category"></i>
                             </div>
                             <div class="menu-title">Дастлабки қарор</div>
                         </a>
-                        <%--							<ul>--%>
-                        <%--								<li> <a href="app-emailbox.html"><i class="bx bx-right-arrow-alt"></i>Email</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>Chat Box</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="app-file-manager.html"><i class="bx bx-right-arrow-alt"></i>File Manager</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="app-contact-list.html"><i class="bx bx-right-arrow-alt"></i>Contatcs</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="app-to-do.html"><i class="bx bx-right-arrow-alt"></i>Todo List</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="app-invoice.html"><i class="bx bx-right-arrow-alt"></i>Invoice</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="app-fullcalender.html"><i class="bx bx-right-arrow-alt"></i>Calendar</a>--%>
-                        <%--								</li>--%>
-                        <%--							</ul>--%>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:ErrorMessage(0);">
@@ -727,40 +631,13 @@
                             </div>
                             <div class="menu-title">Қарздорликлар хисоби</div>
                         </a>
-                        <%--							<ul>--%>
-                        <%--								<li> <a href="user-profile.html"><i class="bx bx-right-arrow-alt"></i>User Profile</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="timeline.html"><i class="bx bx-right-arrow-alt"></i>Timeline</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="pricing-table.html"><i class="bx bx-right-arrow-alt"></i>Pricing</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a class="has-arrow" href="javascript:;"><i class="bx bx-right-arrow-alt"></i>Errors</a>--%>
-                        <%--									<ul>--%>
-                        <%--										<li> <a href="errors-404-error.html"><i class="bx bx-right-arrow-alt"></i>404 Error</a>--%>
-                        <%--										</li>--%>
-                        <%--										<li> <a href="errors-500-error.html"><i class="bx bx-right-arrow-alt"></i>500 Error</a>--%>
-                        <%--										</li>--%>
-                        <%--										<li> <a href="errors-coming-soon.html"><i class="bx bx-right-arrow-alt"></i>Coming Soon</a>--%>
-                        <%--										</li>--%>
-                        <%--									</ul>--%>
-                        <%--								</li>--%>
-                        <%--							</ul>--%>
                     </li>
-                    <%--                    <%}%>--%>
                     <li>
                         <a class="has-arrow" href="javascript:CostMonitoring(0);">
                             <div class="parent-icon"><i class="bx bx-line-chart"></i>
                             </div>
                             <div class="menu-title">Қиймат мониторинги</div>
                         </a>
-                        <%--							<ul>--%>
-                        <%--								<li> <a href="charts-apex-chart.html"><i class="bx bx-right-arrow-alt"></i>Apex</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="charts-chartjs.html"><i class="bx bx-right-arrow-alt"></i>Chartjs</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="charts-highcharts.html"><i class="bx bx-right-arrow-alt"></i>Highcharts</a>--%>
-                        <%--								</li>--%>
-                        <%--							</ul>--%>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:LogicalControl(0);">
@@ -768,38 +645,6 @@
                             </div>
                             <div class="menu-title">Мантиқий назорат</div>
                         </a>
-                        <%--							<ul>--%>
-                        <%--								<li> <a href="widgets.html"><i class="bx bx-right-arrow-alt"></i>Widgets</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="component-alerts.html"><i class="bx bx-right-arrow-alt"></i>Alerts</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="component-accordions.html"><i class="bx bx-right-arrow-alt"></i>Accordions</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="component-buttons.html"><i class="bx bx-right-arrow-alt"></i>Buttons</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="component-cards.html"><i class="bx bx-right-arrow-alt"></i>Cards</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="component-list-groups.html"><i class="bx bx-right-arrow-alt"></i>List Groups</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="component-media-object.html"><i class="bx bx-right-arrow-alt"></i>Media Objects</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="component-modals.html"><i class="bx bx-right-arrow-alt"></i>Modals</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="component-navs-tabs.html"><i class="bx bx-right-arrow-alt"></i>Navs & Tabs</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="component-navbar.html"><i class="bx bx-right-arrow-alt"></i>Navbar</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="component-popovers-tooltips.html"><i class="bx bx-right-arrow-alt"></i>Popovers & Tooltips</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="component-progress-bars.html"><i class="bx bx-right-arrow-alt"></i>Progress</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="component-spinners.html"><i class="bx bx-right-arrow-alt"></i>Spinners</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="component-notifications.html"><i class="bx bx-right-arrow-alt"></i>Notifications</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="component-avtars-chips.html"><i class="bx bx-right-arrow-alt"></i>Avatrs & Chips</a>--%>
-                        <%--								</li>--%>
-                        <%--							</ul>--%>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:InternationalSurvay(0);">
@@ -807,22 +652,6 @@
                             </div>
                             <div class="menu-title">Халқаро сўровнома</div>
                         </a>
-                        <%--							<ul>--%>
-                        <%--								<li> <a href="authentication-signin.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Sign In</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="authentication-signup.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Sign Up</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="authentication-signin-with-header-footer.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Sign In with Header & Footer</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="authentication-signup-with-header-footer.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Sign Up with Header & Footer</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="authentication-forgot-password.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Forgot Password</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="authentication-reset-password.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Reset Password</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="authentication-lock-screen.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Lock Screen</a>--%>
-                        <%--								</li>--%>
-                        <%--							</ul>--%>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:Digests(0);">
@@ -830,43 +659,17 @@
                             </div>
                             <div class="menu-title">Справочник</div>
                         </a>
-                        <%--							<ul>--%>
-                        <%--								<li> <a href="form-elements.html"><i class="bx bx-right-arrow-alt"></i>Form Elements</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="form-input-group.html"><i class="bx bx-right-arrow-alt"></i>Input Groups</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="form-layouts.html"><i class="bx bx-right-arrow-alt"></i>Forms Layouts</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="form-validations.html"><i class="bx bx-right-arrow-alt"></i>Form Validation</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="form-wizard.html"><i class="bx bx-right-arrow-alt"></i>Form Wizard</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="form-text-editor.html"><i class="bx bx-right-arrow-alt"></i>Text Editor</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="form-file-upload.html"><i class="bx bx-right-arrow-alt"></i>File Upload</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="form-date-time-pickes.html"><i class="bx bx-right-arrow-alt"></i>Date Pickers</a>--%>
-                        <%--								</li>--%>
-                        <%--								<li> <a href="form-select2.html"><i class="bx bx-right-arrow-alt"></i>Select2</a>--%>
-                        <%--								</li>--%>
-                        <%--							</ul>--%>
                     </li>
                 </ul>
             </nav>
         </div>
-        <!-- end navigation-->
     </div>
-    <!-- end header wrapper-->
-    <!-- start page wrapper -->
-
     <%--todo Асосий----------------------------------------------------қисми------------------------дан--%>
     <div class="page-wrapper" id="MainContent" role="main" style="min-height: 850px!important;">
         <%--todo страницаларни чақириш жойи--%>
     </div>
     <%--todo Асосий----------------------------------------------------қисми------------------------гача--%>
-
 </div>
-
 <div class="switcher-wrapper">
     <div class="switcher-btn"><i class='bx bx-cog bx-spin'></i>
     </div>
@@ -944,7 +747,7 @@
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/variable-pie.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/export-data.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/accessibility.js"></script>
-<%--<script src="<%=request.getContextPath()%>/resources/assets2/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>--%>
+
 <script>
     new PerfectScrollbar('.dashboard-top-countries');
 </script>
@@ -954,7 +757,7 @@
     new PerfectScrollbar('.email-navigation');
     new PerfectScrollbar('.email-list');
 </script>
-<script src="<%=request.getContextPath()%>/resources/assets2/plugins/datatable/js/jquery.dataTables.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/assets2/data-table/jquery.dataTables.min.js"></script>
 <script>
     $("#headercolor1").ready(function () {
         $("html").addClass("color-header headercolor1");
@@ -1025,7 +828,6 @@
         });
     })(jQuery);
 </script>
-
 <script>
     $(document).ready(function () {
         var dataS = {

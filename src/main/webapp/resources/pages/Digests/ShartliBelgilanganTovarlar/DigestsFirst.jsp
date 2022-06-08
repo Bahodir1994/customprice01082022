@@ -15,43 +15,31 @@
     String userPost = (String) request.getSession().getAttribute("userPost");
 %>
 <head>
-    <!-- Required meta tags -->
+    <link href="<%=request.getContextPath()%>/resources/assets2/data-table/jquery.dataTables.min.css" rel="stylesheet"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--favicon-->
     <link href="<%=request.getContextPath()%>/resources/assets2/images/favicon-32x32.png" type="image/png"/>
-    <!--plugins-->
     <link href="<%=request.getContextPath()%>/resources/assets2/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
     <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
-    <!-- loader-->
     <link href="<%=request.getContextPath()%>/resources/assets2/css/pace.min.css" rel="stylesheet"/>
     <script src="<%=request.getContextPath()%>/resources/assets2/js/pace.min.js"></script>
-    <!-- Bootstrap CSS -->
     <link href="<%=request.getContextPath()%>/resources/assets2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/resources/assets2/css/app.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/resources/assets2/css/icons.css" rel="stylesheet">
-    <!-- Theme Style CSS -->
     <link href="<%=request.getContextPath()%>/resources/assets2/css/dark-theme.css"/>
     <link href="<%=request.getContextPath()%>/resources/assets2/css/semi-dark.css"/>
     <link href="<%=request.getContextPath()%>/resources/assets2/css/header-colors.css"/>
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
     <link href="<%=request.getContextPath()%>/resources/assets2/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
-    <!-- loader-->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
-<!--wrapper-->
-
-<!--start page wrapper -->
 <div id="ModalSentMess" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true"></div>
 <div class="page-content">
-    <!--start email wrapper-->
     <div class="">
-
         <div id="main" class="col">
             <h6 class="mb-0 text-uppercase">Шартли белгиланган товарлар</h6>
             <hr>
@@ -395,11 +383,8 @@
                 </div>
             </div>
         </div>
-
         <div>
-<%--            <button style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</button>--%>
             <style>
-
                 .sidenav {
                     height: 100%;
                     width: 0;
@@ -483,6 +468,7 @@
         });
     });
 </script>
+<script src="<%=request.getContextPath()%>/resources/assets2/data-table/jquery.dataTables.min.js"></script>
 <script>
     /* PDF open */
     function openPDF(declId, docType) {

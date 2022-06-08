@@ -15,39 +15,26 @@
     String userPost = (String) request.getSession().getAttribute("userPost");
 %>
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--favicon-->
     <link href="<%=request.getContextPath()%>/resources/assets2/images/favicon-32x32.png" type="image/png"/>
-    <!--plugins-->
     <link href="<%=request.getContextPath()%>/resources/assets2/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
-    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css"
-          rel="stylesheet"/>
-    <!-- loader-->
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
     <link href="<%=request.getContextPath()%>/resources/assets2/css/pace.min.css" rel="stylesheet"/>
     <script src="<%=request.getContextPath()%>/resources/assets2/js/pace.min.js"></script>
-    <!-- Bootstrap CSS -->
     <link href="<%=request.getContextPath()%>/resources/assets2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/resources/assets2/css/app.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/resources/assets2/css/icons.css" rel="stylesheet">
-    <!-- Theme Style CSS -->
     <link href="<%=request.getContextPath()%>/resources/assets2/css/dark-theme.css"/>
     <link href="<%=request.getContextPath()%>/resources/assets2/css/semi-dark.css"/>
     <link href="<%=request.getContextPath()%>/resources/assets2/css/header-colors.css"/>
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css"
-          rel="stylesheet"/>
-    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/metismenu/css/metisMenu.min.css"
-          rel="stylesheet"/>
-    <!-- loader-->
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
-
 <body>
-<!--wrapper-->
 <style>
     .sidenav {
         height: 100%;
@@ -104,7 +91,7 @@
         <!--PDF open here-->
     </div>
 </div>
-<!--start page wrapper -->
+
 <div id="bodyLc" class="page-content">
     <h6 class="mb-0 text-uppercase">Мантиқий назорат</h6>
     <hr>
@@ -191,7 +178,6 @@
             $(this).hide();
         }
     })(jQuery);
-
     function searchResultTableLC(x) {
         $('#loaderII').removeClass('visually-hidden')
         var dataS = {
@@ -219,14 +205,12 @@
             }
         });
     }
-
     function clearForm(x) {
         document.getElementById("flkNum").value = '';
         document.getElementById("flkName").value = '';
         document.getElementById("Dfrom").value = '';
         document.getElementById("Dtoo").value = '';
     }
-
     function openNavLc(id, flkNum) {
         var dataS = {
             "id": id,
@@ -248,7 +232,6 @@
         });
 
     }
-
     function EditOrDeletePdf(id, flkNum) {
         var dataS = {
             "id": id,
@@ -270,7 +253,6 @@
         });
 
     }
-
     function closeNavLc() {
         document.getElementById("modalPdfLC").style.width = "0";
         document.getElementById("bodyLc").style.marginLeft = "0";
