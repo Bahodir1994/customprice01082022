@@ -242,6 +242,9 @@ public class InternationalSurveyController {
         Map<String, String> errors = new HashMap<>();
         if (result.hasErrors()) {
             errors = result.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+            if (Objects.equals(internationalSurveyStep2DTO.getExecutiveTerritoryCode(), "1701")){
+                errors.put("executiveTerritoryCode", "Маъсул худуд ДБҚ бўлиши мумкин эмас!");
+            }
             return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
         } else {
             InternationalSurveyEntity internationalSurveyEntity = internationalSurveyService.getByIdAndStatus(internationalSurveyStep2DTO.getId(), internationalSurveyStep2DTO.getStatus());
@@ -256,6 +259,11 @@ public class InternationalSurveyController {
             internationalSurveyEntity.setResponseNumSendXbbNum(internationalSurveyStep2DTO.getResponseNumSendXbbNum());
             if (!Objects.equals(internationalSurveyStep2DTO.getResponseNumSendXbbDate(), "")) {
                 internationalSurveyEntity.setResponseNumSendXbbDate(Date.valueOf(internationalSurveyStep2DTO.getResponseNumSendXbbDate()));
+            }
+            if (Objects.equals(internationalSurveyStep2DTO.getExecutiveTerritoryCode(), "1701")){
+                Map<String, String> errorsTerritorilCode = new HashMap<>();
+                errorsTerritorilCode.put("executiveTerritoryCode", "Маъсул худуд ДБҚ бўлиши мумкин эмас!");
+                return new ResponseEntity<Object>(errorsTerritorilCode, HttpStatus.BAD_REQUEST);
             }
             internationalSurveyEntity.setExecutiveTerritoryCode(internationalSurveyStep2DTO.getExecutiveTerritoryCode());
             Optional<Location> location = locationRepo.findById(internationalSurveyStep2DTO.getExecutiveTerritoryCode());

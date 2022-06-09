@@ -258,59 +258,60 @@
                             </c:if>
                         </c:if>
                     </c:if>
+
                     <c:if test="${tut.status == '300'}">
                         <c:if test="${tut.sumOnControl != '0.00'}">
-                            <c:if test="${(tut.executiveTerritoryCode == userLocation && userId == tut.savedUserFirstId)}">
-                                <td>
-                                    <button class="mess btn btn-outline-danger" data-bs-toggle="modal"
-                                        data-bs-target="#modalAddSumApproved" data-bs-whatever="@mdo"
-                                        data-title="Назоратда"><i class="bx bxs-info-square"></i></button>
-                                </td>
-                                <div class="modal fade" id="modalAddSumApproved" tabindex="-1"
-                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="header m-2 text-center">
-                                            <h5 class="text-center" id="exampleModalLabel">Хат рақами
-                                                №:${tut.xbbMailNum} бўлган сўровнома<br> бўйича ундирилган тўловни
-                                                киритиш</h5>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <div class="mb-3">
-                                                    <label for="sumApprovedAdd" class="col-form-label">Ундирилган сумма
-                                                        миқдори:</label>
-                                                    <input type="number" class="form-control" id="sumApprovedAdd">
-                                                    <input hidden value="${tut.id}" id="IsId"/>
+                                <c:if test="${userId == tut.savedUserFirstId}">
+                                    <td>
+                                        <button class="mess btn btn-outline-danger" data-bs-toggle="modal"
+                                                data-bs-target="#modalAddSumApproved" data-bs-whatever="@mdo"
+                                                data-title="Назоратда"><i class="bx bxs-info-square"></i></button>
+                                    </td>
+                                    <div class="modal fade" id="modalAddSumApproved" tabindex="-1"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="header m-2 text-center">
+                                                    <h5 class="text-center" id="exampleModalLabel">Хат рақами
+                                                        №:${tut.xbbMailNum} бўлган сўровнома<br> бўйича ундирилган тўловни
+                                                        киритиш</h5>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="fabulaAdd" class="col-form-label">Фабула:</label>
-                                                    <textarea class="form-control" id="fabulaAdd"></textarea>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="mb-3">
+                                                            <label for="sumApprovedAdd" class="col-form-label">Ундирилган сумма
+                                                                миқдори:</label>
+                                                            <input type="number" class="form-control" id="sumApprovedAdd">
+                                                            <input hidden value="${tut.id}" id="IsId"/>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="fabulaAdd" class="col-form-label">Фабула:</label>
+                                                            <textarea class="form-control" id="fabulaAdd"></textarea>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="commentAdd" class="col-form-label">Изох:</label>
+                                                            <textarea class="form-control" id="commentAdd"></textarea>
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="commentAdd" class="col-form-label">Изох:</label>
-                                                    <textarea class="form-control" id="commentAdd"></textarea>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                                            id="modalAddSumApprovedClose"><i class="bx bx-window-close"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary"
+                                                            onclick="saveSumApprovedAdd()">Сақлаш
+                                                    </button>
                                                 </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                                    id="modalAddSumApprovedClose"><i class="bx bx-window-close"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-primary"
-                                                    onclick="saveSumApprovedAdd()">Сақлаш
-                                            </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            </c:if>
-                            <c:if test="${(tut.executiveTerritoryCode != userLocation || userId != tut.savedUserFirstId)}">
-                                <td>
-                                    <button class="mess btn btn-outline-danger" data-title="Назоратда, Сиз учун тақиқланган!"><i
-                                            class="bx bxs-info-square"></i></button>
-                                </td>
-                            </c:if>
+                                </c:if>
+                                <c:if test="${userId != tut.savedUserFirstId}">
+                                    <td>
+                                        <button class="mess btn btn-outline-danger" data-title="Назоратда, Сиз учун тақиқланган!"><i
+                                                class="bx bxs-info-square"></i></button>
+                                    </td>
+                                </c:if>
                         </c:if>
                         <c:if test="${tut.sumOnControl == '0.00'}">
                             <td>
@@ -421,7 +422,7 @@
                                     <c:if test="${userLocation == '1701'}">
                                         <div class="form-group col-md-3 mb-2" id="divLocDir">
                                             <label for="executiveTerritoryCode"
-                                                   class="form-label text-primary"><span class="text-danger">&#x2734;</span>Ижрочи<br> Ҳудуд:</label>
+                                                   class="form-label text-primary"><br><span class="text-danger">&#x2734;</span>Ижрочи Ҳудуд:</label>
                                             <select class="form-control" type="date" id="executiveTerritoryCode"
                                                     name="executiveTerritoryCode">
                                                 <option class="font-italic" selected value="">--- Танланг ---</option>
@@ -659,6 +660,7 @@
             resultExecuTerritoryCode = $('#executiveTerritoryCode').val();
             resultDistributed = "yes"
         }
+        console.log(userLocation + userLocationCode)
         var dataS = {
             /*"xbbMailNum": $('#xbbMailNum').val(),
             "xbbMailDate": $('#xbbMailDate').val(),
