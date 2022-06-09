@@ -27,7 +27,7 @@
             height="678">
         <p>This browser does not support PDF!</p>
     </object>
-    <div class="position-absolute bg-white d-flex justify-content-center align-items-center" id="wrap_btn_2"
+    <div class="position-absolute bg-dark d-flex justify-content-center align-items-center" id="wrap_btn_2"
          style="cursor:pointer; top: 50%; left: 0; height: 40px; width: 30px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
         <i class="fa-solid fa-caret-left f-20" id="caret_2"></i>
     </div>

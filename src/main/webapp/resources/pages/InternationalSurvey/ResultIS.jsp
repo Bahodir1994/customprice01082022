@@ -132,11 +132,13 @@
             <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
             <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
             <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
             <th></th>
         </tr>
         <tr class="filters bg-white text-dark">
             <th style="text-align: center;" class="">т/р</th>
             <th style="text-align: center;" class=""><i class="bx bx-edit"></i>Таҳрир</th>
+            <th style="text-align: center;" class="">Ходим</th>
             <th style="text-align: center;" class="">Таркибий<br>тузилма</th>
             <th style="text-align: center;" class="">Йўналиш</th>
             <th style="text-align: center;" class="">ҲББ томонидан юбоирлган<br>хат рақами</th>
@@ -258,12 +260,13 @@
                     </c:if>
                     <c:if test="${tut.status == '300'}">
                         <c:if test="${tut.sumOnControl != '0.00'}">
-                            <td>
-                                <button class="mess btn btn-outline-danger" data-bs-toggle="modal"
+                            <c:if test="${(tut.executiveTerritoryCode == userLocation && userId == tut.savedUserFirstId)}">
+                                <td>
+                                    <button class="mess btn btn-outline-danger" data-bs-toggle="modal"
                                         data-bs-target="#modalAddSumApproved" data-bs-whatever="@mdo"
                                         data-title="Назоратда"><i class="bx bxs-info-square"></i></button>
-                            </td>
-                            <div class="modal fade" id="modalAddSumApproved" tabindex="-1"
+                                </td>
+                                <div class="modal fade" id="modalAddSumApproved" tabindex="-1"
                                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -301,6 +304,13 @@
                                     </div>
                                 </div>
                             </div>
+                            </c:if>
+                            <c:if test="${(tut.executiveTerritoryCode != userLocation || userId != tut.savedUserFirstId)}">
+                                <td>
+                                    <button class="mess btn btn-outline-danger" data-title="Назоратда, Сиз учун тақиқланган!"><i
+                                            class="bx bxs-info-square"></i></button>
+                                </td>
+                            </c:if>
                         </c:if>
                         <c:if test="${tut.sumOnControl == '0.00'}">
                             <td>
@@ -310,6 +320,8 @@
                         </c:if>
                     </c:if>
                     <!-- 1 start-->
+
+                    <td style="text-align: center;">${tut.savedUserFirst}</td>
                     <td style="text-align: center;">${tut.userLocationName}</td>
                     <td style="text-align: center;">${tut.directionTypeName}</td>
                     <td style="text-align: center;">${tut.xbbMailNum}</td>
@@ -356,7 +368,7 @@
                             <div class="modal-body row">
                                 <!--todo 2-bosqich-->
                                 <form class="row g-3 needs-validation2">
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mb-2">
                                         <label for="sendReqNum" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Юборилган сўровнома
                                             рақами:</label>
                                         <input class="form-control" type="hidden" id="interSurveyId2"
@@ -369,37 +381,37 @@
                                         <div class="valid-feedback">Текширилди</div>
                                         <div class="" id="sendReqNumValid"></div>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mb-2">
                                         <label for="reqDate" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Юборилган сўровнома
                                             санаси:</label>
                                         <input class="form-control" type="date" id="reqDate" name="reqDate">
                                         <div class="valid-feedback">Текширилди</div>
                                         <div class="" id="reqDateValid"></div>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="responseNum" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Сўровномага олинган
+                                    <div class="form-group col-md-3 mb-2">
+                                        <label for="responseNum" class="form-label text-primary"><span class="text-danger"></span>Сўровномага олинган
                                             жавоб хати:</label>
                                         <input class="form-control" type="text" id="responseNum" name="responseNum">
                                         <div class="valid-feedback">Текширилди</div>
                                         <div class="" id="responseNumValid"></div>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="responseDate" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Сўровномага олинган
+                                    <div class="form-group col-md-3 mb-2">
+                                        <label for="responseDate" class="form-label text-primary"><span class="text-danger"></span>Сўровномага олинган
                                             жавоб хати санаси:</label>
                                         <input class="form-control" type="date" id="responseDate" name="responseDate">
                                         <div class="valid-feedback">Текширилди</div>
                                         <div class="" id="responseDateValid"></div>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="responseNumSendXbbNum" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Сўровномага
+                                    <div class="form-group col-md-3 mb-2">
+                                        <label for="responseNumSendXbbNum" class="form-label text-primary"><span class="text-danger"></span>Сўровномага
                                             олинган жавоб хатини<br> ҲББга юборилган хат рақами:</label>
                                         <input class="form-control" type="text" id="responseNumSendXbbNum"
                                                name="responseNumSendXbbNum">
                                         <div class="valid-feedback">Текширилди</div>
                                         <div class="" id="responseNumSendXbbNumValid"></div>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="responseNumSendXbbDate" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Сўровномага
+                                    <div class="form-group col-md-3 mb-2">
+                                        <label for="responseNumSendXbbDate" class="form-label text-primary"><span class="text-danger"></span>Сўровномага
                                             олинган жавоб хатини<br> ҲББга юборилган хат санаси:</label>
                                         <input class="form-control" type="date" id="responseNumSendXbbDate"
                                                name="responseNumSendXbbDate">
@@ -407,7 +419,7 @@
                                         <div class="" id="responseNumSendXbbDateValid"></div>
                                     </div>
                                     <c:if test="${userLocation == '1701'}">
-                                        <div class="form-group col-md-3" id="divLocDir">
+                                        <div class="form-group col-md-3 mb-2" id="divLocDir">
                                             <label for="executiveTerritoryCode"
                                                    class="form-label text-primary"><span class="text-danger">&#x2734;</span>Ижрочи<br> Ҳудуд:</label>
                                             <select class="form-control" type="date" id="executiveTerritoryCode"

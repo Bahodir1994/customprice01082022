@@ -239,7 +239,6 @@ public class InternationalSurveyController {
         String userLocation = (String) request.getSession().getAttribute("userLocation");
         String userLocationName = (String) request.getSession().getAttribute("userLocationName");
         String userPost = (String) request.getSession().getAttribute("userPost");
-
         Map<String, String> errors = new HashMap<>();
         if (result.hasErrors()) {
             errors = result.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
@@ -264,9 +263,25 @@ public class InternationalSurveyController {
             internationalSurveyEntity.setDistributed(internationalSurveyStep2DTO.getDistributed());
             internationalSurveyEntity.setSavedUserSecondId(userId);
             internationalSurveyEntity.setSavedUserSecond(userName);
-            /**100-First step**/ /**200-Second step**/ /**300-Third step**/
-            internationalSurveyEntity.setStatus("200");
             internationalSurveyService.savingValue(internationalSurveyEntity);
+            Map<String, String> notAllowedInputs = new HashMap<>();
+            if ((internationalSurveyEntity.getResponseNum() == null) || (Objects.equals(internationalSurveyEntity.getResponseNum(), ""))){
+                notAllowedInputs.put("responseNum", "responseNum");
+            }
+            if ((internationalSurveyEntity.getResponseDate() == null)){
+                notAllowedInputs.put("responseDate", "responseDate");
+            }
+            if (internationalSurveyEntity.getResponseNumSendXbbNum() == null || Objects.equals(internationalSurveyEntity.getResponseNumSendXbbNum(), "")){
+                notAllowedInputs.put("responseNumSendXbbNum", "responseNumSendXbbNum");
+            }
+            if (internationalSurveyEntity.getResponseNumSendXbbDate() == null){
+                notAllowedInputs.put("responseNumSendXbbDate", "responseNumSendXbbDate");
+            }
+            /**100-First step**/ /**200-Second step**/ /**300-Third step**/
+            if(notAllowedInputs.size() == 0){
+                internationalSurveyEntity.setStatus("200");
+                internationalSurveyService.savingValue(internationalSurveyEntity);
+            }
             return ResponseEntity.status(201).body(internationalSurveyEntity);
         }
     }

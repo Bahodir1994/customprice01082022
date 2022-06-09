@@ -329,6 +329,8 @@
     function openInDecPdf(cmdtId) {
         document.getElementById("mySidenav").style.width = "650px";
         document.getElementById("main").style.marginLeft = "570px";
+        document.getElementById("preloaderGenerating")
+        $('#preloaderGenerating').removeClass('visually-hidden');
         var dataS = {
             "cmdtId": cmdtId,
         }
@@ -340,6 +342,7 @@
             header: 'Content-type: text/html; charset=utf-8',
             success: function (res) {
                 $('div#openInPdf').html(res);
+                $('#preloaderGenerating').addClass('visually-hidden');
             },
             error: function (res) {
             }

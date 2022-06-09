@@ -3,6 +3,7 @@ package uz.customs.customsprice.entity.earxiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import org.hibernate.annotations.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import uz.customs.customsprice.entity.InitialDecision.Apps;
 import uz.customs.customsprice.entity.entityConfig.AbstractAuditingEntity;
 
@@ -79,10 +80,15 @@ public class Earxiv extends AbstractAuditingEntity {
     @Column(name = "FILE_NUM", length = 50)
     private String fileNum;
 
+    @Column(name = "FILE_DATE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date fileDate;
+
     public Earxiv() {
     }
 
-    public Earxiv(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, String folderId, String name, String userInn, String userPnfl, String docname, String docType, String fileId, String status, String docTypeName, String setFolderId, String partyNo, String docId, String hash, String fileNum) {
+    public Earxiv(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, String folderId, String name, String userInn, String userPnfl, String docname, String docType, String fileId, String status, String docTypeName, String setFolderId, String partyNo, String docId, String hash, String fileNum, Date fileDate) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.apps = apps;
@@ -101,6 +107,7 @@ public class Earxiv extends AbstractAuditingEntity {
         this.docId = docId;
         this.hash = hash;
         this.fileNum = fileNum;
+        this.fileDate = fileDate;
     }
 
     public String getId() {
@@ -237,5 +244,16 @@ public class Earxiv extends AbstractAuditingEntity {
 
     public void setFileNum(String fileNum) {
         this.fileNum = fileNum;
+    }
+
+    public Date getFileDate() {
+        return fileDate;
+    }
+
+    public void setFileDate(Date fileDate) {
+        this.fileDate = fileDate;
+    }
+
+    public void setFileDate(String s) {
     }
 }

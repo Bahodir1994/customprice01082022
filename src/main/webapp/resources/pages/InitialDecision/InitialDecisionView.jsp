@@ -559,34 +559,13 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Аризани қайтариш Modal end -->
                     </div>
                 </div>
             </div>
         </div>
-        <!--
-        <div class="col-4 col-lg-4 position-relative">
-            <div class="position-relative" id="pdf_area_2">
-                <object
-                        data='https://pdfjs-express.s3-us-west-2.amazonaws.com/docs/choosing-a-pdf-viewer.pdf'
-                        type="application/pdf"
-                        width="100%"
-                        height="678">
-                    <p>This browser does not support PDF!</p>
-                </object>
-                <div class="position-absolute bg-white d-flex justify-content-center align-items-center" id="wrap_btn_2"
-                     style="cursor:pointer; top: 50%; left: 0; height: 40px; width: 30px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
-                    <i class="fa-solid fa-caret-left f-20" id="caret_2"></i>
-                </div>
-
-            </div>
-        </div>
-        -->
         <div id="divcalculate">
-            <!-- Calculate oyna uchun div -->
         </div>
     </div>
-    <!--end row-->
 </div>
 
 <script>
@@ -609,7 +588,6 @@
             }
         });
     }
-
     function appRollback() {
         // alert($('#appId').val() + ', \n ' + $.trim($('#commentRollback').val()));
 
@@ -720,7 +698,6 @@
 
         /*------------------------------*/
     }
-
     function appRollbackToFix(statusApp) {
         // alert($('#appId').val() + ', \n ' + $.trim($('#commentRollback').val()));
 
@@ -825,10 +802,7 @@
 
         /*------------------------------*/
     }
-
-
     var HS_NM_FULL_C = "";
-
     function addT_HS_NM(x) {
         // alert(x);
         var y = x.replaceAll(' ', '');
@@ -859,7 +833,6 @@
         }
         document.getElementById('HS_NM').value = '';
     }
-
     function addT_HS_NM2(x) {
         // alert(x);
         var y = x.replaceAll(' ', '');
@@ -890,11 +863,9 @@
         }
         document.getElementById('HS_NM2').value = '';
     }
-
     function ClearT_HS_NM() {
         document.getElementById("HS_NM").value = "";
     }
-
     function ClearT_HS_NM2() {
         document.getElementById("HS_NM2").value = "";
     }
@@ -918,10 +889,7 @@
         HS_NM_FULLS2.value = "";
         HS_CD_FULL2.value = "";
     };
-
     /*------------------------------*/
-
-
     function check_methodDesc(rowNum, methodNm, methodDesc) {
         var newRow = $("table.tableMethodDesc tbody");
         var cols = '<tr class="trMethodDesc">';
@@ -939,6 +907,12 @@
         }
         newRow.append(cols);
     }
+    $(document).ready( function () {
+        $('#tableDecView').DataTable({
+            scrollX: true
+        });
+    });
 
 </script>
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

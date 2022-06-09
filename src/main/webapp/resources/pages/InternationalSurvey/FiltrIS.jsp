@@ -103,6 +103,8 @@
     </div>
 </div>
 <!--start page wrapper -->
+<!-- Latest compiled and minified CSS -->
+
 <div id="main" class="page-content">
     <span style="cursor: pointer"><a href="#" class="text-success">БОШ САХИФА</a> / </span></span><span class=""><b>ХАЛҚАРО СЎРОВНОМА</b></span>
     <hr>
@@ -361,7 +363,7 @@
                                                 <div class="" id="directionTypeSaveValid"></div>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="productName" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Эхтимол.қўшим хисобланган:</label>
+                                                <label for="productName" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Эхтимол.қўшим хисобланган (cўмда):</label>
                                                 <input class="form-control" type="text" id="sumProbability"
                                                        name="sumProbability">
                                                 <div class="valid-feedback">Текширилди</div>

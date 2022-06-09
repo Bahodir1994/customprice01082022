@@ -13,40 +13,31 @@ import java.util.List;
 @Data
 public class AppsAndDocsAndTransportsDTO {
     private Apps apps;
-
     private List<Earxiv> docs;
-
     private List<TransportType> transports;
 
     public AppsAndDocsAndTransportsDTO() {
     }
-
     public AppsAndDocsAndTransportsDTO(Apps apps, List<Earxiv> docs, List<TransportType> transports) {
         this.apps = apps;
         this.docs = docs;
         this.transports = transports;
     }
-
     public Apps getApps() {
         return apps;
     }
-
     public void setApps(Apps apps) {
         this.apps = apps;
     }
-
     public List<Earxiv> getDocs() {
         return docs;
     }
-
     public void setDocs(List<Earxiv> docs) {
         this.docs = docs;
     }
-
     public List<TransportType> getTransports() {
         return transports;
     }
-
     public void setTransports(List<TransportType> transports) {
         this.transports = transports;
     }

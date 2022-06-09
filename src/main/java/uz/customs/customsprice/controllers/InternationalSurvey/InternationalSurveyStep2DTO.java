@@ -16,19 +16,19 @@ public class InternationalSurveyStep2DTO {
     @NotBlank(message = "Санани киритиш мажбурий!")
     private String reqDate;
 
-    @Size(min = 3, max = 30, message = "Майдон белгилари сони 3 та дан <br> 30 та гача бўлиши лозим!")
+//    @Size(min = 3, max = 30, message = "Майдон белгилари сони 3 та дан <br> 30 та гача бўлиши лозим!")
     private String responseNum;
 
-    @NotBlank(message = "Санани киритиш мажбурий!")
+//    @NotBlank(message = "Санани киритиш мажбурий!")
     private String responseDate;
 
-    @Size(min = 3, max = 30, message = "Майдон белгилари сони 3 та дан <br> 30 та гача бўлиши лозим!")
+//    @Size(min = 3, max = 30, message = "Майдон белгилари сони 3 та дан <br> 30 та гача бўлиши лозим!")
     private String responseNumSendXbbNum;
 
-    @NotBlank(message = "Санани киритиш мажбурий!")
+//    @NotBlank(message = "Санани киритиш мажбурий!")
     private String responseNumSendXbbDate;
 
-    @NotBlank(message = "Ижрочи худудни танланг!")
+//    @NotBlank(message = "Ижрочи худудни танланг!")
     private String executiveTerritoryCode;
 
     private String distributed;

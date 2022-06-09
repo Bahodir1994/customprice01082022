@@ -19,7 +19,6 @@ import uz.customs.customsprice.repository.TransportTypeRepo;
 import uz.customs.customsprice.repository.classifier.TransportTypeSRepo;
 import uz.customs.customsprice.service.*;
 import uz.customs.customsprice.service.earxiv.EarxivService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.*;
 import java.util.*;
@@ -57,9 +56,8 @@ public class ApiAppsController {
         this.transportTypeRepo = transportTypeRepo;
         this.transportTypeSRepo = transportTypeSRepo;
     }
-
     /*---------------------------------------------------------------------------------------------------------start*/
-    /* Apps маълумотларини API орқали сақлаш учун учун*/
+    /* Apps маълумотларини API орқали сақлаш учун */
     @PostMapping
     public ResponseEntity<Object> valuesave(@RequestBody AppsAndDocsAndTransportsDTO appsAndDocsAndTransportsDTO, HttpServletRequest request, BindingResult br) {
         Map<Integer, Object> errorTransportType = new HashMap<>();
@@ -67,13 +65,10 @@ public class ApiAppsController {
         Map<Integer, Object> errorEarxiv = new HashMap<>();
         JSONObject jsonObject;
         JSONObject jsonObject2;
-
         /*1*/
         Apps apps = appsAndDocsAndTransportsDTO.getApps();
-
         /*2*/
         List<TransportType> transportTypes = appsAndDocsAndTransportsDTO.getTransports();
-
         /*3*/
         List<Earxiv> earxivS = appsAndDocsAndTransportsDTO.getDocs();
 
@@ -90,7 +85,6 @@ public class ApiAppsController {
                     System.out.println(violation.getPropertyPath());
                     System.out.println(violation.getMessage());
                     jsonObject.put(violation.getPropertyPath().toString(), violation.getMessage());
-//                    errorTransportType.put(violation.getPropertyPath().toString() , violation.getMessage());
                 }
                 errorTransportType.put(e, jsonObject);
                 e++;
@@ -105,14 +99,12 @@ public class ApiAppsController {
                     System.out.println(violation.getPropertyPath());
                     System.out.println(violation.getMessage());
                     jsonObject2.put(violation.getPropertyPath().toString(), violation.getMessage());
-//                    errorEarxiv.put(violation.getPropertyPath().toString() + e, violation.getMessage());
                 }
                 errorEarxiv.put(k, jsonObject2);
                 k++;
             }
         }
         Set<ConstraintViolation<Apps>> violationApps;
-//        for (Apps type : apps) {
         violationApps = validator.validate(apps);
         if (!violationApps.isEmpty()) {
             for (ConstraintViolation violation : violationApps) {
@@ -121,44 +113,34 @@ public class ApiAppsController {
                 errorApps.put(violation.getPropertyPath().toString(), violation.getMessage());
             }
         }
-//        }
-
         if (errorTransportType.size() > 0 || errorApps.size() > 0 || errorEarxiv.size() > 0) {
             JSONObject obj = new JSONObject();
             obj.put("message", "Error");
-
             if (errorTransportType.size() > 0) {
                 obj.put("errorsTransportType", errorTransportType);
             }
             if (errorApps.size() > 0) {
                 obj.put("errorsApps", errorApps);
             }
-
             if (errorEarxiv.size() > 0) {
                 obj.put("errorEarxiv", errorEarxiv);
             }
-
             obj.put("status", "400");
             return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
-
         } else {
             Optional<Persons> personsIdGet = personsService.getById(apps.getPersonId());
             if (personsIdGet.isPresent()) {
                 Country country = conturyService.getByCodeAndLngaTpcd(apps.getCustomerCountry(), "UZ");
                 apps.setCustomerCountryNm(country.getCdNm());
-
                 country = conturyService.getByCodeAndLngaTpcd(apps.getSenderCountry(), "UZ");
                 apps.setSenderCountryNm(country.getCdNm());
-
                 Location location = locationService.getById(apps.getLocationId());
                 apps.setLocationNm(location.getName1());
                 apps.setStatus(100);
                 Status status = statusService.getById(100);
                 apps.setStatusNm(status.getName());
-
                 Terms terms = termsService.findByIdAndLngaTpcd(apps.getTerms(), "UZ");
                 apps.setTermsNm(terms.getSign());
-
                 apps.setInsUser(personsIdGet.get().getTin());
                 appsService.saveApps(apps);
                 apps.getId();
@@ -169,18 +151,13 @@ public class ApiAppsController {
                         Country countryFinish = conturyService.getByCodeAndLngaTpcd(type.getFinishCountry(), "UZ");
                         Country countryEnd = conturyService.getByCodeAndLngaTpcd(type.getEndCountry(), "UZ");
                         TransportTypeS transportTypeS = transportTypeSRepo.findByCodeAndLngaTpcd(type.getTarnsportType(), "UZ");
-
                         transportType.setAppId(apps.getId());
-
                         transportType.setFinishCountry(type.getFinishCountry());
                         transportType.setFinishCountryNm(countryFinish.getCdNm());
-
                         transportType.setEndCountry(type.getEndCountry());
                         transportType.setEndCountryNm(countryEnd.getCdNm());
-
                         transportType.setTarnsportType(type.getTarnsportType());
                         transportType.setTarnsportTypeNm(transportTypeS.getCdNm());
-
                         transportType.setTransportPrice(type.getTransportPrice());
                         transportTypeService.savetrtype(transportType);
                         ResponseHandler.generateResponse("TransportType ma`lumotlari saqlandi!", HttpStatus.OK, transportType);
@@ -192,7 +169,6 @@ public class ApiAppsController {
                         return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
                     }
                 }
-
                 for (int i = 0; i < earxivS.size(); i++) {
                     Earxiv earxiv = new Earxiv();
                     List<Object[]> fileList = earxivService.getFile1(earxivS.get(i).getFileId());
@@ -209,6 +185,7 @@ public class ApiAppsController {
                         earxiv.setDocTypeName(fileList.get(0)[8] != null ? fileList.get(0)[8].toString() : "");
                         earxiv.setHash(fileList.get(0)[9] != null ? fileList.get(0)[9].toString() : "");
                         earxiv.setFileNum(fileList.get(0)[10] != null ? fileList.get(0)[10].toString() : "");
+                        earxiv.setFileDate(fileList.get(0)[11] != null ? fileList.get(0)[11].toString() : "");
                     } else {
                         earxiv.setAppId("");
                         earxiv.setFolderId("");
@@ -222,11 +199,11 @@ public class ApiAppsController {
                         earxiv.setStatus("");
                         earxiv.setHash("");
                         earxiv.setFileNum("");
+                        earxiv.setFileDate("");
                     }
                     earxivService.create(earxiv);
                     ResponseHandler.generateResponse("Xujjat ma`lumotlari saqlandi!", HttpStatus.OK, earxiv);
                 }
-
                 /**todo ЛОК га ёзиш start todo**/
                 StatusM statusM = new StatusM();
                 statusM.setAppId(apps.getId());
@@ -243,7 +220,6 @@ public class ApiAppsController {
                 statusH.setInsUser(personsIdGet.get().getTin());
                 statusHService.saveStatusH(statusH);
                 /**todo ЛОК га ёзиш end todo**/
-
                 JSONObject obj = new JSONObject();
                 obj.put("message", "Success");
                 obj.put("data", apps);
@@ -258,9 +234,7 @@ public class ApiAppsController {
                 return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
             }
         }
-
     }
-
     @PostMapping("/updateappsrestapi")
     public ResponseEntity<Object> updatevalue(@RequestBody AppsAndDocsAndTransportsDTO appsAndDocsAndTransportsDTO, HttpServletRequest request, BindingResult br) {
         Map<Integer, Object> errorTransportType = new HashMap<>();
@@ -269,9 +243,6 @@ public class ApiAppsController {
         JSONObject jsonObject;
         JSONObject jsonObject2;
         Map<String, String> errorAppsAll = new HashMap<>();
-
-        /*Salom*/
-
         if (appsAndDocsAndTransportsDTO.getApps() == null) {
             errorAppsAll.put("apps", "Ариза маълумотлари буш булиши мумкин эмас!");
         }
@@ -289,8 +260,6 @@ public class ApiAppsController {
             obj.put("status", "400");
             return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
         }
-
-
         /*1*/
         Apps apps = appsAndDocsAndTransportsDTO.getApps();
         /*2*/
@@ -358,7 +327,6 @@ public class ApiAppsController {
             Apps appsUpdate = appsService.findById(apps.getId());
             if (personsIdGet.isPresent() && appsUpdate != null) {
                 /******************************************(Apps update all by appId)**********************************/
-
 //                appsUpdate.setId(apps.getId());
                 appsUpdate.setPersonId(apps.getPersonId());
                 appsUpdate.setCustomerCountry(apps.getCustomerCountry());
@@ -381,7 +349,6 @@ public class ApiAppsController {
                 /*4*/
                 Status status = statusService.getById(130);
                 appsUpdate.setStatusNm(status.getName());
-
                 /*1*/
                 Country country = conturyService.getByCodeAndLngaTpcd(apps.getCustomerCountry(), "UZ");
                 appsUpdate.setCustomerCountryNm(country.getCdNm());
@@ -396,7 +363,6 @@ public class ApiAppsController {
                 appsUpdate.setTermsNm(terms.getSign());
                 /*6*/
                 appsUpdate.setInsUser(personsIdGet.get().getTin());
-
                 appsService.saveApps(appsUpdate);
                 /*************(TransportType delete all by appId and save new transporttype Lists)*********************/
                 transportTypeRepo.deleteAllByAppId(appsUpdate.getId());
@@ -407,18 +373,13 @@ public class ApiAppsController {
                         Country countryFinish = conturyService.getByCodeAndLngaTpcd(type.getFinishCountry(), "UZ");
                         Country countryEnd = conturyService.getByCodeAndLngaTpcd(type.getEndCountry(), "UZ");
                         TransportTypeS transportTypeS = transportTypeSRepo.findByCodeAndLngaTpcd(type.getTarnsportType(), "UZ");
-
                         transportType.setAppId(apps.getId());
-
                         transportType.setFinishCountry(type.getFinishCountry());
                         transportType.setFinishCountryNm(countryFinish.getCdNm());
-
                         transportType.setEndCountry(type.getEndCountry());
                         transportType.setEndCountryNm(countryEnd.getCdNm());
-
                         transportType.setTarnsportType(type.getTarnsportType());
                         transportType.setTarnsportTypeNm(transportTypeS.getCdNm());
-
                         transportType.setTransportPrice(type.getTransportPrice());
                         transportTypeService.savetrtype(transportType);
                     } else {
@@ -429,7 +390,6 @@ public class ApiAppsController {
                         return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
                     }
                 }
-
                 /********************(Earxiv delete all by appId and save new Earxiv Lists)****************************/
                 earxivRepo.deleteAllByAppId(appsUpdate.getId());
                 for (int i = 0; i < earxivS.size(); i++) {
@@ -447,6 +407,8 @@ public class ApiAppsController {
                         earxiv.setStatus(fileList.get(0)[7] != null ? fileList.get(0)[7].toString() : "");
                         earxiv.setDocTypeName(fileList.get(0)[8] != null ? fileList.get(0)[8].toString() : "");
                         earxiv.setHash(fileList.get(0)[9] != null ? fileList.get(0)[9].toString() : "");
+                        earxiv.setFileNum(fileList.get(0)[10] != null ? fileList.get(0)[10].toString() : "");
+                        earxiv.setFileDate(fileList.get(0)[11] != null ? fileList.get(0)[11].toString() : "");
                     } else {
                         earxiv.setAppId("");
                         earxiv.setFolderId("");
@@ -459,11 +421,12 @@ public class ApiAppsController {
                         earxiv.setFileId("");
                         earxiv.setStatus("");
                         earxiv.setHash("");
+                        earxiv.setFileNum("");
+                        earxiv.setFileDate("");
                     }
                     earxivService.create(earxiv);
                     ResponseHandler.generateResponse("Xujjat ma`lumotlari saqlandi!", HttpStatus.OK, earxiv);
                 }
-
                 /**todo ЛОК га ёзиш start todo**/
                 StatusM statusM = new StatusM();
                 statusM.setAppId(apps.getId());
@@ -480,7 +443,6 @@ public class ApiAppsController {
                 statusH.setInsUser(personsIdGet.get().getTin());
                 statusHService.saveStatusH(statusH);
                 /**todo ЛОК га ёзиш end todo**/
-
                 JSONObject obj = new JSONObject();
                 obj.put("message", "Success");
                 obj.put("data", appsUpdate);
@@ -495,7 +457,5 @@ public class ApiAppsController {
                 return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
             }
         }
-
     }
-
 }

@@ -41,7 +41,7 @@
 <div class="page-content">
     <div class="">
         <div id="main" class="col">
-            <h6 class="mb-0 text-uppercase">Шартли белгиланган товарлар</h6>
+            <span style="cursor: pointer"><a href="#" class="text-success">БОШ САХИФА</a> / </span><span style="cursor: pointer"><a href="#" class="text-success">СПРАВОЧНИК</a> / </span></span><span class=""><b>ШАРТЛИ БЕЛГИЛАНГАН ТОВАРЛАР</b></span>
             <hr>
             <div class="card">
                 <div class="card-body">
