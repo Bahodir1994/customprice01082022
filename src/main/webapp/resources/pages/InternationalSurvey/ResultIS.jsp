@@ -133,6 +133,7 @@
             <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
             <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
             <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
+            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
             <th></th>
         </tr>
         <tr class="filters bg-white text-dark">
@@ -198,7 +199,18 @@
                                 <td>
                                     <button class="btn btn-outline-primary" data-title=""
                                             data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                                            onclick="('${tut.userLocationCode}' === '1701' ? $('#divLocDir').css({'display': ''}) : $('#divLocDir').css({'display': 'none'})); $('#interSurveyId2').val('${tut.id}');$('#interSurveyStatus2').val('${tut.status}');$('#interSurveyUserLocationCode').val('${tut.userLocationCode}')">
+                                            onclick="('${tut.userLocationCode}' === '1701' ? $('#divLocDir').css({'display': ''}) : $('#divLocDir').css({'display': 'none'}));
+                                            $('#interSurveyId2').val('${tut.id}');
+                                            $('#interSurveyStatus2').val('${tut.status}');
+                                            $('#interSurveyUserLocationCode').val('${tut.userLocationCode}');
+                                            $('#sendReqNum').val('${tut.sendReqNum}');
+                                            $('#reqDate').val('${tut.reqDate}');
+                                            $('#responseNum').val('${tut.responseNum}');
+                                            $('#responseDate').val('${tut.responseDate}');
+                                            $('#responseNumSendXbbNum').val('${tut.responseNumSendXbbNum}');
+                                            $('#responseNumSendXbbDate').val('${tut.responseNumSendXbbDate}');
+                                            $('#executiveTerritoryCode').val('${tut.executiveTerritoryCode}');
+                                                    ">
                                         <i class="bx bx-plus"></i></button>
                                 </td>
                             </c:if>
@@ -206,7 +218,17 @@
                                 <td>
                                     <button class="btn btn-outline-primary" data-title=""
                                             data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                                            onclick="('${tut.userLocationCode}' === '1701' ? $('#divLocDir').css({'display': ''}) : $('#divLocDir').css({'display': 'none'})); $('#interSurveyId2').val('${tut.id}');$('#interSurveyStatus2').val('${tut.status}');$('#interSurveyUserLocationCode').val('${tut.userLocationCode}')">
+                                            onclick="('${tut.userLocationCode}' === '1701' ? $('#divLocDir').css({'display': ''}) : $('#divLocDir').css({'display': 'none'}));
+                                            $('#interSurveyId2').val('${tut.id}');$('#interSurveyStatus2').val('${tut.status}');
+                                            $('#interSurveyUserLocationCode').val('${tut.userLocationCode}');
+                                            $('#sendReqNum').val('${tut.sendReqNum}');
+                                            $('#reqDate').val('${tut.reqDate}');
+                                            $('#responseNum').val('${tut.responseNum}');
+                                            $('#responseDate').val('${tut.responseDate}');
+                                            $('#responseNumSendXbbNum').val('${tut.responseNumSendXbbNum}');
+                                            $('#responseNumSendXbbDate').val('${tut.responseNumSendXbbDate}');
+                                            $('#executiveTerritoryCode').val('${tut.executiveTerritoryCode}');
+                                                    ">
                                         <i class="bx bx-plus"></i></button>
                                 </td>
                             </c:if>
@@ -258,7 +280,6 @@
                             </c:if>
                         </c:if>
                     </c:if>
-
                     <c:if test="${tut.status == '300'}">
                         <c:if test="${tut.sumOnControl != '0.00'}">
                                 <c:if test="${userId == tut.savedUserFirstId}">
@@ -649,7 +670,6 @@
         });
 
     }
-
     function saveValueFromInputSStep2(e = null) {
         let userLocation = '<%=userLocation%>';
         let userLocationCode = $('#interSurveyUserLocationCode').val();
@@ -772,7 +792,6 @@
             }
         });
     }
-
     function saveValueFromInputSStep3() {
         var dataS = {
             /*"xbbMailNum": $('#xbbMailNum').val(),
