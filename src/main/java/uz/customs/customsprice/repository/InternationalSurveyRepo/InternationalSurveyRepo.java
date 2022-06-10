@@ -32,6 +32,7 @@ public interface InternationalSurveyRepo extends JpaRepository<InternationalSurv
             "(:resultAnswerMailDate is null or c.resultAnswerMailDate = :resultAnswerMailDate) and"+
             "(:xbbVerdictNum='' or :xbbVerdictNum is null or lower(c.xbbVerdictNum) like lower(CONCAT('%',:xbbVerdictNum,'%'))) and"+
             "(:xbbVerdictDate is null or c.xbbVerdictDate = :xbbVerdictDate) and"+
+            "(:executiveTerritoryCode is null or :executiveTerritoryCode='' or c.executiveTerritoryCode = :executiveTerritoryCode) and"+
             "(:status='' or :status is null or c.status = :status)")
 //                "(:status='' or c.status = :status)")
     Page<InternationalSurveyEntity>
@@ -53,6 +54,7 @@ public interface InternationalSurveyRepo extends JpaRepository<InternationalSurv
             @Param("resultAnswerMailDate") Date resultAnswerMailDate,
             @Param("xbbVerdictNum") String xbbVerdictNum,
             @Param("xbbVerdictDate") Date xbbVerdictDate,
+            @Param("executiveTerritoryCode") String executiveTerritoryCode,
             @Param("status") String status,
             Pageable paging);
 
@@ -61,4 +63,6 @@ public interface InternationalSurveyRepo extends JpaRepository<InternationalSurv
     Page<InternationalSurveyEntity> findByOrgNameAndHsCode(String orgName, String hsCode, Pageable paging);
 
     InternationalSurveyEntity findByIdAndStatus(String id, String status);
+
+    InternationalSurveyEntity findByExecutiveTerritoryCode(String executiveTerritoryCode);
 }

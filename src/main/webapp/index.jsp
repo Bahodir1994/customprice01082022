@@ -664,6 +664,84 @@
             </nav>
         </div>
     </div>
+    <style>
+        #preloader {
+            z-index: 99999;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #loader {
+            z-index: 99999;
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #9370DB;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+        #loader:before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #BA55D3;
+            -webkit-animation: spin 3s linear infinite;
+            animation: spin 3s linear infinite;
+        }
+        #loader:after {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #FF00FF;
+            -webkit-animation: spin 1.5s linear infinite;
+            animation: spin 1.5s linear infinite;
+        }
+        @-webkit-keyframes spin {
+            0%   {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes spin {
+            0%   {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <div id="preloader" class="visually-hidden">
+        <div id="loader"></div>
+    </div>
     <%--todo Асосий----------------------------------------------------қисми------------------------дан--%>
     <div class="page-wrapper" id="MainContent" role="main" style="min-height: 850px!important;">
         <%--todo страницаларни чақириш жойи--%>
@@ -733,8 +811,6 @@
         </div>
     </div>
 </div>
-
-
 <script src="<%=request.getContextPath()%>/resources/assets2/js/bootstrap.bundle.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/simplebar/js/simplebar.min.js"></script>
@@ -764,15 +840,12 @@
         $("html").addClass("color-header headercolor1");
         $("html").removeClass("headercolor2 headercolor3 headercolor4 headercolor5 headercolor6 headercolor7 headercolor8");
     });
-
     $(document).ready(function () {
         $('#example').DataTable();
     });
     $(document).ready(digitalClock());
     (function($, undefined) {
-
         "use strict";
-
         // When ready.
         $(function() {
 
@@ -852,29 +925,6 @@
         });
 
     });
-
-    <%--$(document).ready(function () {--%>
-    <%--    var dataS = {--%>
-    <%--        "x": '0',--%>
-    <%--    };--%>
-    <%--    var tipform = "<%=request.getContextPath()%>/resources/pages/StarterPage/homes.jsp";--%>
-    <%--    $.post({--%>
-    <%--        async: false,--%>
-    <%--        url: tipform,--%>
-    <%--        data: dataS,--%>
-    <%--        dataType: "html",--%>
-    <%--        header: 'Content-type: text/html; charset=utf-8',--%>
-    <%--        success: function (res) {--%>
-    <%--            $('div#MainContent').html(res);--%>
-    <%--            document.body.style.cursor = 'default';--%>
-    <%--        },--%>
-    <%--        error: function (res) {--%>
-    <%--            if (res.status == 401) {--%>
-    <%--                $(".logOutForm").submit();--%>
-    <%--            }--%>
-    <%--        }--%>
-    <%--    });--%>
-    <%--});--%>
     /*Tovarlarni toifalash */
     function ListClassProduct(x) {
         var dataS = {
@@ -895,6 +945,8 @@
     }
     /* Маълумотларни твқсимлаш */
     function InitialDecisionRasp(x) {
+        $('#MainContent').remove();
+        $('#preloader').removeClass('visually-hidden');
         var dataS = {
             "id": x
         }
@@ -912,6 +964,7 @@
                 $("#loading").hide();
             },
             success: function (res) {
+                $('#preloader').addClass('visually-hidden');
                 $('div#MainContent').html(res);
             },
             error: function (res) {
@@ -930,15 +983,18 @@
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
                 $("#loading").show();
             },
             complete: function () {
                 $("#loading").hide();
+                $('#preloader').addClass('visually-hidden');
             },
             success: function (res) {
                 $('div#MainContent').html(res);
             },
             error: function (res) {
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }

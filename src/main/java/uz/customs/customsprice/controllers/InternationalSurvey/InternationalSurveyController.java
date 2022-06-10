@@ -77,6 +77,7 @@ public class InternationalSurveyController {
         List<Location> location = locationRepo.findAll();
         mav.addObject("countryList", countryList);
         mav.addObject("userLocation", userLocation);
+        mav.addObject("userRole", userRole);
         mav.addObject("directionType", directionType);
         mav.addObject("location", location);
         return mav;
@@ -104,6 +105,7 @@ public class InternationalSurveyController {
             @RequestParam(required = false) String resultAnswerMailDate,
             @RequestParam(required = false) String xbbVerdictNum,
             @RequestParam(required = false) String xbbVerdictDate,
+            @RequestParam(required = false) String executiveTerritoryCode,
             @RequestParam(required = false) String status,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "0") int size
@@ -112,6 +114,9 @@ public class InternationalSurveyController {
         String userLocation = (String) request.getSession().getAttribute("userLocation");
         Integer userRole = (Integer) request.getSession().getAttribute("userRole");
         List<Location> location = locationRepo.findAll();
+        if (!Objects.equals(userLocation, "1701")){
+            executiveTerritoryCode = userLocation;
+        }
 
         ModelAndView viewModel = new ModelAndView("resources/pages/InternationalSurvey/ResultIS");
         java.sql.Date xbbMailDateS = null;
@@ -160,6 +165,7 @@ public class InternationalSurveyController {
                             resultAnswerMailDateS,
                             xbbVerdictNum,
                             xbbVerdictDateS,
+                            executiveTerritoryCode,
                             status,
                             paging
                     );
@@ -222,6 +228,10 @@ public class InternationalSurveyController {
             internationalSurveyEntity.setSavedUserFirst(userName);
             internationalSurveyEntity.setUserLocationCode(userLocation);
             internationalSurveyEntity.setUserLocationName(userLocationName);
+
+            internationalSurveyEntity.setExecutiveTerritoryCode(userLocation);
+            Optional<Location> location = locationRepo.findById(userLocation);
+            internationalSurveyEntity.setExecutiveTerritoryName(location.get().getName1());
             /**100-First step**/ /**200-Second step**/ /**300-Third step**/
             internationalSurveyEntity.setStatus("100");
             /*finish*/

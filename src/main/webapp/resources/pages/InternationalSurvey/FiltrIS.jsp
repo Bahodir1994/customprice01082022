@@ -115,21 +115,21 @@
                     <div class="row m-3">
                         <div class="row">
                             <div class="col">
-                                <label class="">Таркибий тузилма</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Таркибий тузилмалар"></i>
-                                <select class="result form-control shadow-sm" type="text" id="userLocationCode" name="userLocationCode" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} ">
-                                    <option class="font-italic" selected value="">--- Танланг ---</option>
-                                    <c:forEach var="usrLoc" items="${location}" varStatus="i">
-                                        <option value="${usrLoc.id}">${usrLoc.name1}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <div class="col">
                                 <label class="">Йўналиш</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Халқаро сўровнома йўналиш тури"></i>
                                 <select class="result form-control shadow-sm" type="text" id="directionTypeCode" name="directionTypeCode" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} ">
                                     <option class="font-italic" selected value="">--- Танланг ---</option>
                                     <c:forEach var="dirTyp" items="${directionType}" varStatus="i">
                                         <option value="${dirTyp.code}">${dirTyp.name}</option>
                                     </c:forEach>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label>Cўровнома холати</label>
+                                <select class="form-select" id="statusS" name="statusS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+                                <option value="">--Танланг--</option>
+                                <option value="100">Янги</option>
+                                <option value="200">Жараёнда</option>
+                                <option value="300">Якунланган</option>
                                 </select>
                             </div>
                             <div class="col">
@@ -267,26 +267,39 @@
                                            name="xbbVerdictDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                 </div>
                             </div>
-                            <div class="col">
-                                <label>Cўровнома холати</label>
-                                <select class="form-select" id="statusS" name="statusS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                                <option value="">--Танланг--</option>
-                                <option value="100">Янги</option>
-                                <option value="200">Жараёнда</option>
-                                <option value="300">Якунланган</option>
-                                </select>
-                            </div>
+                            <c:if test="${userLocation == '1701'}">
+                                <div class="col">
+                                    <label class="">Таркибий тузилма</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Таркибий тузилмалар"></i>
+                                    <select class="result form-control shadow-sm" type="text" id="userLocationCode" name="userLocationCode">
+                                        <option class="font-italic" selected value="">--- Танланг ---</option>
+                                        <c:forEach var="usrLoc" items="${location}" varStatus="i">
+                                            <option value="${usrLoc.id}">${usrLoc.name1}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Маъсул худуд</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Маъсул худуд"></i>
+                                    <select class="result form-control shadow-sm" type="text" id="executiveTerritoryCode" name="executiveTerritoryCode">
+                                        <option class="font-italic" selected value="">--- Танланг ---</option>
+                                        <c:forEach var="usrLoc" items="${location}" varStatus="i">
+                                            <option value="${usrLoc.id}">${usrLoc.name1}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </c:if>
                             <div class="col mt-2">
                                 <button type="button" class="btn btn-primary btn-block mt-2"
                                         onclick="searchResultTableIS(0)"><i class='bx bx-refresh'></i>Излаш
                                 </button>
                                 <button type="reset" class="btn btn-primary btn-block mt-2" onclick="reset(1)">
-                                    <i class='bx bx-trash'></i>Тозалаш
+                                    <i class='bx bx-trash'></i>
                                 </button>
-                                <button type="button" class="btn btn-primary btn-block mt-2"
-                                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        onclick="resetModal()"><i class='bx bx-plus'></i>Киритиш
-                                </button>
+                                <c:if test="${userRole == '8' || userRole == '7' || userRole == '6' || userRole == '4'}">
+                                    <button type="button" class="btn btn-primary btn-block mt-2"
+                                            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            onclick="resetModal()"><i class='bx bx-plus'></i>Киритиш
+                                    </button>
+                                </c:if>
                             </div>
                         </div>
                         <!-- Modal 1-qadam-->
@@ -455,6 +468,7 @@
             "resultAnswerMailDate": $("#resultAnswerMailDateS").val(),
             "xbbVerdictNum": $("#xbbVerdictNumS").val(),
             "xbbVerdictDate": $("#xbbVerdictDateS").val(),
+            "executiveTerritoryCode": $("#executiveTerritoryCode").val(),
             "status": $("#statusS").val(),
             "page": x,
             "size": $("#size").val()
