@@ -49,7 +49,7 @@ public class EarxivService {
                 "    dt.cd_nm,\n" +
                 "    fd.hash,\n" +
                 "    fl.file_num, \n" +
-                "    fl.file_date\n" +
+                "    fl.file_data\n" +
                 "from\n" +
                 "    e_arxiv.folder f\n" +
                 "join\n" +
@@ -95,7 +95,7 @@ public class EarxivService {
                 "    dt.cd_nm,\n" +
                 "    fd.hash,\n" +
                 "    fl.file_num, \n" +
-                "    fl.file_date\n" +
+                "    fl.file_data\n" +
                 "from\n" +
                 "    e_arxiv.folder f\n" +
                 "join\n" +
