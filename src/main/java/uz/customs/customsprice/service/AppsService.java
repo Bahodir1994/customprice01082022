@@ -821,10 +821,10 @@ public class AppsService {
             sqlWhere = " and a.status not in (100, 115, 170, 175) \n ";
         }
         if (userRole == 7) {
-            sqlWhere = " and a.status not in (100, 115, 170, 175) \n and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
+            sqlWhere = " and a.status not in (100, 115, 170, 175, 135) \n and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
         }
         if (userRole == 8) {
-            sqlWhere = " and a.status = 110 \n and ar.inspector_id = '" + userIdS + "' and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
+            sqlWhere = " and a.status in (110, 135) \n and ar.inspector_id = '" + userIdS + "' and ar.location = '" + userLocation + "' and ar.post = '" + userPost + "' ";
         }
 
         String queryForList = "select\n" +
