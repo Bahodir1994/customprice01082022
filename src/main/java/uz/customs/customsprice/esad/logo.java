@@ -110,7 +110,8 @@ public class logo extends HttpServlet {
         request.getSession().setAttribute("UserBean", up);
         assert up != null;
         String userLogin = up.getULogin();
-        String UUser_Id = up.getUUser_Id();
+//        String UUser_Id = up.getUUser_Id();
+        String UUser_Id = up.getUId();
         TreeMap rolSet = new TreeMap();
         rolSet = up.getURoleSets();
         String rol = "", rolName = "";
@@ -176,6 +177,7 @@ public class logo extends HttpServlet {
                             "    um.password,\n" +
                             "    um.ikeysn,\n" +
                             "    um.userid,\n" +
+                            "    um.id um_user_id,\n" +
                             "    ur.idrotation,\n" +
                             "    ur.user_id ur_userid,\n" +
                             "    ur.pnumber,\n" +
@@ -229,7 +231,8 @@ public class logo extends HttpServlet {
                             "where\n" +
                             "    um.isdeleted=0\n" +
                             " and lower(um.login) like lower('" + userLogin.trim() + "') \n " +
-                            " and ur.idrotation='" + UUser_Id.trim() + "'    \n" +
+                            " and um.id='" + UUser_Id.trim() + "'    \n" +
+//                            " and ur.idrotation='" + UUser_Id.trim() + "'    \n" +
 //                            "and lower(um.login) like lower('RustamSh')\n" +
 //                            "    and ur.idrotation='AB170110000064530'\n" +
                             "order by\n" +
@@ -239,7 +242,8 @@ public class logo extends HttpServlet {
                         t = t + 1;
                         ROLE.put(Integer.toString(t), (Utils.nullClear(rslt.getString("role"))));
                         ROLEID.put(Integer.toString(t), (Utils.nullClear(rslt.getString("userrole_id"))));
-                        USERID.put(Integer.toString(t), (Utils.nullClear(rslt.getString("userid"))));
+//                        USERID.put(Integer.toString(t), (Utils.nullClear(rslt.getString("userid"))));
+                        USERID.put(Integer.toString(t), (Utils.nullClear(rslt.getString("um_user_id"))));
                         NAME.put(Integer.toString(t), (Utils.nullClear(rslt.getString("name"))));
                         LOGIN.put(Integer.toString(t), (Utils.nullClear(rslt.getString("login"))));
                         PASSWORD.put(Integer.toString(t), (Utils.nullClear(rslt.getString("password"))));
@@ -272,7 +276,8 @@ public class logo extends HttpServlet {
                     conET = getConCPID(request);
                     conET.setAutoCommit(false);
                     Statement sqlEt = conET.createStatement();
-                    String sqlstr = "insert into cpid.log(ses_id, USER_ID, name, ip, enter, last) " + "values ('" + sessionID + "','" + up.getUUser_Id().substring(2) + "','" + up.getUName() + "','" + IP + "',current_timestamp,current_timestamp)";
+//                    String sqlstr = "insert into cpid.log(ses_id, USER_ID, name, ip, enter, last) " + "values ('" + sessionID + "','" + up.getUUser_Id().substring(2) + "','" + up.getUName() + "','" + IP + "',current_timestamp,current_timestamp)";
+                    String sqlstr = "insert into cpid.log(ses_id, USER_ID, name, ip, enter, last) " + "values ('" + sessionID + "','" + up.getUId() + "','" + up.getUName() + "','" + IP + "',current_timestamp,current_timestamp)";
                     sqlEt.executeUpdate(sqlstr);
 
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -417,7 +422,7 @@ public class logo extends HttpServlet {
                         user.setLocation(location);
                         user.setLocationname(locationname);
                         user.setPost(post);
-                        user.setPost(postname);
+                        user.setPostname(postname);
                         user.setLang(lang);
                         user.setNotification(notification);
                         user.setInsUser(userid);
