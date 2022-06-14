@@ -104,27 +104,75 @@
                 <div class="mb-0">
                     <div class="row m-3">
                         <div class="row">
-                            <div class="col select2-container">
+                            <div class="col-md-3">
                                 <label class="">Йўналиш</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Халқаро сўровнома йўналиш тури"></i>
-                                <select class="form-select" type="text" id="directionTypeCode" name="directionTypeCode" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} ">
+                                <select class="form-select" type="text" id="directionTypeCode" name="directionTypeCode">
                                     <option class="font-italic" selected value="">--- Танланг ---</option>
                                     <c:forEach var="dirTyp" items="${directionType}" varStatus="i">
                                         <option value="${dirTyp.code}">${dirTyp.name}</option>
                                     </c:forEach>
                                 </select>
                             </div>
-                            <div class="col">
+                            <div class="col-md-3">
                                 <label>Cўровнома холати</label>
-                                <select class="form-select" id="statusS" name="statusS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+                                <select class="form-select" id="statusS" name="statusS"/>
                                 <option value="">--Танланг--</option>
                                 <option value="100">Янги</option>
                                 <option value="200">Жараёнда</option>
                                 <option value="300">Якунланган</option>
                                 </select>
                             </div>
-                            <div class="col">
+                            <div class="col-md-3">
+                                <label class="">Сўровнома юборилган давлат</label><i class="bx bx-info-circle"
+                                                                                     data-bs-toggle="tooltip"
+                                                                                     data-bs-placement="top"
+                                                                                     title="Сўровнома юборилган давлат"></i>
+                                <select class="form-select shadow-sm" id="sendReqCountryCodeS"
+                                        name="sendReqCountryCodeS" required=""/>
+                                <option value="">--Танланг--</option>
+                                <c:forEach var="countr" items="${countryList}">
+                                    <option value="${countr.code}">${countr.cdNm}</option>
+                                </c:forEach>
+                                </select>
+                            </div>
+                            <c:if test="${userLocation == '1701'}">
+                                <div class="col-md-3">
+                                    <label class="">Таркибий тузилма</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Таркибий тузилмалар"></i>
+                                    <select class="result form-select shadow-sm" type="text" id="userLocationCode" name="userLocationCode">
+                                        <option class="font-italic" selected value="">--- Танланг ---</option>
+                                        <c:forEach var="usrLoc" items="${location}" varStatus="i">
+                                            <option value="${usrLoc.id}">${usrLoc.name1}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="">Маъсул худуд</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Маъсул худуд"></i>
+                                    <select class="result form-select shadow-sm" type="text" id="executiveTerritoryCode" name="executiveTerritoryCode">
+                                        <option class="font-italic" selected value="">--- Танланг ---</option>
+                                        <c:forEach var="usrLoc" items="${location}" varStatus="i">
+                                            <option value="${usrLoc.id}">${usrLoc.name1}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </c:if>
+                            <div class="col-md-3 mt-2">
+                                <button type="button" class="btn btn-primary btn-block mt-2"
+                                        onclick="searchResultTableISFirst(0)"><i class='bx bx-refresh'></i>Излаш
+                                </button>
+                                <button type="reset" class="btn btn-primary btn-block mt-2" onclick="reset(1)">
+                                    <i class='bx bx-trash'></i>
+                                </button>
+                                <c:if test="${userRole == '8' || userRole == '7' || userRole == '6' || userRole == '4'}">
+                                    <button type="button" class="btn btn-primary btn-block mt-2"
+                                            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            onclick="resetModal()"><i class='bx bx-plus'></i>Киритиш
+                                    </button>
+                                </c:if>
+                            </div>
+                            <div id="target" name="target"></div>
+                            <!--<div class="col">
                                 <label class="">Хат рақами</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="ҲББ томонидан юбоирлган хат рақами"></i>
-                                <input class="result form-control shadow-sm" type="text" id="xbbMailNumS" name="xbbMailNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+                                <input class="result form-control shadow-sm" type="text" id="xbbMailNumS" value="" name="xbbMailNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                             </div>
                             <div class="col">
                                 <label class="">Санаси</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
@@ -137,29 +185,16 @@
                                 <label class="">ТИФ ТН код</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
                                                                      data-bs-placement="top" title="ТИФ ТН код"></i>
                                 <input class="result form-control shadow-sm" type="text" id="hsCodeS" name="hsCodeS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                            </div>
+                            </div>-->
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <!--<div class="col">
                                 <label class="">Товар номи</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
                                                                      data-bs-placement="top" title="Товар номи"></i>
                                 <input class="result form-control shadow-sm" type="text" id="productNameS"
                                        name="productNameS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                            </div>
-                            <div class="col">
-                                <label class="">Сўровнома юборилган давлат</label><i class="bx bx-info-circle"
-                                                                                     data-bs-toggle="tooltip"
-                                                                                     data-bs-placement="top"
-                                                                                     title="Сўровнома юборилган давлат"></i>
-                                <select class="form-select shadow-sm" id="sendReqCountryCodeS"
-                                        name="sendReqCountryCodeS" required="" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                                <option value="">--Танланг--</option>
-                                <c:forEach var="countr" items="${countryList}">
-                                    <option value="${countr.code}">${countr.cdNm}</option>
-                                </c:forEach>
-                                </select>
-                            </div>
-                            <div class="col">
+                            </div>-->
+                            <!--<div class="col">
                                 <div class="">
                                     <label class="">Юборилган сўровнома рақами</label><i class="bx bx-info-circle"
                                                                                          data-bs-toggle="tooltip"
@@ -186,10 +221,10 @@
                                                                                          title="Сўровномага олинган жавоб хати"></i>
                                 <input class="result form-control shadow-sm" type="text" id="responseNumS"
                                        name="responseNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                            </div>
+                            </div>-->
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <!--<div class="col">
                                 <label class="">Олинган жавоб хати санаси</label><i class="bx bx-info-circle"
                                                                                     data-bs-toggle="tooltip"
                                                                                     data-bs-placement="top"
@@ -234,11 +269,10 @@
                                     <input class="result form-control shadow-sm" type="date" id="resultAnswerMailDateS"
                                            name="resultAnswerMailDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                 </div>
-                            </div>
-                            <div id="target" name="target"></div>
+                            </div>-->
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <!--<div class="col">
                                 <div class="">
                                     <label class="">ҲББ хулоса рақами</label><i class="bx bx-info-circle"
                                                                                 data-bs-toggle="tooltip"
@@ -256,41 +290,9 @@
                                     <input class="result form-control shadow-sm" type="date" id="xbbVerdictDateS"
                                            name="xbbVerdictDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
                                 </div>
-                            </div>
-                            <c:if test="${userLocation == '1701'}">
-                                <div class="col">
-                                    <label class="">Таркибий тузилма</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Таркибий тузилмалар"></i>
-                                    <select class="result form-select shadow-sm" type="text" id="userLocationCode" name="userLocationCode">
-                                        <option class="font-italic" selected value="">--- Танланг ---</option>
-                                        <c:forEach var="usrLoc" items="${location}" varStatus="i">
-                                            <option value="${usrLoc.id}">${usrLoc.name1}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <label class="">Маъсул худуд</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Маъсул худуд"></i>
-                                    <select class="result form-select shadow-sm" type="text" id="executiveTerritoryCode" name="executiveTerritoryCode">
-                                        <option class="font-italic" selected value="">--- Танланг ---</option>
-                                        <c:forEach var="usrLoc" items="${location}" varStatus="i">
-                                            <option value="${usrLoc.id}">${usrLoc.name1}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                            </c:if>
-                            <div class="col mt-2">
-                                <button type="button" class="btn btn-primary btn-block mt-2"
-                                        onclick="searchResultTableIS(0)"><i class='bx bx-refresh'></i>Излаш
-                                </button>
-                                <button type="reset" class="btn btn-primary btn-block mt-2" onclick="reset(1)">
-                                    <i class='bx bx-trash'></i>
-                                </button>
-                                <c:if test="${userRole == '8' || userRole == '7' || userRole == '6' || userRole == '4'}">
-                                    <button type="button" class="btn btn-primary btn-block mt-2"
-                                            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                            onclick="resetModal()"><i class='bx bx-plus'></i>Киритиш
-                                    </button>
-                                </c:if>
-                            </div>
+                            </div>-->
+
+
                         </div>
                         <!-- Modal 1-qadam-->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -418,7 +420,7 @@
 <%--    });--%>
 <%--</script>--%>
 <script>
-    (function ($) {
+    (function($){
         function getTimer(obj) {
             return obj.data('swd_timer');
         }
@@ -446,6 +448,52 @@
             $(this).hide();
         }
     })(jQuery);
+    function searchResultTableISFirst(x, root = null) {
+        $('#loaderII').removeClass('visually-hidden')
+        if (root) root.preventDefault();
+        var dataS = {
+            // "userLocationCode": $("#userLocationCode").val(),
+            "directionTypeCode": $("#directionTypeCode").val(),
+            // "xbbMailDate": $("#xbbMailDateS").val().toString(),
+            // "xbbMailNum": $("#xbbMailNumS").val(),
+            // "hsCode": $("#hsCodeS").val(),
+            // "productName": $("#productNameS").val(),
+            "sendReqCountryCode": $("#sendReqCountryCodeS").val(),
+            // "sendReqNum": $("#sendReqNumS").val(),
+            // "reqDate": $("#reqDateS").val(),
+            // "responseNum": $("#responseNumS").val(),
+            // "responseDate": $("#responseDateS").val(),
+            // "responseNumSendXbbNum": $("#responseNumSendXbbNumS").val(),
+            // "responseNumSendXbbDate": $("#responseNumSendXbbDateS").val(),
+            // "resultAnswerMailNum": $("#resultAnswerMailNumS").val(),
+            // "resultAnswerMailDate": $("#resultAnswerMailDateS").val(),
+            // "xbbVerdictNum": $("#xbbVerdictNumS").val(),
+            // "xbbVerdictDate": $("#xbbVerdictDateS").val(),
+            "executiveTerritoryCode": $("#executiveTerritoryCode").val(),
+            "status": $("#statusS").val(),
+            "page": x,
+            "size": $("#size").val()
+        }
+        alert($("#executiveTerritoryCode").val())
+        $.ajax({
+            type: "GET",
+            data: dataS,
+            url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/ResultIS",
+            dataType: "html",
+            header: 'Content-type: text/html; charset=utf-8',
+            success: function (res) {
+                $('div#ListCMTable').html(res);
+                $('div#divRowCount').css({'display': ''});
+                $('#loaderII').addClass('visually-hidden');
+            },
+            error: function (res) {
+                setTimeout(()=>{
+                    $('#loaderII').addClass('visually-hidden')
+                },1000)
+            }
+        });
+
+    }
     function searchResultTableIS(x, root = null) {
         $('#loaderII').removeClass('visually-hidden')
         if (root) root.preventDefault();
@@ -628,22 +676,9 @@
     function reset(x) {
         document.getElementById("userLocationCode").value = '';
         document.getElementById("directionTypeCode").value = '';
-        document.getElementById("xbbMailDateS").value = '';
-        document.getElementById("xbbMailNumS").value = '';
-        document.getElementById("hsCodeS").value = '';
-        document.getElementById("productNameS").value = '';
         document.getElementById("sendReqCountryCodeS").value = '';
-        document.getElementById("sendReqNumS").value = '';
-        document.getElementById("reqDateS").value = '';
-        document.getElementById("responseNumS").value = '';
-        document.getElementById("responseDateS").value = '';
-        document.getElementById("responseNumSendXbbNumS").value = '';
-        document.getElementById("responseNumSendXbbDateS").value = '';
-        document.getElementById("resultAnswerMailNumS").value = '';
-        document.getElementById("resultAnswerMailDateS").value = '';
-        document.getElementById("xbbVerdictNumS").value = '';
-        document.getElementById("xbbVerdictDateS").value = '';
         document.getElementById("statusS").value = '';
+        document.getElementById("executiveTerritoryCode").value = '';
     }
     function resetModal() {
         document.getElementById("xbbMailNum").value = '';

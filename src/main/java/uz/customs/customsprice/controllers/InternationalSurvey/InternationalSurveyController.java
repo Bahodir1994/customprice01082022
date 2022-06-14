@@ -125,22 +125,22 @@ public class InternationalSurveyController {
         java.sql.Date responseNumSendXbbDateS = null;
         java.sql.Date resultAnswerMailDateS = null;
         java.sql.Date xbbVerdictDateS = null;
-        if (!Objects.equals(xbbMailDate, "")) {
+        if (xbbMailDate != null && xbbMailDate != "") {
             xbbMailDateS = java.sql.Date.valueOf(xbbMailDate);
         }
-        if (!Objects.equals(reqDate, "")) {
+        if (reqDate != "" && reqDate != null) {
             reqDateS = java.sql.Date.valueOf(reqDate);
         }
-        if (!Objects.equals(responseDate, "")) {
+        if (responseDate != "" && responseDate != null) {
             responseDateS = java.sql.Date.valueOf(responseDate);
         }
-        if (!Objects.equals(responseNumSendXbbDate, "")) {
+        if (responseNumSendXbbDate != "" && responseNumSendXbbDate != null) {
             responseNumSendXbbDateS = java.sql.Date.valueOf(responseNumSendXbbDate);
         }
-        if (!Objects.equals(resultAnswerMailDate, "")) {
+        if (resultAnswerMailDate != "" && resultAnswerMailDate != null) {
             resultAnswerMailDateS = java.sql.Date.valueOf(resultAnswerMailDate);
         }
-        if (!Objects.equals(xbbVerdictDate, "")) {
+        if (xbbVerdictDate != "" && xbbVerdictDate != null) {
             resultAnswerMailDateS = java.sql.Date.valueOf(xbbVerdictDate);
         }
         try {
@@ -186,12 +186,10 @@ public class InternationalSurveyController {
             viewModel.addObject("userRole", userRole);
 
             viewModel.addObject("countryList", countryList);
-            viewModel.addObject("userLocation", userLocation);
-            viewModel.addObject("userRole", userRole);
             viewModel.addObject("directionType", directionType);
             viewModel.addObject("location", location);
 
-            System.out.println(userId);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
