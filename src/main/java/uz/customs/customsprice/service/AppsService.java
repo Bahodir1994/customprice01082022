@@ -51,7 +51,7 @@ public class AppsService {
                     "    cpid.apps_rasp ar\n" +
                     "on\n" +
                     "    a.id=ar.app_id";
-            sqlWhere = " and a.status=110 \n " +
+            sqlWhere = " and a.status in (110, 135) \n " +
                     " and ar.inspector_id='" + userIdS + "' ";
         }
         if (userRole == 6) {
