@@ -24,4 +24,5 @@ public interface EarxivRepo extends JpaRepository<Earxiv, String> {
     @Transactional
     void deleteAllByAppId(String appId);
 
+    Earxiv findByHashAndFileIdAndId(String hash, String fileId, String id);
 }

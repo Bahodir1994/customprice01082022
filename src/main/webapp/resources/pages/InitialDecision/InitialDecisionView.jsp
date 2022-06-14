@@ -40,7 +40,12 @@
                             <tr>
                                 <td>
                                     <div class="title">
-                                        <h4 class="fw-bolder">DASTLABKI QAROR</h4>
+                                        <c:if test="${appInfo[19] == '170' || appInfo[19] =='175'}">
+                                            <h4 class="fw-bolder">ДАСТЛАБКИ ҚАРОР</h4>
+                                        </c:if>
+                                        <c:if test="${appInfo[19] != '170' && appInfo[19] !='175'}">
+                                            <h4 class="fw-bolder">АРИЗА</h4>
+                                        </c:if>
                                     </div>
                                     <style>
                                         @import url('https://fonts.googleapis.com/css?family=Cairo');
@@ -94,87 +99,86 @@
                     <div class="row mt-3">
                         <div class="row invoice-info">
                             <div class="col-6 col-lg-6">
-                                <table class="table table-responsive border-white fs-6 table-sm">
-                                    <thead>
-                                    <c:set var="total" value="${0.0}"/>
-                                    <c:forEach var="val" items="${transports}" varStatus="i">
-                                        <c:set var="total" value="${total + val.transportPrice}"/>
-                                    </c:forEach>
-                                    <c:forEach var="val" items="${appInfo}" varStatus="i">
-                                        <tr>
-                                            <th class="text-end">Аризачи:</th>
-                                            <td>${val[9]}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-end">Телефон рақами:</th>
-                                            <td>${val[11]}</td>
+                                <div class="container">
+                                    <div class="row row-cols-3">
+                                        <c:set var="total" value="${0.0}"/>
+                                        <c:forEach var="val" items="${transports}" varStatus="i">
+                                            <c:set var="total" value="${total + val.transportPrice}"/>
+                                        </c:forEach>
+                                        <c:forEach var="val" items="${appInfo}" varStatus="i">
+                                            <div class="col"></div>
+                                            <div class="col h6">Аризачи:</div>
+                                            <div class="col">${val[9]}</div>
 
-                                        </tr>
-                                        <tr>
-                                            <th class="text-end">Юк жўнатувчи:</th>
-                                            <td>${val[17]} - "${val[18]}</td>
 
-                                        </tr>
-                                        <tr>
-                                            <th class="text-end">Сотувчи:</th>
-                                            <td>${val[3]} - "${val[15]}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-end">Транспорт харажатлари:</th>
-                                            <td><a type="button" class="btn btn-outline-primary btn-sm radius-30" type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                            <div class="col"></div>
+                                            <div class="col h6">Телефон рақами:</div>
+                                            <div class="col">(+998) ${val[11]}</div>
+
+
+                                            <div class="col"></div>
+                                            <div class="col h6">Юк жўнатувчи:</div>
+                                            <div class="col">${val[17]} - "${val[18]}</div>
+
+
+                                            <div class="col"></div>
+                                            <div class="col h6">Сотувчи:</div>
+                                            <div class="col">${val[3]} - "${val[15]}</div>
+
+
+                                            <div class="col"></div>
+                                            <div class="col h6">Транспорт харажатлари:</div>
+                                            <div class="col">
+                                                <a type="button" class="btn btn-outline-primary btn-sm radius-30" type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                                                    data-bs-target="#exampleModal1" style="cursor: pointer;"> <c:out value="${total}"/>
-                                                <i class="bx bx-info-circle"></i>
-                                            </a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </thead>
-                                </table>
-                            </div>
-                            <div class="col-4 col-lg-6">
-                                <table class="table table-responsive border-white fs-6 ">
-                                    <thead>
-                                    <c:forEach var="val" items="${appInfo}" varStatus="i">
-                                        <tr>
-                                            <th class="text-end">Божхона қиймати:</th>
-                                            <td>
-                                                <a type="button" class="btn btn-outline-primary btn-sm radius-30" <%--data-bs-toggle="modal" data-bs-target="#exampleModalfq"--%> style="cursor: pointer;">
-                                                        ${val[30]} Сўмда
                                                     <i class="bx bx-info-circle"></i>
                                                 </a>
-                                            </td>
+                                            </div>
+                                            <div class="col"></div>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-6">
+                                <div class="container">
+                                <c:forEach var="val" items="${appInfo}" varStatus="i">
+                                    <div class="row row-cols-3">
+                                        <div class="col h6">Божхона қиймати:</div>
+                                        <div class="col">
+                                            <a type="button" class="btn btn-outline-primary btn-sm radius-30" <%--data-bs-toggle="modal" data-bs-target="#exampleModalfq"--%> style="cursor: pointer;">
+                                                    ${val[30]} ${val[32]}
+                                                <i class="bx bx-info-circle"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col"></div>
 
-                                        </tr>
-                                        <tr>
-                                            <th class="text-end">Фактура қиймати:</th>
-                                            <td>${val[29]} АҚШ</td>
 
-                                        </tr>
-                                        <tr>
-                                            <th class="text-end">Нетто оғирлиги:</th>
-                                            <td>${val[27]} кг</td>
+                                        <div class="col h6">Фактура қиймати:</div>
+                                        <div class="col">${val[29]} ${val[32]}</div>
+                                        <div class="col"></div>
 
-                                        </tr>
-                                        <tr>
-                                            <th class="text-end">Брутто оғирлиги:</th>
-                                            <td>${val[28]} кг</td>
+                                        <div class="col h6">Нетто оғирлиги:</div>
+                                        <div class="col">${val[27]} кг</div>
+                                        <div class="col"></div>
 
-                                        </tr>
-                                        <tr>
-                                            <th class="text-end">Етказиб бериш шарти:</th>
-                                            <td>${val[22]} - ${val[23]}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-end">Хужжатлар:</th>
-                                            <td>
-                                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    <i class="bx bx-folder-open"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </thead>
-                                </table>
+                                        <div class="col h6">Брутто оғирлиги:</div>
+                                        <div class="col">${val[28]} кг</div>
+                                        <div class="col"></div>
+
+                                        <div class="col h6">Етказиб бериш шарти:</div>
+                                        <div class="col">${val[22]} - ${val[23]}</div>
+                                        <div class="col"></div>
+
+                                        <div class="col h6">Хужжатлар:</div>
+                                        <div class="col">
+                                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                <i class="bx bx-folder-open"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col"></div>
+                                    </div>
+                                </c:forEach>
+                                </div>
                             </div>
                             <!-- Хужжатлар Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -191,19 +195,20 @@
                                                     <th style="border-style: dotted" class="column-title">№</th>
                                                     <th style="border-style: dotted" class="column-title">Хужжат тури</th>
                                                     <th style="border-style: dotted" class="column-title">Хужжат рақами</th>
-                                                    <%--                                                    <th style="border-style: dotted" class="column-title">Хужжат санаси</th>--%>
-                                                    <th style="border-style: dotted" class="column-title">Хужжат файли</th>
+                                                    <th style="border-style: dotted" class="column-title">Хужжат санаси</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach var="pepe" items="${earxivList}" varStatus="i">
                                                     <tr class="even pointer">
                                                         <td class=" ">${i.index+1}</td>
-                                                        <td class=" ">${pepe.docTypeName}</td>
-                                                        <td class=" ">${pepe.docType}<i class="success fa fa-long-arrow-up"></i></td>
-                                                            <%--                                                        <td class=" ">${val.docDate}</td>--%>
-                                                        <td class=" "><a href="<%=request.getContextPath()%>/download/${pepe.hash}/${pepe.fileId}" class="btn btn-outline-primary btn-sm"><i
-                                                                class="fa fa-download">${pepe.docname}</i></a></td>
+                                                        <td class=" ">${pepe.docType}-${pepe.docTypeName}</td>
+                                                        <td class=" ">
+                                                            <a href="<%=request.getContextPath()%>/download/${pepe.hash}/${pepe.fileId}/${pepe.id}" class="">
+                                                                <i class="bx bxs-download bx-sm mt-2">${pepe.fileNum}</i>
+                                                            </a>
+                                                        </td>
+                                                        <td class=" ">${pepe.fileDate}<i class="success fa fa-download"></i></td>
                                                     </tr>
                                                 </c:forEach>
 
@@ -455,9 +460,7 @@
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLongTitle">Танланган усулдан олдинги
                                             усулни қўлламаслик сабаблари</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="col-md-12">

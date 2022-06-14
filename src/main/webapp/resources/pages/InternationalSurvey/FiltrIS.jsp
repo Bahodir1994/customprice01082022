@@ -15,34 +15,24 @@
     String userPost = (String) request.getSession().getAttribute("userPost");
 %>
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--favicon-->
     <link href="<%=request.getContextPath()%>/resources/assets2/images/favicon-32x32.png" type="image/png"/>
-    <!--plugins-->
     <link href="<%=request.getContextPath()%>/resources/assets2/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
-    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css"
-          rel="stylesheet"/>
-    <!-- loader-->
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
     <link href="<%=request.getContextPath()%>/resources/assets2/css/pace.min.css" rel="stylesheet"/>
     <script src="<%=request.getContextPath()%>/resources/assets2/js/pace.min.js"></script>
-    <!-- Bootstrap CSS -->
     <link href="<%=request.getContextPath()%>/resources/assets2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/resources/assets2/css/app.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/resources/assets2/css/icons.css" rel="stylesheet">
-    <!-- Theme Style CSS -->
     <link href="<%=request.getContextPath()%>/resources/assets2/css/dark-theme.css"/>
     <link href="<%=request.getContextPath()%>/resources/assets2/css/semi-dark.css"/>
     <link href="<%=request.getContextPath()%>/resources/assets2/css/header-colors.css"/>
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css"
-          rel="stylesheet"/>
-    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/metismenu/css/metisMenu.min.css"
-          rel="stylesheet"/>
-    <!-- loader-->
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/select2/css/select2-bootstrap4.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -114,9 +104,9 @@
                 <div class="mb-0">
                     <div class="row m-3">
                         <div class="row">
-                            <div class="col">
+                            <div class="col select2-container">
                                 <label class="">Йўналиш</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Халқаро сўровнома йўналиш тури"></i>
-                                <select class="result form-control shadow-sm" type="text" id="directionTypeCode" name="directionTypeCode" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} ">
+                                <select class="form-select" type="text" id="directionTypeCode" name="directionTypeCode" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} ">
                                     <option class="font-italic" selected value="">--- Танланг ---</option>
                                     <c:forEach var="dirTyp" items="${directionType}" varStatus="i">
                                         <option value="${dirTyp.code}">${dirTyp.name}</option>
@@ -270,7 +260,7 @@
                             <c:if test="${userLocation == '1701'}">
                                 <div class="col">
                                     <label class="">Таркибий тузилма</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Таркибий тузилмалар"></i>
-                                    <select class="result form-control shadow-sm" type="text" id="userLocationCode" name="userLocationCode">
+                                    <select class="result form-select shadow-sm" type="text" id="userLocationCode" name="userLocationCode">
                                         <option class="font-italic" selected value="">--- Танланг ---</option>
                                         <c:forEach var="usrLoc" items="${location}" varStatus="i">
                                             <option value="${usrLoc.id}">${usrLoc.name1}</option>
@@ -279,7 +269,7 @@
                                 </div>
                                 <div class="col">
                                     <label class="">Маъсул худуд</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Маъсул худуд"></i>
-                                    <select class="result form-control shadow-sm" type="text" id="executiveTerritoryCode" name="executiveTerritoryCode">
+                                    <select class="result form-select shadow-sm" type="text" id="executiveTerritoryCode" name="executiveTerritoryCode">
                                         <option class="font-italic" selected value="">--- Танланг ---</option>
                                         <c:forEach var="usrLoc" items="${location}" varStatus="i">
                                             <option value="${usrLoc.id}">${usrLoc.name1}</option>
@@ -418,6 +408,15 @@
 </div>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/assets2/plugins/select2/js/select2.min.js"></script>
+<%--<script>--%>
+<%--    $('.single-select').select2({--%>
+<%--        theme: 'bootstrap',--%>
+<%--        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100 form-control') ? '100%' : 'style',--%>
+<%--        placeholder: $(this).data('placeholder'),--%>
+<%--        allowClear: Boolean($(this).data('allow-clear')),--%>
+<%--    });--%>
+<%--</script>--%>
 <script>
     (function ($) {
         function getTimer(obj) {

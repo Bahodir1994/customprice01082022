@@ -131,9 +131,9 @@ public class EarxivService {
         } else return null;
     }
 
-    public Earxiv getByHashAndFileId(String hash, String fileId) {
-        if (earxivRepo.findByHashAndFileId(hash, fileId) != null) {
-            return earxivRepo.findByHashAndFileId(hash, fileId);
+    public Earxiv getByHashAndFileId(String hash, String fileId, String id) {
+        if (earxivRepo.findByHashAndFileIdAndId(hash, fileId, id) != null) {
+            return earxivRepo.findByHashAndFileIdAndId(hash, fileId, id);
         } else return null;
     }
 

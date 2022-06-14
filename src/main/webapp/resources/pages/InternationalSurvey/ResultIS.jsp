@@ -51,7 +51,6 @@
     .filterable .filters input[disabled]:-ms-input-placeholder {
         color: #333;
     }
-
 </style>
 <script>
     $(document).ready(function () {
@@ -98,10 +97,40 @@
     });
 </script>
 
-<div class="panel panel-primary filterable table-responsive">
-    <table class="table align-middle mb-0 table-striped shadow-sm" style="border-style: dotted; border-width: 0.2px">
-        <thead class="table-light">
-        <tr class="filters">
+<div class="table-responsive">
+    <table class="table align-middle mb-0 table-striped shadow-sm table-bordered w-100 mt-1" id="interSurveyTable">
+        <thead>
+        <tr class="text-dark bg-white">
+            <th style="text-align: center;" class="border border-dark dotted border-top-0 border-bottom-0 border-end-0">т/р</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0"><i class="bx bx-edit"></i>Таҳрир</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Ходим</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Таркибий тузилма</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Йўналиш</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">ҲББ томонидан юбоирлган<br>хат рақами</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">ҲББ томонидан юбоирлган<br>хат санаси</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Ташкилот номи</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">ТИФ ТН код</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Товар номи</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Сўровнома юборилган<br>давлат</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Эхтимолий қўшимча <br>хисобланган</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Юборилган сўровнома<br>рақами</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Юборилган сўровнома<br>санаси</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Сўровномага олинган<br>жавоб хати</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Сўровномага олинган жавоб<br>хати санаси</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Сўровномага олинган жавоб хатини<br>ҲББга юборилган хат рақами</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Сўровномага олинган жавоб хатини<br>ҲББга юборилган хат санаси</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Масъул ХББ</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Сўровнома натижаси бўйича жавоб<br>хати рақами</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Сўровнома натижаси бўйича жавоб<br>хати санаси</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">ҲББ хулоса рақами</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">ҲББ хулоса санаси</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Камомад<br>суммаси</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Ундирилган<br>сумма</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Назоратдаги<br>сумма</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0 border-end-0">Фабула</th>
+            <th style="text-align: center;" class="border border-dark border-top-0 border-bottom-0">Изоҳ</th>
+        </tr>
+        <tr class="">
             <th>
                 <button class="btn btn-default btn-xs btn-filter text-primary"><span
                         class="glyphicon glyphicon-filter"></span> Filter
@@ -109,62 +138,116 @@
                 <input type="hidden" class="form-control form-control-sm" placeholder="">
             </th>
             <th><input type="hidden" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
-            <th></th>
-        </tr>
-        <tr class="filters bg-white text-dark">
-            <th style="text-align: center;" class="">т/р</th>
-            <th style="text-align: center;" class=""><i class="bx bx-edit"></i>Таҳрир</th>
-            <th style="text-align: center;" class="">Ходим</th>
-            <th style="text-align: center;" class="">Таркибий<br>тузилма</th>
-            <th style="text-align: center;" class="">Йўналиш</th>
-            <th style="text-align: center;" class="">ҲББ томонидан юбоирлган<br>хат рақами</th>
-            <th style="text-align: center;" class="">ҲББ томонидан юбоирлган<br>хат санаси</th>
-            <th style="text-align: center;" class="">Ташкилот номи</th>
-            <th style="text-align: center;" class="">ТИФ ТН код</th>
-            <th style="text-align: center;" class="">Товар номи</th>
-            <th style="text-align: center;" class="">Сўровнома юборилган<br>давлат</th>
-            <th style="text-align: center;" class="">Эхтимолий қўшимча <br>хисобланган</th>
-            <th style="text-align: center;" class="">Юборилган сўровнома<br>рақами</th>
-            <th style="text-align: center;" class="">Юборилган сўровнома<br>санаси</th>
-            <th style="text-align: center;" class="">Сўровномага олинган<br>жавоб хати</th>
-            <th style="text-align: center;" class="">Сўровномага олинган жавоб<br>хати санаси</th>
-            <th style="text-align: center;" class="">Сўровномага олинган жавоб хатини<br>ҲББга юборилган хат рақами</th>
-            <th style="text-align: center;" class="">Сўровномага олинган жавоб хатини<br>ҲББга юборилган хат санаси</th>
-            <th style="text-align: center;" class="">Масъул ХББ</th>
-            <th style="text-align: center;" class="">Сўровнома натижаси бўйича жавоб<br>хати рақами</th>
-            <th style="text-align: center;" class="">Сўровнома натижаси бўйича жавоб<br>хати санаси</th>
-            <th style="text-align: center;" class="">ҲББ хулоса рақами</th>
-            <th style="text-align: center;" class="">ҲББ хулоса санаси</th>
-            <th style="text-align: center;" class="">Камомад<br>суммаси</th>
-            <th style="text-align: center;" class="">Ундирилган<br>сумма</th>
-            <th style="text-align: center;" class="">Назоратдаги<br>сумма</th>
-            <th style="text-align: center;" class="">Фабула</th>
-            <th style="text-align: center;" class="">Изоҳ</th>
+            <th><input type="text" class="form-control form-control" placeholder="Ходим"></th>
+            <th><input type="text" class="form-control form-control" placeholder="Таркибий тузилма"></th>
+            <th>
+                <select class="result form-select form-control-sm shadow-sm" type="text" id="directionTypeCode" name="directionTypeCode" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} ">
+                    <option class="font-italic text-muted" selected value="">--- Танланг ---</option>
+                    <c:forEach var="dirTyp" items="${directionType}" varStatus="i">
+                        <option value="${dirTyp.code}">${dirTyp.name}</option>
+                    </c:forEach>
+                </select>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="Йўналиш">--%>
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input class="result form-control shadow-sm" type="text" id="xbbMailNumS" name="xbbMailNumS" placeholder="Хат рақами" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input class="result form-control shadow-sm" type="date" id="xbbMailDateS"
+                       name="xbbMailDateS"  onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+
+            </th>
+            <th>
+                <input type="text" class="form-control" placeholder="">
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input class="result form-control shadow-sm" type="text" id="hsCodeS" name="hsCodeS" placeholder="ТИФ ТН код" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input class="result form-control shadow-sm" type="text" id="productNameS"
+                       name="productNameS"  placeholder="Товар номи" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <select class="form-select shadow-sm" id="sendReqCountryCodeS"
+                        name="sendReqCountryCodeS" required="" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+            </th>
+            <th>
+                <input type="text" class="form-control" placeholder="">
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input class="result form-control shadow-sm" type="text" id="sendReqNumS"
+                       name="sendReqNumS" placeholder="Юборилган сўровнома рақами" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input class="result form-control shadow-sm" type="date" id="reqDateS"
+                       name="reqDateS" placeholder="Юборилган сўровнома санаси" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input class="result form-control shadow-sm" type="text" id="responseNumS"
+                       name="responseNumS" placeholder="Сўровномага олинган жавоб хати" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input class="result form-control shadow-sm" type="date" id="responseDateS"
+                       name="responseDateS" placeholder="Олинган жавоб хати санаси" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input class="result form-control shadow-sm" type="text" id="responseNumSendXbbNumS"
+                       name="responseNumSendXbbNumS" placeholder="ХББга юборилган хат рақами" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input class="result form-control shadow-sm" type="date"
+                       id="responseNumSendXbbDateS" name="responseNumSendXbbDateS" placeholder="ҲББга юборилган хат санаси" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+            </th>
+            <th>
+                <input type="text" class="form-control form-control-sm" placeholder="">
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input class="result form-control shadow-sm" type="text" id="resultAnswerMailNumS"
+                       name="resultAnswerMailNumS" placeholder="Натижаси бўйича жавоб хати рақами" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input class="result form-control shadow-sm" type="date" id="resultAnswerMailDateS"
+                       name="resultAnswerMailDateS" placeholder="Натижаси бўйича жавоб хати санаси" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input class="result form-control shadow-sm" type="text" id="xbbVerdictNumS"
+                       name="xbbVerdictNumS" placeholder="ҲББ хулоса рақами" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input class="result form-control shadow-sm" type="date" id="xbbVerdictDateS"
+                       name="xbbVerdictDateS" placeholder="ҲББ хулоса санаси" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+            </th>
+            <th>
+<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+            </th>
+            <th>
+                <input type="text" class="form-control" placeholder="Фабула">
+            </th>
+            <th>
+                <input type="text" class="form-control" placeholder="Изоҳ">
+            </th>
         </tr>
         </thead>
         <style>
@@ -192,12 +275,12 @@
         <c:if test="${tutorials.size() >= 1}">
             <c:forEach var="tut" items="${tutorials}" varStatus="i">
                 <tr>
-                    <td>${((currentPage+1) * getPageSize - getPageSize + 1)+i.index}</td>
+                    <td style="text-align: center">${((currentPage+1) * getPageSize - getPageSize + 1)+i.index}</td>
                     <c:if test="${tut.status == '100'}">
                         <c:if test="${userLocation == '1701'}">
                             <c:if test="${tut.userLocationCode != '1701'}">
                                 <td>
-                                    <button class="btn btn-outline-primary" data-title=""
+                                    <button class="btn btn-primary" data-title=""
                                             data-bs-toggle="modal" data-bs-target="#exampleModal2"
                                             onclick="('${tut.userLocationCode}' === '1701' ? $('#divLocDir').css({'display': ''}) : $('#divLocDir').css({'display': 'none'}));
                                             $('#interSurveyId2').val('${tut.id}');
@@ -216,7 +299,7 @@
                             </c:if>
                             <c:if test="${(tut.savedUserFirstId ==userId) && tut.userLocationCode == '1701'}">
                                 <td>
-                                    <button class="btn btn-outline-primary" data-title=""
+                                    <button class="btn btn-primary" data-title=""
                                             data-bs-toggle="modal" data-bs-target="#exampleModal2"
                                             onclick="('${tut.userLocationCode}' === '1701' ? $('#divLocDir').css({'display': ''}) : $('#divLocDir').css({'display': 'none'}));
                                             $('#interSurveyId2').val('${tut.id}');$('#interSurveyStatus2').val('${tut.status}');
@@ -234,14 +317,14 @@
                             </c:if>
                             <c:if test="${tut.userLocationCode == '1701' && (tut.savedUserFirstId != userId)}">
                                     <td>
-                                        <button class="mess btn btn-outline-primary" data-title="Сиз учун тақиқланган!"><i
+                                        <button class="mess btn btn-primary" data-title="Сиз учун тақиқланган!"><i
                                                 class="bx bx-info-circle"></i></button>
                                     </td>
                             </c:if>
                         </c:if>
                         <c:if test="${userLocation != '1701'}">
                             <td>
-                                <button class="mess btn btn-outline-primary" data-title="Сиз учун тақиқланган!"><i
+                                <button class="mess btn btn-primary" data-title="Сиз учун тақиқланган!"><i
                                         class="bx bx-info-circle"></i></button>
                             </td>
                         </c:if>
@@ -250,7 +333,7 @@
                         <c:if test="${tut.distributed == 'no'}">
                             <c:if test="${(tut.executiveTerritoryCode == userLocation && userId == tut.savedUserFirstId)}">
                                 <td>
-                                    <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    <button class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal3"
                                             onclick="$('#interSurveyId3').val('${tut.id}');$('#interSurveyStatus3').val('${tut.status}')">
                                         <i class="bx bx-plus"></i></button>
@@ -258,7 +341,7 @@
                             </c:if>
                             <c:if test="${(tut.executiveTerritoryCode != userLocation || userId != tut.savedUserFirstId)}">
                                 <td>
-                                    <button class="mess btn btn-outline-primary" data-title="Сиз учун тақиқланган!"><i
+                                    <button class="mess btn btn-primary" data-title="Сиз учун тақиқланган!"><i
                                             class="bx bx-info-circle"></i></button>
                                 </td>
                             </c:if>
@@ -266,7 +349,7 @@
                         <c:if test="${tut.distributed == 'yes'}">
                             <c:if test="${(tut.executiveTerritoryCode == userLocation && userRole == 7)}">
                                 <td>
-                                    <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    <button class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal3"
                                             onclick="$('#interSurveyId3').val('${tut.id}');$('#interSurveyStatus3').val('${tut.status}')">
                                         <i class="bx bx-plus"></i></button>
@@ -274,7 +357,7 @@
                             </c:if>
                             <c:if test="${(tut.executiveTerritoryCode != userLocation || userRole != 7)}">
                                 <td>
-                                    <button class="mess btn btn-outline-primary" data-title="Сиз учун тақиқланган!"><i
+                                    <button class="mess btn btn-primary" data-title="Сиз учун тақиқланган!"><i
                                             class="bx bx-info-circle"></i></button>
                                 </td>
                             </c:if>
@@ -323,14 +406,14 @@
                             <c:if test="${userLocation == '1701'}">
                                 <c:if test="${userId == tut.savedUserFirstId}">
                                     <td>
-                                        <button class="mess btn btn-outline-danger" data-bs-toggle="modal"
+                                        <button class="mess btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#modalAddSumApproved" data-bs-whatever="@mdo"
                                                 data-title="Назоратда"><i class="bx bxs-info-square"></i></button>
                                     </td>
                                 </c:if>
                                 <c:if test="${userId != tut.savedUserFirstId}">
                                     <td>
-                                        <button class="mess btn btn-outline-danger" data-title="Назоратда, Сиз учун тақиқланган!"><i
+                                        <button class="mess btn btn-danger" data-title="Назоратда, Сиз учун тақиқланган!"><i
                                                 class="bx bxs-info-square"></i></button>
                                     </td>
                                 </c:if>
@@ -339,14 +422,14 @@
                                 <c:if test="${tut.distributed == 'no'}">
                                     <c:if test="${userId == tut.savedUserFirstId}">
                                         <td>
-                                            <button class="mess btn btn-outline-danger" data-bs-toggle="modal"
+                                            <button class="mess btn btn-danger" data-bs-toggle="modal"
                                                     data-bs-target="#modalAddSumApproved" data-bs-whatever="@mdo"
                                                     data-title="Назоратда"><i class="bx bxs-info-square"></i></button>
                                         </td>
                                     </c:if>
                                     <c:if test="${userId != tut.savedUserFirstId}">
                                         <td>
-                                            <button class="mess btn btn-outline-danger" data-title="Назоратда, Сиз учун тақиқланган!"><i
+                                            <button class="mess btn btn-danger" data-title="Назоратда, Сиз учун тақиқланган!"><i
                                                     class="bx bxs-info-square"></i></button>
                                         </td>
                                     </c:if>
@@ -354,14 +437,14 @@
                                 <c:if test="${tut.distributed == 'yes'}">
                                     <c:if test="${userRole == 7}">
                                         <td>
-                                            <button class="mess btn btn-outline-danger" data-bs-toggle="modal"
+                                            <button class="mess btn btn-danger" data-bs-toggle="modal"
                                                     data-bs-target="#modalAddSumApproved" data-bs-whatever="@mdo"
                                                     data-title="Назоратда"><i class="bx bxs-info-square"></i></button>
                                         </td>
                                     </c:if>
                                     <c:if test="${userRole != 7}">
                                         <td>
-                                            <button class="mess btn btn-outline-danger" data-title="Назоратда, Сиз учун тақиқланган!"><i
+                                            <button class="mess btn btn-danger" data-title="Назоратда, Сиз учун тақиқланган!"><i
                                                     class="bx bxs-info-square"></i></button>
                                         </td>
                                     </c:if>
@@ -370,7 +453,7 @@
                         </c:if>
                         <c:if test="${tut.sumOnControl == '0.00'}">
                             <td>
-                                <button class="mess btn btn-outline-success" data-title="Якунланган"><i
+                                <button class="mess btn btn-success" data-title="Якунланган"><i
                                         class="bx bx-check"></i></button>
                             </td>
                         </c:if>
@@ -601,8 +684,8 @@
         </tbody>
     </table>
 </div>
-<div class="row">
-    <div class="col-md-5 align-middle">
+<div class="position-relative">
+    <div class="text-left">
         <c:if test="${((currentPage+1) * getPageSize - getPageSize + tutorials.size()) > 1}">
             <p class="text-muted">
                     ${(currentPage+1) * getPageSize - getPageSize + 1} дан
@@ -614,7 +697,7 @@
             <span class="text-primary h5 mt-4">Маълумотлар топилмади!</span>
         </c:if>
     </div>
-    <div class="col-md-7">
+    <div class="position-absolute end-0 translate-middle-y">
         <nav class="" aria-label="Page navigation example">
             <ul class="pagination">
                 <c:if test="${currentPage > 1}">
@@ -950,4 +1033,12 @@
         });
     }
 </script>
+<%--<script src="<%=request.getContextPath()%>/resources/js/colResizable/colresizable/samples/rangeSlider.Demo2/js/jquery.js"></script>--%>
+<%--<link href="<%=request.getContextPath()%>/resources/js/colResizable/colresizable/samples/rangeSlider.Demo2/css/main.css" rel="stylesheet">--%>
+<%--<script src="<%=request.getContextPath()%>/resources/js/colResizable/colresizable/colResizable-1.6.min.js"></script>--%>
+<%--<script>--%>
+<%--    $(function(){--%>
+<%--        $("#interSurveyTable").colResizable('{fixed:false,liveDrag:true}');--%>
+<%--    });--%>
+<%--</script>--%>
 </body>

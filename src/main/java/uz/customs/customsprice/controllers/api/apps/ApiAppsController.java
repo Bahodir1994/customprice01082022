@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import uz.customs.customsprice.controllers.api.files.AppsAndDocsAndTransportsDTO;
+import uz.customs.customsprice.controllers.api.helper.FileUploadHelper;
 import uz.customs.customsprice.controllers.api.helper.ResponseHandler;
 import uz.customs.customsprice.entity.InitialDecision.*;
 import uz.customs.customsprice.entity.classifier.TransportTypeS;
@@ -19,8 +20,12 @@ import uz.customs.customsprice.repository.TransportTypeRepo;
 import uz.customs.customsprice.repository.classifier.TransportTypeSRepo;
 import uz.customs.customsprice.service.*;
 import uz.customs.customsprice.service.earxiv.EarxivService;
+import uz.customs.customsprice.utils.Utils;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.*;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -173,19 +178,36 @@ public class ApiAppsController {
                     Earxiv earxiv = new Earxiv();
                     List<Object[]> fileList = earxivService.getFile1(earxivS.get(i).getFileId());
                     if (fileList.size() > 0) {
+
+                        String fileName = Utils.nullClear(fileList.get(0)[4].toString());
+                        String file_extension = "", file_only_name = "";
+                        String timeStampS = "";
+                        int i_ex = fileName.lastIndexOf('.');
+                        int p_ex = Math.max(fileName.lastIndexOf('/'), fileName.lastIndexOf('\\'));
+                        if (i_ex > p_ex) {
+                            file_extension = fileName.substring(i_ex);
+                        }
+                        if (file_extension.equals("")) file_only_name = fileName;
+                        else file_only_name = fileName.substring(0, (fileName.length() - file_extension.length()));
+
+                        timeStampS = new SimpleDateFormat("dd.MM.yyyy.HH.mm.ss.SSS").format(new Timestamp(System.currentTimeMillis()));
+                        timeStampS = timeStampS.replaceAll("-", "").replaceAll(":", "").replaceAll(" ", "").replaceAll("\\.", "");
+                        timeStampS = timeStampS /*+ "_" + InputName*/ + file_extension;
+
                         earxiv.setAppId(apps.getId());
                         earxiv.setFolderId(fileList.get(0)[0] != null ? fileList.get(0)[0].toString() : "");
                         earxiv.setName(fileList.get(0)[1] != null ? fileList.get(0)[1].toString() : "");
                         earxiv.setUserInn(fileList.get(0)[2] != null ? fileList.get(0)[2].toString() : "");
                         earxiv.setUserPnfl(fileList.get(0)[3] != null ? fileList.get(0)[3].toString() : "");
-                        earxiv.setDocname(fileList.get(0)[4] != null ? fileList.get(0)[4].toString() : "");
+                        earxiv.setDocname(timeStampS);
                         earxiv.setDocType(fileList.get(0)[5] != null ? fileList.get(0)[5].toString() : "");
                         earxiv.setFileId(fileList.get(0)[6] != null ? fileList.get(0)[6].toString() : "");
                         earxiv.setStatus(fileList.get(0)[7] != null ? fileList.get(0)[7].toString() : "");
                         earxiv.setDocTypeName(fileList.get(0)[8] != null ? fileList.get(0)[8].toString() : "");
                         earxiv.setHash(fileList.get(0)[9] != null ? fileList.get(0)[9].toString() : "");
                         earxiv.setFileNum(fileList.get(0)[10] != null ? fileList.get(0)[10].toString() : "");
-                        earxiv.setFileDate(fileList.get(0)[11] != null ? fileList.get(0)[11].toString() : "");
+                        earxiv.setFileDate((Date) fileList.get(0)[11]);
+                        earxiv.setDocNameEx(fileList.get(0)[4] != null ? fileList.get(0)[4].toString() : "");
                     } else {
                         earxiv.setAppId("");
                         earxiv.setFolderId("");
@@ -199,7 +221,8 @@ public class ApiAppsController {
                         earxiv.setStatus("");
                         earxiv.setHash("");
                         earxiv.setFileNum("");
-                        earxiv.setFileDate("");
+                        earxiv.setFileDate(null);
+                        earxiv.setDocNameEx("");
                     }
                     earxivService.create(earxiv);
                     ResponseHandler.generateResponse("Xujjat ma`lumotlari saqlandi!", HttpStatus.OK, earxiv);
@@ -396,19 +419,36 @@ public class ApiAppsController {
                     Earxiv earxiv = new Earxiv();
                     List<Object[]> fileList = earxivService.getFile1(earxivS.get(i).getFileId());
                     if (fileList.size() > 0) {
+
+                        String fileName = Utils.nullClear(fileList.get(0)[4].toString());
+                        String file_extension = "", file_only_name = "";
+                        String timeStampS = "";
+                        int i_ex = fileName.lastIndexOf('.');
+                        int p_ex = Math.max(fileName.lastIndexOf('/'), fileName.lastIndexOf('\\'));
+                        if (i_ex > p_ex) {
+                            file_extension = fileName.substring(i_ex);
+                        }
+                        if (file_extension.equals("")) file_only_name = fileName;
+                        else file_only_name = fileName.substring(0, (fileName.length() - file_extension.length()));
+
+                        timeStampS = new SimpleDateFormat("dd.MM.yyyy.HH.mm.ss.SSS").format(new Timestamp(System.currentTimeMillis()));
+                        timeStampS = timeStampS.replaceAll("-", "").replaceAll(":", "").replaceAll(" ", "").replaceAll("\\.", "");
+                        timeStampS = timeStampS /*+ "_" + InputName*/ + file_extension;
+
                         earxiv.setAppId(apps.getId());
                         earxiv.setFolderId(fileList.get(0)[0] != null ? fileList.get(0)[0].toString() : "");
                         earxiv.setName(fileList.get(0)[1] != null ? fileList.get(0)[1].toString() : "");
                         earxiv.setUserInn(fileList.get(0)[2] != null ? fileList.get(0)[2].toString() : "");
                         earxiv.setUserPnfl(fileList.get(0)[3] != null ? fileList.get(0)[3].toString() : "");
-                        earxiv.setDocname(fileList.get(0)[4] != null ? fileList.get(0)[4].toString() : "");
+                        earxiv.setDocname(timeStampS);
                         earxiv.setDocType(fileList.get(0)[5] != null ? fileList.get(0)[5].toString() : "");
                         earxiv.setFileId(fileList.get(0)[6] != null ? fileList.get(0)[6].toString() : "");
                         earxiv.setStatus(fileList.get(0)[7] != null ? fileList.get(0)[7].toString() : "");
                         earxiv.setDocTypeName(fileList.get(0)[8] != null ? fileList.get(0)[8].toString() : "");
                         earxiv.setHash(fileList.get(0)[9] != null ? fileList.get(0)[9].toString() : "");
                         earxiv.setFileNum(fileList.get(0)[10] != null ? fileList.get(0)[10].toString() : "");
-                        earxiv.setFileDate(fileList.get(0)[11] != null ? fileList.get(0)[11].toString() : "");
+                        earxiv.setFileDate((Date) fileList.get(0)[11]);
+                        earxiv.setDocNameEx(fileList.get(0)[4] != null ? fileList.get(0)[4].toString() : "");
                     } else {
                         earxiv.setAppId("");
                         earxiv.setFolderId("");
@@ -422,7 +462,8 @@ public class ApiAppsController {
                         earxiv.setStatus("");
                         earxiv.setHash("");
                         earxiv.setFileNum("");
-                        earxiv.setFileDate("");
+                        earxiv.setFileDate(null);
+                        earxiv.setDocNameEx("");
                     }
                     earxivService.create(earxiv);
                     ResponseHandler.generateResponse("Xujjat ma`lumotlari saqlandi!", HttpStatus.OK, earxiv);

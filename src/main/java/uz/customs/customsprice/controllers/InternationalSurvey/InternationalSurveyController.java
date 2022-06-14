@@ -144,6 +144,10 @@ public class InternationalSurveyController {
             resultAnswerMailDateS = java.sql.Date.valueOf(xbbVerdictDate);
         }
         try {
+            String lngaTpcd = "UZ";
+            List<Country> countryList = countyRepo.findAllByLngaTpcdOrderByCodeAsc(lngaTpcd);
+            List<DirectionType> directionType = directionTypeRepo.findAll();
+
             List<InternationalSurveyEntity> tutorials = new ArrayList<InternationalSurveyEntity>();
             Pageable paging = PageRequest.of(page, size);
             Page<InternationalSurveyEntity> pageTuts =
@@ -180,6 +184,13 @@ public class InternationalSurveyController {
             viewModel.addObject("userId", userId);
             viewModel.addObject("userLocation", userLocation);
             viewModel.addObject("userRole", userRole);
+
+            viewModel.addObject("countryList", countryList);
+            viewModel.addObject("userLocation", userLocation);
+            viewModel.addObject("userRole", userRole);
+            viewModel.addObject("directionType", directionType);
+            viewModel.addObject("location", location);
+
             System.out.println(userId);
         } catch (Exception e) {
             e.printStackTrace();

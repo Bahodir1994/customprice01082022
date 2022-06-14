@@ -34,7 +34,6 @@ public class FileDownloadController {
         this.dbFileService = dbFileService;
         this.earxivService = earxivService;
     }
-    
 //    @GetMapping
 //    public void downloadFile(@Param("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
 //
@@ -82,10 +81,10 @@ public class FileDownloadController {
 //        }
 //    }
 
-    @GetMapping("/{hash}/{fileId}")
-    public ResponseEntity<byte[]> getFile(@PathVariable String hash, @PathVariable String fileId) {
+    @GetMapping("/{hash}/{fileId}/{id}")
+    public ResponseEntity<byte[]> getFile(@PathVariable String hash, @PathVariable String fileId, @PathVariable String id ) {
         DBFile dbFile = dbFileService.getByHash(hash);
-        Earxiv earxiv = earxivService.getByHashAndFileId(hash, fileId);
+        Earxiv earxiv = earxivService.getByHashAndFileId(hash, fileId, id);
         String fileName = earxiv.getDocname();
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")

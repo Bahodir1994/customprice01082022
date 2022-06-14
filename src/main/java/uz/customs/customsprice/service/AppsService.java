@@ -356,6 +356,7 @@ public class AppsService {
                 /*29 - */"    sum(cm.price)  allprice,\n" +
                 /*30 - */"    sum(cm.customs_price)  allcustoms_price,\n" +
                 /*31 - */"    count(cm.id)   cntcmdt,\n" +
+                /*32 - */"    cm.currency_nm,\n" +
                 "    a.comment \n" +
                 "from\n" +
                 "    apps a\n" +
@@ -395,6 +396,7 @@ public class AppsService {
                 "    a.trans_exp,\n" +
                 "    a.person_id, \n" +
                 "    a.instime,\n" +
+       /*32 - */"    cm.currency_nm,\n" +
                 "    a.comment \n" +
                 "order by\n" +
                 "    a.instime desc";

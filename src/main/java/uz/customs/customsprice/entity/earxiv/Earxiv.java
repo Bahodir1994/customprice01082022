@@ -85,10 +85,13 @@ public class Earxiv extends AbstractAuditingEntity {
     @Temporal(TemporalType.DATE)
     private Date fileDate;
 
+    @Column(name = "DOCNAME_EX", columnDefinition = "VARCHAR(200) CCSID 1208")
+    private String docNameEx;
+
     public Earxiv() {
     }
 
-    public Earxiv(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, String folderId, String name, String userInn, String userPnfl, String docname, String docType, String fileId, String status, String docTypeName, String setFolderId, String partyNo, String docId, String hash, String fileNum, Date fileDate) {
+    public Earxiv(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, String folderId, String name, String userInn, String userPnfl, String docname, String docType, String fileId, String status, String docTypeName, String setFolderId, String partyNo, String docId, String hash, String fileNum, Date fileDate, String docNameEx) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.apps = apps;
@@ -108,6 +111,7 @@ public class Earxiv extends AbstractAuditingEntity {
         this.hash = hash;
         this.fileNum = fileNum;
         this.fileDate = fileDate;
+        this.docNameEx = docNameEx;
     }
 
     public String getId() {
@@ -254,6 +258,12 @@ public class Earxiv extends AbstractAuditingEntity {
         this.fileDate = fileDate;
     }
 
-    public void setFileDate(String s) {
+    public String getDocNameEx() {
+        return docNameEx;
     }
+
+    public void setDocNameEx(String docNameEx) {
+        this.docNameEx = docNameEx;
+    }
+
 }
