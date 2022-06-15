@@ -41,6 +41,9 @@ public class OutProgram {
     @Autowired
     LocationRepo locationRepo;
 
+    @Autowired
+    RollBackAppRepo rollBackAppRepo;
+
     /************************(PersonId бўйча App ларни беради)****************************/
     @GetMapping("/tutorials/published")
     public ResponseEntity<Map<String, Object>> findByPersonIdToApp(
@@ -161,9 +164,12 @@ public class OutProgram {
 
             Page<StatusH> pageTuts = statusHRepo.findByAppId(appId, paging);
             tutorials = pageTuts.getContent();
+            RollBackApp rollBackApp =new RollBackApp();
+            rollBackApp = rollBackAppRepo.getByAppId(appId);
 
             Map<String, Object> response = new HashMap<>();
             response.put("statusAppHistoryList", tutorials);
+            response.put("rollbackApp", rollBackApp);
             response.put("currentPage", pageTuts.getNumber());
             response.put("totalItems", pageTuts.getTotalElements());
             response.put("totalPages", pageTuts.getTotalPages());

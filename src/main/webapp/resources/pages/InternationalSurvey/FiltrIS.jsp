@@ -498,7 +498,7 @@
         if (root) root.preventDefault();
         var dataS = {
             "userLocationCode": $("#userLocationCode").val(),
-            "directionTypeCode": $("#directionTypeCode").val(),
+            // "directionTypeCode": $("#directionTypeCode").val(),
             "xbbMailDate": $("#xbbMailDateS").val().toString(),
             "xbbMailNum": $("#xbbMailNumS").val(),
             "hsCode": $("#hsCodeS").val(),

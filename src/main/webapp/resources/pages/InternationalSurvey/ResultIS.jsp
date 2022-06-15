@@ -64,12 +64,12 @@
             <th><input type="text" class="form-control form-control" placeholder="Ходим"></th>
             <th><input type="text" class="form-control form-control" placeholder="Таркибий тузилма"></th>
             <th>
-                <select class="result form-select form-control-sm shadow-sm" type="text" id="directionTypeCode" name="directionTypeCode" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} ">
-                    <option class="font-italic text-muted" selected value="">--- Танланг ---</option>
-                    <c:forEach var="dirTyp" items="${directionType}" varStatus="i">
-                        <option value="${dirTyp.code}">${dirTyp.name}</option>
-                    </c:forEach>
-                </select>
+<%--                <select class="result form-select form-control-sm shadow-sm" type="text" id="directionTypeCode" name="directionTypeCode" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} ">--%>
+<%--                    <option class="font-italic text-muted" selected value="">--- Танланг ---</option>--%>
+<%--                    <c:forEach var="dirTyp" items="${directionType}" varStatus="i">--%>
+<%--                        <option value="${dirTyp.code}">${dirTyp.name}</option>--%>
+<%--                    </c:forEach>--%>
+<%--                </select>--%>
             </th>
             <th>
                 <input class="result form-control shadow-sm" type="text" id="xbbMailNumS" name="xbbMailNumS" placeholder="Хат рақами" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
