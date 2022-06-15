@@ -90,12 +90,15 @@ public class InternationalSurveyController {
             HttpSession session,
             HttpServletRequest request,
             @RequestParam(required = false) String userLocationCode,
+            @RequestParam(required = false) String savedUserFirst,
             @RequestParam(required = false) String directionTypeCode,
             @RequestParam(required = false) String xbbMailDate,
+            @RequestParam(required = false) String orgName,
             @RequestParam(required = false) String xbbMailNum,
             @RequestParam(required = false) String hsCode,
             @RequestParam(required = false) String productName,
             @RequestParam(required = false) String sendReqCountryCode,
+            @RequestParam(required = false) String sumProbability,
             @RequestParam(required = false) String sendReqNum,
             @RequestParam(required = false) String reqDate,
             @RequestParam(required = false) String responseNum,
@@ -108,6 +111,8 @@ public class InternationalSurveyController {
             @RequestParam(required = false) String xbbVerdictDate,
             @RequestParam(required = false) String executiveTerritoryCode,
             @RequestParam(required = false) String status,
+            @RequestParam(required = false) String comment,
+            @RequestParam(required = false) String fabula,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "0") int size
     ) {
@@ -160,12 +165,15 @@ public class InternationalSurveyController {
             Page<InternationalSurveyEntity> pageTuts =
                     internationalSurveyRepo.findAllByOrderByInsTimeAscAndOrgNameAndHsCode(
                             userLocationCode,
+                            savedUserFirst,
                             directionTypeCode,
                             xbbMailNum,
                             xbbMailDateS,
+                            orgName,
                             hsCode,
                             productName,
                             sendReqCountryCode,
+                            sumProbability,
                             sendReqNum,
                             reqDateS,
                             responseNum,
@@ -178,6 +186,8 @@ public class InternationalSurveyController {
                             xbbVerdictDateS,
                             executiveTerritoryCode,
                             status,
+                            comment,
+                            fabula,
                             paging
                     );
             tutorials = pageTuts.getContent();

@@ -56,102 +56,97 @@
             <th style="text-align: center;border-style: dotted!important;" class="bg-light-primary border border-dark border-top-0 ">Изоҳ</th>
         </tr>
         <tr class="">
-            <th colspan="2">
-                <button class="btn btn-outline-primary btn-sm"><span
-                        class="glyphicon glyphicon-filter"></span><i class="bx bxs-trash">Филтр</i>
+            <th></th>
+            <th>
+                <button class="btn btn-outline-primary btn-sm btn-block" onclick="resetFilterOoTable(1)">
+                    <span class="glyphicon glyphicon-filter"></span>
+                    <i class="bx bxs-trash"></i>
                 </button>
             </th>
-            <th><input type="text" class="form-control form-control" placeholder="Ходим"></th>
-            <th><input type="text" class="form-control form-control" placeholder="Таркибий тузилма"></th>
             <th>
-<%--                <select class="result form-select form-control-sm shadow-sm" type="text" id="directionTypeCode" name="directionTypeCode" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} ">--%>
-<%--                    <option class="font-italic text-muted" selected value="">--- Танланг ---</option>--%>
-<%--                    <c:forEach var="dirTyp" items="${directionType}" varStatus="i">--%>
-<%--                        <option value="${dirTyp.code}">${dirTyp.name}</option>--%>
-<%--                    </c:forEach>--%>
-<%--                </select>--%>
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;"
+                       class="result form-control" type="text" id="savedUserFirstS" name="savedUserFirstS" placeholder="Ходим" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
             <th>
-                <input class="result form-control shadow-sm" type="text" id="xbbMailNumS" name="xbbMailNumS" placeholder="Хат рақами" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+                <select style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" onchange="searchResultTableIS(0)"
+                    class="result form-select" type="text" id="userLocationCodeS" name="userLocationCodeS">
+                    <option class="font-italic" selected value="">--- Танланг ---</option>
+                    <c:forEach var="usrLoc" items="${location}" varStatus="i">
+                        <option value="${usrLoc.id}">${usrLoc.name1}</option>
+                    </c:forEach>
+                </select>
+            </th>
+            <th></th>
+            <th>
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" class="result form-control" type="text" id="xbbMailNumS" name="xbbMailNumS" placeholder="Хат рақами" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
             <th>
-                <input class="result form-control shadow-sm" type="date" id="xbbMailDateS"
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" class="result form-control" type="date" id="xbbMailDateS"
                        name="xbbMailDateS"  onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
             <th>
-                <input type="text" class="form-control" placeholder="">
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" type="text" id="orgNameS" name="orgNameS" class="form-control" placeholder="Ташкилот номи" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} ">
             </th>
             <th>
-                <input class="result form-control shadow-sm" type="text" id="hsCodeS" name="hsCodeS" placeholder="ТИФ ТН код" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" class="result form-control" type="text" id="hsCodeS" name="hsCodeS" placeholder="ТИФ ТН код" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
             <th>
-                <input class="result form-control shadow-sm" type="text" id="productNameS"
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" class="result form-control" type="text" id="productNameS"
                        name="productNameS"  placeholder="Товар номи" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
+            <th></th>
             <th>
-                <select class="form-select shadow-sm" id="sendReqCountryCodeS"
-                        name="sendReqCountryCodeS" required="" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" id="sumProbabilityS" name="sumProbabilityS" type="text" class="form-control" placeholder="Эхтимолий қўшимча хисобланган" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
             <th>
-                <input type="text" class="form-control" placeholder="">
-            </th>
-            <th>
-                <input class="result form-control shadow-sm" type="text" id="sendReqNumS"
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" class="result form-control" type="text" id="sendReqNumS"
                        name="sendReqNumS" placeholder="Юборилган сўровнома рақами" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
             <th>
-                <input class="result form-control shadow-sm" type="date" id="reqDateS"
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" class="result form-control" type="date" id="reqDateS"
                        name="reqDateS" placeholder="Юборилган сўровнома санаси" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
             <th>
-                <input class="result form-control shadow-sm" type="text" id="responseNumS"
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" class="result form-control" type="text" id="responseNumS"
                        name="responseNumS" placeholder="Сўровномага олинган жавоб хати" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
             <th>
-                <input class="result form-control shadow-sm" type="date" id="responseDateS"
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" class="result form-control" type="date" id="responseDateS"
                        name="responseDateS" placeholder="Олинган жавоб хати санаси" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
             <th>
-                <input class="result form-control shadow-sm" type="text" id="responseNumSendXbbNumS"
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" class="result form-control" type="text" id="responseNumSendXbbNumS"
                        name="responseNumSendXbbNumS" placeholder="ХББга юборилган хат рақами" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
             <th>
-                <input class="result form-control shadow-sm" type="date"
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" class="result form-control" type="date"
                        id="responseNumSendXbbDateS" name="responseNumSendXbbDateS" placeholder="ҲББга юборилган хат санаси" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
+            <th></th>
             <th>
-
-            </th>
-            <th>
-                <input class="result form-control shadow-sm" type="text" id="resultAnswerMailNumS"
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" class="result form-control" type="text" id="resultAnswerMailNumS"
                        name="resultAnswerMailNumS" placeholder="Натижаси бўйича жавоб хати рақами" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
             <th>
-                <input class="result form-control shadow-sm" type="date" id="resultAnswerMailDateS"
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" class="result form-control" type="date" id="resultAnswerMailDateS"
                        name="resultAnswerMailDateS" placeholder="Натижаси бўйича жавоб хати санаси" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
             <th>
-                <input class="result form-control shadow-sm" type="text" id="xbbVerdictNumS"
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" class="result form-control" type="text" id="xbbVerdictNumS"
                        name="xbbVerdictNumS" placeholder="ҲББ хулоса рақами" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
             <th>
-                <input class="result form-control shadow-sm" type="date" id="xbbVerdictDateS"
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" class="result form-control" type="date" id="xbbVerdictDateS"
                        name="xbbVerdictDateS" placeholder="ҲББ хулоса санаси" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
+            <th></th>
+            <th></th>
+            <th></th>
             <th>
-<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" id="fabulaS" name="fabulaS" type="text" class="form-control" placeholder="Фабула" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
             <th>
-<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
-            </th>
-            <th>
-<%--                <input type="text" class="form-control form-control-sm" placeholder="">--%>
-            </th>
-            <th>
-                <input type="text" class="form-control" placeholder="Фабула">
-            </th>
-            <th>
-                <input type="text" class="form-control" placeholder="Изоҳ">
+                <input style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" id="commentS" name="commentS" type="text" class="form-control" placeholder="Изоҳ" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
             </th>
         </tr>
         </thead>
@@ -185,7 +180,7 @@
                         <c:if test="${userLocation == '1701'}">
                             <c:if test="${tut.userLocationCode != '1701'}">
                                 <td>
-                                    <button class="btn btn-primary" data-title=""
+                                    <button class="btn btn-primary btn-sm" data-title=""
                                             data-bs-toggle="modal" data-bs-target="#exampleModal2"
                                             onclick="('${tut.userLocationCode}' === '1701' ? $('#divLocDir').css({'display': ''}) : $('#divLocDir').css({'display': 'none'}));
                                             $('#interSurveyId2').val('${tut.id}');
@@ -204,7 +199,7 @@
                             </c:if>
                             <c:if test="${(tut.savedUserFirstId ==userId) && tut.userLocationCode == '1701'}">
                                 <td>
-                                    <button class="btn btn-primary" data-title=""
+                                    <button class="btn btn-primary btn-sm" data-title=""
                                             data-bs-toggle="modal" data-bs-target="#exampleModal2"
                                             onclick="('${tut.userLocationCode}' === '1701' ? $('#divLocDir').css({'display': ''}) : $('#divLocDir').css({'display': 'none'}));
                                             $('#interSurveyId2').val('${tut.id}');$('#interSurveyStatus2').val('${tut.status}');
@@ -222,14 +217,14 @@
                             </c:if>
                             <c:if test="${tut.userLocationCode == '1701' && (tut.savedUserFirstId != userId)}">
                                     <td>
-                                        <button class="mess btn btn-primary" data-title="Сиз учун тақиқланган!"><i
+                                        <button class="mess btn btn-primary btn-sm" data-title="Сиз учун тақиқланган!"><i
                                                 class="bx bx-info-circle"></i></button>
                                     </td>
                             </c:if>
                         </c:if>
                         <c:if test="${userLocation != '1701'}">
                             <td>
-                                <button class="mess btn btn-primary" data-title="Сиз учун тақиқланган!"><i
+                                <button class="mess btn btn-primary btn-sm" data-title="Сиз учун тақиқланган!"><i
                                         class="bx bx-info-circle"></i></button>
                             </td>
                         </c:if>
@@ -238,7 +233,7 @@
                         <c:if test="${tut.distributed == 'no'}">
                             <c:if test="${(tut.executiveTerritoryCode == userLocation && userId == tut.savedUserFirstId)}">
                                 <td>
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal3"
                                             onclick="$('#interSurveyId3').val('${tut.id}');$('#interSurveyStatus3').val('${tut.status}')">
                                         <i class="bx bx-plus"></i></button>
@@ -246,7 +241,7 @@
                             </c:if>
                             <c:if test="${(tut.executiveTerritoryCode != userLocation || userId != tut.savedUserFirstId)}">
                                 <td>
-                                    <button class="mess btn btn-primary" data-title="Сиз учун тақиқланган!"><i
+                                    <button class="mess btn btn-primary btn-sm" data-title="Сиз учун тақиқланган!"><i
                                             class="bx bx-info-circle"></i></button>
                                 </td>
                             </c:if>
@@ -254,7 +249,7 @@
                         <c:if test="${tut.distributed == 'yes'}">
                             <c:if test="${(tut.executiveTerritoryCode == userLocation && userRole == 7)}">
                                 <td>
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal3"
                                             onclick="$('#interSurveyId3').val('${tut.id}');$('#interSurveyStatus3').val('${tut.status}')">
                                         <i class="bx bx-plus"></i></button>
@@ -262,7 +257,7 @@
                             </c:if>
                             <c:if test="${(tut.executiveTerritoryCode != userLocation || userRole != 7)}">
                                 <td>
-                                    <button class="mess btn btn-primary" data-title="Сиз учун тақиқланган!"><i
+                                    <button class="mess btn btn-primary btn-sm" data-title="Сиз учун тақиқланган!"><i
                                             class="bx bx-info-circle"></i></button>
                                 </td>
                             </c:if>
@@ -298,7 +293,7 @@
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"
                                                     id="modalAddSumApprovedClose"><i class="bx bx-window-close"></i>
                                             </button>
                                             <button type="button" class="btn btn-primary"
@@ -311,14 +306,14 @@
                             <c:if test="${userLocation == '1701'}">
                                 <c:if test="${userId == tut.savedUserFirstId}">
                                     <td>
-                                        <button class="mess btn btn-danger" data-bs-toggle="modal"
+                                        <button class="mess btn btn-danger btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#modalAddSumApproved" data-bs-whatever="@mdo"
                                                 data-title="Назоратда"><i class="bx bxs-info-square"></i></button>
                                     </td>
                                 </c:if>
                                 <c:if test="${userId != tut.savedUserFirstId}">
                                     <td>
-                                        <button class="mess btn btn-danger" data-title="Назоратда, Сиз учун тақиқланган!"><i
+                                        <button class="mess btn btn-danger btn-sm" data-title="Назоратда, Сиз учун тақиқланган!"><i
                                                 class="bx bxs-info-square"></i></button>
                                     </td>
                                 </c:if>
@@ -327,14 +322,14 @@
                                 <c:if test="${tut.distributed == 'no'}">
                                     <c:if test="${userId == tut.savedUserFirstId}">
                                         <td>
-                                            <button class="mess btn btn-danger" data-bs-toggle="modal"
+                                            <button class="mess btn btn-danger btn-sm" data-bs-toggle="modal"
                                                     data-bs-target="#modalAddSumApproved" data-bs-whatever="@mdo"
                                                     data-title="Назоратда"><i class="bx bxs-info-square"></i></button>
                                         </td>
                                     </c:if>
                                     <c:if test="${userId != tut.savedUserFirstId}">
                                         <td>
-                                            <button class="mess btn btn-danger" data-title="Назоратда, Сиз учун тақиқланган!"><i
+                                            <button class="mess btn btn-danger btn-sm" data-title="Назоратда, Сиз учун тақиқланган!"><i
                                                     class="bx bxs-info-square"></i></button>
                                         </td>
                                     </c:if>
@@ -342,14 +337,14 @@
                                 <c:if test="${tut.distributed == 'yes'}">
                                     <c:if test="${userRole == 7}">
                                         <td>
-                                            <button class="mess btn btn-danger" data-bs-toggle="modal"
+                                            <button class="mess btn btn-danger btn-sm" data-bs-toggle="modal"
                                                     data-bs-target="#modalAddSumApproved" data-bs-whatever="@mdo"
                                                     data-title="Назоратда"><i class="bx bxs-info-square"></i></button>
                                         </td>
                                     </c:if>
                                     <c:if test="${userRole != 7}">
                                         <td>
-                                            <button class="mess btn btn-danger" data-title="Назоратда, Сиз учун тақиқланган!"><i
+                                            <button class="mess btn btn-danger btn-sm" data-title="Назоратда, Сиз учун тақиқланган!"><i
                                                     class="bx bxs-info-square"></i></button>
                                         </td>
                                     </c:if>
@@ -358,7 +353,7 @@
                         </c:if>
                         <c:if test="${tut.sumOnControl == '0.00'}">
                             <td>
-                                <button class="mess btn btn-success" data-title="Якунланган"><i
+                                <button class="mess btn btn-success btn-sm" data-title="Якунланган"><i
                                         class="bx bx-check"></i></button>
                             </td>
                         </c:if>
@@ -582,8 +577,6 @@
         <c:if test="${tutorials.size() < 1}">
             <tr>
                 <td class="no-result text-center" style="text-align: center" colspan="38">Маълумотлар топилмади!</td>
-<%--                <td class="no-result text-center" style="text-align: center" colspan="10">Маълумотлар топилмади!</td>--%>
-<%--                <td class="no-result text-center" style="text-align: center" colspan="9">Маълумотлар топилмади!</td>--%>
             </tr>
         </c:if>
         </tbody>

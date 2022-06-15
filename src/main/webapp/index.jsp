@@ -836,7 +836,6 @@
     new PerfectScrollbar('.email-list');
 </script>
 <script src="<%=request.getContextPath()%>/resources/assets2/data-table/jquery.dataTables.min.js"></script>
-<%--<script src="<%=request.getContextPath()%>/resources/assets2/plugins/select2/js/select2.min.js"></script>--%>
 <script>
     $("#headercolor1").ready(function () {
         $("html").addClass("color-header headercolor1");
@@ -913,6 +912,12 @@
             url: "<%=request.getContextPath()%>/main/resources/pages/ClassProduct/ListClassProduct",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
             success: function (res) {
                 $('div#MainContent').html(res);
             },
@@ -922,8 +927,6 @@
     }
     /* Маълумотларни твқсимлаш */
     function InitialDecisionRasp(x) {
-        $('#MainContent').remove();
-        $('#preloader').removeClass('visually-hidden');
         var dataS = {
             "id": x
         }
@@ -935,16 +938,17 @@
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
             beforeSend: function () {
-                $("#loading").show();
+                $('#preloader').removeClass('visually-hidden');
             },
             complete: function () {
-                $("#loading").hide();
+                $('#preloader').addClass('visually-hidden');
             },
             success: function (res) {
                 $('#preloader').addClass('visually-hidden');
                 $('div#MainContent').html(res);
             },
             error: function (res) {
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }
@@ -961,10 +965,8 @@
             header: 'Content-type: text/html; charset=utf-8',
             beforeSend: function () {
                 $('#preloader').removeClass('visually-hidden');
-                $("#loading").show();
             },
             complete: function () {
-                $("#loading").hide();
                 $('#preloader').addClass('visually-hidden');
             },
             success: function (res) {
@@ -986,10 +988,17 @@
             url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecision1",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
             success: function (res) {
                 $('div#MainContent').html(res);
             },
             error: function (res) {
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }
@@ -1004,10 +1013,17 @@
             url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionView",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
             success: function (res) {
                 $('div#MainContent').html(res);
             },
             error: function (res) {
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }
@@ -1022,11 +1038,18 @@
             url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/DigestsPage",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
             success: function (res) {
                 $('div#MainContent').html(res);
 
             },
             error: function (res) {
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }
@@ -1041,6 +1064,12 @@
             url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/QiymatRejectModal",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
             success: function (res) {
                 console.log('clicked');
                 $('#ModalSentMess').html(res);
@@ -1049,6 +1078,7 @@
             },
             error: function () {
                 console.log("error");
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }
@@ -1063,6 +1093,12 @@
             url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/QiymatConsultModal",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
             success: function (res) {
                 console.log('clicked');
                 $('#ModalSentMess').html(res);
@@ -1071,6 +1107,7 @@
             },
             error: function () {
                 console.log("error");
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }
@@ -1085,6 +1122,12 @@
             url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/QiymatShartliModal",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
             success: function (res) {
                 console.log('clicked');
                 $('#ModalSentMess').html(res);
@@ -1093,6 +1136,7 @@
             },
             error: function () {
                 console.log("error");
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }
@@ -1107,11 +1151,17 @@
             url: "<%=request.getContextPath()%>/resources/pages/ErrorPage/ErrorMessage.jsp",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
             success: function (res) {
                 $('div#MainContent').html(res);
-
             },
             error: function (res) {
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }
@@ -1125,6 +1175,12 @@
             url: "${pageContext.servletContext.contextPath}/checkRole/checkRole",
             async: false,
             data: dataS,
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
             success: function (res) {
                 window.location.reload();
                 $('#roleName').html(res.roleName);
@@ -1134,6 +1190,7 @@
                 if (res.status == 401) {
                     $(".logOutForm").submit();
                 }
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }
@@ -1148,11 +1205,17 @@
             url: "<%=request.getContextPath()%>/costmonitoring/resources/pages/CostMonitoring/FiltrCM",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
             success: function (res) {
                 $('div#MainContent').html(res);
-
             },
             error: function (res) {
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }
@@ -1167,11 +1230,17 @@
             url: "<%=request.getContextPath()%>/logicalcontrolss/resources/pages/LogicalControl/FilterLC",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
             success: function (res) {
                 $('div#MainContent').html(res);
-
             },
             error: function (res) {
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }
@@ -1186,11 +1255,17 @@
             url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/FilterIS",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
             success: function (res) {
                 $('div#MainContent').html(res);
-
             },
             error: function (res) {
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }

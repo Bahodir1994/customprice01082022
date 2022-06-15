@@ -683,15 +683,21 @@
             url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/DigestsFirst",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
             success: function (res) {
                 document.body.style.cursor = "default";
                 $('div#MainContent').html(res);
             },
             error: function (res) {
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }
-
     /* BYDHistory */
     function BYDHistory(x) {
         var dataS = {
@@ -704,11 +710,18 @@
             url: "<%=request.getContextPath()%>/digests/resources/pages/Digests/FilterBYDHistory",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
             success: function (res) {
                 document.body.style.cursor = "default";
                 $('div#MainContent').html(res);
             },
             error: function (res) {
+                $('#preloader').addClass('visually-hidden');
             }
         });
     }

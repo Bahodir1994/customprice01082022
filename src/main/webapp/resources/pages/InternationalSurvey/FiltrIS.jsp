@@ -123,10 +123,12 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <label class="">Сўровнома юборилган давлат</label><i class="bx bx-info-circle"
-                                                                                     data-bs-toggle="tooltip"
-                                                                                     data-bs-placement="top"
-                                                                                     title="Сўровнома юборилган давлат"></i>
+                                <label class="">Сўровнома юборилган давлат</label>
+                                    <i class="bx bx-info-circle"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="top"
+                                       title="Сўровнома юборилган давлат">
+                                    </i>
                                 <select class="form-select shadow-sm" id="sendReqCountryCodeS"
                                         name="sendReqCountryCodeS" required=""/>
                                 <option value="">--Танланг--</option>
@@ -138,7 +140,7 @@
                             <c:if test="${userLocation == '1701'}">
                                 <div class="col-md-3">
                                     <label class="">Таркибий тузилма</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Таркибий тузилмалар"></i>
-                                    <select class="result form-select shadow-sm" type="text" id="userLocationCode" name="userLocationCode">
+                                    <select class="result form-select shadow-sm" type="text" id="userLocationCodeS1" name="userLocationCodeS1">
                                         <option class="font-italic" selected value="">--- Танланг ---</option>
                                         <c:forEach var="usrLoc" items="${location}" varStatus="i">
                                             <option value="${usrLoc.id}">${usrLoc.name1}</option>
@@ -159,9 +161,16 @@
                                 <button type="button" class="btn btn-primary btn-block mt-3"
                                         onclick="searchResultTableISFirst(0)"><i class='bx bx-refresh'></i>Излаш
                                 </button>
+                                <c:if test="${userLocation != '1701'}">
                                 <button type="reset" class="btn btn-primary btn-block mt-3" onclick="reset(1)">
                                     <i class='bx bx-trash'></i>
                                 </button>
+                                </c:if>
+                                <c:if test="${userLocation == '1701'}">
+                                    <button type="reset" class="btn btn-primary btn-block mt-3" onclick="resetS(1)">
+                                        <i class='bx bx-trash'></i>
+                                    </button>
+                                </c:if>
                                 <c:if test="${userRole == '8' || userRole == '7' || userRole == '6' || userRole == '4'}">
                                     <button type="button" class="btn btn-primary btn-block mt-3"
                                             class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -170,129 +179,12 @@
                                 </c:if>
                             </div>
                             <div id="target" name="target"></div>
-                            <!--<div class="col">
-                                <label class="">Хат рақами</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="ҲББ томонидан юбоирлган хат рақами"></i>
-                                <input class="result form-control shadow-sm" type="text" id="xbbMailNumS" value="" name="xbbMailNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                            </div>
-                            <div class="col">
-                                <label class="">Санаси</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
-                                                                 data-bs-placement="top"
-                                                                 title="ҲББ томонидан юбоирлган хат санаси"></i>
-                                <input class="result form-control shadow-sm" type="date" id="xbbMailDateS"
-                                       name="xbbMailDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                            </div>
-                            <div class="col">
-                                <label class="">ТИФ ТН код</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
-                                                                     data-bs-placement="top" title="ТИФ ТН код"></i>
-                                <input class="result form-control shadow-sm" type="text" id="hsCodeS" name="hsCodeS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                            </div>-->
                         </div>
                         <div class="row">
-                            <!--<div class="col">
-                                <label class="">Товар номи</label><i class="bx bx-info-circle" data-bs-toggle="tooltip"
-                                                                     data-bs-placement="top" title="Товар номи"></i>
-                                <input class="result form-control shadow-sm" type="text" id="productNameS"
-                                       name="productNameS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                            </div>-->
-                            <!--<div class="col">
-                                <div class="">
-                                    <label class="">Юборилган сўровнома рақами</label><i class="bx bx-info-circle"
-                                                                                         data-bs-toggle="tooltip"
-                                                                                         data-bs-placement="top"
-                                                                                         title="Юборилган сўровнома рақами"></i>
-                                    <input class="result form-control shadow-sm" type="text" id="sendReqNumS"
-                                           name="sendReqNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="">
-                                    <label class="">Юборилган сўровнома санаси</label><i class="bx bx-info-circle"
-                                                                                         data-bs-toggle="tooltip"
-                                                                                         data-bs-placement="top"
-                                                                                         title="Юборилган сўровнома санаси"></i>
-                                    <input class="result form-control shadow-sm" type="date" id="reqDateS"
-                                           name="reqDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <label class="">Сўровномага олинган жавоб хати</label><i class="bx bx-info-circle"
-                                                                                         data-bs-toggle="tooltip"
-                                                                                         data-bs-placement="top"
-                                                                                         title="Сўровномага олинган жавоб хати"></i>
-                                <input class="result form-control shadow-sm" type="text" id="responseNumS"
-                                       name="responseNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                            </div>-->
                         </div>
                         <div class="row">
-                            <!--<div class="col">
-                                <label class="">Олинган жавоб хати санаси</label><i class="bx bx-info-circle"
-                                                                                    data-bs-toggle="tooltip"
-                                                                                    data-bs-placement="top"
-                                                                                    title="Сўровномага олинган жавоб хати санаси"></i>
-                                <input class="result form-control shadow-sm" type="date" id="responseDateS"
-                                       name="responseDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                            </div>
-                            <div class="col">
-                                <div class="">
-                                    <label class="">ХББга юборилган хат рақами</label><i class="bx bx-info-circle"
-                                                                                         data-bs-toggle="tooltip"
-                                                                                         data-bs-placement="top"
-                                                                                         title="Сўровномага олинган жавоб хатини ҲББга юборилган хат рақами"></i>
-                                    <input class="result form-control shadow-sm" type="text" id="responseNumSendXbbNumS"
-                                           name="responseNumSendXbbNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="">
-                                    <label class="">ҲББга юборилган хат санаси</label><i class="bx bx-info-circle"
-                                                                                         data-bs-toggle="tooltip"
-                                                                                         data-bs-placement="top"
-                                                                                         title="Сўровномага олинган жавоб хатини ҲББга юборилган хат санаси"></i>
-                                    <input class="result form-control shadow-sm" type="date"
-                                           id="responseNumSendXbbDateS" name="responseNumSendXbbDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="">
-                                    <label class="">Натижаси бўйича жавоб хати рақами</label><i
-                                        class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Сўровнома натижаси бўйича жавоб хати рақами"></i>
-                                    <input class="result form-control shadow-sm" type="text" id="resultAnswerMailNumS"
-                                           name="resultAnswerMailNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="">
-                                    <label class="">Натижаси бўйича жавоб хати санаси</label><i
-                                        class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Сўровнома натижаси бўйича жавоб хати санаси"></i>
-                                    <input class="result form-control shadow-sm" type="date" id="resultAnswerMailDateS"
-                                           name="resultAnswerMailDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                                </div>
-                            </div>-->
                         </div>
                         <div class="row">
-                            <!--<div class="col">
-                                <div class="">
-                                    <label class="">ҲББ хулоса рақами</label><i class="bx bx-info-circle"
-                                                                                data-bs-toggle="tooltip"
-                                                                                data-bs-placement="top"
-                                                                                title="ҲББ хулоса рақами"></i>
-                                    <input class="result form-control shadow-sm" type="text" id="xbbVerdictNumS"
-                                           name="xbbVerdictNumS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="">
-                                    <label>ҲББ хулоса санаси</label><i class="bx bx-info-circle"
-                                                                       data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                       title="ҲББ хулоса санаси"></i>
-                                    <input class="result form-control shadow-sm" type="date" id="xbbVerdictDateS"
-                                           name="xbbVerdictDateS" onkeypress="if (event.keyCode == 13) {searchResultTableIS(0); return false;} " />
-                                </div>
-                            </div>-->
-
-
                         </div>
                         <!-- Modal 1-qadam-->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -452,7 +344,7 @@
         $('#loaderII').removeClass('visually-hidden')
         if (root) root.preventDefault();
         var dataS = {
-            // "userLocationCode": $("#userLocationCode").val(),
+            "userLocationCode": $("#userLocationCodeS1").val(),
             "directionTypeCode": $("#directionTypeCode").val(),
             // "xbbMailDate": $("#xbbMailDateS").val().toString(),
             // "xbbMailNum": $("#xbbMailNumS").val(),
@@ -497,13 +389,15 @@
         $('#loaderII').removeClass('visually-hidden')
         if (root) root.preventDefault();
         var dataS = {
-            "userLocationCode": $("#userLocationCode").val(),
-            // "directionTypeCode": $("#directionTypeCode").val(),
+            "userLocationCode": $("#userLocationCodeS").val(),
+            "savedUserFirst": $("#savedUserFirstS").val(),
             "xbbMailDate": $("#xbbMailDateS").val().toString(),
             "xbbMailNum": $("#xbbMailNumS").val(),
+            "orgName": $("#orgNameS").val(),
             "hsCode": $("#hsCodeS").val(),
             "productName": $("#productNameS").val(),
             "sendReqCountryCode": $("#sendReqCountryCodeS").val(),
+            "sumProbability": $("#sumProbabilityS").val(),
             "sendReqNum": $("#sendReqNumS").val(),
             "reqDate": $("#reqDateS").val(),
             "responseNum": $("#responseNumS").val(),
@@ -516,6 +410,8 @@
             "xbbVerdictDate": $("#xbbVerdictDateS").val(),
             "executiveTerritoryCode": $("#executiveTerritoryCode").val(),
             "status": $("#statusS").val(),
+            "comment": $("#commentS").val(),
+            "fabula": $("#fabulaS").val(),
             "page": x,
             "size": $("#size").val()
         }
@@ -661,7 +557,6 @@
                     $('#sumProbabilityValid').html('');
                     $('#sumProbability').addClass('border border-success');
                 }
-
                 Swal.fire({
                     position: 'top-end',
                     icon: 'error',
@@ -673,11 +568,18 @@
         });
     }
     function reset(x) {
-        document.getElementById("userLocationCode").value = '';
+        // document.getElementById("userLocationCodeS1").value = '';
         document.getElementById("directionTypeCode").value = '';
         document.getElementById("sendReqCountryCodeS").value = '';
         document.getElementById("statusS").value = '';
-        document.getElementById("executiveTerritoryCode").value = '';
+        // document.getElementById("executiveTerritoryCodeS").value = '';
+    }
+    function resetS(x) {
+        document.getElementById("userLocationCodeS1").value = '';
+        document.getElementById("directionTypeCode").value = '';
+        document.getElementById("sendReqCountryCodeS").value = '';
+        document.getElementById("statusS").value = '';
+        document.getElementById("executiveTerritoryCodeS").value = '';
     }
     function resetModal() {
         document.getElementById("xbbMailNum").value = '';
@@ -686,6 +588,32 @@
         document.getElementById("hsCode").value = '';
         document.getElementById("productName").value = '';
         document.getElementById("sendReqCountryCode").value = '';
+    }
+    function  resetFilterOoTable(x) {
+        document.getElementById("userLocationCodeS").value = '';
+        document.getElementById("savedUserFirstS").value = '';
+        document.getElementById("xbbMailDate").value = '';
+        document.getElementById("xbbMailNum").value = '';
+        document.getElementById("orgName").value = '';
+        document.getElementById("hsCode").value = '';
+        document.getElementById("productName").value = '';
+        document.getElementById("sendReqCountryCode").value = '';
+        document.getElementById("sumProbability").value = '';
+        document.getElementById("sendReqNum").value = '';
+        document.getElementById("reqDate").value = '';
+        document.getElementById("responseNum").value = '';
+        document.getElementById("responseDate").value = '';
+        document.getElementById("responseNumSendXbbNum").value = '';
+        document.getElementById("responseNumSendXbbDate").value = '';
+        document.getElementById("resultAnswerMailNum").value = '';
+        document.getElementById("resultAnswerMailDate").value = '';
+        document.getElementById("xbbVerdictNum").value = '';
+        document.getElementById("xbbVerdictDate").value = '';
+        // document.getElementById("executiveTerritoryCode").value = '';
+        // document.getElementById("status").value = '';
+        document.getElementById("commentS").value = '';
+        document.getElementById("fabulaS").value = '';
+        searchResultTableIS();
     }
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
