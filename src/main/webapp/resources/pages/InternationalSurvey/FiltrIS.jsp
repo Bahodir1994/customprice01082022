@@ -295,7 +295,7 @@
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
-            <div class="card-body" id="ListCMTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important; padding: 0rem 1rem!important;">
+            <div class="card-body" id="ListCMTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
             </div>
         </div>
     </div>
@@ -378,9 +378,6 @@
                 $('#loaderII').addClass('visually-hidden');
             },
             error: function (res) {
-                setTimeout(()=>{
-                    $('#loaderII').addClass('visually-hidden')
-                },1000)
             }
         });
 
