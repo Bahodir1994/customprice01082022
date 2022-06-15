@@ -396,7 +396,7 @@
                         <td class="myDIV text-danger" style="text-align: center;">${tut.sumOnControl}</td>
                     </c:if>
                     <td style="text-align: center;"><textarea size="25" rows="2">${tut.fabula}</textarea></td>
-                    <td style="text-align: center;">${tut.comment}</td>
+                    <td style="text-align: center; min-width: 20px!important;">${tut.comment}</td>
                 </tr>
                 <!-- Modal 2-qadam-->
                 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
