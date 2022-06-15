@@ -53,6 +53,7 @@ public class ApiCommodityController {
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         } else {
             Optional<Apps> appIdGet = Optional.ofNullable(appsService.findById(commodity.getAppId()));
+            Commodity commodity1 = new Commodity();
             if (appIdGet.isPresent()) {
                 Country country = conturyService.getByCodeAndLngaTpcd(commodity.getOriginCountry(), "UZ");
                 commodity.setOrignCountrNm(country.getCdNm());
