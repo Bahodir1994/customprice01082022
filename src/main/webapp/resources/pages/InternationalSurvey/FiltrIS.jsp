@@ -147,7 +147,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="">Маъсул худуд</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Маъсул худуд"></i>
-                                    <select class="result form-select shadow-sm" type="text" id="executiveTerritoryCode" name="executiveTerritoryCode">
+                                    <select class="result form-select shadow-sm" type="text" id="executiveTerritoryCodeS" name="executiveTerritoryCodeS">
                                         <option class="font-italic" selected value="">--- Танланг ---</option>
                                         <c:forEach var="usrLoc" items="${location}" varStatus="i">
                                             <option value="${usrLoc.id}">${usrLoc.name1}</option>
@@ -469,7 +469,7 @@
             // "resultAnswerMailDate": $("#resultAnswerMailDateS").val(),
             // "xbbVerdictNum": $("#xbbVerdictNumS").val(),
             // "xbbVerdictDate": $("#xbbVerdictDateS").val(),
-            "executiveTerritoryCode": $("#executiveTerritoryCode").val(),
+            "executiveTerritoryCode": $("#executiveTerritoryCodeS").val(),
             "status": $("#statusS").val(),
             "page": x,
             "size": $("#size").val()

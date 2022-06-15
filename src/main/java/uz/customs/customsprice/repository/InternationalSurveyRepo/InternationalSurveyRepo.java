@@ -2,6 +2,7 @@ package uz.customs.customsprice.repository.InternationalSurveyRepo;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -36,7 +37,7 @@ public interface InternationalSurveyRepo extends JpaRepository<InternationalSurv
             "(:status='' or :status is null or c.status = :status)")
 //                "(:status='' or c.status = :status)")
     Page<InternationalSurveyEntity>
-    findAllByOrgNameAndHsCode(
+    findAllByOrderByInsTimeAscAndOrgNameAndHsCode(
             @Param("userLocationCode") String userLocationCode,
             @Param("directionTypeCode") String directionTypeCode,
             @Param("xbbMailNum") String xbbMailNum,

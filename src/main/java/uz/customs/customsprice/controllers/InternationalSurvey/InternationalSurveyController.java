@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -148,10 +149,16 @@ public class InternationalSurveyController {
             List<Country> countryList = countyRepo.findAllByLngaTpcdOrderByCodeAsc(lngaTpcd);
             List<DirectionType> directionType = directionTypeRepo.findAll();
 
+            String sortBy = "insTime";
+            String sortDir = "desc";
+
+            Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())?
+                    Sort.by(sortBy).ascending(): Sort.by(sortBy).descending();
+
             List<InternationalSurveyEntity> tutorials = new ArrayList<InternationalSurveyEntity>();
-            Pageable paging = PageRequest.of(page, size);
+            Pageable paging = PageRequest.of(page, size, sort);
             Page<InternationalSurveyEntity> pageTuts =
-                    internationalSurveyRepo.findAllByOrgNameAndHsCode(
+                    internationalSurveyRepo.findAllByOrderByInsTimeAscAndOrgNameAndHsCode(
                             userLocationCode,
                             directionTypeCode,
                             xbbMailNum,
