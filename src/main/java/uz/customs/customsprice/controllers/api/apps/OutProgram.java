@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import uz.customs.customsprice.entity.InitialDecision.*;
 import uz.customs.customsprice.entity.earxiv.Earxiv;
 import uz.customs.customsprice.repository.*;
+import uz.customs.customsprice.service.AppsService;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @RestController
@@ -43,6 +47,9 @@ public class OutProgram {
 
     @Autowired
     RollBackAppRepo rollBackAppRepo;
+
+    @Autowired
+    AppsService appsService;
 
     /************************(PersonId бўйча App ларни беради)****************************/
     @GetMapping("/tutorials/published")
@@ -182,7 +189,6 @@ public class OutProgram {
 
 
     /******************************************************************************************************************/
-
     @GetMapping("/custom/locations")
     public ResponseEntity<Map<String, Object>> findAllLocations(
     ) {
@@ -199,6 +205,24 @@ public class OutProgram {
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /******************************************************************************************************************/
+    @GetMapping("/custom/reestor")
+    public ResponseEntity<Map<String, Object>> findByInDec(){
+        try {
+            Map<String, Object> response = new HashMap<>();
+            response.put("inDecReestr", appsService.getInDecForApi());
+            response.put("message", "succes");
+            response.put("status", 200);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }catch (Exception e){
+            Map<String, Object> response = new HashMap<>();
+            response.put("inDecReestr", "Маълумотлар топилмади");
+            response.put("message", "error");
+            response.put("status", 400);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

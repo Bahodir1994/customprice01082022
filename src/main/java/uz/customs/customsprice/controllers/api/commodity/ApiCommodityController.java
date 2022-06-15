@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import uz.customs.customsprice.controllers.api.helper.ResponseHandler;
 import uz.customs.customsprice.entity.InitialDecision.*;
+import uz.customs.customsprice.repository.CommodityRepo;
 import uz.customs.customsprice.repository.CurrencyEntityRepo;
 import uz.customs.customsprice.service.*;
 
@@ -31,8 +32,12 @@ public class ApiCommodityController {
     private final PackagingService packagingService;
     private final Tnved2Service tnved2Service;
     private final CurrencyEntityRepo currencyEntityRepo;
+    private final CommodityRepo commodityRepo;
+    private final StatusService statusService;
+    private final StatusHService statusHService;
+    private final StatusMService statusMService;
 
-    public ApiCommodityController(AppsService appsService, CommodityService commodityService, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, CurrencyEntityRepo currencyEntityRepo) {
+    public ApiCommodityController(AppsService appsService, CommodityService commodityService, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, CurrencyEntityRepo currencyEntityRepo, CommodityRepo commodityRepo, StatusService statusService, StatusHService statusHService, StatusMService statusMService) {
         this.appsService = appsService;
         this.commodityService = commodityService;
         this.conturyService = conturyService;
@@ -40,6 +45,10 @@ public class ApiCommodityController {
         this.packagingService = packagingService;
         this.tnved2Service = tnved2Service;
         this.currencyEntityRepo = currencyEntityRepo;
+        this.commodityRepo = commodityRepo;
+        this.statusService = statusService;
+        this.statusHService = statusHService;
+        this.statusMService = statusMService;
     }
 
 
@@ -54,6 +63,10 @@ public class ApiCommodityController {
         } else {
             Optional<Apps> appIdGet = Optional.ofNullable(appsService.findById(commodity.getAppId()));
             Commodity commodity1 = new Commodity();
+            commodity1 = commodityService.getByAppId(commodity.getAppId());
+            if (commodity1 != null){
+                commodityRepo.deleteAllByAppId(commodity.getAppId());
+            }
             if (appIdGet.isPresent()) {
                 Country country = conturyService.getByCodeAndLngaTpcd(commodity.getOriginCountry(), "UZ");
                 commodity.setOrignCountrNm(country.getCdNm());
@@ -75,8 +88,31 @@ public class ApiCommodityController {
                 if (commodity.getInDecDate() != null && !"".equals(String.valueOf(commodity.getInDecDate())) && !"null".equals(String.valueOf(commodity.getInDecDate()))) commodity.setInDecDate(commodity.getInDecDate());
                 if (commodity.getInDecNum() != null && !"".equals(commodity.getInDecNum()) && !"null".equals(commodity.getInDecNum())) commodity.setInDecNum(commodity.getInDecNum());
                 if (commodity.getExtraUnits() != null && !"".equals(commodity.getExtraUnits()) && !"null".equals(commodity.getExtraUnits())) commodity.setExtraUnits(commodity.getExtraUnits());
-
                 commodityService.saveCommodity(commodity);
+
+                Apps apps =new Apps();
+                apps = appsService.findById(commodity.getAppId());
+                apps.setStatus(135);
+                Status status = statusService.getById(135);
+                apps.setStatusNm(status.getName());
+                appsService.saveApps(apps);
+
+                /**todo ЛОК га ёзиш start todo**/
+                StatusM statusM = new StatusM();
+                statusM.setAppId(apps.getId());
+                statusM.setStatus(String.valueOf(apps.getStatus()));
+                statusM.setStatusComment(apps.getStatusNm());
+                statusM.setInsUser(apps.getPersonTin());
+                statusMService.saveStatusM(statusM);
+
+                StatusH statusH = new StatusH();
+                statusH.setStmainID(statusM.getId());
+                statusH.setAppId(statusM.getAppId());
+                statusH.setStatus(String.valueOf(apps.getStatus()));
+                statusH.setStatusComment(apps.getStatusNm());
+                statusH.setInsUser(apps.getPersonTin());
+                statusHService.saveStatusH(statusH);
+                /**todo ЛОК га ёзиш end todo**/
                 return ResponseHandler.generateResponse("Commodity ma`lumotlari saqlandi!", HttpStatus.OK, commodity);
             } else {
                 JSONObject obj = new JSONObject();

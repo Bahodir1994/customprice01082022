@@ -247,7 +247,6 @@ public class AppsService {
         return entityManager.createNativeQuery(queryForList).getResultList();
     }
 
-
     /* 4) <<app_num>> га ариза рақамини киритади */
     public Apps saveApps(Apps apps) {
         LocalDateTime now = LocalDateTime.now();
@@ -876,6 +875,94 @@ public class AppsService {
                 "order by\n" +
                 "    a.instime desc";
         return entityManager.createNativeQuery(queryForList).getResultList();
+    }
+
+    /* ApiРеестр учун барча Д-Қарорлар */
+    public List<InDec> getInDecForApi() {
+        String queryForList = "select\n" +
+                "    a.id,\n" +
+                "    a.instime,\n" +
+                "    a.insuser,\n" +
+                "    a.isdeleted,\n" +
+                "    a.updtime,\n" +
+                "    a.upduser,\n" +
+                "    a.app_num,\n" +
+                "    a.app_date,\n" +
+                "    a.customer_country_nm,\n" +
+                "    a.customer_country,\n" +
+                /*10*/"    a.location_id,\n" +
+                "    a.location_nm,\n" +
+                "    a.org_name,\n" +
+                "    a.person_addr,\n" +
+                "    a.person_fio,\n" +
+                "    a.person_mail,\n" +
+                "    a.person_phone,\n" +
+                "    a.person_pin,\n" +
+                "    a.person_position,\n" +
+                "    a.person_tin,\n" +
+                /*20*/"    a.seller_org,\n" +
+                "    a.sender_country,\n" +
+                "    a.sender_country_nm,\n" +
+                "    a.sender_org,\n" +
+                "    a.status,\n" +
+                "    a.terms_nm,\n" +
+                "    a.terms_addr,\n" +
+                "    a.trans_exp,\n" +
+                "    a.status_nm,\n" +
+                "    ar.inspector_id   inspector_id,\n" +
+                "    ar.inspector_name inspector_name,\n" +
+                "    a.comment,\n" +
+                /*32*/"    cmdt.id cmdt_id,\n" +
+                "    i.id indec_id,\n" +
+                "    i.instime indec_instime,\n" +
+                "    i.insuser indec_insuser,\n" +
+                "    i.isdeleted indec_isdeleted,\n" +
+                "    i.updtime indec_updtime,\n" +
+                "    i.upduser indec_upduser,\n" +
+                "    i.comment_marks,\n" +
+                /*40*/"    i.customs_payments,\n" +
+                "    i.customs_preference,\n" +
+                "    i.hs_code,\n" +
+                "    i.hs_name,\n" +
+                "    i.in_dec_basis,\n" +
+                "    i.in_dec_date,\n" +
+                "    i.in_dec_location,\n" +
+                "    i.in_dec_location_nm,\n" +
+                "    i.in_dec_num,\n" +
+                "    i.method,\n" +
+                /*50*/"    i.method_nm,\n" +
+                "    i.origin_country,\n" +
+                "    i.origin_country_nm,\n" +
+                "    i.person_id,\n" +
+                "    i.status indec_status,\n" +
+                "    i.status_nm indec_status_nm,\n" +
+                "    i.in_dec_end_date,\n" +
+                "    i.IN_DEC_USR_ENDED_DATE,\n" +
+                "    i.COMMENT_ENDED,\n" +
+                "    i.END_ACTIV\n" +
+                "from\n" +
+                "    cpid.in_dec i\n" +
+                "left join\n" +
+                "    cpid.commodity cmdt\n" +
+                "on\n" +
+                "    cmdt.id=i.cmdt_id\n" +
+                "and cmdt.isdeleted=0\n" +
+                "left join\n" +
+                "    cpid.apps a\n" +
+                "on\n" +
+                "    a.id=cmdt.app_id\n" +
+                "and a.isdeleted=0\n" +
+                "left join\n" +
+                "    cpid.apps_rasp ar\n" +
+                "on\n" +
+                "    a.id=ar.app_id\n" +
+                "where\n" +
+                "    i.isdeleted=0\n" +
+                "and a.status = 170\n" +
+                "and i.end_activ = 200\n" +
+                "order by\n" +
+                "    a.instime desc";
+        return (List<InDec>) entityManager.createNativeQuery(queryForList).getResultList();
     }
 
 }

@@ -368,10 +368,7 @@ public class ApiAppsController {
                 appsUpdate.setPersonPhone(apps.getPersonPhone());
                 appsUpdate.setLocationId(apps.getLocationId());
                 appsUpdate.setTransExp(apps.getTransExp());
-                appsUpdate.setStatus(135);
                 /*4*/
-                Status status = statusService.getById(135);
-                appsUpdate.setStatusNm(status.getName());
                 /*1*/
                 Country country = conturyService.getByCodeAndLngaTpcd(apps.getCustomerCountry(), "UZ");
                 appsUpdate.setCustomerCountryNm(country.getCdNm());

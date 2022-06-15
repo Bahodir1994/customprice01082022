@@ -3,6 +3,7 @@ package uz.customs.customsprice.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 import uz.customs.customsprice.entity.InitialDecision.Commodity;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface CommodityRepo extends JpaRepository<Commodity, String> {
 
     Page<Commodity> findByAppId(String appId, Pageable pageable);
 
+    @Transactional
+    void deleteAllByAppId(String appId);
 }
