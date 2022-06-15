@@ -53,7 +53,7 @@
             <th style="text-align: center;border-style: dotted!important;" class="bg-light-primary border border-dark border-top-0  border-end-0">Ундирилган<br>сумма</th>
             <th style="text-align: center;border-style: dotted!important;" class="bg-light-primary border border-dark border-top-0  border-end-0">Назоратдаги<br>сумма</th>
             <th style="text-align: center;border-style: dotted!important;" class="bg-light-primary border border-dark border-top-0  border-end-0">Фабула</th>
-            <th style="text-align: center;border-style: dotted!important;" class="bg-light-primary border border-dark border-top-0 ">Изоҳ</th>
+            <th style="text-align: center;border-style: dotted!important; min-width: 20px!important;" class="bg-light-primary border border-dark border-top-0 ">Изоҳ</th>
         </tr>
         <tr class="">
             <th></th>
