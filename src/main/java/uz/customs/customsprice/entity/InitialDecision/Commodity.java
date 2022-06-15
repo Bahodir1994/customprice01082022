@@ -169,8 +169,8 @@ public class Commodity extends AbstractAuditingEntity {
     @Size(max = 30, message = "Устун маълумоти катталиги чекланган")
     private String inDecNum;
 
-    @Column(name = "METHOD", length = 2)
-    @Digits(message = "Устун фақат сонлардан иборат бўлиши лозим", integer = 2, fraction = 0)
+    @Column(name = "METHOD", length = 3)
+    @Digits(message = "Устун фақат сонлардан иборат бўлиши лозим", integer = 2, fraction = 1)
     private String method;
 
     @Column(name = "METHOD_NM", columnDefinition = "VARCHAR(180) CCSID 1208")

@@ -155,15 +155,15 @@
                                     </select>
                                 </div>
                             </c:if>
-                            <div class="col-md-3 mt-2">
-                                <button type="button" class="btn btn-primary btn-block mt-2"
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-primary btn-block mt-3"
                                         onclick="searchResultTableISFirst(0)"><i class='bx bx-refresh'></i>Излаш
                                 </button>
-                                <button type="reset" class="btn btn-primary btn-block mt-2" onclick="reset(1)">
+                                <button type="reset" class="btn btn-primary btn-block mt-3" onclick="reset(1)">
                                     <i class='bx bx-trash'></i>
                                 </button>
                                 <c:if test="${userRole == '8' || userRole == '7' || userRole == '6' || userRole == '4'}">
-                                    <button type="button" class="btn btn-primary btn-block mt-2"
+                                    <button type="button" class="btn btn-primary btn-block mt-3"
                                             class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                             onclick="resetModal()"><i class='bx bx-plus'></i>Киритиш
                                     </button>
@@ -474,7 +474,6 @@
             "page": x,
             "size": $("#size").val()
         }
-        alert($("#executiveTerritoryCode").val())
         $.ajax({
             type: "GET",
             data: dataS,
