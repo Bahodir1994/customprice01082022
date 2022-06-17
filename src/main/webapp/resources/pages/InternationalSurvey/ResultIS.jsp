@@ -69,7 +69,7 @@
             </th>
             <th>
                 <select style="box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;" onchange="searchResultTableIS(0)"
-                    class="result form-select" type="text" id="userLocationCodeS" name="userLocationCodeS">
+                        class="result form-select" type="text" id="userLocationCodeS" name="userLocationCodeS">
                     <option class="font-italic" selected value="">--- Танланг ---</option>
                     <c:forEach var="usrLoc" items="${location}" varStatus="i">
                         <option value="${usrLoc.id}">${usrLoc.name1}</option>
@@ -183,16 +183,16 @@
                                     <button class="btn btn-primary btn-sm" data-title=""
                                             data-bs-toggle="modal" data-bs-target="#exampleModal2"
                                             onclick="('${tut.userLocationCode}' === '1701' ? $('#divLocDir').css({'display': ''}) : $('#divLocDir').css({'display': 'none'}));
-                                            $('#interSurveyId2').val('${tut.id}');
-                                            $('#interSurveyStatus2').val('${tut.status}');
-                                            $('#interSurveyUserLocationCode').val('${tut.userLocationCode}');
-                                            $('#sendReqNum').val('${tut.sendReqNum}');
-                                            $('#reqDate').val('${tut.reqDate}');
-                                            $('#responseNum').val('${tut.responseNum}');
-                                            $('#responseDate').val('${tut.responseDate}');
-                                            $('#responseNumSendXbbNum').val('${tut.responseNumSendXbbNum}');
-                                            $('#responseNumSendXbbDate').val('${tut.responseNumSendXbbDate}');
-                                            $('#executiveTerritoryCode').val('${tut.executiveTerritoryCode}');
+                                                    $('#interSurveyId2').val('${tut.id}');
+                                                    $('#interSurveyStatus2').val('${tut.status}');
+                                                    $('#interSurveyUserLocationCode').val('${tut.userLocationCode}');
+                                                    $('#sendReqNum').val('${tut.sendReqNum}');
+                                                    $('#reqDate').val('${tut.reqDate}');
+                                                    $('#responseNum').val('${tut.responseNum}');
+                                                    $('#responseDate').val('${tut.responseDate}');
+                                                    $('#responseNumSendXbbNum').val('${tut.responseNumSendXbbNum}');
+                                                    $('#responseNumSendXbbDate').val('${tut.responseNumSendXbbDate}');
+                                                    $('#executiveTerritoryCode').val('${tut.executiveTerritoryCode}');
                                                     ">
                                         <i class="bx bx-plus"></i></button>
                                 </td>
@@ -202,24 +202,24 @@
                                     <button class="btn btn-primary btn-sm" data-title=""
                                             data-bs-toggle="modal" data-bs-target="#exampleModal2"
                                             onclick="('${tut.userLocationCode}' === '1701' ? $('#divLocDir').css({'display': ''}) : $('#divLocDir').css({'display': 'none'}));
-                                            $('#interSurveyId2').val('${tut.id}');$('#interSurveyStatus2').val('${tut.status}');
-                                            $('#interSurveyUserLocationCode').val('${tut.userLocationCode}');
-                                            $('#sendReqNum').val('${tut.sendReqNum}');
-                                            $('#reqDate').val('${tut.reqDate}');
-                                            $('#responseNum').val('${tut.responseNum}');
-                                            $('#responseDate').val('${tut.responseDate}');
-                                            $('#responseNumSendXbbNum').val('${tut.responseNumSendXbbNum}');
-                                            $('#responseNumSendXbbDate').val('${tut.responseNumSendXbbDate}');
-                                            $('#executiveTerritoryCode').val('${tut.executiveTerritoryCode}');
+                                                    $('#interSurveyId2').val('${tut.id}');$('#interSurveyStatus2').val('${tut.status}');
+                                                    $('#interSurveyUserLocationCode').val('${tut.userLocationCode}');
+                                                    $('#sendReqNum').val('${tut.sendReqNum}');
+                                                    $('#reqDate').val('${tut.reqDate}');
+                                                    $('#responseNum').val('${tut.responseNum}');
+                                                    $('#responseDate').val('${tut.responseDate}');
+                                                    $('#responseNumSendXbbNum').val('${tut.responseNumSendXbbNum}');
+                                                    $('#responseNumSendXbbDate').val('${tut.responseNumSendXbbDate}');
+                                                    $('#executiveTerritoryCode').val('${tut.executiveTerritoryCode}');
                                                     ">
                                         <i class="bx bx-plus"></i></button>
                                 </td>
                             </c:if>
                             <c:if test="${tut.userLocationCode == '1701' && (tut.savedUserFirstId != userId)}">
-                                    <td>
-                                        <button class="mess btn btn-primary btn-sm" data-title="Сиз учун тақиқланган!"><i
-                                                class="bx bx-info-circle"></i></button>
-                                    </td>
+                                <td>
+                                    <button class="mess btn btn-primary btn-sm" data-title="Сиз учун тақиқланган!"><i
+                                            class="bx bx-info-circle"></i></button>
+                                </td>
                             </c:if>
                         </c:if>
                         <c:if test="${userLocation != '1701'}">
@@ -306,9 +306,8 @@
                             <c:if test="${userLocation == '1701'}">
                                 <c:if test="${userId == tut.savedUserFirstId}">
                                     <td>
-                                        <button class="mess btn btn-danger btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#modalAddSumApproved" data-bs-whatever="@mdo"
-                                                data-title="Назоратда"><i class="bx bxs-info-square"></i></button>
+                                        <button class="mess btn btn-danger btn-sm" data-title="Назоратда, Сиз учун тақиқланган!"><i
+                                                class="bx bxs-info-square"></i></button>
                                     </td>
                                 </c:if>
                                 <c:if test="${userId != tut.savedUserFirstId}">

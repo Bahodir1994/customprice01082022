@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "MTC_REPL", schema = "EBR", catalog = "")
+@Table(name = "MTC_REPL", schema = "CP", catalog = "")
 public class MtcRepl {
     private String id;
     private String declId;
@@ -82,6 +82,11 @@ public class MtcRepl {
     private Timestamp curtime;
     private Integer mtcid;
     private int idMtc;
+    private String g11Nm;
+    private String g15Nm;
+    private String g17Nm;
+    private String g34Nm;
+    private String g41Nm;
 
     @Basic
     @Column(name = "ID")
@@ -825,5 +830,55 @@ public class MtcRepl {
     @Override
     public int hashCode() {
         return Objects.hash(id, declId, cmdtId, g7A, g7B, g7C, g1A, g1B, g2Name, g2Code2, g8Name, g8Code2, g9Name, g9Code2, g11, g12, g13, g15, g17, g20B, g20Name, g22A, g22B, g23, g23Scale, g25, g26, g20Fr, g24A, g24B, idn, g31Name, g31Marka, g31Amount, g32, g33, g34, g35, g37B, g37C, g38, g41, g42, g43, g45, g46, g31Edizm, g45Usd2, unitname, vesEdizm, metodOtc, g45Usd, g45UsdEdizm, g45SumEdizm, g45Index, g45EdizmValkont, g45IndexValkont, g42Usd, g42UsdEdizm, g42SumEdizm, g42Index, g42EdizmValkont, g42IndexValkont, gc3Date, vidTulov, docType, gdvipdate, status, instime, updtime, curtime, mtcid, idMtc);
+    }
+
+    @Basic
+    @Column(name = "G11_NM")
+    public String getG11Nm() {
+        return g11Nm;
+    }
+
+    public void setG11Nm(String g11Nm) {
+        this.g11Nm = g11Nm;
+    }
+
+    @Basic
+    @Column(name = "G15_NM")
+    public String getG15Nm() {
+        return g15Nm;
+    }
+
+    public void setG15Nm(String g15Nm) {
+        this.g15Nm = g15Nm;
+    }
+
+    @Basic
+    @Column(name = "G17_NM")
+    public String getG17Nm() {
+        return g17Nm;
+    }
+
+    public void setG17Nm(String g17Nm) {
+        this.g17Nm = g17Nm;
+    }
+
+    @Basic
+    @Column(name = "G34_NM")
+    public String getG34Nm() {
+        return g34Nm;
+    }
+
+    public void setG34Nm(String g34Nm) {
+        this.g34Nm = g34Nm;
+    }
+
+    @Basic
+    @Column(name = "G41_NM")
+    public String getG41Nm() {
+        return g41Nm;
+    }
+
+    public void setG41Nm(String g41Nm) {
+        this.g41Nm = g41Nm;
     }
 }

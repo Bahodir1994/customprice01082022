@@ -658,7 +658,7 @@
                         <a class="has-arrow" href="javascript:Digests(0);">
                             <div class="parent-icon"><i class='bx bx-message-square-edit'></i>
                             </div>
-                            <div class="menu-title">Справочник</div>
+                            <div class="menu-title">Таснифлагич</div>
                         </a>
                     </li>
                 </ul>
@@ -1202,20 +1202,14 @@
         $.ajax({
             type: "POST",
             data: dataS,
-            url: "<%=request.getContextPath()%>/costmonitoring/resources/pages/CostMonitoring/FiltrCM",
+            url: "<%=request.getContextPath()%>/costmonitoring/resources/pages/CostMonitoring/MtcRepl/FiltrCM",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
-            beforeSend: function () {
-                $('#preloader').removeClass('visually-hidden');
-            },
-            complete: function () {
-                $('#preloader').addClass('visually-hidden');
-            },
             success: function (res) {
                 $('div#MainContent').html(res);
+
             },
             error: function (res) {
-                $('#preloader').addClass('visually-hidden');
             }
         });
     }

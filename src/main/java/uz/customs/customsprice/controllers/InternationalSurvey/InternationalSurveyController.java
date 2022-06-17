@@ -71,6 +71,9 @@ public class InternationalSurveyController {
         String userLocationName = (String) request.getSession().getAttribute("userLocationName");
         String userPost = (String) request.getSession().getAttribute("userPost");
 
+
+
+
         ModelAndView mav = new ModelAndView("resources/pages/InternationalSurvey/FiltrIS");
         String lngaTpcd = "UZ";
         List<Country> countryList = countyRepo.findAllByLngaTpcdOrderByCodeAsc(lngaTpcd);
@@ -81,6 +84,56 @@ public class InternationalSurveyController {
         mav.addObject("userRole", userRole);
         mav.addObject("directionType", directionType);
         mav.addObject("location", location);
+
+        /*1*/ int allInSur;
+        /*2*/ BigDecimal allSumProbability = BigDecimal.valueOf(0.00);
+        /*3*/ BigDecimal sumDef = BigDecimal.valueOf(0.00);
+        /*4*/ BigDecimal ApprovedSum = BigDecimal.valueOf(0.00);;
+        /*5*/ BigDecimal sumOnControl = BigDecimal.valueOf(0.00);
+        if(Objects.equals(userLocation, "1701")){
+            List<InternationalSurveyEntity> internationalSurveyEntity = new ArrayList<>();
+            internationalSurveyEntity = internationalSurveyRepo.findAll();
+            /*1*/allInSur = internationalSurveyEntity.size();
+            /*2*/for (int i = 0; i < internationalSurveyEntity.size(); i++) {
+                BigDecimal sum = internationalSurveyEntity.get(i).getSumProbability();
+                allSumProbability = allSumProbability.add(sum);}
+            /*3*/for (int i = 0; i <internationalSurveyEntity.size() ; i++) {
+                BigDecimal sum = internationalSurveyEntity.get(i).getSum();
+                sumDef = sumDef.add(sum);}
+            /*4*/for (int i = 0; i <internationalSurveyEntity.size() ; i++) {
+                BigDecimal sum = internationalSurveyEntity.get(i).getSumАpproved();
+                ApprovedSum = ApprovedSum.add(sum);}
+            /*5*/for (int i = 0; i <internationalSurveyEntity.size() ; i++) {
+                BigDecimal sum = internationalSurveyEntity.get(i).getSumOnControl();
+                sumOnControl = sumOnControl.add(sum);}
+        }else {
+            List<InternationalSurveyEntity> internationalSurveyEntity = new ArrayList<InternationalSurveyEntity>();
+            internationalSurveyEntity = internationalSurveyRepo.findByExecutiveTerritoryCode(userLocation);
+            /*1*/allInSur = internationalSurveyEntity.size();
+            /*2*/for (int i = 0; i < internationalSurveyEntity.size(); i++) {
+                BigDecimal sum = internationalSurveyEntity.get(i).getSumProbability();
+
+                allSumProbability = allSumProbability.add(sum);}
+            /*3*/for (int i = 0; i <internationalSurveyEntity.size() ; i++) {
+                BigDecimal sum2 = internationalSurveyEntity.get(i).getSum();
+                sumDef = sumDef.add(sum2);}
+            /*4*/for (int i = 0; i <internationalSurveyEntity.size() ; i++) {
+                BigDecimal sum3 = internationalSurveyEntity.get(i).getSumАpproved();
+                ApprovedSum = ApprovedSum.add(sum3);}
+            /*5*/for (int i = 0; i <internationalSurveyEntity.size() ; i++) {
+                BigDecimal sum4 = internationalSurveyEntity.get(i).getSumOnControl();
+                sumOnControl = sumOnControl.add(sum4);}
+        }
+
+        /**Statistic bar**/
+        mav.addObject("AllInSurvey", allInSur);
+        mav.addObject("AllSumProbability", allSumProbability);
+        mav.addObject("AllSumDef", sumDef);
+        mav.addObject("AllSumАpproved", ApprovedSum);
+        mav.addObject("AllSumOnControl", sumOnControl);
+        /**Statistic bar**/
+
+
         return mav;
     }
 
@@ -361,7 +414,7 @@ public class InternationalSurveyController {
                 internationalSurveyEntity.setSumАpproved(internationalSurveyStep3DTO.getSumАpproved());
             }
             internationalSurveyEntity.setSumOnControl(
-                internationalSurveyEntity.getSum().subtract(internationalSurveyStep3DTO.getSumАpproved())
+                    internationalSurveyEntity.getSum().subtract(internationalSurveyStep3DTO.getSumАpproved())
             );
             internationalSurveyEntity.setSavedUserThirdId(userId);
             internationalSurveyEntity.setSavedUserThird(userName);

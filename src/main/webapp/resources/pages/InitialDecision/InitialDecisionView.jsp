@@ -438,12 +438,14 @@
                                                         <i class="bx bx-calculator"></i>
                                                     </button>
 
+                                                    <%if (userRole == 8){%>
                                                     <c:if test="${appStatus != 120 && appStatus != 125 && appStatus != 170 && appStatus != 175}">
                                                         <button type="button" class="btn btn-danger btn-block" data-bs-toggle="modal"
                                                                 data-bs-target="#exampleExtraLargeModal4">
                                                             <i class="bx bx-undo"></i>
                                                         </button>
                                                     </c:if>
+                                                    <%}%>
 
                                                         <%--                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleExtraLargeModal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Очень большой</font></font></button>--%>
                                     </td>

@@ -183,7 +183,7 @@
 <div id="main" class="page-content">
     <!--start email wrapper-->
     <div class="row">
-        <%if (userRole == 7 || userRole == 8) {%>
+        <%if (userRole == 7 || userRole == 8 || userRole <= 5) {%>
         <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecApp('100')">
             <div class="card radius-10 shadow">
                 <div class="card-body">
@@ -192,7 +192,7 @@
                         </div>
                         <h4 class="my-1">
                             <%
-                                if (userRole == 7) {
+                                if (userRole == 7 || (userRole <= 5 && userLocation.equals("1701")) ) {
                             %>
                             ${notSortedListSize} та
                             <%
@@ -208,7 +208,7 @@
             </div>
         </div>
         <%}%>
-        <%if (userRole == 7) {%>
+        <%if (userRole == 7 || (userRole <= 5 && userLocation.equals("1701")) ) {%>
         <%--        <c:if test="userRole == 7">--%>
         <div class="col my-button" style="cursor: pointer;" onclick="javascript:ListInDecRaspTable('110')">
             <div class="card radius-10 shadow">

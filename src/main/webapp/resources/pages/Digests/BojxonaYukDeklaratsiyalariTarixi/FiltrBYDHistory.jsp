@@ -109,7 +109,7 @@
 </div>
 <!--start page wrapper -->
 <div id="main" class="page-content">
-    <span><a style="cursor: pointer" class="text-success" href="#">БОШ САХИФА</a> / </span><span><a style="cursor: pointer;" class="text-success" href="#">СПРАВОЧНИК</a> / </span><span><b>БОЖХОНА ЮК ДЕКЛАРАЦИЯЛАРИ ТАРИХИ</b></span>
+    <span><a style="cursor: pointer" class="text-success" href="#">БОШ САХИФА</a> / </span><span><a style="cursor: pointer;" class="text-success" href="#">Таснифлагич</a> / </span><span><b>БОЖХОНА ЮК ДЕКЛАРАЦИЯЛАРИ ТАРИХИ</b></span>
     <hr>
     <div class="col-12 col-lg-12 shadow">
         <div class="card">

@@ -11,6 +11,7 @@ import uz.customs.customsprice.entity.InternationalSurveyEntity.InternationalSur
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
 
 @Repository
 public interface InternationalSurveyRepo extends JpaRepository<InternationalSurveyEntity, String> {
@@ -75,5 +76,7 @@ public interface InternationalSurveyRepo extends JpaRepository<InternationalSurv
 
     InternationalSurveyEntity findByIdAndStatus(String id, String status);
 
-    InternationalSurveyEntity findByExecutiveTerritoryCode(String executiveTerritoryCode);
+    List<InternationalSurveyEntity> findByExecutiveTerritoryCode(String executiveTerritoryCode);
+
+
 }

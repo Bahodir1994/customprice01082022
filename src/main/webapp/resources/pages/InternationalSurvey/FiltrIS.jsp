@@ -98,7 +98,71 @@
 <div id="main" class="page-content">
     <span style="cursor: pointer"><a href="#" class="text-success">БОШ САХИФА</a> / </span></span><span class=""><b>ХАЛҚАРО СЎРОВНОМА</b></span>
     <hr>
-    <div class="col-12 col-lg-12 shadow">
+    <div class="row">
+        <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="">
+        <div class="card radius-10 shadow">
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+                    </div>
+                    <h4 class="my-1">${AllInSurvey} та</h4>
+                    <p class="mb-0 text-secondary">Жами халқаро сўровномалар</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="">
+        <div class="card radius-10 shadow">
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+                    </div>
+                    <h4 class="my-1">${AllSumProbability} сўм</h4>
+                    <p class="mb-0 text-secondary">Эхтимолий хисобланган сумма</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="">
+        <div class="card radius-10 shadow">
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+                    </div>
+                    <h4 class="my-1">${AllSumDef} сўм</h4>
+                    <p class="mb-0 text-secondary">Камомад суммаси</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="">
+        <div class="card radius-10 shadow">
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+                    </div>
+                    <h4 class="my-1">${AllSumАpproved} сўм</h4>
+                    <p class="mb-0 text-secondary">Ундирилган сумма</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="">
+        <div class="card radius-10 shadow">
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+                    </div>
+                    <h4 class="my-1">${AllSumOnControl} сўм</h4>
+                    <p class="mb-0 text-secondary">Назоратдаги сумма</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="col-12 col-lg-12 shadow">
         <div class="card">
             <div class="fm-search mt-2 mb-1 ml-3 mr-3">
                 <div class="mb-0">
@@ -124,11 +188,11 @@
                             </div>
                             <div class="col-md-3">
                                 <label class="">Сўровнома юборилган давлат</label>
-                                    <i class="bx bx-info-circle"
-                                       data-bs-toggle="tooltip"
-                                       data-bs-placement="top"
-                                       title="Сўровнома юборилган давлат">
-                                    </i>
+                                <i class="bx bx-info-circle"
+                                   data-bs-toggle="tooltip"
+                                   data-bs-placement="top"
+                                   title="Сўровнома юборилган давлат">
+                                </i>
                                 <select class="form-select shadow-sm" id="sendReqCountryCodeS"
                                         name="sendReqCountryCodeS" required=""/>
                                 <option value="">--Танланг--</option>
@@ -162,9 +226,9 @@
                                         onclick="searchResultTableISFirst(0)"><i class='bx bx-refresh'></i>Излаш
                                 </button>
                                 <c:if test="${userLocation != '1701'}">
-                                <button type="reset" class="btn btn-primary btn-block mt-3" onclick="reset(1)">
-                                    <i class='bx bx-trash'></i>
-                                </button>
+                                    <button type="reset" class="btn btn-primary btn-block mt-3" onclick="reset(1)">
+                                        <i class='bx bx-trash'></i>
+                                    </button>
                                 </c:if>
                                 <c:if test="${userLocation == '1701'}">
                                     <button type="reset" class="btn btn-primary btn-block mt-3" onclick="resetS(1)">

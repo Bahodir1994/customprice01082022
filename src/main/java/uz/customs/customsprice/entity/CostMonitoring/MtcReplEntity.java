@@ -1,5 +1,10 @@
 package uz.customs.customsprice.entity.CostMonitoring;
 
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -7,7 +12,10 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "MTC_REPL", schema = "CP", catalog = "")
+@Table(name = "MTC_REPL", schema = "CP", indexes = {@Index(columnList = "id_mtc", unique = true)})
+@TypeDef(name = "jsonb", typeClass = JsonStringType.class)
+//@SQLDelete(sql = "update MTC_REPL set isdeleted = 1 where id_mtc = ?")
+//@Where(clause = "isdeleted = 0")
 public class MtcReplEntity {
     @Basic
     @Column(name = "ID")
