@@ -171,7 +171,7 @@ public class OutProgram {
 
             Page<StatusH> pageTuts = statusHRepo.findByAppId(appId, paging);
             tutorials = pageTuts.getContent();
-            RollBackApp rollBackApp =new RollBackApp();
+            List<RollBackApp> rollBackApp =new ArrayList<>();
             rollBackApp = rollBackAppRepo.getByAppId(appId);
 
             Map<String, Object> response = new HashMap<>();
