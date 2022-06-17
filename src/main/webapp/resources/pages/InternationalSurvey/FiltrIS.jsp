@@ -98,6 +98,7 @@
 <div id="main" class="page-content">
     <span style="cursor: pointer"><a href="#" class="text-success">БОШ САХИФА</a> / </span></span><span class=""><b>ХАЛҚАРО СЎРОВНОМА</b></span>
     <hr>
+
     <div class="row">
         <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="">
         <div class="card radius-10 shadow">
@@ -105,7 +106,8 @@
                 <div class="text-center">
                     <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
                     </div>
-                    <h4 class="my-1">${AllInSurvey} та</h4>
+                    <c:set var = "AllInSurveys" value = "${AllInSurvey}"/>
+                    <h4 class="my-1"><fmt:formatNumber value = "${AllInSurveys}" maxFractionDigits="3" /> та</h4>
                     <p class="mb-0 text-secondary">Жами халқаро сўровномалар</p>
                 </div>
             </div>
@@ -117,7 +119,7 @@
                 <div class="text-center">
                     <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
                     </div>
-                    <h4 class="my-1">${AllSumProbability} сўм</h4>
+                    <h4 id="mmm" class="my-1">${AllSumProbability} сўм</h4>
                     <p class="mb-0 text-secondary">Эхтимолий хисобланган сумма</p>
                 </div>
             </div>

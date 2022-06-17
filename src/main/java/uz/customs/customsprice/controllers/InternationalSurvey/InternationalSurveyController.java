@@ -29,6 +29,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -57,6 +59,7 @@ public class InternationalSurveyController {
         this.directionTypeRepo = directionTypeRepo1;
         this.locationRepo = locationRepo;
     }
+
     @Autowired
     CountyRepo countyRepo;
 
@@ -72,8 +75,6 @@ public class InternationalSurveyController {
         String userPost = (String) request.getSession().getAttribute("userPost");
 
 
-
-
         ModelAndView mav = new ModelAndView("resources/pages/InternationalSurvey/FiltrIS");
         String lngaTpcd = "UZ";
         List<Country> countryList = countyRepo.findAllByLngaTpcdOrderByCodeAsc(lngaTpcd);
@@ -85,52 +86,77 @@ public class InternationalSurveyController {
         mav.addObject("directionType", directionType);
         mav.addObject("location", location);
 
-        /*1*/ int allInSur;
-        /*2*/ BigDecimal allSumProbability = BigDecimal.valueOf(0.00);
-        /*3*/ BigDecimal sumDef = BigDecimal.valueOf(0.00);
-        /*4*/ BigDecimal ApprovedSum = BigDecimal.valueOf(0.00);;
-        /*5*/ BigDecimal sumOnControl = BigDecimal.valueOf(0.00);
-        if(Objects.equals(userLocation, "1701")){
+        /*1*/
+        int allInSur;
+        /*2*/
+        BigDecimal allSumProbability = BigDecimal.valueOf(0.00);
+        /*3*/
+        BigDecimal sumDef = BigDecimal.valueOf(0.00);
+        /*4*/
+        BigDecimal ApprovedSum = BigDecimal.valueOf(0.00);
+        /*5*/
+        BigDecimal sumOnControl = BigDecimal.valueOf(0.00);
+        DecimalFormat df = new DecimalFormat("#,###.00");
+
+        if (Objects.equals(userLocation, "1701")) {
             List<InternationalSurveyEntity> internationalSurveyEntity = new ArrayList<>();
             internationalSurveyEntity = internationalSurveyRepo.findAll();
-            /*1*/allInSur = internationalSurveyEntity.size();
-            /*2*/for (int i = 0; i < internationalSurveyEntity.size(); i++) {
+            /*1*/
+            allInSur = internationalSurveyEntity.size();
+            /*2*/
+            for (int i = 0; i < internationalSurveyEntity.size(); i++) {
                 BigDecimal sum = internationalSurveyEntity.get(i).getSumProbability();
-                allSumProbability = allSumProbability.add(sum);}
-            /*3*/for (int i = 0; i <internationalSurveyEntity.size() ; i++) {
+                if (sum != null) allSumProbability = allSumProbability.add(sum);
+            }
+            /*3*/
+            for (int i = 0; i < internationalSurveyEntity.size(); i++) {
                 BigDecimal sum = internationalSurveyEntity.get(i).getSum();
-                sumDef = sumDef.add(sum);}
-            /*4*/for (int i = 0; i <internationalSurveyEntity.size() ; i++) {
+
+                if (sum != null) sumDef = sumDef.add(sum);
+            }
+            /*4*/
+            for (int i = 0; i < internationalSurveyEntity.size(); i++) {
                 BigDecimal sum = internationalSurveyEntity.get(i).getSumАpproved();
-                ApprovedSum = ApprovedSum.add(sum);}
-            /*5*/for (int i = 0; i <internationalSurveyEntity.size() ; i++) {
+                if (sum != null) ApprovedSum = ApprovedSum.add(sum);
+            }
+            /*5*/
+            for (int i = 0; i < internationalSurveyEntity.size(); i++) {
                 BigDecimal sum = internationalSurveyEntity.get(i).getSumOnControl();
-                sumOnControl = sumOnControl.add(sum);}
-        }else {
+                if (sum != null) sumOnControl = sumOnControl.add(sum);
+            }
+        } else {
             List<InternationalSurveyEntity> internationalSurveyEntity = new ArrayList<InternationalSurveyEntity>();
             internationalSurveyEntity = internationalSurveyRepo.findByExecutiveTerritoryCode(userLocation);
-            /*1*/allInSur = internationalSurveyEntity.size();
-            /*2*/for (int i = 0; i < internationalSurveyEntity.size(); i++) {
+            /*1*/
+            allInSur = internationalSurveyEntity.size();
+            /*2*/
+            for (int i = 0; i < internationalSurveyEntity.size(); i++) {
                 BigDecimal sum = internationalSurveyEntity.get(i).getSumProbability();
-
-                allSumProbability = allSumProbability.add(sum);}
-            /*3*/for (int i = 0; i <internationalSurveyEntity.size() ; i++) {
+                if (sum != null) allSumProbability = allSumProbability.add(sum);
+            }
+            /*3*/
+            for (int i = 0; i < internationalSurveyEntity.size(); i++) {
                 BigDecimal sum2 = internationalSurveyEntity.get(i).getSum();
-                sumDef = sumDef.add(sum2);}
-            /*4*/for (int i = 0; i <internationalSurveyEntity.size() ; i++) {
+                if (sum2 != null) sumDef = sumDef.add(sum2);
+            }
+            /*4*/
+            for (int i = 0; i < internationalSurveyEntity.size(); i++) {
                 BigDecimal sum3 = internationalSurveyEntity.get(i).getSumАpproved();
-                ApprovedSum = ApprovedSum.add(sum3);}
-            /*5*/for (int i = 0; i <internationalSurveyEntity.size() ; i++) {
+                if (sum3 != null) ApprovedSum = ApprovedSum.add(sum3);
+            }
+            /*5*/
+            for (int i = 0; i < internationalSurveyEntity.size(); i++) {
                 BigDecimal sum4 = internationalSurveyEntity.get(i).getSumOnControl();
-                sumOnControl = sumOnControl.add(sum4);}
+                if (sum4 != null) sumOnControl = sumOnControl.add(sum4);
+            }
         }
 
         /**Statistic bar**/
         mav.addObject("AllInSurvey", allInSur);
-        mav.addObject("AllSumProbability", allSumProbability);
-        mav.addObject("AllSumDef", sumDef);
-        mav.addObject("AllSumАpproved", ApprovedSum);
-        mav.addObject("AllSumOnControl", sumOnControl);
+        mav.addObject("AllSumProbability", df.format(allSumProbability));
+        mav.addObject("AllSumDef", df.format(sumDef));
+        mav.addObject("AllSumАpproved", df.format(ApprovedSum));
+        mav.addObject("AllSumOnControl", df.format(sumOnControl));
         /**Statistic bar**/
 
 
@@ -173,7 +199,7 @@ public class InternationalSurveyController {
         String userLocation = (String) request.getSession().getAttribute("userLocation");
         Integer userRole = (Integer) request.getSession().getAttribute("userRole");
         List<Location> location = locationRepo.findAll();
-        if (!Objects.equals(userLocation, "1701")){
+        if (!Objects.equals(userLocation, "1701")) {
             executiveTerritoryCode = userLocation;
         }
 
@@ -210,8 +236,8 @@ public class InternationalSurveyController {
             String sortBy = "insTime";
             String sortDir = "desc";
 
-            Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())?
-                    Sort.by(sortBy).ascending(): Sort.by(sortBy).descending();
+            Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
+                    Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
 
             List<InternationalSurveyEntity> tutorials = new ArrayList<InternationalSurveyEntity>();
             Pageable paging = PageRequest.of(page, size, sort);
@@ -283,11 +309,11 @@ public class InternationalSurveyController {
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         } else {
             InternationalSurveyEntity internationalSurveyEntity = new InternationalSurveyEntity();
-            if(!Objects.equals(internationalSurveyStep1DTO.getXbbMailNum(), "1701")){
+            if (!Objects.equals(internationalSurveyStep1DTO.getXbbMailNum(), "1701")) {
                 internationalSurveyEntity.setXbbMailNum(internationalSurveyStep1DTO.getXbbMailNum());
             }
             if (!Objects.equals(internationalSurveyStep1DTO.getXbbMailDate(), "")) {
-                if(userLocation != "1701" && internationalSurveyStep1DTO.getXbbMailDate() != "1111-11-11"){
+                if (userLocation != "1701" && internationalSurveyStep1DTO.getXbbMailDate() != "1111-11-11") {
                     internationalSurveyEntity.setXbbMailDate(Date.valueOf(internationalSurveyStep1DTO.getXbbMailDate()));
                 }
             }
@@ -331,7 +357,7 @@ public class InternationalSurveyController {
         Map<String, String> errors = new HashMap<>();
         if (result.hasErrors()) {
             errors = result.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-            if (Objects.equals(internationalSurveyStep2DTO.getExecutiveTerritoryCode(), "1701")){
+            if (Objects.equals(internationalSurveyStep2DTO.getExecutiveTerritoryCode(), "1701")) {
                 errors.put("executiveTerritoryCode", "Маъсул худуд ДБҚ бўлиши мумкин эмас!");
             }
             return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
@@ -349,7 +375,7 @@ public class InternationalSurveyController {
             if (!Objects.equals(internationalSurveyStep2DTO.getResponseNumSendXbbDate(), "")) {
                 internationalSurveyEntity.setResponseNumSendXbbDate(Date.valueOf(internationalSurveyStep2DTO.getResponseNumSendXbbDate()));
             }
-            if (Objects.equals(internationalSurveyStep2DTO.getExecutiveTerritoryCode(), "1701")){
+            if (Objects.equals(internationalSurveyStep2DTO.getExecutiveTerritoryCode(), "1701")) {
                 Map<String, String> errorsTerritorilCode = new HashMap<>();
                 errorsTerritorilCode.put("executiveTerritoryCode", "Маъсул худуд ДБҚ бўлиши мумкин эмас!");
                 return new ResponseEntity<Object>(errorsTerritorilCode, HttpStatus.BAD_REQUEST);
@@ -362,20 +388,20 @@ public class InternationalSurveyController {
             internationalSurveyEntity.setSavedUserSecond(userName);
             internationalSurveyService.savingValue(internationalSurveyEntity);
             Map<String, String> notAllowedInputs = new HashMap<>();
-            if ((internationalSurveyEntity.getResponseNum() == null) || (Objects.equals(internationalSurveyEntity.getResponseNum(), ""))){
+            if ((internationalSurveyEntity.getResponseNum() == null) || (Objects.equals(internationalSurveyEntity.getResponseNum(), ""))) {
                 notAllowedInputs.put("responseNum", "responseNum");
             }
-            if ((internationalSurveyEntity.getResponseDate() == null)){
+            if ((internationalSurveyEntity.getResponseDate() == null)) {
                 notAllowedInputs.put("responseDate", "responseDate");
             }
-            if (internationalSurveyEntity.getResponseNumSendXbbNum() == null || Objects.equals(internationalSurveyEntity.getResponseNumSendXbbNum(), "")){
+            if (internationalSurveyEntity.getResponseNumSendXbbNum() == null || Objects.equals(internationalSurveyEntity.getResponseNumSendXbbNum(), "")) {
                 notAllowedInputs.put("responseNumSendXbbNum", "responseNumSendXbbNum");
             }
-            if (internationalSurveyEntity.getResponseNumSendXbbDate() == null){
+            if (internationalSurveyEntity.getResponseNumSendXbbDate() == null) {
                 notAllowedInputs.put("responseNumSendXbbDate", "responseNumSendXbbDate");
             }
             /**100-First step**/ /**200-Second step**/ /**300-Third step**/
-            if(notAllowedInputs.size() == 0){
+            if (notAllowedInputs.size() == 0) {
                 internationalSurveyEntity.setStatus("200");
                 internationalSurveyService.savingValue(internationalSurveyEntity);
             }
@@ -410,7 +436,7 @@ public class InternationalSurveyController {
             if (!Objects.equals(internationalSurveyStep3DTO.getSum(), "")) {
                 internationalSurveyEntity.setSum(internationalSurveyStep3DTO.getSum());
             }
-            if (!Objects.equals(internationalSurveyStep3DTO.getSumАpproved(), "")){
+            if (!Objects.equals(internationalSurveyStep3DTO.getSumАpproved(), "")) {
                 internationalSurveyEntity.setSumАpproved(internationalSurveyStep3DTO.getSumАpproved());
             }
             internationalSurveyEntity.setSumOnControl(
@@ -441,7 +467,7 @@ public class InternationalSurveyController {
         try {
             InternationalSurveyEntity internationalSurveyEntity = internationalSurveyService.getById(internationalSurveyAddNewSumApproved.getIsId());
             BigDecimal newSumApproved;
-            if (!Objects.equals(internationalSurveyAddNewSumApproved.getSumApprovedAdd(), "")){
+            if (!Objects.equals(internationalSurveyAddNewSumApproved.getSumApprovedAdd(), "")) {
                 newSumApproved = internationalSurveyEntity.getSumАpproved().add(internationalSurveyAddNewSumApproved.getSumApprovedAdd());
             } else newSumApproved = BigDecimal.valueOf(0.00);
 
@@ -451,14 +477,14 @@ public class InternationalSurveyController {
             internationalSurveyEntity.setSumOnControl(newSumOnControl);
 
             String newComment = "";
-            if (internationalSurveyAddNewSumApproved.getCommentAdd() != ""){
+            if (internationalSurveyAddNewSumApproved.getCommentAdd() != "") {
                 newComment = internationalSurveyAddNewSumApproved.getCommentAdd() + ";" + "<br>" + internationalSurveyEntity.getComment();
                 internationalSurveyEntity.setComment(newComment);
             }
             internationalSurveyEntity.setFabula(internationalSurveyAddNewSumApproved.getFabulaAdd());
             internationalSurveyService.savingValue(internationalSurveyEntity);
             return ResponseEntity.status(201).body(internationalSurveyEntity);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<Object>("error", HttpStatus.BAD_REQUEST);
         }
     }
