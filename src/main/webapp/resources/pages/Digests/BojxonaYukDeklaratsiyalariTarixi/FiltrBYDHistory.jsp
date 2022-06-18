@@ -378,7 +378,7 @@
             $.ajax({
                 type: "POST",
                 data: dataS,
-                url: "<%=request.getContextPath()%>/costmonitoring/resources/pages/CostMonitoring/FiltrCMPost",
+                url: "<%=request.getContextPath()%>/costmonitoring/resources/pages/CostMonitoring/MtcRepl/FiltrCMPost",
                 // dataType: "json",
                 header: 'Content-type: application/json; charset=utf-8',
                 success: function (res) {
