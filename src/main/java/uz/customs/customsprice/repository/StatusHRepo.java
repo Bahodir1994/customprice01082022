@@ -6,6 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import uz.customs.customsprice.entity.InitialDecision.StatusH;
 import uz.customs.customsprice.entity.earxiv.Earxiv;
 
+import java.util.List;
+
 public interface StatusHRepo extends JpaRepository<StatusH, String> {
     Page<StatusH> findByAppId(String appId, Pageable pageable);
+
+    List<StatusH> findByAppId(String appId);
 }

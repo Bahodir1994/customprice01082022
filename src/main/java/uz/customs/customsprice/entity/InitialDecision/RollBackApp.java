@@ -29,6 +29,15 @@ public class RollBackApp extends AbstractAuditingEntity {
     @Column(name = "APP_ID", columnDefinition = "VARCHAR(50)")
     private String appId;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "STATUS_H_ID", insertable = false, updatable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private StatusH statusH;
+
+    @Column(name = "STATUS_H_ID", columnDefinition = "VARCHAR(50)")
+    private String statusHId;
+
     @Column(name = "ROLLBACK_ID", columnDefinition = "VARCHAR(50)")
     private String rollbackId;
 
@@ -38,11 +47,13 @@ public class RollBackApp extends AbstractAuditingEntity {
     public RollBackApp() {
     }
 
-    public RollBackApp(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, String rollbackId, String rollbackName) {
+    public RollBackApp(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, StatusH statusH, String statusHId, String rollbackId, String rollbackName) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.apps = apps;
         this.appId = appId;
+        this.statusH = statusH;
+        this.statusHId = statusHId;
         this.rollbackId = rollbackId;
         this.rollbackName = rollbackName;
     }
@@ -69,6 +80,22 @@ public class RollBackApp extends AbstractAuditingEntity {
 
     public void setAppId(String appId) {
         this.appId = appId;
+    }
+
+    public StatusH getStatusH() {
+        return statusH;
+    }
+
+    public void setStatusH(StatusH statusH) {
+        this.statusH = statusH;
+    }
+
+    public String getStatusHId() {
+        return statusHId;
+    }
+
+    public void setStatusHId(String statusHId) {
+        this.statusHId = statusHId;
     }
 
     public String getRollbackId() {

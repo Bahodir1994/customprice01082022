@@ -93,6 +93,7 @@ public class OutProgram {
 
             tutorials = pageTuts.getContent();
             Map<String, Object> response = new HashMap<>();
+
             response.put("commodityList", tutorials);
             response.put("apps", apps);
 
@@ -171,12 +172,37 @@ public class OutProgram {
 
             Page<StatusH> pageTuts = statusHRepo.findByAppId(appId, paging);
             tutorials = pageTuts.getContent();
-            List<RollBackApp> rollBackApp =new ArrayList<>();
+            List<RollBackApp> rollBackApp = new ArrayList<>();
             rollBackApp = rollBackAppRepo.getByAppId(appId);
 
             Map<String, Object> response = new HashMap<>();
-            response.put("statusAppHistoryList", tutorials);
-            response.put("rollbackApp", rollBackApp);
+//            Map<String, Object> rollBackAppList = new HashMap<>();
+            Map<String, Object> statusHAppList = new HashMap<>();
+
+            List<StatusH> statusHList = statusHRepo.findByAppId(appId);
+//            List<RollBackApp> rollBackAppList = rollBackAppRepo.findByAppIdAndStatusHId(appId);
+
+            for (int i = 0; i < statusHList.size(); i++) {
+//                List<RollBackApp> rollBackAppList = rollBackAppRepo.findByAppIdAndStatusHId(appId, statusHList.get(i).getId());
+                Map<String, Object> rollBackAppList = new HashMap<>();
+                for (int j = 0; j < rollBackApp.size(); j++) {
+                    if (statusHList.get(i).getId().equals(rollBackApp.get(j).getStatusHId())) {
+                        rollBackAppList.put(String.valueOf(j), rollBackApp.get(j));
+                    }
+                }
+                statusHAppList.put("appId", tutorials.get(i).getAppId());
+                statusHAppList.put("htatus", tutorials.get(i).getStatus());
+                statusHAppList.put("historyNum", tutorials.get(i).getHistoryNum());
+                statusHAppList.put("Id", tutorials.get(i).getId());
+                statusHAppList.put("statusComment", tutorials.get(i).getStatusComment());
+                statusHAppList.put("stmainID", tutorials.get(i).getStmainID());
+                statusHAppList.put("statusM", tutorials.get(i).getStatusM());
+                statusHAppList.put("rollBackAppSList", rollBackAppList);
+            }
+
+            response.put("statusHAppList", statusHAppList);
+//            response.put("statusAppHistoryList", tutorials);
+//            response.put("rollbackApp", rollBackApp);
             response.put("currentPage", pageTuts.getNumber());
             response.put("totalItems", pageTuts.getTotalElements());
             response.put("totalPages", pageTuts.getTotalPages());
@@ -210,14 +236,14 @@ public class OutProgram {
 
     /******************************************************************************************************************/
     @GetMapping("/custom/reestor")
-    public ResponseEntity<Map<String, Object>> findByInDec(){
+    public ResponseEntity<Map<String, Object>> findByInDec() {
         try {
             Map<String, Object> response = new HashMap<>();
             response.put("inDecReestr", appsService.getInDecForApi());
             response.put("message", "succes");
             response.put("status", 200);
             return new ResponseEntity<>(response, HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             Map<String, Object> response = new HashMap<>();
             response.put("inDecReestr", "Маълумотлар топилмади");
             response.put("message", "error");

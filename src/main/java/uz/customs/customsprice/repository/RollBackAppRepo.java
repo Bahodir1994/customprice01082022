@@ -9,4 +9,6 @@ import java.util.List;
 public interface RollBackAppRepo extends JpaRepository<RollBackApp, String> {
 //    RollBackApp getByAppId(String appId);
     List<RollBackApp> getByAppId(String appId);
+
+    List<RollBackApp> findByAppIdAndStatusHId(String appId, String statusHId);
 }
