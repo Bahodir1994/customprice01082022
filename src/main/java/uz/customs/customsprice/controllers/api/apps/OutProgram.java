@@ -15,9 +15,6 @@ import uz.customs.customsprice.entity.earxiv.Earxiv;
 import uz.customs.customsprice.repository.*;
 import uz.customs.customsprice.service.AppsService;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @RestController
@@ -172,37 +169,37 @@ public class OutProgram {
 
             Page<StatusH> pageTuts = statusHRepo.findByAppId(appId, paging);
             tutorials = pageTuts.getContent();
-            List<RollBackApp> rollBackApp = new ArrayList<>();
-            rollBackApp = rollBackAppRepo.getByAppId(appId);
 
             Map<String, Object> response = new HashMap<>();
-//            Map<String, Object> rollBackAppList = new HashMap<>();
-            Map<String, Object> statusHAppList = new HashMap<>();
+            response.put("statusAppHistoryList", tutorials);
+            response.put("currentPage", pageTuts.getNumber());
+            response.put("totalItems", pageTuts.getTotalElements());
+            response.put("totalPages", pageTuts.getTotalPages());
 
-            List<StatusH> statusHList = statusHRepo.findByAppId(appId);
-//            List<RollBackApp> rollBackAppList = rollBackAppRepo.findByAppIdAndStatusHId(appId);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-            for (int i = 0; i < statusHList.size(); i++) {
-//                List<RollBackApp> rollBackAppList = rollBackAppRepo.findByAppIdAndStatusHId(appId, statusHList.get(i).getId());
-                Map<String, Object> rollBackAppList = new HashMap<>();
-                for (int j = 0; j < rollBackApp.size(); j++) {
-                    if (statusHList.get(i).getId().equals(rollBackApp.get(j).getStatusHId())) {
-                        rollBackAppList.put(String.valueOf(j), rollBackApp.get(j));
-                    }
-                }
-                statusHAppList.put("appId", tutorials.get(i).getAppId());
-                statusHAppList.put("htatus", tutorials.get(i).getStatus());
-                statusHAppList.put("historyNum", tutorials.get(i).getHistoryNum());
-                statusHAppList.put("Id", tutorials.get(i).getId());
-                statusHAppList.put("statusComment", tutorials.get(i).getStatusComment());
-                statusHAppList.put("stmainID", tutorials.get(i).getStmainID());
-                statusHAppList.put("statusM", tutorials.get(i).getStatusM());
-                statusHAppList.put("rollBackAppSList", rollBackAppList);
-            }
+    /************************(AppId бўйча Aриза StatusHistory ларни беради)****************************/
+    @GetMapping("/tutorials/historyrollback")
+    public ResponseEntity<Map<String, Object>> findByAppIdToAppByStatusHistoryRollBack(
+            @RequestParam(required = false) String appId,
+            @RequestParam(required = false) String statusHId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "50") int size
+    ) {
+        try {
+            List<RollBackApp> tutorials = new ArrayList<>();
+            Optional<Apps> apps = appsRepo.findById(appId);
+            Pageable paging = PageRequest.of(page, size);
+            Page<RollBackApp> pageTuts = rollBackAppRepo.findByAppIdAndStatusHId(appId, statusHId, paging);
+            tutorials = pageTuts.getContent();
 
-            response.put("statusHAppList", statusHAppList);
-//            response.put("statusAppHistoryList", tutorials);
-//            response.put("rollbackApp", rollBackApp);
+            Map<String, Object> response = new HashMap<>();
+            response.put("rollBackAppList", tutorials);
+            response.put("rollBackComment", apps.get().getComment());
             response.put("currentPage", pageTuts.getNumber());
             response.put("totalItems", pageTuts.getTotalElements());
             response.put("totalPages", pageTuts.getTotalPages());
