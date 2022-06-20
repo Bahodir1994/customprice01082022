@@ -141,9 +141,9 @@ public class ApiAppsController {
                 apps.setSenderCountryNm(country.getCdNm());
                 Location location = locationService.getById(apps.getLocationId());
                 apps.setLocationNm(location.getName1());
-                apps.setStatus(100);
-                Status status = statusService.getById(100);
-                apps.setStatusNm(status.getName());
+//                apps.setStatus(100);
+//                Status status = statusService.getById(100);
+//                apps.setStatusNm(status.getName());
                 Terms terms = termsService.findByIdAndLngaTpcd(apps.getTerms(), "UZ");
                 apps.setTermsNm(terms.getSign());
                 apps.setInsUser(personsIdGet.get().getTin());
@@ -227,22 +227,6 @@ public class ApiAppsController {
                     earxivService.create(earxiv);
                     ResponseHandler.generateResponse("Xujjat ma`lumotlari saqlandi!", HttpStatus.OK, earxiv);
                 }
-                /**todo ЛОК га ёзиш start todo**/
-                StatusM statusM = new StatusM();
-                statusM.setAppId(apps.getId());
-                statusM.setStatus(String.valueOf(apps.getStatus()));
-                statusM.setStatusComment(apps.getStatusNm());
-                statusM.setInsUser(personsIdGet.get().getTin());
-                statusMService.saveStatusM(statusM);
-
-                StatusH statusH = new StatusH();
-                statusH.setStmainID(statusM.getId());
-                statusH.setAppId(statusM.getAppId());
-                statusH.setStatus(String.valueOf(apps.getStatus()));
-                statusH.setStatusComment(apps.getStatusNm());
-                statusH.setInsUser(personsIdGet.get().getTin());
-                statusHService.saveStatusH(statusH);
-                /**todo ЛОК га ёзиш end todo**/
                 JSONObject obj = new JSONObject();
                 obj.put("message", "Success");
                 obj.put("data", apps);

@@ -37,6 +37,7 @@ public class ApiCommodityController {
     private final StatusHService statusHService;
     private final StatusMService statusMService;
 
+
     public ApiCommodityController(AppsService appsService, CommodityService commodityService, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, CurrencyEntityRepo currencyEntityRepo, CommodityRepo commodityRepo, StatusService statusService, StatusHService statusHService, StatusMService statusMService) {
         this.appsService = appsService;
         this.commodityService = commodityService;
@@ -64,33 +65,10 @@ public class ApiCommodityController {
             Optional<Apps> appIdGet = Optional.ofNullable(appsService.findById(commodity.getAppId()));
             Commodity commodity1 = new Commodity();
             commodity1 = commodityService.getByAppId(commodity.getAppId());
-            if (commodity1 != null){
+            Apps apps = new Apps();
+            apps = appsService.findById(commodity.getAppId());
+            if (commodity1 != null && !commodity1.equals("null") && !commodity1.equals("")) {
                 commodityRepo.deleteAllByAppId(commodity.getAppId());
-            }
-            if (appIdGet.isPresent()) {
-                Country country = conturyService.getByCodeAndLngaTpcd(commodity.getOriginCountry(), "UZ");
-                commodity.setOrignCountrNm(country.getCdNm());
-
-                Method method = methodService.getById(commodity.getMethod());
-                commodity.setMethodNm(method.getName());
-
-                Packaging packaging = packagingService.getByIdAndLngaTpcd(commodity.getPackType(), "UZ");
-                commodity.setPackTypeNm(packaging.getCdNm());
-
-                Tnved2 tnved2 = tnved2Service.getByIdAndFinishdate(commodity.getHsCode());
-                commodity.setHsName(tnved2.getName());
-
-                CurrencyEntity currencyEntity = currencyEntityRepo.findByCodeAndLngaTpcd(commodity.getCurrencyType(), "RU");
-                commodity.setCurrencyNm(currencyEntity.getCdDesc());
-                commodity.setCurrencyNmSymbol(currencyEntity.getCdId());
-
-                if (commodity.getHsDecDate() != null && !"".equals(String.valueOf(commodity.getHsDecDate())) && !"null".equals(String.valueOf(commodity.getHsDecDate()))) commodity.setHsDecDate(commodity.getHsDecDate());
-                if (commodity.getInDecDate() != null && !"".equals(String.valueOf(commodity.getInDecDate())) && !"null".equals(String.valueOf(commodity.getInDecDate()))) commodity.setInDecDate(commodity.getInDecDate());
-                if (commodity.getInDecNum() != null && !"".equals(commodity.getInDecNum()) && !"null".equals(commodity.getInDecNum())) commodity.setInDecNum(commodity.getInDecNum());
-                if (commodity.getExtraUnits() != null && !"".equals(commodity.getExtraUnits()) && !"null".equals(commodity.getExtraUnits())) commodity.setExtraUnits(commodity.getExtraUnits());
-                commodityService.saveCommodity(commodity);
-
-                Apps apps =new Apps();
                 apps = appsService.findById(commodity.getAppId());
                 apps.setStatus(135);
                 Status status = statusService.getById(135);
@@ -113,6 +91,56 @@ public class ApiCommodityController {
                 statusH.setInsUser(apps.getPersonTin());
                 statusHService.saveStatusH(statusH);
                 /**todo ЛОК га ёзиш end todo**/
+            }
+            if (appIdGet.isPresent()) {
+                Country country = conturyService.getByCodeAndLngaTpcd(commodity.getOriginCountry(), "UZ");
+                commodity.setOrignCountrNm(country.getCdNm());
+
+                Method method = methodService.getById(commodity.getMethod());
+                commodity.setMethodNm(method.getName());
+
+                Packaging packaging = packagingService.getByIdAndLngaTpcd(commodity.getPackType(), "UZ");
+                commodity.setPackTypeNm(packaging.getCdNm());
+
+                Tnved2 tnved2 = tnved2Service.getByIdAndFinishdate(commodity.getHsCode());
+                commodity.setHsName(tnved2.getName());
+
+                CurrencyEntity currencyEntity = currencyEntityRepo.findByCodeAndLngaTpcd(commodity.getCurrencyType(), "RU");
+                commodity.setCurrencyNm(currencyEntity.getCdDesc());
+                commodity.setCurrencyNmSymbol(currencyEntity.getCdId());
+
+                if (commodity.getHsDecDate() != null && !"".equals(String.valueOf(commodity.getHsDecDate())) && !"null".equals(String.valueOf(commodity.getHsDecDate())))
+                    commodity.setHsDecDate(commodity.getHsDecDate());
+                if (commodity.getInDecDate() != null && !"".equals(String.valueOf(commodity.getInDecDate())) && !"null".equals(String.valueOf(commodity.getInDecDate())))
+                    commodity.setInDecDate(commodity.getInDecDate());
+                if (commodity.getInDecNum() != null && !"".equals(commodity.getInDecNum()) && !"null".equals(commodity.getInDecNum()))
+                    commodity.setInDecNum(commodity.getInDecNum());
+                if (commodity.getExtraUnits() != null && !"".equals(commodity.getExtraUnits()) && !"null".equals(commodity.getExtraUnits()))
+                    commodity.setExtraUnits(commodity.getExtraUnits());
+                commodityService.saveCommodity(commodity);
+
+                    apps.setStatus(100);
+                    Status status = statusService.getById(100);
+                    apps.setStatusNm(status.getName());
+                    appsService.saveApps(apps);
+
+                    /**todo ЛОК га ёзиш start todo**/
+                    StatusM statusM = new StatusM();
+                    statusM.setAppId(apps.getId());
+                    statusM.setStatus(String.valueOf(apps.getStatus()));
+                    statusM.setStatusComment(apps.getStatusNm());
+                    statusM.setInsUser(apps.getPersonTin());
+                    statusMService.saveStatusM(statusM);
+
+                    StatusH statusH = new StatusH();
+                    statusH.setStmainID(statusM.getId());
+                    statusH.setAppId(statusM.getAppId());
+                    statusH.setStatus(String.valueOf(apps.getStatus()));
+                    statusH.setStatusComment(apps.getStatusNm());
+                    statusH.setInsUser(apps.getPersonTin());
+                    statusHService.saveStatusH(statusH);
+                    /**todo ЛОК га ёзиш end todo**/
+
                 return ResponseHandler.generateResponse("Commodity ma`lumotlari saqlandi!", HttpStatus.OK, commodity);
             } else {
                 JSONObject obj = new JSONObject();
