@@ -79,9 +79,9 @@
                                 <td>${i.index+1}</td>
                                 <td>${val.g47Type}</td>
                                 <td>${val.g47Base}</td>
+                                <td>${val.g47AltBase}</td>
                                 <td>${val.g47Rate}</td>
                                 <td>${val.g47AltRate}</td>
-                                <td>${val.g47AltBase}</td>
                                 <td>${rate}</td>
                                 <td>${val.g47AltBaseEdIzm}</td>
                                 <td>${val.g47Sum}</td>
