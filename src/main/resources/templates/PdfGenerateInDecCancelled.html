@@ -146,9 +146,9 @@
                             <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb12()}">Урамлар сони:</b><br>
                                 <p th:text="${cmdt.get().getPackQty()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                             <td style="background-color: #ffff;"><b th:text="${htmlData.get().getZapas4()}">Божхона қиймати</b><br>
-                                <p th:text="${cmdt.get().getCustomsPrice()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                <p th:text="${#numbers.formatCurrency(cmdt.get().getCustomsPrice())}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                             <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb14()}">Фактура киймати:</b><br>
-                                <p th:text="${cmdt.get().getPrice()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                <p th:text="${#numbers.formatCurrency(cmdt.get().getPrice())}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                             <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb15()}">Валюта коди:</b><br>
                                 <p th:text="${cmdt.get().getCurrencyType()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                         </tr>
@@ -156,9 +156,9 @@
                             <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb13()}">Юк жойларининг умумий сони:</b><br>
                                 <p th:text="${cmdt.get().getCargoSpace()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                             <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb16()}">Брутто:</b><br>
-                                <p th:text="${cmdt.get().getBrutto()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                <p th:text="${#numbers.formatDecimal(cmdt.get().getBrutto(), 0, 'COMMA', 3, 'POINT')}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                             <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb17()}">Нетто:</b><br>
-                                <p th:text="${cmdt.get().getNetto()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                <p th:text="${#numbers.formatDecimal(cmdt.get().getNetto(), 0, 'COMMA', 3, 'POINT')}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                             <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb18()}">Қўш. ўл.бир. миқ.</b><br>
                                 <p th:text="${cmdt.get().getExtraQty()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                             <td style="background-color: #ffff;" colspan="2"><b th:text="${htmlData.get().getTableb19()}">Қўш. ўл.бир. коди:</b><br>
@@ -307,9 +307,9 @@
                                     <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb12()}">Урамлар сони:</b><br>
                                         <p th:text="${cmdt.get().getPackQty()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                                     <td style="background-color: #ffff;"><b th:text="${htmlData.get().getZapas4()}">Божхона қиймати</b><br>
-                                        <p th:text="${cmdt.get().getCustomsPrice()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                        <p th:text="${#numbers.formatCurrency(cmdt.get().getCustomsPrice())}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                                     <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb14()}">Фактура киймати:</b><br>
-                                        <p th:text="${cmdt.get().getPrice()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                        <p th:text="${#numbers.formatCurrency(cmdt.get().getPrice())}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                                     <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb15()}">Валюта коди:</b><br>
                                         <p th:text="${cmdt.get().getCurrencyType()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                                 </tr>
@@ -317,9 +317,9 @@
                                     <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb13()}">Юк жойларининг умумий сони:</b><br>
                                         <p th:text="${cmdt.get().getCargoSpace()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                                     <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb16()}">Брутто:</b><br>
-                                        <p th:text="${cmdt.get().getBrutto()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                        <p th:text="${#numbers.formatDecimal(cmdt.get().getBrutto(), 0, 'COMMA', 3, 'POINT')}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                                     <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb17()}">Нетто:</b><br>
-                                        <p th:text="${cmdt.get().getNetto()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                        <p th:text="${#numbers.formatDecimal(cmdt.get().getNetto(), 0, 'COMMA', 3, 'POINT')}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                                     <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb18()}">Қўш. ўл.бир. миқ.</b><br>
                                         <p th:text="${cmdt.get().getExtraQty()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
                                     <td style="background-color: #ffff;" colspan="2"><b th:text="${htmlData.get().getTableb19()}">Қўш. ўл.бир. коди:</b><br>
@@ -367,11 +367,11 @@
                                 <tbody>
                                 <tr th:each="pay: ${payment}">
                                     <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47Type()}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${{pay.getG47Base()}}" class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${#numbers.formatCurrency(pay.getG47Base())}" class="tg-oi4f"></td>
                                     <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltRate()}" class="tg-oi4f"></td>
                                     <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltBase()}" class="tg-oi4f"></td>
                                     <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltBaseCurrkod()}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${{pay.getG47Sum()}}" class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${#numbers.formatCurrency(pay.getG47Sum())}" class="tg-oi4f"></td>
                                     <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47Sp()}" class="tg-oi4f"></td>
                                 </tr>
                                 </tbody>

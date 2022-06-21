@@ -27,7 +27,7 @@ public class InternationalSurveyReportXML {
     public String generateReport(String executiveTerritoryCode,
                                  Date FromStart,
                                  Date ToEnd) {
-        List<InternationalSurveyEntity> employees = internationalSurveyRepo.queryInternationalSurveyEntityByExecutiveTerritoryCodeAndXbbMailDateBetween(executiveTerritoryCode, FromStart, ToEnd);
+        List<InternationalSurveyEntity> employees = internationalSurveyRepo.findAllByExecutiveTerritoryCodeAndXbbMailDateBetween(executiveTerritoryCode, FromStart, ToEnd);
 
 
         try {

@@ -88,12 +88,18 @@ public interface InternationalSurveyRepo extends JpaRepository<InternationalSurv
             "    sum( case when i.sumOnControl is null then 0.00 else i.sumOnControl end)\n" +
             "from\n" +
             "    InternationalSurveyEntity i\n" +
+            "where i.executiveTerritoryCode = :executiveTerritoryCode \n" +
+            "and i.xbbMailDate > :FromStart \n"+
+            "and i.xbbMailDate < :ToEnd \n"+
             "group by\n" +
             "    i.directionTypeCode,\n" +
             "    i.directionTypeName,\n" +
             "    i.sendReqCountryCode,\n" +
             "    i.sendReqCountryNm\n" +
             "    order by i.directionTypeCode asc  ")
-    List<InternationalSurveyEntity> queryInternationalSurveyEntityByExecutiveTerritoryCodeAndXbbMailDateBetween(String executiveTerritoryCode, Date fromStart, Date toEnd);
+    List<InternationalSurveyEntity> findAllByExecutiveTerritoryCodeAndXbbMailDateBetween(
+            @Param("executiveTerritoryCode")String executiveTerritoryCode,
+            @Param("FromStart")Date fromStart,
+            @Param("ToEnd")Date toEnd);
 
 }

@@ -496,12 +496,18 @@ public class InternationalSurveyController {
         }
     }
 
-
     @GetMapping(value = GET_REPORT_IN_SUR)
-    public ResponseEntity<InputStreamResource> getFile(@PathVariable String formats, @PathVariable String FromStart, @PathVariable String ToEnd) {
-        System.out.println(formats);
+    public ResponseEntity<InputStreamResource> getFile(@PathVariable String formats, @PathVariable String FromStart, @PathVariable String ToEnd, HttpServletRequest request) {
+        String userId = (String) request.getSession().getAttribute("userId");
+        String userName = (String) request.getSession().getAttribute("userName");
+        Integer userRole = (Integer) request.getSession().getAttribute("userRole");
+        String userRoleName = (String) request.getSession().getAttribute("userRoleName");
+        String userLocation = (String) request.getSession().getAttribute("userLocation");
+        String userLocationName = (String) request.getSession().getAttribute("userLocationName");
+        String userPost = (String) request.getSession().getAttribute("userPost");
+
         String filename = "tutorials.xlsx";
-        InputStreamResource file = new InputStreamResource(fileService.load());
+        InputStreamResource file = new InputStreamResource(fileService.load(userLocation, FromStart, ToEnd));
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
                 .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
