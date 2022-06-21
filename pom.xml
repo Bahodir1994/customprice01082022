@@ -213,6 +213,11 @@
             <version>2.0.4</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>html2pdf</artifactId>
             <version>3.0.1</version>
@@ -267,6 +272,19 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.19.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>local.jasperFontOverrides</groupId>
+            <artifactId>local.jasperFontOverrides</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/Times.jar</systemPath>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

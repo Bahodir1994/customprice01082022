@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_Landscape_2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f7ebc8fc-1a45-4b9e-b78f-7e3b4c53c61c">
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <property name="template.engine" value="tabular_template"/>
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+    <style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+    <style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+    <style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+        <conditionalStyle>
+            <conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+            <style mode="Opaque" backcolor="#EEEFF0"/>
+        </conditionalStyle>
+    </style>
+    <parameter name="FromStart" class="java.lang.String"/>
+    <parameter name="ToEnd" class="java.lang.String"/>
+    <parameter name="Year" class="java.lang.String"/>
+    <field name="directionTypeName" class="java.lang.String"/>
+    <field name="sendReqCountryNm" class="java.lang.String"/>
+    <field name="xbbMailNum" class="java.lang.String"/>
+    <field name="sum" class="java.math.BigDecimal"/>
+    <field name="sumOnControl" class="java.math.BigDecimal"/>
+    <field name="sumАpproved" class="java.math.BigDecimal"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="60" splitType="Stretch">
+            <staticText>
+                <reportElement x="-20" y="20" width="841" height="40" uuid="0a3d22ed-d655-4561-839e-c7a3a1dc5af0">
+                    <property name="net.sf.jasperreports.export.xls.auto.filter" value="End"/>
+                    <property name="net.sf.jasperreports.export.xls.auto.fit.column" value="true"/>
+                    <property name="net.sf.jasperreports.export.xls.cell.locked" value="true"/>
+                </reportElement>
+                <box>
+                    <pen lineWidth="1.5" lineColor="#009900"/>
+                    <topPen lineWidth="1.5" lineStyle="Solid" lineColor="#009900"/>
+                    <leftPen lineWidth="1.5" lineStyle="Solid" lineColor="#009900"/>
+                    <bottomPen lineWidth="1.5" lineStyle="Solid" lineColor="#009900"/>
+                    <rightPen lineWidth="1.5" lineStyle="Solid" lineColor="#009900"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="TimesRomanS" size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="37" y="35" width="122" height="20" uuid="b2fab0af-2bcc-41c4-bf65-e1ca4876294d">
+                    <property name="net.sf.jasperreports.export.xls.auto.filter" value="End"/>
+                    <property name="net.sf.jasperreports.export.xls.auto.fit.column" value="true"/>
+                    <property name="net.sf.jasperreports.export.xls.cell.locked" value="true"/>
+                </reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="TimesRomanS" size="12" isBold="true" isItalic="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{Year}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="160" y="35" width="39" height="20" uuid="63b2ea8c-b618-415f-b161-567771f0591b">
+                    <property name="net.sf.jasperreports.export.xls.auto.filter" value="End"/>
+                    <property name="net.sf.jasperreports.export.xls.auto.fit.column" value="true"/>
+                    <property name="net.sf.jasperreports.export.xls.cell.locked" value="true"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="TimesRomanS" size="12" isBold="true" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[йил]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="290" y="35" width="90" height="20" uuid="343a2f7b-72c9-4db4-bda7-e24fb6eaf6b7">
+                    <property name="net.sf.jasperreports.export.xls.auto.filter" value="End"/>
+                    <property name="net.sf.jasperreports.export.xls.auto.fit.column" value="true"/>
+                    <property name="net.sf.jasperreports.export.xls.cell.locked" value="true"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="TimesRomanS" size="12" isBold="true" isItalic="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{ToEnd}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="200" y="35" width="88" height="20" uuid="e8d0af8f-ed9a-4e7f-b04d-ae31588e2862">
+                    <property name="net.sf.jasperreports.export.xls.auto.filter" value="End"/>
+                    <property name="net.sf.jasperreports.export.xls.auto.fit.column" value="true"/>
+                    <property name="net.sf.jasperreports.export.xls.cell.locked" value="true"/>
+                </reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="TimesRomanS" size="12" isBold="true" isItalic="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{FromStart}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="380" y="35" width="388" height="20" uuid="efd558f6-fe13-42c0-97e3-d1b16cd074cd">
+                    <property name="net.sf.jasperreports.export.xls.auto.filter" value="End"/>
+                    <property name="net.sf.jasperreports.export.xls.auto.fit.column" value="true"/>
+                    <property name="net.sf.jasperreports.export.xls.cell.locked" value="true"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="TimesRomanS" size="12" isBold="true" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[да Халқаро сўровномалар йўналишида ҳисобот]]></text>
+            </staticText>
+        </band>
+    </title>
+    <columnHeader>
+        <band height="61" splitType="Stretch">
+            <staticText>
+                <reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="-20" y="11" width="147" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="991082ab-cf6e-44a2-a50d-c234ce06a613"/>
+                <box>
+                    <pen lineWidth="1.0" lineColor="#009900"/>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="TimesRomanS" size="12" isBold="true" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[№]]></text>
+            </staticText>
+            <staticText>
+                <reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="129" y="11" width="109" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="89eef6cd-bd2f-44aa-9dd2-2f1cff8473ae"/>
+                <box>
+                    <pen lineWidth="1.0" lineColor="#009900"/>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="TimesRomanS" size="12" isBold="true" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[Йўналиш]]></text>
+            </staticText>
+            <staticText>
+                <reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="240" y="11" width="109" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="ef4c49a9-51c1-4130-ac23-69483cb50614"/>
+                <box>
+                    <pen lineWidth="1.0" lineColor="#009900"/>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="TimesRomanS" size="12" isBold="true" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[Мамлакат]]></text>
+            </staticText>
+            <staticText>
+                <reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="351" y="11" width="109" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="83faf296-2213-46a7-8a0b-c6bf16c82291"/>
+                <box>
+                    <pen lineWidth="1.0" lineColor="#009900"/>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="TimesRomanS" size="12" isBold="true" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[Сўровнома сони]]></text>
+            </staticText>
+            <staticText>
+                <reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="462" y="11" width="109" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="678375ba-4b1f-433f-8039-2202fc61c750"/>
+                <box>
+                    <pen lineWidth="1.0" lineColor="#009900"/>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="TimesRomanS" size="12" isBold="true" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[Камомад]]></text>
+            </staticText>
+            <staticText>
+                <reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="573" y="11" width="109" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="678375ba-4b1f-433f-8039-2202fc61c750"/>
+                <box>
+                    <pen lineWidth="1.0" lineColor="#009900"/>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="TimesRomanS" size="12" isBold="true" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[Ундирилди]]></text>
+            </staticText>
+            <staticText>
+                <reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="684" y="11" width="137" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="678375ba-4b1f-433f-8039-2202fc61c750"/>
+                <box>
+                    <pen lineWidth="1.0" lineColor="#009900"/>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#009900"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="TimesRomanS" size="12" isBold="true" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[Назоратда]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="20" splitType="Stretch">
+            <textField>
+                <reportElement stretchType="RelativeToTallestObject" x="-20" y="-30" width="147" height="20" uuid="913df414-eb3a-46a2-b4b0-d734aba8b76f"/>
+                <box>
+                    <pen lineWidth="0.25"/>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font fontName="TimesRomanS"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement stretchType="RelativeToTallestObject" x="129" y="-30" width="109" height="20" uuid="949e3440-3faa-436f-8f9e-921195f303d4"/>
+                <box>
+                    <pen lineWidth="0.25"/>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font fontName="TimesRomanS"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{directionTypeName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement stretchType="RelativeToTallestObject" x="240" y="-30" width="109" height="20" uuid="db63fb82-3af3-4e4e-8774-c3b816ae262c"/>
+                <box>
+                    <pen lineWidth="0.25"/>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font fontName="TimesRomanS"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{sendReqCountryNm}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement stretchType="RelativeToTallestObject" x="351" y="-30" width="109" height="20" uuid="eb511461-d878-4042-a091-de4be4d5a7b0"/>
+                <box>
+                    <pen lineWidth="0.25"/>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font fontName="TimesRomanS"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{xbbMailNum}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement stretchType="RelativeToTallestObject" x="462" y="-30" width="109" height="20" uuid="87cb6791-448a-46f6-a263-d6c597fcd31c"/>
+                <box>
+                    <pen lineWidth="0.25"/>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font fontName="TimesRomanS"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{sum}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement stretchType="RelativeToTallestObject" x="573" y="-30" width="109" height="20" uuid="87cb6791-448a-46f6-a263-d6c597fcd31c"/>
+                <box>
+                    <pen lineWidth="0.25"/>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font fontName="TimesRomanS"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{sumАpproved}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement stretchType="RelativeToTallestObject" x="684" y="-30" width="137" height="20" uuid="87cb6791-448a-46f6-a263-d6c597fcd31c"/>
+                <box>
+                    <pen lineWidth="0.25"/>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font fontName="TimesRomanS"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{sumOnControl}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

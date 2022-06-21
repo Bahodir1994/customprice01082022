@@ -44,7 +44,7 @@
                 <div class="col border-end border-light-2">
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
-                            <p class="mb-1 text-white">Ўртача божхона қиймати индекси</p>
+                            <p class="mb-1 text-white">Халқаро сўровномалар (Камомад суммаси)</p>
                             <h3 class="mb-3 text-white">14.72 $</h3>
                             <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i>2.1%</span> охирги 7 кунда</p>
                             <div id="chart1"></div>

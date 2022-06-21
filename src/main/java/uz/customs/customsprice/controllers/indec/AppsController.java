@@ -321,15 +321,6 @@ public class AppsController {
         appsservice.saveAppsStatus(app);
 
 
-        for (int i = 0; i < rollback_idArr.length; i++) {
-            RollBackApp rollBackApp = new RollBackApp();
-            rollBackApp.setAppId(appId);
-            rollBackApp.setInsUser(userId);
-            rollBackApp.setRollbackId(rollback_idArr[i]);
-            rollBackApp.setRollbackName(rollback_nameArr[i]);
-            rollBackAppService.saveRollBack(rollBackApp);
-        }
-
         /**todo ЛОК га ёзиш start todo**/
         StatusM statusM = statusMService.getByAppId(appId);
         statusM.setAppId(app.getId());
@@ -346,6 +337,16 @@ public class AppsController {
         statusH.setInsUser(userId);
         statusHService.saveStatusH(statusH);
         /**todo ЛОК га ёзиш end todo**/
+
+        for (int i = 0; i < rollback_idArr.length; i++) {
+            RollBackApp rollBackApp = new RollBackApp();
+            rollBackApp.setAppId(appId);
+            rollBackApp.setStatusHId(statusH.getId());
+            rollBackApp.setInsUser(userId);
+            rollBackApp.setRollbackId(rollback_idArr[i]);
+            rollBackApp.setRollbackName(rollback_nameArr[i]);
+            rollBackAppService.saveRollBack(rollBackApp);
+        }
 
         List<Apps> notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
         mav.addObject("notSortedListSize", notSortedList.size());

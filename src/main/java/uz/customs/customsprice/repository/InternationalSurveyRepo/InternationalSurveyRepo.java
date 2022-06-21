@@ -2,14 +2,12 @@ package uz.customs.customsprice.repository.InternationalSurveyRepo;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import uz.customs.customsprice.entity.InternationalSurveyEntity.InternationalSurveyEntity;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 
@@ -78,5 +76,24 @@ public interface InternationalSurveyRepo extends JpaRepository<InternationalSurv
 
     List<InternationalSurveyEntity> findByExecutiveTerritoryCode(String executiveTerritoryCode);
 
+
+    @Query(" select\n" +
+            "    i.directionTypeCode,\n" +
+            "    i.directionTypeName,\n" +
+            "    i.sendReqCountryCode,\n" +
+            "    i.sendReqCountryNm,\n" +
+            "    count(i.sendReqCountryCode),\n" +
+            "    sum( case when i.sum is null then 0.00 else i.sum end),\n" +
+            "    sum( case when i.sumАpproved is null then 0.00 else i.sumАpproved end),\n" +
+            "    sum( case when i.sumOnControl is null then 0.00 else i.sumOnControl end)\n" +
+            "from\n" +
+            "    InternationalSurveyEntity i\n" +
+            "group by\n" +
+            "    i.directionTypeCode,\n" +
+            "    i.directionTypeName,\n" +
+            "    i.sendReqCountryCode,\n" +
+            "    i.sendReqCountryNm\n" +
+            "    order by i.directionTypeCode asc  ")
+    List<InternationalSurveyEntity> queryInternationalSurveyEntityByExecutiveTerritoryCodeAndXbbMailDateBetween(String executiveTerritoryCode, Date fromStart, Date toEnd);
 
 }

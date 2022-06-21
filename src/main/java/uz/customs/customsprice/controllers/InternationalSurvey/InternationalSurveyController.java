@@ -1,11 +1,14 @@
 package uz.customs.customsprice.controllers.InternationalSurvey;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,7 +25,9 @@ import uz.customs.customsprice.repository.InternationalSurveyRepo.InternationalS
 import uz.customs.customsprice.repository.LocationRepo;
 import uz.customs.customsprice.service.ConturyService;
 import uz.customs.customsprice.service.InternationalSurveyS.DirectionTypeService;
+import uz.customs.customsprice.service.InternationalSurveyS.ExcelService;
 import uz.customs.customsprice.service.InternationalSurveyS.InternationalSurveyService;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,7 +35,6 @@ import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -43,25 +47,30 @@ public class InternationalSurveyController {
     private final String INTERNATIONALSURVEYSAVEIS2 = "/resources/pages/InternationalSurvay/SaveIS2";
     private final String INTERNATIONALSURVEYSAVEIS3 = "/resources/pages/InternationalSurvay/SaveIS3";
     private final String INTERNATIONALSURVEYSAVESUMAPPROVEDADD = "/resources/pages/InternationalSurvay/SaveSumApprovedAdd";
+    private final String GET_REPORT_IN_SUR = "/resources/pages/InternationalSurvay/getReport/{formats}/{FromStart}/{ToEnd}";
 
     private final InternationalSurveyService internationalSurveyService;
     private final InternationalSurveyRepo internationalSurveyRepo;
     private final ConturyService conturyService;
-    private final DirectionTypeService directionTypeService;
     private final DirectionTypeRepo directionTypeRepo;
     private final LocationRepo locationRepo;
+    private final DirectionTypeService directionTypeService;
 
-    public InternationalSurveyController(InternationalSurveyService internationalSurveyService, InternationalSurveyRepo internationalSurveyRepo, ConturyService conturyService, DirectionTypeRepo directionTypeRepo, DirectionTypeService directionTypeService, DirectionTypeRepo directionTypeRepo1, LocationRepo locationRepo) {
-        this.internationalSurveyService = internationalSurveyService;
-        this.internationalSurveyRepo = internationalSurveyRepo;
-        this.conturyService = conturyService;
-        this.directionTypeService = directionTypeService;
-        this.directionTypeRepo = directionTypeRepo1;
-        this.locationRepo = locationRepo;
-    }
+
+    @Autowired
+    ExcelService fileService;
 
     @Autowired
     CountyRepo countyRepo;
+
+    public InternationalSurveyController(InternationalSurveyService internationalSurveyService, InternationalSurveyRepo internationalSurveyRepo, ConturyService conturyService, DirectionTypeRepo directionTypeRepo, LocationRepo locationRepo, DirectionTypeService directionTypeService) {
+        this.internationalSurveyService = internationalSurveyService;
+        this.internationalSurveyRepo = internationalSurveyRepo;
+        this.conturyService = conturyService;
+        this.directionTypeRepo = directionTypeRepo;
+        this.locationRepo = locationRepo;
+        this.directionTypeService = directionTypeService;
+    }
 
     @PostMapping(value = INTERNATIONALSURVEYPAGE)
     @ResponseBody
@@ -158,8 +167,6 @@ public class InternationalSurveyController {
         mav.addObject("AllSumАpproved", df.format(ApprovedSum));
         mav.addObject("AllSumOnControl", df.format(sumOnControl));
         /**Statistic bar**/
-
-
         return mav;
     }
 
@@ -488,4 +495,17 @@ public class InternationalSurveyController {
             return new ResponseEntity<Object>("error", HttpStatus.BAD_REQUEST);
         }
     }
+
+
+    @GetMapping(value = GET_REPORT_IN_SUR)
+    public ResponseEntity<InputStreamResource> getFile(@PathVariable String formats, @PathVariable String FromStart, @PathVariable String ToEnd) {
+        System.out.println(formats);
+        String filename = "tutorials.xlsx";
+        InputStreamResource file = new InputStreamResource(fileService.load());
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(file);
+    }
+
 }

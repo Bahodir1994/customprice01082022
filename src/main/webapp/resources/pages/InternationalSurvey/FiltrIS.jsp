@@ -1,3 +1,8 @@
+<%@ page import="uz.customs.customsprice.utils.Utils" %>
+<%@ page import="java.util.GregorianCalendar" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.Calendar" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
@@ -13,6 +18,22 @@
     String userLocation = (String) request.getSession().getAttribute("userLocation");
     String userLocationName = (String) request.getSession().getAttribute("userLocationName");
     String userPost = (String) request.getSession().getAttribute("userPost");
+
+    String startDate = Utils.tecDate00();
+    String endDate = Utils.tecDate00();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    GregorianCalendar gc = new GregorianCalendar();
+    java.util.Date d = new Date();
+    gc.setTime(d);
+    int dayBefore = gc.get(Calendar.DAY_OF_YEAR);
+    gc.roll(Calendar.DAY_OF_YEAR, -1);
+    int dayAfter = gc.get(Calendar.DAY_OF_YEAR);
+    if (dayAfter > dayBefore) {
+        gc.roll(Calendar.YEAR, -1);
+    }
+    gc.get(Calendar.DATE);
+    java.util.Date yesterday = gc.getTime();
+    startDate = Utils.toDate00(yesterday);
 %>
 <head>
     <meta charset="utf-8">
@@ -240,9 +261,53 @@
                                 <c:if test="${userRole == '8' || userRole == '7' || userRole == '6' || userRole == '4'}">
                                     <button type="button" class="btn btn-primary btn-block mt-3"
                                             class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                            onclick="resetModal()"><i class='bx bx-plus'></i>Киритиш
+                                            onclick="resetModal()"><i class='bx bx-plus'></i>Янги
                                     </button>
                                 </c:if>
+                                <button type="reset" class="btn btn-outline-dark btn-block mt-3" data-bs-toggle="modal" data-bs-target="#reportExport">
+                                    <i class='bx bx-line-chart-down'></i>Хисобот
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="reportExport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="">Хисобот шакли</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body row">
+                                                    <div class="col">
+                                                        <label for="FromStart" class="text-dark m-1">дан</label>
+                                                        <input class="form-control" id="FromStart" name="FromStart" type="date" value="<%=startDate%>"/>
+                                                        <label for="FromStart" id="FromStartValid" class="m-1"></label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="ToEnd" class="text-dark m-1">гача</label>
+                                                        <input class="form-control"  id="ToEnd" name="ToEnd" type="date" value="<%=endDate%>"/>
+                                                    </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <style>
+                                                    .imgs:hover {
+                                                        border:2px solid white;
+                                                        transform: scale(1.1);
+                                                    }
+                                                    .imgs {
+                                                        cursor: pointer;
+                                                    }
+                                                    .imgs:active {
+                                                        border-color: blue;
+                                                    }
+                                                </style>
+                                                <div class="text-center">
+                                                    <img class="m-3 imgs"  src="<%=request.getContextPath()%>/resources/images/excel.png" width="15%" height="15%" alt="" onclick="report('exel')"/>
+                                                    <img class="m-3 imgs"  src="<%=request.getContextPath()%>/resources/images/pdf.png" width="15%" height="15%" alt=""  onclick="report('pdf')"/>
+                                                    <img class="m-3 imgs"  src="<%=request.getContextPath()%>/resources/images/html.png" width="15%" height="15%" alt=""  onclick="report('htmls')"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div id="target" name="target"></div>
                         </div>
@@ -678,7 +743,20 @@
         document.getElementById("fabulaS").value = '';
         searchResultTableIS();
     }
+    function report(x){
+        var Fs = $('#FromStart').val();
+        var Te = $('#ToEnd').val();
+        if (Fs === "undefined" && Fs == null && Fs === ""){
+            Te = DateTime.date
+        }
+        if (Fs !== "undefined" && Fs != null && Fs !== "" && Fs !== "undefined") {
+            window.location = "/inrenationalsurvaey/resources/pages/InternationalSurvay/getReport/" + x + "/"+Fs + "/"+ Te;
+            $('#FromStartValid').html('').removeClass('border border-danger');
+        } else {
+            $('#FromStartValid').html("Бошланғич сана тўлдирилиши лозим!").addClass('text-danger');
+            $('#FromStart').addClass('border border-danger')
+        }
+    }
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </body>
