@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextpdf.text.BadElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -274,6 +275,7 @@ public class InDecController {
     }
 
     @PostMapping(value = INITIALDECISIONCONFIRMXBBFINISH)
+    @Transactional
     public ModelAndView saveFromXBB(InDec inDec, HttpServletRequest request, @RequestParam String cmdtId, @RequestParam String appId) throws IOException, BadElementException, ParseException {
         ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec");
 

@@ -52,7 +52,7 @@ public class InDec extends AbstractAuditingEntity {
     @Column(name = "HS_NAME", columnDefinition = "VARCHAR(2000) CCSID 1208")
     private String hsName;
 
-    @Column(name = "METHOD", length = 2)
+    @Column(name = "METHOD", length = 3)
     private String method;
 
     @Column(name = "METHOD_NM", columnDefinition = "VARCHAR(180) CCSID 1208")

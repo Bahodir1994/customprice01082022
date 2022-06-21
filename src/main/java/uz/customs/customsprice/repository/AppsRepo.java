@@ -16,6 +16,8 @@ public interface AppsRepo extends JpaRepository<Apps, String> {
             " where c.appId is not null and a.personPin = :personPin")
     Page<Apps> findByPersonPin(String personPin, Pageable pageable);
 
+    Page<Apps> findAll(Pageable pageable);
+
     String countByStatusAndLocationId(String status, String locationId);
 
 }

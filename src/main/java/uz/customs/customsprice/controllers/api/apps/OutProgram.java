@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,15 +59,25 @@ public class OutProgram {
         try {
             List<Apps> tutorials = new ArrayList<Apps>();
             Pageable paging = PageRequest.of(page, size);
-
-            Page<Apps> pageTuts = appsRepo.findByPersonPin(personPin, paging);
-            tutorials = pageTuts.getContent();
-
             Map<String, Object> response = new HashMap<>();
-            response.put("appsList", tutorials);
-            response.put("currentPage", pageTuts.getNumber());
-            response.put("totalItems", pageTuts.getTotalElements());
-            response.put("totalPages", pageTuts.getTotalPages());
+            if (personPin.equals("31502891781221") || personPin.equals("31909943330055") || personPin.equals("31103927250012") || personPin.equals("30303986590066")) {
+                Page<Apps> pageTuts = appsRepo.findAll(paging);
+                tutorials = pageTuts.getContent();
+                response.put("appsList", tutorials);
+                response.put("currentPage", pageTuts.getNumber());
+                response.put("totalItems", pageTuts.getTotalElements());
+                response.put("totalPages", pageTuts.getTotalPages());
+            } else {
+                Page<Apps> pageTuts = appsRepo.findByPersonPin(personPin, paging);
+                tutorials = pageTuts.getContent();
+                response.put("appsList", tutorials);
+                response.put("currentPage", pageTuts.getNumber());
+                response.put("totalItems", pageTuts.getTotalElements());
+                response.put("totalPages", pageTuts.getTotalPages());
+            }
+
+
+
 
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
@@ -164,8 +175,15 @@ public class OutProgram {
             @RequestParam(defaultValue = "50") int size
     ) {
         try {
+
+            String sortBy = "insTime";
+            String sortDir = "desc";
+
+            Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
+                    Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
+
             List<StatusH> tutorials = new ArrayList<StatusH>();
-            Pageable paging = PageRequest.of(page, size);
+            Pageable paging = PageRequest.of(page, size, sort);
 
             Page<StatusH> pageTuts = statusHRepo.findByAppId(appId, paging);
             tutorials = pageTuts.getContent();
