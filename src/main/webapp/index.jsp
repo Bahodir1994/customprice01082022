@@ -542,26 +542,25 @@
                         <ul class="dropdown-menu dropdown-menu-end">
                             <%
                                 int i = 1;
-                                String selected = "", active = "", fw = "", fa = "";
+                                String selected = "", active = "", fw = "", fa = "", fl = "";
                                 for (Role role : roleList) {
                                     if (role.getCode().equals(user.getRole())) {
                                         selected = "selected";
                                         active = "active";
-                                        fw = "f-w-600";
-                                        fa = "fa-solid fa-user-check text-white";
+                                        fw = "fw-bold";
+                                        fa = "bx bxs-user text-white";
+                                        fl = "btn btn-success w-100 text-start";
                                     } else {
                                         selected = "";
                                         active = "";
-                                        fw = "";
-                                        fa = "fa-solid fa-user";
+                                        fw = "fw-normal";
+                                        fa = "bx bx-user";
+                                        fl = "btn btn-outline-success w-100 text-start";
                                     }
                             %>
-                            <li class="<%=selected%> <%=active%> <%=fw%>"
-                                title="<%=role.getCode()%>.
-                                <a
-                                        href="javascript:RoleF('<%=role.getCode()%>')"
-                                        class="dropdown-item f-w-600"><i
-                                        class="<%=fa%>" id="iconU<%=i%>"></i> <%=role.getName()%>
+                            <li class="<%=selected%> <%=active%> <%=fw%> m-1" title="<%=role.getCode()%>">
+                                <a href="javascript:RoleF('<%=role.getCode()%>')" class="<%=fl%>">
+                                    <i class="<%=fa%>" id="iconU<%=i%>"></i> <%=role.getName()%>
                                 </a>
                             </li>
                             <% i++;
@@ -569,8 +568,8 @@
                             <hr>
                             <li class="text-c-red"
                                 title="Тизимдан чиқиш"><a
-                                    href="${pageContext.request.contextPath}/exit.do" class="dropdown-item">
-                                <i class="fa-solid fa-right-from-bracket text-c-red"></i> Чиқиш
+                                    href="${pageContext.request.contextPath}/exit.do" class="dropdown-item link-danger">
+                                <i class="bx bx-log-out bx-sm text-danger"></i> Чиқиш
                             </a>
                             </li>
                         </ul>
