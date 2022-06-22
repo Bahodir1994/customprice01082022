@@ -571,8 +571,7 @@
                                                             type="text" name="HS_NM" id="HS_NM">
                                                         <option></option>
                                                         <c:forEach var="vals" items="${rollbackInfo}" varStatus="i">
-                                                            <option value="${vals.id}">${vals.id}
-                                                                - ${vals.rollbackName}</option>
+                                                            <option value="${vals.id}">${vals.id} - ${vals.rollbackName}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </div>
