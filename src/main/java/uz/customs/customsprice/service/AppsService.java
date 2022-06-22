@@ -959,7 +959,7 @@ public class AppsService {
                 "where\n" +
                 "    i.isdeleted=0\n" +
                 "and a.status = 170\n" +
-                "and i.end_activ = 200\n" +
+                "and i.end_activ in (200, 100)\n" +
                 "order by\n" +
                 "    a.instime desc";
         return (List<InDec>) entityManager.createNativeQuery(queryForList).getResultList();

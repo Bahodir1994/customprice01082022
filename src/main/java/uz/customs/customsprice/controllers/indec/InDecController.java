@@ -189,7 +189,7 @@ public class InDecController {
         mav.addObject("appId", appId);
         mav.addObject("paymenttype", paymenttypeEntityList);
         mav.addObject("paymttype", paymtypeEntityList);
-        if (payments.isEmpty() && userRole == 8) {
+        if (payments.isEmpty() && userRole == 8 && apps.getStatus() != 125) {
             return mav;
         } else {
             mav2.addObject("CmdtPayments", payments);
