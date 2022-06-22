@@ -275,7 +275,6 @@ public class InDecController {
     }
 
     @PostMapping(value = INITIALDECISIONCONFIRMXBBFINISH)
-    @Transactional
     public ModelAndView saveFromXBB(InDec inDec, HttpServletRequest request, @RequestParam String cmdtId, @RequestParam String appId) throws IOException, BadElementException, ParseException {
         ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec");
 
