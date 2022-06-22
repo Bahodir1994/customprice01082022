@@ -311,7 +311,7 @@ public class CommodityController {
         mav.addObject("paymttype", paymtypeEntityList);
         List<Payment> payments = paymentServise.getByCmdtId(cmdt_id);
         Optional<Commodity> commodityTnved = commodityService.getById(cmdt_id);
-        if (payments.isEmpty() && userRole == 8) {
+        if (payments.isEmpty() && userRole == 8 && apps.getStatus() != 125 && apps.getStatus() != 120) {
             return mav;
         } else {
             mav2.addObject("CmdtPayments", payments);

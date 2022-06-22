@@ -18,8 +18,8 @@ import java.util.Date;
 @Entity
 @Table(name = "EARXIV", indexes = {@Index(columnList = "id", unique = true), @Index(columnList = "insuser", unique = false), @Index(columnList = "isdeleted", unique = false)})
 @TypeDef(name = "jsonb", typeClass = JsonStringType.class)
-@SQLDelete(sql = "update EARXIV set isdeleted = 1 where id = ?")
-@Where(clause = "isdeleted = '0'")
+//@SQLDelete(sql = "update EARXIV set isdeleted = 1 where id = ?")
+//@Where(clause = "isdeleted = '0'")
 public class Earxiv extends AbstractAuditingEntity {
     @Id
     @GeneratedValue(generator = "uuid4")

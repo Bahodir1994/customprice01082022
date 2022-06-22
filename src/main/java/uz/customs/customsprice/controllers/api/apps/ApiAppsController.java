@@ -449,22 +449,6 @@ public class ApiAppsController {
                     earxivService.create(earxiv);
                     ResponseHandler.generateResponse("Xujjat ma`lumotlari saqlandi!", HttpStatus.OK, earxiv);
                 }
-                /**todo ЛОК га ёзиш start todo**/
-                StatusM statusM = new StatusM();
-                statusM.setAppId(apps.getId());
-                statusM.setStatus(String.valueOf(appsUpdate.getStatus()));
-                statusM.setStatusComment(appsUpdate.getStatusNm());
-                statusM.setInsUser(personsIdGet.get().getTin());
-                statusMService.saveStatusM(statusM);
-
-                StatusH statusH = new StatusH();
-                statusH.setStmainID(statusM.getId());
-                statusH.setAppId(statusM.getAppId());
-                statusH.setStatus(String.valueOf(appsUpdate.getStatus()));
-                statusH.setStatusComment(appsUpdate.getStatusNm());
-                statusH.setInsUser(personsIdGet.get().getTin());
-                statusHService.saveStatusH(statusH);
-                /**todo ЛОК га ёзиш end todo**/
                 JSONObject obj = new JSONObject();
                 obj.put("message", "Success");
                 obj.put("data", appsUpdate);
