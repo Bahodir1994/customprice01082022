@@ -237,6 +237,8 @@ public class logo extends HttpServlet {
 //                            "    and ur.idrotation='AB170110000064530'\n" +
                             "order by\n" +
                             "    usr.id ";
+                    String postCode = "";
+                    String postName = "";
                     rslt = sql.executeQuery(zapros);
                     while (rslt.next()) {
                         t = t + 1;
@@ -257,6 +259,8 @@ public class logo extends HttpServlet {
                         POSTNAME.put(Integer.toString(t), (Utils.nullClear(rslt.getString("postname"))));
                         USERROLE.put(Integer.toString(t), (Utils.nullClear(rslt.getString("login"))));
                         PNUMBER.put(Integer.toString(t), (Utils.nullClear(rslt.getString("pnumber"))));
+                        postCode = (!Utils.nullClear(rslt.getString("post")).equals("") ? rslt.getString("post") : rslt.getString("department"));
+                        postName = (!Utils.nullClear(rslt.getString("postname")).equals("") ? rslt.getString("postname") : rslt.getString("departmentname"));
                     }
                     request.getSession().setAttribute("USERID", USERID.get("1"));  // фойдаланувчи iD си
 
@@ -317,8 +321,14 @@ public class logo extends HttpServlet {
                         fullname = Utils.nullClear(rslt2.getString("fullname"));
                         location = Utils.nullClear(rslt2.getString("location"));
                         locationname = Utils.nullClear(rslt2.getString("locationname"));
-                        post = Utils.nullClear(rslt2.getString("post"));
-                        postname = Utils.nullClear(rslt2.getString("postname"));
+                        if (Utils.nullClear(rslt2.getString("post")).equals(postCode)) {
+                            post = Utils.nullClear(rslt2.getString("post"));
+                            postname = Utils.nullClear(rslt2.getString("postname"));
+                        } else {
+                            post = postCode;
+                            postname = postName;
+                        }
+
                         lang = Utils.nullClear(rslt2.getString("lang"));
                         notification = Utils.nullClearI0(rslt2.getString("notification"));
                         role = Utils.nullClearI0(rslt2.getString("role"));

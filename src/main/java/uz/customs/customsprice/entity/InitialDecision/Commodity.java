@@ -89,7 +89,7 @@ public class Commodity extends AbstractAuditingEntity {
     private String techChar;
 
     @Column(name = "PRODUCT_GOAL", columnDefinition = "VARCHAR(900) CCSID 1208")
-    @Size(max = 30, message = "Устун маълумоти катталиги чекланган")
+    @Size(max = 300, message = "Устун маълумоти катталиги чекланган")
     private String productGoal;
 
     @Column(name = "HS_CODE", length = 10)
