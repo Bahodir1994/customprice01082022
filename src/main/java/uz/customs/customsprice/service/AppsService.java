@@ -655,7 +655,7 @@ public class AppsService {
                 "    a.trans_exp,\n" +
                 "    a.status_nm,\n" +
                 "    ar.inspector_id   inspector_id,\n" +
-                "    ar.inspector_name inspector_name,\n" +
+                /*30*/"    ar.inspector_name inspector_name,\n" +
                 "    a.comment,\n" +
                 "    cmdt.id cmdt_id,\n" +
                 "    i.id indec_id,\n" +
@@ -684,7 +684,10 @@ public class AppsService {
                 "    i.in_dec_end_date,\n" +
                 "    i.IN_DEC_USR_ENDED_DATE,\n" +
                 "    i.COMMENT_ENDED,\n" +
-                "    i.END_ACTIV\n" +
+                "    i.END_ACTIV,\n" +
+                /*60*/"    i.g3a,\n" +
+                "    char(i.g3b, eur) g3b,\n" +
+                "    i.g3c g3c\n" +
                 "from\n" +
                 "    cpid.in_dec i\n" +
                 "left join\n" +

@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import uz.customs.customsprice.entity.entityConfig.AbstractAuditingEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -99,10 +100,39 @@ public class InDec extends AbstractAuditingEntity {
     @Column(name = "END_ACTIV", columnDefinition = "SMALLINT DEFAULT 100")
     private int endActiv = 100;
 
+
+    @Column(name = "TPO_ID", length = 50)
+    private String tpoId;
+
+    @Column(name = "PAY_ID", length = 50)
+    private String payId;
+
+    @Column(name = "G3A", columnDefinition = "VARCHAR(5)")
+    private String g3a;
+
+    @Column(name = "G3B", columnDefinition = "date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date g3b;
+
+    @Column(name = "G3C", columnDefinition = "VARCHAR(10)")
+    private String g3c;
+
+    @Column(name = "G19BASE")
+    @Digits(integer = 15, fraction = 3)
+    private BigDecimal g19Base;
+
+    @Column(name = "STAVKA", columnDefinition = "VARCHAR(50)")
+    private String stavka;
+
+    @Column(name = "G19SUM")
+    @Digits(integer = 15, fraction = 3)
+    private BigDecimal g19Sum;
+
     public InDec() {
     }
 
-    public InDec(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Commodity commodity, String cmdtId, String inDecNum, Date inDecDate, String inDecLocation, String inDecLocationNm, String personId, String hsCode, String hsName, String method, String methodNm, String originCountry, String orignCountrNm, String inDecBasis, String commentMarks, BigDecimal customsPreference, BigDecimal customsPayments, int status, String statusNm, Date inDecEndDate, Date inDecUserEndedDate, String commentEnded, int endActiv) {
+    public InDec(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Commodity commodity, String cmdtId, String inDecNum, Date inDecDate, String inDecLocation, String inDecLocationNm, String personId, String hsCode, String hsName, String method, String methodNm, String originCountry, String orignCountrNm, String inDecBasis, String commentMarks, BigDecimal customsPreference, BigDecimal customsPayments, int status, String statusNm, Date inDecEndDate, Date inDecUserEndedDate, String commentEnded, int endActiv, String tpoId, String payId, String g3a, Date g3b, String g3c, BigDecimal g19Base, String stavka, BigDecimal g19Sum) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.commodity = commodity;
@@ -128,6 +158,14 @@ public class InDec extends AbstractAuditingEntity {
         this.inDecUserEndedDate = inDecUserEndedDate;
         this.commentEnded = commentEnded;
         this.endActiv = endActiv;
+        this.tpoId = tpoId;
+        this.payId = payId;
+        this.g3a = g3a;
+        this.g3b = g3b;
+        this.g3c = g3c;
+        this.g19Base = g19Base;
+        this.stavka = stavka;
+        this.g19Sum = g19Sum;
     }
 
     public String getId() {
@@ -320,5 +358,69 @@ public class InDec extends AbstractAuditingEntity {
 
     public void setEndActiv(int endActiv) {
         this.endActiv = endActiv;
+    }
+
+    public String getTpoId() {
+        return tpoId;
+    }
+
+    public void setTpoId(String tpoId) {
+        this.tpoId = tpoId;
+    }
+
+    public String getPayId() {
+        return payId;
+    }
+
+    public void setPayId(String payId) {
+        this.payId = payId;
+    }
+
+    public String getG3a() {
+        return g3a;
+    }
+
+    public void setG3a(String g3a) {
+        this.g3a = g3a;
+    }
+
+    public Date getG3b() {
+        return g3b;
+    }
+
+    public void setG3b(Date g3b) {
+        this.g3b = g3b;
+    }
+
+    public String getG3c() {
+        return g3c;
+    }
+
+    public void setG3c(String g3c) {
+        this.g3c = g3c;
+    }
+
+    public BigDecimal getG19Base() {
+        return g19Base;
+    }
+
+    public void setG19Base(BigDecimal g19Base) {
+        this.g19Base = g19Base;
+    }
+
+    public String getStavka() {
+        return stavka;
+    }
+
+    public void setStavka(String stavka) {
+        this.stavka = stavka;
+    }
+
+    public BigDecimal getG19Sum() {
+        return g19Sum;
+    }
+
+    public void setG19Sum(BigDecimal g19Sum) {
+        this.g19Sum = g19Sum;
     }
 }

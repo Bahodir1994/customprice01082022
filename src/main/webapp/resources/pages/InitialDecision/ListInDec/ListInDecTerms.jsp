@@ -131,10 +131,10 @@
                                 }
                             %>
 
-                            <c:if test="${terms[54] == 180}"><a class="btn btn-outline-danger <%=disabled%>"
-                                                                onclick="javascript:SaveTPO('${terms[33]}')">${terms[55]}</a></c:if>
-                            <c:if test="${terms[54] == 185}"><a class="btn btn-outline-success"
-                                                                onclick="javascript:resultTPO('<h6>${terms[39]}</h6>')">${terms[55]}</a></c:if>
+                            <c:if test="${terms[54] == 180}"><a data-bs-toggle="modal" class="btn btn-outline-danger <%=disabled%>" onclick="$('#inDecId').val('${terms[33]}');"
+                                                                data-bs-target="#exampleModalPAY">${terms[55]}</a></c:if>
+                            <c:if test="${terms[54] == 185}"><a class="btn btn-outline-success" onclick="javascript:resultTPO('<h6>${terms[60]}/${terms[61]}/${terms[62]}</h6>')">${terms[55]}</a
+                            ></c:if>
                         </td>
                         <td>${terms[1]}</td>
                         <td>
@@ -164,23 +164,33 @@
                 </c:forEach>
                 </tbody>
             </table>
+            <input type="hidden" id="inDecId" name="inDecId"/>
             <div class="col">
                 <!-- Modal Pay -->
                 <div class="modal fade" id="exampleModalPAY" tabindex="-1" aria-labelledby="exampleModalLabel11"
                      style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel11">Modal title</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                <h5 class="modal-title" id="exampleModalLabel11">Тўлдирилган БКО рақами ва санаси</h5>
+                                <button id="btnCloseModalTPO" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                consectetur.
+                                <div class="input-group mb-4">
+                                    <input id="g3a" type="number" size="5" maxlength="5" class="form-control" placeholder="Пост коди">
+                                    <span class="input-group-text">/</span>
+                                    <input id="g3b" type="date" class="form-control" placeholder="БКО тўлдирилган санаси">
+                                    <span class="input-group-text">/</span>
+                                    <input id="g3c" type="number" class="form-control" placeholder="БКО рақами">
+                                </div>
+                                <div id="g3aValid"></div>
+                                <div id="g3bValid"></div>
+                                <div id="g3cValid"></div>
+                                <div id="validTPODiv" class=""></div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ёпиш</button>
-                                <button type="button" class="btn btn-primary">Сақлаш</button>
+                                <button type="button" class="btn btn-primary" onclick="SaveTPO()">Сақлаш</button>
                             </div>
                         </div>
                     </div>
@@ -279,51 +289,89 @@
         });
     });
 
-    function SaveTPO(inDecId) {
-        Swal.fire({
-            title: 'Тўлдирилган БКО рақами ва санаси',
-            html:
-                '<input id="TPO_NUM" type="text" class="swal2-input" placeholder="БКО рақами">' +
-                '<input id="TPO_DATE" type="date" class="swal2-input" placeholder="БКО тўлдирилган санаси">',
-            showDenyButton: true,
-            confirmButtonText: 'Сақлаш',
-            denyButtonText: `Рад этиш`,
-        }).then((result) => {
-            // alert($('#TPO_NUM').val() + ' / ' + $('#TPO_DATE').val());
+    function SaveTPO() {
+        var log_f = true;
+        var log_n = '';
+        var arr = [];
+
+        if ($('#g3a').val() == null || $('#g3a').val() == '') {
+            $('#g3aValid').html('Пост кодини киритинг!').addClass('text-danger');
+            $('#g3a').addClass('border border-danger')
+            log_f = false;
+        } else if ($.trim($('#g3a').val()).length > 5 || $.trim($('#g3a').val()).length < 5) {
+            $('#g3aValid').html('Пост коди 5 та сондан иборат бўлиши лозим!').addClass('text-danger');
+            $('#g3a').addClass('border border-danger')
+            log_f = false;
+        } else {
+            $('#g3a').removeClass('border border-danger');
+            $('#g3a').addClass('border border-success');
+            $('#g3aValid').html('');
+        }
+
+        if ($('#g3b').val() == null || $('#g3b').val() == '') {
+            $('#g3bValid').html('Санани киритинг!').addClass('text-danger');
+            $('#g3b').addClass('border border-danger')
+            log_f = false;
+        } else {
+            $('#g3b').removeClass('border border-danger');
+            $('#g3b').addClass('border border-success');
+            $('#g3bValid').html('');
+        }
+
+        if ($.trim($('#g3c').val()) == null || $.trim($('#g3c').val()) == '') {
+            $('#g3cValid').html('БКО рақамини киритинг!').addClass('text-danger');
+            $('#g3c').addClass('border border-danger')
+            log_f = false;
+        } else if ($.trim($('#g3c').val()).length > 7 || $.trim($('#g3c').val()).length < 7) {
+            $('#g3cValid').html('БКО рақами 7 та сондан иборат бўлиши лозим!').addClass('text-danger');
+            $('#g3c').addClass('border border-danger')
+            log_f = false;
+        } else {
+            $('#g3c').removeClass('border border-danger');
+            $('#g3c').addClass('border border-success');
+            $('#g3cValid').html('');
+        }
+
+        if (log_f) {
+
             var dataS = {
-                "inDecId": inDecId,
-                "TPO_NUM": $('#TPO_NUM').val(),
-                "TPO_DATE": $('#TPO_DATE').val()
+                "inDecId": $('#inDecId').val(),
+                "g3a": $('#g3a').val(),
+                "g3b": $('#g3b').val(),
+                "g3c": $('#g3c').val()
             }
-
-
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-
-                if ($('#TPO_NUM').val() === "" || $('#TPO_DATE').val() === "") {
-                    Swal.fire(
-                        '<i class="fa fa-info-circle"></i> Маълумотлар тўлдирилмаган!'
-                    )
-                } else {
-                    $.ajax({
-                        type: "POST",
-                        data: dataS,
-                        dataType: "html",
-                        url: "<%=request.getContextPath()%>/saveInDec/resources/pages/InitialDecision/InitialDecisionTPO",
-                        header: 'Content-type: text/html; charset=utf-8',
-                        success: function (res) {
-                            $('div#ListInDecTable').html(res);
-                        },
-                        error: function (res) {
-                        }
-                    });
-                    Swal.fire('Сақланди!', '', 'success')
+            $.ajax({
+                type: "POST",
+                data: JSON.stringify(dataS),
+                url: "<%=request.getContextPath()%>/saveInDec/resources/pages/InitialDecision/InitialDecisionTPO",
+                dataType: "json",
+                async: true,
+                contentType: 'application/json',
+                success: function (response) {
+                    $('#btnCloseModalTPO').trigger('click');
+                    ListInDecTermstTable('170');
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Дастлабки маълумотлар сақланди',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                },
+                error: function (response) {
+                    if (typeof response.responseJSON.message != "undefined" && response.responseJSON.message != null && response.responseJSON.message != "" && response.responseJSON.message != "undefined") {
+                        $('#validTPODiv').html(response.responseJSON.message).addClass('text-danger');
+                        $('#g3a').addClass('border border-danger')
+                        $('#g3b').addClass('border border-danger')
+                        $('#g3c').addClass('border border-danger')
+                    } else {
+                        $('#g3a,#g3b,#g3c').removeClass('border border-danger');
+                        $('#g3a,#g3b,#g3c').addClass('border border-success');
+                        $('#validTPODiv').html('');
+                    }
                 }
-
-            } else if (result.isDenied) {
-                Swal.fire('Маълумотлар сақланмади', '', 'info')
-            }
-        })
+            });
+        } else return false;
     }
 
     function openInDecPdf(cmdtId) {

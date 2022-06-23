@@ -4,19 +4,29 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextpdf.text.BadElementException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import uz.customs.customsprice.entity.InitialDecision.*;
+import uz.customs.customsprice.entity.InitialDecision.TPO.Pay;
+import uz.customs.customsprice.entity.InitialDecision.TPO.Tpo;
 import uz.customs.customsprice.repository.CommodityRepo;
 import uz.customs.customsprice.repository.PaymentRepo;
+import uz.customs.customsprice.repository.Tpo.PayRepository;
+import uz.customs.customsprice.repository.Tpo.TpoRepository;
 import uz.customs.customsprice.service.*;
+import uz.customs.customsprice.utils.Utils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -44,6 +54,8 @@ public class InDecController {
     private final PaymentTypeService paymentTypeService;
     private final PaymTypeService paymTypeService;
     private final UsersService usersService;
+    private final TpoRepository tpoRepository;
+    private final PayRepository payRepository;
 
     @Autowired
     PaymentRepo paymentRepo;
@@ -58,7 +70,7 @@ public class InDecController {
     private final String INITIALDECISIONCONFIRMTPO = "/resources/pages/InitialDecision/InitialDecisionTPO";
     private final String INDECCANCELLED = "/resources/pages/InitialDecision/InitialDecisionCancelled";
 
-    public InDecController(InDecService inDecService, AppsService appsService, AppsService appsservice, CommodityService commodityService, CommodityRepo commodityRepo, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, LocationService locationService, StatusService statusService, PdfService pdfService, PaymentServise paymentServise, ExchangerateService exchangerateService, StatusMService statusMService, StatusHService statusHService, PaymentTypeService paymentTypeService, PaymTypeService paymTypeService, UsersService usersService) {
+    public InDecController(InDecService inDecService, AppsService appsService, AppsService appsservice, CommodityService commodityService, CommodityRepo commodityRepo, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, LocationService locationService, StatusService statusService, PdfService pdfService, PaymentServise paymentServise, ExchangerateService exchangerateService, StatusMService statusMService, StatusHService statusHService, PaymentTypeService paymentTypeService, PaymTypeService paymTypeService, UsersService usersService, TpoRepository tpoRepository, PayRepository payRepository) {
         this.inDecService = inDecService;
         this.appsService = appsService;
         this.appsservice = appsservice;
@@ -78,8 +90,9 @@ public class InDecController {
         this.paymentTypeService = paymentTypeService;
         this.paymTypeService = paymTypeService;
         this.usersService = usersService;
+        this.tpoRepository = tpoRepository;
+        this.payRepository = payRepository;
     }
-
 
     @PostMapping(value = INITIALDECISIONCONFIRMCMDT)
     public ModelAndView saveValue(HttpServletRequest request, @RequestParam String appId) {
@@ -332,7 +345,6 @@ public class InDecController {
         inDec.setOrignCountrNm(commodity.get().getOrignCountrNm());
 
 
-
         Date date = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
@@ -376,8 +388,12 @@ public class InDecController {
     }
 
     @PostMapping(value = INITIALDECISIONCONFIRMTPO)
-    public ModelAndView saveTPO(InDec inDec, HttpServletRequest request, @RequestParam String inDecId, @RequestParam String TPO_NUM, @RequestParam String TPO_DATE) throws IOException, BadElementException {
-        ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec/ListInDecTerms");
+    public ResponseEntity<Object> saveTPO(
+            @RequestBody @Valid TpoValidDTO tpoValidDTO,
+            BindingResult result,
+            HttpServletRequest request
+    ) throws IOException, BadElementException {
+
         String userId = (String) request.getSession().getAttribute("userId");
         String userName = (String) request.getSession().getAttribute("userName");
         Integer userRole = (Integer) request.getSession().getAttribute("userRole");
@@ -386,18 +402,52 @@ public class InDecController {
         String userLocationName = (String) request.getSession().getAttribute("userLocationName");
         String userPost = (String) request.getSession().getAttribute("userPost");
 
-        InDec inDec1 = inDecService.getById(inDecId);
-        inDec1.setStatus(185);
-        Status status = statusService.getById(185);
-        inDec1.setStatusNm(status.getName());
-        inDec1.setCommentMarks(TPO_NUM+'/'+TPO_DATE);
-        inDecService.saveInDec(inDec1);
+        Map<String, String> errors = new HashMap<>();
+        JSONObject obj = new JSONObject();
 
-        List<InDec> termsList = appsservice.getListInDec(request);
-        mav.addObject("termsList", termsList);
-        mav.addObject("userRole", userRole);
+        InDec inDec1 = inDecService.getById(tpoValidDTO.getInDecId());
+        String g3a = Utils.nullClear(tpoValidDTO.getG3a());
+        Date g3b = null;
+        if (!Objects.equals(tpoValidDTO.getG3b(), "")) {
+            g3b = java.sql.Date.valueOf(tpoValidDTO.getG3b());
+        }
+        String g3c = Utils.nullClear(tpoValidDTO.getG3c());
 
-        return mav;
+        if (Utils.nullClear(inDec1.getG3a()).equals(g3a) && inDec1.getG3b().equals(g3b) && Utils.nullClear(inDec1.getG3c()).equals(g3c)) {
+            obj.put("message", "Ушбу БКО бўйича тўлов ундирилган, бошқа БКО киритинг!");
+            obj.put("status", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
+        } else {
+            Tpo tpo = new Tpo();
+            Pay pay = new Pay();
+            tpo = tpoRepository.findByG3AAndG3BAndG3C(g3a, g3b, g3c);
+            if (tpo == null) {
+                obj.put("message", "Ушбу БКО топилмади");
+                obj.put("status", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
+            }
+            String g19Type = "50";
+            pay = payRepository.findByIdTpoAndG19Type(Utils.nullClear(tpo.getId()), g19Type);
+            if (!Utils.nullClear(pay).equals("") && !Utils.nullClear(pay.getG19Type()).equals("")) {
+                inDec1.setStatus(185);
+                Status status = statusService.getById(185);
+                inDec1.setStatusNm(status.getName());
+                inDec1.setTpoId(pay.getIdTpo());
+                inDec1.setPayId(pay.getIdPay());
+                inDec1.setG3a(g3a);
+                inDec1.setG3b(g3b);
+                inDec1.setG3c(g3c);
+                inDec1.setG19Base(pay.getG19Base());
+                inDec1.setStavka(pay.getStavka());
+                inDec1.setG19Sum(pay.getG19Sum());
+                inDecService.saveInDec(inDec1);
+                return ResponseEntity.status(201).body(inDec1);
+            } else {
+                obj.put("message", "Ушбу БКО маълумотлари топилмади");
+                obj.put("status", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
+            }
+        }
     }
 
     @PostMapping(value = INITIALDECISIONCONFIRMCMDT_CALC)
@@ -463,7 +513,7 @@ public class InDecController {
     }
 
     @PostMapping(value = INDECCANCELLED)
-    public ModelAndView saveInDecCancelled(HttpServletRequest request, @RequestParam String inDecId, @RequestParam String TPO_NUM) throws IOException, BadElementException  {
+    public ModelAndView saveInDecCancelled(HttpServletRequest request, @RequestParam String inDecId, @RequestParam String TPO_NUM) throws IOException, BadElementException {
         ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/ListInDec/ListInDecTerms");
         String userId = (String) request.getSession().getAttribute("userId");
         String userName = (String) request.getSession().getAttribute("userName");
