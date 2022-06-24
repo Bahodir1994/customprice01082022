@@ -234,7 +234,7 @@
                                     <td style="background-color: #e2efd9; text-align: center" th:text="${iterStat.count}" class="tg-oi4f"></td>
                                     <td style="background-color: #e2efd9; text-align: center" th:text="${doc.getDocTypeName()}" class="tg-oi4f"></td>
                                     <td style="background-color: #e2efd9; text-align: center" th:text="${doc.getFileNum()}" class="tg-oi4f"></td>
-                                    <td style="background-color: #e2efd9; text-align: center" th:text="${#dates.format(doc.getFileDate(), 'dd-MMM yyyy')}" class="tg-oi4f"></td>
+                                    <td style="background-color: #e2efd9; text-align: center" th:text="${#dates.format(doc.getFileDate(), 'dd.mm.yyyy')}" class="tg-oi4f"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -258,7 +258,7 @@
                             <br>
                     <tr>
                         <td style="width: 40%">
-                            <span style="font-weight:bold;" th:text="${htmlData.get().getName13_1()}">Бошқарма бошлиғи:</span>
+                            <span style="font-weight:bold;" th:text="${htmlData.get().getName13_1()}">Бошқарма раҳбарияти:</span>
                         </td>
                         <td style="width: 60%">
                             <span th:text="${userName}" style="margin-right: auto"></span>
