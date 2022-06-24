@@ -746,16 +746,38 @@
     function report(x){
         var Fs = $('#FromStart').val();
         var Te = $('#ToEnd').val();
-        if (Fs === "undefined" && Fs == null && Fs === ""){
-            Te = DateTime.date
-        }
-        if (Fs !== "undefined" && Fs != null && Fs !== "" && Fs !== "undefined") {
-            window.location = "/inrenationalsurvaey/resources/pages/InternationalSurvay/getReport/" + x + "/"+Fs + "/"+ Te;
-            $('#FromStartValid').html('').removeClass('border border-danger');
-        } else {
-            $('#FromStartValid').html("Бошланғич сана тўлдирилиши лозим!").addClass('text-danger');
-            $('#FromStart').addClass('border border-danger')
-        }
+        <%--if (Fs === "undefined" && Fs == null && Fs === ""){--%>
+        <%--    Te = DateTime.date--%>
+        <%--}--%>
+        <%--if (Fs !== "undefined" && Fs != null && Fs !== "" && Fs !== "undefined") {--%>
+        <%--    window.location = "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/getReport/" + x + "/"+Fs + "/"+ Te;--%>
+        <%--    $('#FromStartValid').html('').removeClass('border border-danger');--%>
+        <%--} else {--%>
+        <%--    $('#FromStartValid').html("Бошланғич сана тўлдирилиши лозим!").addClass('text-danger');--%>
+        <%--    $('#FromStart').addClass('border border-danger')--%>
+        <%--}--%>
+
+        location.href = "/inrenationalsurvaey/resources/pages/InternationalSurvay/getReport/" + x + "/"+Fs + "/"+ Te
+
+
+        <%--$.ajax({--%>
+        <%--    type: "GET",--%>
+        <%--    // data: dataS,--%>
+        <%--    url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/getReport/" + x + "/"+Fs + "/"+ Te,--%>
+        <%--    dataType: "html",--%>
+        <%--    header: 'Content-type: text/html; charset=utf-8',--%>
+        <%--    success: function (res) {--%>
+
+        <%--        // $('div#ListCMTable').html(res);--%>
+        <%--        // $('div#divRowCount').css({'display': ''});--%>
+        <%--        // $('#loaderII').addClass('visually-hidden');--%>
+        <%--    },--%>
+        <%--    error: function (res) {--%>
+        <%--        setTimeout(()=>{--%>
+        <%--            $('#loaderII').addClass('visually-hidden')--%>
+        <%--        },1000)--%>
+        <%--    }--%>
+        <%--});--%>
     }
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

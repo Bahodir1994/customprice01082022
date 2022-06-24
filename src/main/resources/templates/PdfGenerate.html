@@ -189,9 +189,9 @@
                                 <tr>
                                     <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei1()}">Код</th>
                                     <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei2()}">Ҳисоблаш асоси</th>
-                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei3()}">Ставка</th>
-                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei4()}">Ҳос ставка (асос)</th>
-                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei5()}">Ҳос ставка</th>
+                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei3()}">Адвалор Ставка</th>
+                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei4()}">Ҳос ставка</th>
+                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei5()}">Ҳос ставка миқдори</th>
                                     <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei6()}">Ҳисобланган тўлов</th>
                                     <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei7()}">Тўлов усули</th>
                                 </tr>
@@ -200,9 +200,9 @@
                                 <tr th:each="pay: ${payment}">
                                     <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47Type()}" class="tg-oi4f"></td>
                                     <td style="background-color: #deeaf6; text-align: center" th:text="${#numbers.formatCurrency(pay.getG47Base())}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltRate()}" class="tg-oi4f"></td>
                                     <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltBase()}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltBaseCurrkod()}" class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47Rate()}" class="tg-oi4f"></td>
+                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltRate()}" class="tg-oi4f"></td>
                                     <td style="background-color: #deeaf6; text-align: center" th:text="${#numbers.formatCurrency(pay.getG47Sum())}" class="tg-oi4f"></td>
                                     <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47Sp()}" class="tg-oi4f"></td>
                                 </tr>
