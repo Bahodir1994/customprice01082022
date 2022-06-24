@@ -77,29 +77,6 @@ public interface InternationalSurveyRepo extends JpaRepository<InternationalSurv
     List<InternationalSurveyEntity> findByExecutiveTerritoryCode(String executiveTerritoryCode);
 
 
-    @Query(" select\n" +
-            "    i.directionTypeCode,\n" +
-            "    i.directionTypeName,\n" +
-            "    i.sendReqCountryCode,\n" +
-            "    i.sendReqCountryNm,\n" +
-            "    count(i.sendReqCountryCode),\n" +
-            "    sum( case when i.sum is null then 0.00 else i.sum end),\n" +
-            "    sum( case when i.sumАpproved is null then 0.00 else i.sumАpproved end),\n" +
-            "    sum( case when i.sumOnControl is null then 0.00 else i.sumOnControl end)\n" +
-            "from\n" +
-            "    InternationalSurveyEntity i\n" +
-            "where i.executiveTerritoryCode = :executiveTerritoryCode \n" +
-            "and i.xbbMailDate > :FromStart \n"+
-            "and i.xbbMailDate < :ToEnd \n"+
-            "group by\n" +
-            "    i.directionTypeCode,\n" +
-            "    i.directionTypeName,\n" +
-            "    i.sendReqCountryCode,\n" +
-            "    i.sendReqCountryNm\n" +
-            "    order by i.directionTypeCode asc  ")
-    List<InternationalSurveyEntity> findAllByExecutiveTerritoryCodeAndXbbMailDateBetween(
-            @Param("executiveTerritoryCode")String executiveTerritoryCode,
-            @Param("FromStart")Date fromStart,
-            @Param("ToEnd")Date toEnd);
+    List<InternationalSurveyEntity> findAllByExecutiveTerritoryCodeAndXbbMailDateBetween(String executiveTerritoryCode, Date fromStart, Date toEnd);
 
 }

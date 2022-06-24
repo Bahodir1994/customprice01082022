@@ -12,9 +12,14 @@ import uz.customs.customsprice.repository.InternationalSurveyRepo.InternationalS
 public class ExcelService {
     @Autowired
     InternationalSurveyRepo repository;
+
+    @Autowired
+    InternationalSurveyService internationalSurveyService;
+
     public ByteArrayInputStream load(String userLocation,String FromStart,String ToEnd) {
+//        List<InternationalSurveyEntity> tutorials = internationalSurveyService.getInternationalSurveyReport(userLocation, Date.valueOf(FromStart), Date.valueOf(ToEnd));
         List<InternationalSurveyEntity> tutorials = repository.findAllByExecutiveTerritoryCodeAndXbbMailDateBetween(userLocation, Date.valueOf(FromStart), Date.valueOf(ToEnd));
-        ByteArrayInputStream in = ExcelHelper.tutorialsToExcel(tutorials);
+        ByteArrayInputStream in = ExcelHelper.tutorialsToExcel(tutorials, FromStart, ToEnd);
         return in;
     }
 }
