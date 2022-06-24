@@ -122,314 +122,314 @@
 
     <div class="row">
         <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="">
-        <div class="card radius-10 shadow">
-            <div class="card-body">
-                <div class="text-center">
-                    <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+            <div class="card radius-10 shadow">
+                <div class="card-body">
+                    <div class="text-center">
+                        <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+                        </div>
+                        <c:set var = "AllInSurveys" value = "${AllInSurvey}"/>
+                        <h4 class="my-1"><fmt:formatNumber value = "${AllInSurveys}" maxFractionDigits="3" /> та</h4>
+                        <p class="mb-0 text-secondary">Жами халқаро сўровномалар</p>
                     </div>
-                    <c:set var = "AllInSurveys" value = "${AllInSurvey}"/>
-                    <h4 class="my-1"><fmt:formatNumber value = "${AllInSurveys}" maxFractionDigits="3" /> та</h4>
-                    <p class="mb-0 text-secondary">Жами халқаро сўровномалар</p>
                 </div>
             </div>
         </div>
-    </div>
         <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="">
-        <div class="card radius-10 shadow">
-            <div class="card-body">
-                <div class="text-center">
-                    <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+            <div class="card radius-10 shadow">
+                <div class="card-body">
+                    <div class="text-center">
+                        <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+                        </div>
+                        <h4 id="mmm" class="my-1">${AllSumProbability} сўм</h4>
+                        <p class="mb-0 text-secondary">Эхтимолий хисобланган сумма</p>
                     </div>
-                    <h4 id="mmm" class="my-1">${AllSumProbability} сўм</h4>
-                    <p class="mb-0 text-secondary">Эхтимолий хисобланган сумма</p>
                 </div>
             </div>
         </div>
-    </div>
         <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="">
-        <div class="card radius-10 shadow">
-            <div class="card-body">
-                <div class="text-center">
-                    <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+            <div class="card radius-10 shadow">
+                <div class="card-body">
+                    <div class="text-center">
+                        <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+                        </div>
+                        <h4 class="my-1">${AllSumDef} сўм</h4>
+                        <p class="mb-0 text-secondary">Камомад суммаси</p>
                     </div>
-                    <h4 class="my-1">${AllSumDef} сўм</h4>
-                    <p class="mb-0 text-secondary">Камомад суммаси</p>
                 </div>
             </div>
         </div>
-    </div>
         <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="">
-        <div class="card radius-10 shadow">
-            <div class="card-body">
-                <div class="text-center">
-                    <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+            <div class="card radius-10 shadow">
+                <div class="card-body">
+                    <div class="text-center">
+                        <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+                        </div>
+                        <h4 class="my-1">${AllSumАpproved} сўм</h4>
+                        <p class="mb-0 text-secondary">Ундирилган сумма</p>
                     </div>
-                    <h4 class="my-1">${AllSumАpproved} сўм</h4>
-                    <p class="mb-0 text-secondary">Ундирилган сумма</p>
                 </div>
             </div>
         </div>
-    </div>
         <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="">
-        <div class="card radius-10 shadow">
-            <div class="card-body">
-                <div class="text-center">
-                    <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+            <div class="card radius-10 shadow">
+                <div class="card-body">
+                    <div class="text-center">
+                        <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
+                        </div>
+                        <h4 class="my-1">${AllSumOnControl} сўм</h4>
+                        <p class="mb-0 text-secondary">Назоратдаги сумма</p>
                     </div>
-                    <h4 class="my-1">${AllSumOnControl} сўм</h4>
-                    <p class="mb-0 text-secondary">Назоратдаги сумма</p>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </div>
 
 <div class="col-12 col-lg-12 shadow">
-        <div class="card">
-            <div class="fm-search mt-2 mb-1 ml-3 mr-3">
-                <div class="mb-0">
-                    <div class="row m-3">
-                        <div class="row">
+    <div class="card">
+        <div class="fm-search mt-2 mb-1 ml-3 mr-3">
+            <div class="mb-0">
+                <div class="row m-3">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="">Йўналиш</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Халқаро сўровнома йўналиш тури"></i>
+                            <select class="form-select" type="text" id="directionTypeCode" name="directionTypeCode">
+                                <option class="font-italic" selected value="">--- Танланг ---</option>
+                                <c:forEach var="dirTyp" items="${directionType}" varStatus="i">
+                                    <option value="${dirTyp.code}">${dirTyp.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Cўровнома холати</label>
+                            <select class="form-select" id="statusS" name="statusS"/>
+                            <option value="">--Танланг--</option>
+                            <option value="100">Янги</option>
+                            <option value="200">Жараёнда</option>
+                            <option value="300">Якунланган</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="">Сўровнома юборилган давлат</label>
+                            <i class="bx bx-info-circle"
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="top"
+                               title="Сўровнома юборилган давлат">
+                            </i>
+                            <select class="form-select shadow-sm" id="sendReqCountryCodeS"
+                                    name="sendReqCountryCodeS" required=""/>
+                            <option value="">--Танланг--</option>
+                            <c:forEach var="countr" items="${countryList}">
+                                <option value="${countr.code}">${countr.cdNm}</option>
+                            </c:forEach>
+                            </select>
+                        </div>
+                        <c:if test="${userLocation == '1701'}">
                             <div class="col-md-3">
-                                <label class="">Йўналиш</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Халқаро сўровнома йўналиш тури"></i>
-                                <select class="form-select" type="text" id="directionTypeCode" name="directionTypeCode">
+                                <label class="">Таркибий тузилма</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Таркибий тузилмалар"></i>
+                                <select class="result form-select shadow-sm" type="text" id="userLocationCodeS1" name="userLocationCodeS1">
                                     <option class="font-italic" selected value="">--- Танланг ---</option>
-                                    <c:forEach var="dirTyp" items="${directionType}" varStatus="i">
-                                        <option value="${dirTyp.code}">${dirTyp.name}</option>
+                                    <c:forEach var="usrLoc" items="${location}" varStatus="i">
+                                        <option value="${usrLoc.id}">${usrLoc.name1}</option>
                                     </c:forEach>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <label>Cўровнома холати</label>
-                                <select class="form-select" id="statusS" name="statusS"/>
-                                <option value="">--Танланг--</option>
-                                <option value="100">Янги</option>
-                                <option value="200">Жараёнда</option>
-                                <option value="300">Якунланган</option>
+                                <label class="">Маъсул худуд</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Маъсул худуд"></i>
+                                <select class="result form-select shadow-sm" type="text" id="executiveTerritoryCodeS" name="executiveTerritoryCodeS">
+                                    <option class="font-italic" selected value="">--- Танланг ---</option>
+                                    <c:forEach var="usrLoc" items="${location}" varStatus="i">
+                                        <option value="${usrLoc.id}">${usrLoc.name1}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
-                            <div class="col-md-3">
-                                <label class="">Сўровнома юборилган давлат</label>
-                                <i class="bx bx-info-circle"
-                                   data-bs-toggle="tooltip"
-                                   data-bs-placement="top"
-                                   title="Сўровнома юборилган давлат">
-                                </i>
-                                <select class="form-select shadow-sm" id="sendReqCountryCodeS"
-                                        name="sendReqCountryCodeS" required=""/>
-                                <option value="">--Танланг--</option>
-                                <c:forEach var="countr" items="${countryList}">
-                                    <option value="${countr.code}">${countr.cdNm}</option>
-                                </c:forEach>
-                                </select>
-                            </div>
-                            <c:if test="${userLocation == '1701'}">
-                                <div class="col-md-3">
-                                    <label class="">Таркибий тузилма</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Таркибий тузилмалар"></i>
-                                    <select class="result form-select shadow-sm" type="text" id="userLocationCodeS1" name="userLocationCodeS1">
-                                        <option class="font-italic" selected value="">--- Танланг ---</option>
-                                        <c:forEach var="usrLoc" items="${location}" varStatus="i">
-                                            <option value="${usrLoc.id}">${usrLoc.name1}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="">Маъсул худуд</label><i class="bx bx-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Маъсул худуд"></i>
-                                    <select class="result form-select shadow-sm" type="text" id="executiveTerritoryCodeS" name="executiveTerritoryCodeS">
-                                        <option class="font-italic" selected value="">--- Танланг ---</option>
-                                        <c:forEach var="usrLoc" items="${location}" varStatus="i">
-                                            <option value="${usrLoc.id}">${usrLoc.name1}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
+                        </c:if>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-primary btn-block mt-3"
+                                    onclick="searchResultTableISFirst(0)"><i class='bx bx-refresh'></i>Излаш
+                            </button>
+                            <c:if test="${userLocation != '1701'}">
+                                <button type="reset" class="btn btn-primary btn-block mt-3" onclick="reset(1)">
+                                    <i class='bx bx-trash'></i>
+                                </button>
                             </c:if>
-                            <div class="col-md-3">
+                            <c:if test="${userLocation == '1701'}">
+                                <button type="reset" class="btn btn-primary btn-block mt-3" onclick="resetS(1)">
+                                    <i class='bx bx-trash'></i>
+                                </button>
+                            </c:if>
+                            <c:if test="${userRole == '8' || userRole == '7' || userRole == '6' || userRole == '4'}">
                                 <button type="button" class="btn btn-primary btn-block mt-3"
-                                        onclick="searchResultTableISFirst(0)"><i class='bx bx-refresh'></i>Излаш
+                                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                        onclick="resetModal()"><i class='bx bx-plus'></i>Янги
                                 </button>
-                                <c:if test="${userLocation != '1701'}">
-                                    <button type="reset" class="btn btn-primary btn-block mt-3" onclick="reset(1)">
-                                        <i class='bx bx-trash'></i>
-                                    </button>
-                                </c:if>
-                                <c:if test="${userLocation == '1701'}">
-                                    <button type="reset" class="btn btn-primary btn-block mt-3" onclick="resetS(1)">
-                                        <i class='bx bx-trash'></i>
-                                    </button>
-                                </c:if>
-                                <c:if test="${userRole == '8' || userRole == '7' || userRole == '6' || userRole == '4'}">
-                                    <button type="button" class="btn btn-primary btn-block mt-3"
-                                            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                            onclick="resetModal()"><i class='bx bx-plus'></i>Янги
-                                    </button>
-                                </c:if>
-                                <button type="reset" class="btn btn-outline-dark btn-block mt-3" data-bs-toggle="modal" data-bs-target="#reportExport">
-                                    <i class='bx bx-line-chart-down'></i>Хисобот
-                                </button>
-                                <!-- Modal -->
-                                <div class="modal fade" id="reportExport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="">Хисобот шакли</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </c:if>
+                            <button type="reset" class="btn btn-outline-dark btn-block mt-3" data-bs-toggle="modal" data-bs-target="#reportExport">
+                                <i class='bx bx-line-chart-down'></i>Хисобот
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="reportExport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="">Хисобот шакли</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body row">
+                                            <div class="col">
+                                                <label for="FromStart" class="text-dark m-1">дан</label>
+                                                <input class="form-control" id="FromStart" name="FromStart" type="date" value="<%=startDate%>"/>
+                                                <label for="FromStart" id="FromStartValid" class="m-1"></label>
                                             </div>
-                                            <div class="modal-body row">
-                                                    <div class="col">
-                                                        <label for="FromStart" class="text-dark m-1">дан</label>
-                                                        <input class="form-control" id="FromStart" name="FromStart" type="date" value="<%=startDate%>"/>
-                                                        <label for="FromStart" id="FromStartValid" class="m-1"></label>
-                                                    </div>
-                                                    <div class="col">
-                                                        <label for="ToEnd" class="text-dark m-1">гача</label>
-                                                        <input class="form-control"  id="ToEnd" name="ToEnd" type="date" value="<%=endDate%>"/>
-                                                    </div>
+                                            <div class="col">
+                                                <label for="ToEnd" class="text-dark m-1">гача</label>
+                                                <input class="form-control"  id="ToEnd" name="ToEnd" type="date" value="<%=endDate%>"/>
                                             </div>
-                                            <div class="modal-footer">
-                                                <style>
-                                                    .imgs:hover {
-                                                        border:2px solid white;
-                                                        transform: scale(1.1);
-                                                    }
-                                                    .imgs {
-                                                        cursor: pointer;
-                                                    }
-                                                    .imgs:active {
-                                                        border-color: blue;
-                                                    }
-                                                </style>
-                                                <div class="text-center">
-                                                    <img class="m-3 imgs"  src="<%=request.getContextPath()%>/resources/images/excel.png" width="15%" height="15%" alt="" onclick="report('exel')"/>
-                                                    <img class="m-3 imgs"  src="<%=request.getContextPath()%>/resources/images/pdf.png" width="15%" height="15%" alt=""  onclick="report('pdf')"/>
-                                                    <img class="m-3 imgs"  src="<%=request.getContextPath()%>/resources/images/html.png" width="15%" height="15%" alt=""  onclick="report('htmls')"/>
-                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <style>
+                                                .imgs:hover {
+                                                    border:2px solid white;
+                                                    transform: scale(1.1);
+                                                }
+                                                .imgs {
+                                                    cursor: pointer;
+                                                }
+                                                .imgs:active {
+                                                    border-color: blue;
+                                                }
+                                            </style>
+                                            <div class="text-center">
+                                                <img class="m-3 imgs"  src="<%=request.getContextPath()%>/resources/images/excel.png" width="15%" height="15%" alt="" onclick="report('exel')"/>
+                                                <img class="m-3 imgs"  src="<%=request.getContextPath()%>/resources/images/pdf.png" width="15%" height="15%" alt=""  onclick="report('pdf')"/>
+                                                <img class="m-3 imgs"  src="<%=request.getContextPath()%>/resources/images/html.png" width="15%" height="15%" alt=""  onclick="report('htmls')"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="target" name="target"></div>
                         </div>
-                        <div class="row">
-                        </div>
-                        <div class="row">
-                        </div>
-                        <div class="row">
-                        </div>
-                        <!-- Modal 1-qadam-->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog modal-xl col-md-12">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Халқаро сўровнома киритиш</h5>
-                                        <button type="button" class="btn-close" id="closeModalSave"
-                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body row">
-                                        <!--todo 1-bosqich-->
-                                        <form class="row g-3 needs-validation">
-                                            <c:if test="${userLocation != '1701'}">
-                                                <div class="form-group col-md-3">
-                                                    <label for="xbbMailNum" class="form-label text-primary"><span class="text-danger">&#x2734;</span>ҲББ томонидан юбоирлган хат рақами:</label>
-                                                    <input class="form-control" type="text" id="xbbMailNum" name="xbbMailNum">
-                                                    <div class="valid-feedback">Текширилди</div>
-                                                    <div class="" id="xbbMailNumValid"></div>
-                                                </div>
-                                                <div class="form-group col-md-3">
-                                                    <label for="xbbMailNum" class="form-label text-primary"><span class="text-danger">&#x2734;</span>ҲББ томонидан юбоирлган хат санаси:</label>
-                                                    <input class="form-control" type="date" id="xbbMailDate" name="xbbMailDate">
-                                                    <div class="valid-feedback">Текширилди</div>
-                                                    <div class="" id="xbbMailDateValid"></div>
-                                                </div>
-                                            </c:if>
+                        <div id="target" name="target"></div>
+                    </div>
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                    </div>
+                    <!-- Modal 1-qadam-->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-xl col-md-12">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Халқаро сўровнома киритиш</h5>
+                                    <button type="button" class="btn-close" id="closeModalSave"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body row">
+                                    <!--todo 1-bosqich-->
+                                    <form class="row g-3 needs-validation">
+                                        <c:if test="${userLocation != '1701'}">
+                                            <div class="form-group col-md-3">
+                                                <label for="xbbMailNum" class="form-label text-primary"><span class="text-danger">&#x2734;</span>ҲББ томонидан юбоирлган хат рақами:</label>
+                                                <input class="form-control" type="text" id="xbbMailNum" name="xbbMailNum">
+                                                <div class="valid-feedback">Текширилди</div>
+                                                <div class="" id="xbbMailNumValid"></div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="xbbMailNum" class="form-label text-primary"><span class="text-danger">&#x2734;</span>ҲББ томонидан юбоирлган хат санаси:</label>
+                                                <input class="form-control" type="date" id="xbbMailDate" name="xbbMailDate">
+                                                <div class="valid-feedback">Текширилди</div>
+                                                <div class="" id="xbbMailDateValid"></div>
+                                            </div>
+                                        </c:if>
 
-                                            <div class="form-group col-md-3">
-                                                <label for="orgName" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Ташкилот
-                                                    номи:</label>
-                                                <input class="form-control was-validated" type="text" id="orgName"
-                                                       name="orgName">
-                                                <div class="valid-feedback">Текширилди</div>
-                                                <div class="" id="orgNameValid"></div>
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="hsCode" class="form-label text-primary"><span class="text-danger">&#x2734;</span>ТИФ ТН код:</label>
-                                                <input class="form-control" type="text" id="hsCode" name="hsCode">
-                                                <div class="valid-feedback">Текширилди</div>
-                                                <div class="" id="hsCodeValid"></div>
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="productName" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Товар
-                                                    номи:</label>
-                                                <input class="form-control" type="text" id="productName"
-                                                       name="productName">
-                                                <div class="valid-feedback">Текширилди</div>
-                                                <div class="" id="productNameValid"></div>
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="sendReqCountryCode" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Сўровнома юборилган давлат:</label>
-                                                <select class="form-control" type="text" id="sendReqCountryCode" name="sendReqCountryCode">
-                                                    <option class="font-italic" selected value="">--- Танланг ---</option>
-                                                    <c:forEach var="vals" items="${countryList}" varStatus="i">
-                                                        <option value="${vals.code}">${vals.code}- ${vals.cdNm}</option>
-                                                    </c:forEach>
-                                                </select>
-                                                <div class="valid-feedback">Текширилди</div>
-                                                <div class="" id="sendReqCountryCodeValid"></div>
-                                            </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="orgName" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Ташкилот
+                                                номи:</label>
+                                            <input class="form-control was-validated" type="text" id="orgName"
+                                                   name="orgName">
+                                            <div class="valid-feedback">Текширилди</div>
+                                            <div class="" id="orgNameValid"></div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="hsCode" class="form-label text-primary"><span class="text-danger">&#x2734;</span>ТИФ ТН код:</label>
+                                            <input class="form-control" type="text" id="hsCode" name="hsCode">
+                                            <div class="valid-feedback">Текширилди</div>
+                                            <div class="" id="hsCodeValid"></div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="productName" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Товар
+                                                номи:</label>
+                                            <input class="form-control" type="text" id="productName"
+                                                   name="productName">
+                                            <div class="valid-feedback">Текширилди</div>
+                                            <div class="" id="productNameValid"></div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="sendReqCountryCode" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Сўровнома юборилган давлат:</label>
+                                            <select class="form-control" type="text" id="sendReqCountryCode" name="sendReqCountryCode">
+                                                <option class="font-italic" selected value="">--- Танланг ---</option>
+                                                <c:forEach var="vals" items="${countryList}" varStatus="i">
+                                                    <option value="${vals.code}">${vals.code}- ${vals.cdNm}</option>
+                                                </c:forEach>
+                                            </select>
+                                            <div class="valid-feedback">Текширилди</div>
+                                            <div class="" id="sendReqCountryCodeValid"></div>
+                                        </div>
 
-                                            <div class="form-group col-md-3">
-                                                <label for="sendReqCountryCode" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Йўналиш:</label>
-                                                <select class="form-control" type="text" id="directionTypeSave" name="sendReqCountryCode">
-                                                    <option class="font-italic" selected value="">--- Танланг ---</option>
-                                                    <c:forEach var="dirTyp" items="${directionType}" varStatus="i">
-                                                        <option value="${dirTyp.code}">${dirTyp.name}</option>
-                                                    </c:forEach>
-                                                </select>
-                                                <div class="valid-feedback">Текширилди</div>
-                                                <div class="" id="directionTypeSaveValid"></div>
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="productName" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Эхтимол.қўшим хисобланган (cўмда):</label>
-                                                <input class="form-control" type="text" id="sumProbability"
-                                                       name="sumProbability">
-                                                <div class="valid-feedback">Текширилди</div>
-                                                <div class="" id="sumProbabilityValid"></div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary"
-                                                        onclick="saveValueFromInputS()">Сақлаш
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="sendReqCountryCode" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Йўналиш:</label>
+                                            <select class="form-control" type="text" id="directionTypeSave" name="sendReqCountryCode">
+                                                <option class="font-italic" selected value="">--- Танланг ---</option>
+                                                <c:forEach var="dirTyp" items="${directionType}" varStatus="i">
+                                                    <option value="${dirTyp.code}">${dirTyp.name}</option>
+                                                </c:forEach>
+                                            </select>
+                                            <div class="valid-feedback">Текширилди</div>
+                                            <div class="" id="directionTypeSaveValid"></div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="productName" class="form-label text-primary"><span class="text-danger">&#x2734;</span>Эхтимол.қўшим хисобланган (cўмда):</label>
+                                            <input class="form-control" type="text" id="sumProbability"
+                                                   name="sumProbability">
+                                            <div class="valid-feedback">Текширилди</div>
+                                            <div class="" id="sumProbabilityValid"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary"
+                                                    onclick="saveValueFromInputS()">Сақлаш
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr>
-            <div class="col-sm-8" id="divRowCount" style="display: none; margin-left: 15px!important;">
-                <div class="col-md-1 text-primary">
-                    <select class="form-select" id="size" name="size" onchange="searchResultTableIS(0)">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="30">30</option>
-                        <option value="50">50</option>
-                    </select>
-                </div>
-            </div>
-            <div id="loaderII" class="col-md-12 position-absolute top-50 start-50 visually-hidden" role="status" style="z-index: 999999">
-                <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-            <div class="card-body" id="ListCMTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
+        </div>
+        <hr>
+        <div class="col-sm-8" id="divRowCount" style="display: none; margin-left: 15px!important;">
+            <div class="col-md-1 text-primary">
+                <select class="form-select" id="size" name="size" onchange="searchResultTableIS(0)">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                </select>
             </div>
         </div>
+        <div id="loaderII" class="col-md-12 position-absolute top-50 start-50 visually-hidden" role="status" style="z-index: 999999">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="card-body" id="ListCMTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
+        </div>
     </div>
+</div>
 </div>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
