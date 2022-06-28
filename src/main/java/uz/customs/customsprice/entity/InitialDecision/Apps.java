@@ -135,10 +135,16 @@ public class Apps extends AbstractAuditingEntity {
     @Column(name = "COMMENT", columnDefinition = "VARCHAR(600) CCSID 1208")
     private String comment;
 
+    @Column(name = "IMPORTER_NM", columnDefinition = "VARCHAR(600) CCSID 1208")
+    private String importerNm;
+
+    @Column(name = "IMPORTER_TIN", columnDefinition = "VARCHAR(30) CCSID 1025")
+    private String importerTin;
+
     public Apps() {
     }
 
-    public Apps(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, String personId, String appNum, Date appDate, String customerCountry, String customerCountryNm, String senderCountry, String senderCountryNm, String senderOrg, String sellerOrg, String terms, String termsNm, String termsAddr, String personFio, String orgName, String personPosition, String personAddr, String personTin, String personPin, String personMail, String personPhone, String locationId, String locationNm, BigDecimal transExp, int status, String statusNm, String comment) {
+    public Apps(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, String personId, String appNum, Date appDate, String customerCountry, String customerCountryNm, String senderCountry, String senderCountryNm, String senderOrg, String sellerOrg, String terms, String termsNm, String termsAddr, String personFio, String orgName, String personPosition, String personAddr, String personTin, String personPin, String personMail, String personPhone, String locationId, String locationNm, BigDecimal transExp, int status, String statusNm, String comment, String importerNm, String importerTin) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.personId = personId;
@@ -167,6 +173,8 @@ public class Apps extends AbstractAuditingEntity {
         this.status = status;
         this.statusNm = statusNm;
         this.comment = comment;
+        this.importerNm = importerNm;
+        this.importerTin = importerTin;
     }
 
     public String getId() {
@@ -383,6 +391,22 @@ public class Apps extends AbstractAuditingEntity {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getImporterNm() {
+        return importerNm;
+    }
+
+    public void setImporterNm(String importerNm) {
+        this.importerNm = importerNm;
+    }
+
+    public String getImporterTin() {
+        return importerTin;
+    }
+
+    public void setImporterTin(String importerTin) {
+        this.importerTin = importerTin;
     }
 }
 

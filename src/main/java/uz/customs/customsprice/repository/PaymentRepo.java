@@ -13,4 +13,6 @@ public interface PaymentRepo extends JpaRepository<Payment, String> {
 
     @Transactional
     void deletePaymentById(String id);
+
+    List<Payment> findByCmdtIdAndG47Sp(String cmdtId, String g47Sp);
 }

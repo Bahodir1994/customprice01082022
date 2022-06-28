@@ -90,7 +90,9 @@ public class AppsService {
                 "    a.terms_addr,\n" +
                 "    a.trans_exp,\n" +
                 "    a.person_id,\n" +
-                "    a.comment \n" +
+                "    a.comment, \n" +
+                "    a.importer_nm, \n" +
+                "    a.importer_tin \n" +
                 "    " + sqlJoinVal + "\n" +
                 "from\n" +
                 "    apps a\n" +
@@ -159,7 +161,9 @@ public class AppsService {
                 "    a.trans_exp,\n" +
                 "    ar.inspector_id   inspector_id,\n" +
                 "    ar.inspector_name inspector_name,\n" +
-                "    a.comment \n" +
+                "    a.comment, \n" +
+                "    a.importer_nm, \n" +
+                "    a.importer_tin \n" +
                 "from\n" +
                 "    cpid.apps a\n" +
                 "left join\n" +
@@ -231,7 +235,9 @@ public class AppsService {
                 "    a.trans_exp,\n" +
                 "    ar.inspector_id   inspector_id,\n" +
                 "    ar.inspector_name inspector_name,\n" +
-                "    a.comment \n" +
+                "    a.comment, \n" +
+                "    a.importer_nm, \n" +
+                "    a.importer_tin \n" +
                 "from\n" +
                 "    cpid.apps a\n" +
                 "left join\n" +
@@ -356,7 +362,9 @@ public class AppsService {
                 /*30 - */"    sum(cm.customs_price)  allcustoms_price,\n" +
                 /*31 - */"    count(cm.id)   cntcmdt,\n" +
                 /*32 - */"    cm.currency_nm,\n" +
-                "    a.comment \n" +
+                "    a.comment, \n" +
+                "    a.importer_nm, \n" +
+                "    a.importer_tin \n" +
                 "from\n" +
                 "    apps a\n" +
                 "left join\n" +
@@ -396,7 +404,9 @@ public class AppsService {
                 "    a.person_id, \n" +
                 "    a.instime,\n" +
        /*32 - */"    cm.currency_nm,\n" +
-                "    a.comment \n" +
+                "    a.comment, \n" +
+                "    a.importer_nm, \n" +
+                "    a.importer_tin \n" +
                 "order by\n" +
                 "    a.instime desc";
         return (List<Apps>) entityManager.createNativeQuery(queryForList).getResultList();
@@ -561,7 +571,9 @@ public class AppsService {
                 "    a.status_nm,\n" + /*28-status_nm*/
                 "    ar.inspector_id inspector_id,\n" + /*29-inspector_id*/
                 "    ar.inspector_name inspector_name,\n" + /*30-inspector_name*/
-                "    a.comment \n" +
+                "    a.comment, \n" +
+                "    a.importer_nm, \n" +
+                "    a.importer_tin \n" +
                 "from\n" +
                 "    cpid.apps a\n" +
                 "left join\n" +
@@ -687,7 +699,9 @@ public class AppsService {
                 "    i.END_ACTIV,\n" +
                 /*60*/"    i.g3a,\n" +
                 "    char(i.g3b, eur) g3b,\n" +
-                "    i.g3c g3c\n" +
+                "    i.g3c g3c,\n" +
+                "    a.importer_nm, \n" +
+                "    a.importer_tin \n" +
                 "from\n" +
                 "    cpid.in_dec i\n" +
                 "left join\n" +
@@ -784,7 +798,9 @@ public class AppsService {
                 "    i.in_dec_end_date,\n" +
                 "    i.IN_DEC_USR_ENDED_DATE,\n" +
                 "    i.COMMENT_ENDED,\n" +
-                "    i.END_ACTIV\n" +
+                "    i.END_ACTIV, \n" +
+                "    a.importer_nm, \n" +
+                "    a.importer_tin \n" +
                 "from\n" +
                 "    cpid.in_dec i\n" +
                 "left join\n" +
@@ -864,7 +880,9 @@ public class AppsService {
                 "    a.trans_exp,\n" +
                 "    ar.inspector_id   inspector_id,\n" +
                 "    ar.inspector_name inspector_name,\n" +
-                "    a.comment \n" +
+                "    a.comment, \n" +
+                "    a.importer_nm, \n" +
+                "    a.importer_tin \n" +
                 "from\n" +
                 "    cpid.apps a\n" +
                 "left join\n" +
@@ -942,7 +960,9 @@ public class AppsService {
                 "    i.in_dec_end_date,\n" +
                 "    i.IN_DEC_USR_ENDED_DATE,\n" +
                 "    i.COMMENT_ENDED,\n" +
-                "    i.END_ACTIV\n" +
+                "    i.END_ACTIV, \n" +
+                "    a.importer_nm, \n" +
+                "    a.importer_tin \n" +
                 "from\n" +
                 "    cpid.in_dec i\n" +
                 "left join\n" +
