@@ -178,7 +178,90 @@ public class forHtml {
     @Column(name = "zapas4", columnDefinition = " VARCHAR(400) CCSID 1208")
     private String zapas4;
 
+    @Column(name = "zapas5", columnDefinition = " VARCHAR(400) CCSID 1208")
+    private String zapas5;
+
+    @Column(name = "zapas6", columnDefinition = " VARCHAR(400) CCSID 1208")
+    private String zapas6;
+
+    @Column(name = "zapas7", columnDefinition = " VARCHAR(400) CCSID 1208")
+    private String zapas7;
+
+    @Column(name = "zapas8", columnDefinition = " VARCHAR(400) CCSID 1208")
+    private String zapas8;
+
+    @Column(name = "zapas9", columnDefinition = " VARCHAR(400) CCSID 1208")
+    private String zapas9;
+
+    @Column(name = "zapas10", columnDefinition = " VARCHAR(400) CCSID 1208")
+    private String zapas10;
+
     public forHtml() {
+    }
+
+    public forHtml(String id, String title, String title2, String name1, String name2, String name3, String name4, String name5, String name6, String tableb1, String tableb2, String tableb3, String tableb4, String tableb5, String tableb6, String tableb7, String tableb8, String tableb9, String tableb10, String tableb11, String tableb12, String tableb13, String tableb14, String tableb15, String tableb16, String tableb17, String tableb18, String tableb19, String tableb20, String tableb21, String tableb22, String name7, String name8, String name9, String tablei1, String tablei2, String tablei3, String tablei4, String tablei5, String tablei6, String tablei7, String name10, String name11, String tableu1, String tableu2, String tableu3, String tableu4, String name12, String name13, String name13_1, String comment1, String comment2, String zapas1, String zapas2, String zapas3, String zapas4, String zapas5, String zapas6, String zapas7, String zapas8, String zapas9, String zapas10) {
+        this.id = id;
+        this.title = title;
+        this.title2 = title2;
+        this.name1 = name1;
+        this.name2 = name2;
+        this.name3 = name3;
+        this.name4 = name4;
+        this.name5 = name5;
+        this.name6 = name6;
+        this.tableb1 = tableb1;
+        this.tableb2 = tableb2;
+        this.tableb3 = tableb3;
+        this.tableb4 = tableb4;
+        this.tableb5 = tableb5;
+        this.tableb6 = tableb6;
+        this.tableb7 = tableb7;
+        this.tableb8 = tableb8;
+        this.tableb9 = tableb9;
+        this.tableb10 = tableb10;
+        this.tableb11 = tableb11;
+        this.tableb12 = tableb12;
+        this.tableb13 = tableb13;
+        this.tableb14 = tableb14;
+        this.tableb15 = tableb15;
+        this.tableb16 = tableb16;
+        this.tableb17 = tableb17;
+        this.tableb18 = tableb18;
+        this.tableb19 = tableb19;
+        this.tableb20 = tableb20;
+        this.tableb21 = tableb21;
+        this.tableb22 = tableb22;
+        this.name7 = name7;
+        this.name8 = name8;
+        this.name9 = name9;
+        this.tablei1 = tablei1;
+        this.tablei2 = tablei2;
+        this.tablei3 = tablei3;
+        this.tablei4 = tablei4;
+        this.tablei5 = tablei5;
+        this.tablei6 = tablei6;
+        this.tablei7 = tablei7;
+        this.name10 = name10;
+        this.name11 = name11;
+        this.tableu1 = tableu1;
+        this.tableu2 = tableu2;
+        this.tableu3 = tableu3;
+        this.tableu4 = tableu4;
+        this.name12 = name12;
+        this.name13 = name13;
+        this.name13_1 = name13_1;
+        this.comment1 = comment1;
+        this.comment2 = comment2;
+        this.zapas1 = zapas1;
+        this.zapas2 = zapas2;
+        this.zapas3 = zapas3;
+        this.zapas4 = zapas4;
+        this.zapas5 = zapas5;
+        this.zapas6 = zapas6;
+        this.zapas7 = zapas7;
+        this.zapas8 = zapas8;
+        this.zapas9 = zapas9;
+        this.zapas10 = zapas10;
     }
 
     public String getId() {
@@ -627,5 +710,53 @@ public class forHtml {
 
     public void setZapas4(String zapas4) {
         this.zapas4 = zapas4;
+    }
+
+    public String getZapas5() {
+        return zapas5;
+    }
+
+    public void setZapas5(String zapas5) {
+        this.zapas5 = zapas5;
+    }
+
+    public String getZapas6() {
+        return zapas6;
+    }
+
+    public void setZapas6(String zapas6) {
+        this.zapas6 = zapas6;
+    }
+
+    public String getZapas7() {
+        return zapas7;
+    }
+
+    public void setZapas7(String zapas7) {
+        this.zapas7 = zapas7;
+    }
+
+    public String getZapas8() {
+        return zapas8;
+    }
+
+    public void setZapas8(String zapas8) {
+        this.zapas8 = zapas8;
+    }
+
+    public String getZapas9() {
+        return zapas9;
+    }
+
+    public void setZapas9(String zapas9) {
+        this.zapas9 = zapas9;
+    }
+
+    public String getZapas10() {
+        return zapas10;
+    }
+
+    public void setZapas10(String zapas10) {
+        this.zapas10 = zapas10;
     }
 }

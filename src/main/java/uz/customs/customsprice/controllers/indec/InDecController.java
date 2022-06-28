@@ -308,25 +308,6 @@ public class InDecController {
         apps.setStatusNm(status2.getName());
         appsService.saveAppsStatus(apps);
 
-        /** mav object start **/
-
-
-        /**todo ЛОК га ёзиш start todo**/
-        StatusM statusM = statusMService.getByAppId(appId);
-        statusM.setAppId(apps.getId());
-        statusM.setStatus(String.valueOf(apps.getStatus()));
-        statusM.setStatusComment(apps.getStatusNm());
-        statusM.setInsUser(userId);
-        statusMService.saveStatusM(statusM);
-
-        StatusH statusH = new StatusH();
-        statusH.setStmainID(statusM.getId());
-        statusH.setAppId(statusM.getAppId());
-        statusH.setStatus(String.valueOf(apps.getStatus()));
-        statusH.setStatusComment(apps.getStatusNm());
-        statusH.setInsUser(userId);
-        statusHService.saveStatusH(statusH);
-        /**todo ЛОК га ёзиш end todo**/
 
 
         /**todo Дастлаки қарор маълумотларини шакиллантириш **/
@@ -359,6 +340,27 @@ public class InDecController {
         inDec.setStatus(status1.getId());
         inDec.setStatusNm(status1.getName());
         inDecService.saveInDec(inDec);
+        /** mav object start **/
+
+
+        /**todo ЛОК га ёзиш start todo**/
+        StatusM statusM = statusMService.getByAppId(appId);
+        statusM.setAppId(apps.getId());
+        statusM.setStatus(String.valueOf(apps.getStatus()));
+        statusM.setStatusComment(apps.getStatusNm());
+        statusM.setInsUser(userId);
+        statusMService.saveStatusM(statusM);
+
+        StatusH statusH = new StatusH();
+        statusH.setStmainID(statusM.getId());
+        statusH.setAppId(statusM.getAppId());
+        statusH.setStatus(String.valueOf(apps.getStatus()));
+        statusH.setStatusComment(apps.getStatusNm());
+        statusH.setInsUser(userId);
+        statusHService.saveStatusH(statusH);
+        /**todo ЛОК га ёзиш end todo**/
+
+
 
         /**todo PDF GENERATSIYA  **/
 //        pdfService.createPdf(appId, cmdtId, userName);

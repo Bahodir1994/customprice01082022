@@ -18,6 +18,10 @@ public class PaymentServise {
         return paymentRepo.findByCmdtId(cmdtId);
     }
 
+    public List<Payment> getByCmdtIdAndG47Sp(String cmdtId, String g47Sp) {
+        return paymentRepo.findByCmdtIdAndG47Sp(cmdtId, g47Sp);
+    }
+
 //    public List<Payment> getAllByCmdtId(String cmdtId) {
 //        return paymentRepo.findAllByCmdtId(cmdtId);
 //    }

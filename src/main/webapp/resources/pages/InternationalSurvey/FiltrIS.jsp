@@ -746,18 +746,18 @@
     function report(x){
         var Fs = $('#FromStart').val();
         var Te = $('#ToEnd').val();
-        <%--if (Fs === "undefined" && Fs == null && Fs === ""){--%>
-        <%--    Te = DateTime.date--%>
-        <%--}--%>
-        <%--if (Fs !== "undefined" && Fs != null && Fs !== "" && Fs !== "undefined") {--%>
-        <%--    window.location = "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/getReport/" + x + "/"+Fs + "/"+ Te;--%>
-        <%--    $('#FromStartValid').html('').removeClass('border border-danger');--%>
-        <%--} else {--%>
-        <%--    $('#FromStartValid').html("Бошланғич сана тўлдирилиши лозим!").addClass('text-danger');--%>
-        <%--    $('#FromStart').addClass('border border-danger')--%>
-        <%--}--%>
+        if (Fs === "undefined" && Fs == null && Fs === ""){
+            Te = DateTime.date
+        }
+        if (Fs !== "undefined" && Fs != null && Fs !== "" && Fs !== "undefined") {
+            window.location = "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/getReport/" + x + "/"+Fs + "/"+ Te;
+            $('#FromStartValid').html('').removeClass('border border-danger');
+        } else {
+            $('#FromStartValid').html("Бошланғич сана тўлдирилиши лозим!").addClass('text-danger');
+            $('#FromStart').addClass('border border-danger')
+        }
 
-        location.href = "/inrenationalsurvaey/resources/pages/InternationalSurvay/getReport/" + x + "/"+Fs + "/"+ Te
+        <%--location.href = "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InternationalSurvay/getReport/" + x + "/"+Fs + "/"+ Te--%>
 
 
         <%--$.ajax({--%>

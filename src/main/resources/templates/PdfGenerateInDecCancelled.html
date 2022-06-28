@@ -262,6 +262,18 @@
                         <td class="tg-aboz" th:text="${apps.getPersonFio()}"></td>
                     </tr>
                     <tr>
+                        <td class="tg-oi4f" colspan="2"><b th:text="${htmlData.get().getZapas5()}">Юк жўнатувчи:</b></td>
+                        <td class="tg-aboz" th:text="${apps.getSenderOrg()}+ '-' + ${apps.getSenderCountryNm()}"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-oi4f" colspan="2"><b th:text="${htmlData.get().getZapas7()}">Импортчи/юкни қабул қилувчи номи:</b></td>
+                        <td class="tg-aboz" th:text="${apps.getImporterNm()}"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-oi4f" colspan="2"><b th:text="${htmlData.get().getZapas6()}">Импортчи/юкни қабул қилувчи СТИР:</b></td>
+                        <td class="tg-aboz" th:text="${apps.getImporterTin()}"></td>
+                    </tr>
+                    <tr>
                         <td class="tg-oi4f" colspan="2"><b th:text="${htmlData.get().getName4()}">4. Дастлабки қарорнинг амал қилиш муддати:</b></td>
                         <td class="tg-aboz" th:text="${{inDec.getInDecEndDate()}}"></td>
                     </tr>
@@ -345,7 +357,7 @@
                     </tr>
                     <tr>
                         <td class="tg-oi4f" style="margin-top: 0"><b th:text="${htmlData.get().getName8()}">8. Товарларнинг келиб чиқиш мамлакати ва уни асослаш:</b></td>
-                        <td class="tg-aboz" colspan="2" style="margin-top: 0"><p th:text="${cmdt.get().getOriginCountry()} + '-' + ${cmdt.get().getOrignCountrNm()}"></p></td>
+                        <td class="tg-aboz" colspan="2" style="margin-top: 0"><p th:text="${cmdt.get().getOriginCountry()} + '-' + ${cmdt.get().getOrignCountrNm()} + '/ ' + ${cmdt.get().getOriginOrg()}"></p></td>
                     </tr>
                     <tr>
                         <td class="tg-oi4f" colspan="3"><b th:text="${htmlData.get().getName9()}">9. Божхона тўловлари ва йиғимлари тўғрисида маълумот:</b></td>
@@ -373,6 +385,16 @@
                                     <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltRate()}" class="tg-oi4f"></td>
                                     <td style="background-color: #deeaf6; text-align: center" th:text="${#numbers.formatCurrency(pay.getG47Sum())}" class="tg-oi4f"></td>
                                     <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47Sp()}" class="tg-oi4f"></td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #deeaf6; text-align: center; font-weight: bold; border-width: 1px 0 0 0; border-style: dotted;" class="tg-oi4f" colspan="5" rowspan="2" th:text="${htmlData.get().getZapas8()}">Жами:</td>
+                                    <td style="background-color: #deeaf6; text-align: center; font-weight: bold; border-width: 1px 0 0 0; border-style: dotted;" th:text="${#numbers.formatCurrency(paymentBN)}"></td>
+                                    <td style="background-color: #deeaf6; text-align: center; font-weight: bold; border-width: 1px 0 0 0; border-style: dotted;" th:text="${htmlData.get().getZapas9()}">БН</td>
+                                </tr>
+                                <tr>
+                                    <!--                                    <td style="background-color: #deeaf6; text-align: center" class="tg-oi4f" colspan="5" th:text="${htmlData.get().getZapas8()}">Жами:</td>-->
+                                    <td style="background-color: #deeaf6; text-align: center; font-weight: bold;" th:text="${#numbers.formatCurrency(paymentOO)}"></td>
+                                    <td style="background-color: #deeaf6; text-align: center; font-weight: bold;" th:text="${htmlData.get().getZapas10()}">OO</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -402,7 +424,7 @@
                                     <td style="background-color: #e2efd9; text-align: center" th:text="${iterStat.count}" class="tg-oi4f"></td>
                                     <td style="background-color: #e2efd9; text-align: center" th:text="${doc.getDocTypeName()}" class="tg-oi4f"></td>
                                     <td style="background-color: #e2efd9; text-align: center" th:text="${doc.getFileNum()}" class="tg-oi4f"></td>
-                                    <td style="background-color: #e2efd9; text-align: center" th:text="${#dates.format(doc.getFileDate(), 'dd.mm.yyyy')}" class="tg-oi4f"></td>
+                                    <td style="background-color: #e2efd9; text-align: center" th:text="${#dates.format(doc.getFileDate(), 'dd.MM.yyyy')}" class="tg-oi4f"></td>
                                 </tr>
                                 </tbody>
                             </table>

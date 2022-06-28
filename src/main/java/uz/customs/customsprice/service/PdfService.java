@@ -14,12 +14,14 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 import uz.customs.customsprice.entity.InitialDecision.Apps;
 import uz.customs.customsprice.entity.InitialDecision.Commodity;
 import uz.customs.customsprice.entity.InitialDecision.InDec;
+import uz.customs.customsprice.entity.InitialDecision.Payment;
 import uz.customs.customsprice.entity.files.DecisionPdf;
 import uz.customs.customsprice.entity.users.User;
 import uz.customs.customsprice.service.earxiv.EarxivService;
 import uz.customs.customsprice.service.earxiv.EarxivServiceFrom;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -27,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -82,6 +85,21 @@ public class PdfService {
         context.setVariable("cmdt", commodityService.getById(cmdtId));
         context.setVariable("inDec", inDecService.getByCmtdId(cmdtId));
         context.setVariable("payment", paymentServise.getByCmdtId(cmdtId));
+        BigDecimal BNSum = BigDecimal.valueOf(0.00);
+        String g47Sp = "";
+        g47Sp = "БН";
+        List<Payment> paymentListBN = paymentServise.getByCmdtIdAndG47Sp(cmdtId, g47Sp);
+        for (int i = 0; i < paymentServise.getByCmdtIdAndG47Sp(cmdtId, "БН").size(); i++) {
+            BNSum = BNSum.add(paymentListBN.get(i).getG47Sum());
+        }
+        BigDecimal OOSum = BigDecimal.valueOf(0.00);
+        g47Sp = "ОО";
+        List<Payment> paymentListOO = paymentServise.getByCmdtIdAndG47Sp(cmdtId, g47Sp);
+        for (int i = 0; i < paymentListOO.size(); i++) {
+            OOSum = OOSum.add(paymentListOO.get(i).getG47Sum());
+        }
+        context.setVariable("paymentBN", BNSum);
+        context.setVariable("paymentOO", OOSum);
         context.setVariable("docs", earxivServiceFrom.getAllByAppIdForPdf2(commodityForApp.getAppId()));
         context.setVariable("userName", userName.getFullname());
         context.setVariable("LocaleDate", inDecService.getByCmtdId(cmdtId).getInsTime());
