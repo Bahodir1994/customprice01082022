@@ -87,6 +87,7 @@
                     <th style="border-style: dotted">Ариза рақами</th>
                     <th style="border-style: dotted">Мақоми</th>
                     <th style="border-style: dotted">Ариза санаси</th>
+                    <th style="border-style: dotted">Ариза юборилган ҲББ</th>
                     <th style="border-style: dotted">Мафаатдор шахс</th>
                     <th style="border-style: dotted">Савдо қилувчи</th>
                     <th style="border-style: dotted">Ишлаб чиқарувчи</th>
@@ -119,6 +120,7 @@
                             </div>
                         </td>
                         <td>${notSorted.insTime.toLocaleString()}</td>
+                        <td>${notSorted.locationNm}</td>
                         <td>${notSorted.personFio}</td>
                         <td>${notSorted.customerCountry}-${notSorted.customerCountryNm}</td>
                         <td>${notSorted.customerCountry}-${notSorted.customerCountryNm}</td>

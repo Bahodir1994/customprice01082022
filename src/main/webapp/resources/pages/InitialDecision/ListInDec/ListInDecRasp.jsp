@@ -87,6 +87,7 @@
                     <th style="border-style: dotted">Ариза рақами</th>
                     <th style="border-style: dotted">Мақоми</th>
                     <th style="border-style: dotted">Ариза санаси</th>
+                    <th style="border-style: dotted">Ариза юборилган ҲББ</th>
                     <th style="border-style: dotted">Мафаатдор шахс</th>
                     <th style="border-style: dotted">Савдо қилувчи</th>
                     <th style="border-style: dotted">Сотувчи мамлакат</th>
@@ -101,6 +102,7 @@
                                class="text-primary font-weight-bold"><u>${sorted[6]}</u></a></td>
                         <td><div class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>${sorted[25]}</div></td>
                         <td>${sorted[1]}</td>
+                        <td>${sorted[11]}</td>
                         <td>${sorted[14]}</td>
                         <td>${sorted[9]}-${sorted[8]}</td>
                         <td>${sorted[21]}-${sorted[22]}</td>

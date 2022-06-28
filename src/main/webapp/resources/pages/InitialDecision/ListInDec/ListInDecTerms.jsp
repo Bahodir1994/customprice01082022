@@ -91,6 +91,7 @@
                     <th style=" border-style: dotted">Холати</th>
                     <th style=" border-style: dotted">Тўлов холати</th>
                     <th style=" border-style: dotted">Ариза санаси</th>
+                    <th style="border-style: dotted">Ариза юборилган ҲББ</th>
                     <th style=" border-style: dotted">Хужжат (Pdf2)</th>
                     <th style=" border-style: dotted">Манфаатдор шахс</th>
                     <th style=" border-style: dotted">Қарор рақами</th>
@@ -137,6 +138,7 @@
                             ></c:if>
                         </td>
                         <td>${terms[1]}</td>
+                        <td>${terms[11]}</td>
                         <td>
                             <a type="button" onclick="openInDecPdf('${terms[32]}')"
                                class="btn btn-outline-warning">

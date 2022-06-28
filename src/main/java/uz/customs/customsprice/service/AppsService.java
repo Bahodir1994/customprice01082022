@@ -36,7 +36,7 @@ public class AppsService {
         String userIdS = (String) request.getSession().getAttribute("userIdS");
 
         String sqlWhere = "", sqlJoin = "", sqlJoinVal = "";
-        if (userRole == 1) {
+        if (userRole <= 5 && userLocation.equals("1701")) {
             sqlWhere = " and a.status=100 \n ";
         }
         if (userRole == 7) {
