@@ -125,16 +125,16 @@
                                             <div class="col h6">Сотувчи:</div>
                                             <div class="col">${val[3]} - "${val[15]}</div>
 
+                                            <div class="col"></div>
+                                            <div class="col h6">Импортёр номи:</div>
+                                            <div class="col">${val[34]}</div>
 
                                             <div class="col"></div>
-                                            <div class="col h6">Транспорт харажатлари:</div>
-                                            <div class="col">
-                                                <a type="button" class="btn btn-outline-primary btn-sm radius-30" type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                                   data-bs-target="#exampleModal1" style="cursor: pointer;"> <c:out value="${total}"/>
-                                                    <i class="bx bx-info-circle"></i>
-                                                </a>
-                                            </div>
+                                            <div class="col h6">Импортёр СТИРи:</div>
+                                            <div class="col">${val[35]}</div>
+
                                             <div class="col"></div>
+
                                         </c:forEach>
                                     </div>
                                 </div>
@@ -145,10 +145,10 @@
                                         <div class="row row-cols-3">
                                             <div class="col h6">Божхона қиймати:</div>
                                             <div class="col">
-                                                <a type="button" class="btn btn-outline-primary btn-sm radius-30" <%--data-bs-toggle="modal" data-bs-target="#exampleModalfq"--%> style="cursor: pointer;">
-                                                        ${val[30]} ${val[32]}
-                                                    <i class="bx bx-info-circle"></i>
-                                                </a>
+                                                    <%--                                                <a type="button" class="btn btn-outline-primary btn-sm radius-30" &lt;%&ndash;data-bs-toggle="modal" data-bs-target="#exampleModalfq"&ndash;%&gt; style="cursor: pointer;">--%>
+                                                    ${val[30]} ${val[32]}
+                                                    <%--                                                    <i class="bx bx-info-circle"></i>--%>
+                                                    <%--                                                </a>--%>
                                             </div>
                                             <div class="col"></div>
 
@@ -175,7 +175,21 @@
                                                     <i class="bx bx-folder-open"></i>
                                                 </button>
                                             </div>
+                                                <%--                                            <div class="col"></div>--%>
+
+
                                             <div class="col"></div>
+                                            <br><br><br>
+                                            <div class="col h6">Транспорт харажатлари:</div>
+                                            <div class="col">
+                                                <a type="button" class="btn btn-outline-primary btn-sm radius-30" type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                                   data-bs-target="#exampleModal1" style="cursor: pointer;"> <c:out value="${total}"/>
+                                                    <i class="bx bx-info-circle"></i>
+                                                </a>
+                                            </div>
+                                            <div class="col"></div>
+
+
                                         </div>
                                     </c:forEach>
                                 </div>
@@ -438,7 +452,7 @@
                                             <i class="bx bx-calculator"></i>
                                         </button>
 
-                                        <c:if test="${appStatus != 120 && appStatus != 125 && appStatus != 170 && appStatus != 175}">
+                                        <c:if test="${appStatus != 120 && appStatus != 125 && appStatus != 170 && appStatus != 175 && (userRole == 7 || userRole == 8) }">
                                             <button type="button" class="btn btn-danger btn-block" data-bs-toggle="modal"
                                                     data-bs-target="#exampleExtraLargeModal4">
                                                 <i class="bx bx-undo"></i>
@@ -591,6 +605,7 @@
             }
         });
     }
+
     function appRollback() {
         // alert($('#appId').val() + ', \n ' + $.trim($('#commentRollback').val()));
 
@@ -701,6 +716,7 @@
 
         /*------------------------------*/
     }
+
     function appRollbackToFix(statusApp) {
         // alert($('#appId').val() + ', \n ' + $.trim($('#commentRollback').val()));
 
@@ -805,7 +821,9 @@
 
         /*------------------------------*/
     }
+
     var HS_NM_FULL_C = "";
+
     function addT_HS_NM(x) {
         // alert(x);
         var y = x.replaceAll(' ', '');
@@ -836,6 +854,7 @@
         }
         document.getElementById('HS_NM').value = '';
     }
+
     function addT_HS_NM2(x) {
         // alert(x);
         var y = x.replaceAll(' ', '');
@@ -866,9 +885,11 @@
         }
         document.getElementById('HS_NM2').value = '';
     }
+
     function ClearT_HS_NM() {
         document.getElementById("HS_NM").value = "";
     }
+
     function ClearT_HS_NM2() {
         document.getElementById("HS_NM2").value = "";
     }
@@ -892,6 +913,7 @@
         HS_NM_FULLS2.value = "";
         HS_CD_FULL2.value = "";
     };
+
     /*------------------------------*/
     function check_methodDesc(rowNum, methodNm, methodDesc) {
         var newRow = $("table.tableMethodDesc tbody");
@@ -910,7 +932,8 @@
         }
         newRow.append(cols);
     }
-    $(document).ready( function () {
+
+    $(document).ready(function () {
         $('#tableDecView').DataTable({
             scrollX: true
         });

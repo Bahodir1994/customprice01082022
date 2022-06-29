@@ -362,9 +362,9 @@ public class AppsService {
                 /*30 - */"    sum(cm.customs_price)  allcustoms_price,\n" +
                 /*31 - */"    count(cm.id)   cntcmdt,\n" +
                 /*32 - */"    cm.currency_nm,\n" +
-                "    a.comment, \n" +
-                "    a.importer_nm, \n" +
-                "    a.importer_tin \n" +
+                /*33 - */"    a.comment, \n" +
+                /*34 - */"    a.importer_nm, \n" +
+                /*35 - */"    a.importer_tin \n" +
                 "from\n" +
                 "    apps a\n" +
                 "left join\n" +

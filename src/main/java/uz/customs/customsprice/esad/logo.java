@@ -313,6 +313,7 @@ public class logo extends HttpServlet {
                     int notification = 0, role = ROLECODE.get(ROLE.get(String.valueOf(1)));
                     String insuser = user_idS;
                     Timestamp instime = new Timestamp(System.currentTimeMillis());
+                    Timestamp updtime = new Timestamp(System.currentTimeMillis());
                     while (rslt2.next()) {
                         id = Utils.nullClear(rslt2.getString("id"));
                         userid = Utils.nullClear(rslt2.getString("userid"));
@@ -401,7 +402,7 @@ public class logo extends HttpServlet {
                         USER.setInt(10, notification);
                         USER.setString(11, insuser);
                         USER.setInt(12, 0);
-                        USER.setTimestamp(13, instime);
+                        USER.setTimestamp(13, updtime);
                         USER.setInt(14, role);
                         USER.setString(15, id);
                         USER.execute();
