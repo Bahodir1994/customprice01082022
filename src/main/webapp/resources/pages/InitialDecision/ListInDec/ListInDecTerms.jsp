@@ -355,7 +355,7 @@
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Дастлабки маълумотлар сақланди',
+                        title: 'Дастлабки қарор учун йиғим муваффақиятли киритилди',
                         showConfirmButton: false,
                         timer: 1500
                     })

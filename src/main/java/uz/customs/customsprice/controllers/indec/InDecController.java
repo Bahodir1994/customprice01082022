@@ -418,10 +418,11 @@ public class InDecController {
             g3b = java.sql.Date.valueOf(tpoValidDTO.getG3b());
         }
         String g3c = Utils.nullClear(tpoValidDTO.getG3c());
-        InDec inDec1 = inDecRepo.findByG3aAndG3bAndG3c(g3a, g3b, g3c);
+        InDec inDec = inDecRepo.findByG3aAndG3bAndG3c(g3a, g3b, g3c);
+        InDec inDec1 = inDecService.getById(tpoValidDTO.getInDecId());
 
 //        if (Utils.nullClear(inDec1.getG3a()).equals(g3a) && inDec1.getG3b().equals(g3b) && Utils.nullClear(inDec1.getG3c()).equals(g3c)) {
-        if (!Utils.nullClear(inDec1).equals("") && Utils.nullClear(inDec1.getG3a()).equals(g3a) && inDec1.getG3b().equals(g3b) && Utils.nullClear(inDec1.getG3c()).equals(g3c)) {
+        if (!Utils.nullClear(inDec).equals("") && Utils.nullClear(inDec.getG3a()).equals(g3a) && inDec.getG3b().equals(g3b) && Utils.nullClear(inDec.getG3c()).equals(g3c)) {
             obj.put("message", "Ушбу БКО бўйича тўлов ундирилган, бошқа БКО киритинг!");
             obj.put("status", HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
