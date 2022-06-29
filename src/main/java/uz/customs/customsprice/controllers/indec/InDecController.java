@@ -19,6 +19,7 @@ import uz.customs.customsprice.entity.InitialDecision.*;
 import uz.customs.customsprice.entity.InitialDecision.TPO.Pay;
 import uz.customs.customsprice.entity.InitialDecision.TPO.Tpo;
 import uz.customs.customsprice.repository.CommodityRepo;
+import uz.customs.customsprice.repository.InDecRepo;
 import uz.customs.customsprice.repository.PaymentRepo;
 import uz.customs.customsprice.repository.Tpo.PayRepository;
 import uz.customs.customsprice.repository.Tpo.TpoRepository;
@@ -36,6 +37,7 @@ import java.util.*;
 @RequestMapping("/saveInDec")
 public class InDecController {
     private final InDecService inDecService;
+    private final InDecRepo inDecRepo;
     private final AppsService appsService;
     private final AppsService appsservice;
     private final CommodityService commodityService;
@@ -70,8 +72,9 @@ public class InDecController {
     private final String INITIALDECISIONCONFIRMTPO = "/resources/pages/InitialDecision/InitialDecisionTPO";
     private final String INDECCANCELLED = "/resources/pages/InitialDecision/InitialDecisionCancelled";
 
-    public InDecController(InDecService inDecService, AppsService appsService, AppsService appsservice, CommodityService commodityService, CommodityRepo commodityRepo, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, LocationService locationService, StatusService statusService, PdfService pdfService, PaymentServise paymentServise, ExchangerateService exchangerateService, StatusMService statusMService, StatusHService statusHService, PaymentTypeService paymentTypeService, PaymTypeService paymTypeService, UsersService usersService, TpoRepository tpoRepository, PayRepository payRepository) {
+    public InDecController(InDecService inDecService, InDecRepo inDecRepo, AppsService appsService, AppsService appsservice, CommodityService commodityService, CommodityRepo commodityRepo, ConturyService conturyService, MethodService methodService, PackagingService packagingService, Tnved2Service tnved2Service, LocationService locationService, StatusService statusService, PdfService pdfService, PaymentServise paymentServise, ExchangerateService exchangerateService, StatusMService statusMService, StatusHService statusHService, PaymentTypeService paymentTypeService, PaymTypeService paymTypeService, UsersService usersService, TpoRepository tpoRepository, PayRepository payRepository) {
         this.inDecService = inDecService;
+        this.inDecRepo = inDecRepo;
         this.appsService = appsService;
         this.appsservice = appsservice;
         this.commodityService = commodityService;
@@ -407,15 +410,18 @@ public class InDecController {
         Map<String, String> errors = new HashMap<>();
         JSONObject obj = new JSONObject();
 
-        InDec inDec1 = inDecService.getById(tpoValidDTO.getInDecId());
+//        InDec inDec1 = inDecService.getById(tpoValidDTO.getInDecId());
+
         String g3a = Utils.nullClear(tpoValidDTO.getG3a());
         Date g3b = null;
         if (!Objects.equals(tpoValidDTO.getG3b(), "")) {
             g3b = java.sql.Date.valueOf(tpoValidDTO.getG3b());
         }
         String g3c = Utils.nullClear(tpoValidDTO.getG3c());
+        InDec inDec1 = inDecRepo.findByG3aAndG3bAndG3c(g3a, g3b, g3c);
 
-        if (Utils.nullClear(inDec1.getG3a()).equals(g3a) && inDec1.getG3b().equals(g3b) && Utils.nullClear(inDec1.getG3c()).equals(g3c)) {
+//        if (Utils.nullClear(inDec1.getG3a()).equals(g3a) && inDec1.getG3b().equals(g3b) && Utils.nullClear(inDec1.getG3c()).equals(g3c)) {
+        if (!Utils.nullClear(inDec1).equals("") && Utils.nullClear(inDec1.getG3a()).equals(g3a) && inDec1.getG3b().equals(g3b) && Utils.nullClear(inDec1.getG3c()).equals(g3c)) {
             obj.put("message", "Ушбу БКО бўйича тўлов ундирилган, бошқа БКО киритинг!");
             obj.put("status", HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
@@ -429,7 +435,8 @@ public class InDecController {
                 return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
             }
             String g19Type = "50";
-            pay = payRepository.findByIdTpoAndG19Type(Utils.nullClear(tpo.getId()), g19Type);
+//            pay = payRepository.findByIdTpoAndG19Type(Utils.nullClear(tpo.getId()), g19Type);
+            pay = payRepository.findByIdTpo(Utils.nullClear(tpo.getId()));
             if (!Utils.nullClear(pay).equals("") && !Utils.nullClear(pay.getG19Type()).equals("")) {
                 inDec1.setStatus(185);
                 Status status = statusService.getById(185);

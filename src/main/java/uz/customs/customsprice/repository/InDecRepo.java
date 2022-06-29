@@ -22,4 +22,6 @@ public interface InDecRepo extends JpaRepository<InDec, String> {
     InDec findByInDecNumAndInDecDate(String inDecNum, Date inDecDate);
 
     InDec findByInDecNumAndInDecDateAndPersonId(String inDecNum, Date inDecDate, String personId);
+
+    InDec findByG3aAndG3bAndG3c(String g3a, Date g3b, String g3c);
 }
