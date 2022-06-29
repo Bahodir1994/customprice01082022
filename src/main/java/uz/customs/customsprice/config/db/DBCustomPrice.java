@@ -80,7 +80,7 @@ public class DBCustomPrice {
             socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
             ip = socket.getLocalAddress().getHostAddress();
         }
-        if ((ip.equals("192.168.224.22") || ip.equals("192.168.224.18") || ip.equals("localhost"))) {
+        if ((ip.equals("192.168.224.224") || ip.equals("192.168.224.18") || ip.equals("localhost"))) {
             hikariConfig.setJdbcUrl("jdbc:as400://192.168.2.10/CPID");
             hikariConfig.setUsername("rustamadm");
             hikariConfig.setPassword("rustamadm");
