@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import uz.customs.customsprice.controllers.api.files.AppsAndDocsAndTransportsDTO;
-import uz.customs.customsprice.controllers.api.helper.FileUploadHelper;
 import uz.customs.customsprice.controllers.api.helper.ResponseHandler;
 import uz.customs.customsprice.entity.InitialDecision.*;
+import uz.customs.customsprice.entity.classifier.TransportS;
 import uz.customs.customsprice.entity.classifier.TransportTypeS;
 import uz.customs.customsprice.entity.earxiv.Earxiv;
 import uz.customs.customsprice.repository.EarxivRepo;
 import uz.customs.customsprice.repository.TransportTypeRepo;
+import uz.customs.customsprice.repository.classifier.TransportSRepository;
 import uz.customs.customsprice.repository.classifier.TransportTypeSRepo;
 import uz.customs.customsprice.service.*;
 import uz.customs.customsprice.service.earxiv.EarxivService;
@@ -45,8 +46,9 @@ public class ApiAppsController {
     private final EarxivRepo earxivRepo;
     private final TransportTypeRepo transportTypeRepo;
     private final TransportTypeSRepo transportTypeSRepo;
+    private final TransportSRepository transportSRepository;
 
-    public ApiAppsController(AppsService appsService, ConturyService conturyService, LocationService locationService, StatusService statusService, TermsService termsService, PersonsService personsService, StatusHService statusHService, StatusMService statusMService, TransportTypeService transportTypeService, EarxivService earxivService, EarxivRepo earxivRepo, TransportTypeRepo transportTypeRepo, TransportTypeSRepo transportTypeSRepo) {
+    public ApiAppsController(AppsService appsService, ConturyService conturyService, LocationService locationService, StatusService statusService, TermsService termsService, PersonsService personsService, StatusHService statusHService, StatusMService statusMService, TransportTypeService transportTypeService, EarxivService earxivService, EarxivRepo earxivRepo, TransportTypeRepo transportTypeRepo, TransportTypeSRepo transportTypeSRepo, TransportSRepository transportSRepository) {
         this.appsService = appsService;
         this.conturyService = conturyService;
         this.locationService = locationService;
@@ -60,6 +62,7 @@ public class ApiAppsController {
         this.earxivRepo = earxivRepo;
         this.transportTypeRepo = transportTypeRepo;
         this.transportTypeSRepo = transportTypeSRepo;
+        this.transportSRepository = transportSRepository;
     }
     /*---------------------------------------------------------------------------------------------------------start*/
     /* Apps маълумотларини API орқали сақлаш учун */
@@ -155,14 +158,14 @@ public class ApiAppsController {
                         TransportType transportType = new TransportType();
                         Country countryFinish = conturyService.getByCodeAndLngaTpcd(type.getFinishCountry(), "UZ");
                         Country countryEnd = conturyService.getByCodeAndLngaTpcd(type.getEndCountry(), "UZ");
-                        TransportTypeS transportTypeS = transportTypeSRepo.findByCodeAndLngaTpcd(type.getTarnsportType(), "UZ");
+                        TransportS transportS = transportSRepository.findByCodeAndLngaTpcd(type.getTarnsportType(), "UZ");
                         transportType.setAppId(apps.getId());
                         transportType.setFinishCountry(type.getFinishCountry());
                         transportType.setFinishCountryNm(countryFinish.getCdNm());
                         transportType.setEndCountry(type.getEndCountry());
                         transportType.setEndCountryNm(countryEnd.getCdNm());
                         transportType.setTarnsportType(type.getTarnsportType());
-                        transportType.setTarnsportTypeNm(transportTypeS.getCdNm());
+                        transportType.setTarnsportTypeNm(transportS.getCdNm());
                         transportType.setTransportPrice(type.getTransportPrice());
                         transportTypeService.savetrtype(transportType);
                         ResponseHandler.generateResponse("TransportType ma`lumotlari saqlandi!", HttpStatus.OK, transportType);
@@ -376,14 +379,14 @@ public class ApiAppsController {
                         TransportType transportType = new TransportType();
                         Country countryFinish = conturyService.getByCodeAndLngaTpcd(type.getFinishCountry(), "UZ");
                         Country countryEnd = conturyService.getByCodeAndLngaTpcd(type.getEndCountry(), "UZ");
-                        TransportTypeS transportTypeS = transportTypeSRepo.findByCodeAndLngaTpcd(type.getTarnsportType(), "UZ");
+                        TransportS transportS = transportSRepository.findByCodeAndLngaTpcd(type.getTarnsportType(), "UZ");
                         transportType.setAppId(apps.getId());
                         transportType.setFinishCountry(type.getFinishCountry());
                         transportType.setFinishCountryNm(countryFinish.getCdNm());
                         transportType.setEndCountry(type.getEndCountry());
                         transportType.setEndCountryNm(countryEnd.getCdNm());
                         transportType.setTarnsportType(type.getTarnsportType());
-                        transportType.setTarnsportTypeNm(transportTypeS.getCdNm());
+                        transportType.setTarnsportTypeNm(transportS.getCdNm());
                         transportType.setTransportPrice(type.getTransportPrice());
                         transportTypeService.savetrtype(transportType);
                     } else {

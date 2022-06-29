@@ -13,5 +13,7 @@ public interface TransportSRepository extends JpaRepository<TransportS, String> 
             "(t.lngaTpcd = :lngaTpcd )")
     List<TransportS> findByLngaTpcd(@Param("lngaTpcd") String lngaTpcd);
 
-    List<TransportS> findByCodeAndLngaTpcd(@Param("code") String code, @Param("lngaTpcd") String lngaTpcd);
+//    List<TransportS> findByCodeAndLngaTpcd(@Param("code") String code, @Param("lngaTpcd") String lngaTpcd);
+
+    TransportS findByCodeAndLngaTpcd(@Param("code") String code, @Param("lngaTpcd") String lngaTpcd);
 }

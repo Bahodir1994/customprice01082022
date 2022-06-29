@@ -252,7 +252,7 @@ public class AppsController {
         mav.addObject("appId", appId);
         mav.addObject("appStatus", apps.getStatus());
         mav.addObject("userRole", userRole);
-        if (userRole == 8 && apps.getStatus() == 110) {
+        if (userRole == 8 && (apps.getStatus() == 110 || apps.getStatus() == 135) ) {
             Status status = statusService.getById(115);
             apps.setStatus(status.getId());
             apps.setStatusNm(status.getName());

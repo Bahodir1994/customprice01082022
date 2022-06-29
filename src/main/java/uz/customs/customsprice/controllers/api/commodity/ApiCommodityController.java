@@ -76,8 +76,39 @@ public class ApiCommodityController {
                 apps.setStatusNm(status.getName());
                 appsService.saveApps(apps);
 
+
+                /*todo commodity start*/
+                Country country = conturyService.getByCodeAndLngaTpcd(commodity.getOriginCountry(), "UZ");
+                commodity.setOrignCountrNm(country.getCdNm());
+
+                Method method = methodService.getById(commodity.getMethod());
+                commodity.setMethodNm(method.getName());
+
+                Packaging packaging = packagingService.getByIdAndLngaTpcd(commodity.getPackType(), "UZ");
+                commodity.setPackTypeNm(packaging.getCdNm());
+
+                Tnved2 tnved2 = tnved2Service.getByIdAndFinishdate(commodity.getHsCode());
+                commodity.setHsName(tnved2.getName());
+
+                CurrencyEntity currencyEntity = currencyEntityRepo.findByCodeAndLngaTpcd(commodity.getCurrencyType(), "RU");
+                commodity.setCurrencyNm(currencyEntity.getCdDesc());
+                commodity.setCurrencyNmSymbol(currencyEntity.getCdId());
+
+                if (commodity.getHsDecDate() != null && !"".equals(String.valueOf(commodity.getHsDecDate())) && !"null".equals(String.valueOf(commodity.getHsDecDate())))
+                    commodity.setHsDecDate(commodity.getHsDecDate());
+                if (commodity.getInDecDate() != null && !"".equals(String.valueOf(commodity.getInDecDate())) && !"null".equals(String.valueOf(commodity.getInDecDate())))
+                    commodity.setInDecDate(commodity.getInDecDate());
+                if (commodity.getInDecNum() != null && !"".equals(commodity.getInDecNum()) && !"null".equals(commodity.getInDecNum()))
+                    commodity.setInDecNum(commodity.getInDecNum());
+                if (commodity.getExtraUnits() != null && !"".equals(commodity.getExtraUnits()) && !"null".equals(commodity.getExtraUnits()))
+                    commodity.setExtraUnits(commodity.getExtraUnits());
+                commodityService.saveCommodity(commodity);
+                /*todo commodity end*/
+
+
                 /**todo ЛОК га ёзиш start todo**/
-                StatusM statusM = new StatusM();
+                StatusM statusM = statusMService.getByAppId(apps.getId());
+//                StatusM statusM = new StatusM();
                 statusM.setAppId(apps.getId());
                 statusM.setStatus(String.valueOf(apps.getStatus()));
                 statusM.setStatusComment(apps.getStatusNm());
