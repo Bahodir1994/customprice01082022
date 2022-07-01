@@ -46,7 +46,7 @@ public class InDecService {
     private EntityManager entityManager;
 
     /* 4) <<app_num>> га ариза рафамини киритади */
-    public InDec saveInDec(InDec inDec) {
+    public InDec saveInDec(InDec inDec, String userLocation) {
         LocalDateTime now = LocalDateTime.now();
         String inDecNum = getMaxNumberInDec();
         String currentDateFormat = "";
@@ -60,7 +60,11 @@ public class InDecService {
         else
             currentDateFormat += now.getDayOfMonth();
         currentDateFormat = currentDateFormat + inDecNum;
-        inDec.setInDecNum(currentDateFormat);
+        inDec.setInDecNum(userLocation + currentDateFormat);
+        return inDecRepo.save(inDec);
+    }
+
+    public InDec saveInDecOne(InDec inDec) {
         return inDecRepo.save(inDec);
     }
 
@@ -117,7 +121,7 @@ public class InDecService {
         return result;
     }
 
-    public void saveInDec(Optional<InDec> inDec1) {
-    }
+//    public void saveInDec(Optional<InDec> inDec1) {
+//    }
 
 }

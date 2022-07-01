@@ -342,7 +342,7 @@ public class InDecController {
 //        inDec.setCustomsPayments(); //?
         inDec.setStatus(status1.getId());
         inDec.setStatusNm(status1.getName());
-        inDecService.saveInDec(inDec);
+        inDecService.saveInDec(inDec, userLocation);
         /** mav object start **/
 
 
@@ -450,7 +450,7 @@ public class InDecController {
                 inDec1.setG19Base(pay.getG19Base());
                 inDec1.setStavka(pay.getStavka());
                 inDec1.setG19Sum(pay.getG19Sum());
-                inDecService.saveInDec(inDec1);
+                inDecService.saveInDecOne(inDec1);
                 return ResponseEntity.status(201).body(inDec1);
             } else {
                 obj.put("message", "Ушбу БКО маълумотлари топилмади");
@@ -541,7 +541,7 @@ public class InDecController {
 //        Status status = statusService.getById(185);
 //        inDec1.setStatusNm(status.getName());
 //        inDec1.setCommentMarks(TPO_NUM+'/'+TPO_DATE);
-        inDecService.saveInDec(inDec1);
+        inDecService.saveInDecOne(inDec1);
 
         List<InDec> termsList = appsservice.getListInDec(request);
         mav.addObject("termsList", termsList);
