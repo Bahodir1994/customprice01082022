@@ -74,7 +74,7 @@ public class ApiCommodityController {
                 apps.setStatus(135);
                 Status status = statusService.getById(135);
                 apps.setStatusNm(status.getName());
-                appsService.saveApps(apps);
+                appsService.saveAppsOne(apps);
 
 
                 /*todo commodity start*/
@@ -155,7 +155,7 @@ public class ApiCommodityController {
                     apps.setStatus(100);
                     Status status = statusService.getById(100);
                     apps.setStatusNm(status.getName());
-                    appsService.saveApps(apps);
+                    appsService.saveAppsOne(apps);
 
                     /**todo ЛОК га ёзиш start todo**/
                     StatusM statusM = new StatusM();

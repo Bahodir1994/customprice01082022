@@ -26,7 +26,6 @@ public class AppsService {
     @PersistenceContext
     private EntityManager entityManager;
 
-
     /* 1) Барча статуси "Янги" бўлган аризалар */
     public List<Apps> getListNotSorted(HttpServletRequest request, String userLocation, String userPost, String userId, Integer userRole) {
 
@@ -256,7 +255,7 @@ public class AppsService {
     /* 4) <<app_num>> га ариза рақамини киритади */
     public Apps saveApps(Apps apps) {
         LocalDateTime now = LocalDateTime.now();
-        String appsNum = getMaxNumber();
+        String appsNum = getMaxNumberApp();
         String currentDateFormat = "";
         currentDateFormat = currentDateFormat + now.getYear() % 100;
         if (now.getMonthValue() < 10)
@@ -272,8 +271,12 @@ public class AppsService {
         return appsRepo.save(apps);
     }
 
+    public Apps saveAppsOne(Apps apps) {
+        return appsRepo.save(apps);
+    }
+
     /* 5) <<app_num>> учун рақам генерация қилади */
-    public String getMaxNumber() {
+    public String getMaxNumberApp() {
         String queryForList = "select\n" +
                 "    a.APP_NUM as maxno\n" +
                 "from\n" +

@@ -48,7 +48,7 @@ public class InDecService {
     /* 4) <<app_num>> га ариза рафамини киритади */
     public InDec saveInDec(InDec inDec) {
         LocalDateTime now = LocalDateTime.now();
-        String inDecNum = getMaxNumber();
+        String inDecNum = getMaxNumberInDec();
         String currentDateFormat = "";
         currentDateFormat = currentDateFormat + now.getYear() % 100;
         if (now.getMonthValue() < 10)
@@ -65,7 +65,7 @@ public class InDecService {
     }
 
     /* 1) <<InDec>> учун рақам генерация қилади */
-    public String getMaxNumber() {
+    public String getMaxNumberInDec() {
         String queryForList = "select\n" +
                 "    a.IN_DEC_NUM as maxno\n" +
                 "from\n" +

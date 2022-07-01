@@ -370,7 +370,7 @@ public class ApiAppsController {
                 appsUpdate.setTermsNm(terms.getSign());
                 /*6*/
                 appsUpdate.setInsUser(personsIdGet.get().getTin());
-                appsService.saveApps(appsUpdate);
+                appsService.saveAppsOne(appsUpdate);
                 /*************(TransportType delete all by appId and save new transporttype Lists)*********************/
                 transportTypeRepo.deleteAllByAppId(appsUpdate.getId());
                 for (TransportType type : transportTypes) {
