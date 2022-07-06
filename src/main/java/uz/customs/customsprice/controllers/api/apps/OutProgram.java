@@ -16,6 +16,7 @@ import uz.customs.customsprice.entity.earxiv.Earxiv;
 import uz.customs.customsprice.repository.*;
 import uz.customs.customsprice.service.AppsService;
 
+import java.sql.Date;
 import java.util.*;
 
 @RestController
@@ -48,6 +49,9 @@ public class OutProgram {
 
     @Autowired
     AppsService appsService;
+
+    @Autowired
+    InDecRepo inDecRepo;
 
     /************************(PersonId бўйча App ларни беради)****************************/
     @GetMapping("/tutorials/published")
@@ -251,12 +255,36 @@ public class OutProgram {
 
     /******************************************************************************************************************/
     @GetMapping("/custom/reestor")
-    public ResponseEntity<Map<String, Object>> findByInDec() {
+    public ResponseEntity<Map<String, Object>> findByInDec(
+            @RequestParam(required = false) String appNum,
+            @RequestParam(required = false) String hsCode,
+            @RequestParam(required = false) String inDecNum,
+            @RequestParam(required = false) String StartDate,
+            @RequestParam(required = false) String EndDate,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "50") int size) {
         try {
+            java.sql.Date insTimeStart = null;
+            java.sql.Date insTimeEnd = null;
+            if (!Objects.equals(StartDate, "") && StartDate != null){
+                insTimeStart = java.sql.Date.valueOf(StartDate);
+            }
+            if (!Objects.equals(EndDate, "") && EndDate != null){
+                insTimeEnd = Date.valueOf(EndDate);
+            }
+            List<InDec> tutorials = new ArrayList<>();
+            Pageable paging = PageRequest.of(page, size);
+            Page<InDec> pageTuts = inDecRepo.findAllByCmdtId(appNum, hsCode, inDecNum, insTimeStart, insTimeEnd, paging);
+            tutorials = pageTuts.getContent();
+
             Map<String, Object> response = new HashMap<>();
-            response.put("inDecReestr", appsService.getInDecForApi());
+            response.put("inDecReestr", tutorials);
+            response.put("currentPage", pageTuts.getNumber());
+            response.put("totalItems", pageTuts.getTotalElements());
+            response.put("totalPages", pageTuts.getTotalPages());
             response.put("message", "succes");
             response.put("status", 200);
+
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             Map<String, Object> response = new HashMap<>();
