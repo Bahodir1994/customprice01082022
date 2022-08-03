@@ -12,6 +12,7 @@ import java.util.Optional;
 
 public interface CommodityRepo extends JpaRepository<Commodity, String> {
     Optional<Commodity> findById(String id);
+
     Commodity findAllByAppId(String appId);
 
     List<Commodity> findByAppId(String appId);

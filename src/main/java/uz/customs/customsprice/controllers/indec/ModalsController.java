@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import uz.customs.customsprice.service.CostMonitoringService;
+import uz.customs.customsprice.service.classifier.CostMonitoringService;
 
 import javax.servlet.http.HttpSession;
 

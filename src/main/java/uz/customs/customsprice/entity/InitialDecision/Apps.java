@@ -24,6 +24,9 @@ public class Apps extends AbstractAuditingEntity {
     @Column(name = "APP_NUM", length = 50)
     private String appNum;
 
+    @Column(name = "APP_NUMS", length = 50)
+    private String appNumS;
+
     @CreatedDate
     @Column(name = "APP_DATE", columnDefinition = " date default current_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -94,6 +97,7 @@ public class Apps extends AbstractAuditingEntity {
     @Column(name = "PERSON_TIN", length = 9)
     @NotBlank(message =  "Устун тўлдирилмаган")
     @Size(min = 9, max = 9, message = "Устун 9 та сондан иборат бўлиши лозим")
+    @Size(min = 9, max = 9, message = "Устун 9 та сондан иборат бўлиши лозим")
     private String personTin;
 
     @Column(name = "PERSON_PIN", length = 14)
@@ -141,14 +145,48 @@ public class Apps extends AbstractAuditingEntity {
     @Column(name = "IMPORTER_TIN", columnDefinition = "VARCHAR(30) CCSID 1025")
     private String importerTin;
 
+    @Column(name = "VERSION_NUM", length = 50)
+    private String versionNum = "1";
+
+    @Column(name = "AUTHORIZED_PERSON", length = 50)
+    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
+    private String authorizedPerson = "-";
+
+    @Column(name = "AUTHORIZED_PERSON_PIN", length = 50)
+    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
+    private String authorizedPersonPin = "-";
+
+    @Column(name = "AUTHORIZED_PERSON_DOC", length = 50)
+    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
+    private String authorizedPersonDoc = "-";
+
+    @Column(name = "AUTHORIZED_PERSON_DOC_DATE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date authorizedPersonDocDate;
+
+    @Column(name = "AUTHORIZED_PERSON_DOC_NUM", length = 50)
+    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
+    private String authorizedPersonDocNum = "-";
+
+    @Column(name = "STATE_NUMBER", length = 50)
+    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
+    private String stateNumber = "-";
+
+    @Column(name = "STATE_NUMBER_DATE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date stateNumberDate;
+
     public Apps() {
     }
 
-    public Apps(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, String personId, String appNum, Date appDate, String customerCountry, String customerCountryNm, String senderCountry, String senderCountryNm, String senderOrg, String sellerOrg, String terms, String termsNm, String termsAddr, String personFio, String orgName, String personPosition, String personAddr, String personTin, String personPin, String personMail, String personPhone, String locationId, String locationNm, BigDecimal transExp, int status, String statusNm, String comment, String importerNm, String importerTin) {
+    public Apps(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, String personId, String appNum, String appNumS, Date appDate, String customerCountry, String customerCountryNm, String senderCountry, String senderCountryNm, String senderOrg, String sellerOrg, String terms, String termsNm, String termsAddr, String personFio, String orgName, String personPosition, String personAddr, String personTin, String personPin, String personMail, String personPhone, String locationId, String locationNm, BigDecimal transExp, int status, String statusNm, String comment, String importerNm, String importerTin, String versionNum, String authorizedPerson, String authorizedPersonPin, String authorizedPersonDoc, Date authorizedPersonDocDate, String authorizedPersonDocNum, String stateNumber, Date stateNumberDate) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.personId = personId;
         this.appNum = appNum;
+        this.appNumS = appNumS;
         this.appDate = appDate;
         this.customerCountry = customerCountry;
         this.customerCountryNm = customerCountryNm;
@@ -175,6 +213,14 @@ public class Apps extends AbstractAuditingEntity {
         this.comment = comment;
         this.importerNm = importerNm;
         this.importerTin = importerTin;
+        this.versionNum = versionNum;
+        this.authorizedPerson = authorizedPerson;
+        this.authorizedPersonPin = authorizedPersonPin;
+        this.authorizedPersonDoc = authorizedPersonDoc;
+        this.authorizedPersonDocDate = authorizedPersonDocDate;
+        this.authorizedPersonDocNum = authorizedPersonDocNum;
+        this.stateNumber = stateNumber;
+        this.stateNumberDate = stateNumberDate;
     }
 
     public String getId() {
@@ -199,6 +245,14 @@ public class Apps extends AbstractAuditingEntity {
 
     public void setAppNum(String appNum) {
         this.appNum = appNum;
+    }
+
+    public String getAppNumS() {
+        return appNumS;
+    }
+
+    public void setAppNumS(String appNumS) {
+        this.appNumS = appNumS;
     }
 
     public Date getAppDate() {
@@ -407,6 +461,70 @@ public class Apps extends AbstractAuditingEntity {
 
     public void setImporterTin(String importerTin) {
         this.importerTin = importerTin;
+    }
+
+    public String getVersionNum() {
+        return versionNum;
+    }
+
+    public void setVersionNum(String versionNum) {
+        this.versionNum = versionNum;
+    }
+
+    public String getAuthorizedPerson() {
+        return authorizedPerson;
+    }
+
+    public void setAuthorizedPerson(String authorizedPerson) {
+        this.authorizedPerson = authorizedPerson;
+    }
+
+    public String getAuthorizedPersonPin() {
+        return authorizedPersonPin;
+    }
+
+    public void setAuthorizedPersonPin(String authorizedPersonPin) {
+        this.authorizedPersonPin = authorizedPersonPin;
+    }
+
+    public String getAuthorizedPersonDoc() {
+        return authorizedPersonDoc;
+    }
+
+    public void setAuthorizedPersonDoc(String authorizedPersonDoc) {
+        this.authorizedPersonDoc = authorizedPersonDoc;
+    }
+
+    public Date getAuthorizedPersonDocDate() {
+        return authorizedPersonDocDate;
+    }
+
+    public void setAuthorizedPersonDocDate(Date authorizedPersonDocDate) {
+        this.authorizedPersonDocDate = authorizedPersonDocDate;
+    }
+
+    public String getAuthorizedPersonDocNum() {
+        return authorizedPersonDocNum;
+    }
+
+    public void setAuthorizedPersonDocNum(String authorizedPersonDocNum) {
+        this.authorizedPersonDocNum = authorizedPersonDocNum;
+    }
+
+    public String getStateNumber() {
+        return stateNumber;
+    }
+
+    public void setStateNumber(String stateNumber) {
+        this.stateNumber = stateNumber;
+    }
+
+    public Date getStateNumberDate() {
+        return stateNumberDate;
+    }
+
+    public void setStateNumberDate(Date stateNumberDate) {
+        this.stateNumberDate = stateNumberDate;
     }
 }
 

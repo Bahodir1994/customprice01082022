@@ -8,6 +8,7 @@ import uz.customs.customsprice.entity.entityConfig.AbstractAuditingEntity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "STATUS_H")
@@ -33,6 +34,11 @@ public class StatusH extends AbstractAuditingEntity {
     @JsonIgnore
     private StatusM statusM;
 
+    @OneToMany(mappedBy="statusH", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @JsonIgnore
+    private List<RollBackApp> rollBackApps;
+
     @Column(name = "STMAIN_ID", columnDefinition = "VARCHAR(50)")
     private String stmainID;
 
@@ -45,19 +51,32 @@ public class StatusH extends AbstractAuditingEntity {
     @Column(name = "STATUS_COMMENT", columnDefinition = "VARCHAR(1500) CCSID 1208")
     private String statusComment;
 
+    @Column(name = "SORTED_INS_ID", length = 50, updatable = false)
+    private String sortedInsId;
+
+    @Column(name = "SORTED_INS_NM", columnDefinition = "VARCHAR(600) CCSID 1208")
+    private String sortedInsNm;
+
+    @Column(name = "COMMENT", columnDefinition = "VARCHAR(600) CCSID 1208")
+    private String comment;
+
     public StatusH() {
     }
 
-    public StatusH(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, StatusM statusM, String stmainID, Integer historyNum, String status, String statusComment) {
+    public StatusH(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, StatusM statusM, List<RollBackApp> rollBackApps, String stmainID, Integer historyNum, String status, String statusComment, String sortedInsId, String sortedInsNm, String comment) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.apps = apps;
         this.appId = appId;
         this.statusM = statusM;
+        this.rollBackApps = rollBackApps;
         this.stmainID = stmainID;
         this.historyNum = historyNum;
         this.status = status;
         this.statusComment = statusComment;
+        this.sortedInsId = sortedInsId;
+        this.sortedInsNm = sortedInsNm;
+        this.comment = comment;
     }
 
     public String getId() {
@@ -92,6 +111,14 @@ public class StatusH extends AbstractAuditingEntity {
         this.statusM = statusM;
     }
 
+    public List<RollBackApp> getRollBackApps() {
+        return rollBackApps;
+    }
+
+    public void setRollBackApps(List<RollBackApp> rollBackApps) {
+        this.rollBackApps = rollBackApps;
+    }
+
     public String getStmainID() {
         return stmainID;
     }
@@ -122,5 +149,29 @@ public class StatusH extends AbstractAuditingEntity {
 
     public void setStatusComment(String statusComment) {
         this.statusComment = statusComment;
+    }
+
+    public String getSortedInsId() {
+        return sortedInsId;
+    }
+
+    public void setSortedInsId(String sortedInsId) {
+        this.sortedInsId = sortedInsId;
+    }
+
+    public String getSortedInsNm() {
+        return sortedInsNm;
+    }
+
+    public void setSortedInsNm(String sortedInsNm) {
+        this.sortedInsNm = sortedInsNm;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

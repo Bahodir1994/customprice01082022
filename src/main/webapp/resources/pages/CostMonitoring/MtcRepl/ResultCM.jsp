@@ -239,12 +239,12 @@
         </c:if>
     </div>
 
-<%--    <div class="position-absolute end-0 translate-middle-y mt-5">--%>
-<%--        <ul>--%>
-<%--            <li class="page-item"><a class="page-link act" href="#">${currentPage+1}</a></li>--%>
-<%--&lt;%&ndash;            <c:forEach></c:forEach>&ndash;%&gt;--%>
-<%--        </ul>--%>
-<%--    </div>--%>
+    <div class="position-absolute end-0 translate-middle-y mt-5">
+        <ul>
+            <li class="page-item"><a class="page-link act" href="#">${currentPage+1}</a></li>
+<%--            <c:forEach></c:forEach>--%>
+        </ul>
+    </div>
 
     <div class="position-absolute end-0 translate-middle-y">
         <nav class="" aria-label="Page navigation example">

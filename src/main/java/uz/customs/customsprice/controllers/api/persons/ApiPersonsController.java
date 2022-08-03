@@ -10,16 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import uz.customs.customsprice.entity.InitialDecision.Persons;
-import uz.customs.customsprice.service.PersonsService;
+import uz.customs.customsprice.service.person.PersonsService;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -42,7 +36,7 @@ public class ApiPersonsController {
         Persons personsTinGet = personsService.getByTin(persons.getTin());
         Persons personsEmailGet = personsService.getByeMail(persons.getEmail());
 
-        if (personsPinGet == null && personsTinGet == null && personsEmailGet == null) {
+        if (personsPinGet == null && personsTinGet == null) {
             if (br.hasErrors()) {
                 errors = br.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
                 JSONObject obj = new JSONObject();
@@ -58,9 +52,9 @@ public class ApiPersonsController {
             obj.put("status", "200");
             ResponseEntity.status(0);
             return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
-        } else {
+        } else if (personsPinGet != null && personsTinGet != null) {
             Persons AllUniqueParametrs = personsService.getByEmailAndPinAndTin(persons.getEmail(), persons.getPin(), persons.getTin());
-            if(AllUniqueParametrs != null) {
+            if (AllUniqueParametrs != null) {
                 JSONObject obj = new JSONObject();
                 obj.put("message", "Success");
                 obj.put("data", personsPinGet);
@@ -72,9 +66,12 @@ public class ApiPersonsController {
             obj.put("data", "Маълумотлар мос келмади");
             obj.put("status", "207");
             return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
+        } else {
+            JSONObject obj = new JSONObject();
+            obj.put("message", "Error");
+            obj.put("data", "Маълумотлар мос келмади");
+            obj.put("status", "207");
+            return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
         }
     }
-
-
-
 }

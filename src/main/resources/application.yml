@@ -1,5 +1,5 @@
 server:
-  port: 9080
+  port: 4040
   servlet:
     session:
       persistent: false

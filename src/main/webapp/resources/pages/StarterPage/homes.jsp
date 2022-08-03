@@ -33,13 +33,138 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/assets2/css/dark-theme.css" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/assets2/css/semi-dark.css" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/assets2/css/header-colors.css" />
+    <style>
+        .highcharts-figure,
+        .highcharts-data-table table {
+            min-width: 320px;
+            max-width: 800px;
+            margin: 1em auto;
+        }
 
+        .highcharts-title{
+            "color": "#333333", "fontSize": "18px"
+        }
+
+        .highcharts-data-table table {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid #ebebeb;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #ffffff;
+        }
+
+        .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+        }
+
+        .highcharts-data-table td,
+        .highcharts-data-table th,
+        .highcharts-data-table caption {
+            padding: 0.5em;
+        }
+
+        .highcharts-data-table thead tr,
+        .highcharts-data-table tr:nth-child(even) {
+            background: #eeeeee;
+        }
+
+        .highcharts-data-table tr:hover {
+            background: #f1f7ff;
+        }
+
+        input[type="number"] {
+            min-width: 50px;
+        }
+    </style>
+    <style>
+        #containerValyut {
+            height: 400px;
+            min-width: 310px;
+        }
+
+        #container {
+            height: 400px;
+        }
+
+        .highcharts-figure,
+        .highcharts-data-table table {
+            min-width: 310px;
+            max-width: 800px;
+            margin: 1em auto;
+        }
+
+        .highcharts-data-table table {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid #ebebeb;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+        }
+
+        .highcharts-data-table td,
+        .highcharts-data-table th,
+        .highcharts-data-table caption {
+            padding: 0.5em;
+        }
+
+        .highcharts-data-table thead tr,
+        .highcharts-data-table tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+
+        .highcharts-data-table tr:hover {
+            background: #f1f7ff;
+        }
+    </style>
+    <style>
+        #containerMini {
+            height: 400px;
+        }
+
+        .highcharts-figure,
+        .highcharts-data-table table {
+            min-width: 310px;
+            max-width: 800px;
+            margin: 1em auto;
+        }
+
+        #sliders td input[type="range"] {
+            display: inline;
+        }
+
+        #sliders td {
+            padding-right: 1em;
+            white-space: nowrap;
+        }
+    </style>
 </head>
 <body>
-    <div class="page-wrapper">
-        <div class="page-content">
+<div class="page-wrapper">
+    <div class="page-content">
 
-        <div class="dash-wrapper bg-dark">
+        <div class="dash-wrapper bg-gradient-moonlit">
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-5 row-cols-xxl-5">
                 <div class="col border-end border-light-2">
                     <div class="card bg-transparent shadow-none mb-0">
@@ -87,7 +212,7 @@
                             <p class="mb-1 text-white">Дастурдан фойдаланиш вақтингиз</p>
                             <h3 class="mb-3 text-white">00:04:60</h3>
                             <p class="font-13 text-white"><span class="text-danger"><i class=""></i> Эслатма</span> Фойдаланиш вақти 10 дақиқа</p>
-<%--                            <div id="chart5"></div>--%>
+                            <%--                            <div id="chart5"></div>--%>
                         </div>
                     </div>
                 </div>
@@ -95,354 +220,342 @@
         </div>
 
         <div class="row row-cols-1 row-cols-xl-2">
-            <div class="col d-flex">
-                <div class="card radius-10 w-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div>
-                                <h6 class="mb-0">Энг кўп импорт қилинаётган товарларнинг божхона қиймати индекси</h6>
-                            </div>
-                            <div class="dropdown ms-auto">
-                                <button class="btn btn-white btn-sm radius-10 dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    ТИФ ТН коди
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">3304 99 000 0</a></li>
-                                    <li><a class="dropdown-item" href="#">1001 99 000 0</a></li>
-                                    <li><a class="dropdown-item" href="#">9033 00 000 0</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div id="chart6"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col d-flex">
-                <div class="card radius-10 w-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div>
-                                <h6 class="mb-0">божхона қиймати индекси пасайиб кетаётган товарлар</h6>
-                            </div>
-                            <div class="d-flex align-items-center ms-auto font-13 gap-2">
-                                <span class="border px-1 rounded cursor-pointer"><i class='bx bxs-circle text-primary me-1'></i>New Visitor</span>
-                                <span class="border px-1 rounded cursor-pointer"><i class='bx bxs-circle text-sky-light me-1'></i>Old Visitor</span>
-                            </div>
-                        </div>
-                        <div id="chart7"></div>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- end row-->
-
-        <!--<div class="row">
-            <div class="col-12 col-lg-8 d-flex">
-                <div class="card radius-10 w-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div>
-                                <h6 class="mb-0">Geographic</h6>
-                            </div>
-                            <div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>
-                            </div>
-                        </div>
-                        <div class="" id="geographic-map"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-4 d-flex">
-                <div class="card radius-10 w-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div>
-                                <h6 class="mb-0">Impressions By Country</h6>
-                            </div>
-                            <div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="col d-flex">
+                            <div class="card radius-10 w-100" >
+                                <div class="card-body">
+                                    <div id="container"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="dashboard-top-countries mb-3 p-3">
-
-                        <div class="row mb-4">
-                            <div class="col-2">
-                                <img src="<%=request.getContextPath()%>/resources/assets2/images/icons/united-states.png" width="42" alt="">
-                            </div>
-                            <div class="col">
-                                <p class="mb-2">United States <strong class="float-end">445,85</strong></p>
-                                <div class="progress radius-10" style="height:6px;">
-                                    <div class="progress-bar bg-gradient-blues" role="progressbar" style="width: 86%"></div>
+                    <div class="carousel-item">
+                        <div class="col d-flex">
+                            <div class="card radius-10 w-100">
+                                <div class="card-body">
+                                    <div id="container2"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-4">
-                            <div class="col-2">
-                                <img src="<%=request.getContextPath()%>/resources/assets2/images/icons/germany.png" width="42" alt="">
-                            </div>
-                            <div class="col">
-                                <p class="mb-2">Germany <strong class="float-end">683,46</strong></p>
-                                <div class="progress radius-10" style="height:6px;">
-                                    <div class="progress-bar bg-gradient-cosmic" role="progressbar" style="width: 66%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-2">
-                                <img src="<%=request.getContextPath()%>/resources/assets2/images/icons/canada.png" width="42" alt="">
-                            </div>
-                            <div class="col">
-                                <p class="mb-2">Canada <strong class="float-end">982,43</strong></p>
-                                <div class="progress radius-10" style="height:6px;">
-                                    <div class="progress-bar bg-gradient-burning" role="progressbar" style="width: 56%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-2">
-                                <img src="<%=request.getContextPath()%>/resources/assets2/images/icons/india.png" width="42" alt="">
-                            </div>
-                            <div class="col">
-                                <p class="mb-2">India <strong class="float-end">852,35</strong></p>
-                                <div class="progress radius-10" style="height:6px;">
-                                    <div class="progress-bar bg-gradient-lush" role="progressbar" style="width: 45%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-2">
-                                <img src="<%=request.getContextPath()%>/resources/assets2/images/icons/netherlands.png" width="42" alt="">
-                            </div>
-                            <div class="col">
-                                <p class="mb-2">Netherlands <strong class="float-end">785,24</strong></p>
-                                <div class="progress radius-10" style="height:6px;">
-                                    <div class="progress-bar bg-gradient-kyoto" role="progressbar" style="width: 38%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-0">
-                            <div class="col-2">
-                                <img src="<%=request.getContextPath()%>/resources/assets2/images/icons/malaysia.png" width="42" alt="">
-                            </div>
-                            <div class="col">
-                                <p class="mb-2">Malaysia <strong class="float-end">387,56</strong></p>
-                                <div class="progress radius-10" style="height:6px;">
-                                    <div class="progress-bar bg-gradient-moonlit" role="progressbar" style="width: 28%"></div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
+                <button class="position-absolute top-50 start-0 translate-middle-y btn btn-outline-primary btn-sm m-2" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <i class="bx bx-chevron-left"></i>
+                </button>
+                <button class="position-absolute top-50 end-0 translate-middle-y btn btn-outline-primary btn-sm m-2" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <i class="bx bx-chevron-right"></i>
+                </button>
             </div>
-        </div> --><!-- end row-->
+            <div id="carouselExampleControls2" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <div class="col d-flex">
+                            <div class="card radius-10 w-100" >
+                                <div class="card-body">
+                                    <div id="container3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="20000">
+                        <div class="col d-flex">
+                            <div class="card radius-10 w-100">
+                                <div class="card-body">
+                                    <div id="container4"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="position-absolute top-50 start-0 translate-middle-y btn btn-outline-primary btn-sm m-2" type="button" data-bs-target="#carouselExampleControls2" data-bs-slide="prev">
+                    <i class="bx bx-chevron-left"></i>
+                </button>
+                <button class="position-absolute top-50 end-0 translate-middle-y btn btn-outline-primary btn-sm m-2" type="button" data-bs-target="#carouselExampleControls2" data-bs-slide="next">
+                    <i class="bx bx-chevron-right"></i>
+                </button>
+            </div>
+        </div>
 
-        <div class="row row-cols-1 row-cols-lg-12 row-cols-xl-3">
-            <div class="col d-flex">
+        <div class="row">
+            <div class="col-md-12 d-flex">
                 <div class="card radius-10 p-0 w-100 bg-transparent shadow-none">
                     <div class="card radius-10">
                         <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <p class="mb-0">ДОЛЛАР $ </p>
-                                    <h5 class="mb-0">11010.88 сум</h5>
-                                </div>
-                                <div class="widgets-icons bg-light-primary text-primary ms-auto"><i class="bx bxs-cookie"></i></div>
-                            </div>
-                            <div id="chart8"></div>
+                            <div id="containerValyut"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col d-flex">
-                <div class="card radius-10 p-0 w-100 bg-transparent shadow-none">
-                    <div class="card radius-10">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <p class="mb-0">РУБЛ  ₱ </p>
-                                    <h5 class="mb-0">175.26 сум</h5>
-                                </div>
-                                <div class="widgets-icons bg-light-danger text-danger ms-auto"><i class="bx bxs-bookmark-alt-plus"></i></div>
-                            </div>
-                            <div id="chart9"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col d-flex">
-                <div class="card radius-10 p-0 w-100 bg-transparent shadow-none">
-                    <div class="card radius-10 mb-0">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <p class="mb-0">ЭВРО €</p>
-                                    <h5 class="mb-0">11854.31 сум</h5>
-                                </div>
-                                <div class="widgets-icons bg-light-success text-success ms-auto"><i class="bx bxs-cloud-download"></i></div>
-                            </div>
-                            <div id="chart10"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-<%--            <div class="col d-flex">--%>
-<%--                <div class="card radius-10 w-100">--%>
-<%--                    <div class="card-body">--%>
-<%--                        <div class="d-flex align-items-center">--%>
-<%--                            <div>--%>
-<%--                                <h6 class="mb-0">Goal Statistics</h6>--%>
-<%--                            </div>--%>
-<%--                            <div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div id="chart11"></div>--%>
-<%--                        <div class="row align-items-center py-2">--%>
-<%--                            <div class="col-auto">--%>
-<%--                                <p class="mb-0">Sales</p>--%>
-<%--                            </div>--%>
-<%--                            <div class="col-auto">--%>
-<%--                                <p class="mb-0">1580</p>--%>
-<%--                            </div>--%>
-<%--                            <div class="col-auto">--%>
-<%--                                <p class="mb-0">875</p>--%>
-<%--                            </div>--%>
-<%--                            <div class="col">--%>
-<%--                                <div class="progress radius-10 mb-0" style="height:6px;">--%>
-<%--                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 85%"></div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div><!-- end row-->--%>
-
-<%--                        <div class="row align-items-center py-2">--%>
-<%--                            <div class="col-auto">--%>
-<%--                                <p class="mb-0">Users</p>--%>
-<%--                            </div>--%>
-<%--                            <div class="col-auto">--%>
-<%--                                <p class="mb-0">1852</p>--%>
-<%--                            </div>--%>
-<%--                            <div class="col-auto">--%>
-<%--                                <p class="mb-0">356</p>--%>
-<%--                            </div>--%>
-<%--                            <div class="col">--%>
-<%--                                <div class="progress radius-10 mb-0" style="height:6px;">--%>
-<%--                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 65%"></div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div><!-- end row-->--%>
-
-<%--                        <div class="row align-items-center py-2">--%>
-<%--                            <div class="col-auto">--%>
-<%--                                <p class="mb-0">Visits</p>--%>
-<%--                            </div>--%>
-<%--                            <div class="col-auto">--%>
-<%--                                <p class="mb-0">1280</p>--%>
-<%--                            </div>--%>
-<%--                            <div class="col-auto">--%>
-<%--                                <p class="mb-0">867</p>--%>
-<%--                            </div>--%>
-<%--                            <div class="col">--%>
-<%--                                <div class="progress radius-10 mb-0" style="height:6px;">--%>
-<%--                                    <div class="progress-bar bg-success" role="progressbar" style="width: 45%"></div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div><!-- end row-->--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="col col-lg-12 d-flex">--%>
-<%--                <div class="card radius-10 p-0 w-100 p-3">--%>
-<%--                    <div class="card radius-10 shadow-none bg-transparent border">--%>
-<%--                        <div class="card-body">--%>
-<%--                            <div class="d-flex align-items-center justify-content-center justify-content-lg-start">--%>
-<%--                                <div id="chart12"></div>--%>
-<%--                                <div class="">--%>
-<%--                                    <p class="mb-0 d-flex align-items-center"><i class='bx bx-male text-danger fs-4'></i><span class="mx-2">Male</span><span>65%</span></p>--%>
-<%--                                    <p class="mb-0 d-flex align-items-center"><i class='bx bx-female text-primary fs-4'></i><span class="mx-2">Male</span><span>35%</span></p>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="card radius-10 mb-0 shadow-none bg-transparent mb-0 border">--%>
-<%--                        <div class="card-body">--%>
-<%--                            <div class="d-flex align-items-center mb-4">--%>
-<%--                                <div>--%>
-<%--                                    <h6 class="mb-0">Device Type</h6>--%>
-<%--                                </div>--%>
-<%--                                <div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                            <div class="row row-cols-3 g-3">--%>
-<%--                                <div class="col">--%>
-<%--                                    <div class="d-flex gap-2">--%>
-<%--                                        <h4 class="mb-1 d-flex">61 <span class="align-self-start fs-6">%</span></h4>--%>
-<%--                                        <p class="mb-0 align-self-center text-success">(+8.4%)</p>--%>
-<%--                                    </div>--%>
-<%--                                    <p class="mb-0 d-flex align-items-center"><i class='bx bxs-circle text-info fs-6'></i><span class="mx-2">Android</span></p>--%>
-<%--                                </div>--%>
-<%--                                <div class="col">--%>
-<%--                                    <div class="d-flex gap-2">--%>
-<%--                                        <h4 class="mb-1 d-flex">28 <span class="align-self-start fs-6">%</span></h4>--%>
-<%--                                        <p class="mb-0 align-self-center text-danger">(-1.9%)</p>--%>
-<%--                                    </div>--%>
-<%--                                    <p class="mb-0 d-flex align-items-center"><i class='bx bxs-circle text-success fs-6'></i><span class="mx-2">iOS</span></p>--%>
-<%--                                </div>--%>
-<%--                                <div class="col">--%>
-<%--                                    <div class="d-flex gap-2">--%>
-<%--                                        <h4 class="mb-1 d-flex">11 <span class="align-self-start fs-6">%</span></h4>--%>
-<%--                                        <p class="mb-0 align-self-center text-success">(+6.8%)</p>--%>
-<%--                                    </div>--%>
-<%--                                    <p class="mb-0 d-flex align-items-center"><i class='bx bxs-circle text-warning fs-6'></i><span class="mx-2">Other</span></p>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-
-<%--                            <div class="progress radius-10 mt-4" style="height: 10px">--%>
-<%--                                <div class="progress-bar bg-info" role="progressbar" style="width: 45%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>--%>
-<%--                                <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>--%>
-<%--                                <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>--%>
-<%--                            </div>--%>
-
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-        </div><!-- end row-->
-
-<%--        <div class="row">--%>
-<%--            <div class="col-12 col-lg-6">--%>
-<%--                <div class="card radius-10">--%>
-<%--                    <div class="card-body">--%>
-<%--                        <div id="chart13"></div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="col-12 col-lg-6">--%>
-<%--                <div class="card radius-10">--%>
-<%--                    <div class="card-body">--%>
-<%--                        <div id="chart14"></div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div><!-- end row-->--%>
+        </div>
     </div>
-    </div>
-<%--    <script src="<%=request.getContextPath()%>/resources/assets2/js/bootstrap.bundle.min.js"></script>--%>
-<%--    <!-- plugins -->--%>
-<%--    <script src="<%=request.getContextPath()%>/resources/assets2/js/jquery.min.js"></script>--%>
-<%--    <script src="<%=request.getContextPath()%>/resources/assets2/plugins/simplebar/js/simplebar.min.js"></script>--%>
-<%--    <script src="<%=request.getContextPath()%>/resources/assets2/plugins/metismenu/js/metisMenu.min.js"></script>--%>
-<%--    <script src="<%=request.getContextPath()%>/resources/assets2/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>--%>
-<%--    <script src="<%=request.getContextPath()%>/resources/assets2/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>--%>
-<%--    <script src="<%=request.getContextPath()%>/resources/assets2/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>--%>
-<%--    <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/highcharts.js"></script>--%>
-<%--    <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/exporting.js"></script>--%>
-<%--    <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/variable-pie.js"></script>--%>
-<%--    <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/export-data.js"></script>--%>
-<%--    <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/accessibility.js"></script>--%>
-<%--    <script src="<%=request.getContextPath()%>/resources/assets2/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>--%>
-<%--    <script>--%>
-<%--        new PerfectScrollbar('.dashboard-top-countries');--%>
-    </script>
-    <script src="<%=request.getContextPath()%>/resources/assets2/js/index.js"></script>
-    <!-- app JS-->
-<%--    <script src="<%=request.getContextPath()%>/resources/assets2/js/app.js"></script>--%>
+</div>
+<script>
+    Highcharts.chart('container', {
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45
+            }
+        },
+        title: {
+            text: 'Contents of Highsoft\'s weekly fruit delivery'
+        },
+        subtitle: {
+            text: '3D donut in Highcharts'
+        },
+        plotOptions: {
+            pie: {
+                innerSize: 100,
+                depth: 45
+            }
+        },
+        series: [{
+            name: 'Delivered amount',
+            data: [
+                ['Bananas', 8],
+                ['Kiwi', 3],
+                ['Mixed nuts', 1],
+                ['Oranges', 6],
+                ['Apples', 8],
+                ['Pears', 4],
+                ['Clementines', 4],
+                ['Reddish (bag)', 1],
+                ['Grapes (bunch)', 1]
+            ]
+        }]
+    });
+</script>
+<script>
+    Highcharts.chart('container2', {
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45
+            }
+        },
+        title: {
+            text: 'Contents of Highsoft\'s weekly fruit delivery'
+        },
+        subtitle: {
+            text: '3D donut in Highcharts'
+        },
+        plotOptions: {
+            pie: {
+                innerSize: 100,
+                depth: 45
+            }
+        },
+        series: [{
+            name: 'Delivered amount',
+            data: [
+                ['Bananas', 8],
+                ['Kiwi', 3],
+                ['Mixed nuts', 1],
+                ['Oranges', 6],
+                ['Apples', 8],
+                ['Pears', 4],
+                ['Clementines', 4],
+                ['Reddish (bag)', 1],
+                ['Grapes (bunch)', 1]
+            ]
+        }]
+    });
+</script>
+<script>
+    Highcharts.chart('container3', {
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45
+            }
+        },
+        title: {
+            text: 'Contents of Highsoft\'s weekly fruit delivery'
+        },
+        subtitle: {
+            text: '3D donut in Highcharts'
+        },
+        plotOptions: {
+            pie: {
+                innerSize: 100,
+                depth: 45
+            }
+        },
+        series: [{
+            name: 'Delivered amount',
+            data: [
+                ['Bananas', 8],
+                ['Kiwi', 3],
+                ['Mixed nuts', 1],
+                ['Oranges', 6],
+                ['Apples', 8],
+                ['Pears', 4],
+                ['Clementines', 4],
+                ['Reddish (bag)', 1],
+                ['Grapes (bunch)', 1]
+            ]
+        }]
+    });
+</script>
+<script>
+    Highcharts.chart('container4', {
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45
+            }
+        },
+        title: {
+            text: 'Contents of Highsoft\'s weekly fruit delivery'
+        },
+        subtitle: {
+            text: '3D donut in Highcharts'
+        },
+        plotOptions: {
+            pie: {
+                innerSize: 100,
+                depth: 45
+            }
+        },
+        series: [{
+            name: 'Delivered amount',
+            data: [
+                ['Bananas', 8],
+                ['Kiwi', 3],
+                ['Mixed nuts', 1],
+                ['Oranges', 6],
+                ['Apples', 8],
+                ['Pears', 4],
+                ['Clementines', 4],
+                ['Reddish (bag)', 1],
+                ['Grapes (bunch)', 1]
+            ]
+        }]
+    });
+</script>
+<script>
+    Highcharts.chart('containerValyut', {
+
+        title: {
+            text: 'Solar Employment Growth by Sector, 2010-2016'
+        },
+
+        subtitle: {
+            text: 'Source: thesolarfoundation.com'
+        },
+
+        yAxis: {
+            title: {
+                text: 'Number of Employees'
+            }
+        },
+
+        xAxis: {
+            accessibility: {
+                rangeDescription: 'Range: 2020 to 2021'
+            }
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+                pointStart: 2020
+            }
+        },
+
+        series: [{
+            name: 'Dollar $',
+            data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+        }, {
+            name: 'Manufacturing',
+            data: [10500, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+        }, {
+            name: 'Sales & Distribution',
+            data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+        }, {
+            name: 'Project Development',
+            data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+        }, {
+            name: 'Other',
+            data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 5
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+</script>
+<script>
+    // Set up the chart
+    const chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'containerMini',
+            type: 'column',
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 15,
+                depth: 50,
+                viewDistance: 25
+            }
+        },
+        title: {
+            text: 'Chart rotation demo'
+        },
+        subtitle: {
+            text: 'Test options by dragging the sliders below'
+        },
+        plotOptions: {
+            column: {
+                depth: 25
+            }
+        },
+        series: [{
+            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+        }]
+    });
+
+    function showValues() {
+        document.getElementById('alpha-value').innerHTML = chart.options.chart.options3d.alpha;
+        document.getElementById('beta-value').innerHTML = chart.options.chart.options3d.beta;
+        document.getElementById('depth-value').innerHTML = chart.options.chart.options3d.depth;
+    }
+
+    // Activate the sliders
+    document.querySelectorAll('#sliders input').forEach(input => input.addEventListener('input', e => {
+        chart.options.chart.options3d[e.target.id] = parseFloat(e.target.value);
+        showValues();
+        chart.redraw(false);
+    }));
+
+    showValues();
+</script>
+<script src="<%=request.getContextPath()%>/resources/assets2/js/index.js"></script>
 </body>
 </html>

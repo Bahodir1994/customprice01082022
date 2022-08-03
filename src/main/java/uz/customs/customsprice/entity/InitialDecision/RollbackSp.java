@@ -21,13 +21,17 @@ public class RollbackSp extends AbstractAuditingEntity {
     @Column(name = "NAME", columnDefinition = "VARCHAR(300) CCSID 1208")
     private String rollbackName;
 
+    @Column(name = "DEFENATION", columnDefinition = "VARCHAR(1600) CCSID 1208")
+    private String defenation;
+
     public RollbackSp() {
     }
 
-    public RollbackSp(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, String rollbackName) {
+    public RollbackSp(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, String rollbackName, String defenation) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.rollbackName = rollbackName;
+        this.defenation = defenation;
     }
 
     public String getId() {
@@ -44,5 +48,13 @@ public class RollbackSp extends AbstractAuditingEntity {
 
     public void setRollbackName(String rollbackName) {
         this.rollbackName = rollbackName;
+    }
+
+    public String getDefenation() {
+        return defenation;
+    }
+
+    public void setDefenation(String defenation) {
+        this.defenation = defenation;
     }
 }

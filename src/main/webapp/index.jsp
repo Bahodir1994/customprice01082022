@@ -13,19 +13,6 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%
-    //    String userId = (String) request.getSession().getAttribute("userId");
-//    Integer userRole = (Integer) request.getSession().getAttribute("userRole");
-//    String userName = (String) request.getSession().getAttribute("userName");
-//    String userRoleName = (String) request.getSession().getAttribute("userRoleName");
-//    String userLocation = (String) request.getSession().getAttribute("userLocation");
-//    String userLocationName = (String) request.getSession().getAttribute("userLocationName");
-//    String userPost = (String) request.getSession().getAttribute("userPost");
-//    userRole = 8;
-//    request.getSession().setAttribute("userRole", userRole);
-//    request.getSession().setAttribute("userId", userId);
-%>
-
-<%
     Integer userRole;
     String userId = "";
     String userName = "";
@@ -49,7 +36,6 @@
             session.setAttribute("userLocation", "0");
             session.setAttribute("userPost", "0");
             session.setAttribute("userLocationName", "0");
-//            userRole = 0;
         } else {
             session.setAttribute("role", user.getRole());
             session.setAttribute("userRole", user.getRole());
@@ -59,7 +45,6 @@
             session.setAttribute("userLocation", user.getLocation());
             session.setAttribute("userLocationName", user.getLocationname());
             session.setAttribute("userPost", user.getPost());
-//            userRole = user.getRole();
         }
     }
     Integer roleI = (Integer) session.getAttribute("role");
@@ -75,10 +60,6 @@
     for (Role role : roleList) {
         if (role.getCode().equals(roleI)) {
             roleN = role.getName();
-//            System.out.println(user.getRole() + " ===>> " + user.getUserid() + " ===>> " + user.getId());
-//            System.out.println(user.getRole() + " ===>> " + user.getId() + " 7777===>> " + user.getId());
-//            System.out.println(user.getFullname() + " ===>> " + roleN);
-//            System.out.println(user.getLocationname() + " ===>> " + roleN);
             break;
         }
     }
@@ -108,7 +89,8 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/assets2/css/dark-theme.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/assets2/css/semi-dark.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/assets2/css/header-colors.css"/>
-<%--    <link href="<%=request.getContextPath()%>/resources/assets2/plugins/select2/css/select2.min.css" rel="stylesheet" />--%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/plugins/select2.min.css">
     <title>Божхона қиймати</title>
 </head>
 
@@ -619,12 +601,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:ListInDec(0)" class="has-arrow">
+                        <a href="javascript:ListInDec()" class="has-arrow">
                             <div class="parent-icon"><i class="bx bx-category"></i>
                             </div>
                             <div class="menu-title">Дастлабки қарор</div>
                         </a>
                     </li>
+
                     <li>
                         <a class="has-arrow" href="javascript:ErrorMessage(0);">
                             <div class="parent-icon icon-color-6"><i class="bx bx-donate-blood"></i>
@@ -753,11 +736,11 @@
     </div>
     <div class="switcher-body">
         <div class="d-flex align-items-center">
-            <h5 class="mb-0 text-uppercase">Theme Customizer</h5>
+            <h5 class="mb-0 text-uppercase">Лавҳалар</h5>
             <button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
         </div>
         <hr/>
-        <h6 class="mb-0">Theme Styles</h6>
+        <h6 class="mb-0">Фон ранглари</h6>
         <hr/>
         <div class="d-flex align-items-center justify-content-between">
             <div class="form-check">
@@ -819,15 +802,16 @@
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/highcharts.js"></script>
+<script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/highchart-3d.js"></script>
+<script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/highstock.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/exporting.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/variable-pie.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/export-data.js"></script>
+<script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/data.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/highcharts/js/accessibility.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
-
-<script>
-    new PerfectScrollbar('.dashboard-top-countries');
-</script>
+<script src="<%=request.getContextPath()%>/resources/assets2/plugins/select2/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/resources/assets2/js/app.js"></script>
 <script>
@@ -952,9 +936,9 @@
         });
     }
     /* Маълумотларни твқсимлаш */
-    function ListInDec(x) {
+    function ListInDec(selectedBar) {
         var dataS = {
-            "id": x
+            "selectedBar":selectedBar
         }
         $.ajax({
             type: "POST",
@@ -976,8 +960,10 @@
             }
         });
     }
+
     /* Маълумотларнинг инспектор қисми */
     function InitialDecision(x) {
+        alert(x)
         var dataS = {
             "id": x
         }

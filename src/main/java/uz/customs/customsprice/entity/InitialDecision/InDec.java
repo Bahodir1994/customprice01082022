@@ -33,6 +33,9 @@ public class InDec extends AbstractAuditingEntity {
     @Column(name = "IN_DEC_NUM", length = 30)
     private String inDecNum;
 
+    @Column(name = "IN_DEC_NUMS", length = 30)
+    private String inDecNumS;
+
     @Column(name = "IN_DEC_DATE", columnDefinition = " date default current_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
@@ -129,15 +132,20 @@ public class InDec extends AbstractAuditingEntity {
     @Digits(integer = 15, fraction = 3)
     private BigDecimal g19Sum;
 
+    @Column(name = "VERSION_NUM", columnDefinition = "VARCHAR(50) DEFAULT 1")
+    private String versionNum = "1";
+
+
     public InDec() {
     }
 
-    public InDec(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Commodity commodity, String cmdtId, String inDecNum, Date inDecDate, String inDecLocation, String inDecLocationNm, String personId, String hsCode, String hsName, String method, String methodNm, String originCountry, String orignCountrNm, String inDecBasis, String commentMarks, BigDecimal customsPreference, BigDecimal customsPayments, int status, String statusNm, Date inDecEndDate, Date inDecUserEndedDate, String commentEnded, int endActiv, String tpoId, String payId, String g3a, Date g3b, String g3c, BigDecimal g19Base, String stavka, BigDecimal g19Sum) {
+    public InDec(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Commodity commodity, String cmdtId, String inDecNum, String inDecNumS, Date inDecDate, String inDecLocation, String inDecLocationNm, String personId, String hsCode, String hsName, String method, String methodNm, String originCountry, String orignCountrNm, String inDecBasis, String commentMarks, BigDecimal customsPreference, BigDecimal customsPayments, int status, String statusNm, Date inDecEndDate, Date inDecUserEndedDate, String commentEnded, int endActiv, String tpoId, String payId, String g3a, Date g3b, String g3c, BigDecimal g19Base, String stavka, BigDecimal g19Sum, String versionNum) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.commodity = commodity;
         this.cmdtId = cmdtId;
         this.inDecNum = inDecNum;
+        this.inDecNumS = inDecNumS;
         this.inDecDate = inDecDate;
         this.inDecLocation = inDecLocation;
         this.inDecLocationNm = inDecLocationNm;
@@ -166,6 +174,7 @@ public class InDec extends AbstractAuditingEntity {
         this.g19Base = g19Base;
         this.stavka = stavka;
         this.g19Sum = g19Sum;
+        this.versionNum = versionNum;
     }
 
     public String getId() {
@@ -198,6 +207,14 @@ public class InDec extends AbstractAuditingEntity {
 
     public void setInDecNum(String inDecNum) {
         this.inDecNum = inDecNum;
+    }
+
+    public String getInDecNumS() {
+        return inDecNumS;
+    }
+
+    public void setInDecNumS(String inDecNumS) {
+        this.inDecNumS = inDecNumS;
     }
 
     public Date getInDecDate() {
@@ -422,5 +439,13 @@ public class InDec extends AbstractAuditingEntity {
 
     public void setG19Sum(BigDecimal g19Sum) {
         this.g19Sum = g19Sum;
+    }
+
+    public String getVersionNum() {
+        return versionNum;
+    }
+
+    public void setVersionNum(String versionNum) {
+        this.versionNum = versionNum;
     }
 }

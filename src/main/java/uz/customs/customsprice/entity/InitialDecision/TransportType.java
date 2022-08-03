@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import uz.customs.customsprice.entity.entityConfig.AbstractAuditingEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -45,7 +46,8 @@ public class TransportType extends AbstractAuditingEntity {
     @Column(name = "tarnsport_type_NM", columnDefinition = "VARCHAR(120) CCSID 1208")
     private String tarnsportTypeNm;
 
-    @Column(name = "transport_price", length = 4)
+    @Column(name = "transport_price")
+    @Digits(integer = 15, fraction = 3)
     private BigDecimal transportPrice;
 
     public TransportType() {

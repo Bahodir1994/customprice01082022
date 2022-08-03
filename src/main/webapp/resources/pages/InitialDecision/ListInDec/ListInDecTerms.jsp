@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <%--
   Created by IntelliJ IDEA.
@@ -97,18 +100,18 @@
                     <th style=" border-style: dotted">Қарор рақами</th>
                     <th style=" border-style: dotted">Қарор санаси</th>
                     <th style=" border-style: dotted">Етказиб бериш шарти</th>
-                    <th style=" border-style: dotted">Амал қилиш муддати</th>
+                    <th style=" border-style: dotted">Амал қилиш муддати${userRole}</th>
                     <c:forEach var="termss" items="${termsList}" varStatus="i">
-                        <c:if test="${termss[59] == 100 && userRole == 6}">
-                            <th style="border-style: dotted">Бекор қилиш</th>
+                        <c:if test="${termss[59] == 100 && userRole == 3}">
+                            <th>Бекор қилиш</th>
                         </c:if>
                         <c:if test="${termss[59] == 100 && userRole != 6}">
                         </c:if>
                         <c:if test="${termss[59] == 200}">
-                            <th style="border-style: dotted">Бекор қилиш</th>
+                            <th>Бекор қилиш</th>
                         </c:if>
                     </c:forEach>
-                    <th style=" border-style: dotted">Инспектор</th>
+                    <th>Инспектор</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -134,14 +137,12 @@
 
                             <c:if test="${terms[54] == 180}"><a data-bs-toggle="modal" class="btn btn-outline-danger <%=disabled%>" onclick="$('#inDecId').val('${terms[33]}');"
                                                                 data-bs-target="#exampleModalPAY">${terms[55]}</a></c:if>
-                            <c:if test="${terms[54] == 185}"><a class="btn btn-outline-success" onclick="javascript:resultTPO('<h6>${terms[60]}/${terms[61]}/${terms[62]}</h6>')">${terms[55]}</a
-                            ></c:if>
+                            <c:if test="${terms[54] == 185}"><a class="btn btn-outline-success" onclick="javascript:resultTPO('<h6>${terms[60]}/${terms[61]}/${terms[62]}</h6>')">${terms[55]}</a></c:if>
                         </td>
                         <td>${terms[1]}</td>
                         <td>${terms[11]}</td>
                         <td>
-                            <a type="button" onclick="openInDecPdf('${terms[32]}')"
-                               class="btn btn-outline-warning">
+                            <a type="button" onclick="openInDecPdf('${terms[32]}')" class="btn btn-outline-warning">
                                 <i class="bx bxs-file-pdf" style="font-size: 30px"></i>
                             </a>
                         </td>
@@ -152,8 +153,7 @@
                         <td>${terms[56]}</td>
                         <c:if test="${terms[59] == 100 && userRole == 6}">
                             <td>
-                                <button class="btn btn-outline-primary" onclick="inDecCancelled('${terms[33]}')"><i
-                                        class="bx bx-message-alt-x bx-sm"></i></button>
+                                <button class="btn btn-outline-primary" onclick="inDecCancelled('${terms[33]}')"><i class="bx bx-message-alt-x bx-sm"></i></button>
                             </td>
                         </c:if>
                         <c:if test="${terms[59] == 100 && userRole != 6}">
@@ -202,12 +202,6 @@
     </div>
 </div>
 
-<script>
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-    }
-</script>
 <script>
     $('.datepicker').pickadate({
         selectMonths: true,
@@ -290,202 +284,6 @@
             }
         });
     });
-
-    function SaveTPO() {
-        var log_f = true;
-        var log_n = '';
-        var arr = [];
-
-        if ($('#g3a').val() == null || $('#g3a').val() == '') {
-            $('#g3aValid').html('Пост кодини киритинг!').addClass('text-danger');
-            $('#g3a').addClass('border border-danger')
-            log_f = false;
-        } else if ($.trim($('#g3a').val()).length > 5 || $.trim($('#g3a').val()).length < 5) {
-            $('#g3aValid').html('Пост коди 5 та сондан иборат бўлиши лозим!').addClass('text-danger');
-            $('#g3a').addClass('border border-danger')
-            log_f = false;
-        } else {
-            $('#g3a').removeClass('border border-danger');
-            $('#g3a').addClass('border border-success');
-            $('#g3aValid').html('');
-        }
-
-        if ($('#g3b').val() == null || $('#g3b').val() == '') {
-            $('#g3bValid').html('Санани киритинг!').addClass('text-danger');
-            $('#g3b').addClass('border border-danger')
-            log_f = false;
-        } else {
-            $('#g3b').removeClass('border border-danger');
-            $('#g3b').addClass('border border-success');
-            $('#g3bValid').html('');
-        }
-
-        if ($.trim($('#g3c').val()) == null || $.trim($('#g3c').val()) == '') {
-            $('#g3cValid').html('БКО рақамини киритинг!').addClass('text-danger');
-            $('#g3c').addClass('border border-danger')
-            log_f = false;
-        } else if ($.trim($('#g3c').val()).length > 7 || $.trim($('#g3c').val()).length < 7) {
-            $('#g3cValid').html('БКО рақами 7 та сондан иборат бўлиши лозим!').addClass('text-danger');
-            $('#g3c').addClass('border border-danger')
-            log_f = false;
-        } else {
-            $('#g3c').removeClass('border border-danger');
-            $('#g3c').addClass('border border-success');
-            $('#g3cValid').html('');
-        }
-
-        if (log_f) {
-
-            var dataS = {
-                "inDecId": $('#inDecId').val(),
-                "g3a": $('#g3a').val(),
-                "g3b": $('#g3b').val(),
-                "g3c": $('#g3c').val()
-            }
-            $.ajax({
-                type: "POST",
-                data: JSON.stringify(dataS),
-                url: "<%=request.getContextPath()%>/saveInDec/resources/pages/InitialDecision/InitialDecisionTPO",
-                dataType: "json",
-                async: true,
-                contentType: 'application/json',
-                success: function (response) {
-                    $('#btnCloseModalTPO').trigger('click');
-                    ListInDecTermstTable('170');
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Дастлабки қарор учун йиғим муваффақиятли киритилди',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                },
-                error: function (response) {
-                    if (typeof response.responseJSON.message != "undefined" && response.responseJSON.message != null && response.responseJSON.message != "" && response.responseJSON.message != "undefined") {
-                        $('#validTPODiv').html(response.responseJSON.message).addClass('text-danger');
-                        $('#g3a').addClass('border border-danger')
-                        $('#g3b').addClass('border border-danger')
-                        $('#g3c').addClass('border border-danger')
-                    } else {
-                        $('#g3a,#g3b,#g3c').removeClass('border border-danger');
-                        $('#g3a,#g3b,#g3c').addClass('border border-success');
-                        $('#validTPODiv').html('');
-                    }
-                }
-            });
-        } else return false;
-    }
-
-    function openInDecPdf(cmdtId) {
-        document.getElementById("mySidenav").style.width = "650px";
-        document.getElementById("main").style.marginLeft = "570px";
-        document.getElementById("preloaderGenerating")
-        $('#preloaderGenerating').removeClass('visually-hidden');
-        var dataS = {
-            "cmdtId": cmdtId,
-        }
-        $.ajax({
-            type: "POST",
-            data: dataS,
-            dataType: "html",
-            url: "<%=request.getContextPath()%>/openInDecPdf/resources/openInDecPdfOne",
-            header: 'Content-type: text/html; charset=utf-8',
-            success: function (res) {
-                $('div#openInPdf').html(res);
-                $('#preloaderGenerating').addClass('visually-hidden');
-            },
-            error: function (res) {
-            }
-        });
-    }
-
-    function inDecCancelled(inDecId) {
-        Swal.fire({
-            title: 'Бекор қилиш сабабини киритинг',
-            html:
-                '<textarea id="TPO_NUM" type="number" class="swal2-input m-0 w-100" placeholder="Изох учун"/>',
-            showDenyButton: true,
-            confirmButtonText: 'Сақлаш',
-            denyButtonText: `Рад этиш`,
-        }).then((result) => {
-            var dataS = {
-                "inDecId": inDecId,
-                "TPO_NUM": $('#TPO_NUM').val(),
-            }
-
-
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-
-                if ($('#TPO_NUM').val() === "") {
-                    Swal.fire(
-                        '<i class="fa fa-info-circle"></i> Маълумотлар тўлдирилмаган!'
-                    )
-                } else {
-                    $.ajax({
-                        type: "POST",
-                        data: dataS,
-                        dataType: "html",
-                        url: "<%=request.getContextPath()%>/saveInDec/resources/pages/InitialDecision/InitialDecisionCancelled",
-                        header: 'Content-type: text/html; charset=utf-8',
-                        success: function (res) {
-                            $('div#ListInDecTable').html(res);
-                        },
-                        error: function (res) {
-                        }
-                    });
-                    Swal.fire('Сақланди!', '', 'success')
-                }
-
-            } else if (result.isDenied) {
-                Swal.fire('Маълумотлар сақланмади', '', 'info')
-            }
-        })
-    }
-
-    function resultTPO(commentMarks) {
-
-        <%--Swal.fire({--%>
-        <%--    title: 'Тўлдирилган ТПО рақами ва санаси',--%>
-        <%--    html:--%>
-        <%--        '<input id="TPO_NUM" type="number" class="swal2-input" placeholder="ТПО рақами">' +--%>
-        <%--        '<input id="TPO_DATE" type="date" class="swal2-input" placeholder="ТПО тўлдирилган санаси">',--%>
-        <%--    showDenyButton: true,--%>
-        <%--    showCancelButton: true,--%>
-        <%--    confirmButtonText: 'Сақлаш',--%>
-        <%--    denyButtonText: `Рад этиш`,--%>
-        <%--}).then((result) => {--%>
-        <%--    // alert($('#TPO_NUM').val() + ' / ' + $('#TPO_DATE').val());--%>
-        <%--    var dataS = {--%>
-        <%--        "inDecId": inDecId,--%>
-        <%--        "TPO_NUM": $('#TPO_NUM').val(),--%>
-        <%--        "TPO_DATE": $('#TPO_DATE').val()--%>
-        <%--    }--%>
-        <%--    /* Read more about isConfirmed, isDenied below */--%>
-        <%--    if (result.isConfirmed) {--%>
-        <%--        $.ajax({--%>
-        <%--            type: "POST",--%>
-        <%--            data: dataS,--%>
-        <%--            dataType: "html",--%>
-        <%--            url: "<%=request.getContextPath()%>/saveInDec/resources/pages/InitialDecision/InitialDecisionTPO",--%>
-        <%--            header: 'Content-type: text/html; charset=utf-8',--%>
-        <%--            success: function (res) {--%>
-        <%--                $('div#ListInDecTable').html(res);--%>
-        <%--            },--%>
-        <%--            error: function (res) {--%>
-        <%--            }--%>
-        <%--        });--%>
-        <%--        Swal.fire('Сақланди!', '', 'success')--%>
-        <%--    } else if (result.isDenied) {--%>
-        <%--        Swal.fire('Маълумотлар сақланмади', '', 'info')--%>
-        <%--    }--%>
-        <%--})--%>
-
-        Swal.fire('' +
-            '<h5>Божхона кирим ордери асосида дастлабки қарор учун тўлов қилинган</h5>'
-            + '<h6>БКО рақами ва санаси:</h6>' + commentMarks);
-    }
-
 </script>
 </body>
 </html>

@@ -7,6 +7,10 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+import javax.annotation.PostConstruct;
+import java.util.TimeZone;
 
 //@ServletComponentScan
 //@SpringBootApplication
@@ -29,6 +33,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @ServletComponentScan
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
+@EnableScheduling
 public class CustomspriceApplication implements CommandLineRunner {
     public final static String MODEL_PACKAGE = "uz.customs.customsprice.entity";
 
@@ -44,4 +49,10 @@ public class CustomspriceApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
     }
+
+//    @PostConstruct
+//    public void init(){
+//        // Setting Spring Boot SetTimeZone
+//        TimeZone.setDefault(TimeZone.getTimeZone("UTC+6"));
+//    }
 }

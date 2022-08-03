@@ -194,7 +194,7 @@
                             <label class="">ХББ</label>
                             <select class="form-select shadow-sm" required="" id="locationId" name="locationId" onchange="changeLocation()">
                                 <%-- todo                                <option selected="" disabled="disabled" value=""><p class="text-muted">Ариза мақоми</p></option>--%>
-                                <%--                                <option value="">--- Танланг ---</option>--%>
+<%--                                <option value="">--- Танланг ---</option>--%>
                                 <c:forEach var="locations" items="${locationList}" varStatus="i">
                                     <option value="${locations.id}">${locations.id} - ${locations.name1}</option>
                                 </c:forEach>
@@ -262,16 +262,14 @@
                                 <%--                                    <option value="${vals.id}">${i.index+1}-усул (${vals.name})</option>--%>
                                 <%--                                </c:forEach>--%>
                                 <%--                                <option value="0">Все</option>--%>
-                                <option value="1">1 - усул</option>
-                                <option value="2">2 - усул</option>
-                                <option value="3">3 - усул</option>
-                                <option value="4">4 - усул</option>
-                                <option value="5">5 - усул</option>
-                                <option value="6.1">6.1 - усул</option>
-                                <option value="6.2">6.2 - усул</option>
-                                <option value="6.3">6.3 - усул</option>
-                                <option value="6.4">6.4 - усул</option>
-                                <option value="6.5">6.5 - усул</option>
+                                <option value="1">1-усул</option>
+                                <option value="4">4-усул</option>
+                                <option value="5">5-усул</option>
+                                <option value="6.1">6.1-усул</option>
+                                <%--                                <option value="6.2">6.2</option>--%>
+                                <%--                                <option value="6.3">6.3</option>--%>
+                                                                <option value="6.4">6.4-усул</option>
+                                                                <option value="6.5">6.5-усул</option>
                             </select>
                         </div>
                         <div class="col-md-2 m-2">
@@ -488,9 +486,9 @@
                     $('div#divRowCount').css({'display': ''});
                 },
                 error: function (res) {
-                    setTimeout(() => {
+                    setTimeout(()=>{
                         $('#loaderII').addClass('visually-hidden')
-                    }, 1000)
+                    },1000)
                 }
             });
         }

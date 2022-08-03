@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import uz.customs.customsprice.entity.InitialDecision.*;
 import uz.customs.customsprice.entity.earxiv.Earxiv;
 import uz.customs.customsprice.repository.*;
-import uz.customs.customsprice.service.AppsService;
+
 
 import java.sql.Date;
 import java.util.*;
@@ -46,9 +47,6 @@ public class OutProgram {
 
     @Autowired
     RollBackAppRepo rollBackAppRepo;
-
-    @Autowired
-    AppsService appsService;
 
     @Autowired
     InDecRepo inDecRepo;
@@ -173,6 +171,7 @@ public class OutProgram {
 
     /************************(AppId бўйча Aриза StatusHistory ларни беради)****************************/
     @GetMapping("/tutorials/historystatus")
+    @Transactional
     public ResponseEntity<Map<String, Object>> findByAppIdToAppByStatusHistory(
             @RequestParam(required = false) String appId,
             @RequestParam(defaultValue = "0") int page,
@@ -189,39 +188,19 @@ public class OutProgram {
             List<StatusH> tutorials = new ArrayList<StatusH>();
             Pageable paging = PageRequest.of(page, size, sort);
 
-            Page<StatusH> pageTuts = statusHRepo.findByAppId(appId, paging);
+            List<String> statusGet = new ArrayList<String>();
+            statusGet.add("110");
+            statusGet.add("120");
+            statusGet.add("125");
+            statusGet.add("170");
+            statusGet.add("176");
+            statusGet.add("195");
+
+            Page<StatusH> pageTuts = statusHRepo.findByAppIdAndStatusIn(appId, statusGet, paging);
             tutorials = pageTuts.getContent();
 
-            Map<String, Object> response = new HashMap<>();
+            HashMap<String, Object> response = new HashMap<>();
             response.put("statusAppHistoryList", tutorials);
-            response.put("currentPage", pageTuts.getNumber());
-            response.put("totalItems", pageTuts.getTotalElements());
-            response.put("totalPages", pageTuts.getTotalPages());
-
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    /************************(AppId бўйча Aриза StatusHistory ларни беради)****************************/
-    @GetMapping("/tutorials/historyrollback")
-    public ResponseEntity<Map<String, Object>> findByAppIdToAppByStatusHistoryRollBack(
-            @RequestParam(required = false) String appId,
-            @RequestParam(required = false) String statusHId,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "50") int size
-    ) {
-        try {
-            List<RollBackApp> tutorials = new ArrayList<>();
-            Optional<Apps> apps = appsRepo.findById(appId);
-            Pageable paging = PageRequest.of(page, size);
-            Page<RollBackApp> pageTuts = rollBackAppRepo.findByAppIdAndStatusHId(appId, statusHId, paging);
-            tutorials = pageTuts.getContent();
-
-            Map<String, Object> response = new HashMap<>();
-            response.put("rollBackAppList", tutorials);
-            response.put("rollBackComment", apps.get().getComment());
             response.put("currentPage", pageTuts.getNumber());
             response.put("totalItems", pageTuts.getTotalElements());
             response.put("totalPages", pageTuts.getTotalPages());
@@ -258,12 +237,16 @@ public class OutProgram {
     public ResponseEntity<Map<String, Object>> findByInDec(
             @RequestParam(required = false) String appNum,
             @RequestParam(required = false) String hsCode,
+            @RequestParam(required = false) String tradeName,
+            @RequestParam(required = false) String terms,
+            @RequestParam(required = false) String method,
             @RequestParam(required = false) String inDecNum,
             @RequestParam(required = false) String StartDate,
             @RequestParam(required = false) String EndDate,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "50") int size) {
         try {
+            String terResl = "";
             java.sql.Date insTimeStart = null;
             java.sql.Date insTimeEnd = null;
             if (!Objects.equals(StartDate, "") && StartDate != null){
@@ -272,9 +255,21 @@ public class OutProgram {
             if (!Objects.equals(EndDate, "") && EndDate != null){
                 insTimeEnd = Date.valueOf(EndDate);
             }
+            if (!terms.equals("") && terms != null){
+                terResl = String.valueOf(terms);
+            }
             List<InDec> tutorials = new ArrayList<>();
             Pageable paging = PageRequest.of(page, size);
-            Page<InDec> pageTuts = inDecRepo.findAllByCmdtId(appNum, hsCode, inDecNum, insTimeStart, insTimeEnd, paging);
+            Page<InDec> pageTuts = inDecRepo.findAllByCmdtId(
+                    appNum,
+                    hsCode,
+                    tradeName,
+                    terResl,
+                    method,
+                    inDecNum,
+                    insTimeStart,
+                    insTimeEnd,
+                    paging);
             tutorials = pageTuts.getContent();
 
             Map<String, Object> response = new HashMap<>();

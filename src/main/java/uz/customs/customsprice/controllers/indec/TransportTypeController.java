@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import uz.customs.customsprice.entity.InitialDecision.TransportType;
-import uz.customs.customsprice.service.TransportTypeService;
+import uz.customs.customsprice.service.catalog.TransportTypeService;
 
 
 @Controller

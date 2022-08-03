@@ -196,10 +196,16 @@ public class forHtml {
     @Column(name = "zapas10", columnDefinition = " VARCHAR(400) CCSID 1208")
     private String zapas10;
 
+    @Column(name = "zapas11", columnDefinition = " VARCHAR(400) CCSID 1208")
+    private String zapas11;
+
+    @Column(name = "zapas12", columnDefinition = " VARCHAR(400) CCSID 1208")
+    private String zapas12;
+
     public forHtml() {
     }
 
-    public forHtml(String id, String title, String title2, String name1, String name2, String name3, String name4, String name5, String name6, String tableb1, String tableb2, String tableb3, String tableb4, String tableb5, String tableb6, String tableb7, String tableb8, String tableb9, String tableb10, String tableb11, String tableb12, String tableb13, String tableb14, String tableb15, String tableb16, String tableb17, String tableb18, String tableb19, String tableb20, String tableb21, String tableb22, String name7, String name8, String name9, String tablei1, String tablei2, String tablei3, String tablei4, String tablei5, String tablei6, String tablei7, String name10, String name11, String tableu1, String tableu2, String tableu3, String tableu4, String name12, String name13, String name13_1, String comment1, String comment2, String zapas1, String zapas2, String zapas3, String zapas4, String zapas5, String zapas6, String zapas7, String zapas8, String zapas9, String zapas10) {
+    public forHtml(String id, String title, String title2, String name1, String name2, String name3, String name4, String name5, String name6, String tableb1, String tableb2, String tableb3, String tableb4, String tableb5, String tableb6, String tableb7, String tableb8, String tableb9, String tableb10, String tableb11, String tableb12, String tableb13, String tableb14, String tableb15, String tableb16, String tableb17, String tableb18, String tableb19, String tableb20, String tableb21, String tableb22, String name7, String name8, String name9, String tablei1, String tablei2, String tablei3, String tablei4, String tablei5, String tablei6, String tablei7, String name10, String name11, String tableu1, String tableu2, String tableu3, String tableu4, String name12, String name13, String name13_1, String comment1, String comment2, String zapas1, String zapas2, String zapas3, String zapas4, String zapas5, String zapas6, String zapas7, String zapas8, String zapas9, String zapas10, String zapas11, String zapas12) {
         this.id = id;
         this.title = title;
         this.title2 = title2;
@@ -262,6 +268,8 @@ public class forHtml {
         this.zapas8 = zapas8;
         this.zapas9 = zapas9;
         this.zapas10 = zapas10;
+        this.zapas11 = zapas11;
+        this.zapas12 = zapas12;
     }
 
     public String getId() {
@@ -758,5 +766,21 @@ public class forHtml {
 
     public void setZapas10(String zapas10) {
         this.zapas10 = zapas10;
+    }
+
+    public String getZapas11() {
+        return zapas11;
+    }
+
+    public void setZapas11(String zapas11) {
+        this.zapas11 = zapas11;
+    }
+
+    public String getZapas12() {
+        return zapas12;
+    }
+
+    public void setZapas12(String zapas12) {
+        this.zapas12 = zapas12;
     }
 }

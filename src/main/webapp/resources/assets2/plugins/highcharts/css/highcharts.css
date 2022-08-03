@@ -40,7 +40,7 @@
 }
 
 .highcharts-background {
-  fill: #ffffff;
+  /*fill: #0d75fe;*/
 }
 
 .highcharts-plot-border, .highcharts-plot-background {
@@ -69,12 +69,12 @@
 
 /* Titles */
 .highcharts-title {
-  fill: #333333;
+  fill: #ffffff;
   font-size: 1.5em;
 }
 
 .highcharts-subtitle {
-  fill: #666666;
+  fill: #ffffff;
 }
 
 /* Axes */

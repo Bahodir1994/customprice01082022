@@ -1,4 +1,4 @@
-package uz.etranzitin.esad.Crypt;
+package uz.customs.customsprice.esad.Crypt;
 
 public class Crypt {
 

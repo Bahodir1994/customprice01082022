@@ -486,111 +486,111 @@
 <script src="<%=request.getContextPath()%>/resources/vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
 <script>
-    function appRollback(statusApp) {
-        // alert($('#appId').val() + ', \n ' + $.trim($('#commentRollback').val()));
+    <%--function appRollback(statusApp) {--%>
+    <%--    // alert($('#appId').val() + ', \n ' + $.trim($('#commentRollback').val()));--%>
 
-        var log_f = true;
-        var log_n = '';
-        var arr = [];
-        var vN = '';
+    <%--    var log_f = true;--%>
+    <%--    var log_n = '';--%>
+    <%--    var arr = [];--%>
+    <%--    var vN = '';--%>
 
-        if ($.trim($('#HS_NM_FULLS').val()) == null || $.trim($('#HS_NM_FULLS').val()) == '') {
-            $('#HS_NM_FULLS').css({'border': '1px solid #FF0000'});
-            arr[0] = ' Аризани қайтариш сабабини рўйхатдан танланг ! ';
-            log_f = false;
-        } else {
-            $('#HS_NM_FULLS').css({'border': '1px solid #a6c9e2'});
-            arr[0] = '';
-        }
+    <%--    if ($.trim($('#HS_NM_FULLS').val()) == null || $.trim($('#HS_NM_FULLS').val()) == '') {--%>
+    <%--        $('#HS_NM_FULLS').css({'border': '1px solid #FF0000'});--%>
+    <%--        arr[0] = ' Аризани қайтариш сабабини рўйхатдан танланг ! ';--%>
+    <%--        log_f = false;--%>
+    <%--    } else {--%>
+    <%--        $('#HS_NM_FULLS').css({'border': '1px solid #a6c9e2'});--%>
+    <%--        arr[0] = '';--%>
+    <%--    }--%>
 
-        if ($.trim($('#commentRollback').val()) == null || $.trim($('#commentRollback').val()) == '') {
-            $('#commentRollback').css({'border': '1px solid #FF0000'});
-            arr[1] = ' Аризани қайтариш бўйича қўшимча маълумот киритилмаган, илтимос майдонни тўлдиринг ! ';
-            log_f = false;
-        } else if ($.trim($('#commentRollback').val()).length > 200) {
-            $('#commentRollback').css({'border': '1px solid #FF0000'});
-            arr[1] = ' Аризани қайтариш сабаби майдонининг узунлиги 250 та белгидан ошмаслиги лозим ! ';
-            log_f = false;
-        } else {
-            $('#commentRollback').css({'border': '1px solid #a6c9e2'});
-            arr[1] = '';
-        }
+    <%--    if ($.trim($('#commentRollback').val()) == null || $.trim($('#commentRollback').val()) == '') {--%>
+    <%--        $('#commentRollback').css({'border': '1px solid #FF0000'});--%>
+    <%--        arr[1] = ' Аризани қайтариш бўйича қўшимча маълумот киритилмаган, илтимос майдонни тўлдиринг ! ';--%>
+    <%--        log_f = false;--%>
+    <%--    } else if ($.trim($('#commentRollback').val()).length > 200) {--%>
+    <%--        $('#commentRollback').css({'border': '1px solid #FF0000'});--%>
+    <%--        arr[1] = ' Аризани қайтариш сабаби майдонининг узунлиги 250 та белгидан ошмаслиги лозим ! ';--%>
+    <%--        log_f = false;--%>
+    <%--    } else {--%>
+    <%--        $('#commentRollback').css({'border': '1px solid #a6c9e2'});--%>
+    <%--        arr[1] = '';--%>
+    <%--    }--%>
 
 
-        for (var i = 0; i <= 1; i++) {
-            if (arr[i] != '' && !log_f) {
-                log_n = log_n + arr[i] + '\n\n';
-            }
-        }
+    <%--    for (var i = 0; i <= 1; i++) {--%>
+    <%--        if (arr[i] != '' && !log_f) {--%>
+    <%--            log_n = log_n + arr[i] + '\n\n';--%>
+    <%--        }--%>
+    <%--    }--%>
 
-        if (log_n != '') {
-            alert(log_n + '');
-        }
+    <%--    if (log_n != '') {--%>
+    <%--        alert(log_n + '');--%>
+    <%--    }--%>
 
-        if (log_f) {
+    <%--    if (log_f) {--%>
 
-            var dataS = {
-                "appId": $('#appId').val(),
-                "commentRollback": $.trim($('#commentRollback').val()),
-                "rollback_ids": $.trim($('#HS_CD_FULL').val()),
-                "rollback_names": $.trim($('#HS_NM_FULL').val()),
-                "statusApp": statusApp
-            }
+    <%--        var dataS = {--%>
+    <%--            "appId": $('#appId').val(),--%>
+    <%--            "commentRollback": $.trim($('#commentRollback').val()),--%>
+    <%--            "rollback_ids": $.trim($('#HS_CD_FULL').val()),--%>
+    <%--            "rollback_names": $.trim($('#HS_NM_FULL').val()),--%>
+    <%--            "statusApp": statusApp--%>
+    <%--        }--%>
 
-            /*-------------------------------*/
+    <%--        /*-------------------------------*/--%>
 
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: false
-            })
+    <%--        const swalWithBootstrapButtons = Swal.mixin({--%>
+    <%--            customClass: {--%>
+    <%--                confirmButton: 'btn btn-success',--%>
+    <%--                cancelButton: 'btn btn-danger'--%>
+    <%--            },--%>
+    <%--            buttonsStyling: false--%>
+    <%--        })--%>
 
-            swalWithBootstrapButtons.fire({
-                title: 'Аризани қайтаришни хоҳлайсизми?',
-                text: "Сиз ушбу ариза бўйича қарор қабул қилмоқдасиз!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Ха, ариза қайтарилади!',
-                cancelButtonText: 'Йўқ, қайта кўриб чиқаман!',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    swalWithBootstrapButtons.fire(
-                        'Ариза қайтарилди!',
-                        'Ушбу ариза божхона қонуни талабларига мос эмас деб топилди',
-                        'success'
-                    )
-                    $.ajax({
-                        type: "POST",
-                        data: dataS,
-                        url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRollBack",
-                        dataType: "html",
-                        header: 'Content-type: text/html; charset=utf-8',
-                        success: function (res) {
-                            var typeMessage = '';
-                            $('div#MainContent').html(res);
-                        },
-                        error: function (res) {
-                        }
-                    });
-                } else if (
-                    /* Read more about handling dismissals below */
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                        'Амал рад этилди!',
-                        'Сақлаш амалга оширилмади',
-                        'error'
-                    )
-                }
-            })
+    <%--        swalWithBootstrapButtons.fire({--%>
+    <%--            title: 'Аризани қайтаришни хоҳлайсизми?',--%>
+    <%--            text: "Сиз ушбу ариза бўйича қарор қабул қилмоқдасиз!",--%>
+    <%--            icon: 'warning',--%>
+    <%--            showCancelButton: true,--%>
+    <%--            confirmButtonText: 'Ха, ариза қайтарилади!',--%>
+    <%--            cancelButtonText: 'Йўқ, қайта кўриб чиқаман!',--%>
+    <%--            reverseButtons: true--%>
+    <%--        }).then((result) => {--%>
+    <%--            if (result.isConfirmed) {--%>
+    <%--                swalWithBootstrapButtons.fire(--%>
+    <%--                    'Ариза қайтарилди!',--%>
+    <%--                    'Ушбу ариза божхона қонуни талабларига мос эмас деб топилди',--%>
+    <%--                    'success'--%>
+    <%--                )--%>
+    <%--                $.ajax({--%>
+    <%--                    type: "POST",--%>
+    <%--                    data: dataS,--%>
+    <%--                    url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRollBack",--%>
+    <%--                    dataType: "html",--%>
+    <%--                    header: 'Content-type: text/html; charset=utf-8',--%>
+    <%--                    success: function (res) {--%>
+    <%--                        var typeMessage = '';--%>
+    <%--                        $('div#MainContent').html(res);--%>
+    <%--                    },--%>
+    <%--                    error: function (res) {--%>
+    <%--                    }--%>
+    <%--                });--%>
+    <%--            } else if (--%>
+    <%--                /* Read more about handling dismissals below */--%>
+    <%--                result.dismiss === Swal.DismissReason.cancel--%>
+    <%--            ) {--%>
+    <%--                swalWithBootstrapButtons.fire(--%>
+    <%--                    'Амал рад этилди!',--%>
+    <%--                    'Сақлаш амалга оширилмади',--%>
+    <%--                    'error'--%>
+    <%--                )--%>
+    <%--            }--%>
+    <%--        })--%>
 
-        } else return false;
+    <%--    } else return false;--%>
 
-        /*------------------------------*/
-    }
+    <%--    /*------------------------------*/--%>
+    <%--}--%>
 
     function appRollbackToFix(statusApp) {
         // alert($('#appId').val() + ', \n ' + $.trim($('#commentRollback').val()));

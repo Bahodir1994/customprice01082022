@@ -147,7 +147,7 @@
                     dataType: "html",
                     header: 'Content-type: text/html; charset=utf-8',
                     success: function (res) {
-                        $('div#MainContent').html(res);
+                        ListInDec("koribChiqilmoqda")
                     },
                     error: function (res) {
                     }
@@ -203,7 +203,7 @@
                     dataType: "html",
                     header: 'Content-type: text/html; charset=utf-8',
                     success: function (res) {
-                        $('div#MainContent').html(res);
+                        ListInDec("raxbariyatda")
                     },
                     error: function (res) {
                     }
@@ -259,7 +259,7 @@
                     dataType: "html",
                     header: 'Content-type: text/html; charset=utf-8',
                     success: function (res) {
-                        $('div#MainContent').html(res);
+                        ListInDec('qabulQilinganDastlabkiQaror');
                     },
                     error: function (res) {
                     }
@@ -315,7 +315,7 @@
 
     }
 </script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="<%=request.getContextPath()%>/resources/js/swalSweetalert.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

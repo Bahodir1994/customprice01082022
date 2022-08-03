@@ -13,14 +13,21 @@ import uz.customs.customsprice.controllers.api.files.AppsAndDocsAndTransportsDTO
 import uz.customs.customsprice.controllers.api.helper.ResponseHandler;
 import uz.customs.customsprice.entity.InitialDecision.*;
 import uz.customs.customsprice.entity.classifier.TransportS;
-import uz.customs.customsprice.entity.classifier.TransportTypeS;
 import uz.customs.customsprice.entity.earxiv.Earxiv;
 import uz.customs.customsprice.repository.EarxivRepo;
 import uz.customs.customsprice.repository.TransportTypeRepo;
 import uz.customs.customsprice.repository.classifier.TransportSRepository;
 import uz.customs.customsprice.repository.classifier.TransportTypeSRepo;
-import uz.customs.customsprice.service.*;
+import uz.customs.customsprice.service.apps.AppsService;
+import uz.customs.customsprice.service.catalog.ConturyService;
+import uz.customs.customsprice.service.catalog.LocationService;
+import uz.customs.customsprice.service.catalog.TermsService;
+import uz.customs.customsprice.service.catalog.TransportTypeService;
 import uz.customs.customsprice.service.earxiv.EarxivService;
+import uz.customs.customsprice.service.person.PersonsService;
+import uz.customs.customsprice.service.status.StatusHService;
+import uz.customs.customsprice.service.status.StatusMService;
+import uz.customs.customsprice.service.status.StatusService;
 import uz.customs.customsprice.utils.Utils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -144,13 +151,11 @@ public class ApiAppsController {
                 apps.setSenderCountryNm(country.getCdNm());
                 Location location = locationService.getById(apps.getLocationId());
                 apps.setLocationNm(location.getName1());
-//                apps.setStatus(100);
-//                Status status = statusService.getById(100);
-//                apps.setStatusNm(status.getName());
+
                 Terms terms = termsService.findByIdAndLngaTpcd(apps.getTerms(), "UZ");
                 apps.setTermsNm(terms.getSign());
                 apps.setInsUser(personsIdGet.get().getTin());
-                appsService.saveApps(apps);
+                appsService.saveAppsS(apps);
                 apps.getId();
                 for (TransportType type : transportTypes) {
                     Optional<Apps> appIdGet = Optional.ofNullable(appsService.findById(apps.getId()));
@@ -245,6 +250,7 @@ public class ApiAppsController {
             }
         }
     }
+
     @PostMapping("/updateappsrestapi")
     public ResponseEntity<Object> updatevalue(@RequestBody AppsAndDocsAndTransportsDTO appsAndDocsAndTransportsDTO, HttpServletRequest request, BindingResult br) {
         Map<Integer, Object> errorTransportType = new HashMap<>();
@@ -270,11 +276,9 @@ public class ApiAppsController {
             obj.put("status", "400");
             return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
         }
-        /*1*/
+
         Apps apps = appsAndDocsAndTransportsDTO.getApps();
-        /*2*/
         List<TransportType> transportTypes = appsAndDocsAndTransportsDTO.getTransports();
-        /*3*/
         List<Earxiv> earxivS = appsAndDocsAndTransportsDTO.getDocs();
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -332,47 +336,33 @@ public class ApiAppsController {
             }
             obj.put("status", "400");
             return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
-        } else {
+        }
+        else {
             Optional<Persons> personsIdGet = personsService.getById(apps.getPersonId());
             Apps appsUpdate = appsService.findById(apps.getId());
             if (personsIdGet.isPresent() && appsUpdate != null) {
                 /******************************************(Apps update all by appId)**********************************/
-//                appsUpdate.setId(apps.getId());
-                appsUpdate.setPersonId(apps.getPersonId());
-                appsUpdate.setCustomerCountry(apps.getCustomerCountry());
-                appsUpdate.setSenderCountry(apps.getSenderCountry());
-                appsUpdate.setSenderOrg(apps.getSenderOrg());
-                appsUpdate.setSellerOrg(apps.getSellerOrg());
-                appsUpdate.setTerms(apps.getTerms());
-                appsUpdate.setTermsAddr(apps.getTermsAddr());
-                appsUpdate.setPersonFio(apps.getPersonFio());
-                appsUpdate.setOrgName(apps.getOrgName());
-                appsUpdate.setPersonPosition(apps.getPersonPosition());
-                appsUpdate.setPersonAddr(apps.getPersonAddr());
-                appsUpdate.setPersonTin(apps.getPersonTin());
-                appsUpdate.setPersonPin(apps.getPersonPin());
-                appsUpdate.setPersonMail(apps.getPersonMail());
-                appsUpdate.setPersonPhone(apps.getPersonPhone());
-                appsUpdate.setLocationId(apps.getLocationId());
-                appsUpdate.setTransExp(apps.getTransExp());
-                /*4*/
-                /*1*/
+                List<Apps> apps1 = appsService.getByAppNum(appsUpdate.getAppNum());
+                int versionNum = 0;
+                versionNum = 1 + apps1.size();
+                apps.setId(null);
+
                 Country country = conturyService.getByCodeAndLngaTpcd(apps.getCustomerCountry(), "UZ");
-                appsUpdate.setCustomerCountryNm(country.getCdNm());
-                /*2*/
+                apps.setCustomerCountryNm(country.getCdNm());
                 country = conturyService.getByCodeAndLngaTpcd(apps.getSenderCountry(), "UZ");
-                appsUpdate.setSenderCountryNm(country.getCdNm());
-                /*3*/
+                apps.setSenderCountryNm(country.getCdNm());
                 Location location = locationService.getById(apps.getLocationId());
-                appsUpdate.setLocationNm(location.getName1());
-                /*5*/
+                apps.setLocationNm(location.getName1());
+                apps.setVersionNum(String.valueOf(versionNum));
+
                 Terms terms = termsService.findByIdAndLngaTpcd(apps.getTerms(), "UZ");
-                appsUpdate.setTermsNm(terms.getSign());
-                /*6*/
-                appsUpdate.setInsUser(personsIdGet.get().getTin());
-                appsService.saveAppsOne(appsUpdate);
+                apps.setTermsNm(terms.getSign());
+                apps.setInsUser(personsIdGet.get().getTin());
+                apps.setAppNum(appsUpdate.getAppNum());
+                appsService.saveAppsOne(apps);
+
                 /*************(TransportType delete all by appId and save new transporttype Lists)*********************/
-                transportTypeRepo.deleteAllByAppId(appsUpdate.getId());
+//                transportTypeRepo.deleteAllByAppId(appsUpdate.getId());
                 for (TransportType type : transportTypes) {
                     Optional<Apps> appIdGet = Optional.ofNullable(appsService.findById(appsUpdate.getId()));
                     if (appIdGet.isPresent()) {
@@ -398,7 +388,7 @@ public class ApiAppsController {
                     }
                 }
                 /********************(Earxiv delete all by appId and save new Earxiv Lists)****************************/
-                earxivRepo.deleteAllByAppId(appsUpdate.getId());
+//                earxivRepo.deleteAllByAppId(appsUpdate.getId());
                 for (int i = 0; i < earxivS.size(); i++) {
                     Earxiv earxiv = new Earxiv();
                     List<Object[]> fileList = earxivService.getFile1(earxivS.get(i).getFileId());
@@ -454,7 +444,7 @@ public class ApiAppsController {
                 }
                 JSONObject obj = new JSONObject();
                 obj.put("message", "Success");
-                obj.put("data", appsUpdate);
+                obj.put("data", apps);
                 obj.put("status", "200");
                 ResponseEntity.status(0);
                 return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);

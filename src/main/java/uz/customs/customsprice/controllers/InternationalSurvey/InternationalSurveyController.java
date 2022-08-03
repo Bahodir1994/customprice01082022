@@ -23,10 +23,10 @@ import uz.customs.customsprice.repository.CountyRepo;
 import uz.customs.customsprice.repository.InternationalSurveyRepo.DirectionTypeRepo;
 import uz.customs.customsprice.repository.InternationalSurveyRepo.InternationalSurveyRepo;
 import uz.customs.customsprice.repository.LocationRepo;
-import uz.customs.customsprice.service.ConturyService;
-import uz.customs.customsprice.service.InternationalSurveyS.DirectionTypeService;
-import uz.customs.customsprice.service.InternationalSurveyS.ExcelService;
-import uz.customs.customsprice.service.InternationalSurveyS.InternationalSurveyService;
+import uz.customs.customsprice.service.catalog.ConturyService;
+import uz.customs.customsprice.service.internationalSurveyS.DirectionTypeService;
+import uz.customs.customsprice.service.internationalSurveyS.ExcelService;
+import uz.customs.customsprice.service.internationalSurveyS.InternationalSurveyService;
 
 
 import javax.servlet.http.HttpServletRequest;

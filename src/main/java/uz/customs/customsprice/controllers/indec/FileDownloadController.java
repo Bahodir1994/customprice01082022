@@ -1,10 +1,9 @@
 package uz.customs.customsprice.controllers.indec;
 
 
-import org.hibernate.engine.jdbc.internal.BinaryStreamImpl;
-import org.springframework.data.repository.query.Param;
+import com.itextpdf.text.DocumentException;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -13,15 +12,11 @@ import uz.customs.customsprice.entity.earxiv.DBFile;
 import uz.customs.customsprice.entity.earxiv.Earxiv;
 import uz.customs.customsprice.service.earxiv.DBFileService;
 import uz.customs.customsprice.service.earxiv.EarxivService;
+import uz.customs.customsprice.service.makerJasper.PdfGenerateService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Decoder;
-import javax.websocket.Encoder;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.Base64;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 
 @Controller

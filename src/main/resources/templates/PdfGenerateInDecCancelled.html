@@ -7,8 +7,13 @@
 
         @page {
             size: A4;
-            margin-top: 0;
-            margin-bottom: 0;
+            margin: .5in .5in .5in .5in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+        div.Section1 {
+            page: Section1;
         }
 
         * {
@@ -113,67 +118,38 @@
                 <td style="width: 50%; border:1px dashed black; text-align: center" th:text="${inDec.inDecNum} + '/' + ${inDec.inDecDate}"></td>
             </tr>
             <tr>
-                <td style="width: 100%" colspan="5">
+                <td style="width: 100%; min-height: 400px!important; vertical-align: top!important;" colspan="5">
                     <ol><li value="5" th:text="${htmlData2.get().getName5()}">Бекор қилинган дастлабки қарорда кўрсатилган товар номи</li></ol>
-                    <table style="width: 100%; border-top: 0px dashed #e2efd9; border-bottom: 0px dashed #e2efd9; border-left: 0px; border-right: 0px">
-                        <tr style="border: 0;">
-                            <td style="background-color: #e2efd9; border: 0px; width: auto"><b th:text="${htmlData.get().getTableb1()}">Тижорат номи:</b>
-                                <p th:text="${cmdt.get().getTradeName()}" style="margin-top: 0; margin-bottom: 0"></p></td>
-                            <td style="background-color: #e2efd9; border: 0px"><b th:text="${htmlData.get().getTableb2()}">Савдо белгиси:</b>
-                                <p th:text="${cmdt.get().getTradeMark()}" style="margin-top: 0; margin-bottom: 0"></p></td>
-                            <td style="background-color: #e2efd9; border: 0px"><b th:text="${htmlData.get().getTableb3()}">Маркаси:</b>
-                                <p th:text="${cmdt.get().getMark()}" style="margin-top: 0; margin-bottom: 0"></p></td>
-                            <td style="background-color: #e2efd9; border: 0px"><b th:text="${htmlData.get().getTableb4()}">Модели:</b>
-                                <p th:text="${cmdt.get().getModel()}" style="margin-top: 0; margin-bottom: 0"></p></td>
-                            <td style="background-color: #e2efd9; border: 0px"><b th:text="${htmlData.get().getTableb5()}">Артикули:</b>
-                                <p th:text="${cmdt.get().getArticle()}" style="margin-top: 0; margin-bottom: 0"></p></td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: #ffff; border: 0px"><b th:text="${htmlData.get().getTableb6()}">Нави:</b><br>
-                                <p th:text="${cmdt.get().getSort()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                            <td style="background-color: #ffff; border: 0px"><b th:text="${htmlData.get().getTableb7()}">Стандарти:</b><br>
-                                <p th:text="${cmdt.get().getStandarts()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                            <td style="background-color: #ffff; border: 0px"><b th:text="${htmlData.get().getTableb8()}">Фойдаланиш мақсади:</b><br>
-                                <p th:text="${cmdt.get().getProductGoal()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                            <td style="background-color: #ffff; border: 0px"><b th:text="${htmlData.get().getTableb9()}">Тижорат хцусусияти:</b><br>
-                                <p th:text="${cmdt.get().getComProp()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                            <td style="background-color: #ffff; border: 0px"><b th:text="${htmlData.get().getTableb10()}">Техник хусусияти:</b><br>
-                                <p th:text="${cmdt.get().getTechChar()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb11()}">Ўрам тури:</b><br>
-                                <p th:text="${cmdt.get().getPackTypeNm()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                            <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb12()}">Урамлар сони:</b><br>
-                                <p th:text="${cmdt.get().getPackQty()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                            <td style="background-color: #ffff;"><b th:text="${htmlData.get().getZapas4()}">Божхона қиймати</b><br>
-                                <p th:text="${#numbers.formatCurrency(cmdt.get().getCustomsPrice())}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                            <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb14()}">Фактура киймати:</b><br>
-                                <p th:text="${#numbers.formatCurrency(cmdt.get().getPrice())}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                            <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb15()}">Валюта коди:</b><br>
-                                <p th:text="${cmdt.get().getCurrencyType()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb13()}">Юк жойларининг умумий сони:</b><br>
-                                <p th:text="${cmdt.get().getCargoSpace()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                            <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb16()}">Брутто:</b><br>
-                                <p th:text="${#numbers.formatDecimal(cmdt.get().getBrutto(), 0, 'COMMA', 3, 'POINT')}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                            <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb17()}">Нетто:</b><br>
-                                <p th:text="${#numbers.formatDecimal(cmdt.get().getNetto(), 0, 'COMMA', 3, 'POINT')}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                            <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb18()}">Қўш. ўл.бир. миқ.</b><br>
-                                <p th:text="${cmdt.get().getExtraQty()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                            <td style="background-color: #ffff;" colspan="2"><b th:text="${htmlData.get().getTableb19()}">Қўш. ўл.бир. коди:</b><br>
-                                <p th:text="${cmdt.get().getExtraUnits()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: #e2efd9; border: 0px" colspan="5"><b th:text="${htmlData.get().getTableb20()}">Қўшимча:</b><br>
-                                <p th:text="${cmdt.get().getExtraInfo()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: #ffff; border: 0px" colspan="3"><b th:text="${htmlData.get().getTableb21()}">Илгари берилган БТ бўйича дастлабки қарор:</b><br>
-                                <p th:text="${cmdt.get().getHsDecNum()} + '/' + ${cmdt.get().getHsDecDate()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                            <td style="background-color: #ffff; border: 0px" colspan="2"><b th:text="${htmlData.get().getTableb22()}">ТИФ ТН бўйича дастлабки қарор:</b><br>
-                                <p th:text="${cmdt.get().getInDecNum()} + '/' + ${cmdt.get().getInDecDate()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                        </tr>
+                        <table style="width: 100%; border-top: 0px dashed #e2efd9; border-bottom: 1px dashed #e2efd9; border-left: 0px; border-right: 0px; margin-left: 5px!important; margin-right: 5px!important;">
+                            <thead>
+                                    <tr>
+                                        <th style="border: 0px">
+                                        </th>
+                                        <th style="border: 0px">
+                                            T/p
+                                        </th>
+                                        <th style="border: 0px" th:text="${htmlData.get().getZapas12()}">
+                                          Товар ТИФ ТН коди:
+                                        </th>
+                                        <th style="border: 0px; width: auto" th:text="${htmlData.get().getTableb1()}">
+                                           Тижорат номи:
+                                        </th>
+                                        <th style="border: 0px">
+                                        </th>
+                                        <th style="border: 0px">
+                                        </th>
+                                    </tr>
+                            </thead>
+                            <tbody>
+                                    <tr style="border-bottom: 1px dashed #e2efd9!important;" th:each="cmdts, iterStat: ${cmdt}">
+                                        <td style=""></td>
+                                        <td style="border-bottom: 0.5px dashed #090909;" th:text="${iterStat.count}"></td>
+                                        <td style="border-bottom: 0.5px dashed #090909;" th:text="${cmdts.getHsCode()}"></td>
+                                        <td style="border-bottom: 0.5px dashed #090909;" th:text="${cmdts.getTradeName()}"></td>
+                                        <td style=""></td>
+                                        <td style=""></td>
+                                    </tr>
+                            </tbody>
                     </table>
                 </td>
             </tr>
@@ -216,9 +192,9 @@
     </div>
 </div>
 
-<div class="row" style="margin-top: 250px!important">
 
-    <div class="col-md-12 watermark2">
+<div class="row" style="margin-top: 80px!important">
+    <div class="col-md-12 watermark">
         <div class="row">
             <table>
                 <tr>
@@ -246,7 +222,7 @@
                 </thead>
             </table>
             <div class="col-md-12" style="min-width:300px; overflow-x: auto">
-                <table style=" width: 100%; margin-left: auto; margin-right: auto;">
+                <table id="asdasdsadw" style="margin-left: auto; margin-right: auto;">
                     <tbody>
                     <tr>
                         <td class="tg-oi4f" colspan="2"><b th:text="${htmlData.get().getName1()}">1. Дастлабки қарорни рўйхатга олиш рақами ва санаси:</b></td>
@@ -278,131 +254,144 @@
                         <td class="tg-aboz" th:text="${{inDec.getInDecEndDate()}}"></td>
                     </tr>
                     <tr>
-                        <td class="tg-oi4f" colspan="2"><b th:text="${htmlData.get().getName5()}">5. Товарнинг ТИФ ТН коди:</b></td>
-                        <td class="tg-aboz" th:text="${inDec.getHsCode()}"></td>
-                    </tr>
-                    <tr>
-                        <td class="tg-oi4f" colspan="3"><b th:text="${htmlData.get().getName6()}">6. Товарлар номи ва тавсифи:</b>
-                            <!--                            <p th:text="'ТИФ ТН бўйича товар номи:' + ${inDec.getHsName()}" style="margin-top: 0; font-style: italic;"></p>-->
-                        </td>
-                    </tr>
-                    <tr>
                         <td colspan="3">
-                            <table style="width: 100%;  border-top: 1px solid #e2efd9; border-bottom: 1px solid #e2efd9;">
-                                <tr>
-                                    <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb1()}">Тижорат номи:</b>
-                                        <p th:text="${cmdt.get().getTradeName()}" style="margin-top: 0; margin-bottom: 0"></p></td>
-                                    <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb2()}">Савдо белгиси:</b>
-                                        <p th:text="${cmdt.get().getTradeMark()}" style="margin-top: 0; margin-bottom: 0"></p></td>
-                                    <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb3()}">Маркаси:</b>
-                                        <p th:text="${cmdt.get().getMark()}" style="margin-top: 0; margin-bottom: 0"></p></td>
-                                    <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb4()}">Модели:</b>
-                                        <p th:text="${cmdt.get().getModel()}" style="margin-top: 0; margin-bottom: 0"></p></td>
-                                    <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb5()}">Артикули:</b>
-                                        <p th:text="${cmdt.get().getArticle()}" style="margin-top: 0; margin-bottom: 0"></p></td>
-                                </tr>
-                                <tr>
-                                    <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb6()}">Нави:</b><br>
-                                        <p th:text="${cmdt.get().getSort()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                    <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb7()}">Стандарти:</b><br>
-                                        <p th:text="${cmdt.get().getStandarts()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                    <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb8()}">Фойдаланиш мақсади:</b><br>
-                                        <p th:text="${cmdt.get().getProductGoal()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                    <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb9()}">Тижорат хцусусияти:</b><br>
-                                        <p th:text="${cmdt.get().getComProp()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                    <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb10()}">Техник хусусияти:</b><br>
-                                        <p th:text="${cmdt.get().getTechChar()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                </tr>
-                                <tr>
-                                    <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb11()}">Ўрам тури:</b><br>
-                                        <p th:text="${cmdt.get().getPackTypeNm()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                    <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb12()}">Урамлар сони:</b><br>
-                                        <p th:text="${cmdt.get().getPackQty()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                    <td style="background-color: #ffff;"><b th:text="${htmlData.get().getZapas4()}">Божхона қиймати</b><br>
-                                        <p th:text="${#numbers.formatCurrency(cmdt.get().getCustomsPrice())}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                    <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb14()}">Фактура киймати:</b><br>
-                                        <p th:text="${#numbers.formatCurrency(cmdt.get().getPrice())}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                    <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb15()}">Валюта коди:</b><br>
-                                        <p th:text="${cmdt.get().getCurrencyType()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                </tr>
-                                <tr>
-                                    <td style="background-color: #e2efd9;"><b th:text="${htmlData.get().getTableb13()}">Юк жойларининг умумий сони:</b><br>
-                                        <p th:text="${cmdt.get().getCargoSpace()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                    <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb16()}">Брутто:</b><br>
-                                        <p th:text="${#numbers.formatDecimal(cmdt.get().getBrutto(), 0, 'COMMA', 3, 'POINT')}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                    <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb17()}">Нетто:</b><br>
-                                        <p th:text="${#numbers.formatDecimal(cmdt.get().getNetto(), 0, 'COMMA', 3, 'POINT')}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                    <td style="background-color: #ffff;"><b th:text="${htmlData.get().getTableb18()}">Қўш. ўл.бир. миқ.</b><br>
-                                        <p th:text="${cmdt.get().getExtraQty()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                    <td style="background-color: #ffff;" colspan="2"><b th:text="${htmlData.get().getTableb19()}">Қўш. ўл.бир. коди:</b><br>
-                                        <p th:text="${cmdt.get().getExtraUnits()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                </tr>
-                                <tr>
-                                    <td style="background-color: #e2efd9;" colspan="5"><b th:text="${htmlData.get().getTableb20()}">Қўшимча:</b><br>
-                                        <p th:text="${cmdt.get().getExtraInfo()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                </tr>
-                                <tr>
-                                    <td style="background-color: #ffff;" colspan="2"><b th:text="${htmlData.get().getTableb21()}">Илгари берилган БТ бўйича дастлабки қарор:</b><br>
-                                        <p th:text="${cmdt.get().getHsDecNum()} + '/' + ${cmdt.get().getHsDecDate()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                    <td style="background-color: #ffff;" colspan="3"><b th:text="${htmlData.get().getTableb22()}">ТИФ ТН бўйича дастлабки қарор:</b><br>
-                                        <p th:text="${cmdt.get().getInDecNum()} + '/' + ${cmdt.get().getInDecDate()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
-                                </tr>
-                            </table>
+                            <div class="divss" th:each="cmdts, iterStat: ${cmdt}" style="border: dotted; border-left: 0px; border-right: 0px; border-bottom: 0px">
+                                <!--                                th:style="${cmdts.getPaymentList().size() > 3 ? 'padding: 20px' : 'padding: 40px'}"-->
+                                <table>
+                                    <tr>
+                                        <td class="tg-oi4f" colspan="2"><b th:text="${htmlData.get().getZapas11()}">5.1 Товарнинг тартиб рақами:</b></td>
+                                        <td class="tg-aboz" th:text="${iterStat.count} +'/'+ ${iterStat.size}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-oi4f" colspan="2"><b th:text="${htmlData.get().getName5()}">Товарнинг ТИФ ТН коди:</b></td>
+                                        <td class="tg-aboz" th:text="${cmdts.getHsCode()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-oi4f" colspan="3"><b th:text="${htmlData.get().getName6()}">6. Товарлар номи ва тавсифи:</b>
+                                            <p th:text="'ТИФ ТН бўйича товар номи:' + ${cmdts.getHsName()}" style="margin-top: 0; font-style: italic;"></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <table style="width: 100%;">
+                                                <tr>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb1()}">Тижорат номи:</b>
+                                                        <p th:text="${cmdts.getTradeName()}" style="margin-top: 0; margin-bottom: 0"></p></td>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb2()}">Савдо белгиси:</b>
+                                                        <p th:text="${cmdts.getTradeMark()}" style="margin-top: 0; margin-bottom: 0"></p></td>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb3()}">Маркаси:</b>
+                                                        <p th:text="${cmdts.getMark()}" style="margin-top: 0; margin-bottom: 0"></p></td>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb4()}">Модели:</b>
+                                                        <p th:text="${cmdts.getModel()}" style="margin-top: 0; margin-bottom: 0"></p></td>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb5()}">Артикули:</b>
+                                                        <p th:text="${cmdts.getArticle()}" style="margin-top: 0; margin-bottom: 0"></p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb6()}">Нави:</b><br>
+                                                        <p th:text="${cmdts.getSort()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb7()}">Стандарти:</b><br>
+                                                        <p th:text="${cmdts.getStandarts()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb8()}">Фойдаланиш мақсади:</b><br>
+                                                        <p th:text="${cmdts.getProductGoal()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb9()}">Тижорат хцусусияти:</b><br>
+                                                        <p th:text="${cmdts.getComProp()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb10()}">Техник хусусияти:</b><br>
+                                                        <p th:text="${cmdts.getTechChar()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb11()}">Ўрам тури:</b><br>
+                                                        <p th:text="${cmdts.getPackTypeNm()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb12()}">Урамлар сони:</b><br>
+                                                        <p th:text="${cmdts.getPackQty()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                    <td style=""><b th:text="${htmlData.get().getZapas4()}">Божхона қиймати</b><br>
+                                                        <p th:text="${#numbers.formatCurrency(cmdts.getCustomsPrice())}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb14()}">Фактура киймати:</b><br>
+                                                        <p th:text="${#numbers.formatCurrency(cmdts.getPrice())}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb15()}">Валюта коди:</b><br>
+                                                        <p th:text="${cmdts.getCurrencyType()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb13()}">Юк жойларининг умумий сони:</b><br>
+                                                        <p th:text="${cmdts.getCargoSpace()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb16()}">Брутто:</b><br>
+                                                        <p th:text="${#numbers.formatDecimal(cmdts.getBrutto(), 0, 'COMMA', 3, 'POINT')}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb17()}">Нетто:</b><br>
+                                                        <p th:text="${#numbers.formatDecimal(cmdts.getNetto(), 0, 'COMMA', 3, 'POINT')}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                    <td style=""><b th:text="${htmlData.get().getTableb18()}">Қўш. ўл.бир. миқ.</b><br>
+                                                        <p th:text="${cmdts.getExtraQty()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                    <td style="" colspan="2"><b th:text="${htmlData.get().getTableb19()}">Қўш. ўл.бир. коди:</b><br>
+                                                        <p th:text="${cmdts.getExtraUnits()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="" colspan="5"><b th:text="${htmlData.get().getTableb20()}">Қўшимча:</b><br>
+                                                        <p th:text="${cmdts.getExtraInfo()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="" colspan="2"><b th:text="${htmlData.get().getTableb21()}">Илгари берилган БТ бўйича дастлабки қарор:</b><br>
+                                                        <p th:text="${cmdts.getHsDecNum()} + '/' + ${cmdts.getHsDecDate()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                    <td style="" colspan="3"><b th:text="${htmlData.get().getTableb22()}">ТИФ ТН бўйича дастлабки қарор:</b><br>
+                                                        <p th:text="${cmdts.getInDecNum()} + '/' + ${cmdts.getInDecDate()}" style="margin-top: 0; margin-bottom: 0"></p></br></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-oi4f" style="margin-top: 0"><b th:text="${htmlData.get().getName7()}">7. Товарларнинг божхона қийматини аниқлаш усули ва уни
+                                            асослаш:</b></td>
+                                        <td class="tg-aboz" colspan="2" style="margin-top: 0"><p th:text="${cmdts.getMethod()} + ' - ' + ${cmdts.getMethodNm()}"></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-oi4f" style="margin-top: 0"><b th:text="${htmlData.get().getName8()}">8. Товарларнинг келиб чиқиш мамлакати ва уни асослаш:</b></td>
+                                        <td class="tg-aboz" colspan="2" style="margin-top: 0"><p th:text="${cmdts.getOriginCountry()} + '-' + ${cmdts.getOrignCountrNm()} + '/ ' + ${cmdts.getOriginOrg()}"></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-oi4f" colspan="3"><b th:text="${htmlData.get().getName9()}">9. Божхона тўловлари ва йиғимлари тўғрисида маълумот:</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <table style="width: 100%;">
+                                                <thead>
+                                                <tr>
+                                                    <th style=" text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei1()}">Код</th>
+                                                    <th style=" text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei2()}">Ҳисоблаш асоси</th>
+                                                    <th style=" text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei3()}">Адвалор Ставка</th>
+                                                    <th style=" text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei4()}">Ҳос ставка</th>
+                                                    <th style=" text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei5()}">Ҳос ставка миқдори</th>
+                                                    <th style=" text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei6()}">Ҳисобланган тўлов</th>
+                                                    <th style=" text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei7()}">Тўлов усули</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="pay: ${cmdts.getPaymentList()}">
+                                                    <td style=" text-align: center" th:text="${pay.getG47Type()}" class="tg-oi4f"></td>
+                                                    <td style=" text-align: center" th:text="${#numbers.formatCurrency(pay.getG47Base())}" class="tg-oi4f"></td>
+                                                    <td style=" text-align: center" th:text="${pay.getG47AltBase()}" class="tg-oi4f"></td>
+                                                    <td style=" text-align: center" th:text="${pay.getG47Rate()}" class="tg-oi4f"></td>
+                                                    <td style=" text-align: center" th:text="${pay.getG47AltRate()}" class="tg-oi4f"></td>
+                                                    <td style=" text-align: center" th:text="${#numbers.formatCurrency(pay.getG47Sum())}" class="tg-oi4f"></td>
+                                                    <td style=" text-align: center" th:text="${pay.getG47Sp()}" class="tg-oi4f"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style=" text-align: center; font-weight: bold; border-width: 1px 0 0 0; border-style: solid;" class="tg-oi4f" colspan="5" rowspan="2" th:text="${htmlData.get().getZapas8()}">Жами:</td>
+                                                    <td style=" text-align: center; font-weight: bold; border-width: 1px 0 0 0; border-style: solid;" th:text="${#numbers.formatCurrency(paymentBN)}"></td>
+                                                    <td style=" text-align: center; font-weight: bold; border-width: 1px 0 0 0; border-style: solid;" th:text="${htmlData.get().getZapas9()}">БН</td>
+                                                </tr>
+                                                <tr>
+                                                    <!--                                    <td style=" text-align: center" class="tg-oi4f" colspan="5" th:text="${htmlData.get().getZapas8()}">Жами:</td>-->
+                                                    <td style=" text-align: center; font-weight: bold;" th:text="${#numbers.formatCurrency(paymentOO)}"></td>
+                                                    <td style=" text-align: center; font-weight: bold;" th:text="${htmlData.get().getZapas10()}">OO</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-oi4f" colspan="2"><b th:text="${htmlData.get().getName10()}">10. Дастлабки қарорни қабул қилиш асослари:</b></td>
+                                        <td th:text="${apps.getAppNum()}" class="tg-aboz"></td>
+                                    </tr>
+                                </table>
+                            </div>
                         </td>
-                    </tr>
-                    <tr>
-                        <td class="tg-oi4f" style="margin-top: 0"><b th:text="${htmlData.get().getName7()}">7. Товарларнинг божхона қийматини аниқлаш усули ва уни
-                            асослаш:</b></td>
-                        <td class="tg-aboz" colspan="2" style="margin-top: 0"><p th:text="${cmdt.get().getMethod()} + ' - ' + ${cmdt.get().getMethodNm()}"></p></td>
-                    </tr>
-                    <tr>
-                        <td class="tg-oi4f" style="margin-top: 0"><b th:text="${htmlData.get().getName8()}">8. Товарларнинг келиб чиқиш мамлакати ва уни асослаш:</b></td>
-                        <td class="tg-aboz" colspan="2" style="margin-top: 0"><p th:text="${cmdt.get().getOriginCountry()} + '-' + ${cmdt.get().getOrignCountrNm()} + '/ ' + ${cmdt.get().getOriginOrg()}"></p></td>
-                    </tr>
-                    <tr>
-                        <td class="tg-oi4f" colspan="3"><b th:text="${htmlData.get().getName9()}">9. Божхона тўловлари ва йиғимлари тўғрисида маълумот:</b></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <table style="width: 100%; border-top: 1px solid #e2efd9; border-bottom: 1px solid #e2efd9;">
-                                <thead>
-                                <tr>
-                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei1()}">Код</th>
-                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei2()}">Ҳисоблаш асоси</th>
-                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei3()}">Ставка</th>
-                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei4()}">Ҳос ставка (асос)</th>
-                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei5()}">Ҳос ставка</th>
-                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei6()}">Ҳисобланган тўлов</th>
-                                    <th style="background-color: #deeaf6; text-align: center" class="tg-oi4f" th:text="${htmlData.get().getTablei7()}">Тўлов усули</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="pay: ${payment}">
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47Type()}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${#numbers.formatCurrency(pay.getG47Base())}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltBase()}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47Rate()}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47AltRate()}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${#numbers.formatCurrency(pay.getG47Sum())}" class="tg-oi4f"></td>
-                                    <td style="background-color: #deeaf6; text-align: center" th:text="${pay.getG47Sp()}" class="tg-oi4f"></td>
-                                </tr>
-                                <tr>
-                                    <td style="background-color: #deeaf6; text-align: center; font-weight: bold; border-width: 1px 0 0 0; border-style: dotted;" class="tg-oi4f" colspan="5" rowspan="2" th:text="${htmlData.get().getZapas8()}">Жами 1:</td>
-                                    <td style="background-color: #deeaf6; text-align: center; font-weight: bold; border-width: 1px 0 0 0; border-style: dotted;" th:text="${#numbers.formatCurrency(paymentBN)}"></td>
-                                    <td style="background-color: #deeaf6; text-align: center; font-weight: bold; border-width: 1px 0 0 0; border-style: dotted;" th:text="${htmlData.get().getZapas9()}">БН</td>
-                                </tr>
-                                <tr>
-                                    <!--                                    <td style="background-color: #deeaf6; text-align: center" class="tg-oi4f" colspan="5" th:text="${htmlData.get().getZapas8()}">Жами:</td>-->
-                                    <td style="background-color: #deeaf6; text-align: center; font-weight: bold;" th:text="${#numbers.formatCurrency(paymentOO)}"></td>
-                                    <td style="background-color: #deeaf6; text-align: center; font-weight: bold;" th:text="${htmlData.get().getZapas10()}">OO</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tg-oi4f" colspan="2"><b th:text="${htmlData.get().getName10()}">10. Дастлабки қарорни қабул қилиш асослари:</b></td>
-                        <td th:text="${inDec.getInDecBasis()}" class="tg-aboz"></td>
                     </tr>
                     <tr>
                         <td class="tg-oi4f" colspan="3"><b th:text="${htmlData.get().getName11()}">11. Манфаатдор шахс томонидан тақдим қилинган маълумотлар ва
@@ -413,18 +402,18 @@
                             <table style="width: 100%; border-top: 1px solid #e2efd9; border-bottom: 1px solid #e2efd9;">
                                 <thead>
                                 <tr>
-                                    <th class="tg-oi4f" style="background-color: #e2efd9; text-align: center" th:text="${htmlData.get().getTableu1()}">Тартиб рақами</th>
-                                    <th class="tg-oi4f" style="background-color: #e2efd9; text-align: center" th:text="${htmlData.get().getTableu2()}">Хужжат тури</th>
-                                    <th class="tg-oi4f" style="background-color: #e2efd9; text-align: center" th:text="${htmlData.get().getTableu3()}">Хужжат рақами</th>
-                                    <th class="tg-oi4f" style="background-color: #e2efd9; text-align: center" th:text="${htmlData.get().getTableu4()}">Хужжат санаси</th>
+                                    <th class="tg-oi4f" style=" text-align: center" th:text="${htmlData.get().getTableu1()}">Тартиб рақами</th>
+                                    <th class="tg-oi4f" style=" text-align: center" th:text="${htmlData.get().getTableu2()}">Хужжат тури</th>
+                                    <th class="tg-oi4f" style=" text-align: center" th:text="${htmlData.get().getTableu3()}">Хужжат рақами</th>
+                                    <th class="tg-oi4f" style=" text-align: center" th:text="${htmlData.get().getTableu4()}">Хужжат санаси</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="doc,iterStat: ${docs}">
-                                    <td style="background-color: #e2efd9; text-align: center" th:text="${iterStat.count}" class="tg-oi4f"></td>
-                                    <td style="background-color: #e2efd9; text-align: center" th:text="${doc.getDocTypeName()}" class="tg-oi4f"></td>
-                                    <td style="background-color: #e2efd9; text-align: center" th:text="${doc.getFileNum()}" class="tg-oi4f"></td>
-                                    <td style="background-color: #e2efd9; text-align: center" th:text="${#dates.format(doc.getFileDate(), 'dd.MM.yyyy')}" class="tg-oi4f"></td>
+                                    <td style=" text-align: center" th:text="${iterStat.count}" class="tg-oi4f"></td>
+                                    <td style=" text-align: center" th:text="${doc.getDocTypeName()}" class="tg-oi4f"></td>
+                                    <td style=" text-align: center" th:text="${doc.getFileNum()}" class="tg-oi4f"></td>
+                                    <td style=" text-align: center" th:text="${#dates.format(doc.getFileDate(), 'dd.MM.yyyy')}" class="tg-oi4f"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -448,7 +437,7 @@
                             <br>
                     <tr>
                         <td style="width: 40%">
-                            <span style="font-weight:bold;" th:text="${htmlData.get().getName13_1()}">Бошқарма раҳбарияти:</span>
+                            <span style="font-weight:bold;" th:text="${htmlData.get().getName13_1()}">Бошқарма раҳбариятии:</span>
                         </td>
                         <td style="width: 60%">
                             <span th:text="${userName}" style="margin-right: auto"></span>
@@ -459,6 +448,7 @@
                     </tr>
                     </tbody>
                 </table>
+
             </div>
             <p style="text-indent: 1.5em!important;">
                 <span th:text="${htmlData.get().getComment1()}">Ушбу маълумотлар</span>
@@ -473,7 +463,6 @@
             </p>
         </div>
     </div>
-    <center><h3 style="color: red; border-style: dotted; font-size: 50px" th:text="${htmlData.get().getZapas3()}">БЕКОР ҚИЛИНГАН</h3></center>
 </div>
 
 </body>

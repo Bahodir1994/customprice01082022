@@ -1,7 +1,7 @@
 package uz.customs.customsprice.service.serviceImpl;
 
 import org.springframework.stereotype.Service;
-import uz.customs.customsprice.service.CostMonitoringService;
+import uz.customs.customsprice.service.classifier.CostMonitoringService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

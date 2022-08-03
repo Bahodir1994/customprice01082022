@@ -147,5 +147,5 @@
 
 </script>
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="<%=request.getContextPath()%>/resources/js/swalSweetalert.js"></script>
 </body>

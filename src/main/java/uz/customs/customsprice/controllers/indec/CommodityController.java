@@ -15,6 +15,13 @@ import uz.customs.customsprice.service.*;
 import uz.customs.customsprice.service.Rate.Rate20Service;
 import uz.customs.customsprice.service.Rate.Rate27NewService;
 import uz.customs.customsprice.service.Rate.Rate29Service;
+import uz.customs.customsprice.service.apps.AppsService;
+import uz.customs.customsprice.service.apps.RollbackSpService;
+import uz.customs.customsprice.service.catalog.ExchangerateService;
+import uz.customs.customsprice.service.commodity.CommodityService;
+import uz.customs.customsprice.service.payment.PaymTypeService;
+import uz.customs.customsprice.service.payment.PaymentServise;
+import uz.customs.customsprice.service.payment.PaymentTypeService;
 import uz.customs.customsprice.utils.Utils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -290,11 +297,9 @@ public class CommodityController {
         ModelAndView mav = new ModelAndView("resources/pages/InitialDecision/InitialDecisionSteps/Steps4");
         ModelAndView mav2 = new ModelAndView("resources/pages/InitialDecision/InitialDecisionSteps/Steps4StatusDefault");
         Integer userRole = (Integer) request.getSession().getAttribute("userRole");
-//        Apps apps = appsservice.findById(appId);
+
         Optional<Commodity> commodityList = commodityService.getById(cmdt_id);
         Apps apps = appsService.findById(appId);
-//        List<Docs> docsList = appsservice.getDocsListAppId(appId);
-//        List<RollbackSp> listRollbackSp = rollbackSpService.getlistRollbackSp();
         List<PaymenttypeEntity> paymenttypeEntityList = paymentTypeService.getListPaymentType();
         List<PaymtypeEntity> paymtypeEntityList = paymTypeService.getListPaymType();
 
@@ -302,16 +307,19 @@ public class CommodityController {
         BigDecimal rate = BigDecimal.valueOf(exchangerate840.getRate()).multiply(BigDecimal.valueOf(exchangerate840.getAmount()));
 
         mav.addObject("commodity", commodityList.get().getHsCode());
-//        mav.addObject("docsList", docsList);
-//        mav.addObject("rollbackInfo", listRollbackSp);
-//        mav.addObject("cmdtId", appId);
         mav.addObject("cmdtId", cmdt_id);
         mav.addObject("appId", appId);
         mav.addObject("paymenttype", paymenttypeEntityList);
         mav.addObject("paymttype", paymtypeEntityList);
         List<Payment> payments = paymentServise.getByCmdtId(cmdt_id);
         Optional<Commodity> commodityTnved = commodityService.getById(cmdt_id);
-        if (payments.isEmpty() && userRole == 8 && apps.getStatus() != 125 && apps.getStatus() != 120) {
+        if (payments.isEmpty() &&
+                userRole == 8 &&
+                apps.getStatus() != 125 &&
+                apps.getStatus() != 120 &&
+                apps.getStatus() != 116 &&
+                apps.getStatus() != 117
+        ) {
             return mav;
         } else {
             mav2.addObject("CmdtPayments", payments);

@@ -24,6 +24,17 @@ import uz.customs.customsprice.repository.PaymentRepo;
 import uz.customs.customsprice.repository.Tpo.PayRepository;
 import uz.customs.customsprice.repository.Tpo.TpoRepository;
 import uz.customs.customsprice.service.*;
+import uz.customs.customsprice.service.apps.AppsService;
+import uz.customs.customsprice.service.catalog.*;
+import uz.customs.customsprice.service.classifier.PackagingService;
+import uz.customs.customsprice.service.commodity.CommodityService;
+import uz.customs.customsprice.service.payment.PaymTypeService;
+import uz.customs.customsprice.service.payment.PaymentServise;
+import uz.customs.customsprice.service.payment.PaymentTypeService;
+import uz.customs.customsprice.service.pdfGenerating.PdfService;
+import uz.customs.customsprice.service.status.StatusHService;
+import uz.customs.customsprice.service.status.StatusMService;
+import uz.customs.customsprice.service.status.StatusService;
 import uz.customs.customsprice.utils.Utils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -120,28 +131,6 @@ public class InDecController {
             apps.setStatusNm(status2.getName());
             appsService.saveAppsStatus(apps);
 
-            /** mav object start **/
-            List<Apps> notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
-            mav.addObject("notSortedListSize", notSortedList.size());
-
-            List<Apps> sortedList = appsservice.getListSorted(request);
-            mav.addObject("sortedListSize", sortedList.size());
-
-            List<InDec> termsList = appsservice.getListInDec(request);
-            mav.addObject("termsListSize", termsList.size());
-
-            List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
-            mav.addObject("termsRollBackListSize", termsRollBackList.size());
-
-            List<Apps> listProcessApp = appsservice.getListProcessApp(request, "115");
-            mav.addObject("listProcessAppSize", listProcessApp.size());
-
-            List<Apps> listSubmittedApp = appsservice.getListProcessApp(request, "145");
-            mav.addObject("listSubmittedAppSize", listSubmittedApp.size());
-
-            List<Apps> listSignedApp = appsservice.getListProcessApp(request, "160");
-            mav.addObject("listSignedAppSize", listSignedApp.size());
-            /** mav object end **/
 
             /**todo ЛОК га ёзиш start todo**/
             StatusM statusM = statusMService.getByAppId(appId);
@@ -311,12 +300,8 @@ public class InDecController {
         apps.setStatusNm(status2.getName());
         appsService.saveAppsStatus(apps);
 
-
-
         /**todo Дастлаки қарор маълумотларини шакиллантириш **/
         inDec.setCmdtId(cmdtId);
-//        inDec.setInDecNum();//?
-//        inDec.setInDecDate();//?
         inDec.setInsUser(userId);
         inDec.setInDecLocation(apps.getLocationId());
         inDec.setInDecLocationNm(apps.getLocationNm());
@@ -336,13 +321,9 @@ public class InDecController {
         System.out.println(cal.getTime());
 
         inDec.setInDecEndDate(cal.getTime());
-//        inDec.setInDecBasis(); //?
-//        inDec.setCommentMarks(); //?
-//        inDec.setCustomsPreference(); //?
-//        inDec.setCustomsPayments(); //?
         inDec.setStatus(status1.getId());
         inDec.setStatusNm(status1.getName());
-        inDecService.saveInDec(inDec, userLocation);
+        inDecService.saveInDecS(inDec, userLocation);
         /** mav object start **/
 
 
@@ -363,32 +344,56 @@ public class InDecController {
         statusHService.saveStatusH(statusH);
         /**todo ЛОК га ёзиш end todo**/
 
+        Apps appsFindChangeProccess = appsService.getByAppNumAndStatus(apps.getAppNum(), 172);
+        if (appsFindChangeProccess != null){
+            appsFindChangeProccess.setStatus(171);
+            Status status = statusService.getById(171);
+            appsFindChangeProccess.setStatusNm(status.getName());
+            appsService.saveAppsOne(appsFindChangeProccess);
 
+            List<Commodity> commodityChange = new ArrayList<>();
+            commodityChange = commodityService.getListAppId(appsFindChangeProccess.getId());
 
-        /**todo PDF GENERATSIYA  **/
-//        pdfService.createPdf(appId, cmdtId, userName);
+            List<Commodity> commodityList = new ArrayList<>();
+            commodityList = commodityService.getListAppId(apps.getId());
+            for (int i = 0; i <commodityChange.size();  i++) {
+                try {
+                    InDec inDecToMark = new InDec();
+                    inDecToMark = inDecService.getByCmtdId(commodityChange.get(i).getId());
+                    if (inDecToMark != null){
+                        inDecToMark.setEndActiv(200);
+                        inDecToMark.setCommentEnded("Дастлабки қарорга ўзгартириш киритиш туфайли бекор қилинди");
+                        inDecService.saveInDecOne(inDecToMark);
 
-        List<Apps> notSortedList = appsservice.getListNotSorted(request, userLocation, userPost, userId, userRole);
-        mav.addObject("notSortedListSize", notSortedList.size());
+                        InDec inDecNewEdit = new InDec();
+                        inDecNewEdit = inDecService.getByCmtdId(commodityList.get(i).getId());
+                        inDecNewEdit.setInDecNum(inDecToMark.getInDecNum());
+                        inDecNewEdit.setInDecDate(inDecToMark.getInDecDate());
+                        inDecNewEdit.setInDecEndDate(inDecToMark.getInDecEndDate());
+                        inDecNewEdit.setStatus(inDecToMark.getStatus());
+                        inDecNewEdit.setStatusNm(inDecToMark.getStatusNm());
 
-        List<Apps> sortedList = appsservice.getListSorted(request);
-        mav.addObject("sortedListSize", sortedList.size());
+                        inDecNewEdit.setG19Base(inDecToMark.getG19Base());
+                        inDecNewEdit.setG19Sum(inDecToMark.getG19Sum());
+                        inDecNewEdit.setG3a(inDecToMark.getG3a());
+                        inDecNewEdit.setG3b(inDecToMark.getG3b());
+                        inDecNewEdit.setG3c(inDecToMark.getG3c());
+                        inDecNewEdit.setPayId(inDecToMark.getPayId());
+                        inDecNewEdit.setStavka(inDecToMark.getStavka());
+                        inDecNewEdit.setTpoId(inDecToMark.getTpoId());
+                        String versionNum = "2";
+                        inDecNewEdit.setVersionNum(versionNum);
+                        inDecNewEdit.setCommentMarks(inDecToMark.getUpdTime().toString().substring(0, 10)+" ("+inDecToMark.getUpdTime().toString().substring(11, 16)+") "+" санада дастлабки қарорга ўзгартириш киритилди");
+                        inDecService.saveInDecOne(inDecNewEdit);
+                    }
+                    return mav;
+                }catch (Exception ee){
+                    System.out.println(ee);
+                    return null;
+                }
+            }
 
-        List<InDec> termsList = appsservice.getListInDec(request);
-        mav.addObject("termsListSize", termsList.size());
-
-        List<InDec> termsRollBackList = appsservice.getListInDecRollBack(request);
-        mav.addObject("termsRollBackListSize", termsRollBackList.size());
-
-        List<Apps> listProcessApp = appsservice.getListProcessApp(request, "115");
-        mav.addObject("listProcessAppSize", listProcessApp.size());
-
-        List<Apps> listSubmittedApp = appsservice.getListProcessApp(request, "145");
-        mav.addObject("listSubmittedAppSize", listSubmittedApp.size());
-
-        List<Apps> listSignedApp = appsservice.getListProcessApp(request, "160");
-        mav.addObject("listSignedAppSize", listSignedApp.size());
-
+            }
         return mav;
     }
 
@@ -410,8 +415,6 @@ public class InDecController {
         Map<String, String> errors = new HashMap<>();
         JSONObject obj = new JSONObject();
 
-//        InDec inDec1 = inDecService.getById(tpoValidDTO.getInDecId());
-
         String g3a = Utils.nullClear(tpoValidDTO.getG3a());
         Date g3b = null;
         if (!Objects.equals(tpoValidDTO.getG3b(), "")) {
@@ -421,7 +424,6 @@ public class InDecController {
         InDec inDec = inDecRepo.findByG3aAndG3bAndG3c(g3a, g3b, g3c);
         InDec inDec1 = inDecService.getById(tpoValidDTO.getInDecId());
 
-//        if (Utils.nullClear(inDec1.getG3a()).equals(g3a) && inDec1.getG3b().equals(g3b) && Utils.nullClear(inDec1.getG3c()).equals(g3c)) {
         if (!Utils.nullClear(inDec).equals("") && Utils.nullClear(inDec.getG3a()).equals(g3a) && inDec.getG3b().equals(g3b) && Utils.nullClear(inDec.getG3c()).equals(g3c)) {
             obj.put("message", "Ушбу БКО бўйича тўлов ундирилган, бошқа БКО киритинг!");
             obj.put("status", HttpStatus.BAD_REQUEST);
@@ -436,7 +438,6 @@ public class InDecController {
                 return new ResponseEntity<>(obj.toMap(), HttpStatus.BAD_REQUEST);
             }
             String g19Type = "50";
-//            pay = payRepository.findByIdTpoAndG19Type(Utils.nullClear(tpo.getId()), g19Type);
             pay = payRepository.findByIdTpo(Utils.nullClear(tpo.getId()));
             if (!Utils.nullClear(pay).equals("") && !Utils.nullClear(pay.getG19Type()).equals("")) {
                 inDec1.setStatus(185);
@@ -474,7 +475,6 @@ public class InDecController {
         String userLocation = (String) request.getSession().getAttribute("userLocation");
         String userLocationName = (String) request.getSession().getAttribute("userLocationName");
         String userPost = (String) request.getSession().getAttribute("userPost");
-
 
         ResponseObject object = null;
         listCar.forEach(responseObject -> System.out.println(responseObject.toString()));
@@ -533,15 +533,43 @@ public class InDecController {
         String userLocationName = (String) request.getSession().getAttribute("userLocationName");
         String userPost = (String) request.getSession().getAttribute("userPost");
 
+
         InDec inDec1 = inDecService.getById(inDecId);
         inDec1.setEndActiv(200);
         inDec1.setCommentEnded(TPO_NUM);
         Date date1 = Calendar.getInstance().getTime();
         inDec1.setInDecUserEndedDate(date1);
-//        Status status = statusService.getById(185);
-//        inDec1.setStatusNm(status.getName());
-//        inDec1.setCommentMarks(TPO_NUM+'/'+TPO_DATE);
         inDecService.saveInDecOne(inDec1);
+
+        Commodity commodity = new Commodity();
+        commodity = commodityService.findById(inDec1.getCmdtId());
+
+        Apps apps = new Apps();
+        apps = appsService.findById(commodity.getAppId());
+
+        Status status = new Status();
+        status = statusService.getById(195);
+
+        apps.setStatus(195);
+        apps.setStatusNm(status.getName());
+        appsService.saveAppsOne(apps);
+
+        /**todo ЛОК га ёзиш start todo**/
+        StatusM statusM = statusMService.getByAppId(apps.getId());
+        statusM.setStatus(String.valueOf(195));
+        statusM.setStatusComment(status.getName());
+        statusM.setInsUser(userId);
+        statusMService.saveStatusM(statusM);
+
+        StatusH statusH = new StatusH();
+        statusH.setStmainID(statusM.getId());
+        statusH.setAppId(statusM.getAppId());
+        statusH.setStatus(String.valueOf(195));
+        statusH.setStatusComment(status.getName());
+        statusH.setInsUser(userId);
+        statusH.setComment("Бекор қилинди");
+        statusHService.saveStatusH(statusH);
+        /**todo ЛОК га ёзиш end todo**/
 
         List<InDec> termsList = appsservice.getListInDec(request);
         mav.addObject("termsList", termsList);

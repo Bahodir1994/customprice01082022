@@ -1,6 +1,7 @@
 package uz.customs.customsprice.entity.InitialDecision;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -15,8 +16,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name = "COMMODITY")
 public class Commodity extends AbstractAuditingEntity {
     @Id
     @GeneratedValue(generator = "uuid4")
@@ -29,6 +33,16 @@ public class Commodity extends AbstractAuditingEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Apps apps;
+
+    @OneToMany(mappedBy="commodity", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @JsonIgnore
+    private List<Payment> paymentList;
+
+    @OneToMany(mappedBy="commodity", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @JsonIgnore
+    private List<MethodCause> methodCauses;
 
     @Column(name = "APP_ID", columnDefinition = "VARCHAR(50)")
     private String appId;
@@ -183,19 +197,29 @@ public class Commodity extends AbstractAuditingEntity {
 //    @Digits(message = "Устун фақат сонлардан иборат бўлиши лозим", integer = 2, fraction = 0)
     private String paymentYN = "NO";
 
-    @Column(name = "currency_NM", columnDefinition = "VARCHAR(120) CCSID 1208")
+    @Column(name = "CURRENCY_NM", columnDefinition = "VARCHAR(120) CCSID 1208")
     private String currencyNm;
 
-    @Column(name = "currency_NMSymbol", columnDefinition = "VARCHAR(120) CCSID 1208")
+    @Column(name = "CURRENCY_NMSYMBOL", columnDefinition = "VARCHAR(120) CCSID 1208")
     private String currencyNmSymbol;
+
+    @Column(name = "METHOD_URL", columnDefinition = "VARCHAR(220)")
+    private String methodUrl;
+
+    @Column(name = "METHOD_URL_DISCRIPTION", columnDefinition = "VARCHAR(220)")
+    @Size(max = 220, message = "Устун маълумоти катталиги чекланган")
+    private String methodUrlDiscription;
+
 
     public Commodity() {
     }
 
-    public Commodity(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, String appId, Integer cmdtNum, String originCountry, String orignCountrNm, String originOrg, String tradeName, String tradeMark, String mark, String model, String article, String sort, String standarts, String functions, String comProp, String techChar, String productGoal, String hsCode, String hsName, BigDecimal brutto, BigDecimal netto, BigDecimal basicQty, String extraUnits, BigDecimal extraQty, BigDecimal price, BigDecimal customsPrice, String currencyType, BigDecimal cargoSpace, String packType, String packTypeNm, BigDecimal packQty, String extraInfo, String hsDecNum, Date hsDecDate, Date inDecDate, String inDecNum, String method, String methodNm, String methodDescription, String paymentYN, String currencyNm, String currencyNmSymbol) {
+    public Commodity(String insUser, String updUser, Date insTime, Date updTime, int isDeleted, String id, Apps apps, List<Payment> paymentList, List<MethodCause> methodCauses, String appId, Integer cmdtNum, String originCountry, String orignCountrNm, String originOrg, String tradeName, String tradeMark, String mark, String model, String article, String sort, String standarts, String functions, String comProp, String techChar, String productGoal, String hsCode, String hsName, BigDecimal brutto, BigDecimal netto, BigDecimal basicQty, String extraUnits, BigDecimal extraQty, BigDecimal price, BigDecimal customsPrice, String currencyType, BigDecimal cargoSpace, String packType, String packTypeNm, BigDecimal packQty, String extraInfo, String hsDecNum, Date hsDecDate, Date inDecDate, String inDecNum, String method, String methodNm, String methodDescription, String paymentYN, String currencyNm, String currencyNmSymbol, String methodUrl, String methodUrlDiscription) {
         super(insUser, updUser, insTime, updTime, isDeleted);
         this.id = id;
         this.apps = apps;
+        this.paymentList = paymentList;
+        this.methodCauses = methodCauses;
         this.appId = appId;
         this.cmdtNum = cmdtNum;
         this.originCountry = originCountry;
@@ -237,6 +261,8 @@ public class Commodity extends AbstractAuditingEntity {
         this.paymentYN = paymentYN;
         this.currencyNm = currencyNm;
         this.currencyNmSymbol = currencyNmSymbol;
+        this.methodUrl = methodUrl;
+        this.methodUrlDiscription = methodUrlDiscription;
     }
 
     public String getId() {
@@ -253,6 +279,22 @@ public class Commodity extends AbstractAuditingEntity {
 
     public void setApps(Apps apps) {
         this.apps = apps;
+    }
+
+    public List<Payment> getPaymentList() {
+        return paymentList;
+    }
+
+    public void setPaymentList(List<Payment> paymentList) {
+        this.paymentList = paymentList;
+    }
+
+    public List<MethodCause> getMethodCauses() {
+        return methodCauses;
+    }
+
+    public void setMethodCauses(List<MethodCause> methodCauses) {
+        this.methodCauses = methodCauses;
     }
 
     public String getAppId() {
@@ -581,5 +623,21 @@ public class Commodity extends AbstractAuditingEntity {
 
     public void setCurrencyNmSymbol(String currencyNmSymbol) {
         this.currencyNmSymbol = currencyNmSymbol;
+    }
+
+    public String getMethodUrl() {
+        return methodUrl;
+    }
+
+    public void setMethodUrl(String methodUrl) {
+        this.methodUrl = methodUrl;
+    }
+
+    public String getMethodUrlDiscription() {
+        return methodUrlDiscription;
+    }
+
+    public void setMethodUrlDiscription(String methodUrlDiscription) {
+        this.methodUrlDiscription = methodUrlDiscription;
     }
 }

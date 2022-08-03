@@ -42,9 +42,7 @@
     <!-- loader-->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
-
 <body>
-<!--wrapper-->
 <style>
     .sidenav {
         height: 100%;
@@ -162,7 +160,6 @@
     }
 </style>
 <div id="mySidenav" class="sidenav">
-
 <div id="openInPdf">
     <br>
     <br>
@@ -181,140 +178,87 @@
 </div>
 <!--start page wrapper -->
 <div id="main" class="page-content">
-    <!--start email wrapper-->
     <div class="row">
-        <%if (userRole == 7 || userRole == 8 || userRole <= 5) {%>
-        <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecApp('100')">
+        <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecApp('yangi')">
             <div class="card radius-10 shadow">
-                <div class="card-body">
+                <div class="card-body select1">
                     <div class="text-center">
                         <div class="widgets-icons rounded-circle mx-auto bg-light-primary text-primary mb-3"><i class="bx bx-news"></i>
                         </div>
-                        <h4 class="my-1">
-                            <%
-                                if (userRole == 7 || (userRole <= 5 && userLocation.equals("1701")) ) {
-                            %>
-                            ${notSortedListSize} та
-                            <%
-                                }
-                                if (userRole == 8) {
-                            %>
-                            ${sortedListSize} та
-                            <%}%>
-                        </h4>
-                        <p class="mb-0 text-secondary">Янги ариза</p>
+                        <h4 class="my-1 newApps">0 та</h4>
+                        <p class="mb-0 text-secondary">Янги</p>
                     </div>
                 </div>
             </div>
         </div>
-        <%}%>
-        <%if (userRole == 7 || (userRole <= 5 && userLocation.equals("1701")) ) {%>
-        <%--        <c:if test="userRole == 7">--%>
-        <div class="col my-button" style="cursor: pointer;" onclick="javascript:ListInDecRaspTable('110')">
+        <div class="col my-button" style="cursor: pointer;" onclick="javascript:ListInDecApp('koribChiqilmoqda')">
             <div class="card radius-10 shadow">
-                <div class="card-body">
+                <div class="card-body select2">
                     <div class="text-center">
                         <div class="widgets-icons rounded-circle mx-auto bg-light-danger text-danger mb-3"><i class="bx bx-send"></i>
                         </div>
-                        <h4 class="my-1">${sortedListSize} та</h4>
-                        <p class="mb-0 text-secondary">Tақсимланган</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <%}%>
-        <%--        </c:if>--%>
-        <%if (userRole == 1 || userRole == 7 || userRole == 8) {%>
-        <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecProcessApp('115')">
-            <div class="card radius-10 shadow">
-                <div class="card-body">
-                    <div class="text-center">
-                        <div class="widgets-icons rounded-circle mx-auto bg-light-info text-info mb-3"><i class="bx bxl-linkedin-square"></i>
-                        </div>
-                        <h4 class="my-1">${listProcessAppSize} та</h4>
+                        <h4 class="my-1 inProccessApps">0 та</h4>
                         <p class="mb-0 text-secondary">Кўриб чиқилмоқда</p>
                     </div>
                 </div>
             </div>
         </div>
-        <%--        <%}%>--%>
-
-        <%--        <%if (userRole == 1 || userRole == 7 || userRole == 8) {%>--%>
-        <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecSubmittedApp('145')">
+        <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecApp('radEtilganlar')">
             <div class="card radius-10 shadow">
-                <div class="card-body">
+                <div class="card-body select3">
                     <div class="text-center">
-                        <div class="widgets-icons rounded-circle mx-auto bg-light-success text-success mb-3"><i class="bx bx-captions"></i>
+                        <div class="widgets-icons rounded-circle mx-auto bg-light-info text-info mb-3"><i class="bx bxl-linkedin-square"></i>
                         </div>
-                        <h4 class="my-1">${listSubmittedAppSize} та</h4>
-                        <p class="mb-0 text-secondary">Тасдиқлашга киритилган</p>
+                        <h4 class="my-1 returnedApps">0 та</h4>
+                        <p class="mb-0 text-secondary">Рад этилганлар</p>
                     </div>
                 </div>
             </div>
         </div>
-        <%}%>
-
-        <%if (userRole == 1 || userRole == 6 || userRole == 7) {%>
-        <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecSignedApp('160')">
+        <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecApp('raxbariyatda')">
             <div class="card radius-10 shadow">
-                <div class="card-body">
+                <div class="card-body select4">
                     <div class="text-center">
                         <div class="widgets-icons rounded-circle mx-auto bg-light-success text-success mb-3"><i class="bx bx-captions"></i>
                         </div>
-                        <h4 class="my-1">${listSignedAppSize} та</h4>
-                        <p class="mb-0 text-secondary">Имзога киритилган</p>
+                        <h4 class="my-1 inCommandApps">0 та</h4>
+                        <p class="mb-0 text-secondary">Раҳбариятда</p>
                     </div>
                 </div>
             </div>
         </div>
-        <%}%>
-
-        <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="javascript:ListInDecTermstTable('170')">
+        <div class="col" style="cursor: pointer;" onclick="javascript:ListInDecApp('qabulQilinganDastlabkiQaror')">
             <div class="card radius-10 shadow">
-                <div class="card-body">
+                <div class="card-body select5">
+                    <div class="text-center">
+                        <div class="widgets-icons rounded-circle mx-auto bg-light-success text-success mb-3"><i class="bx bx-captions"></i>
+                        </div>
+                        <h4 class="my-1 activInDecs">0 та</h4>
+                        <p class="mb-0 text-secondary">Қабул қилинган дастлабки қарорлар</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="javascript:ListInDecApp('bekorQilinganDastlabkiQaror')">
+            <div class="card radius-10 shadow">
+                <div class="card-body select6">
                     <div class="text-center">
                         <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3"><i class="bx bx-award"></i>
                         </div>
-                        <h4 class="my-1">${termsListSize} та</h4>
-                        <p class="mb-0 text-secondary">Дастлабки қарор</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="javascript:ListAppReturned('125')">
-            <div class="card radius-10 shadow">
-                <div class="card-body">
-                    <div class="text-center">
-                        <div class="widgets-icons rounded-circle mx-auto bg-light-danger text-danger mb-3"><i class="bx bx-repeat"></i>
-                        </div>
-                        <h4 class="my-1">${listAppReturnedSize} та</h4>
-                        <p class="mb-0 text-secondary">Тузатишга қайтарилган</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col" style="opacity: 0.9; cursor: pointer;" onclick="javascript:ListInDecTermsRollBack('175')">
-            <div class="card radius-10 shadow">
-                <div class="card-body">
-                    <div class="text-center">
-                        <div class="widgets-icons rounded-circle mx-auto bg-light-info text-info mb-3"><i class="bx bx-reset"></i>
-                        </div>
-                        <h4 class="my-1">${termsRollBackListSize} та</h4>
-                        <p class="mb-0 text-secondary">Бекор қилинган</p>
+                        <h4 class="my-1 noActiveInDecs">0 та</h4>
+                        <p class="mb-0 text-secondary">Бекор қилинган дастлабки қарорлар</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
+    <input type="hidden" class="selectedBarDef" id="selBar" value="${selectedBarVal}">
     <!--end email wrapper-->
-    <div class="col-12 col-lg-12 shadow">
+    <div class="col-12 col-lg-12 shadow muteding">
         <div class="card">
-            <div class="card-body" id="ListInDecTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
-                <!--end row-->
+            <div class="card-body"  id="ListInDecTable" style="min-height: 740px!important; max-height: 5000px!important; height: 100%!important;">
+
             </div>
         </div>
     </div>
@@ -322,6 +266,58 @@
 <!--end page wrapper -->
 <!--end wrapper -->
 <script>
+    function statisticsBar(newApps, inProccessApps, returnedApps, inCommandApps, activInDecs, noActiveInDecs){
+        $('.newApps').html('');
+        $('.inProccessApps').html('');
+        $('.returnedApps').html('');
+        $('.inCommandApps').html('');
+        $('.activInDecs').html('');
+        $('.noActiveInDecs').html('');
+
+        $('.newApps').html(newApps+" та");
+        $('.inProccessApps').html(inProccessApps+" та");
+        $('.returnedApps').html(returnedApps+" та");
+        $('.inCommandApps').html(inCommandApps+" та");
+        $('.activInDecs').html(activInDecs+" та");
+        $('.noActiveInDecs').html(noActiveInDecs+" та");
+    };
+    function mutedBody(x){
+        if (x===1){
+            $('.muteding').css('background-color', '');
+            $('.muteding').css('background-color', 'lightblue');
+        }
+        if (x===0){
+            $('.muteding').css('background-color', 'lightblue');
+        }
+    }
+    function selectedBarColor(x){
+        let selectedV = x;
+        $('.select1').removeClass('border border-2 border-primary radius-10 shadow');
+        $('.select2').removeClass('border border-2 border-primary radius-10 shadow');
+        $('.select3').removeClass('border border-2 border-primary radius-10 shadow');
+        $('.select4').removeClass('border border-2 border-primary radius-10 shadow');
+        $('.select5').removeClass('border border-2 border-primary radius-10 shadow');
+        $('.select6').removeClass('border border-2 border-primary radius-10 shadow');
+        if (selectedV === "yangi"){
+            $('.select1').addClass('border border-2 border-primary radius-10 shadow');
+        }
+        if (selectedV === "koribChiqilmoqda"){
+            $('.select2').addClass('border border-2 border-primary radius-10 shadow');
+        }
+        if (selectedV === "radEtilganlar"){
+            $('.select3').addClass('border border-2 border-primary radius-10 shadow');
+        }
+        if (selectedV === "raxbariyatda"){
+            $('.select4').addClass('border border-2 border-primary radius-10 shadow');
+        }
+        if (selectedV === "qabulQilinganDastlabkiQaror"){
+            $('.select5').addClass('border border-2 border-primary radius-10 shadow');
+        }
+        if (selectedV === "bekorQilinganDastlabkiQaror"){
+            $('.select6').addClass('border border-2 border-primary radius-10 shadow');
+        }
+
+    }
     (function ($) {
         function getTimer(obj) {
             return obj.data('swd_timer');
@@ -350,23 +346,21 @@
             $(this).hide();
         }
     })(jQuery);
-
-    function ListInDecApp(status) {
-        if (status == '100') {
+    $(document).ready(function () {
+        let selectedBar= $('.selectedBarDef').val();
+        ListInDecApp(selectedBar)
+    });
+    function ListInDecApp(selectedBar) {
+        if (selectedBar === "" || selectedBar ==="0" || selectedBar === 0){
+            selectedBar = $('.selectedBarDef').val();
         }
-        if (status == '110') {
-        }
-        // var inspectorName = $('#userIdF_' + rowNum + ' option:selected').text();
-        var x = '0';
         var dataS = {
-            "id": x,
-            "status": status
+            "selectedBar": selectedBar
         }
         document.body.style.cursor = "wait";
         $.ajax({
             type: "POST",
             data: dataS,
-            <%--url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/InitialDecisionRasp",--%>
             url: "<%=request.getContextPath()%>/apps/resources/pages/InitialDecision/ListInDec/ListInDecTable",
             dataType: "html",
             header: 'Content-type: text/html; charset=utf-8',
@@ -378,11 +372,6 @@
             }
         });
     }
-
-    $(document).ready(function () {
-        ListInDecApp('100');
-    });
-
     function ListInDecRaspTable(status) {
         var x = '0';
         var dataS = {
@@ -403,7 +392,6 @@
             }
         });
     }
-
     function ListInDecProcessApp(status) {
         var x = '0';
         var dataS = {
@@ -424,7 +412,6 @@
             }
         });
     }
-
     function ListInDecSubmittedApp(status) {
         var x = '0';
         var dataS = {
@@ -445,7 +432,6 @@
             }
         });
     }
-
     function ListInDecSignedApp(status) {
         var x = '0';
         var dataS = {
@@ -466,7 +452,6 @@
             }
         });
     }
-
     function ListInDecTermstTable(status) {
         if (status == '100') {
         }
@@ -492,7 +477,6 @@
             }
         });
     }
-
     function ListInDecTermsRollBack(status) {
         if (status == '100') {
         }
@@ -518,7 +502,6 @@
             }
         });
     }
-
     function ListAppReturned(status) {
         var x = '0';
         var dataS = {
@@ -539,6 +522,5 @@
             }
         });
     }
-
 </script>
 </body>

@@ -13,4 +13,6 @@ public interface RollBackAppRepo extends JpaRepository<RollBackApp, String> {
     List<RollBackApp> getByAppId(String appId);
 
     Page<RollBackApp> findByAppIdAndStatusHId(String appId, String statusHId, Pageable pageable);
+
+    List<RollBackApp> findByStatusHId(String stId);
 }

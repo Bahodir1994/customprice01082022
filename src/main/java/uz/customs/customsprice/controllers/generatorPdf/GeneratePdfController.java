@@ -1,12 +1,9 @@
 package uz.customs.customsprice.controllers.generatorPdf;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import uz.customs.customsprice.service.PdfService;
+import uz.customs.customsprice.service.pdfGenerating.PdfService;
 
 import javax.servlet.http.HttpServletResponse;
 

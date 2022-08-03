@@ -10,4 +10,6 @@ public interface StatusRepo extends JpaRepository<Status, Integer> {
     Optional<Status> findById(Integer id);
 
     List<Status> findAll();
+
+    List<Status> findByIdIn(List<Integer> id);
 }
