@@ -248,15 +248,15 @@
                         </c:forEach>
                     </select>
                 </th>
-                <th class="column100 column6" data-column="column6">
-                    Ишлаб чиқарувчи
-                    <select style="min-width: 250px!important;" id="orignOrg" class="form-control form-select" type="text" placeholder="Киритинг.." onchange="ListInDecAppTAbleAjaxSecond(0)">
-                        <option value="">--Танланг--</option>
-                        <c:forEach var="country" items="${countries}" varStatus="i">
-                            <option value="${country.code}">${country.code} - ${country.cdNm}</option>
-                        </c:forEach>
-                    </select>
-                </th>
+<%--                <th class="column100 column6" data-column="column6">--%>
+<%--                    Ишлаб чиқарувчи--%>
+<%--                    <select style="min-width: 250px!important;" id="orignOrg" class="form-control form-select" type="text" placeholder="Киритинг.." onchange="ListInDecAppTAbleAjaxSecond(0)">--%>
+<%--                        <option value="">--Танланг--</option>--%>
+<%--                        <c:forEach var="country" items="${countries}" varStatus="i">--%>
+<%--                            <option value="${country.code}">${country.code} - ${country.cdNm}</option>--%>
+<%--                        </c:forEach>--%>
+<%--                    </select>--%>
+<%--                </th>--%>
                 <th class="column100 column7" data-column="column7">
                     Сотувчи мамлакат
                     <select style="min-width: 250px!important;" id="senderOrg" class="form-control form-select" type="text" placeholder="Киритинг.." onchange="ListInDecAppTAbleAjaxSecond(0)">
@@ -354,7 +354,7 @@
                             '<td class="column4" data-column="column7">' + appeal[22] + '</td>' +
                             '<td class="column5" data-column="column8">' + appeal[13] + '</td>' +
                             '<td class="column6" data-column="column4">' + appeal[4] + "-" + appeal[5] +'</td>' +
-                            '<td class="column7" data-column="column4">' + appeal[4] + "-" + appeal[5] +'</td>' +
+                            // '<td class="column7" data-column="column4">' + appeal[4] + "-" + appeal[5] +'</td>' +
                             '<td class="column8" data-column="column4">' + appeal[6] + "-" + appeal[7] +'</td>' +
                             '<td style="" class="column9" data-column="column5">'+ appeal[30] +'</td>' +
                             '</tr>';
@@ -381,13 +381,13 @@
                     }
                     if (current_page > 1) {
                         havingStart = '<li class="page-item"><a href="#" class="page-link" aria-label="Previous" ><span aria-hidden="true">...</span></a></li>'
-                        currentLeft = '<li class="page-item"><a class="page-link" href="#">' + (current_page-1) + '</a>' +
-                            '</li><li class="page-item"><a class="page-link" href="#">' + (current_page-0) + '</a></li>'
+                        currentLeft = '<li class="page-item"><a class="page-link" href="#" onclick="ListInDecAppTAbleAjaxSecond('+ (current_page-2)+')">' + (current_page-1) + '</a>' +
+                            '</li><li class="page-item"><a class="page-link" href="#" onclick="ListInDecAppTAbleAjaxSecond('+ (current_page-1)+')">' + (current_page-0) + '</a></li>'
                     }
                     if (current_page < totalPages-2) {
                         havingEnd = '<li class="page-item"><a href="#" class="page-link" aria-label="Previous" ><span aria-hidden="true">...</span></a></li>'
-                        currentRight = '<li class="page-item"><a class="page-link" href="#">' + (current_page+2) + '</a>' +
-                            '</li><li class="page-item"><a class="page-link" href="#">' + (current_page+3) + '</a></li>'
+                        currentRight = '<li class="page-item"><a class="page-link" href="#" onclick="ListInDecAppTAbleAjaxSecond('+ (current_page+1)+')">' + (current_page+2) + '</a>' +
+                            '</li><li class="page-item"><a class="page-link" href="#" onclick="ListInDecAppTAbleAjaxSecond('+ (current_page+2)+')">' + (current_page+3) + '</a></li>'
                     }
                     if (response.ItemsSize === 10){
                         selected10 = 'selected="selected"';

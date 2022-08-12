@@ -13,7 +13,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 import uz.customs.customsprice.entity.InitialDecision.*;
 import uz.customs.customsprice.entity.files.DecisionPdfRollback;
-import uz.customs.customsprice.entity.files.ForHtmlRollbackTemplate;
+import uz.customs.customsprice.entity.ForHtmlRollbackTemplate;
 import uz.customs.customsprice.repository.ForHtmlRollbackTemplateRepo;
 import uz.customs.customsprice.repository.RollBackAppRepo;
 import uz.customs.customsprice.repository.StatusHRepo;
@@ -22,10 +22,8 @@ import uz.customs.customsprice.service.apps.AppsService;
 import uz.customs.customsprice.service.catalog.TransportTypeService;
 import uz.customs.customsprice.service.commodity.CommodityService;
 import uz.customs.customsprice.service.earxiv.EarxivServiceFrom;
-import uz.customs.customsprice.utils.Utils;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -71,8 +69,10 @@ public class PdfServiceRollback {
         List<RollBackApp> rollBackApp = null;
         String user = null;
         if (Objects.equals(status, "120")) {
-            statusHES = statusHRepo.findTop1ByAppIdAndStatusOrderByInsTimeDesc(statusH.get().getAppId(), "116");
-            rollBackApp = rollBackAppRepo.findByStatusHId(statusHES.getId());
+            statusHES = statusHRepo.findTop1ByAppIdAndStatusOrderByInsTimeDesc(statusH.get().getAppId(), "120");
+            if (statusHES != null){
+                rollBackApp = rollBackAppRepo.findByStatusHId(statusHES.getId());
+            }
             user = usersService.getById(statusH.get().getInsUser()).getFullname();
         } else if (Objects.equals(status, "125")) {
             statusHES = statusHRepo.findTop1ByAppIdAndStatusOrderByInsTimeDesc(statusH.get().getAppId(), "125");
@@ -132,11 +132,18 @@ public class PdfServiceRollback {
         context.setVariable("statusH", statusH);
         context.setVariable("statusHES", statusHES);
         context.setVariable("user", user);
-        StringBuilder urlText = new StringBuilder("https://d-qaror.customs.uz/decisionPdfDownloadRollback?stId=" + stId + "&status=" + status);
+        StringBuilder urlText = new StringBuilder("https://d-qaror.customs.uz/decisionPdfDownloadRollback?stId=" + stId);
         context.setVariable("url_qrCode", urlText);
         context.setVariable("url_InsUsr", url_InsUsr);
         context.setVariable("htmlData", forHtmlRollbackTemplate);
         context.setVariable("htmlData2", forHtmlCancelledService.getforHtmlById("1"));
+        List<String> ject = new ArrayList<>();
+        ject.add("Жисмоний шахс");
+        ject.add("Юридик шахс");
+        ject.add("БН");
+        ject.add("НТ");
+        context.setVariable("js", ject);
+
 
         String processHtml = "";
 

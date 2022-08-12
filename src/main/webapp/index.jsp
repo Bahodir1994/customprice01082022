@@ -137,7 +137,7 @@
                                  style="width: 45px;">
                         </div>
                         <div class="">
-                            <a class="logo-text h4" href="/CUSTOMSPRICE">Божхона қиймати назорати</a>
+                            <a class="logo-text h4" style="font-size: 18px!important;" href="/CUSTOMSPRICE">Божхона қиймати  назорати</a>
                         </div>
                     </div>
                     <div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>
@@ -155,7 +155,59 @@
                     <div class="top-menu ms-auto">
                         <ul class="navbar-nav align-items-center">
                             <li class="nav-item mobile-search-icon">
+                                <style>
+                                    @-webkit-keyframes scroll {
+                                        0% {
+                                            -webkit-transform: translate(0, 0);
+                                            transform: translate(0, 0);
+                                        }
+                                        100% {
+                                            -webkit-transform: translate(-100%, 0);
+                                            transform: translate(-100%, 0)
+                                        }
+                                    }
+
+                                    @-moz-keyframes scroll {
+                                        0% {
+                                            -moz-transform: translate(0, 0);
+                                            transform: translate(0, 0);
+                                        }
+                                        100% {
+                                            -moz-transform: translate(-100%, 0);
+                                            transform: translate(-100%, 0)
+                                        }
+                                    }
+
+
+                                    @keyframes scroll {
+                                        0% {
+                                            transform: translate(0, 0);
+                                        }
+                                        100% {
+                                            transform: translate(-100%, 0)
+                                        }
+                                    }
+
+
+                                    .marquee {
+                                        display: block;
+                                        width: 100%;
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                    }
+
+                                    .marquee span {
+                                        color: #0a58ca;
+                                        display: inline-block;
+                                        padding-left: 100%;
+                                        -webkit-animation: scroll 5s infinite linear;
+                                        -moz-animation: scroll 5s infinite linear;
+                                        animation: scroll 35s infinite linear;
+                                    }
+                                </style>
                             </li>
+<%--                            <h6 class="marquee text-white"><span class="text-white" style="color: #ffffff">Хозирда дастурни оптималлаштириш ишлари олиб борилмоқда, шу сабабли дастурда узилишлар бўлиши мумкун...</span></h6>--%>
+
                             <li class="nav-item dropdown dropdown-large">
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <div class="row row-cols-3 g-3 p-3">

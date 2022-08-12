@@ -486,23 +486,23 @@
                         aLeft = '<a href="#" class="page-link" aria-label="Previous" style="cursor: not-allowed"><span aria-hidden="true">«</span></a>'
                     }
                     else{
-                        aLeft = '<a href="#" class="page-link" aria-label="Previous" onclick="ListInDecAppTAbleAjaxThird(0, '+(current_page-1)+')"><span aria-hidden="true">«</span></a>'
+                        aLeft = '<a href="#" class="page-link" aria-label="Previous" onclick="ListInDecAppTAbleAjaxThird('+(current_page-1)+')"><span aria-hidden="true">«</span></a>'
                     }
                     if (current_page < totalPages-1) {
-                        aRight = '<a href="#" class="page-link" aria-label="Previous" onclick="ListInDecAppTAbleAjaxThird(0, '+(current_page+1)+')"><span aria-hidden="true">»</span></a>'
+                        aRight = '<a href="#" class="page-link" aria-label="Previous" onclick="ListInDecAppTAbleAjaxThird('+(current_page+1)+')"><span aria-hidden="true">»</span></a>'
                     }
                     else{
                         aRight = '<a href="#" class="page-link" aria-label="Previous" style="cursor: not-allowed"><span aria-hidden="true">»</span></a>'
                     }
                     if (current_page > 1) {
                         havingStart = '<li class="page-item"><a href="#" class="page-link" aria-label="Previous" ><span aria-hidden="true">...</span></a></li>'
-                        currentLeft = '<li class="page-item"><a class="page-link" href="#">' + (current_page-1) + '</a>' +
-                            '</li><li class="page-item"><a class="page-link" href="#">' + (current_page-0) + '</a></li>'
+                        currentLeft = '<li class="page-item"><a class="page-link" href="#" onclick="ListInDecAppTAbleAjaxThird('+ (current_page-2) +')">' + (current_page-1) + '</a>' +
+                            '</li><li class="page-item"><a class="page-link" href="#" onclick="ListInDecAppTAbleAjaxThird('+ (current_page-1) +')">' + (current_page-0) + '</a></li>'
                     }
                     if (current_page < totalPages-2) {
                         havingEnd = '<li class="page-item"><a href="#" class="page-link" aria-label="Previous" ><span aria-hidden="true">...</span></a></li>'
-                        currentRight = '<li class="page-item"><a class="page-link" href="#">' + (current_page+2) + '</a>' +
-                            '</li><li class="page-item"><a class="page-link" href="#">' + (current_page+3) + '</a></li>'
+                        currentRight = '<li class="page-item"><a class="page-link" href="#" onclick="ListInDecAppTAbleAjaxThird('+ (current_page+1) +')">' + (current_page+2) + '</a>' +
+                            '</li><li class="page-item"><a class="page-link" href="#" onclick="ListInDecAppTAbleAjaxThird('+ (current_page+2) +')">' + (current_page+3) + '</a></li>'
                     }
                     if (response.ItemsSize === 10){
                         selected10 = 'selected="selected"';

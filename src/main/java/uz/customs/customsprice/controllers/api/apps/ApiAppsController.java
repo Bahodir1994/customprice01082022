@@ -155,6 +155,11 @@ public class ApiAppsController {
                 Terms terms = termsService.findByIdAndLngaTpcd(apps.getTerms(), "UZ");
                 apps.setTermsNm(terms.getSign());
                 apps.setInsUser(personsIdGet.get().getTin());
+//                if (apps.getAuthorizedPersonDocDate() != null && !Objects.equals(apps.getAuthorizedPersonDocDate().toString(), "")){
+//                    Date dd = apps.getAuthorizedPersonDocDate();
+//                    apps.setAuthorizedPersonDocDate();
+//                }
+
                 appsService.saveAppsS(apps);
                 apps.getId();
                 for (TransportType type : transportTypes) {

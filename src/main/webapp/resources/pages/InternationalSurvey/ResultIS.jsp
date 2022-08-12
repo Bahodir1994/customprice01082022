@@ -358,7 +358,12 @@
                         </c:if>
                     </c:if>
                     <!-- 1 start-->
-                    <td style="text-align: center;">${tut.savedUserFirst}</td>
+                    <td style="text-align: left;">
+                        <c:if test="${userId == '7a682cae-6c18-4095-9852-e88cc36c42ac' || userId == '20054' || userId == 20054}">
+                            <button class="btn btn-outline-danger text-end" onclick="deleteInternationalSurvey('${tut.id}')"><i class="bx bx-trash"></i></button>
+                        </c:if>
+                            ${tut.savedUserFirst}
+                    </td>
                     <td style="text-align: center;">${tut.userLocationName}</td>
                     <td style="text-align: center;">${tut.directionTypeName}</td>
                     <td style="text-align: center;">${tut.xbbMailNum}</td>
@@ -929,13 +934,63 @@
             }
         });
     }
+    function deleteInternationalSurvey(id){
+        var dataS = {
+            "id": id,
+        }
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Тасдиқлаш',
+            text: "Халқаро сўровномани ўчириш",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ха!',
+            cancelButtonText: 'Йўқ!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                    'Бажарилди!',
+                    'Ушбу ариза рўйхатдан ўчирилди',
+                    'success'
+                )
+                $.ajax({
+                    type: "POST",
+                    data: JSON.stringify(dataS),
+                    url: "<%=request.getContextPath()%>/inrenationalsurvaey/resources/pages/InitialDecision/ListInDec/deleteIs",
+                    dataType: "json",
+                    async: true,
+                    contentType: 'application/json',
+                    beforeSend: function () {
+                        $('#preloader').removeClass('visually-hidden');
+
+                    },
+                    complete: function () {
+                        $('#preloader').addClass('visually-hidden');
+                    },
+                    success: function (response) {
+                        searchResultTableISFirst();
+                    },
+                    error: function (response) {
+                    }
+                });
+            }
+            else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    'Амал рад этилди!',
+                    'Ўчириш амалга оширилмади',
+                    'error'
+                )
+            }
+        })
+    }
 </script>
-<%--<script src="<%=request.getContextPath()%>/resources/js/colResizable/colresizable/samples/rangeSlider.Demo2/js/jquery.js"></script>--%>
-<%--<link href="<%=request.getContextPath()%>/resources/js/colResizable/colresizable/samples/rangeSlider.Demo2/css/main.css" rel="stylesheet">--%>
-<%--<script src="<%=request.getContextPath()%>/resources/js/colResizable/colresizable/colResizable-1.6.min.js"></script>--%>
-<%--<script>--%>
-<%--    $(function(){--%>
-<%--        $("#interSurveyTable").colResizable('{fixed:false,liveDrag:true}');--%>
-<%--    });--%>
-<%--</script>--%>
 </body>

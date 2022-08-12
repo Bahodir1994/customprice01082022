@@ -124,7 +124,6 @@ public class UserController {
     @RequestMapping("/resources/pages/StarterPage/homes")
     public ModelAndView homePage(HttpServletRequest request, HttpSession session){
         ModelAndView modelAndView = new ModelAndView("/resources/pages/StarterPage/homes");
-        modelAndView.addObject("setting", "ma'lumot");
         return modelAndView;
     }
 

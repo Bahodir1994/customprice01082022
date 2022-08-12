@@ -30,11 +30,12 @@ public class FilterDTO {
     private String index;
     private String doubleRollbackCommentTextarea;
     private String statusGetSaveRollbackType;
+    private String id;
 
     public FilterDTO() {
     }
 
-    public FilterDTO(String status, String appDateStart, String appDateEnd, String appNum, String locationId, String personFio, String sellerOrg, String orignOrg, String senderOrg, int page, int size, String selectedBar, String sortedInspector, String inDecStarts, String inDecEnds, String inDecEndDateStarts, String inDecEndDateEnds, String statusPay, String inDecNum, String termsNm, String appIdForHistory, String stId, String index, String doubleRollbackCommentTextarea, String statusGetSaveRollbackType) {
+    public FilterDTO(String status, String appDateStart, String appDateEnd, String appNum, String locationId, String personFio, String sellerOrg, String orignOrg, String senderOrg, int page, int size, String selectedBar, String sortedInspector, String inDecStarts, String inDecEnds, String inDecEndDateStarts, String inDecEndDateEnds, String statusPay, String inDecNum, String termsNm, String appIdForHistory, String stId, String index, String doubleRollbackCommentTextarea, String statusGetSaveRollbackType, String id) {
         this.status = status;
         this.appDateStart = appDateStart;
         this.appDateEnd = appDateEnd;
@@ -60,6 +61,7 @@ public class FilterDTO {
         this.index = index;
         this.doubleRollbackCommentTextarea = doubleRollbackCommentTextarea;
         this.statusGetSaveRollbackType = statusGetSaveRollbackType;
+        this.id = id;
     }
 
     public String getStatus() {
@@ -260,5 +262,13 @@ public class FilterDTO {
 
     public void setStatusGetSaveRollbackType(String statusGetSaveRollbackType) {
         this.statusGetSaveRollbackType = statusGetSaveRollbackType;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import uz.customs.customsprice.entity.InDec;
 import uz.customs.customsprice.entity.InitialDecision.*;
 import uz.customs.customsprice.entity.InitialDecision.TPO.Pay;
 import uz.customs.customsprice.entity.InitialDecision.TPO.Tpo;

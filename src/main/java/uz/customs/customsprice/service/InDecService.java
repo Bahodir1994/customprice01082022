@@ -1,7 +1,7 @@
 package uz.customs.customsprice.service;
 
 import org.springframework.stereotype.Service;
-import uz.customs.customsprice.entity.InitialDecision.InDec;
+import uz.customs.customsprice.entity.InDec;
 import uz.customs.customsprice.repository.InDecRepo;
 import uz.customs.customsprice.utils.Utils;
 

@@ -200,7 +200,7 @@ public class DecisionPdfDownloadRollback {
 
 
     @GetMapping(produces = MediaType.APPLICATION_PDF_VALUE)
-    public void downloadPDFResource( HttpServletRequest request, HttpServletResponse response, @Param("stId") String stId, @Param("status") String status) throws BadElementException, IOException {
+    public void downloadPDFResource( HttpServletRequest request, HttpServletResponse response, @Param("stId") String stId) throws BadElementException, IOException {
 
         //If user is not authorized - he should be thrown out from here itself
 
@@ -210,8 +210,8 @@ public class DecisionPdfDownloadRollback {
 //        } else {
 //            pdfServiceRollback.createPdfCancelled(cmdtId);
 //        }
-
-        pdfServiceRollback.createPdfCancelled(stId, status);
+        Optional<StatusH> statushh = statusHRepo.findById(stId);
+        pdfServiceRollback.createPdfCancelled(stId, statushh.get().getStatus());
         Optional<StatusH> statusH = statusHRepo.findById(stId);
 
         DecisionPdfRollback decisionPdf = decisionPdfRollbackService.getByAppId(statusH.get().getAppId());

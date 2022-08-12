@@ -70,6 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/appsrequesthaving/**").permitAll()
                 .antMatchers("/upload-file/**").permitAll()
                 .antMatchers("/inrenationalsurvaey/**").permitAll()
+                .antMatchers("/dashboardStatistics/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

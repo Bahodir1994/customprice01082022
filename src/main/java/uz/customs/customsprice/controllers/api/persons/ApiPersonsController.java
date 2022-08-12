@@ -33,10 +33,8 @@ public class ApiPersonsController {
         Map<String, Map<String, String>> AllErrors = new HashMap<>();
 
         Persons personsPinGet = personsService.getByPin(persons.getPin());
-        Persons personsTinGet = personsService.getByTin(persons.getTin());
-        Persons personsEmailGet = personsService.getByeMail(persons.getEmail());
 
-        if (personsPinGet == null && personsTinGet == null) {
+        if (personsPinGet == null) {
             if (br.hasErrors()) {
                 errors = br.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
                 JSONObject obj = new JSONObject();
@@ -52,24 +50,10 @@ public class ApiPersonsController {
             obj.put("status", "200");
             ResponseEntity.status(0);
             return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
-        } else if (personsPinGet != null && personsTinGet != null) {
-            Persons AllUniqueParametrs = personsService.getByEmailAndPinAndTin(persons.getEmail(), persons.getPin(), persons.getTin());
-            if (AllUniqueParametrs != null) {
-                JSONObject obj = new JSONObject();
-                obj.put("message", "Success");
-                obj.put("data", personsPinGet);
-                obj.put("status", "207");
-                return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
-            }
-            JSONObject obj = new JSONObject();
-            obj.put("message", "Error");
-            obj.put("data", "Маълумотлар мос келмади");
-            obj.put("status", "207");
-            return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
         } else {
             JSONObject obj = new JSONObject();
-            obj.put("message", "Error");
-            obj.put("data", "Маълумотлар мос келмади");
+            obj.put("message", "Success");
+            obj.put("data", personsPinGet);
             obj.put("status", "207");
             return new ResponseEntity<>(obj.toMap(), HttpStatus.OK);
         }

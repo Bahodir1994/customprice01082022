@@ -127,7 +127,17 @@
                     <ol><li value="6" th:text="${htmlData.get().getTitle7()}">Бекор қилинган дастлабки қарорда кўрсатилган товар номи</li></ol>
                     <table style="width: 100%; border-top: 0px dashed #e2efd9; border-bottom: 0px dashed #e2efd9; border-left: 0px; border-right: 0px; margin-left: 25px; margin-bottom: 0px; margin-top: 0px">
                         <tr style="border: 0;" th:each="cmdts, iterStat: ${cmdt}">
-                            <td style="border: 0px; width: auto"><b  th:text="${iterStat.count}+') '"></b>ТИФ код:<b th:text="${cmdts.getHsCode()}+'; '"></b> Товар номи: <b th:text="${cmdts.getTradeName()}"></b></td>
+                            <td style="border: 0px; width: auto">
+                                <b  th:text="${iterStat.count}+') '"></b>
+                                <span th:text="${htmlData.get().getTitle12()}">
+                                    ТИФ код:
+                                </span>
+                                <b th:text="${cmdts.getHsCode()}+'; '"></b>
+                                <span th:text="${htmlData.get().getTitle13()}">
+                                    Товар номи:
+                                </span>
+                                <b th:text="${cmdts.getTradeName()}"></b>
+                            </td>
                         </tr>
                     </table>
                 </td>
@@ -141,7 +151,7 @@
                         </tr>
                         <tr style="border: 0;">
                             <td>
-                                <i style="margin-left: 25px;" th:text="'Изох: '+${statusHES.getComment()}"></i>
+                                <i style="margin-left: 25px;" th:text="${htmlData.get().getTitle14()}"></i><i style="margin-left: 25px;" th:text="${statusHES.getComment()}"></i>
                             </td>
                         </tr>
                     </table>
@@ -152,10 +162,10 @@
                     <ol>
                         <li value="8" th:text="${htmlData.get().getTitle9()}">Дастлабки қарор қабул қилиш тўғрисидаги аризани кўриб чиқишни рад этган божхона органининг мансабдор шахси</li></ol>
                     <tr>
-                        <th style="width: 33%; text-align: right" th:text="${htmlData.get().getTitle11()}">
+                        <th style="width: 33%!important; text-align: right" th:text="${htmlData.get().getTitle11()}">
                                 Хбб ДБСБ ходими
                         </th>
-                        <th  style="width: 34%; text-align: center">
+                        <th  style="width: 34%!important; text-align: center">
                             <img alt=""
                                  class="m-20 w-100 text-center text-c-red"
                                  style="width: 50px; height: 50px"
@@ -163,7 +173,7 @@
                                  th:src="@{${'https://api.qrserver.com/v1/create-qr-code/?data=' + url_InsUsr +'&amp;size=200x200'}}"
                                  title="${uncodId}"/>
                         </th>
-                        <th  style="width: 33% ; text-align: left" th:text="${user}">
+                        <th  style="width: 33%!important; text-align: left" th:text="${user}">
                         </th>
                     </tr>
                 </td>

@@ -1,4 +1,4 @@
-package uz.customs.customsprice.entity.files;
+package uz.customs.customsprice.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;

@@ -5,13 +5,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-import uz.customs.customsprice.entity.InitialDecision.Apps;
-import uz.customs.customsprice.entity.InitialDecision.InDec;
+import uz.customs.customsprice.entity.InDec;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 public interface InDecRepo extends JpaRepository<InDec, String> {
     List<InDec> findByEndActiv(int endActive);

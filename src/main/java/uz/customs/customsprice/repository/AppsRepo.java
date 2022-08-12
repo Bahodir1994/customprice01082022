@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import uz.customs.customsprice.entity.InitialDecision.Apps;
-import uz.customs.customsprice.entity.InitialDecision.InDec;
-import uz.customs.customsprice.entity.InitialDecision.StatusH;
 
 import java.sql.Date;
 import java.util.List;
@@ -33,7 +31,7 @@ public interface AppsRepo extends JpaRepository<Apps, String> {
             "(:appNum='' or :appNum is null or lower(c.appNum) like lower(CONCAT('%',:appNum,'%')) ) and"+
             "(:locationId='' or :locationId is null or c.locationId = :locationId) and"+
             "(:personFio='' or :personFio is null or lower(c.personFio) like lower(CONCAT('%',:personFio,'%'))) and"+
-            "(:sellerOrg='' or :sellerOrg is null or c.sellerOrg = :sellerOrg) and"+
+            "(:sellerOrg='' or :sellerOrg is null or c.customerCountry = :sellerOrg) and"+
             "(:orignOrg='' or :orignOrg is null or c.customerCountry = :orignOrg) and"+
             "(:senderOrg='' or :senderOrg is null or c.senderCountry = :senderOrg) and"+
             "(c.status in (:statusGet))")
@@ -89,7 +87,7 @@ public interface AppsRepo extends JpaRepository<Apps, String> {
             "(:appNum='' or :appNum is null or lower(c.appNum) like lower(CONCAT('%',:appNum,'%')) ) and"+
             "(:locationId='' or :locationId is null or c.locationId = :locationId) and"+
             "(:personFio='' or :personFio is null or lower(c.personFio) like lower(CONCAT('%',:personFio,'%'))) and"+
-            "(:sellerOrg='' or :sellerOrg is null or c.sellerOrg = :sellerOrg) and"+
+            "(:sellerOrg='' or :sellerOrg is null or c.customerCountry = :sellerOrg) and"+
             "(:orignOrg='' or :orignOrg is null or c.customerCountry = :orignOrg) and"+
             "(:senderOrg='' or :senderOrg is null or c.senderCountry = :senderOrg) and"+
             "(:inspectorId='' or :inspectorId is null or d.inspectorId = :inspectorId) and"+

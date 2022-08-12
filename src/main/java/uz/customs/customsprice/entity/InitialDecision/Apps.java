@@ -74,9 +74,9 @@ public class Apps extends AbstractAuditingEntity {
     @Size(max = 50, message = "Устун маълумоти катталиги чекланган")
     private String termsAddr;
 
-    @Column(name = "PERSON_FIO", columnDefinition = "VARCHAR(180) CCSID 1208")
+    @Column(name = "PERSON_FIO", columnDefinition = "VARCHAR(3000) CCSID 1208")
     @NotBlank(message =  "Устун тўлдирилмаган")
-    @Size(max = 50, message = "Устун маълумоти катталиги чекланган")
+    @Size(max = 1000, message = "Устун маълумоти катталиги чекланган")
     private String personFio;
 
     @Column(name = "ORG_NAME", columnDefinition = "VARCHAR(900) CCSID 1208")
@@ -149,16 +149,16 @@ public class Apps extends AbstractAuditingEntity {
     private String versionNum = "1";
 
     @Column(name = "AUTHORIZED_PERSON", length = 50)
-    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
-    private String authorizedPerson = "-";
+//    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
+    private String authorizedPerson;
 
     @Column(name = "AUTHORIZED_PERSON_PIN", length = 50)
-    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
-    private String authorizedPersonPin = "-";
+//    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
+    private String authorizedPersonPin;
 
     @Column(name = "AUTHORIZED_PERSON_DOC", length = 50)
-    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
-    private String authorizedPersonDoc = "-";
+//    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
+    private String authorizedPersonDoc;
 
     @Column(name = "AUTHORIZED_PERSON_DOC_DATE")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -166,12 +166,12 @@ public class Apps extends AbstractAuditingEntity {
     private Date authorizedPersonDocDate;
 
     @Column(name = "AUTHORIZED_PERSON_DOC_NUM", length = 50)
-    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
-    private String authorizedPersonDocNum = "-";
+//    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
+    private String authorizedPersonDocNum;
 
     @Column(name = "STATE_NUMBER", length = 50)
-    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
-    private String stateNumber = "-";
+//    @NotBlank(message = "Ваколатли шахс ёки юк эгаси майдони бўш бўлиши мумкун эмас!")
+    private String stateNumber;
 
     @Column(name = "STATE_NUMBER_DATE")
     @DateTimeFormat(pattern = "yyyy-MM-dd")

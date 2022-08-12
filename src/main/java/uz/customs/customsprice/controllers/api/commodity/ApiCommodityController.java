@@ -69,7 +69,6 @@ public class ApiCommodityController {
         this.appsRaspRepo = appsRaspRepo;
     }
 
-
     @PostMapping()
     public ResponseEntity<Object> valuesave(@RequestBody @Valid CommodityDTO commodityDTO, BindingResult br) {
         Map<String, String> errors = new HashMap<>();
@@ -82,8 +81,8 @@ public class ApiCommodityController {
         else {
             try {
                 List<Commodity> commodity = commodityDTO.getCommodity();
-                Optional<Apps> appIdGet = Optional.ofNullable(appsService.findById(commodity.get(1).getAppId()));
-                Apps apps = appsService.findById(commodity.get(1).getAppId());
+                Optional<Apps> appIdGet = Optional.ofNullable(appsService.findById(commodity.get(0).getAppId()));
+                Apps apps = appsService.findById(commodity.get(0).getAppId());
                 if (appIdGet.isPresent())
                 {
                     for (int i = 0; i < commodity.size(); i++) {
@@ -138,7 +137,7 @@ public class ApiCommodityController {
                         }
                         if(min>aaa){
                             min=appsRasp.size();
-                            inspID = usersList.get(i).getUserid();
+                            inspID = usersList.get(i).getId();
                             inspNm = usersList.get(i).getFullname();
                         }
                     }
@@ -161,7 +160,7 @@ public class ApiCommodityController {
                     /**todo ЛОК га ёзиш end todo**/
 
                     /**Auto Rasp**/
-                    Optional<Apps> apps1 = Optional.ofNullable(appsService.findById(commodity.get(1).getAppId()));
+                    Optional<Apps> apps1 = Optional.ofNullable(appsService.findById(commodity.get(0).getAppId()));
                     Apps apps2 = appsService.getTop1ByAppNumOrderByInsTimeAsc(apps1.get().getAppNum());
 
                     AppsRasp appsRasp = appsRaspService.findByAppsId(apps2.getId());

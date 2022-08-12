@@ -13,7 +13,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 import uz.customs.customsprice.entity.InitialDecision.Apps;
 import uz.customs.customsprice.entity.InitialDecision.Commodity;
-import uz.customs.customsprice.entity.InitialDecision.InDec;
+import uz.customs.customsprice.entity.InDec;
 import uz.customs.customsprice.entity.files.DecisionPdf;
 import uz.customs.customsprice.entity.users.User;
 import uz.customs.customsprice.service.*;

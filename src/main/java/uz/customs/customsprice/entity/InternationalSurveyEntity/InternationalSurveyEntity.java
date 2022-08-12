@@ -19,7 +19,7 @@ import java.util.Date;
 @Entity
 @Table(name = "INTERNATIONAL_SURVEY", indexes = {@Index(columnList = "id", unique = true), @Index(columnList = "insuser", unique = false), @Index(columnList = "isdeleted", unique = false)})
 @TypeDef(name = "jsonb", typeClass = JsonStringType.class)
-@SQLDelete(sql = "update INTERATIONALSURVEY set isdeleted = 1 where id = ?")
+@SQLDelete(sql = "update INTERNATIONAL_SURVEY set isdeleted = 1 where id = ?")
 @Where(clause = "isdeleted = 0")
 @AllArgsConstructor
 @Getter

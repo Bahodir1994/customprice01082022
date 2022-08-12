@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import uz.customs.customsprice.controllers.indec.DTO.FilterDTO;
 import uz.customs.customsprice.entity.InitialDecision.Country;
 import uz.customs.customsprice.entity.InitialDecision.Location;
 import uz.customs.customsprice.entity.InternationalSurveyEntity.DirectionType;
@@ -48,6 +49,7 @@ public class InternationalSurveyController {
     private final String INTERNATIONALSURVEYSAVEIS3 = "/resources/pages/InternationalSurvay/SaveIS3";
     private final String INTERNATIONALSURVEYSAVESUMAPPROVEDADD = "/resources/pages/InternationalSurvay/SaveSumApprovedAdd";
     private final String GET_REPORT_IN_SUR = "/resources/pages/InternationalSurvay/getReport/{formats}/{FromStart}/{ToEnd}";
+    private final String DELETE_INTERNATIONAL_SURVEY = "/resources/pages/InitialDecision/ListInDec/deleteIs";
 
     private final InternationalSurveyService internationalSurveyService;
     private final InternationalSurveyRepo internationalSurveyRepo;
@@ -314,7 +316,8 @@ public class InternationalSurveyController {
         if (result.hasErrors()) {
             errors = result.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
-        } else {
+        }
+        else {
             InternationalSurveyEntity internationalSurveyEntity = new InternationalSurveyEntity();
             if (!Objects.equals(internationalSurveyStep1DTO.getXbbMailNum(), "1701")) {
                 internationalSurveyEntity.setXbbMailNum(internationalSurveyStep1DTO.getXbbMailNum());
@@ -512,5 +515,17 @@ public class InternationalSurveyController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
                 .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
                 .body(file);
+    }
+
+    @PostMapping(value = DELETE_INTERNATIONAL_SURVEY)
+    public ResponseEntity<Object> deleteIS(@RequestBody FilterDTO filterDTO, HttpServletRequest request){
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "success");
+        try {
+            internationalSurveyRepo.deleteById(filterDTO.getId());
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }catch(Exception ee){
+            return new ResponseEntity<>("response", HttpStatus.BAD_REQUEST);
+        }
     }
 }

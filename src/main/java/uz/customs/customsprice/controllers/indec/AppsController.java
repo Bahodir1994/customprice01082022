@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import uz.customs.customsprice.controllers.indec.DTO.FilterDTO;
+import uz.customs.customsprice.entity.InDec;
 import uz.customs.customsprice.entity.InitialDecision.*;
 import uz.customs.customsprice.entity.earxiv.Earxiv;
 import uz.customs.customsprice.entity.users.User;
@@ -121,10 +122,17 @@ public class AppsController {
         String userLocation = (String) request.getSession().getAttribute("userLocation");
         String userLocationName = (String) request.getSession().getAttribute("userLocationName");
         String userPost = (String) request.getSession().getAttribute("userPost");
+        String userIdS = (String) request.getSession().getAttribute("userIdS");
 
         if (!Objects.equals(inspectorId, "notSelected") && !Objects.equals(inspectorId, "") && inspectorId != null) {
             AppsRasp appsRasp = new AppsRasp();
             appsRasp = appsRaspService.findByAppsId(appId);
+            if (appsRasp != null){
+                appsRasp = appsRaspService.findByAppsId(appId);
+            }else {
+                appsRasp = new AppsRasp();
+            }
+
             appsRasp.setAppId(appId);
             appsRasp.setInsUser(userId);
             appsRasp.setInspectorId(inspectorId);
@@ -480,7 +488,7 @@ public class AppsController {
                 statusGet.add(116);
                 statusGet.add(117);
                 statusGet.add(118);
-                statusGet.add(120);
+                statusGet.add(135);
                 statusGet.add(150);
                 statusGet.add(165);
             }else {
@@ -565,10 +573,12 @@ public class AppsController {
         String userLocationName = (String) request.getSession().getAttribute("userLocationName");
         String userPost = (String) request.getSession().getAttribute("userPost");
         String userPostName = (String) request.getSession().getAttribute("userPostName");
+        String userIdS = (String) request.getSession().getAttribute("userIdS");
 
         List<Location> locations = locationService.getAll();
         List<User> usersList = new ArrayList<>();
         usersList = usersService.getByLocationAndPostAndRole(userLocation, userPost, 8);
+
 
         List<Apps> tutorials = new ArrayList<Apps>();
         Pageable paging = PageRequest.of(filterDTO.getPage(), filterDTO.getSize());
@@ -602,7 +612,7 @@ public class AppsController {
         if (!Objects.equals(userLocation, "1701") && userRole != 9) {
             locationIdChange = userLocation;
             if (userRole != 7 && userRole != 6){
-                inspectorIdIs = userId;
+                inspectorIdIs = userIdS;
             }
         } else {
             locationIdChange = filterDTO.getLocationId();
@@ -684,7 +694,7 @@ public class AppsController {
                         statusGet.add(116);
                         statusGet.add(117);
                         statusGet.add(118);
-                        statusGet.add(120);
+                        statusGet.add(135);
                         statusGet.add(150);
                         statusGet.add(165);
                     }else {
@@ -756,7 +766,7 @@ public class AppsController {
         }
         if(!Objects.equals(userLocation, "1701") && userRole == 8){
             locationForStatisticBar = userLocation;
-            inspectorIdRasp = userId;
+            inspectorIdRasp = userIdS;
         }else if(!Objects.equals(userLocation, "1701")){
            locationForStatisticBar = userLocation;
            inspectorIdRasp = "";
@@ -772,7 +782,7 @@ public class AppsController {
             statusForStatisticsBarFirst.add(116);
             statusForStatisticsBarFirst.add(117);
             statusForStatisticsBarFirst.add(118);
-            statusForStatisticsBarFirst.add(120);
+            statusForStatisticsBarFirst.add(135);
             statusForStatisticsBarFirst.add(150);
             statusForStatisticsBarFirst.add(165);
         }else {

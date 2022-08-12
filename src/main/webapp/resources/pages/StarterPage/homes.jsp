@@ -170,8 +170,8 @@
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
                             <p class="mb-1 text-white">Халқаро сўровномалар (Камомад суммаси)</p>
-                            <h3 class="mb-3 text-white">14.72 $</h3>
-                            <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i>2.1%</span> охирги 7 кунда</p>
+                            <h6 class="mb-3 text-white SizeInterSurvay"></h6>
+                            <p class="font-13 text-white"><span class="text-success sumInterSurvays"></span></p>
                             <div id="chart1"></div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
                             <p class="mb-1 text-white">Дастлабки қарорлар сони</p>
-                            <h3 class="mb-3 text-white">2 та</h3>
+                            <h3 class="mb-3 text-white appsSize">0 та</h3>
                             <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i> 4.2% </span> охирги 7 кунда</p>
                             <div id="chart2"></div>
                         </div>
@@ -206,11 +206,55 @@
                         </div>
                     </div>
                 </div>
+                <script>
+                    function ssss() {
+                        var h3 = document.getElementsByClassName('sda')[0];
+                        var start = document.getElementById('strt');
+                        var stop = document.getElementById('stp');
+                        var reset = document.getElementById('rst');
+                        var sec = 0;
+                        var min = 0;
+                        var hrs = 0;
+                        var t;
+
+                        function tick(){
+                            sec++;
+                            if (sec >= 60) {
+                                sec = 0;
+                                min++;
+                                if (min >= 60) {
+                                    min = 0;
+                                    hrs++;
+                                }
+                            }
+                        }
+                        function add() {
+                            tick();
+                            h3.textContent = (hrs > 9 ? hrs : "0" + hrs)
+                                + ":" + (min > 9 ? min : "0" + min)
+                                + ":" + (sec > 9 ? sec : "0" + sec);
+                            timer();
+                        }
+                        function timer() {
+                            t = setTimeout(add, 1000);
+                        }
+
+                        timer();
+                        start.onclick = timer;
+                        stop.onclick = function() {
+                            clearTimeout(t);
+                        }
+                        reset.onclick = function() {
+                            h3.textContent = "00:00:00";
+                            seconds = 0; minutes = 0; hours = 0;
+                        }
+                    };
+                </script>
                 <div class="col col-md-12">
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
                             <p class="mb-1 text-white">Дастурдан фойдаланиш вақтингиз</p>
-                            <h3 class="mb-3 text-white">00:04:60</h3>
+                            <h3 class="mb-3 text-white sda" id="saf"><time>00:00:00</time></h3>
                             <p class="font-13 text-white"><span class="text-danger"><i class=""></i> Эслатма</span> Фойдаланиш вақти 10 дақиқа</p>
                             <%--                            <div id="chart5"></div>--%>
                         </div>
@@ -291,6 +335,46 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function (){
+        var ss = "asd"
+        var dataS = {
+            "status": "status"
+        }
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify(dataS),
+            url: "<%=request.getContextPath()%>/dashboardStatistics/resources/pages/home/dashboardStatistics",
+            dataType: "json",
+            async: true,
+            contentType: 'application/json',
+            beforeSend: function () {
+                $('#preloader').removeClass('visually-hidden');
+            },
+            complete: function () {
+                $('#preloader').addClass('visually-hidden');
+            },
+            success: function (res) {
+                console.log(res)
+                //Apps size:
+                let appSize = '';
+                appSize = res.appsSize;
+                $('.appsSize').html(appSize);
+                //SumInternationalSurvey:
+                let sumInterSurvay = '';
+                let SizeInterSurvay = '';
+                sumInterSurvay = res.sumInterSurvay;
+                SizeInterSurvay = res.SizeInterSurvay;
+                $('.sumInterSurvays').html(sumInterSurvay);
+                $('.SizeInterSurvay').html(SizeInterSurvay);
+            },
+            error: function (res) {
+                $('#preloader').addClass('visually-hidden');
+            }
+        });
+    })
+    $(document).ready(ssss());
+</script>
 <script>
     Highcharts.chart('container', {
         chart: {
@@ -508,7 +592,6 @@
                 }
             }]
         }
-
     });
 </script>
 <script>
@@ -540,20 +623,17 @@
             data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
         }]
     });
-
     function showValues() {
         document.getElementById('alpha-value').innerHTML = chart.options.chart.options3d.alpha;
         document.getElementById('beta-value').innerHTML = chart.options.chart.options3d.beta;
         document.getElementById('depth-value').innerHTML = chart.options.chart.options3d.depth;
     }
-
     // Activate the sliders
     document.querySelectorAll('#sliders input').forEach(input => input.addEventListener('input', e => {
         chart.options.chart.options3d[e.target.id] = parseFloat(e.target.value);
         showValues();
         chart.redraw(false);
     }));
-
     showValues();
 </script>
 <script src="<%=request.getContextPath()%>/resources/assets2/js/index.js"></script>

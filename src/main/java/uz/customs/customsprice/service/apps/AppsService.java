@@ -1,10 +1,9 @@
 package uz.customs.customsprice.service.apps;
 
 import org.springframework.stereotype.Service;
-import uz.customs.customsprice.controllers.api.apps.IndecAPIDto;
 import uz.customs.customsprice.entity.InitialDecision.Apps;
 import uz.customs.customsprice.entity.InitialDecision.Commodity;
-import uz.customs.customsprice.entity.InitialDecision.InDec;
+import uz.customs.customsprice.entity.InDec;
 import uz.customs.customsprice.entity.files.Docs;
 import uz.customs.customsprice.repository.AppsRepo;
 import uz.customs.customsprice.utils.Utils;
@@ -1078,6 +1077,12 @@ public class AppsService {
     public Apps getByAppNumAndStatus(String appNum, int status) {
         if (appsRepo.findByAppNumAndStatus(appNum, status) != null){
             return appsRepo.findByAppNumAndStatus(appNum, status);
+        }else return null;
+    }
+
+    public List<Apps> getAllApps() {
+        if (appsRepo.findAll() != null){
+            return appsRepo.findAll();
         }else return null;
     }
 

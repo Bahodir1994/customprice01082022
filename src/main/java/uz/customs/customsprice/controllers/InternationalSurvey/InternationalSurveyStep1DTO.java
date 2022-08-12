@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class InternationalSurveyStep1DTO {
 
-    @Size(min = 3, max = 15, message = "Майдон белгилари сони 3 та дан 15 та гача бўлиши лозим!")
+    @Size(min = 3, max = 50, message = "Майдон белгилари сони 3 та дан 50 та гача бўлиши лозим!")
     private String xbbMailNum;
 
     @NotBlank(message = "Санани киритиш мажбурий!")

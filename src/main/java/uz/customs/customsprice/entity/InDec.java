@@ -1,10 +1,11 @@
-package uz.customs.customsprice.entity.InitialDecision;
+package uz.customs.customsprice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
+import uz.customs.customsprice.entity.InitialDecision.Commodity;
 import uz.customs.customsprice.entity.entityConfig.AbstractAuditingEntity;
 
 import javax.persistence.*;
@@ -132,8 +133,8 @@ public class InDec extends AbstractAuditingEntity {
     @Digits(integer = 15, fraction = 3)
     private BigDecimal g19Sum;
 
-    @Column(name = "VERSION_NUM", columnDefinition = "VARCHAR(50) DEFAULT 1")
-    private String versionNum = "1";
+    @Column(name = "VERSION_NUM", columnDefinition = "VARCHAR(50)")
+    private String versionNum;
 
 
     public InDec() {
